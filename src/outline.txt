@@ -1,10 +1,11 @@
 SWEN 222
-Team <???> (James Watt, Thomas Edwards, Liam Byrne, Mohsen Javaher, Andrew McManaway)
+Team SnicketySnacks (James Watt, Thomas Edwards, Liam Byrne, Mohsen Javaher, Andrew McManaway)
 
-GAME TITLE: <???>
+GAME TITLE:
+- The Fallacy of the Legacy
 
 DESCRIPTION:
-<???>
+Our game will be a top down dragon crawler similar to games like Binding of Isaac. It will have multiple maps which a single player will navigate by entering side rooms. Each map contains either enemies, items or both. The player will have an inventory of items that can be used later in the game. They will also have a health component which is decreased when they are attacked by NPCs. The game will end with some kind of boss battle or puzzle.
 
 LIBRARIES:
-<???>
+The game will primarily use Swing to generate the GUI and standard libraries like AWT and Collections for model-based logic. However, if smaller plug-in libraries like custom Swing layout managers are found to be useful, they will be added to the list.
