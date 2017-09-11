@@ -2,7 +2,7 @@ SWEN 222
 Team SnicketySnacks (James Watt, Thomas Edwards, Liam Byrne, Mohsen Javaher, Andrew McManaway)
 
 GAME TITLE:
-- The Fallacy of the Legacy
+- The Fallacy of the Prophecy
 
 GAME GITHUB:
 https://github.com/Hiccup246/SWEN222PROJECT
