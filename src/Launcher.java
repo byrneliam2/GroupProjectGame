@@ -1,4 +1,4 @@
-import frame.MainFrame;
+import frames.MainFrame;
 
 import javax.swing.*;
 

@@ -1,4 +1,4 @@
-package frame;
+package frames;
 
 /*
  * Liam: 300338518
