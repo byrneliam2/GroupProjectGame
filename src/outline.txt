@@ -2,7 +2,10 @@ SWEN 222
 Team SnicketySnacks (James Watt, Thomas Edwards, Liam Byrne, Mohsen Javaher, Andrew McManaway)
 
 GAME TITLE:
-- The Fallacy of the Legacy
+- The Fallacy of the Prophecy
+
+GAME GITHUB:
+https://github.com/Hiccup246/SWEN222PROJECT
 
 DESCRIPTION:
 Our game will be a top down dragon crawler similar to games like Binding of Isaac. It will have multiple maps which a single player will navigate by entering side rooms. Each map contains either enemies, items or both. The player will have an inventory of items that can be used later in the game. They will also have a health component which is decreased when they are attacked by NPCs. The game will end with some kind of boss battle or puzzle.
