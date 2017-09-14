@@ -4,6 +4,10 @@ TO DO:
 - Sort global design (UML, text files) by 15/9
 - Write skeleton in weekend of 16/9
 
+DISCUSSION POINTS:
+- BackPack in item package not player package or in its own package?
+- Health potions pickup and "press 'b' to use health pot" or walk over and get health back?
+
 NEXT MEETING (11am CO242b):
 - 20/9
 - Refine library communications, sort out code
