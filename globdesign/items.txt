@@ -1,1 +1,16 @@
-//
+//Primary Author: Thomas 
+
+Our game is going to have a few different types of items, items which you can EQUIP and items which you can USE.
+All Items are either 'dropped' onto the map and must be picked up, or sold to you by Shopkeepers.
+
+As a broad overview there are 4 different classes of item: healthPots, manaPots, Equipable items and keys.
+Each item is stored in the backpack.
+
+Keys:
+These are one time use items which unlock a single door. (Potentially keys might be unique and only be able to open a specific door)
+
+Equipable Items
+Provide passive stat bonuses eg +10 health when equipped.
+
+Health and ManaPots
+One time use items which restore a certain amount of health.
