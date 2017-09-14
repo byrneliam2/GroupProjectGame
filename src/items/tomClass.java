@@ -1,4 +1,4 @@
-package tomPackage;
+package items;
 
 public class tomClass {
 
