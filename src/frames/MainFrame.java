@@ -12,7 +12,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
- * The MainFrame represents the master frame of the application...
+ * The MainFrame represents the master frame of the application.
  */
 public class MainFrame extends JFrame implements Observer {
 
