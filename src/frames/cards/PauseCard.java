@@ -10,4 +10,9 @@ public class PauseCard extends Card {
 
     //
 
+    @Override
+    public void redraw() {
+
+    }
+
 }

@@ -17,10 +17,7 @@ import java.awt.image.BufferedImage;
 public class ImageUtilities {
 
     /**
-     * Rotate the given image by a set number of degrees. Typically, this value
-     * will be locked to cardinal directions; 0, 90, 180 and 270 degrees. This method
-     * is static, meaning it is open to be used by other classes that mey need the rotation
-     * service (such as a Piece rotating its own image.)
+     * Rotate the given image by a set number of degrees.
      * @param img image to be rotated (note that this method produces a copy)
      * @param deg number of degrees to rotate
      * @return rotated copy of img

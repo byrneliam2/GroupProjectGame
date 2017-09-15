@@ -7,6 +7,7 @@ package frames;
  */
 
 import frames.cards.Card;
+import frames.cards.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,21 +36,32 @@ public class MainFrame extends JFrame implements Observer {
         this.setLayout(new CardLayout());
         this.setFocusable(true);
 
+        doSetup();
         this.pack();
         this.setVisible(true);
+    }
+
+    private void doSetup() {
+        // add fixed cards
+        cards.put("menu",  new MenuCard());
+        cards.put("pause", new PauseCard());
+        // get model details and construct enough map cards to fit
+        for (int i = 0; i < 9; i++) { // replace 9 with model value
+            cards.put("level" + i, new MapCard());
+        }
     }
 
     /**
      * Add a card (new screen) to the main frame.
      */
-    public void addScreen() {
+    private void addScreen() {
         //
     }
 
     /**
      * Change the current screen that is being displayed.
      */
-    public void switchScreen() {
+    private void switchScreen() {
         CardLayout cl = (CardLayout) this.getLayout();
         cl.show(this, "");
     }
@@ -57,5 +69,6 @@ public class MainFrame extends JFrame implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         // redraw
+        // switch screen if need be (use arg)
     }
 }

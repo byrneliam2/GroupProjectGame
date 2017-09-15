@@ -10,4 +10,9 @@ public class MenuCard extends Card {
 
     //
 
+    @Override
+    public void redraw() {
+
+    }
+
 }

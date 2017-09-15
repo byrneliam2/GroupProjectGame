@@ -18,13 +18,14 @@ public class ImageLoader {
 
     /**
      * Returns the image specified by the integer parameter.
+     * @param path relative file path to image
      * @return BufferedImage version of the image specified
      */
     public static BufferedImage image(String path) {
         BufferedImage img = null;
-        // FIXME currently retrieves images only from this directory
         try {
             img = ImageIO.read(ImageLoader.class.getResource(path));
+            //img = ImageIO.read(new File(path));
         } catch (IOException e) { e.printStackTrace(); }
 
         return img;
