@@ -1,4 +1,4 @@
-//Primary Author: Thomas 
+//Primary Author: Thomas, CodeReviewer: James, ExternalTester: Liam
 
 Our game is going to have a few different types of items, items which you can EQUIP and items which you can USE.
 All Items are either 'dropped' onto the map and must be picked up by the player, or sold to you by Shopkeepers.
