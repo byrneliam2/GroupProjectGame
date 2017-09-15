@@ -32,19 +32,19 @@ public class HealthPot implements Usable {
 	}
 
 	@Override
-	public void pickupItem(Backpack pack) throws InvalidActionException {
+	public void pickupItem(Backpack pack) throws InvalidBackpackException {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void dropItem(Backpack pack) throws InvalidActionException {
+	public void dropItem(Backpack pack) throws InvalidBackpackException {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void use() throws InvalidActionException {
+	public void use() throws InvalidBackpackException {
 		// TODO Auto-generated method stub
 
 	}

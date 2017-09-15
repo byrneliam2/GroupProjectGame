@@ -16,9 +16,9 @@ public interface Usable extends Item {
 	 *
 	 * @param player
 	 *            the player to use the item on
-	 * @throws InvalidActionException
+	 * @throws InvalidBackpackException
 	 *             if the item was not part of a player's backpack.
 	 */
-	public void use() throws InvalidActionException;
+	public void use() throws InvalidBackpackException;
 
 }

@@ -8,9 +8,9 @@ package items;
  * @author edwardthom
  *
  */
-public class InvalidActionException extends Exception {
+public class InvalidBackpackException extends Exception {
 
-	public InvalidActionException(String message) {
+	public InvalidBackpackException(String message) {
 		super(message);
 	}
 
