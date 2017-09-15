@@ -1,9 +1,20 @@
-Liam Byrne (byrneliam2)
-300338518
+Andrew McManaway (mcmanaaandr)
+300371233
 SWEN 222 Group Project
 
 LIBRARY:
 audio
 
 DESCRIPTION:
+The Audio Library is designed to play all of the background music and sound effects that
+occur at different portions of the game. The Audio Levels of the
 
+
+PRIMARY AUTHOR:
+Andrew
+
+CODE REVIEWER:
+Liam
+
+EXTERNAL TESTER:
+James

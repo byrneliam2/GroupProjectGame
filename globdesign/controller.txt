@@ -1,1 +1,30 @@
-//
+Andrew McManaway (mcmanaaandr)
+300371233
+SWEN 222 Group Project
+
+LIBRARY:
+controller
+
+DESCRIPTION:
+The Controller Library is designed to listen to all Keyboard and Mouse Inputs / Movements
+provided by the user. The library is designed with user preferences in mind, this will allow
+for the user to specify their own desired key-binds for all the different actions the player
+can perform in the game.
+
+The Controller aim's to follow the MVC (Model/View/Controller) Pattern, therefore the View
+will initialise the controller, and provide a pointer to the Model. Which will allow for
+model manipulation, such as moving the character, to occur.
+
+The Main Class of this Library is the "Controller" class, this will be called/created by the
+View to initialise the Controller for use. This class will create a MouseListener and a
+KeyListener, to monitor different inputs provided by the user and then feed those inputs to
+the Model.
+
+PRIMARY AUTHOR:
+Andrew
+
+CODE REVIEWER:
+Liam
+
+EXTERNAL TESTER:
+Mohsen
