@@ -12,12 +12,12 @@ import java.awt.Image;
 public interface Item {
 
 	/**
-	 * @return an image of this item.
+	 * @return returns an image of this item. No guareentees on the size of image returned.
 	 */
 	public Image getImage();
 
 	/**
-	 * @return the name of this item.
+	 * @return returns the name of this item.
 	 */
 	public String getName();
 
