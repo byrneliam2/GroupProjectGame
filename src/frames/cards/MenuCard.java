@@ -14,5 +14,4 @@ public class MenuCard extends Card {
     public void redraw() {
 
     }
-
 }

@@ -28,6 +28,4 @@ public class ImageUtilities {
         AffineTransformOp op = new AffineTransformOp(af, AffineTransformOp.TYPE_BILINEAR);
         return op.filter(img, null);
     }
-
-    //
 }

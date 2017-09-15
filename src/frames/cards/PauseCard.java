@@ -14,5 +14,4 @@ public class PauseCard extends Card {
     public void redraw() {
 
     }
-
 }
