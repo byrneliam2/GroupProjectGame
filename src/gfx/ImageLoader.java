@@ -14,7 +14,7 @@ import java.io.IOException;
  * This class is responsible for all image loading within the
  * game.
  */
-public class ImageMaker {
+public class ImageLoader {
 
     /**
      * Returns the image specified by the integer parameter.
@@ -25,7 +25,7 @@ public class ImageMaker {
 
         BufferedImage img = null;
         try {
-            img = ImageIO.read(ImageMaker.class.getResource(path));
+            img = ImageIO.read(ImageLoader.class.getResource(path));
         } catch (IOException e) { e.printStackTrace(); }
 
         return img;
