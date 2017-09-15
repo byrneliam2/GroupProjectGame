@@ -3,14 +3,14 @@ Code Reviewer: Thomas Edwards
 External Tester: Andrew McManaway
 
 Map library: Will represent a given map in the world. The map library is "core" to the project
-as may of the other API/librarys in this project will rely on the map library for functionility, as such the map will
+as may of the other API/library's in this project will rely on the map library for functionality, as such the map will
 contain allot of methods that deliver important information.
 
 The map is central to the project as it controls the flow of the game and what objects go where, e.g. If the player wants to move to the right,
 it would have to check with the map that the spot it wants to move to can be moved over.
 
 Each map is made up of multiple layers. Each layer being a series of 32x32 pixel "tiles" that represent a single spot on the map. Each layer works
-together to form the map. E.g. Layer one could be the background layer and represent the graphics of the map, while layer two could be the 
+together to form the map. E.g. Layer one could be the background layer and represent the graphics of the map, while layer two could be the
 collision layer which marks which tiles can be moved over by entity's. At this point i have decided upon four core layers that will make up the map.
 
 Each map will have:
