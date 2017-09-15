@@ -4,7 +4,7 @@ import java.awt.Image;
 
 /**
  * Abstract Item interface, all items of any type should implement these
- * methods.
+ * methods
  *
  * @author edwardthom
  *
