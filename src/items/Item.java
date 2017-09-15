@@ -31,19 +31,19 @@ public abstract interface Item {
 	 *
 	 * @param pack
 	 *            the backpack of the player who is picking up the item.
-	 * @throws InvalidActionException
+	 * @throws InvalidBackpackException
 	 *             if the backpack is full or the item already belongs to the
 	 *             player.
 	 */
-	public void pickupItem(Backpack pack) throws InvalidActionException;
+	public void pickupItem(Backpack pack) throws InvalidBackpackException;
 
 	/**
 	 * Removes the item from the player's backpack.
 	 *
 	 * @param pack
 	 *            the backpack of the player who is dropping the item.
-	 * @throws InvalidActionException
+	 * @throws InvalidBackpackException
 	 *             if the backpack doesn't contain this item.
 	 */
-	public void dropItem(Backpack pack) throws InvalidActionException;
+	public void dropItem(Backpack pack) throws InvalidBackpackException;
 }
