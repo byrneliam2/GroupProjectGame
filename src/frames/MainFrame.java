@@ -25,12 +25,14 @@ public class MainFrame extends JFrame implements Observer {
     /* Constants */
     private static final int F_WIDTH = 1280;
     private static final int F_HEIGHT = 720;
+    private static final String GAME_TITLE = "The Fallacy of the Prophecy";
 
     public MainFrame() {
-        super("Game");
+        super(GAME_TITLE);
 
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setPreferredSize(new Dimension(F_WIDTH, F_HEIGHT));
+        this.setLayout(new CardLayout());
         this.setFocusable(true);
 
         this.pack();
