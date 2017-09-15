@@ -1,0 +1,3 @@
+Keep all libraries (exported JARs) in this directory.
+If you wish to use them for testing, download them to your own personal projects.
+Remember to update these when ready!

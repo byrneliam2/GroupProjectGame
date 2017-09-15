@@ -1,0 +1,19 @@
+//Primary Author: Thomas
+
+This package will be responsible for the enemies and allies of the player, it will likely extend the player class 
+and control the actions of an enemy using an algorithm rather than using keyboard controls. There will be essentially 
+two different types of enemies, ones which cause the player to take damage on collision and ones which shoot at the
+player. Enemies will be different sizes as well.
+
+I will likly use a strategy model and a finite state machine to model how enemies react in different situations.
+
+Plan is to first implement 2 simple ai's an easy-to-do passive AI, which will stand in one place and not move 
+or attack you, and a simple enemy ai which will try keep a certain distance from the player, and periodically 
+shoot at the player.
+
+Later plans are to implement 4 different levels of ai behaviours:
+
+Enemies which try to keep a certain distance from the player and shoot slowly (Easy)
+Enemies which move in a more random movement and shoot bullets at a medium pace (Medium)
+Enemies which shoot fast and dodge some of the player's bullets (Hard)
+Enemies which charge at the player attempting to swarm him. (Suicidal)
