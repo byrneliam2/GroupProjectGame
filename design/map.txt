@@ -6,12 +6,12 @@ Map library: Will represent a given map in the world. The map library is "core" 
 as may of the other API/librarys in this project will rely on the map library for functionility, as such the map will
 contain allot of methods that deliver important information.
 
-Each map is made up multiple layers. Each layer being a series of 32x32 pixel "tiles" that represent a single spot on the map. Each layer works
-together to make up the map. e.g. Layer one could be the background layer and represent the graphics of the map, while layer two could be the 
-collision layer which marks which tiles can be moved over by entity's. At this point i have decided upon four core layers that will make up the map.
-
 The map is central to the project as it controls the flow of the game and what objects go where, e.g. If the player wants to move to the right,
 it would have to check with the map that the spot it wants to move to can be moved over.
+
+Each map is made up of multiple layers. Each layer being a series of 32x32 pixel "tiles" that represent a single spot on the map. Each layer works
+together to form the map. E.g. Layer one could be the background layer and represent the graphics of the map, while layer two could be the 
+collision layer which marks which tiles can be moved over by entity's. At this point i have decided upon four core layers that will make up the map.
 
 Each map will have:
 +Background layer, represents the background graphics
@@ -19,5 +19,5 @@ Each map will have:
 +Item layer, contains all the items on the map
 +Enviromental layer, contains information on what tiles have enviromental affects that manipulate entities
 
-The map library will also contain collections of all the objects that can be located on the map. It will also
-be responsible for storing the locations of some of the objects, such as items.
+The map will also contain collections of all the objects that can be located on a map, as well as
+storing the locations of some of the objects, such as items.
