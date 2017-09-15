@@ -6,7 +6,7 @@ public class HealthPot implements Usable {
 
 	private Image img;
 	private String name, description;
-	private Player owner;
+	private Backpack pack;// is null if the item is not picked up
 
 	public HealthPot() {
 		this.name = "Health Pot";
@@ -32,13 +32,19 @@ public class HealthPot implements Usable {
 	}
 
 	@Override
-	public void pickupItem(Player p) throws InvalidActionException {
+	public void pickupItem(Backpack pack) throws InvalidActionException {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void use(Player player) throws InvalidActionException {
+	public void dropItem(Backpack pack) throws InvalidActionException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void use() throws InvalidActionException {
 		// TODO Auto-generated method stub
 
 	}

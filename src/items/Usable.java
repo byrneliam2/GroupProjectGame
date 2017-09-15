@@ -1,5 +1,13 @@
 package items;
 
+/**
+ * Usable items are items which can be used (at any time) by the player and have
+ * some kind of immediate effect. Usable items are destroyed once they have been
+ * used.
+ *
+ * @author edwardthom
+ *
+ */
 public interface Usable extends Item {
 
 	/**
@@ -11,6 +19,6 @@ public interface Usable extends Item {
 	 * @throws InvalidActionException
 	 *             if the item was not part of a player's backpack.
 	 */
-	public void use(Player player) throws InvalidActionException;
+	public void use() throws InvalidActionException;
 
 }

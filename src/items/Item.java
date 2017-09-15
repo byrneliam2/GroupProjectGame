@@ -3,6 +3,8 @@ package items;
 import java.awt.Image;
 
 /**
+ * Abstract Item class, all items of any type should implement these methods.
+ *
  * @author edwardthom
  *
  */
@@ -27,10 +29,21 @@ public abstract interface Item {
 	/**
 	 * Moves the item into the player's backpack.
 	 *
-	 * @param p
-	 *            the player who is picking up the item
+	 * @param pack
+	 *            the backpack of the player who is picking up the item.
 	 * @throws InvalidActionException
-	 *             if the backpack is full.
+	 *             if the backpack is full or the item already belongs to the
+	 *             player.
 	 */
-	public void pickupItem(Player p) throws InvalidActionException;
+	public void pickupItem(Backpack pack) throws InvalidActionException;
+
+	/**
+	 * Removes the item from the player's backpack.
+	 *
+	 * @param pack
+	 *            the backpack of the player who is dropping the item.
+	 * @throws InvalidActionException
+	 *             if the backpack doesn't contain this item.
+	 */
+	public void dropItem(Backpack pack) throws InvalidActionException;
 }

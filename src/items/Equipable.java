@@ -1,8 +1,8 @@
 package items;
 
 /**
- * Equipable items are items which can be 'equipped' by the player, they should
- * provide static bonuses when equiped.
+ * Equipable items are items which can be 'equipped' by the player, they provide
+ * static bonuses when eqquiped.
  *
  * @author edwardthom
  *
@@ -11,8 +11,8 @@ public interface Equipable extends Item {
 
 	/**
 	 * @param player
-	 *            equips this item, providing its given bonuses to the specified
-	 *            player, moving the item into the 'equipped section of the player's
+	 *            equips this item, providing its given bonuses to the player,
+	 *            moving the item into the 'equipped section of the player's
 	 *            backpack.
 	 * @throws InvalidActionException
 	 *             if the player already has the max number of items equipped or the
