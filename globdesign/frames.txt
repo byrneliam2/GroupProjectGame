@@ -8,8 +8,18 @@ frames
 DESCRIPTION:
 The frames library will be responsible for holding the main Swing frame of the application and for generating and
 displaying the correct screens (or "cards") at the correct times in the game. The MainFrame class will use a CardLayout
-manager to flip between each card/screen of the game, including maps, main menus and the pause menu. The cards will
-implement a superclass or interface which will be an extension of Swing JPanels.
+manager to flip between each card/screen of the game, including maps, main menus and the pause menu.
+
+Cards will hold information about each screen of the game, including images that need to be generated (in cooperation
+with the gfx library), buttons/locations that can be interacted with and other GUI attributes/functions.
+The cards will implement a superclass or interface which will be an extension of Swing JPanels, and as such the
+MainFrame will hold a collection of cards to flip between, all referenced by supertype. There will be multiple types of
+cards, for example menu cards and game map cards. These will be different in how they use GUI utilities, and so it is
+highly likely that they will use the Strategy pattern to accomplish complex tasks. Cards will be stored in the
+cards package of the library.
+
+The frames library, along with the gfx library, will comprise the View portion of the MVC pattern that this game will
+be based upon.
 
 PRIMARY AUTHOR:
 Liam

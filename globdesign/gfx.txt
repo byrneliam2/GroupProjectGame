@@ -6,7 +6,13 @@ LIBRARY:
 gfx
 
 DESCRIPTION:
-//
+The gfx library will be in charge of loading and hosting all images and other graphical entities that can be manipulated
+by the game model directly. It will work closely with the frames library to produce a view that is capable of loading
+separate screens and display moving images and other components (such as text and highlights.)
+
+Images will be accessed through other entities in the game. Each component that can be drawn only knows what image
+represents it. not how it is drawn. Therefore, the gfx library uses image file-path getters from each resource in order
+to remove confusion about what should be drawn as what.
 
 PRIMARY AUTHOR:
 Liam
