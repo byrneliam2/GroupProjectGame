@@ -39,6 +39,9 @@ public class MainFrame extends JFrame implements Observer {
         this.setVisible(true);
     }
 
+    /**
+     * Add a card (new screen) to the main frame.
+     */
     public void addScreen() {
         //
     }
@@ -53,6 +56,6 @@ public class MainFrame extends JFrame implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-
+        // redraw
     }
 }
