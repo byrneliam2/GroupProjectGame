@@ -7,8 +7,24 @@ audio
 
 DESCRIPTION:
 The Audio Library is designed to play all of the background music and sound effects that
-occur at different portions of the game. The Audio Levels of the
+occur at different portions of the game. The user will be able to modify the audio levels
+of the Master, Background Music and Sound Effects separately, allowing for the user to
+change these values to their desired sound levels.
 
+The Audio Library will be standalone, and will be created by the View section of the MVC.
+Therefore when the Model sends a request for a sound effect to be played, the View will
+pass on the request, and an sound event will occur.
+
+The Main Class of this Library is the "AudioHandler" class, this will be called/created by the
+View. Whenever the View is required to relay a sound event, the event will be passed onto
+this class. The "AudioHandler" will be relying on Multiple Threads to play different sound
+effects at the same time, and these Threads can be closed on request or after the sound
+file finish's playing.
+
+An "AudioTrack" class will allow for different classes to create sound events, this class
+will contain all the required information for an Audio File to be played. The class will
+contain fields holding: Sound-File Location and Track Type (Music/Sound Effect), which
+will determine how "AudioHandler" handles the sound event.
 
 PRIMARY AUTHOR:
 Andrew
