@@ -20,10 +20,9 @@ public class ImageLoader {
      * Returns the image specified by the integer parameter.
      * @return BufferedImage version of the image specified
      */
-    public static BufferedImage image(int num) {
-        String path = "null.jpg";
-
+    public static BufferedImage image(String path) {
         BufferedImage img = null;
+        // FIXME currently retrieves images only from this directory
         try {
             img = ImageIO.read(ImageLoader.class.getResource(path));
         } catch (IOException e) { e.printStackTrace(); }
