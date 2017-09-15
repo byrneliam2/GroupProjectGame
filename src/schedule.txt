@@ -7,6 +7,7 @@ TO DO:
 DISCUSSION POINTS:
 - BackPack in item package not player package or in its own package?
 - Health potions pickup and "press 'b' to use health pot" or walk over and get health back?
+- whether 'equipped items' should simply be a section of the backpack?
 
 NEXT MEETING (11am CO242b):
 - 20/9
