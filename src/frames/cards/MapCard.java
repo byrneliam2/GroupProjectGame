@@ -24,5 +24,4 @@ public class MapCard extends Card {
     public void redraw() {
 
     }
-
 }

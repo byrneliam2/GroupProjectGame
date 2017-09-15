@@ -48,7 +48,11 @@ public class MainFrame extends JFrame implements Observer {
         // get model details and construct enough map cards to fit
         for (int i = 0; i < 9; i++) { // replace 9 with model value
             cards.put("level" + i, new MapCard());
+            // set up each level
+            MapCard m = (MapCard) cards.get("level" + i);
         }
+
+        switchScreen("menu");
     }
 
     /**
@@ -60,10 +64,11 @@ public class MainFrame extends JFrame implements Observer {
 
     /**
      * Change the current screen that is being displayed.
+     * @param key name of panel to switch to
      */
-    private void switchScreen() {
+    private void switchScreen(String key) {
         CardLayout cl = (CardLayout) this.getLayout();
-        cl.show(this, "");
+        cl.show(this, key);
     }
 
     @Override
