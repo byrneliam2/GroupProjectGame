@@ -3,7 +3,7 @@ A repository for the group of Liam, Mohsen, James, Thomas and Andrew (Team Snick
 
 See src/schedule.txt for group meeting and coding day schedule.
 
-All commits with extended descriptions are journal entries.
+Commits with extended descriptions are journal entries.
 
 GIT COMMIT MESSAGE FORMAT (Diary):
 - Names of group members performing activity
