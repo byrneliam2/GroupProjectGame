@@ -3,7 +3,8 @@ package items;
 import java.awt.Image;
 
 /**
- * Abstract Item class, all items of any type should implement these methods.
+ * Abstract Item interface, all items of any type should implement these
+ * methods.
  *
  * @author edwardthom
  *
