@@ -10,7 +10,7 @@ The frames library will be responsible for holding the main Swing frame of the a
 displaying the correct screens (or "cards") at the correct times in the game. The MainFrame class will use a CardLayout
 manager to flip between each card/screen of the game, including maps, main menus and the pause menu.
 
-Cards will hold information about each screen of the game, including images that need to be generated (in cooperation
+ScreenCards will hold information about each screen of the game, including images that need to be generated (in cooperation
 with the gfx library), buttons/locations that can be interacted with and other GUI attributes/functions. There will be
 multiple types of cards, for example menu cards and game map cards. These will be different in how they use GUI
 utilities, and so it is highly likely that they will use the Strategy pattern to accomplish complex tasks.

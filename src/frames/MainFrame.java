@@ -6,16 +6,23 @@ package frames;
  * SWEN222PROJECT
  */
 
+import frames.cards.ScreenCard;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.Collection;
 import java.util.Observable;
 import java.util.Observer;
 
 /**
- * The MainFrame represents the master frame of the application.
+ * The MainFrame represents the master frame of the application. It
  */
 public class MainFrame extends JFrame implements Observer {
 
+    /* Attributes */
+    private Collection<ScreenCard> cards;
+
+    /* Constants */
     private static final int F_WIDTH = 1280;
     private static final int F_HEIGHT = 720;
 
