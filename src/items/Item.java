@@ -4,12 +4,12 @@ import java.awt.Image;
 
 /**
  * Abstract Item interface, all items of any type should implement these
- * methods
+ * methods.
  *
  * @author edwardthom
  *
  */
-public abstract interface Item {
+public interface Item {
 
 	/**
 	 * @return an image of this item.
