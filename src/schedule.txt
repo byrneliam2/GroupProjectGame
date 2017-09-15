@@ -5,6 +5,7 @@ TO DO:
 - Write skeleton in weekend of 16/9
 
 DISCUSSION POINTS:
+- <none>
 
 NEXT MEETING (11am CO242b):
 - 20/9
