@@ -1,18 +1,16 @@
 package frames;
 
 /*
- * Liam: 300338518
- * 4/09/2017
- * SWEN222PROJECT
+ * SWEN 222 Group Project
+ * Liam Byrne (byrneliam2)
+ * 300338518
  */
 
-import frames.cards.ScreenCard;
+import frames.cards.Card;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Collection;
-import java.util.Observable;
-import java.util.Observer;
+import java.util.*;
 
 /**
  * The MainFrame represents the master frame of the application. It
@@ -20,7 +18,7 @@ import java.util.Observer;
 public class MainFrame extends JFrame implements Observer {
 
     /* Attributes */
-    private Collection<ScreenCard> cards;
+    private Map<String, Card> cards;
 
     /* Constants */
     private static final int F_WIDTH = 1280;
@@ -30,6 +28,8 @@ public class MainFrame extends JFrame implements Observer {
     public MainFrame() {
         super(GAME_TITLE);
 
+        cards = new HashMap<>();
+
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setPreferredSize(new Dimension(F_WIDTH, F_HEIGHT));
         this.setLayout(new CardLayout());
@@ -37,6 +37,18 @@ public class MainFrame extends JFrame implements Observer {
 
         this.pack();
         this.setVisible(true);
+    }
+
+    public void addScreen() {
+        //
+    }
+
+    /**
+     * Change the current screen that is being displayed.
+     */
+    public void switchScreen() {
+        CardLayout cl = (CardLayout) this.getLayout();
+        cl.show(this, "");
     }
 
     @Override

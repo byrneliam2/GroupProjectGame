@@ -1,9 +1,9 @@
 package gfx;
 
 /*
- * Liam: 300338518
- * 4/09/2017
- * SWEN222PROJECT
+ * SWEN 222 Group Project
+ * Liam Byrne (byrneliam2)
+ * 300338518
  */
 
 import javax.imageio.ImageIO;

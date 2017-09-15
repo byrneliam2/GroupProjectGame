@@ -1,8 +1,8 @@
 NOTE: Move to Facebook page/group
 
 TO DO:
-- Sort global design (UML, text files) by 15/9
-- Write skeleton in weekend of 16/9
+- Sort global design (UML, text files) by 16/9
+- Write skeleton in weekend of 16/9 (by 19/9)
 
 DISCUSSION POINTS:
 - <none>
