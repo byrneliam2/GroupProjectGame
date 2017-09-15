@@ -1,0 +1,21 @@
+Liam Byrne (byrneliam2)
+300338518
+SWEN 222 Group Project
+
+LIBRARY:
+frames
+
+DESCRIPTION:
+The frames library will be responsible for holding the main Swing frame of the application and for generating and
+displaying the correct screens (or "cards") at the correct times in the game. The MainFrame class will use a CardLayout
+manager to flip between each card/screen of the game, including maps, main menus and the pause menu. The cards will
+implement a superclass or interface which will be an extension of Swing JPanels.
+
+PRIMARY AUTHOR:
+Liam
+
+CODE REVIEWER:
+Drew
+
+EXTERNAL TESTER:
+Thomas
