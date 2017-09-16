@@ -6,15 +6,14 @@ package frames.cards;
  * 300338518
  */
 
+import gfx.GraphicsUtilities;
 import gfx.ImageLoader;
-
-import javax.swing.*;
 
 public class PauseCard extends Card {
 
     public PauseCard() {
         setBackground(ImageLoader.image("pause.jpg"));
-        this.add(new JLabel(new ImageIcon(background)));
+        GraphicsUtilities.giveImage(this, background);
     }
 
     @Override

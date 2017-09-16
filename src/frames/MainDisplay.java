@@ -31,17 +31,16 @@ public class MainDisplay extends JComponent implements Observer {
     /* Constants */
     public static final int F_WIDTH = 1920;
     public static final int F_HEIGHT = 1080;
-    private static final String GAME_TITLE = "The Fallacy of the Prophecy";
 
     public MainDisplay() {
-        master = new JFrame(GAME_TITLE);
+        master = new JFrame();
         cards = new HashMap<>();
 
         // master frame setup
         master.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         master.setResizable(false);
         master.setUndecorated(true);
-        master.setExtendedState(master.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+        master.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         // this component setup
         this.setLayout(new CardLayout());
@@ -67,13 +66,14 @@ public class MainDisplay extends JComponent implements Observer {
         }
 
         // add all
-        this.add(cards.get("menu"));
-        this.add(cards.get("pause"));
-        for (int i = 0; i < 9; i++) this.add(cards.get("level" + i));
+        this.add(cards.get("menu"), "menu");
+        this.add(cards.get("pause"), "pause");
+        for (int i = 0; i < 9; i++) this.add(cards.get("level" + i), "level" + i);
         master.add(this);
 
         // finally, make the menu screen visible
         switchScreen("menu");
+        //switchScreen("pause");
     }
 
     /**
