@@ -11,8 +11,6 @@ import frames.cards.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
 import java.util.*;
 
 /**
@@ -31,8 +29,8 @@ public class MainDisplay extends JComponent implements Observer {
     private Card currentCard;
 
     /* Constants */
-    public static final int F_WIDTH = 1280;
-    public static final int F_HEIGHT = 720;
+    public static final int F_WIDTH = 1920;
+    public static final int F_HEIGHT = 1080;
     private static final String GAME_TITLE = "The Fallacy of the Prophecy";
 
     public MainDisplay() {
@@ -41,17 +39,9 @@ public class MainDisplay extends JComponent implements Observer {
 
         // master frame setup
         master.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        master.setPreferredSize(new Dimension(F_WIDTH, F_HEIGHT));
-        //master.setResizable(false);
-        master.addComponentListener(new ComponentListener() {
-            @Override
-            public void componentResized(ComponentEvent e) {
-                redraw();
-            }
-            @Override public void componentMoved(ComponentEvent e) {}
-            @Override public void componentShown(ComponentEvent e) {}
-            @Override public void componentHidden(ComponentEvent e) {}
-        });
+        master.setResizable(false);
+        master.setUndecorated(true);
+        master.setExtendedState(master.getExtendedState() | JFrame.MAXIMIZED_BOTH);
 
         // this component setup
         this.setLayout(new CardLayout());
@@ -59,8 +49,6 @@ public class MainDisplay extends JComponent implements Observer {
 
         master.pack();
         master.setVisible(true);
-
-        //redraw();
     }
 
     /**

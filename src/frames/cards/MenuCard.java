@@ -6,8 +6,6 @@ package frames.cards;
  * 300338518
  */
 
-import frames.MainDisplay;
-import gfx.GraphicsUtilities;
 import gfx.ImageLoader;
 
 import javax.swing.*;
@@ -17,18 +15,11 @@ public class MenuCard extends Card {
 
     public MenuCard() {
         setBackground(ImageLoader.image("menu.jpg"));
-    }
-
-    @Override
-    protected void paintComponent(Graphics g) {
-        GraphicsUtilities.drawBackground(this, background, (Graphics2D) g);
+        this.add(new JLabel(new ImageIcon(background)));
     }
 
     @Override
     public void redraw() {
-        /*this.removeAll();
-        JLabel l = new JLabel(new ImageIcon(background));
-        l.setPreferredSize(new Dimension(getWidth(), getHeight()));
-        this.add(l);*/
+        //
     }
 }
