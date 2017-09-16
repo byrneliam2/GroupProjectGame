@@ -29,8 +29,8 @@ public class MainDisplay extends JComponent implements Observer {
     private Card currentCard;
 
     /* Constants */
-    private static final int F_WIDTH = 1280;
-    private static final int F_HEIGHT = 720;
+    public static final int F_WIDTH = 1280;
+    public static final int F_HEIGHT = 720;
     private static final String GAME_TITLE = "The Fallacy of the Prophecy";
 
     public MainDisplay() {
@@ -40,7 +40,7 @@ public class MainDisplay extends JComponent implements Observer {
         // master frame setup
         master.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         master.setPreferredSize(new Dimension(F_WIDTH, F_HEIGHT));
-        //master.setResizable(false);
+        master.setResizable(false);
 
         // this component setup
         this.setLayout(new CardLayout());

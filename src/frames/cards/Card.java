@@ -6,7 +6,10 @@ package frames.cards;
  * 300338518
  */
 
+import frames.MainDisplay;
+
 import javax.swing.*;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
@@ -23,10 +26,12 @@ public abstract class Card extends JPanel {
      * Set the background image of this card. The image is placed using
      * a JLabel that has the image as its icon.
      * @param bg image to set background to
+     *           TODO make background resize to frame
      */
     protected void setBackground(BufferedImage bg) {
         this.background = bg;
         this.bgimage = new JLabel(new ImageIcon(background));
+        this.bgimage.setPreferredSize(new Dimension(MainDisplay.F_WIDTH, MainDisplay.F_HEIGHT));
         this.add(bgimage);
     }
 
