@@ -9,7 +9,6 @@ package frames.cards;
 import gfx.ImageLoader;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class MenuCard extends Card {
 

@@ -61,7 +61,6 @@ public class MainDisplay extends JComponent implements Observer {
         // get model details and construct enough map cards to fit
         for (int i = 0; i < 9; i++) { // replace 9 with model value
             cards.put("level" + i, new MapCard());
-            this.add(cards.get("level" + i));
             // set up each level
             MapCard m = (MapCard) cards.get("level" + i);
             //
