@@ -11,6 +11,8 @@ import frames.cards.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.util.*;
 
 /**
@@ -41,6 +43,15 @@ public class MainDisplay extends JComponent implements Observer {
         master.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         master.setPreferredSize(new Dimension(F_WIDTH, F_HEIGHT));
         //master.setResizable(false);
+        master.addComponentListener(new ComponentListener() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                redraw();
+            }
+            @Override public void componentMoved(ComponentEvent e) {}
+            @Override public void componentShown(ComponentEvent e) {}
+            @Override public void componentHidden(ComponentEvent e) {}
+        });
 
         // this component setup
         this.setLayout(new CardLayout());
@@ -48,6 +59,8 @@ public class MainDisplay extends JComponent implements Observer {
 
         master.pack();
         master.setVisible(true);
+
+        //redraw();
     }
 
     /**

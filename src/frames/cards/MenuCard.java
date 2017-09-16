@@ -10,6 +10,7 @@ import frames.MainDisplay;
 import gfx.GraphicsUtilities;
 import gfx.ImageLoader;
 
+import javax.swing.*;
 import java.awt.*;
 
 public class MenuCard extends Card {
@@ -25,6 +26,9 @@ public class MenuCard extends Card {
 
     @Override
     public void redraw() {
-        //
+        /*this.removeAll();
+        JLabel l = new JLabel(new ImageIcon(background));
+        l.setPreferredSize(new Dimension(getWidth(), getHeight()));
+        this.add(l);*/
     }
 }
