@@ -17,13 +17,17 @@ import java.awt.image.BufferedImage;
 public abstract class Card extends JPanel {
 
     protected BufferedImage background;
+    private JLabel bgimage;
 
     /**
-     * Set the background image of this card.
+     * Set the background image of this card. The image is placed using
+     * a JLabel that has the image as its icon.
      * @param bg image to set background to
      */
     protected void setBackground(BufferedImage bg) {
         this.background = bg;
+        this.bgimage = new JLabel(new ImageIcon(background));
+        this.add(bgimage);
     }
 
     /**
@@ -32,7 +36,6 @@ public abstract class Card extends JPanel {
      * should be called after redraw to ensure an observable update is performed.
      */
     public abstract void redraw();
-
 
     /**
      * Perform the operations required for Swing to update the component.
@@ -43,7 +46,8 @@ public abstract class Card extends JPanel {
     }
 
     /**
-     * A Card Entity is any animated element inside a Card.
+     * A Card Entity is any animated element inside a Card. This does not include
+     * separate Swing entities such as buttons and background images.
      */
     public class Entity {
 

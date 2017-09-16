@@ -8,6 +8,8 @@ package frames.cards;
 
 import gfx.ImageLoader;
 
+import java.awt.*;
+
 public class MenuCard extends Card {
 
     public MenuCard() {
@@ -16,9 +18,6 @@ public class MenuCard extends Card {
 
     @Override
     public void redraw() {
-        /*Graphics2D g = (Graphics2D) this.getGraphics();
-        g.drawImage(background, 0, 0, null);*/
 
-        update();
     }
 }
