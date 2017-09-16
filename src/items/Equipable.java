@@ -10,10 +10,10 @@ package items;
 public interface Equipable extends Item {
 
 	/**
-	 * @param player
-	 *            equips this item, providing its given bonuses to the player,
-	 *            moving the item into the 'equipped section of the player's
-	 *            backpack.
+	 * Equips this item, providing its given bonuses to the player,
+	 * moving the item into the 'equipped' section of the player's
+	 * backpack.
+	 * 
 	 * @throws InvalidBackpackException
 	 *             if the player already has the max number of items equipped or the
 	 *             item is not part of a player's backpack.
@@ -22,7 +22,7 @@ public interface Equipable extends Item {
 
 	/**
 	 * Unequips this item, removing its given bonuses from the player it was
-	 * equipped to.
+	 * equipped to and moving it out of the 'equipped' section of the backpack.
 	 *
 	 * @throws InvalidBackpackException
 	 *             if the item was not equipped to any player.
