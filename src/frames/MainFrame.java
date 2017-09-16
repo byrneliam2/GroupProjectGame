@@ -16,10 +16,14 @@ import java.util.*;
 /**
  * The MainFrame represents the master frame of the application. It
  */
-public class MainFrame extends JFrame implements Observer {
+public class MainFrame extends JComponent implements Observer {
 
-    /* Attributes */
+    /* Swing attributes */
+    private JFrame master;
+
+    /* Other attributes */
     private Map<String, Card> cards;
+    private Card currentCard;
 
     /* Constants */
     private static final int F_WIDTH = 1280;
@@ -27,18 +31,18 @@ public class MainFrame extends JFrame implements Observer {
     private static final String GAME_TITLE = "The Fallacy of the Prophecy";
 
     public MainFrame() {
-        super(GAME_TITLE);
-
+        master = new JFrame(GAME_TITLE);
         cards = new HashMap<>();
 
-        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.setPreferredSize(new Dimension(F_WIDTH, F_HEIGHT));
+        master.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        master.setPreferredSize(new Dimension(F_WIDTH, F_HEIGHT));
+        master.setResizable(false);
+
         this.setLayout(new CardLayout());
-        this.setFocusable(true);
 
         doSetup();
-        this.pack();
-        this.setVisible(true);
+        master.pack();
+        master.setVisible(true);
     }
 
     private void doSetup() {
@@ -48,18 +52,18 @@ public class MainFrame extends JFrame implements Observer {
         // get model details and construct enough map cards to fit
         for (int i = 0; i < 9; i++) { // replace 9 with model value
             cards.put("level" + i, new MapCard());
+            this.add(cards.get("level" + i));
             // set up each level
             MapCard m = (MapCard) cards.get("level" + i);
+            //
         }
 
-        switchScreen("menu");
-    }
+        this.add(cards.get("menu"));
+        this.add(cards.get("pause"));
+        for (int i = 0; i < 9; i++) this.add(cards.get("level" + i));
+        master.add(this);
 
-    /**
-     * Add a card (new screen) to the main frame.
-     */
-    private void addScreen() {
-        //
+        switchScreen("menu");
     }
 
     /**
@@ -69,11 +73,12 @@ public class MainFrame extends JFrame implements Observer {
     private void switchScreen(String key) {
         CardLayout cl = (CardLayout) this.getLayout();
         cl.show(this, key);
+        currentCard = cards.get(key);
     }
 
     @Override
     public void update(Observable o, Object arg) {
-        // redraw
         // switch screen if need be (use arg)
+        currentCard.redraw();
     }
 }

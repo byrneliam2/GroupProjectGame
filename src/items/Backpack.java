@@ -6,5 +6,4 @@ public class Backpack {
 	public Player getPlayer() {
 		return this.owner;
 	}
-
 }

@@ -16,6 +16,8 @@ import java.awt.image.BufferedImage;
  */
 public abstract class Card extends JPanel {
 
+
+
     /**
      * Redraw the current card.
      */
