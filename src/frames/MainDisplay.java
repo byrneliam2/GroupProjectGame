@@ -40,7 +40,7 @@ public class MainDisplay extends JComponent implements Observer {
         // master frame setup
         master.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         master.setPreferredSize(new Dimension(F_WIDTH, F_HEIGHT));
-        master.setResizable(false);
+        //master.setResizable(false);
 
         // this component setup
         this.setLayout(new CardLayout());
@@ -94,6 +94,7 @@ public class MainDisplay extends JComponent implements Observer {
     private void redraw() {
         // redraw and repaint the current screen
         currentCard.redraw();
+        currentCard.update();
         // call the frame's redraw methods
         master.revalidate();
         master.repaint();

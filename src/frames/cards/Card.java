@@ -6,10 +6,7 @@ package frames.cards;
  * 300338518
  */
 
-import frames.MainDisplay;
-
 import javax.swing.*;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
@@ -20,19 +17,21 @@ import java.awt.image.BufferedImage;
 public abstract class Card extends JPanel {
 
     protected BufferedImage background;
-    private JLabel bgimage;
 
     /**
-     * Set the background image of this card. The image is placed using
-     * a JLabel that has the image as its icon.
+     * Set the background image of this card.
      * @param bg image to set background to
-     *           TODO make background resize to frame
      */
     protected void setBackground(BufferedImage bg) {
         this.background = bg;
-        this.bgimage = new JLabel(new ImageIcon(background));
-        this.bgimage.setPreferredSize(new Dimension(MainDisplay.F_WIDTH, MainDisplay.F_HEIGHT));
-        this.add(bgimage);
+    }
+
+    /**
+     * Perform the operations required for Swing to update the component.
+     */
+    public void update() {
+        this.revalidate();
+        this.repaint();
     }
 
     /**
@@ -41,14 +40,6 @@ public abstract class Card extends JPanel {
      * should be called after redraw to ensure an observable update is performed.
      */
     public abstract void redraw();
-
-    /**
-     * Perform the operations required for Swing to update the component.
-     */
-    protected void update() {
-        this.revalidate();
-        this.repaint();
-    }
 
     /**
      * A Card Entity is any animated element inside a Card. This does not include
