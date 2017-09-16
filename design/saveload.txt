@@ -1,1 +1,22 @@
 //
+Primary Author: Mohsen Javaher
+Code Reviewer: Thomas Edwards
+External Tester: James Watt
+//
+
+
+First of all we will be having a Specific folder just to store all the saving games.
+This Save&Load package will be responsible to store all the current infromations
+on the map in a text file, so we need to get all the different locations for 
+players, enemies, items and etc. Also, When you want to load a game it goes through
+saved.txt file and it reads it all and put it in the Map.
+
+
+These are the libraries that I am going to use to make this class. :)
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+ 
