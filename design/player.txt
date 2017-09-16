@@ -1,1 +1,21 @@
 //
+Primary Author: Mohsen Javaher
+Code Reviewer: James Watt
+External Tester: Thomas Edwards
+//
+
+This Player package will store informations on the player and performs methods on it.
+This class will be containing a datastructure or a package to store the items which
+are on the map so based on that we now there is an interaction between the Player package
+and the Map package. 
+Also, Thomas will likely extend the player class and control the actions of an 
+enemy using an algorithm rather than using keyboard controls.
+
+Also, This Player package will store informations about the name of the player.
+Also, the Player package will be containing Actions such attacking, moving, picking up an item and etc.
+
+Later plans are to implement 3 different levels of ai behaviours:
+    A player should be able to attack an enemy or a boss in the map(Easy).
+    A player Should be able to pick up items from the current frame(Easy).
+    A Player Should be able to make a move to the adjacent Cells (Easy).
+    

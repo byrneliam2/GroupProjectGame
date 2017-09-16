@@ -7,7 +7,7 @@ frames
 
 DESCRIPTION:
 The frames library will be responsible for holding the main Swing frame of the application and for generating and
-displaying the correct screens (or "cards") at the correct times in the game. The MainFrame class will use a CardLayout
+displaying the correct screens (or "cards") at the correct times in the game. The MainDisplay class will use a CardLayout
 manager to flip between each card/screen of the game, including maps, main menus and the pause menu.
 
 ScreenCards will hold information about each screen of the game, including images that need to be generated (in cooperation
