@@ -8,8 +8,6 @@ package frames.cards;
 
 import gfx.ImageLoader;
 
-import java.awt.*;
-
 public class MenuCard extends Card {
 
     public MenuCard() {
