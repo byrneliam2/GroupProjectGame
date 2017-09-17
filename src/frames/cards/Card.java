@@ -16,14 +16,21 @@ import java.awt.image.BufferedImage;
  */
 public abstract class Card extends JPanel {
 
+    /* Swing attributes */
+    protected JLabel panel;
+
+    /* Other attributes */
     protected BufferedImage background;
 
     /**
-     * Set the background image of this card.
+     * Set the background image of this card. This is done by adding the image
+     * to the label panel that takes up the whole card.
      * @param bg image to set background to
      */
     protected void setBackground(BufferedImage bg) {
         this.background = bg;
+        this.panel = new JLabel(new ImageIcon(background));
+        this.add(panel);
     }
 
     /**

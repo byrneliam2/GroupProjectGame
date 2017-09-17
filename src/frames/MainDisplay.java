@@ -29,8 +29,8 @@ public class MainDisplay extends JComponent implements Observer {
     private Card currentCard;
 
     /* Constants */
-    public static final int F_WIDTH = 1920;
-    public static final int F_HEIGHT = 1080;
+    public static final int F_WIDTH = 1280;
+    public static final int F_HEIGHT = 720;
 
     public MainDisplay() {
         master = new JFrame();
@@ -48,6 +48,8 @@ public class MainDisplay extends JComponent implements Observer {
 
         master.pack();
         master.setVisible(true);
+
+        redraw();
     }
 
     /**
@@ -103,7 +105,6 @@ public class MainDisplay extends JComponent implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         // switch screen if need be (use arg)
-
         redraw();
     }
 }
