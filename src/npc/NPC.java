@@ -2,6 +2,8 @@ package npc;
 
 import javax.swing.Timer;
 
+import MohsenPackage.Player;
+
 public class NPC extends Player {
 	private static final int SPEED = 100;// rate in milliseconds that NPC is updated
 
