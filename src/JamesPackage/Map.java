@@ -19,6 +19,12 @@ public class Map {
 	// HashMap of the Items located on the map and their locations
 	private HashMap<Item, Location> items;
 
+	// Width of a individual tile
+	public static final int tileWidth = 32;
+
+	// Height of a individual tile
+	public static final int tileHeight = 32;
+
 	// The width of the map
 	private int width;
 
@@ -37,37 +43,10 @@ public class Map {
 	// 2D array of all the images that make up the enviromental layer
 	private ArrayList<ArrayList<BufferedImage>> enviromentalLayer;
 
-	// All the doors located on this map
-	private ArrayList<Door> doors;
+	// The current player
+	// Player
 
-	public Map(String name, ArrayList<Item> items, ArrayList<String> doors) {
-
-	}
-
-	/**
-	 * This method takes an ArrayList of items and assigns them random locations on
-	 * this map, it also gets the image associated with the item and places the
-	 * image in the image layer at the give location
-	 */
-	private void randomItemPlacement(ArrayList<Item> item) {
-
-	}
-
-	/**
-	 * This method splits each layer into the 32x32 tiles and inserts them into the
-	 * map field, as well as sets the width and height of the map.
-	 * 
-	 * @param name
-	 *            The name of the map
-	 */
-	private void loadMap(String name) {
-
-	}
-
-	/**
-	 * Initialis's all the entities on the map
-	 */
-	private void loadEntities() {
+	public Map(String name, ArrayList<Item> items) {
 
 	}
 
@@ -120,7 +99,7 @@ public class Map {
 	 * @param y
 	 * @return
 	 */
-	public boolean isItem(int x, int y) {
+	public boolean itemAtTile(int x, int y) {
 		return false;
 	}
 
@@ -145,6 +124,19 @@ public class Map {
 	 * @return
 	 */
 	public BufferedImage imageAt(int x, int y) {
+		return null;
+	}
+
+	/**
+	 * This method takes a x and y location and rounds it to an absolute
+	 * position(tile), e.g. Tile 2.5 does not exist so it is rounded down to tile 2
+	 * which does exist. Throws an error if the given x and y is invalid.
+	 * 
+	 * @param x
+	 * @param y
+	 * @return
+	 */
+	private Location positionOnMap(int x, int y) {
 		return null;
 	}
 
