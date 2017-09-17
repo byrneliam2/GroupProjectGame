@@ -31,16 +31,16 @@ public class MainDisplay extends JComponent implements Observer {
     /* Constants */
     public static final int F_WIDTH = 1280;
     public static final int F_HEIGHT = 720;
-    private static final String GAME_TITLE = "The Fallacy of the Prophecy";
 
     public MainDisplay() {
-        master = new JFrame(GAME_TITLE);
+        master = new JFrame();
         cards = new HashMap<>();
 
         // master frame setup
         master.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        master.setPreferredSize(new Dimension(F_WIDTH, F_HEIGHT));
-        //master.setResizable(false);
+        master.setResizable(false);
+        master.setUndecorated(true);
+        master.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         // this component setup
         this.setLayout(new CardLayout());
@@ -48,6 +48,8 @@ public class MainDisplay extends JComponent implements Observer {
 
         master.pack();
         master.setVisible(true);
+
+        redraw();
     }
 
     /**
@@ -60,20 +62,20 @@ public class MainDisplay extends JComponent implements Observer {
         // get model details and construct enough map cards to fit
         for (int i = 0; i < 9; i++) { // replace 9 with model value
             cards.put("level" + i, new MapCard());
-            this.add(cards.get("level" + i));
             // set up each level
             MapCard m = (MapCard) cards.get("level" + i);
             //
         }
 
         // add all
-        this.add(cards.get("menu"));
-        this.add(cards.get("pause"));
-        for (int i = 0; i < 9; i++) this.add(cards.get("level" + i));
+        this.add(cards.get("menu"), "menu");
+        this.add(cards.get("pause"), "pause");
+        for (int i = 0; i < 9; i++) this.add(cards.get("level" + i), "level" + i);
         master.add(this);
 
         // finally, make the menu screen visible
         switchScreen("menu");
+        //switchScreen("pause");
     }
 
     /**
@@ -103,7 +105,6 @@ public class MainDisplay extends JComponent implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         // switch screen if need be (use arg)
-
         redraw();
     }
 }

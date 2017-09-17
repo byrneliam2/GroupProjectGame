@@ -6,21 +6,16 @@ package frames.cards;
  * 300338518
  */
 
-import frames.MainDisplay;
-import gfx.GraphicsUtilities;
 import gfx.ImageLoader;
 
+import javax.swing.*;
 import java.awt.*;
 
 public class MenuCard extends Card {
 
     public MenuCard() {
         setBackground(ImageLoader.image("menu.jpg"));
-    }
-
-    @Override
-    protected void paintComponent(Graphics g) {
-        GraphicsUtilities.drawBackground(this, background, (Graphics2D) g);
+        panel.add(new JButton(new ImageIcon(ImageLoader.image("bu_exit.jpg"))));
     }
 
     @Override

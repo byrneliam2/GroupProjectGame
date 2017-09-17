@@ -6,12 +6,16 @@ package frames.cards;
  * 300338518
  */
 
+import gfx.ImageLoader;
+
 public class PauseCard extends Card {
 
-    //
+    public PauseCard() {
+        setBackground(ImageLoader.image("pause.jpg"));
+    }
 
     @Override
     public void redraw() {
-
+        //
     }
 }
