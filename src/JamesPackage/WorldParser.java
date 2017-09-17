@@ -3,6 +3,7 @@ package JamesPackage;
 /**
  * This class is responsible for reading a text file that contains the world of
  * the game. This includes reading various map names. This class can be considered a World factory
+ * and thus has no referenced
  * 
  * @author James
  *
