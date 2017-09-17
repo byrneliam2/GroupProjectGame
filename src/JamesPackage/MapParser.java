@@ -2,8 +2,9 @@ package JamesPackage;
 
 /**
  * This class is responsible for reading a text file that contains all the
- * information for a single map. It will then create a map after having read all
- * the data
+ * information for a single map. This includes reading various items. This class
+ * can be considered a Map factory and thus has no referenceable constructor and
+ * a parser method that can be accessed from anywhere.
  * 
  * @author James
  *
@@ -11,7 +12,7 @@ package JamesPackage;
 public class MapParser {
 
 	private MapParser() {
-		
+
 	}
 
 	/**

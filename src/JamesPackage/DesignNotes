@@ -4,3 +4,5 @@ Design Notes for the map package:
 -Write a parser class that reads a map text file and creates a new map from it
 -Enviroment's need to be in a text file and parsed as well, or at least put into a enum or something
 -Make sure to setup exceptions
+-Map parser includes items and NPC stuff
+-Methods for map class
