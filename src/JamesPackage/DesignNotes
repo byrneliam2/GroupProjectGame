@@ -6,3 +6,6 @@ Design Notes for the map package:
 -Make sure to setup exceptions
 -Map parser includes items and NPC stuff
 -Methods for map class
+-Doors and if they are locked or unlocked, a locked door should reference a global boolean value in World, so when a player picks up a key the boolean is flipped and thus the player
+can unlock the door. Think about door interactions.
+-Movable objects, something to think about
