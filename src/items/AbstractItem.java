@@ -5,8 +5,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public abstract class AbstractItem implements Item {
-	private String name, description;
-	private Image image;
+	protected String name, description;
+	protected Image image;
 	protected Backpack pack;// is null if the item is not picked up
 
 	/**
@@ -43,13 +43,23 @@ public abstract class AbstractItem implements Item {
 	}
 
 	@Override
+	public Backpack getPack() {
+		return this.pack;
+	}
+
+	@Override
+	public void setPack(Backpack pack) {
+		this.pack = pack;
+	}
+
+	@Override
 	public void pickupItem(Backpack pack) throws InvalidBackpackException {
-		// TODO
+		pack.pickupItem(this);
 	}
 
 	@Override
 	public void dropItem(Backpack pack) throws InvalidBackpackException {
-		// TODO
+		pack.dropItem(this);
 	}
 
 }

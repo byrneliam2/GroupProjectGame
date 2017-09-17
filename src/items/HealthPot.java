@@ -7,9 +7,7 @@ public class HealthPot extends AbstractItem implements Usable {
 	}
 
 	@Override
-	public void use() throws InvalidBackpackException {
-		// TODO Auto-generated method stub
-
+	public void use(Player player) throws InvalidBackpackException {
 	}
 
 }

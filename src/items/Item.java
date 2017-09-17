@@ -28,7 +28,21 @@ public interface Item {
 	public String getDescription();
 
 	/**
-	 * Moves the item into the player's backpack.
+	 * @return null if this item has no owner (hasn't been picked up), otherwise the backpack of the player who owns
+	 *         this item.
+	 */
+	public Backpack getPack();
+
+	/**
+	 * Sets the pack (and thus the owner) of this item to the given pack.
+	 * 
+	 * @param pack
+	 *            the pack to set this item to
+	 */
+	public void setPack(Backpack pack);
+
+	/**
+	 * Moves the item into the given player's backpack.
 	 *
 	 * @param pack
 	 *            the backpack of the player who is picking up the item.
@@ -39,7 +53,7 @@ public interface Item {
 	public void pickupItem(Backpack pack) throws InvalidBackpackException;
 
 	/**
-	 * Removes the item from the player's backpack.
+	 * Removes the item from the given player's backpack.
 	 *
 	 * @param pack
 	 *            the backpack of the player who is dropping the item.

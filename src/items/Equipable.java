@@ -10,24 +10,16 @@ package items;
 public interface Equipable extends Item {
 
 	/**
-	 * Equips this item, providing its given bonuses to the player,
-	 * moving the item into the 'equipped' section of the player's
-	 * backpack.
+	 * Provides item's given bonuses to the player,
 	 * 
-	 * @throws InvalidBackpackException
-	 *             if the player already has the max number of items equipped or the
-	 *             item is not part of a player's backpack.
 	 */
-	public void equip() throws InvalidBackpackException;
+	void provideBonus(Player p);
 
 	/**
-	 * Unequips this item, removing its given bonuses from the player it was
-	 * equipped to and moving it out of the 'equipped' section of the backpack.
-	 *
-	 * @throws InvalidBackpackException
-	 *             if the item was not equipped to any player.
+	 * removes itemss given bonuses from the player it was
+	 * equipped to.
 	 *
 	 */
-	public void unequip() throws InvalidBackpackException;
+	void removeBonus(Player p);
 
 }
