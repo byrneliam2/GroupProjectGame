@@ -15,6 +15,6 @@ public interface Usable extends Item {
 	/**
 	 * Uses this item on the player providing it's benefits to the player
 	 */
-	public void use(Player player) throws InvalidBackpackException;
+	public void use(Player player);
 
 }

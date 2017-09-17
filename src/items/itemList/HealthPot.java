@@ -2,7 +2,6 @@ package items.itemList;
 
 import MohsenPackage.Player;
 import items.AbstractItem;
-import items.InvalidBackpackException;
 import items.Usable;
 
 /**
@@ -18,7 +17,7 @@ public class HealthPot extends AbstractItem implements Usable {
 	}
 
 	@Override
-	public void use(Player player) throws InvalidBackpackException {
+	public void use(Player player) {
 		// TODO
 	}
 

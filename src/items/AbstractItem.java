@@ -48,18 +48,13 @@ public abstract class AbstractItem implements Item {
 	}
 
 	@Override
-	public void setPack(Backpack pack) {
+	public void pickUp(Backpack pack) {
 		this.pack = pack;
 	}
 
 	@Override
-	public void pickupItem(Backpack pack) throws InvalidBackpackException {
-		pack.pickupItem(this);
-	}
-
-	@Override
-	public void dropItem(Backpack pack) throws InvalidBackpackException {
-		pack.dropItem(this);
+	public void remove() {
+		this.pack = null;
 	}
 
 }

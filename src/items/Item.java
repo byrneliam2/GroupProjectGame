@@ -34,31 +34,16 @@ public interface Item {
 	public Backpack getPack();
 
 	/**
-	 * Sets the pack (and thus the owner) of this item to the given pack.
-	 * 
-	 * @param pack
-	 *            the pack to set this item to
-	 */
-	public void setPack(Backpack pack);
-
-	/**
-	 * Moves the item into the given player's backpack.
+	 * Sets the item's link to the given backpack
 	 *
 	 * @param pack
 	 *            the backpack of the player who is picking up the item.
-	 * @throws InvalidBackpackException
-	 *             if the backpack is full or the item already belongs to the
-	 *             player.
 	 */
-	public void pickupItem(Backpack pack) throws InvalidBackpackException;
+	public void pickUp(Backpack pack);
 
 	/**
-	 * Removes the item from the given player's backpack.
+	 * Removes the link that this item has to the player's backpackR
 	 *
-	 * @param pack
-	 *            the backpack of the player who is dropping the item.
-	 * @throws InvalidBackpackException
-	 *             if the backpack doesn't contain this item.
 	 */
-	public void dropItem(Backpack pack) throws InvalidBackpackException;
+	public void remove();
 }
