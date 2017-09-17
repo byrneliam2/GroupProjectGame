@@ -7,6 +7,7 @@ import MohsenPackage.Player;
 
 /**
  * Backpack contains 2 sections, the player's inventory, and the items equipped by the player.
+ * Main API for the Player class to use.
  * 
  * @author Thomas Edwards
  *
@@ -65,7 +66,7 @@ public class Backpack {
 	}
 
 	/**
-	 * Removes the item from the player's backpack. (The inventory section of it)
+	 * Removes the item from (the inventory section of) the player's backpack.
 	 *
 	 * @param item
 	 *            the item to drop

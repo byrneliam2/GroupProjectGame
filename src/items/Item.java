@@ -42,7 +42,7 @@ public interface Item {
 	public void pickUp(Backpack pack);
 
 	/**
-	 * Removes the link that this item has to the player's backpackR
+	 * Removes the link that this item has to the player's backpack.
 	 *
 	 */
 	public void remove();
