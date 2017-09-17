@@ -1,5 +1,7 @@
 package items;
 
+import MohsenPackage.Player;
+
 /**
  * Usable items are items which can be used (at any time) by the player and have
  * some kind of immediate effect. Usable items should ALWAYS be destroyed once they have been

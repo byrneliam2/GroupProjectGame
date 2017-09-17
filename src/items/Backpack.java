@@ -3,6 +3,8 @@ package items;
 import java.util.ArrayList;
 import java.util.List;
 
+import MohsenPackage.Player;
+
 /**
  * 
  * @author Thomas Edwards
@@ -17,7 +19,7 @@ public class Backpack {
 	private List<Item> packItems = new ArrayList<Item>(MAX_PACK_ITEMS);
 	private List<Equipable> equippedItems = new ArrayList<Equipable>(MAX_EQUIPABLE_ITEMS);
 
-	public BackPack(Player owner){
+	public Backpack(Player owner) {
 		this.owner = owner;
 	}
 
@@ -67,7 +69,7 @@ public class Backpack {
 	 *             if the player already has the max number of items equipped or the
 	 *             item is not part of a player's backpack.
 	 */
-	public void equipItem(Equipable itemToEquip) {
+	public void equipItem(Equipable itemToEquip) throws InvalidBackpackException {
 		if (!packItems.remove(itemToEquip))// removes the item from the non-equipped section of pack
 			throw new InvalidBackpackException("Item was not in the backpack");
 		if (equippedItems.size() >= MAX_EQUIPABLE_ITEMS)
@@ -84,7 +86,7 @@ public class Backpack {
 	 * @throws InvalidBackpackException
 	 *             if the item was not equipped to any player or the pack's unequipped area is full.
 	 */
-	public void unequipItem(Equipable item) {
+	public void unequipItem(Equipable item) throws InvalidBackpackException {
 		if (!equippedItems.remove(item))// removes item from equiped section of pack
 			throw new InvalidBackpackException("Item was not equipped");
 		if (packItems.size() >= MAX_PACK_ITEMS)
@@ -102,7 +104,7 @@ public class Backpack {
 	 * @throws InvalidBackpackException
 	 *             if the item was not part of a player's backpack.
 	 */
-	public void useItem(Usable itemToUse) {
+	public void useItem(Usable itemToUse) throws InvalidBackpackException {
 		if (!packItems.remove(itemToUse))
 			throw new InvalidBackpackException("Item was not found in the pack");
 

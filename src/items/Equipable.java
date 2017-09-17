@@ -1,5 +1,7 @@
 package items;
 
+import MohsenPackage.Player;
+
 /**
  * Equipable items are items which can be 'equipped' by the player, they provide
  * static bonuses when eqquiped.
