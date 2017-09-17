@@ -8,6 +8,9 @@ package JamesPackage;
  * @author James
  *
  */
-public enum Enviroment {
+public class Enviroment {
 
+	public Enviroment(String name,String) {
+		
+	}
 }

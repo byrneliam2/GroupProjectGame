@@ -2,3 +2,5 @@ Design Notes for the map package:
 
 -The player may not always be on one tile. So there should be a method that decides what tile the player is on "more" and that is the tile the player is one.
 -Write a parser class that reads a map text file and creates a new map from it
+-Enviroment's need to be in a text file and parsed as well, or at least put into a enum or something
+-Make sure to setup exceptions
