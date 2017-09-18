@@ -1,6 +1,6 @@
 package player;
 
-public class Player {
+
 /**
  * Created by javahemohs on 19/09/17.
  */
@@ -29,5 +29,4 @@ public class Player {
     public void setName(String name){
         this.name = name;
     }
-}
 }
