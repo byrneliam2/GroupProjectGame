@@ -1,8 +1,8 @@
 package items.itemList;
 
-import MohsenPackage.Player;
 import items.AbstractItem;
 import items.Equipable;
+import player.Player;
 
 public class MassiveGun extends AbstractItem implements Equipable {
 

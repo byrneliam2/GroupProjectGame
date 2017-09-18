@@ -3,7 +3,7 @@ package items;
 import java.util.ArrayList;
 import java.util.List;
 
-import MohsenPackage.Player;
+import player.Player;
 
 /**
  * Backpack contains 2 sections, the player's inventory, and the items equipped by the player.
@@ -80,7 +80,7 @@ public class Backpack {
 			throw new InvalidBackpackException(
 					"Item was not in the backpack (Note. Item could be equipped in which case, unequip it, then drop it)");
 
-		item.remove();
+		item.remove();// removes items link to backpack.
 	}
 
 	/**

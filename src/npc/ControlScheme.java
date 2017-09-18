@@ -1,6 +1,6 @@
 package npc;
 
-import MohsenPackage.Player;
+import player.Player;
 
 public interface ControlScheme {
 

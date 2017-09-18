@@ -1,6 +1,6 @@
 package items;
 
-import MohsenPackage.Player;
+import player.Player;
 
 /**
  * Usable items are items which can be used (at any time) by the player and have

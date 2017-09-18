@@ -1,6 +1,6 @@
 package npc;
 
-import MohsenPackage.Player;
+import player.Player;
 
 /**
  * A scheme which causes the NPC to patrol left-right or up-down. The NPC will walk the specified distance in the

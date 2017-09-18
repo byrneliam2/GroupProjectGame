@@ -1,8 +1,8 @@
 package items.itemList;
 
-import MohsenPackage.Player;
 import items.AbstractItem;
 import items.Usable;
+import player.Player;
 
 /**
  * Restores a portion of health to the player
