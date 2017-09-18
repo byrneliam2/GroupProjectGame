@@ -35,7 +35,6 @@ public abstract class Card extends JPanel {
         this.background = bg;
 
         this.panel = new JLabel(new ImageIcon(background));
-        this.panel.setLayout(new FlowLayout());
         this.add(panel);
     }
 
@@ -48,9 +47,10 @@ public abstract class Card extends JPanel {
     }
 
     /**
-     * Redraw the current card. Note that this method only draws the current card again,
-     * it does not revalidate or repaint the component. The {@link #update()} method
-     * should be called after redraw to ensure an observable update is performed.
+     * Redraw the elements present on the current card. Note that this method only
+     * draws the elements again, it does not revalidate or repaint the component.
+     * The {@link #update()} method should be called after redraw to ensure an
+     * observable update is performed.
      */
     public abstract void redraw();
 

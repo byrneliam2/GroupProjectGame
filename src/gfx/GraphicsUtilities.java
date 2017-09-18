@@ -19,16 +19,22 @@ public class GraphicsUtilities {
 
     /**
      * Creates and returns a transparent, roll-over enabled button with a set image.
+     * This button is automatically centered for purposes such as menus and clickable
+     * dialogs.
      * @return new JButton
      */
     public static JButton produceButton(BufferedImage main, BufferedImage roll) {
         JButton button = new JButton();
+        // set visual attributes
         button.setContentAreaFilled(false);
         button.setBorderPainted(false);
         button.setIcon(new ImageIcon(main));
+        // set rollover visuals
         button.setRolloverEnabled(true);
         button.setRolloverIcon(new ImageIcon(roll));
-        button.setVerticalAlignment(SwingConstants.CENTER);
+        // force middle alignment
+        button.setAlignmentX(0.5f);
+        // done
         return button;
     }
 

@@ -49,6 +49,7 @@ public class MainDisplay extends JComponent implements Observer {
         master.pack();
         master.setVisible(true);
 
+        // all done, safe to draw
         redraw();
     }
 
