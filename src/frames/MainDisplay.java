@@ -60,6 +60,8 @@ public class MainDisplay extends JComponent implements Observer {
         // add fixed cards
         cards.put("menu",  new MenuCard());
         cards.put("pause", new PauseCard());
+        cards.put("settings", new SettingsCard());
+
         // get model details and construct enough map cards to fit
         for (int i = 0; i < 9; i++) { // replace 9 with model value
             cards.put("level" + i, new MapCard());
@@ -71,6 +73,7 @@ public class MainDisplay extends JComponent implements Observer {
         // add all
         this.add(cards.get("menu"), "menu");
         this.add(cards.get("pause"), "pause");
+        this.add(cards.get("settings"), "settings");
         for (int i = 0; i < 9; i++) this.add(cards.get("level" + i), "level" + i);
         master.add(this);
 

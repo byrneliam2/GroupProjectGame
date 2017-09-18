@@ -19,11 +19,12 @@ public class GraphicsUtilities {
 
     /**
      * Creates and returns a transparent, roll-over enabled button with a set image.
-     * This button is automatically centered for purposes such as menus and clickable
-     * dialogs.
+     * @param main image to attach
+     * @param roll image to appear on button roll-over
+     * @param centerx sets whether to center the x alignment of this component
      * @return new JButton
      */
-    public static JButton produceButton(BufferedImage main, BufferedImage roll) {
+    public static JButton produceButton(BufferedImage main, BufferedImage roll, boolean centerx) {
         JButton button = new JButton();
         // set visual attributes
         button.setContentAreaFilled(false);
@@ -36,6 +37,19 @@ public class GraphicsUtilities {
         button.setAlignmentX(0.5f);
         // done
         return button;
+    }
+
+    /**
+     * Creates and returns a sticker, or a non-interactive label, with the specified image.
+     * @param main image to attach
+     * @param centerx sets whether to center the x alignment of this component
+     * @return new label
+     */
+    public static JLabel produceSticker(BufferedImage main, boolean centerx) {
+        JLabel sticker = new JLabel();
+        sticker.setIcon(new ImageIcon(main));
+        sticker.setAlignmentX(0.5f);
+        return sticker;
     }
 
 }

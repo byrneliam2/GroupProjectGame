@@ -16,7 +16,7 @@ public class MapCard extends Card {
     private List<Entity> entities;
 
     /**
-     * Add an entity to the current screen.
+     * Add a new {@link Card.Entity} to the current screen.
      * @param e entity
      */
     public void addEntity(Entity e) {
