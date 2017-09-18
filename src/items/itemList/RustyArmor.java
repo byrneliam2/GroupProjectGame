@@ -4,10 +4,10 @@ import items.AbstractItem;
 import items.Equipable;
 import player.Player;
 
-public class RustyArmour extends AbstractItem implements Equipable {
+public class RustyArmor extends AbstractItem implements Equipable {
 
-	public RustyArmour() {
-		super("Rusty Armour", "Worn and beaten, this armour provides little protection", null);
+	public RustyArmor() {
+		super("Rusty Armour", "Worn and beaten, this armour provides little protection", "armor1.png");
 	}
 
 	@Override
