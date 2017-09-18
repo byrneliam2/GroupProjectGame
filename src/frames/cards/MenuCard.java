@@ -9,17 +9,27 @@ package frames.cards;
 import gfx.ImageLoader;
 
 import javax.swing.*;
-import java.awt.*;
 
+/**
+ * The MenuCard represents the main menu of the game. This contains buttons that start,
+ * load or end the game, along with a link to the {@link SettingsCard}.
+ */
 public class MenuCard extends Card {
 
     public MenuCard() {
         setBackground(ImageLoader.image("menu.jpg"));
-        panel.add(new JButton(new ImageIcon(ImageLoader.image("bu_exit.jpg"))));
     }
 
     @Override
     public void redraw() {
-        //
+        // TODO extract this to GraphicsUtilities
+        JButton exit = new JButton();
+        exit.setContentAreaFilled(false);
+        exit.setBorderPainted(false);
+        exit.setIcon(new ImageIcon(ImageLoader.image("bu_exit.jpg")));
+        exit.setRolloverEnabled(true);
+        exit.setRolloverIcon(new ImageIcon(ImageLoader.image("pause.jpg")));
+        exit.setVerticalAlignment(SwingConstants.CENTER);
+        panel.add(exit);
     }
 }

@@ -8,6 +8,9 @@ package frames.cards;
 
 import java.util.List;
 
+/**
+ * The MapCard displays the state of a Map, including all Entities on screen.
+ */
 public class MapCard extends Card {
 
     private List<Entity> entities;

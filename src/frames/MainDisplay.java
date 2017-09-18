@@ -64,7 +64,7 @@ public class MainDisplay extends JComponent implements Observer {
             cards.put("level" + i, new MapCard());
             // set up each level
             MapCard m = (MapCard) cards.get("level" + i);
-            //
+            // TODO add map setup
         }
 
         // add all
@@ -75,7 +75,6 @@ public class MainDisplay extends JComponent implements Observer {
 
         // finally, make the menu screen visible
         switchScreen("menu");
-        //switchScreen("pause");
     }
 
     /**

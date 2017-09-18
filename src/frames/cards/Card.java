@@ -7,6 +7,7 @@ package frames.cards;
  */
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
@@ -24,12 +25,17 @@ public abstract class Card extends JPanel {
 
     /**
      * Set the background image of this card. This is done by adding the image
-     * to the label panel that takes up the whole card.
+     * to the label panel that takes up the whole card. Many cards will have some
+     * kind of background image that persists throughout its existence, therefore
+     * this should be considered as a "setup" method that should be called
+     * on creation.
      * @param bg image to set background to
      */
     protected void setBackground(BufferedImage bg) {
         this.background = bg;
+
         this.panel = new JLabel(new ImageIcon(background));
+        this.panel.setLayout(new FlowLayout());
         this.add(panel);
     }
 

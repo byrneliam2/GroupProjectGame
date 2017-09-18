@@ -14,6 +14,6 @@ package gfx;
  */
 public class GraphicsUtilities {
 
-    //
+
 
 }
