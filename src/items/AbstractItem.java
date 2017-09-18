@@ -2,10 +2,12 @@ package items;
 
 import java.awt.Image;
 import java.io.IOException;
+import java.io.InputStream;
+
 import javax.imageio.ImageIO;
 
 public abstract class AbstractItem implements Item {
-	protected String name, description;
+	protected final String name, description;
 	protected Image image;
 	protected Backpack pack;// is null if the item is not picked up
 
@@ -21,7 +23,8 @@ public abstract class AbstractItem implements Item {
 		this.description = itemDescription;
 
 		try {
-			image = ImageIO.read((this.getClass().getResourceAsStream("pictures/" + imageName)));
+			InputStream i = this.getClass().getResourceAsStream("ItemPictures/"+imageName);
+			image = ImageIO.read(i);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

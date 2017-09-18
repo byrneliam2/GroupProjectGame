@@ -13,7 +13,8 @@ import player.Player;
 public class HealthPot extends AbstractItem implements Usable {
 
 	public HealthPot() {
-		super("Health Pot", "A potion of health which immedietly restores x amount of health to the player", null);
+		super("Health Pot", "A potion of health which immedietly restores x amount of health to the player",
+				"healthPotion.png");
 	}
 
 	@Override
