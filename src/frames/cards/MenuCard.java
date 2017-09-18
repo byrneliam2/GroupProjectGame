@@ -6,9 +6,8 @@ package frames.cards;
  * 300338518
  */
 
+import gfx.GraphicsUtilities;
 import gfx.ImageLoader;
-
-import javax.swing.*;
 
 /**
  * The MenuCard represents the main menu of the game. This contains buttons that start,
@@ -22,14 +21,7 @@ public class MenuCard extends Card {
 
     @Override
     public void redraw() {
-        // TODO extract this to GraphicsUtilities
-        JButton exit = new JButton();
-        exit.setContentAreaFilled(false);
-        exit.setBorderPainted(false);
-        exit.setIcon(new ImageIcon(ImageLoader.image("bu_exit.jpg")));
-        exit.setRolloverEnabled(true);
-        exit.setRolloverIcon(new ImageIcon(ImageLoader.image("pause.jpg")));
-        exit.setVerticalAlignment(SwingConstants.CENTER);
-        panel.add(exit);
+        panel.add(GraphicsUtilities.produceButton(ImageLoader.image("bu_exit.jpg"),
+                ImageLoader.image("pause.jpg")));
     }
 }
