@@ -1,4 +1,4 @@
-package MohsenPackage;
+package player;
 
 public class Player {
 
