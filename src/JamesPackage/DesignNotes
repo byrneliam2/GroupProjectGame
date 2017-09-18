@@ -9,3 +9,4 @@ Design Notes for the map package:
 -Doors and if they are locked or unlocked, a locked door should reference a global boolean value in World, so when a player picks up a key the boolean is flipped and thus the player
 can unlock the door. Think about door interactions.
 -Movable objects, something to think about
+-Player represented by a single point or will the player just be the player and i have to find out which block it is more in.
