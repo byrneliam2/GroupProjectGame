@@ -15,19 +15,25 @@ public class AudioTrack {
     private String name;
     private File soundFile;
     private SoundType type;
-    private boolean repeat;
 
-    public AudioTrack(String name, File soundFile, SoundType type, boolean repeat) {
+    public AudioTrack(String name, File soundFile, SoundType type) {
         this.name = name;
         this.soundFile = soundFile;
         this.type = type;
-        this.repeat = repeat;
+    }
+
+    String getName() {
+        return name;
+    }
+
+    SoundType getType() {
+        return type;
     }
 
     /**
      * SoundType enum determines what type of AudioTrack is requested.
      */
-    private enum SoundType{
-        MUSIC, SOUND_EFFECT
+    public enum SoundType{
+        MUSIC, EFFECT
     }
 }
