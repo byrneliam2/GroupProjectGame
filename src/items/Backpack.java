@@ -6,9 +6,9 @@ import java.util.List;
 import player.Player;
 
 /**
- * Backpack contains 2 sections, the player's inventory, and the items equipped by the player.
- * Main API for the Player class to use.
- * 
+ * Backpack contains 2 sections, the player's inventory, and the items equipped
+ * by the player. Main API for the Player class to use.
+ *
  * @author Thomas Edwards
  *
  */
@@ -20,10 +20,11 @@ public class Backpack {
 	private Player owner;
 	private List<Item> inventory = new ArrayList<Item>(MAX_INVENTORY);
 	private List<Equipable> equippedItems = new ArrayList<Equipable>(MAX_EQUIPABLE_ITEMS);
+	private List<Key> keys = new ArrayList<Key>();
 
 	/**
 	 * Creates a new Backpack with the given owner
-	 * 
+	 *
 	 * @param owner
 	 */
 	public Backpack(Player owner) {
@@ -50,9 +51,10 @@ public class Backpack {
 	}
 
 	/**
-	 * Picks up the item and immedietly uses it (removing the item from backpack). This method should be called when you
-	 * want to interact with a 'switch\lever' type of item.
-	 * 
+	 * Picks up the item and immedietly uses it (removing the item from backpack).
+	 * This method should be called when you want to interact with a 'switch\lever'
+	 * type of item.
+	 *
 	 * @param itemToUse
 	 * @throws InvalidBackpackException
 	 */
@@ -84,10 +86,9 @@ public class Backpack {
 	}
 
 	/**
-	 * Equips this item, providing its given bonuses to the player,
-	 * moving the item into the 'equipped' section of the player's
-	 * backpack.
-	 * 
+	 * Equips this item, providing its given bonuses to the player, moving the item
+	 * into the 'equipped' section of the player's backpack.
+	 *
 	 * @throws InvalidBackpackException
 	 *             if the player already has the max number of items equipped or the
 	 *             item is not part of a player's backpack.
@@ -107,7 +108,8 @@ public class Backpack {
 	 * equipped to and moving it out of the 'equipped' section of the backpack.
 	 *
 	 * @throws InvalidBackpackException
-	 *             if the item was not equipped to any player or the pack's unequipped area is full.
+	 *             if the item was not equipped to any player or the pack's
+	 *             unequipped area is full.
 	 */
 	public void unequipItem(Equipable item) throws InvalidBackpackException {
 		if (!equippedItems.remove(item))// removes item from equiped section of pack
@@ -132,6 +134,14 @@ public class Backpack {
 			throw new InvalidBackpackException("Item was not found in the pack");
 
 		itemToUse.use(owner);// uses the item.
+	}
+
+	public boolean checkDoorID(int doorID) {
+		for (Key k : keys) {
+			if (k.keyMatchesDoor(doorID))
+				return true;
+		}
+		return false;
 	}
 
 }

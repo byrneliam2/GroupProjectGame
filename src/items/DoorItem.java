@@ -1,28 +1,30 @@
-package JamesPackage;
+package items;
 
 import java.awt.Image;
-
-import items.Backpack;
-import items.InvalidBackpackException;
-import items.Item;
 
 /**
  * This class represent a door, a door leads to another map. In this case each
  * door has the name of the map it leads to.
- * 
+ *
  * @author James
  *
  */
 public class DoorItem implements Item {
 
+	private int doorID;
 	private String map;
 
-	public DoorItem(String map) {
+	public DoorItem(String map, int ID) {
 		this.map = map;
+		this.doorID = ID;
 	}
 
 	public String getMap() {
 		return map;
+	}
+
+	public int getDoorID() {
+		return doorID;
 	}
 
 	@Override
