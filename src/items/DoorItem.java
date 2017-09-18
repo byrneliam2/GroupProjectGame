@@ -1,7 +1,5 @@
 package items;
 
-import java.awt.Image;
-
 /**
  * This class represent a door, a door leads to another map. In this case each
  * door has the name of the map it leads to.
@@ -9,64 +7,30 @@ import java.awt.Image;
  * @author James
  *
  */
-public class DoorItem implements Item {
+public class DoorItem extends AbstractItem {
 
 	private int doorID;
-	private String map;
+	private boolean locked;
 
-	public DoorItem(String map, int ID) {
-		this.map = map;
+	public DoorItem(String map, int ID, boolean locked) {
+		super(map, "A door linking to map: " + map + " with ID: " + ID, null);
 		this.doorID = ID;
 	}
 
 	public String getMap() {
-		return map;
+		return super.name;
 	}
 
 	public int getDoorID() {
 		return doorID;
 	}
 
-	@Override
-	public Image getImage() {
-		// TODO Auto-generated method stub
-		return null;
+	public void unlockDoor() {
+		this.locked = false;
 	}
 
-	@Override
-	public String getName() {
-		// TODO Auto-generated method stub
-		return this.map;
-	}
-
-	@Override
-	public String getDescription() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Backpack getPack() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setPack(Backpack pack) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void pickupItem(Backpack pack) throws InvalidBackpackException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void dropItem(Backpack pack) throws InvalidBackpackException {
-		// TODO Auto-generated method stub
-
+	public boolean isLocked() {
+		return locked;
 	}
 
 }

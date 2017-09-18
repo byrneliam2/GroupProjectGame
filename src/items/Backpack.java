@@ -32,7 +32,8 @@ public class Backpack {
 	}
 
 	/**
-	 * Adds the item to the player's backpack.
+	 * Adds the item to the player's backpack. If item is a key, adds it to the key
+	 * section of the backpack.
 	 *
 	 * @param item
 	 *            the item to pick up
@@ -46,12 +47,18 @@ public class Backpack {
 		if (item.getPack() != null)
 			throw new InvalidBackpackException("Item has already been picked up");
 
-		inventory.add(item);
 		item.pickUp(this);
+		if (item instanceof Key) {// if you pick up a key, add it to the key section
+			Key key = (Key) item;
+			keys.add(key);
+			return;
+		}
+		inventory.add(item);
+
 	}
 
 	/**
-	 * Picks up the item and immedietly uses it (removing the item from backpack).
+	 * Picks up the item and immediately uses it (removing the item from backpack).
 	 * This method should be called when you want to interact with a 'switch\lever'
 	 * type of item.
 	 *
@@ -136,6 +143,13 @@ public class Backpack {
 		itemToUse.use(owner);// uses the item.
 	}
 
+	/**
+	 * Compares the door id all of the keys in pack.
+	 *
+	 * @param doorID
+	 * @return returns true if the given door id matches an id of a key contained in
+	 *         the backpack.
+	 */
 	public boolean checkDoorID(int doorID) {
 		for (Key k : keys) {
 			if (k.keyMatchesDoor(doorID))
