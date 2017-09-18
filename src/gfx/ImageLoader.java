@@ -13,20 +13,21 @@ import java.io.IOException;
 
 /**
  * This class is responsible for all image loading within the
- * game.
+ * game. The images come from the img directory located within the
+ * gfx library.
  */
 public class ImageLoader {
 
     /**
      * Returns the image specified by the integer parameter.
-     * @param path relative file path to image
+     * @param path file path to image
      * @return BufferedImage version of the image specified
      */
     public static BufferedImage image(String path) {
         BufferedImage img = null;
         try {
-            //img = ImageIO.read(ImageLoader.class.getResource(path));
-            img = ImageIO.read(new File("img/" + path));
+            img = ImageIO.read(ImageLoader.class.getResource("img/" + path));
+            //img = ImageIO.read(new File("img/" + path));
         } catch (IOException e) { e.printStackTrace(); }
 
         return img;
