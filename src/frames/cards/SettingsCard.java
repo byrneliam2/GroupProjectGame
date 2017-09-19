@@ -14,11 +14,16 @@ public class SettingsCard extends Card {
 
     @Override
     protected void doSetup() {
-        //
+
+    }
+
+    @Override
+    protected void setComponentActions() {
+
     }
 
     @Override
     public void redraw() {
-        //
+
     }
 }

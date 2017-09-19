@@ -27,11 +27,16 @@ public class MapCard extends Card {
 
     @Override
     protected void doSetup() {
-        //
+
+    }
+
+    @Override
+    protected void setComponentActions() {
+
     }
 
     @Override
     public void redraw() {
-        //
+
     }
 }

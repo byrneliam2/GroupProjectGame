@@ -26,8 +26,13 @@ public abstract class Card extends JPanel {
         panel = new JLabel();
         components = new HashMap<>();
 
+        // add the label
+        // even if it is not used, it remains as the sole component of this JPanel
         add(panel);
+
+        // all card implementations must perform setup
         doSetup();
+        setComponentActions();
     }
 
     /**
@@ -51,9 +56,16 @@ public abstract class Card extends JPanel {
     }
 
     /**
-     * Perform first time setup for this Card.
+     * Perform first time setup for this Card. This will usually involve
+     * setting up whatever components this screen holds. MapCards will likely
+     * use this method to set up their {@link Card.Entity} list instead.
      */
     protected abstract void doSetup();
+
+    /**
+     * Add actions to the components on screen, if there are any.
+     */
+    protected abstract void setComponentActions();
 
     /**
      * Redraw the elements present on the current card. Note that this method only
