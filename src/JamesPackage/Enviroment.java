@@ -1,5 +1,7 @@
 package JamesPackage;
 
+import player.Player;
+
 /**
  * This class represents a type of enviroment that a tile in the map can be. For
  * example a mud enviroment. Each enviroment affect's the player in
