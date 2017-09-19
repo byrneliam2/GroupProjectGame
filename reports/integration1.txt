@@ -3,3 +3,6 @@ Team SnicketySnacks (James Watt, Thomas Edwards, Liam Byrne, Mohsen Javaher, And
 
 INTEGRATION ONE REPORT
 
+Today's integration had quite a few successes and failures. The combining of the two front end components
+(view libraries and the controller setup) was successful, using simple print statement tests to confirm
+communication.

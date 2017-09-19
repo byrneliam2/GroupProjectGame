@@ -6,6 +6,9 @@ package frames;
  * 300338518
  */
 
+import audio.AudioHandler;
+import controller.KeyboardController;
+import controller.MouseController;
 import frames.cards.Card;
 import frames.cards.*;
 
@@ -27,6 +30,7 @@ public class MainDisplay extends JComponent implements Observer {
     /* Other attributes */
     private Map<String, Card> cards;
     private Card currentCard;
+    private AudioHandler audioHandler;
 
     /* Constants */
     public static final int F_WIDTH = 1280;
@@ -35,12 +39,15 @@ public class MainDisplay extends JComponent implements Observer {
     public MainDisplay() {
         master = new JFrame();
         cards = new HashMap<>();
+        audioHandler = new AudioHandler();
 
         // master frame setup
         master.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         master.setResizable(false);
         master.setUndecorated(true);
         master.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        master.addKeyListener(new KeyboardController());
+        master.addMouseListener(new MouseController());
 
         // this component setup
         this.setLayout(new CardLayout());
