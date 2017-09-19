@@ -3,8 +3,11 @@ package map;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import items.Item;
+import player.Bullet;
 
 /**
  * This class represents each map in the world. Each map is represented by a
@@ -47,6 +50,17 @@ public class Map {
 
 	public Map(String name, ArrayList<Item> items) {
 
+	}
+
+	/**
+	 * Checks whether the bullet has hit either the player or any NPC's
+	 */
+	public boolean hasHit(Bullet b) {
+		// for each entity{
+		// check bullet doesnt belong to entity use b.getOwner()
+		// check whether bullet is touching entity
+		// if it is, then return true, and call the takeDamage() method on the entity
+		return false;
 	}
 
 	/**

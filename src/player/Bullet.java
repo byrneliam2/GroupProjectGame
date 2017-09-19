@@ -2,38 +2,45 @@ package player;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.Timer;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * A bullet is a point object with an x,y location, when the bullet is created a
- * timer is started which updates the bullet location until the bullet hits
- * either a player, or a wall.
+ * timer is started which updates the bullet location until the bullet hits a wall or npc.
  *
  * @author Thomas Edwards
  *
  */
 public class Bullet {
 
-	public static List<Bullet> bulletList = new ArrayList<>();
+	/**
+	 * The list of all current bullets in the game.
+	 */
+	private static List<Bullet> bulletList = new ArrayList<>();
 	private static final int rateOfUpdate = 100;
+	private static Timer bulletTimer = new Timer();// timer which updates bullets.
 
 	private double currentX, currentY;
 	private double updateX, updateY;
 	private Player owner;
-	private Timer timer;
+	private TimerTask bulletTask;
 
 	/**
 	 * Creates a new bullet and timer which updates the bullets location. The timer
 	 * is started as soon as the bullet is created.The timer updates the bullet's
-	 * location. stop() should always be called when removing a bullet as otherwise
+	 * location. {@link #removeBullet()} should always be called when removing a bullet as otherwise
 	 * the timer just keeps going. Adds the bullet to the bullet list.
 	 *
 	 * @param startingX
+	 *            ussually the player's current location
 	 * @param startingY
+	 *            ussually the player's current location
 	 * @param direction
-	 *            an angle between 0 (straight up) and 2PI (also straight up). Pi/2
+	 *            an angle in radians between 0 (straight up) and 2PI (also straight up). Pi/2
 	 *            would be right, Pi would be down, 3Pi/2 would be left.
+	 * @param owner
+	 *            the owner of the bullet
 	 */
 	public Bullet(double startingX, double startingY, double direction, Player owner) {
 		currentX = startingX;
@@ -41,25 +48,27 @@ public class Bullet {
 		this.owner = owner;
 		calculateUpdateAmount(direction);
 		bulletList.add(this);
-		startTimer();
+
+		startTimer();// starts the bullet off
 	}
 
 	/**
-	 * Stops the bullet from moving any further.
+	 * Stops the bullet from moving any further and deletes it from the bullet list.
 	 */
-	public void stop() {
-		timer.stop();
+	public void removeBullet() {
+		bulletTask.cancel();
+		bulletList.remove(this);
 	}
 
 	/**
-	 * @return the x location of this bullet
+	 * @return the current x location of this bullet
 	 */
 	public double getX() {
 		return currentX;
 	}
 
 	/**
-	 * @return the y location of this bullet.
+	 * @return the current y location of this bullet.
 	 */
 	public double getY() {
 		return currentY;
@@ -73,20 +82,29 @@ public class Bullet {
 	}
 
 	private void startTimer() {
-		timer = new Timer(rateOfUpdate, (e) -> update());
-		timer.start();
+		bulletTask = new TimerTask() {
+			@Override
+			public void run() {
+				update();
+			}
+		};
+		bulletTimer.scheduleAtFixedRate(bulletTask, 0, rateOfUpdate);
 	}
 
 	/**
-	 * Updates the bullet location, stops the bullet if runs into an immovable
-	 * location of the map.
+	 * Updates the bullet location, stops the bullet if it runs into an immovable
+	 * location of the map or another player/npc.
 	 */
 	private void update() {
 		currentX += updateX;
 		currentY += updateY;
-		if (!owner.getMap().canMove((int) currentX, (int) currentY)) {// if the bullet hits an immovable area, stop it.
-			timer.stop();
-			bulletList.remove(this);
+		// if the bullet hits an immovable area, remove it.
+		if (!owner.getMap().canMove((int) currentX, (int) currentY)) {
+			removeBullet();
+		}
+		// if the bullet hits a npc, remove it
+		if (owner.getMap().hasHit(this)) {
+			removeBullet();
 		}
 	}
 

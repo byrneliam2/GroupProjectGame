@@ -1,5 +1,7 @@
 package npc;
 
+import map.Map;
+import player.InvalidPlayerExceptions;
 import player.Player;
 
 /**
@@ -11,6 +13,13 @@ import player.Player;
  */
 public class PatrolScheme implements ControlScheme {
 
+	private int progress = 0;// in pixels
+	private final int maxProgress;// in pixels
+
+	private final boolean leftRight;
+	private boolean goingBack = false;
+	private int shotCounter = 0;
+
 	/**
 	 * @param leftRight
 	 *            whether to patrol first right then left (true) or first down then up (false).
@@ -18,11 +27,51 @@ public class PatrolScheme implements ControlScheme {
 	 *            amount of 'map blocks' the patrol moves by.
 	 */
 	public PatrolScheme(boolean leftRight, int patrolDistance) {
+		maxProgress = patrolDistance * Map.tileWidth;
+		this.leftRight = leftRight;
 	}
 
 	@Override
-	public void doBestAction(Player p, NPC npc) {
+	public void doBestAction(NPC npc) {
+		try {
+			// move the player according to the patrol direction.
+			if (leftRight) {
+				if (!goingBack) {
+					progress++;
+					if (progress >= maxProgress)
+						goingBack = true;
+					npc.move(1, 0);
+				} else {
+					progress--;
+					if (progress <= 0)
+						goingBack = false;
+					npc.move(-1, 0);
+				}
+			} else {
+				if (!goingBack) {
+					progress++;
+					if (progress >= maxProgress)
+						goingBack = true;
+					npc.move(0, 1);
+				} else {
+					progress--;
+					if (progress <= 0)
+						goingBack = false;
+					npc.move(0, -1);
 
+				}
+			}
+
+			// shoot at the player every 100 moves
+			shotCounter++;
+			if (shotCounter >= 100) {
+				npc.shoot(npc.getAngleToPlayer());// shoots at the player.
+				shotCounter = 0;
+			}
+		} catch (InvalidPlayerExceptions e) {
+			System.out.println(
+					"Patrol ai wasn't able to do a move, it caught an exception thrown by player..." + e.getMessage());
+		}
 	}
 
 }

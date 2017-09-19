@@ -15,11 +15,11 @@ import items.Usable;
 
 /**
  * @author javahemohs
- * Created by javahemohs on 19/09/17.
+ *         Created by javahemohs on 19/09/17.
  *
  */
 public class Player {
-	/**constants*/
+	/** constants */
 	private static final int rangeCircleWidth = 50;
 	private Item closestItem;
 	private String name;
@@ -28,9 +28,10 @@ public class Player {
 	private int xLocation;
 	private int yLocation;
 	private Map map;
-	private Ellipse2D.Double rangeCircle = new Ellipse2D.Double(xLocation - (rangeCircleWidth/2)  , yLocation - (rangeCircleWidth/2), rangeCircleWidth, rangeCircleWidth);
-	private Rectangle boundingBox = new Rectangle (xLocation - (Map.tileWidth/2),yLocation-(Map.tileWidth/2), Map.tileWidth, Map.tileHeight);
-
+	private Ellipse2D.Double rangeCircle = new Ellipse2D.Double(xLocation - (rangeCircleWidth / 2),
+			yLocation - (rangeCircleWidth / 2), rangeCircleWidth, rangeCircleWidth);
+	private Rectangle boundingBox = new Rectangle(xLocation - (Map.tileWidth / 2), yLocation - (Map.tileWidth / 2),
+			Map.tileWidth, Map.tileHeight);
 
 	/**
 	 * @param name
@@ -47,43 +48,44 @@ public class Player {
 
 	/**
 	 * Pick up an item and put it into the list of BackPack
+	 * 
 	 * @param item
 	 * @throws InvalidPlayerExceptions
 	 */
-	public void pickUpItems() throws InvalidPlayerExceptions {
+	public void pickUpItem() throws InvalidPlayerExceptions {
 		try {
 
-			if(closestItem==null)//throw exception....
+			if (closestItem == null)// throw exception....
 
-			itemsList.pickUpItem(closestItem);
-			//map.pickUpItem(closestItem);//tells map item has been picked up, so map can remove it from map.
-			//closestItem = map.closestItem();//updates closest item to player
+				itemsList.pickUpItem(closestItem);
+			// map.pickUpItem(closestItem);//tells map item has been picked up, so map can remove it from map.
+			// closestItem = map.closestItem();//updates closest item to player
 
 		} catch (InvalidBackpackException e) {
 			throw new InvalidPlayerExceptions(e.getMessage());
 		}
 	}
-
 
 	/**
 	 * Remove the item from the BackPack list
+	 * 
 	 * @param item
 	 * @throws InvalidPlayerExceptions
 	 */
-	public void removeItems(Item item) throws InvalidPlayerExceptions {
+	public void removeItem(Item item) throws InvalidPlayerExceptions {
 		try {
 			itemsList.removeItem(item);
-			//map.placedItem(item);
-			//closestItem = map.closestItem
+			// map.placedItem(item);
+			// closestItem = map.closestItem
 		} catch (InvalidBackpackException e) {
 			throw new InvalidPlayerExceptions(e.getMessage());
 		}
 
 	}
 
-
 	/**
 	 * equip the item from the BackPack list
+	 * 
 	 * @param item
 	 * @throws InvalidPlayerExceptions
 	 */
@@ -97,6 +99,7 @@ public class Player {
 
 	/**
 	 * unequip the item from the list
+	 * 
 	 * @param item
 	 * @throws InvalidPlayerExceptions
 	 */
@@ -111,6 +114,7 @@ public class Player {
 
 	/**
 	 * check if there is an item in the BackPack List
+	 * 
 	 * @param item
 	 * @throws InvalidPlayerExceptions
 	 */
@@ -124,7 +128,8 @@ public class Player {
 	}
 
 	/**
-	 * pickUpAndUse the item from the BackPack list
+	 * pickUpAndUse the item without putting it in the backpack.
+	 * 
 	 * @param item
 	 * @throws InvalidPlayerExceptions
 	 */
@@ -137,15 +142,15 @@ public class Player {
 		}
 	}
 
-	public void checkHit() {
-		// checks whether any bullets that don't belong to 'this' player have hit this
-		// player if it has hit the player, it should call stop() on the bullet, delete
-		// the bullet from the bullet list.and player should lose health
+	public void takeDamage() {
+		// causes the player to take damage and lose health
+		// should check whether the player is not dead....
 		return;
 	}
 
 	/**
 	 * If it is possible for a player to open a door.
+	 * 
 	 * @param doorItem
 	 * @return
 	 */
@@ -156,25 +161,35 @@ public class Player {
 		return false;
 	}
 
-	private boolean canMakeMove() {
+	private boolean canMakeMove(int dx, int dy) {
 		// Ask the map if it possible to move (((Later)))
 		if (true) {
-			return true;
+			return true;// if possible to move to this location
 		}
-		return false;
+		return false;// if not possible
 	}
 
-	public void move() {
-		// Check if you can make the move and then update the x and y.+
-		// When moving to the new Cell check if there is an item for keyboard listener
-		// Can move function from the map
+	public void move(int dx, int dy) throws InvalidPlayerExceptions {
+		// (Use the canMove() function from map class.)
+		// Check if you can make the move and if we can, then do the following:
 
-		//each time you move, you need to update closest item to player
-		//closestItem = map.getClosestItem//....
+		// update the x and y
+		// update closest item to player
+		// closestItem = map.getClosestItem//....
+
+		// if you can't move, throw an exception...
 	}
 
-	public void shoot() {
+	/**
+	 * @param direction
+	 *            should be an angle between 0 and 2Pi. (there's a method in npc/NPC/getAngleToPlayer() which you can
+	 *            copy/use to calculate the angle from player to mouse if needed).
+	 */
+	public void shoot(double direction) throws InvalidPlayerExceptions {
 		// make new bullet and add it to bullet list in the bullet class.
+		// [extra] make it so that you can only shoot say once every second.
+
+		// if you can't shoot (for any reason) throw an exception...
 	}
 
 	/*
