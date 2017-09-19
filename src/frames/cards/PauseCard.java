@@ -1,11 +1,6 @@
 package frames.cards;
 
-/*
- * SWEN 222 Group Project
- * Liam Byrne (byrneliam2)
- * 300338518
- */
-
+import frames.MainDisplay;
 import gfx.ImageLoader;
 
 public class PauseCard extends Card {
@@ -15,7 +10,17 @@ public class PauseCard extends Card {
     }
 
     @Override
+    protected void doSetup() {
+
+    }
+
+    @Override
+    public void setComponentActions(MainDisplay dsp) {
+
+    }
+
+    @Override
     public void redraw() {
-        //
+
     }
 }

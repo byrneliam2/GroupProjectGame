@@ -6,14 +6,31 @@ package frames.cards;
  * 300338518
  */
 
+import frames.MainDisplay;
+import gfx.ImageLoader;
+
 /**
  * The SettingsCard is a screen that hosts options for settings in the game,
  * such as audio adjustment...
  */
 public class SettingsCard extends Card {
 
+    public SettingsCard() {
+        setBackground(ImageLoader.image("pause.jpg"));
+    }
+
+    @Override
+    protected void doSetup() {
+
+    }
+
+    @Override
+    public void setComponentActions(MainDisplay dsp) {
+
+    }
+
     @Override
     public void redraw() {
-        //
+
     }
 }

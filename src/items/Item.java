@@ -12,7 +12,8 @@ import java.awt.Image;
 public interface Item {
 
 	/**
-	 * @return returns an image of this item. No guareentees on the size of image returned.
+	 * @return returns an image of this item. No guareentees on the size of image returned. Is guareenteed that the
+	 *         image has a transparant background so can be drawn on top of other images.
 	 */
 	public Image getImage();
 

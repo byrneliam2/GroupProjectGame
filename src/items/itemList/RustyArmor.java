@@ -7,17 +7,17 @@ import player.Player;
 public class RustyArmor extends AbstractItem implements Equipable {
 
 	public RustyArmor() {
-		super("Rusty Armour", "Worn and beaten, this armour provides little protection", "armor1.png");
+		super("Rusty Armour", "Worn and beaten, this armour provides +1 health", "rustyArmor.png");
 	}
 
 	@Override
 	public void provideBonus(Player p) {
-		// TODO
+		p.setMaxHealth(p.getMaxHealth() + 1);
 	}
 
 	@Override
 	public void removeBonus(Player p) {
-		// TODO
+		p.setMaxHealth(p.getMaxHealth() - 1);
 	}
 
 }

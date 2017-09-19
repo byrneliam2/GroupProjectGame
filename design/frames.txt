@@ -13,7 +13,7 @@ manager to flip between each card/screen of the game, including maps, main menus
 ScreenCards will hold information about each screen of the game, including images that need to be generated (in cooperation
 with the gfx library), buttons/locations that can be interacted with and other GUI attributes/functions. There will be
 multiple types of cards, for example menu cards and game map cards. These will be different in how they use GUI
-utilities, and so it is highly likely that they will use the Strategy pattern to accomplish complex tasks.
+utilities, and so it is likely that they will use the Strategy pattern to accomplish complex tasks.
 
 The cards will implement a superclass or interface which will be an extension of Swing JPanels, and as such the
 MainFrame will hold a collection of cards to flip between, all referenced by supertype. Cards will be stored in the
@@ -21,6 +21,9 @@ cards package of the library.
 
 The frames library, along with the gfx library, will comprise the View portion of the MVC pattern that this game will
 be based upon.
+
+NEW ADDITIONS:
+- The frames library will reference the map (model) through an explicit channeling class
 
 PRIMARY AUTHOR:
 Liam

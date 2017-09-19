@@ -6,6 +6,9 @@ package frames;
  * 300338518
  */
 
+import audio.AudioHandler;
+import controller.KeyboardController;
+import controller.MouseController;
 import frames.cards.Card;
 import frames.cards.*;
 
@@ -27,20 +30,20 @@ public class MainDisplay extends JComponent implements Observer {
     /* Other attributes */
     private Map<String, Card> cards;
     private Card currentCard;
-
-    /* Constants */
-    public static final int F_WIDTH = 1280;
-    public static final int F_HEIGHT = 720;
+    private AudioHandler audioHandler;
 
     public MainDisplay() {
         master = new JFrame();
         cards = new HashMap<>();
+        audioHandler = new AudioHandler();
 
         // master frame setup
         master.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         master.setResizable(false);
         master.setUndecorated(true);
         master.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        master.addKeyListener(new KeyboardController());
+        master.addMouseListener(new MouseController());
 
         // this component setup
         this.setLayout(new CardLayout());
@@ -48,9 +51,6 @@ public class MainDisplay extends JComponent implements Observer {
 
         master.pack();
         master.setVisible(true);
-
-        // all done, safe to draw
-        redraw();
     }
 
     /**
@@ -63,12 +63,16 @@ public class MainDisplay extends JComponent implements Observer {
         cards.put("settings", new SettingsCard());
 
         // get model details and construct enough map cards to fit
-        for (int i = 0; i < 9; i++) { // replace 9 with model value
+        for (int i = 0; i < 9; i++) { // TODO replace 9 with model value
             cards.put("level" + i, new MapCard());
             // set up each level
             MapCard m = (MapCard) cards.get("level" + i);
             // TODO add map setup
         }
+
+        // setup action listeners in each card
+        // needs a reference to this class to assign correctly
+        for (Card c : cards.values()) c.setComponentActions(this);
 
         // add all
         this.add(cards.get("menu"), "menu");
@@ -89,6 +93,8 @@ public class MainDisplay extends JComponent implements Observer {
         CardLayout cl = (CardLayout) this.getLayout();
         cl.show(this, key);
         currentCard = cards.get(key);
+        // force a redraw on the new card
+        redraw();
     }
 
     /**
@@ -108,6 +114,8 @@ public class MainDisplay extends JComponent implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         // switch screen if need be (use arg)
+        if (arg instanceof String)
+            switchScreen((String) arg);
         redraw();
     }
 }

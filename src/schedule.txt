@@ -1,12 +1,17 @@
 TO DO:
-- Implementation
+- Implementation and integration
+- Own unit testing
 
 DISCUSSION POINTS:
-- <none>
+- Where everyone is up to
+- What are the next steps?
+
+DEADLINES
+- Next submission 22/9
+- Complete libraries by 27/9
 
 NEXT MEETING (11am CO242b):
 - 20/9
-- Refine library communications, sort out code
 
 NEXT CODING DAY:
 - 21/9

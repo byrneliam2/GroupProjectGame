@@ -1,10 +1,11 @@
 package player;
 
 import java.awt.Rectangle;
+import java.awt.geom.Ellipse2D;
 import java.util.ArrayList;
 import java.util.List;
 
-import JamesPackage.Map;
+import map.Map;
 import items.Backpack;
 import items.DoorItem;
 import items.Equipable;
@@ -14,19 +15,26 @@ import items.Usable;
 
 /**
  * @author javahemohs
- * Created by javahemohs on 19/09/17.
+ *         Created by javahemohs on 19/09/17.
  *
  */
 public class Player {
-	// need to implement the bounding box for the player when the player is making a move
-	// the I have to change the bounding box of the player.
-	private Rectangle boundingBox = new Rectangle (Map.tileWidth, Map.tileHeight);
-	private String name;
+	/* constants */
+	private static final int rangeCircleWidth = 50;
+	private final String name;
+	private final double defaultFireRate = 1;
+
+	private Item closestItem;
 	private Backpack itemsList = new Backpack(this);
+	private double fireRate = 1;
+	private int maxHealth = 5;
 	private int health;
 	private int xLocation;
 	private int yLocation;
-	private Map map;
+	private Map map;// the map which the player is currently located on.
+
+	private Ellipse2D.Double rangeCircle;// the range at which the player can 'pick up' items
+	private Rectangle boundingBox;// the hit box of the player.
 
 	/**
 	 * @param name
@@ -38,43 +46,64 @@ public class Player {
 		this.health = 5;
 		this.xLocation = xLocation;
 		this.yLocation = yLocation;
-
+		rangeCircle = new Ellipse2D.Double(xLocation - (rangeCircleWidth / 2), yLocation - (rangeCircleWidth / 2),
+				rangeCircleWidth, rangeCircleWidth);
+		boundingBox = new Rectangle(xLocation - (Map.tileWidth / 2), yLocation - (Map.tileWidth / 2), Map.tileWidth,
+				Map.tileHeight);
 	}
 
 	/**
-	 * Pick up an item and put it into the list of BackPack
+	 * Adds the closest item to the player ot the player's backpack. If item is a key, adds it to the key section of the
+	 * backpack. Also tells the map to remove the item from the map.
+	 * 
 	 * @param item
+	 *            item to pickup.
 	 * @throws InvalidPlayerExceptions
+	 *             if the backpack is full, or the item already belongs to the player or, there is no item next to the
+	 *             player
 	 */
-	public void pickUpItems(Item item) throws InvalidPlayerExceptions {
+	public void pickUpItem() throws InvalidPlayerExceptions {
 		try {
-			itemsList.pickUpItem(item);
+
+			if (closestItem == null)// throw exception....
+				// otherwise...
+				itemsList.pickUpItem(closestItem);
+			// map.pickUpItem(closestItem);//tells map item has been picked up, so map can remove it from map.
+			// closestItem = map.closestItem();//updates closest item to player
 
 		} catch (InvalidBackpackException e) {
 			throw new InvalidPlayerExceptions(e.getMessage());
 		}
 	}
 
-
 	/**
-	 * Remove the item from the BackPack list
+	 * Remove an item from the BackPack placing it onto the map at the player's current location.
+	 * 
 	 * @param item
+	 *            item to remove from backpack
 	 * @throws InvalidPlayerExceptions
+	 *             if the backpack doesnt contain the item.
 	 */
-	public void removeItems(Item item) throws InvalidPlayerExceptions {
+	public void removeItem(Item item) throws InvalidPlayerExceptions {
 		try {
 			itemsList.removeItem(item);
+			// map.placedItem(item);
+			// closestItem = map.closestItem
 		} catch (InvalidBackpackException e) {
 			throw new InvalidPlayerExceptions(e.getMessage());
 		}
 
 	}
 
-
 	/**
-	 * equip the item from the BackPack list
+	 * Equips this item, providing its given bonuses to the player, moving the item into the 'equipped' section of the
+	 * player's backpack.
+	 * 
 	 * @param item
+	 *            item to equip
 	 * @throws InvalidPlayerExceptions
+	 *             if the player already has the max number of items equipped or the item is not part of a player's
+	 *             backpack.
 	 */
 	public void equipItem(Equipable item) throws InvalidPlayerExceptions {
 		try {
@@ -85,9 +114,12 @@ public class Player {
 	}
 
 	/**
-	 * unequip the item from the list
+	 * Unequips this item, removing its given bonuses from the player it was equipped to and moving it out of the
+	 * 'equipped' section of the backpack.
+	 * 
 	 * @param item
 	 * @throws InvalidPlayerExceptions
+	 *             if the item was not equipped to any player or the pack's unequipped area is full.
 	 */
 	public void unequipItem(Equipable item) throws InvalidPlayerExceptions {
 		try {
@@ -99,9 +131,12 @@ public class Player {
 	}
 
 	/**
-	 * check if there is an item in the BackPack List
+	 * Uses this item on the player and removes it from the inventory
+	 * 
 	 * @param item
+	 *            item to use
 	 * @throws InvalidPlayerExceptions
+	 *             if the item was not part of a player's backpack.
 	 */
 	public void useItem(Usable item) throws InvalidPlayerExceptions {
 		try {
@@ -113,7 +148,8 @@ public class Player {
 	}
 
 	/**
-	 * pickUpAndUse the item from the BackPack list
+	 * pick Up And Use the item without putting it in the backpack.
+	 * 
 	 * @param item
 	 * @throws InvalidPlayerExceptions
 	 */
@@ -126,15 +162,15 @@ public class Player {
 		}
 	}
 
-	public void checkHit() {
-		// checks whether any bullets that don't belong to 'this' player have hit this
-		// player if it has hit the player, it should call stop() on the bullet, delete
-		// the bullet from the bullet list.and player should lose health
+	public void takeDamage() {
+		// causes the player to take damage and lose health
+		// should check whether the player is not dead....
 		return;
 	}
 
 	/**
 	 * If it is possible for a player to open a door.
+	 * 
 	 * @param doorItem
 	 * @return
 	 */
@@ -145,43 +181,52 @@ public class Player {
 		return false;
 	}
 
-	private boolean canMakeMove() {
+	private boolean canMakeMove(int dx, int dy) {
 		// Ask the map if it possible to move (((Later)))
 		if (true) {
-			return true;
+			return true;// if possible to move to this location
 		}
-		return false;
+		return false;// if not possible
 	}
 
-	public void move() {
-		// Check if you can make the move and then update the x and y.
+	public void move(int dx, int dy) throws InvalidPlayerExceptions {
+		// (Use the canMove() function from map class.)
+		// Check if you can make the move and if we can, then do the following:
 
+		// update the x and y
+		// update closest item to player
+		// closestItem = map.getClosestItem//....
+		// check that you arnt touching a door (use getDoor() method in map), if you are touching a door, move to next
+		// map.
+
+		// if you can't move, throw an exception...
 	}
 
-	public void shoot() {
+	/**
+	 * @param direction
+	 *            should be an angle between 0 and 2Pi. (there's a method in npc/NPC/getAngleToPlayer() which you can
+	 *            copy/use to calculate the angle from player to mouse if needed).
+	 */
+	public void shoot(double direction) throws InvalidPlayerExceptions {
 		// make new bullet and add it to bullet list in the bullet class.
+		// [extra] make it so that you can only shoot say once every second.
+
+		// if you can't shoot (for any reason) throw an exception...
 	}
 
 	/*
-	 * Returns a String
+	 * Returns the name
 	 */
 	public String getName() {
 		return this.name;
-	}
-
-	/*
-	 * Sets the name of
-	 */
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public Backpack getItemsList() {
 		return itemsList;
 	}
 
-	public void setItemsList(Backpack itemsList) {
-		this.itemsList = itemsList;
+	public void resetBackPack() {
+		this.itemsList = new Backpack(this);
 	}
 
 	public int getHealth() {
@@ -196,12 +241,37 @@ public class Player {
 		return xLocation;
 	}
 
-	public Map getMap() {
-		return this.map;
-	}
-
 	public int getyLocation() {
 		return yLocation;
 	}
 
+	public Rectangle getBoundingBox() {
+		return this.boundingBox;
+	}
+
+	public Map getMap() {
+		return this.map;
+	}
+
+	public int getMaxHealth() {
+		return maxHealth;
+	}
+
+	public void setMaxHealth(int max) {
+		this.maxHealth = max;
+		if (health > maxHealth)
+			health = maxHealth;
+	}
+
+	public double getFireRate() {
+		return fireRate;
+	}
+
+	public void setFireRate(double fireRate) {
+		this.fireRate = fireRate;
+	}
+
+	public double getDefaultFireRate() {
+		return defaultFireRate;
+	}
 }

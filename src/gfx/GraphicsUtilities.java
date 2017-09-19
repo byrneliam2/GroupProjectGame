@@ -20,7 +20,7 @@ public class GraphicsUtilities {
     /**
      * Creates and returns a transparent, roll-over enabled button with a set image.
      * @param main image to attach
-     * @param roll image to appear on button roll-over
+     * @param roll image to appear on button roll-over, or null if none specified
      * @param centerx sets whether to center the x alignment of this component
      * @return new JButton
      */
@@ -31,10 +31,12 @@ public class GraphicsUtilities {
         button.setBorderPainted(false);
         button.setIcon(new ImageIcon(main));
         // set rollover visuals
-        button.setRolloverEnabled(true);
-        button.setRolloverIcon(new ImageIcon(roll));
+        if (roll != null) {
+            button.setRolloverEnabled(true);
+            button.setRolloverIcon(new ImageIcon(roll));
+        }
         // force middle alignment
-        button.setAlignmentX(0.5f);
+        if (centerx) button.setAlignmentX(0.5f);
         // done
         return button;
     }
@@ -48,7 +50,7 @@ public class GraphicsUtilities {
     public static JLabel produceSticker(BufferedImage main, boolean centerx) {
         JLabel sticker = new JLabel();
         sticker.setIcon(new ImageIcon(main));
-        sticker.setAlignmentX(0.5f);
+        if (centerx) sticker.setAlignmentX(0.5f);
         return sticker;
     }
 

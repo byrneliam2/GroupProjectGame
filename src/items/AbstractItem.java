@@ -15,15 +15,15 @@ public abstract class AbstractItem implements Item {
 	 * @param itemName
 	 * @param itemDescription
 	 * @param imageName
-	 *            the name of the image, including the file extension, the file should be located in items/pictures
-	 *            folder (for now).
+	 *            the name of the image, including the file extension, the file should be located in
+	 *            itemList/ItemPictures folder (for now).
 	 */
 	public AbstractItem(String itemName, String itemDescription, String imageName) {
 		this.name = itemName;
 		this.description = itemDescription;
 
 		try {
-			InputStream i = this.getClass().getResourceAsStream("ItemPictures/"+imageName);
+			InputStream i = this.getClass().getResourceAsStream("ItemPictures/" + imageName);
 			image = ImageIO.read(i);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -58,6 +58,11 @@ public abstract class AbstractItem implements Item {
 	@Override
 	public void remove() {
 		this.pack = null;
+	}
+
+	@Override
+	public int hashCode() {
+		return name.hashCode();
 	}
 
 }
