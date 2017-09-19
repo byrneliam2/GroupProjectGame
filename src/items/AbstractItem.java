@@ -60,4 +60,9 @@ public abstract class AbstractItem implements Item {
 		this.pack = null;
 	}
 
+	@Override
+	public int hashCode() {
+		return name.hashCode();
+	}
+
 }

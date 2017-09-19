@@ -17,7 +17,7 @@ public class NPC extends Player {
 
 	private Player p;
 	private ControlScheme control;
-	TimerTask npctask;
+	protected TimerTask npctask;
 
 	public NPC(String name, int x, int y, Player mainPlayer, ControlScheme cs) {
 		super(name, x, y);

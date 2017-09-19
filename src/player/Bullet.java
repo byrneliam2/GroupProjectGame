@@ -17,9 +17,15 @@ public class Bullet {
 	/**
 	 * The list of all current bullets in the game.
 	 */
-	private static List<Bullet> bulletList = new ArrayList<>();
+	public static List<Bullet> bulletList = new ArrayList<>();
+	/**
+	 * How quickley bullets move/are updated
+	 */
 	private static final int rateOfUpdate = 100;
-	private static Timer bulletTimer = new Timer();// timer which updates bullets.
+	/**
+	 * Timer which is responsible for updating all bullets in the bullet list.
+	 */
+	private static Timer bulletTimer = new Timer();
 
 	private double currentX, currentY;
 	private double updateX, updateY;

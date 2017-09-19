@@ -64,14 +64,14 @@ public class Map {
 	 */
 	public boolean checkBulletHit(Bullet b) {
 		// for each entity{
-		// check bullet doesnt belong to entity use b.getOwner()
+		// check bullet doesnt belong to entity use bullet.getOwner()
 		// check whether bullet is touching entity
 		// if it is, then return true, and call the takeDamage() method on the entity
 		return false;
 	}
 
 	public DoorItem getDoor(Rectangle boundingBox) {
-		// returns the door touched by the bounding box, or null if no door touched by bounding box
+		// returns the door touched by the bounding box, or null if no door is touched by bounding box
 		return null;
 	}
 
