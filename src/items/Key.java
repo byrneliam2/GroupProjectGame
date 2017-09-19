@@ -1,5 +1,11 @@
 package items;
 
+/**
+ * Key Items unlock doors.
+ *
+ * @author Thomas Edwards
+ *
+ */
 public class Key extends AbstractItem {
 
 	private int id;

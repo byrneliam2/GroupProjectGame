@@ -21,14 +21,23 @@ public class DoorItem extends AbstractItem {
 		return super.name;
 	}
 
+	/**
+	 * @return the ID of this door.
+	 */
 	public int getDoorID() {
 		return doorID;
 	}
 
+	/**
+	 * Unlocks the door.
+	 */
 	public void unlockDoor() {
 		this.locked = false;
 	}
 
+	/**
+	 * @return true if the door is locked, false otherwise.
+	 */
 	public boolean isLocked() {
 		return locked;
 	}
