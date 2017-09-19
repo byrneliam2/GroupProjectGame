@@ -7,8 +7,9 @@ package frames.cards;
  */
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A Card represents a screen of the game. Each Card has attributes and functions
@@ -18,10 +19,15 @@ import java.awt.image.BufferedImage;
 public abstract class Card extends JPanel {
 
     /* Swing attributes */
-    protected JLabel panel;
+    JLabel panel;
+    Map<String, JComponent> components;
 
     /* Other attributes */
-    protected BufferedImage background;
+    BufferedImage background;
+
+    Card() {
+        components = new HashMap<>();
+    }
 
     /**
      * Set the background image of this card. This is done by adding the image
@@ -31,7 +37,7 @@ public abstract class Card extends JPanel {
      * on creation.
      * @param bg image to set background to
      */
-    protected void setBackground(BufferedImage bg) {
+    void setBackground(BufferedImage bg) {
         this.background = bg;
 
         this.panel = new JLabel(new ImageIcon(background));
@@ -45,6 +51,11 @@ public abstract class Card extends JPanel {
         this.revalidate();
         this.repaint();
     }
+
+    /**
+     * Perform first time setup for this Card.
+     */
+    protected abstract void doSetup();
 
     /**
      * Redraw the elements present on the current card. Note that this method only

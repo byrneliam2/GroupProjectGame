@@ -15,6 +15,11 @@ public class PauseCard extends Card {
     }
 
     @Override
+    protected void doSetup() {
+        //
+    }
+
+    @Override
     public void redraw() {
         //
     }

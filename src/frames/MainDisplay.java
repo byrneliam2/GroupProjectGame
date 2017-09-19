@@ -32,10 +32,6 @@ public class MainDisplay extends JComponent implements Observer {
     private Card currentCard;
     private AudioHandler audioHandler;
 
-    /* Constants */
-    public static final int F_WIDTH = 1280;
-    public static final int F_HEIGHT = 720;
-
     public MainDisplay() {
         master = new JFrame();
         cards = new HashMap<>();

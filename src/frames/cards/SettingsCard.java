@@ -13,6 +13,11 @@ package frames.cards;
 public class SettingsCard extends Card {
 
     @Override
+    protected void doSetup() {
+        //
+    }
+
+    @Override
     public void redraw() {
         //
     }

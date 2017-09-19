@@ -34,7 +34,7 @@ public class GraphicsUtilities {
         button.setRolloverEnabled(true);
         button.setRolloverIcon(new ImageIcon(roll));
         // force middle alignment
-        button.setAlignmentX(0.5f);
+        if (centerx) button.setAlignmentX(0.5f);
         // done
         return button;
     }
@@ -48,7 +48,7 @@ public class GraphicsUtilities {
     public static JLabel produceSticker(BufferedImage main, boolean centerx) {
         JLabel sticker = new JLabel();
         sticker.setIcon(new ImageIcon(main));
-        sticker.setAlignmentX(0.5f);
+        if (centerx) sticker.setAlignmentX(0.5f);
         return sticker;
     }
 
