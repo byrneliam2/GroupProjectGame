@@ -32,6 +32,6 @@ public class MapCard extends Card {
 
     @Override
     public void redraw() {
-
+        //
     }
 }

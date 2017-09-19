@@ -22,11 +22,12 @@ public abstract class Card extends JPanel {
     JLabel panel;
     Map<String, JComponent> components;
 
-    /* Other attributes */
-    BufferedImage background;
-
     Card() {
+        panel = new JLabel();
         components = new HashMap<>();
+
+        add(panel);
+        doSetup();
     }
 
     /**
@@ -38,10 +39,7 @@ public abstract class Card extends JPanel {
      * @param bg image to set background to
      */
     void setBackground(BufferedImage bg) {
-        this.background = bg;
-
-        this.panel = new JLabel(new ImageIcon(background));
-        this.add(panel);
+        panel.setIcon(new ImageIcon(bg));
     }
 
     /**

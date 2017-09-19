@@ -19,7 +19,6 @@ public class MenuCard extends Card {
 
     public MenuCard() {
         setBackground(ImageLoader.image("menu.jpg"));
-        doSetup();
     }
 
     @Override
