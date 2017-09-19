@@ -1,8 +1,11 @@
 package player;
 
 import java.awt.Rectangle;
+import java.awt.geom.Ellipse2D;
+import java.util.ArrayList;
+import java.util.List;
 
-import map.Map;
+import JamesPackage.Map;
 import items.Backpack;
 import items.DoorItem;
 import items.Equipable;
@@ -16,15 +19,18 @@ import items.Usable;
  *
  */
 public class Player {
-	// need to implement the bounding box for the player when the player is making a move
-	// the I have to change the bounding box of the player.
-	private Rectangle boundingBox = new Rectangle (Map.tileWidth, Map.tileHeight);
+	/**constants*/
+	private static final int rangeCircleWidth = 50;
+	private Item closestItem;
 	private String name;
 	private Backpack itemsList = new Backpack(this);
 	private int health;
 	private int xLocation;
 	private int yLocation;
 	private Map map;
+	private Ellipse2D.Double rangeCircle = new Ellipse2D.Double(xLocation - (rangeCircleWidth/2)  , yLocation - (rangeCircleWidth/2), rangeCircleWidth, rangeCircleWidth);
+	private Rectangle boundingBox = new Rectangle (xLocation - (Map.tileWidth/2),yLocation-(Map.tileWidth/2), Map.tileWidth, Map.tileHeight);
+
 
 	/**
 	 * @param name
@@ -44,9 +50,14 @@ public class Player {
 	 * @param item
 	 * @throws InvalidPlayerExceptions
 	 */
-	public void pickUpItems(Item item) throws InvalidPlayerExceptions {
+	public void pickUpItems() throws InvalidPlayerExceptions {
 		try {
-			itemsList.pickUpItem(item);
+
+			if(closestItem==null)//throw exception....
+
+			itemsList.pickUpItem(closestItem);
+			//map.pickUpItem(closestItem);//tells map item has been picked up, so map can remove it from map.
+			//closestItem = map.closestItem();//updates closest item to player
 
 		} catch (InvalidBackpackException e) {
 			throw new InvalidPlayerExceptions(e.getMessage());
@@ -62,6 +73,8 @@ public class Player {
 	public void removeItems(Item item) throws InvalidPlayerExceptions {
 		try {
 			itemsList.removeItem(item);
+			//map.placedItem(item);
+			//closestItem = map.closestItem
 		} catch (InvalidBackpackException e) {
 			throw new InvalidPlayerExceptions(e.getMessage());
 		}
@@ -152,8 +165,12 @@ public class Player {
 	}
 
 	public void move() {
-		// Check if you can make the move and then update the x and y.
+		// Check if you can make the move and then update the x and y.+
+		// When moving to the new Cell check if there is an item for keyboard listener
+		// Can move function from the map
 
+		//each time you move, you need to update closest item to player
+		//closestItem = map.getClosestItem//....
 	}
 
 	public void shoot() {
