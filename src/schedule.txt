@@ -1,6 +1,5 @@
 TO DO:
-- Sort global design (UML, text files) by 16/9
-- Write skeleton in weekend of 16/9 (by 19/9)
+- Implementation
 
 DISCUSSION POINTS:
 - <none>

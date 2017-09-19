@@ -10,3 +10,9 @@ Design Notes for the map package:
 can unlock the door. Think about door interactions.
 -Movable objects, something to think about
 -Player represented by a single point or will the player just be the player and i have to find out which block it is more in.
+
+- Simple class on top of JamesPackage (for view to communicate without entering implementation space)
+- No need to break up background image
+- Player bounding box
+- Background images in gfx/img directory
+- Method to return list of items
