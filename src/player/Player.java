@@ -41,11 +41,11 @@ public class Player {
     	}
 
     }
-    public void removeItems(){}
-    public void equipItem(){}
-    public void unequipItem() {}
-    public void useItem() {}
-    public void pickUpAndUse() {}
+    public void canRemoveItems(){}
+    public void canEquipItem(){}
+    public void canUnequipItem() {}
+    public void canUseItem() {}
+    public void canPickUpAndUse() {}
 
     public boolean canOpenDoor(DoorItem doorItem){
     	if(itemsList.checkDoorID(doorItem.getDoorID())) {
