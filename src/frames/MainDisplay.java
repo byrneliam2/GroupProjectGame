@@ -13,6 +13,7 @@ import frames.cards.Card;
 import frames.cards.*;
 
 import javax.swing.*;
+import javax.swing.Timer;
 import java.awt.*;
 import java.util.*;
 
@@ -26,6 +27,7 @@ public class MainDisplay extends JComponent implements Observer {
 
     /* Swing attributes */
     private JFrame master;
+    private Timer timer;
 
     /* Other attributes */
     private Map<String, Card> cards;
