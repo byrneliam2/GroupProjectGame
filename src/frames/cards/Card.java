@@ -6,6 +6,8 @@ package frames.cards;
  * 300338518
  */
 
+import frames.MainDisplay;
+
 import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
@@ -25,26 +27,8 @@ public abstract class Card extends JPanel {
     Card() {
         panel = new JLabel();
         components = new HashMap<>();
-
-        // add the label
-        // even if it is not used, it remains as the sole component of this JPanel
         add(panel);
-
-        // all card implementations must perform setup
         doSetup();
-        setComponentActions();
-    }
-
-    /**
-     * Set the background image of this card. This is done by adding the image
-     * to the label panel that takes up the whole card. Many cards will have some
-     * kind of background image that persists throughout its existence, therefore
-     * this should be considered as a "setup" method that should be called
-     * on creation.
-     * @param bg image to set background to
-     */
-    void setBackground(BufferedImage bg) {
-        panel.setIcon(new ImageIcon(bg));
     }
 
     /**
@@ -56,16 +40,36 @@ public abstract class Card extends JPanel {
     }
 
     /**
+     * Set the background image of this card. This is done by adding the image
+     * to the label panel that takes up the whole card. Many cards will have some
+     * kind of background image that persists throughout its existence, therefore
+     * this should be considered as a "setup" method that should be called
+     * on creation.
+     * @param bg image to set background to
+     */
+    @SuppressWarnings("WeakerAccess")
+    public void setBackground(BufferedImage bg) {
+        panel.setIcon(new ImageIcon(bg));
+    }
+
+    /**
      * Perform first time setup for this Card. This will usually involve
      * setting up whatever components this screen holds. MapCards will likely
-     * use this method to set up their {@link Card.Entity} list instead.
+     * use this method to set up their Entity list instead. If the
+     * added components are interactive Swing components, then they will need to
+     * be properly assigned by using the {@link #setComponentActions(MainDisplay)}
+     * method from the display that holds the card.
      */
     protected abstract void doSetup();
 
     /**
-     * Add actions to the components on screen, if there are any.
+     * Add actions to the components on screen, if there are any. This method
+     * will usually only function if there are interactive components (buttons,
+     * sliders, etc.) held in the card's reference map.
+     * @param dsp display that holds this card. Used to link actions to events that
+     *            occur in the main view class.
      */
-    protected abstract void setComponentActions();
+    public abstract void setComponentActions(MainDisplay dsp);
 
     /**
      * Redraw the elements present on the current card. Note that this method only
@@ -79,7 +83,7 @@ public abstract class Card extends JPanel {
      * A Card Entity is any animated element inside a Card. This does not include
      * separate Swing entities such as buttons and background images.
      */
-    public class Entity {
+    class Entity {
 
         private BufferedImage image;
 

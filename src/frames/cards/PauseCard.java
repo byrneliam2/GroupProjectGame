@@ -1,5 +1,6 @@
 package frames.cards;
 
+import frames.MainDisplay;
 import gfx.ImageLoader;
 
 public class PauseCard extends Card {
@@ -14,7 +15,7 @@ public class PauseCard extends Card {
     }
 
     @Override
-    protected void setComponentActions() {
+    public void setComponentActions(MainDisplay dsp) {
 
     }
 

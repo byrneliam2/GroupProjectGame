@@ -6,6 +6,7 @@ package frames.cards;
  * 300338518
  */
 
+import frames.MainDisplay;
 import gfx.GraphicsUtilities;
 import gfx.ImageLoader;
 
@@ -48,14 +49,18 @@ public class MenuCard extends Card {
     }
 
     @Override
-    protected void setComponentActions() {
+    public void setComponentActions(MainDisplay dsp) {
         for (Map.Entry m : components.entrySet()) {
             final String str = (String) m.getKey();
             final JButton btn = (JButton) m.getValue();
             btn.addActionListener(e -> {
                 switch (str) {
+                    case "settings":
+                        dsp.update(null, str);
+                        break;
                     case "exit":
                         System.exit(0);
+                        break;
                 }
             });
         }

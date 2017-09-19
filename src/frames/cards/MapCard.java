@@ -6,6 +6,8 @@ package frames.cards;
  * 300338518
  */
 
+import frames.MainDisplay;
+
 import java.util.List;
 
 /**
@@ -31,7 +33,7 @@ public class MapCard extends Card {
     }
 
     @Override
-    protected void setComponentActions() {
+    public void setComponentActions(MainDisplay dsp) {
 
     }
 
