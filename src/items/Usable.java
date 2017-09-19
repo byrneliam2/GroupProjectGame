@@ -4,10 +4,10 @@ import player.Player;
 
 /**
  * Usable items are items which can be used (at any time) by the player and have
- * some kind of immediate effect. Usable items should ALWAYS be destroyed once they have been
- * used.
+ * some kind of immediate effect. Usable items should ALWAYS be destroyed once
+ * they have been used.
  *
- * @author edwardthom
+ * @author Thomas Edwards
  *
  */
 public interface Usable extends Item {
