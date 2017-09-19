@@ -5,6 +5,14 @@ import java.util.List;
 
 import javax.swing.Timer;
 
+/**
+ * A bullet is a point object with an x,y location, when the bullet is created a
+ * timer is started which updates the bullet location until the bullet hits
+ * either a player, or a wall.
+ *
+ * @author Thomas Edwards
+ *
+ */
 public class Bullet {
 
 	public static List<Bullet> bulletList = new ArrayList<>();
@@ -19,7 +27,7 @@ public class Bullet {
 	 * Creates a new bullet and timer which updates the bullets location. The timer
 	 * is started as soon as the bullet is created.The timer updates the bullet's
 	 * location. stop() should always be called when removing a bullet as otherwise
-	 * the timer just keeps going.
+	 * the timer just keeps going. Adds the bullet to the bullet list.
 	 *
 	 * @param startingX
 	 * @param startingY
@@ -32,6 +40,7 @@ public class Bullet {
 		currentY = startingY;
 		this.owner = owner;
 		calculateUpdateAmount(direction);
+		bulletList.add(this);
 		startTimer();
 	}
 
@@ -56,6 +65,9 @@ public class Bullet {
 		return currentY;
 	}
 
+	/**
+	 * @return the player/NPC who owns this bullet.
+	 */
 	public Player getOwner() {
 		return this.owner;
 	}
