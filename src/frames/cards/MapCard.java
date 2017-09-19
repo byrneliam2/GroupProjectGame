@@ -13,6 +13,8 @@ import java.util.List;
  */
 public class MapCard extends Card {
 
+    // TODO console screen for dialogue, part of this or main?
+
     private List<Entity> entities;
 
     /**

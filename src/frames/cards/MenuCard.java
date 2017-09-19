@@ -27,14 +27,33 @@ public class MenuCard extends Card {
         panel.removeAll();
         // add the components in a top to bottom order, adding glue where we want space
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
+
         panel.add(Box.createVerticalGlue());
         panel.add(Box.createVerticalGlue());
+
+        // main game logo
         //panel.add(GraphicsUtilities.produceSticker(ImageLoader.image("pause.jpg")));
+
+        // play button
         panel.add(GraphicsUtilities.produceButton(ImageLoader.image("bu_exit.jpg"),
                 ImageLoader.image("pause.jpg"), true));
+
         //panel.add(Box.createRigidArea(new Dimension(100, 50)));
+
+        // load button
         panel.add(GraphicsUtilities.produceButton(ImageLoader.image("bu_exit.jpg"),
                 ImageLoader.image("pause.jpg"), true));
+
+        // settings button
+        panel.add(GraphicsUtilities.produceButton(ImageLoader.image("bu_exit.jpg"),
+                ImageLoader.image("pause.jpg"), true));
+
+        // info button?
+
+        // exit button
+        panel.add(GraphicsUtilities.produceButton(ImageLoader.image("bu_exit.jpg"),
+                ImageLoader.image("pause.jpg"), true));
+
         panel.add(Box.createVerticalGlue());
     }
 }

@@ -1,10 +1,8 @@
 package player;
 
 import java.awt.Rectangle;
-import java.util.ArrayList;
-import java.util.List;
 
-import JamesPackage.Map;
+import map.Map;
 import items.Backpack;
 import items.DoorItem;
 import items.Equipable;

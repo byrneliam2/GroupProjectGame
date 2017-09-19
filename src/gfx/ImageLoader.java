@@ -12,9 +12,8 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * This class is responsible for all image loading within the
- * game. The images come from the img directory located within the
- * gfx library.
+ * This class is responsible for all image loading within the game. The images
+ * come from the img directory located within the gfx library.
  */
 public class ImageLoader {
 
