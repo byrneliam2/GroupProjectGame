@@ -103,7 +103,7 @@ public class Bullet {
 			removeBullet();
 		}
 		// if the bullet hits a npc, remove it
-		if (owner.getMap().hasHit(this)) {
+		if (owner.getMap().checkBulletHit(this)) {
 			removeBullet();
 		}
 	}

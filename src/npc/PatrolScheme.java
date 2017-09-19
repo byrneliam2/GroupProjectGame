@@ -2,7 +2,6 @@ package npc;
 
 import map.Map;
 import player.InvalidPlayerExceptions;
-import player.Player;
 
 /**
  * A scheme which causes the NPC to patrol left-right or up-down. The NPC will walk the specified distance in the

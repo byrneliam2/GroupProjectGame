@@ -19,19 +19,20 @@ import items.Usable;
  *
  */
 public class Player {
-	/** constants */
+	/* constants */
 	private static final int rangeCircleWidth = 50;
+	private final int maxHealth = 5;
+	private final String name;
+
 	private Item closestItem;
-	private String name;
 	private Backpack itemsList = new Backpack(this);
 	private int health;
 	private int xLocation;
 	private int yLocation;
-	private Map map;
-	private Ellipse2D.Double rangeCircle = new Ellipse2D.Double(xLocation - (rangeCircleWidth / 2),
-			yLocation - (rangeCircleWidth / 2), rangeCircleWidth, rangeCircleWidth);
-	private Rectangle boundingBox = new Rectangle(xLocation - (Map.tileWidth / 2), yLocation - (Map.tileWidth / 2),
-			Map.tileWidth, Map.tileHeight);
+	private Map map;// the map which the player is currently located on.
+
+	private Ellipse2D.Double rangeCircle;// the range at which the player can 'pick up' items
+	private Rectangle boundingBox;// the hit box of the player.
 
 	/**
 	 * @param name
@@ -43,20 +44,27 @@ public class Player {
 		this.health = 5;
 		this.xLocation = xLocation;
 		this.yLocation = yLocation;
-
+		rangeCircle = new Ellipse2D.Double(xLocation - (rangeCircleWidth / 2), yLocation - (rangeCircleWidth / 2),
+				rangeCircleWidth, rangeCircleWidth);
+		boundingBox = new Rectangle(xLocation - (Map.tileWidth / 2), yLocation - (Map.tileWidth / 2), Map.tileWidth,
+				Map.tileHeight);
 	}
 
 	/**
-	 * Pick up an item and put it into the list of BackPack
+	 * Adds the closest item to the player ot the player's backpack. If item is a key, adds it to the key section of the
+	 * backpack. Also tells the map to remove the item from the map.
 	 * 
 	 * @param item
+	 *            item to pickup.
 	 * @throws InvalidPlayerExceptions
+	 *             if the backpack is full, or the item already belongs to the player or, there is no item next to the
+	 *             player
 	 */
 	public void pickUpItem() throws InvalidPlayerExceptions {
 		try {
 
 			if (closestItem == null)// throw exception....
-
+				// otherwise...
 				itemsList.pickUpItem(closestItem);
 			// map.pickUpItem(closestItem);//tells map item has been picked up, so map can remove it from map.
 			// closestItem = map.closestItem();//updates closest item to player
@@ -67,10 +75,12 @@ public class Player {
 	}
 
 	/**
-	 * Remove the item from the BackPack list
+	 * Remove an item from the BackPack placing it onto the map at the player's current location.
 	 * 
 	 * @param item
+	 *            item to remove from backpack
 	 * @throws InvalidPlayerExceptions
+	 *             if the backpack doesnt contain the item.
 	 */
 	public void removeItem(Item item) throws InvalidPlayerExceptions {
 		try {
@@ -84,10 +94,14 @@ public class Player {
 	}
 
 	/**
-	 * equip the item from the BackPack list
+	 * Equips this item, providing its given bonuses to the player, moving the item into the 'equipped' section of the
+	 * player's backpack.
 	 * 
 	 * @param item
+	 *            item to equip
 	 * @throws InvalidPlayerExceptions
+	 *             if the player already has the max number of items equipped or the item is not part of a player's
+	 *             backpack.
 	 */
 	public void equipItem(Equipable item) throws InvalidPlayerExceptions {
 		try {
@@ -98,10 +112,12 @@ public class Player {
 	}
 
 	/**
-	 * unequip the item from the list
+	 * Unequips this item, removing its given bonuses from the player it was equipped to and moving it out of the
+	 * 'equipped' section of the backpack.
 	 * 
 	 * @param item
 	 * @throws InvalidPlayerExceptions
+	 *             if the item was not equipped to any player or the pack's unequipped area is full.
 	 */
 	public void unequipItem(Equipable item) throws InvalidPlayerExceptions {
 		try {
@@ -113,10 +129,12 @@ public class Player {
 	}
 
 	/**
-	 * check if there is an item in the BackPack List
+	 * Uses this item on the player and removes it from the inventory
 	 * 
 	 * @param item
+	 *            item to use
 	 * @throws InvalidPlayerExceptions
+	 *             if the item was not part of a player's backpack.
 	 */
 	public void useItem(Usable item) throws InvalidPlayerExceptions {
 		try {
@@ -128,7 +146,7 @@ public class Player {
 	}
 
 	/**
-	 * pickUpAndUse the item without putting it in the backpack.
+	 * pick Up And Use the item without putting it in the backpack.
 	 * 
 	 * @param item
 	 * @throws InvalidPlayerExceptions
@@ -176,6 +194,8 @@ public class Player {
 		// update the x and y
 		// update closest item to player
 		// closestItem = map.getClosestItem//....
+		// check that you arnt touching a door (use getDoor() method in map), if you are touching a door, move to next
+		// map.
 
 		// if you can't move, throw an exception...
 	}
@@ -193,25 +213,18 @@ public class Player {
 	}
 
 	/*
-	 * Returns a String
+	 * Returns the name
 	 */
 	public String getName() {
 		return this.name;
-	}
-
-	/*
-	 * Sets the name of
-	 */
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public Backpack getItemsList() {
 		return itemsList;
 	}
 
-	public void setItemsList(Backpack itemsList) {
-		this.itemsList = itemsList;
+	public void resetBackPack() {
+		this.itemsList = new Backpack(this);
 	}
 
 	public int getHealth() {
@@ -226,12 +239,20 @@ public class Player {
 		return xLocation;
 	}
 
+	public int getyLocation() {
+		return yLocation;
+	}
+
+	public Rectangle getBoundingBox() {
+		return this.boundingBox;
+	}
+
 	public Map getMap() {
 		return this.map;
 	}
 
-	public int getyLocation() {
-		return yLocation;
+	public int getMaxHealth() {
+		return maxHealth;
 	}
 
 }
