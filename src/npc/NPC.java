@@ -11,20 +11,23 @@ public class NPC extends Player {
 	private Player p;
 	private ControlScheme control;
 
-	public NPC(Player p, ControlScheme cs) {
-		this.p = p;
+	public NPC(String name, int x, int y, Player mainPlayer, ControlScheme cs) {
+		super(name, x, y);
+		this.p = mainPlayer;
 		this.control = cs;
 	}
 
 	/**
-	 * Pauses the timer which controls the NPC, which causes the NPC to simply stand still.
+	 * Pauses the timer which controls the NPC, which causes the NPC to simply stand
+	 * still.
 	 */
 	public void pause() {
 		timer.stop();
 	}
 
 	/**
-	 * Starts the timer which moves and controls the NPC. NPC will start moving around.
+	 * Starts the timer which moves and controls the NPC. NPC will start moving
+	 * around.
 	 */
 	public void start() {
 		timer.start();
