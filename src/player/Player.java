@@ -21,11 +21,13 @@ import items.Usable;
 public class Player {
 	/* constants */
 	private static final int rangeCircleWidth = 50;
-	private final int maxHealth = 5;
 	private final String name;
+	private final double defaultFireRate = 1;
 
 	private Item closestItem;
 	private Backpack itemsList = new Backpack(this);
+	private double fireRate = 1;
+	private int maxHealth = 5;
 	private int health;
 	private int xLocation;
 	private int yLocation;
@@ -255,4 +257,19 @@ public class Player {
 		return maxHealth;
 	}
 
+	public void setMaxHealth(int max) {
+		this.maxHealth = max;
+	}
+
+	public double getFireRate() {
+		return fireRate;
+	}
+
+	public void setFireRate(double fireRate) {
+		this.fireRate = fireRate;
+	}
+
+	public double getDefaultFireRate() {
+		return defaultFireRate;
+	}
 }
