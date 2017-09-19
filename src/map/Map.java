@@ -1,11 +1,14 @@
 package map;
 
+import java.awt.Rectangle;
+import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import items.DoorItem;
 import items.Item;
 import player.Bullet;
 
@@ -18,19 +21,19 @@ import player.Bullet;
  *
  */
 public class Map {
-	// HashMap of the Items located on the map and their locations
-	private HashMap<Item, Location> items;
-
 	// Width of a individual tile
 	public static final int tileWidth = 32;
 
 	// Height of a individual tile
 	public static final int tileHeight = 32;
 
-	// The width of the map
+	// HashMap of the Items located on the map and their locations
+	private HashMap<Item, Location> items;
+
+	// The width of the map in tiles
 	private int width;
 
-	// The height of the map
+	// The height of the map in tiles.
 	private int height;
 
 	// 2D array of all the images that make up the backGround layer
@@ -54,13 +57,38 @@ public class Map {
 
 	/**
 	 * Checks whether the bullet has hit either the player or any NPC's
+	 * 
+	 * @param b
+	 *            the bullet to check.
+	 * @return true if the bullet hit a player/npc false otherwise.
 	 */
-	public boolean hasHit(Bullet b) {
+	public boolean checkBulletHit(Bullet b) {
 		// for each entity{
 		// check bullet doesnt belong to entity use b.getOwner()
 		// check whether bullet is touching entity
 		// if it is, then return true, and call the takeDamage() method on the entity
 		return false;
+	}
+
+	public DoorItem getDoor(Rectangle boundingBox) {
+		// returns the door touched by the bounding box, or null if no door touched by bounding box
+		return null;
+	}
+
+	public Item getClosestItem(Ellipse2D rangeCircle) {
+		// returns the closest item that is within the rangeCircle
+		// returns null if no items in the range circle
+
+		return null;
+	}
+
+	public void placeItem(Item i, int x, int y) {
+		// drops the given item onto the map at the given location
+		// x and y are pixel locations rather than tile locations.
+	}
+
+	public void removeItem(Item i) {
+		// removes the given item from the map.
 	}
 
 	/**
