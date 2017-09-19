@@ -128,9 +128,8 @@ public class Player {
 
 	public void checkHit() {
 		// checks whether any bullets that don't belong to 'this' player have hit this
-		// player
-		// if it has hit the player, it should delete the bullet from the bullet list.
-		// and player should lose health
+		// player if it has hit the player, it should call stop() on the bullet, delete
+		// the bullet from the bullet list.and player should lose health
 		return;
 	}
 
