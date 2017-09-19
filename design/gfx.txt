@@ -17,6 +17,9 @@ to remove confusion about what should be drawn as what.
 Classes used to accomplish the above tasks will include image loaders, pipeline classes to access the images and
 various manipulators to edit the image appearances (e.g: rotating, applying filters, etc).
 
+NEW ADDITIONS:
+- Images should be located in the images directory of this package, but entities will still know the file-paths to them.
+
 PRIMARY AUTHOR:
 Liam
 

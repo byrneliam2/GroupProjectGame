@@ -22,6 +22,9 @@ cards package of the library.
 The frames library, along with the gfx library, will comprise the View portion of the MVC pattern that this game will
 be based upon.
 
+NEW ADDITIONS:
+- The frames library will reference the map (model) through an explicit channeling class
+
 PRIMARY AUTHOR:
 Liam
 

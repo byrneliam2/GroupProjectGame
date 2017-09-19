@@ -5,6 +5,15 @@ INTEGRATION ONE REPORT
 
 Today's integration had quite a few successes and failures. The combining of the two front end components
 (view libraries and the controller setup) was successful, using simple print statement tests to confirm
-communication.
-
-The integration of the model and the view was
+communication. The integration of the model and the view was slightly hindered, however. Some difficulties
+were had in trying to merge the different ideas that were proposed over how to display components on the
+screen. The Map was originally going to be sent to the view as several collections of images which the view
+would then process and display. One of these collections included the map background itself, which we have
+decided to change, for ease of working, into one image rather than a collection of images representing partial
+components of the map background. The other approaches have been kept, since drawing a set of items is easier
+than layering another transparent image over top, especially when this image must be produced and updated
+extremely rapidly. It has also been decided that the view will communicate with the model through a functional
+interface class so that the view does not invade the model's implementation space. The in-between class will
+function like a reference "atlas", where it will provide explicit middleman channels to the resources the view
+requires of the model such as image or location queries. The original idea involved the view "grabbing" what it
+needed straight from the model, which is a violation of the modularity we aim to achieve with the use of libraries.
