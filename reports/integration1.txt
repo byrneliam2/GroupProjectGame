@@ -15,5 +15,5 @@ than layering another transparent image over top, especially when this image mus
 extremely rapidly. It has also been decided that the view will communicate with the model through a functional
 interface class so that the view does not invade the model's implementation space. The in-between class will
 function like a reference "atlas", where it will provide explicit middleman channels to the resources the view
-requires of the model such as image or location queries. The original idea involved the view "grabbing" what it
+requires of the model, such as image or location queries. The original idea involved the view "grabbing" what it
 needed straight from the model, which is a violation of the modularity we aim to achieve with the use of libraries.
