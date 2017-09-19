@@ -21,3 +21,6 @@ Each map will have:
 
 The map will also contain collections of all the objects that can be located on a map, as well as
 storing the locations of some of the objects, such as items.
+
+NEW ADDITIONS:
+- No more "tiling" of background images
