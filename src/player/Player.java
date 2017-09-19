@@ -259,6 +259,8 @@ public class Player {
 
 	public void setMaxHealth(int max) {
 		this.maxHealth = max;
+		if (health > maxHealth)
+			health = maxHealth;
 	}
 
 	public double getFireRate() {
