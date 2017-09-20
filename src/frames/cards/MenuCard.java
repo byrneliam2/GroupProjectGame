@@ -29,16 +29,16 @@ public class MenuCard extends Card {
         // main game logo
         //components.put("logo", GraphicsUtilities.produceSticker(ImageLoader.image("pause.jpg")));
         // play button
-        components.put("play", GraphicsUtilities.produceButton(
-                ImageLoader.image("bu_exit.jpg"),
+        components.put("newgame", GraphicsUtilities.produceButton(
+                ImageLoader.image("bu_newgame.jpg"),
                 null, true));
         // load button
-        components.put("load", GraphicsUtilities.produceButton(
-                ImageLoader.image("bu_exit.jpg"),
+        components.put("loadgame", GraphicsUtilities.produceButton(
+                ImageLoader.image("bu_loadgame.jpg"),
                 null, true));
         // settings button
         components.put("settings", GraphicsUtilities.produceButton(
-                ImageLoader.image("bu_exit.jpg"),
+                ImageLoader.image("bu_settings.jpg"),
                 null, true));
         // info button?
 
@@ -55,8 +55,14 @@ public class MenuCard extends Card {
             final JButton btn = (JButton) m.getValue();
             btn.addActionListener(e -> {
                 switch (str) {
+                    case "newgame":
+                        dsp.update(null, "settings");
+                        break;
+                    case "loadgame":
+                        dsp.update(null, "settings");
+                        break;
                     case "settings":
-                        dsp.update(null, str);
+                        dsp.update(null, "settings");
                         break;
                     case "exit":
                         System.exit(0);
@@ -73,9 +79,9 @@ public class MenuCard extends Card {
         panel.add(Box.createVerticalGlue());
         panel.add(Box.createVerticalGlue());
         //panel.add(components.get("logo"));
-        panel.add(components.get("play"));
+        panel.add(components.get("newgame"));
         //panel.add(Box.createRigidArea(new Dimension(100, 50)));
-        panel.add(components.get("load"));
+        panel.add(components.get("loadgame"));
         panel.add(components.get("settings"));
         panel.add(components.get("exit"));
         panel.add(Box.createVerticalGlue());
