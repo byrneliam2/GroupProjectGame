@@ -72,7 +72,10 @@ public class MenuCard extends Card {
                         dsp.update(null, "settings");
                         break;
                     case "exit":
-                        System.exit(0);
+                        if (JOptionPane.showConfirmDialog(this,
+                                "Are you sure you wish to exit?", "Exit Game",
+                            JOptionPane.YES_NO_OPTION) == 0)
+                            System.exit(0);
                         break;
                 }
             });

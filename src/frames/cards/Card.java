@@ -9,6 +9,7 @@ package frames.cards;
 import frames.MainDisplay;
 
 import javax.swing.*;
+import javax.swing.plaf.ColorUIResource;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,6 +28,12 @@ public abstract class Card extends JPanel {
     Card() {
         panel = new JLabel();
         components = new HashMap<>();
+
+        // set the look of option panes
+        // https://stackoverflow.com/questions/1951558/list-of-java-swing-ui-properties
+        /*UIManager.put("OptionPane.background",new ColorUIResource(0,0,0));
+        UIManager.put("Panel.background",new ColorUIResource(0,0,0));*/
+
         add(panel);
         doSetup();
     }
