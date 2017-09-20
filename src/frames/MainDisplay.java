@@ -92,6 +92,9 @@ public class MainDisplay extends JComponent implements Observer {
         //audioHandler.queueMusic(null);
     }
 
+    /**
+     * Set up some Swing UI properties; override default values of UIManager.
+     */
     private void doUISetup() {
         // set the look of option panes
         // https://stackoverflow.com/questions/1951558/list-of-java-swing-ui-properties
@@ -131,7 +134,7 @@ public class MainDisplay extends JComponent implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         // switch screen if need be (use arg)
-        if (arg instanceof String)
+        if (arg != null && arg instanceof String)
             switchScreen((String) arg);
         redraw();
     }

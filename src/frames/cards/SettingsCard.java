@@ -7,7 +7,12 @@ package frames.cards;
  */
 
 import frames.MainDisplay;
+import gfx.GraphicsUtilities;
 import gfx.ImageLoader;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.Map;
 
 /**
  * The SettingsCard is a screen that hosts options for settings in the game,
@@ -21,16 +26,35 @@ public class SettingsCard extends Card {
 
     @Override
     protected void doSetup() {
-
+        panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
+        // back button
+        components.put("back", GraphicsUtilities.produceButton(
+                ImageLoader.image("ui", "bu_back", true),
+                ImageLoader.image("ui", "bu_back_r", false), true));
     }
 
     @Override
     public void setComponentActions(MainDisplay dsp) {
-
+        for (Map.Entry m : components.entrySet()) {
+            if (!(m.getValue() instanceof JButton)) continue;
+            final String str = (String) m.getKey();
+            final JButton btn = (JButton) m.getValue();
+            btn.addActionListener(e -> {
+                switch (str) {
+                    case "back":
+                        dsp.update(null, "menu");
+                        break;
+                }
+            });
+        }
     }
 
     @Override
     public void redraw() {
-
+        panel.removeAll();
+        // add the components in a top to bottom order, adding glue where we want space
+        panel.add(Box.createVerticalGlue());
+        panel.add(components.get("back"));
+        panel.add(Box.createVerticalGlue());
     }
 }
