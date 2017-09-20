@@ -33,21 +33,21 @@ public class MenuCard extends Card {
         // play button
         components.put("newgame", GraphicsUtilities.produceButton(
                 ImageLoader.image("ui", "bu_newgame", true),
-                ImageLoader.image("ui", "bu_newgame", false), true));
+                ImageLoader.image("ui", "bu_newgame_r", false), true));
         // load button
         components.put("loadgame", GraphicsUtilities.produceButton(
                 ImageLoader.image("ui", "bu_loadgame", true),
-                ImageLoader.image("ui", "bu_loadgame", false), true));
+                ImageLoader.image("ui", "bu_loadgame_r", false), true));
         // settings button
         components.put("settings", GraphicsUtilities.produceButton(
                 ImageLoader.image("ui", "bu_settings", true),
-                ImageLoader.image("ui", "bu_settings", false), true));
+                ImageLoader.image("ui", "bu_settings_r", false), true));
         // info button?
 
         // exit button
         components.put("exit", GraphicsUtilities.produceButton(
                 ImageLoader.image("ui", "bu_exit", true),
-                ImageLoader.image("ui", "bu_exit", false), true));
+                ImageLoader.image("ui", "bu_exit_r", false), true));
     }
 
     @Override
@@ -85,7 +85,7 @@ public class MenuCard extends Card {
         // add the components in a top to bottom order, adding glue where we want space
         panel.add(Box.createVerticalGlue());
         panel.add(components.get("logo"));
-        panel.add(Box.createRigidArea(new Dimension(100, 50)));
+        panel.add(Box.createRigidArea(new Dimension(100, 25)));
         panel.add(components.get("newgame"));
         panel.add(components.get("loadgame"));
         panel.add(components.get("settings"));
