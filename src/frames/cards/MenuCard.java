@@ -11,6 +11,7 @@ import gfx.GraphicsUtilities;
 import gfx.ImageLoader;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.Map;
 
 /**
@@ -27,7 +28,7 @@ public class MenuCard extends Card {
     protected void doSetup() {
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
         // main game logo
-        //components.put("logo", GraphicsUtilities.produceSticker(ImageLoader.image("pause.jpg")));
+        components.put("logo", GraphicsUtilities.produceSticker(ImageLoader.image("ui", "logo", true), true));
         // play button
         components.put("newgame", GraphicsUtilities.produceButton(
                 ImageLoader.image("ui", "bu_newgame", false),
@@ -51,6 +52,7 @@ public class MenuCard extends Card {
     @Override
     public void setComponentActions(MainDisplay dsp) {
         for (Map.Entry m : components.entrySet()) {
+            if (!(m.getValue() instanceof JButton)) continue;
             final String str = (String) m.getKey();
             final JButton btn = (JButton) m.getValue();
             btn.addActionListener(e -> {
@@ -77,10 +79,9 @@ public class MenuCard extends Card {
         panel.removeAll();
         // add the components in a top to bottom order, adding glue where we want space
         panel.add(Box.createVerticalGlue());
-        panel.add(Box.createVerticalGlue());
-        //panel.add(components.get("logo"));
+        panel.add(components.get("logo"));
+        panel.add(Box.createRigidArea(new Dimension(100, 50)));
         panel.add(components.get("newgame"));
-        //panel.add(Box.createRigidArea(new Dimension(100, 50)));
         panel.add(components.get("loadgame"));
         panel.add(components.get("settings"));
         panel.add(components.get("exit"));
