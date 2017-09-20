@@ -14,6 +14,7 @@ import frames.cards.*;
 
 import javax.swing.*;
 import javax.swing.Timer;
+import javax.swing.plaf.ColorUIResource;
 import java.awt.*;
 import java.util.*;
 
@@ -59,6 +60,9 @@ public class MainDisplay extends JComponent implements Observer {
      * Perform first time setup for the MainDisplay.
      */
     private void doSetup() {
+        // set UI properties first
+        doUISetup();
+
         // add fixed cards
         cards.put("menu",  new MenuCard());
         cards.put("pause", new PauseCard());
@@ -86,6 +90,16 @@ public class MainDisplay extends JComponent implements Observer {
         // finally, make the menu screen visible
         switchScreen("menu");
         //audioHandler.queueMusic(null);
+    }
+
+    private void doUISetup() {
+        // set the look of option panes
+        // https://stackoverflow.com/questions/1951558/list-of-java-swing-ui-properties
+        UIManager.put("OptionPane.background", Color.BLACK);
+        UIManager.put("OptionPane.messageForeground", Color.WHITE);
+        UIManager.put("Button.background", Color.BLACK);
+        UIManager.put("Button.foreground", Color.WHITE);
+        UIManager.put("Panel.background", Color.BLACK);
     }
 
     /**
