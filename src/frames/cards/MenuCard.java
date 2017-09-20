@@ -29,29 +29,16 @@ public class MenuCard extends Card {
     @Override
     protected void doSetup() {
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-        // main game logo
+        // put the logo in separately
         components.put("logo", GraphicsUtilities.produceSticker(
                 ImageLoader.image("ui", "logo", true), 0.5f));
-        // play button
-        components.put("new", GraphicsUtilities.produceButton(
-                ImageLoader.image("ui", "bu_new", true),
-                ImageLoader.image("ui", "bu_new_r", false), 0.5f));
-        // load button
-        components.put("load", GraphicsUtilities.produceButton(
-                ImageLoader.image("ui", "bu_load", true),
-                ImageLoader.image("ui", "bu_load_r", false), 0.5f));
-        // settings button
-        components.put("settings", GraphicsUtilities.produceButton(
-                ImageLoader.image("ui", "bu_settings", true),
-                ImageLoader.image("ui", "bu_settings_r", false), 0.5f));
-        // info button?
-        components.put("info", GraphicsUtilities.produceButton(
-                ImageLoader.image("ui", "bu_info", true),
-                ImageLoader.image("ui", "bu_info_r", false), 0.5f));
-        // exit button
-        components.put("exit", GraphicsUtilities.produceButton(
-                ImageLoader.image("ui", "bu_exit", true),
-                ImageLoader.image("ui", "bu_exit_r", false), 0.5f));
+        // use a loop to load all the buttons into the list
+        String[] files = {"new", "load", "settings", "info", "exit"};
+        for (String s : files) {
+            components.put(s, GraphicsUtilities.produceButton(
+                    ImageLoader.image("ui", "bu_" + s, true),
+                    ImageLoader.image("ui", "bu_" + s + "_r", false), 0.5f));
+        }
     }
 
     @Override

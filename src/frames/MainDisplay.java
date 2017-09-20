@@ -60,6 +60,15 @@ public class MainDisplay extends JComponent implements Observer {
      * Perform first time setup for the MainDisplay.
      */
     private void doSetup() {
+
+        /* ******************************************************************************
+         * Note that cards have named references in three places:
+         * - in the map that keeps a record of all cards created
+         * - in the CardLayout that keeps a record of all cards added to it
+         * - inside of each Card (a Card knows the name it has been given in this class
+         *   for both the mapping and the layout manager)
+         ***************************************************************************** */
+
         // set UI properties first
         //doUISetup();
 
