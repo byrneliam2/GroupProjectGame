@@ -1,7 +1,7 @@
 ===== All pictures in .jpg format, all background images should be 1080p for max prettiness =====
 
 Icon picture:
-//
+https://cdn.pixabay.com/photo/2012/04/03/13/26/books-25154_960_720.png
 
 Menu picture:
 https://www.pexels.com/photo/362175/

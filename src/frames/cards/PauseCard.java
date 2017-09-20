@@ -6,7 +6,7 @@ import gfx.ImageLoader;
 public class PauseCard extends Card {
 
     public PauseCard() {
-        setBackground(ImageLoader.image("pause.jpg"));
+        setBackground(ImageLoader.image("ui", "pause", false));
     }
 
     @Override

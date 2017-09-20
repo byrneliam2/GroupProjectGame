@@ -20,7 +20,7 @@ import java.util.Map;
 public class MenuCard extends Card {
 
     public MenuCard() {
-        setBackground(ImageLoader.image("menu.jpg"));
+        setBackground(ImageLoader.image("ui","menu", false));
     }
 
     @Override
@@ -30,21 +30,21 @@ public class MenuCard extends Card {
         //components.put("logo", GraphicsUtilities.produceSticker(ImageLoader.image("pause.jpg")));
         // play button
         components.put("newgame", GraphicsUtilities.produceButton(
-                ImageLoader.image("bu_newgame.jpg"),
+                ImageLoader.image("ui", "bu_newgame", false),
                 null, true));
         // load button
         components.put("loadgame", GraphicsUtilities.produceButton(
-                ImageLoader.image("bu_loadgame.jpg"),
+                ImageLoader.image("ui", "bu_loadgame", false),
                 null, true));
         // settings button
         components.put("settings", GraphicsUtilities.produceButton(
-                ImageLoader.image("bu_settings.jpg"),
+                ImageLoader.image("ui", "bu_settings", false),
                 null, true));
         // info button?
 
         // exit button
         components.put("exit", GraphicsUtilities.produceButton(
-                ImageLoader.image("bu_exit.jpg"),
+                ImageLoader.image("ui", "bu_exit", false),
                 null, true));
     }
 
