@@ -25,8 +25,8 @@ public class ImageLoader {
     public static BufferedImage image(String path) {
         BufferedImage img = null;
         try {
-            img = ImageIO.read(ImageLoader.class.getResource("img/" + path));
-            //img = ImageIO.read(new File("img/" + path));
+            //img = ImageIO.read(ImageLoader.class.getResource("img/" + path));
+            img = ImageIO.read(new File("img/" + path));
         } catch (IOException e) { e.printStackTrace(); }
 
         return img;
