@@ -21,7 +21,8 @@ import java.util.Map;
  */
 public class MenuCard extends Card {
 
-    public MenuCard() {
+    public MenuCard(String n) {
+        super(n);
         setBackground(ImageLoader.image("ui","menu", false));
     }
 

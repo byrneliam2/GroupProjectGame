@@ -19,7 +19,8 @@ import java.util.Map;
  */
 public class SettingsCard extends Card {
 
-    public SettingsCard() {
+    public SettingsCard(String n) {
+        super(n);
         setBackground(ImageLoader.image("ui", "pause", false));
     }
 
@@ -41,7 +42,7 @@ public class SettingsCard extends Card {
             btn.addActionListener(e -> {
                 switch (str) {
                     case "back":
-                        dsp.update(null, "menu");
+                        dsp.update(null, "last");
                         break;
                 }
             });

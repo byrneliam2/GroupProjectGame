@@ -9,7 +9,8 @@ import java.util.Map;
 
 public class PauseCard extends Card {
 
-    public PauseCard() {
+    public PauseCard(String n) {
+        super(n);
         setBackground(ImageLoader.image("ui", "pause", false));
     }
 

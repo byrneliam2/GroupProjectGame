@@ -14,7 +14,6 @@ import frames.cards.*;
 
 import javax.swing.*;
 import javax.swing.Timer;
-import javax.swing.plaf.ColorUIResource;
 import java.awt.*;
 import java.util.*;
 
@@ -32,11 +31,12 @@ public class MainDisplay extends JComponent implements Observer {
 
     /* Other attributes */
     private Map<String, Card> cards;
-    private Card currentCard;
+    private Card currentCard, lastCard;
     private AudioHandler audioHandler;
 
     public MainDisplay() {
         master = new JFrame();
+        currentCard = null;
         cards = new HashMap<>();
         audioHandler = new AudioHandler();
 
@@ -64,15 +64,16 @@ public class MainDisplay extends JComponent implements Observer {
         //doUISetup();
 
         // add fixed cards
-        cards.put("menu",  new MenuCard());
-        cards.put("pause", new PauseCard());
-        cards.put("settings", new SettingsCard());
+        cards.put("menu",  new MenuCard("menu"));
+        cards.put("pause", new PauseCard("pause"));
+        cards.put("settings", new SettingsCard("settings"));
 
         // get model details and construct enough map cards to fit
         for (int i = 0; i < 9; i++) { // TODO replace 9 with model value
-            cards.put("level" + i, new MapCard());
+            String name = "level" + i;
+            cards.put(name, new MapCard(name));
             // set up each level
-            MapCard m = (MapCard) cards.get("level" + i);
+            MapCard m = (MapCard) cards.get(name);
             // TODO add map setup
         }
 
@@ -112,6 +113,7 @@ public class MainDisplay extends JComponent implements Observer {
     private void switchScreen(String key) {
         CardLayout cl = (CardLayout) this.getLayout();
         cl.show(this, key);
+        if (currentCard != null) lastCard = currentCard;
         currentCard = cards.get(key);
         // force a redraw on the new card
         redraw();
@@ -134,8 +136,12 @@ public class MainDisplay extends JComponent implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         // switch screen if need be (use arg)
-        if (arg != null && arg instanceof String)
-            switchScreen((String) arg);
-        redraw();
+        if (arg != null && arg instanceof String) {
+            String str = (String) arg;
+            if (str.equals("last"))
+                switchScreen(lastCard.getName());
+            else switchScreen(str);
+        }
+        else redraw();
     }
 }

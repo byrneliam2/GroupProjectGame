@@ -24,11 +24,26 @@ public abstract class Card extends JPanel {
     JLabel panel;
     Map<String, JComponent> components;
 
-    Card() {
+    /* Other attributes */
+    private String name;
+
+    /**
+     * Each Card has a name associated with it for locating purposes.
+     * @param n name
+     */
+    Card(String n) {
+        name = n;
         panel = new JLabel();
         components = new HashMap<>();
         add(panel);
         doSetup();
+    }
+
+    /**
+     * Get the name of this Card.
+     */
+    public String getName() {
+        return name;
     }
 
     /**
