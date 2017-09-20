@@ -5,6 +5,7 @@ import gfx.GraphicsUtilities;
 import gfx.ImageLoader;
 
 import javax.swing.*;
+import java.io.File;
 import java.util.Map;
 
 public class PauseCard extends Card {
@@ -33,7 +34,16 @@ public class PauseCard extends Card {
             final String str = (String) m.getKey();
             final JButton btn = (JButton) m.getValue();
             btn.addActionListener(e -> {
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setCurrentDirectory(new File(".."));
+                fileChooser.setDialogTitle("Select a <ext> file to load");
                 switch (str) {
+                    case "save":
+                        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {}
+                        break;
+                    case "load":
+                        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {}
+                        break;
                     case "settings":
                         dsp.update(null, "settings");
                         break;
