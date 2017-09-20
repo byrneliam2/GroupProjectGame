@@ -12,6 +12,7 @@ import gfx.ImageLoader;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 import java.util.Map;
 
 /**
@@ -29,25 +30,27 @@ public class MenuCard extends Card {
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
         // main game logo
         components.put("logo", GraphicsUtilities.produceSticker(
-                ImageLoader.image("ui", "logo", true), true));
+                ImageLoader.image("ui", "logo", true), 0.5f));
         // play button
-        components.put("newgame", GraphicsUtilities.produceButton(
-                ImageLoader.image("ui", "bu_newgame", true),
-                ImageLoader.image("ui", "bu_newgame_r", false), true));
+        components.put("new", GraphicsUtilities.produceButton(
+                ImageLoader.image("ui", "bu_new", true),
+                ImageLoader.image("ui", "bu_new_r", false), 0.5f));
         // load button
-        components.put("loadgame", GraphicsUtilities.produceButton(
-                ImageLoader.image("ui", "bu_loadgame", true),
-                ImageLoader.image("ui", "bu_loadgame_r", false), true));
+        components.put("load", GraphicsUtilities.produceButton(
+                ImageLoader.image("ui", "bu_load", true),
+                ImageLoader.image("ui", "bu_load_r", false), 0.5f));
         // settings button
         components.put("settings", GraphicsUtilities.produceButton(
                 ImageLoader.image("ui", "bu_settings", true),
-                ImageLoader.image("ui", "bu_settings_r", false), true));
+                ImageLoader.image("ui", "bu_settings_r", false), 0.5f));
         // info button?
-
+        components.put("info", GraphicsUtilities.produceButton(
+                ImageLoader.image("ui", "bu_info", true),
+                ImageLoader.image("ui", "bu_info_r", false), 0.5f));
         // exit button
         components.put("exit", GraphicsUtilities.produceButton(
                 ImageLoader.image("ui", "bu_exit", true),
-                ImageLoader.image("ui", "bu_exit_r", false), true));
+                ImageLoader.image("ui", "bu_exit_r", false), 0.5f));
     }
 
     @Override
@@ -58,18 +61,20 @@ public class MenuCard extends Card {
             final JButton btn = (JButton) m.getValue();
             btn.addActionListener(e -> {
                 switch (str) {
-                    case "newgame":
-                        dsp.update(null, "settings");
+                    case "new":
+                        dsp.update(null, "pause");
                         break;
-                    case "loadgame":
-                        /*fileChooser.setCurrentDirectory(new File("."));
-                        fileChooser.setDialogTitle("Select input directory");
-                        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-                        if (fileChooser.showOpenDialog(frame) == JFileChooser.APPROVE_OPTION) {}*/
-                        dsp.update(null, "settings");
+                    case "load":
+                        JFileChooser fileChooser = new JFileChooser();
+                        fileChooser.setCurrentDirectory(new File(".."));
+                        fileChooser.setDialogTitle("Select a <ext> file to load");
+                        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {}
                         break;
                     case "settings":
                         dsp.update(null, "settings");
+                        break;
+                    case "info":
+                        showInfo();
                         break;
                     case "exit":
                         if (JOptionPane.showConfirmDialog(this,
@@ -89,10 +94,23 @@ public class MenuCard extends Card {
         panel.add(Box.createVerticalGlue());
         panel.add(components.get("logo"));
         panel.add(Box.createRigidArea(new Dimension(100, 25)));
-        panel.add(components.get("newgame"));
-        panel.add(components.get("loadgame"));
+        panel.add(components.get("new"));
+        panel.add(components.get("load"));
         panel.add(components.get("settings"));
+        panel.add(components.get("info"));
         panel.add(components.get("exit"));
         panel.add(Box.createVerticalGlue());
+    }
+
+    /**
+     * Show some information about the game and those who made it.
+     */
+    private void showInfo() {
+        String about = "THE ILLUSION OF THE PROPHECY\n" +
+                "A game made for SWEN 222 at Victoria University of Wellington.\n\n" +
+                "Made by Liam Byrne, James Watt, Thomas Edwards, Mohsen Javaher and " +
+                "Andrew McManaway.\n\n" +
+                "17 October 2017";
+        JOptionPane.showMessageDialog(this, about, "Credits", JOptionPane.PLAIN_MESSAGE);
     }
 }

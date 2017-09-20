@@ -61,7 +61,7 @@ public class MainDisplay extends JComponent implements Observer {
      */
     private void doSetup() {
         // set UI properties first
-        doUISetup();
+        //doUISetup();
 
         // add fixed cards
         cards.put("menu",  new MenuCard());

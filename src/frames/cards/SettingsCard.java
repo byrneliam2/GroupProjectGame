@@ -11,12 +11,11 @@ import gfx.GraphicsUtilities;
 import gfx.ImageLoader;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.Map;
 
 /**
  * The SettingsCard is a screen that hosts options for settings in the game,
- * such as audio adjustment...
+ * such as audio and visual adjustments.
  */
 public class SettingsCard extends Card {
 
@@ -30,7 +29,7 @@ public class SettingsCard extends Card {
         // back button
         components.put("back", GraphicsUtilities.produceButton(
                 ImageLoader.image("ui", "bu_back", true),
-                ImageLoader.image("ui", "bu_back_r", false), true));
+                ImageLoader.image("ui", "bu_back_r", false), 0.5f));
     }
 
     @Override
