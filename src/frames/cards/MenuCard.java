@@ -28,25 +28,26 @@ public class MenuCard extends Card {
     protected void doSetup() {
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
         // main game logo
-        components.put("logo", GraphicsUtilities.produceSticker(ImageLoader.image("ui", "logo", true), true));
+        components.put("logo", GraphicsUtilities.produceSticker(
+                ImageLoader.image("ui", "logo", true), true));
         // play button
         components.put("newgame", GraphicsUtilities.produceButton(
-                ImageLoader.image("ui", "bu_newgame", false),
-                null, true));
+                ImageLoader.image("ui", "bu_newgame", true),
+                ImageLoader.image("ui", "bu_newgame", false), true));
         // load button
         components.put("loadgame", GraphicsUtilities.produceButton(
-                ImageLoader.image("ui", "bu_loadgame", false),
-                null, true));
+                ImageLoader.image("ui", "bu_loadgame", true),
+                ImageLoader.image("ui", "bu_loadgame", false), true));
         // settings button
         components.put("settings", GraphicsUtilities.produceButton(
-                ImageLoader.image("ui", "bu_settings", false),
-                null, true));
+                ImageLoader.image("ui", "bu_settings", true),
+                ImageLoader.image("ui", "bu_settings", false), true));
         // info button?
 
         // exit button
         components.put("exit", GraphicsUtilities.produceButton(
-                ImageLoader.image("ui", "bu_exit", false),
-                null, true));
+                ImageLoader.image("ui", "bu_exit", true),
+                ImageLoader.image("ui", "bu_exit", false), true));
     }
 
     @Override
@@ -61,6 +62,10 @@ public class MenuCard extends Card {
                         dsp.update(null, "settings");
                         break;
                     case "loadgame":
+                        /*fileChooser.setCurrentDirectory(new File("."));
+                        fileChooser.setDialogTitle("Select input directory");
+                        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                        if (fileChooser.showOpenDialog(frame) == JFileChooser.APPROVE_OPTION) {}*/
                         dsp.update(null, "settings");
                         break;
                     case "settings":
