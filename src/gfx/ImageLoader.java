@@ -13,7 +13,7 @@ import java.io.IOException;
 
 /**
  * This class is responsible for all image loading within the game. The images
- * come from the img directory, with the subdirectory specified in the getter.
+ * come from the img directory in assets, with the subdirectory specified in the getter.
  * Currently supported files include JPEG and PNG.
  */
 public class ImageLoader {
@@ -28,8 +28,8 @@ public class ImageLoader {
     public static BufferedImage image(String directory, String name, boolean transparent) {
         BufferedImage img = null;
         try {
-            img = ImageIO.read(new File(
-                    "img/" + directory + (!directory.equals("") ? "/" : "") + name + (transparent ? ".png" : ".jpg")
+            img = ImageIO.read(ImageLoader.class.getResource(
+                    "../assets/img/" + directory + (!directory.equals("") ? "/" : "") + name + (transparent ? ".png" : ".jpg")
             ));
         } catch (IOException e) { e.printStackTrace(); }
 
