@@ -17,9 +17,11 @@ import java.util.Queue;
  */
 public class AudioHandler {
     private AudioTrack currentSong; //REPLACE WITH THREAD LINK WHEN READY
+    private String assetsFolder;
     private Queue<AudioTrack> musicQueue;
 
-    public AudioHandler(){
+    public AudioHandler(String assetsFolder){
+        this.assetsFolder = assetsFolder;
         this.musicQueue = new ArrayDeque<>();
     }
 
@@ -58,18 +60,19 @@ public class AudioHandler {
      * @param effect sound-effect to play
      */
     public void playEffect(AudioTrack effect){
+        String path = String.format("%s%s", assetsFolder, effect.getPath());
+        //TODO
         try {
             checkTrack(effect);
             Clip clip = AudioSystem.getClip();
-            AudioInputStream inputStream = AudioSystem.getAudioInputStream(this.getClass().getResourceAsStream("test_track.wav"));
+            AudioInputStream inputStream = AudioSystem.getAudioInputStream(this.getClass().getResourceAsStream(path));
             clip.open(inputStream);
+            FloatControl volume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            volume.setValue(-20.0f);
             clip.start();
-        } catch (LineUnavailableException | AudioException | UnsupportedAudioFileException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (LineUnavailableException | AudioException | UnsupportedAudioFileException | IOException e) {
             e.printStackTrace();
         }
-        //TODO
     }
 
 

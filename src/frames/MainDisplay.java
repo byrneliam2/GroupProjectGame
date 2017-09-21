@@ -39,7 +39,7 @@ public class MainDisplay extends JComponent implements Observer {
         master = new JFrame();
         currentCard = null;
         cards = new HashMap<>();
-        audioHandler = new AudioHandler();
+        audioHandler = new AudioHandler("../assets/audio/");
 
         // master frame setup
         master.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -100,7 +100,9 @@ public class MainDisplay extends JComponent implements Observer {
 
         // finally, make the menu screen visible
         switchScreen("menu");
-        //audioHandler.queueMusic(null);
+
+        //TODO: AudioTesting
+        audioHandler.playEffect(new AudioTrack("test_track.wav", AudioTrack.SoundType.EFFECT));
     }
 
     /**
@@ -127,10 +129,6 @@ public class MainDisplay extends JComponent implements Observer {
         currentCard = cards.get(key);
         // force a redraw on the new card
         redraw();
-
-        //TODO: TEST SOUND
-        AudioTrack track = new AudioTrack("meme", AudioTrack.SoundType.EFFECT);
-        audioHandler.playEffect(track);
     }
 
     /**

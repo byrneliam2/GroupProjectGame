@@ -20,6 +20,10 @@ public class AudioTrack {
         this.type = type;
     }
 
+    public String getPath() {
+        return path;
+    }
+
     /**
      * SoundType enum determines what type of AudioTrack is requested.
      */
