@@ -15,7 +15,7 @@ import java.util.Map;
 
 /**
  * The SettingsCard is a screen that hosts options for settings in the game,
- * such as audio and visual adjustments. The SettingsCard is slightly different
+ * such as sounds and visual adjustments. The SettingsCard is slightly different
  * in the way that the card that calls it can vary (e.g: the call could come
  * from the pause menu or the main menu.) The MainDisplay class takes care of the
  * memory aspect; this class notifies MainDisplay of a switch to the previous screen

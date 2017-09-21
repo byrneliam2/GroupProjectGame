@@ -39,7 +39,7 @@ public class MainDisplay extends JComponent implements Observer {
         master = new JFrame();
         currentCard = null;
         cards = new HashMap<>();
-        audioHandler = new AudioHandler("../assets/audio/");
+        audioHandler = new AudioHandler();
 
         // master frame setup
         master.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

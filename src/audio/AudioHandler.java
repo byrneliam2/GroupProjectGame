@@ -20,8 +20,8 @@ public class AudioHandler {
     private String assetsFolder;
     private Queue<AudioTrack> musicQueue;
 
-    public AudioHandler(String assetsFolder){
-        this.assetsFolder = assetsFolder;
+    public AudioHandler(){
+        this.assetsFolder = "../assets/sounds/";
         this.musicQueue = new ArrayDeque<>();
     }
 
