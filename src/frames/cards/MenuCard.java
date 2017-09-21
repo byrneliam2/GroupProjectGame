@@ -9,6 +9,7 @@ package frames.cards;
 import frames.MainDisplay;
 import gfx.GraphicsUtilities;
 import gfx.ImageLoader;
+import gfx.tests.LabelButton;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,6 +35,7 @@ public class MenuCard extends Card {
                 ImageLoader.image("ui", "logo", true), 0.5f));
         // use a loop to load all the buttons into the list
         String[] files = {"new", "load", "settings", "info", "exit"};
+        //components.put("new", new LabelButton("GraphicsButton", 225, 75, true));
         for (String s : files) {
             components.put(s, GraphicsUtilities.produceButton(
                     ImageLoader.image("ui", "bu_" + s, true),

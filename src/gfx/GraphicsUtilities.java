@@ -19,6 +19,7 @@ public class GraphicsUtilities {
 
     /**
      * Creates and returns a transparent, roll-over enabled button with a set image.
+     * Button images have a dimension of 225 x 75 pixels.
      * @param main image to attach
      * @param roll image to appear on button roll-over, or null if none specified
      * @param alignment sets x alignment value (0 for left, 1 for right)
