@@ -15,7 +15,12 @@ import java.util.Map;
 
 /**
  * The SettingsCard is a screen that hosts options for settings in the game,
- * such as audio and visual adjustments.
+ * such as audio and visual adjustments. The SettingsCard is slightly different
+ * in the way that the card that calls it can vary (e.g: the call could come
+ * from the pause menu or the main menu.) The MainDisplay class takes care of the
+ * memory aspect; this class notifies MainDisplay of a switch to the previous screen
+ * through the observer update mechanism. That is, the "Back" button escapes to the
+ * "last" screen on the display.
  */
 public class SettingsCard extends Card {
 
@@ -42,6 +47,7 @@ public class SettingsCard extends Card {
             btn.addActionListener(e -> {
                 switch (str) {
                     case "back":
+                        // switch to last screen
                         dsp.update(null, "last");
                         break;
                 }
