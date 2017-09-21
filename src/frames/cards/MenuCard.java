@@ -97,8 +97,9 @@ public class MenuCard extends Card {
     private void showInfo() {
         String about = "THE ILLUSION OF THE PROPHECY\n" +
                 "A game made for SWEN 222 at Victoria University of Wellington.\n\n" +
-                "Made by Liam Byrne, James Watt, Thomas Edwards, Mohsen Javaher and " +
-                "Andrew McManaway.\n\n" +
+                "Made by:\n- Liam Byrne (github.com/byrneliam2)\n- James Watt (github.com/Hiccup246)\n" +
+                "- Thomas Edwards (github.com/tomBeep)\n- Mohsen Javaher (github.com/javahemohs)\n" +
+                "- Andrew McManaway (github.com/McManaway1)\n\n" +
                 "17 October 2017";
         JOptionPane.showMessageDialog(this, about, "Credits", JOptionPane.PLAIN_MESSAGE);
     }
