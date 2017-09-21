@@ -5,6 +5,8 @@ package audio;
  *  SWEN 222 Group Project
  */
 
+import javax.sound.sampled.*;
+import java.io.IOException;
 import java.util.ArrayDeque;
 import java.util.Queue;
 
@@ -22,7 +24,8 @@ public class AudioHandler {
     }
 
     /**
-     * Adds an AudioTrack to be played, forces all previous song to stop playing
+     * Adds an AudioTrack to be played, forces all previous song to stop playing.
+     * Includes a graceful transition to the new forced AudioTrack
      * @param music background music to forcefully play
      */
     public void forceMusic(AudioTrack music){
@@ -55,7 +58,17 @@ public class AudioHandler {
      * @param effect sound-effect to play
      */
     public void playEffect(AudioTrack effect){
-        checkTrack(effect);
+        try {
+            checkTrack(effect);
+            Clip clip = AudioSystem.getClip();
+            AudioInputStream inputStream = AudioSystem.getAudioInputStream(this.getClass().getResourceAsStream("test_track.wav"));
+            clip.open(inputStream);
+            clip.start();
+        } catch (LineUnavailableException | AudioException | UnsupportedAudioFileException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         //TODO
     }
 

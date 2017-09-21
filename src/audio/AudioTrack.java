@@ -12,22 +12,12 @@ import java.io.File;
  * sound type (Music or SoundEffect) and the resource location for the sound-file.
  */
 public class AudioTrack {
-    private String name;
-    private File soundFile;
+    private String path;
     private SoundType type;
 
-    public AudioTrack(String name, File soundFile, SoundType type) {
-        this.name = name;
-        this.soundFile = soundFile;
+    public AudioTrack(String path, SoundType type) {
+        this.path = path;
         this.type = type;
-    }
-
-    String getName() {
-        return name;
-    }
-
-    SoundType getType() {
-        return type;
     }
 
     /**

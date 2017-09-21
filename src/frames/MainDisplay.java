@@ -7,6 +7,7 @@ package frames;
  */
 
 import audio.AudioHandler;
+import audio.AudioTrack;
 import controller.KeyboardController;
 import controller.MouseController;
 import frames.cards.Card;
@@ -126,6 +127,10 @@ public class MainDisplay extends JComponent implements Observer {
         currentCard = cards.get(key);
         // force a redraw on the new card
         redraw();
+
+        //TODO: TEST SOUND
+        AudioTrack track = new AudioTrack("meme", AudioTrack.SoundType.EFFECT);
+        audioHandler.playEffect(track);
     }
 
     /**
