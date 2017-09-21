@@ -145,6 +145,14 @@ public class MainDisplay extends JComponent implements Observer {
         master.repaint();
     }
 
+    /**
+     * Return the display's {@link AudioHandler}. This is used by the cards to
+     * trigger sound effects.
+     */
+    public AudioHandler getAudioHandler() {
+        return audioHandler;
+    }
+
     @Override
     public void update(Observable o, Object arg) {
         // switch screen if need be (use arg)

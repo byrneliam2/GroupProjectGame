@@ -45,6 +45,7 @@ public class SettingsCard extends Card {
             final String str = (String) m.getKey();
             final JButton btn = (JButton) m.getValue();
             btn.addActionListener(e -> {
+                //dsp.getAudioHandler().playEffect();
                 switch (str) {
                     case "back":
                         // switch to last screen

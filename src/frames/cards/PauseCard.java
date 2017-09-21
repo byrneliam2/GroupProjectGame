@@ -34,6 +34,7 @@ public class PauseCard extends Card {
             final String str = (String) m.getKey();
             final JButton btn = (JButton) m.getValue();
             btn.addActionListener(e -> {
+                //dsp.getAudioHandler().playEffect();
                 JFileChooser fileChooser = new JFileChooser();
                 fileChooser.setCurrentDirectory(new File(".."));
                 fileChooser.setDialogTitle("Select a <ext> file to load");
