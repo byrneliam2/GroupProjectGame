@@ -19,6 +19,10 @@ public class MapCard extends Card {
 
     private List<Entity> entities;
 
+    public MapCard(String n) {
+        super(n);
+    }
+
     /**
      * Add a new {@link Card.Entity} to the current screen.
      * @param e entity

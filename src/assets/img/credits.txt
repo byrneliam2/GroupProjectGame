@@ -1,7 +1,7 @@
 ===== All pictures in .jpg format, all background images should be 1080p for max prettiness =====
 
 Icon picture:
-//
+https://commons.wikimedia.org/wiki/File:Bar-knot-basic-decorative.svg
 
 Menu picture:
 https://www.pexels.com/photo/362175/

@@ -19,12 +19,13 @@ public class GraphicsUtilities {
 
     /**
      * Creates and returns a transparent, roll-over enabled button with a set image.
+     * Button images have a dimension of 225 x 75 pixels.
      * @param main image to attach
      * @param roll image to appear on button roll-over, or null if none specified
-     * @param centerx sets whether to center the x alignment of this component
+     * @param alignment sets x alignment value (0 for left, 1 for right)
      * @return new JButton
      */
-    public static JButton produceButton(BufferedImage main, BufferedImage roll, boolean centerx) {
+    public static JButton produceButton(BufferedImage main, BufferedImage roll, float alignment) {
         JButton button = new JButton();
         // set visual attributes
         button.setContentAreaFilled(false);
@@ -36,7 +37,7 @@ public class GraphicsUtilities {
             button.setRolloverIcon(new ImageIcon(roll));
         }
         // force middle alignment
-        if (centerx) button.setAlignmentX(0.5f);
+        button.setAlignmentX(alignment);
         // done
         return button;
     }
@@ -44,13 +45,13 @@ public class GraphicsUtilities {
     /**
      * Creates and returns a sticker, or a non-interactive label, with the specified image.
      * @param main image to attach
-     * @param centerx sets whether to center the x alignment of this component
+     * @param alignment sets x alignment value (0 for left, 1 for right)
      * @return new label
      */
-    public static JLabel produceSticker(BufferedImage main, boolean centerx) {
+    public static JLabel produceSticker(BufferedImage main, float alignment) {
         JLabel sticker = new JLabel();
         sticker.setIcon(new ImageIcon(main));
-        if (centerx) sticker.setAlignmentX(0.5f);
+        sticker.setAlignmentX(alignment);
         return sticker;
     }
 
