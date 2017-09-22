@@ -59,7 +59,8 @@ public abstract class Card extends JPanel {
      * to the label panel that takes up the whole card. Many cards will have some
      * kind of background image that persists throughout its existence, therefore
      * this should be considered as a "setup" method that should be called
-     * on creation.
+     * on creation. This method must be manually called for maps since the image is
+     * not static across all maps.
      * @param bg image to set background to
      */
     @SuppressWarnings("WeakerAccess")

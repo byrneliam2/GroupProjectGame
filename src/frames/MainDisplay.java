@@ -12,6 +12,7 @@ import controller.KeyboardController;
 import controller.MouseController;
 import frames.cards.Card;
 import frames.cards.*;
+import map.World;
 
 import javax.swing.*;
 import javax.swing.Timer;
@@ -86,12 +87,13 @@ public class MainDisplay extends JComponent implements Observer {
         cards.put("settings", new SettingsCard("settings"));
 
         // get model details and construct enough map cards to fit
-        for (int i = 0; i < 9; i++) { // TODO replace 9 with model value
+        for (int i = 0; i < 9; i++) { // TODO replace 9 with model value: for each map in world...
             String name = "level" + i;
             cards.put(name, new MapCard(name));
             // set up each level
             MapCard m = (MapCard) cards.get(name);
             // TODO add map setup
+            //m.setBackground(
         }
 
         // setup action listeners in each card
