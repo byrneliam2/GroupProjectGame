@@ -55,10 +55,11 @@ public class Map {
 	// The name of the map
 	private String name;
 
-	public Map(String name, HashMap<Item, Location> items) {
+	public Map(String name, HashMap<Item, Location> items, ArrayList<NPC> NPCS) {
 		this.name = name;
 		this.items = items;
 		this.backgroundLayer = name;
+		this.NPCS = NPCS;
 
 	}
 
