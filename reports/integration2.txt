@@ -3,4 +3,9 @@ Team SnicketySnacks (James Watt, Thomas Edwards, Liam Byrne, Mohsen Javaher, And
 
 INTEGRATION TWO REPORT
 
-//
+The second integration within our project was significantly better than the last. In the front end,
+the audio and display libraries were integrated and tested with a variety of small test tracks.
+This proved to be successful, with music playing during the menu's running. This will be improved
+with optimized access to audio tracks and manual settings for the user.
+
+In the back end, //
