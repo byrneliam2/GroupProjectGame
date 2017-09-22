@@ -11,12 +11,13 @@ import java.util.TimerTask;
 import items.DoorItem;
 import items.Item;
 import player.Bullet;
+import player.Player;
 
 /**
  * This class represents each map in the world. Each map is represented by a
  * series of layers, each layer being split into 32x32 pixel tiles. The map must
  * also know about all the possible items that can be located on itself.
- * 
+ *
  * @author James
  *
  */
@@ -37,27 +38,32 @@ public class Map {
 	private int height;
 
 	// 2D array of all the images that make up the backGround layer
-	private ArrayList<ArrayList<BufferedImage>> backgroundLayer;
+	private String backgroundLayer;
 
 	// 2D array of all the images that make up the collision layer
 	private ArrayList<ArrayList<BufferedImage>> collisionLayer;
-
-	// 2D array of all the images that make up the item layer
-	private ArrayList<ArrayList<BufferedImage>> itemLayer;
 
 	// 2D array of all the images that make up the enviromental layer
 	private ArrayList<ArrayList<BufferedImage>> enviromentalLayer;
 
 	// The current player
-	// Player
+	private Player currentPlayer;
 
-	public Map(String name, ArrayList<Item> items) {
+	//The name of the map
+	private String name;
+
+	public Map(String name, HashMap<Item,Location> items) {
+		this.name = name;
+		this.items = items;
+		this.backgroundLayer = name;
+
+
 
 	}
 
 	/**
 	 * Checks whether the bullet has hit either the player or any NPC's
-	 * 
+	 *
 	 * @param b
 	 *            the bullet to check.
 	 * @return true if the bullet hit a player/npc false otherwise.
@@ -94,7 +100,7 @@ public class Map {
 	/**
 	 * This method decides whether a position on the map can be moved over by a
 	 * entity
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 */
@@ -103,28 +109,28 @@ public class Map {
 	}
 
 	/**
-	 * This method returns the 2D ArrayList of images that make up the background
-	 * 
-	 * @return A 2D ArrayList of buffered images
+	 * This method returns the filename of the image that makes up the background
+	 *
+	 * @return A filename of the background image
 	 */
-	public ArrayList<ArrayList<BufferedImage>> getBackgroundLayer() {
+	public String getBackgroundLayer() {
 		return this.backgroundLayer;
 	}
 
 	/**
-	 * This method returns a 2D ArrayList of images that make up the item layer
-	 * 
-	 * @return A 2D ArrayList of buffered images
+	 * This method returns a HashMap of images that make up the item layer
+	 *
+	 * @return A HashMap of buffered images
 	 */
-	public ArrayList<ArrayList<BufferedImage>> getImageLayer() {
-		return this.itemLayer;
+	public HashMap<Item,Location> getImageLayer() {
+		return this.items;
 	}
 
 	/**
 	 * This method returns the enviroment on a given tile specified by a x and y
 	 * value, returns null if there is no item. Returns an exception if the x or y
 	 * position is invalid.
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @return The enviroment on the tile at x,y
@@ -135,7 +141,7 @@ public class Map {
 
 	/**
 	 * This method returns whether there is a item on a given spot
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @return
@@ -147,7 +153,7 @@ public class Map {
 	/**
 	 * This method returns the item located at position x,y. Returns null if there
 	 * is no item. Returns an exception if the x or y position is invalid.
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @return
@@ -156,23 +162,12 @@ public class Map {
 		return null;
 	}
 
-	/**
-	 * This method returns the image at a given x and y position. Returns an
-	 * exception if the x and y position is invalid.
-	 * 
-	 * @param x
-	 * @param y
-	 * @return
-	 */
-	public BufferedImage imageAt(int x, int y) {
-		return null;
-	}
 
 	/**
 	 * This method takes a x and y location and rounds it to an absolute
 	 * position(tile), e.g. Tile 2.5 does not exist so it is rounded down to tile 2
 	 * which does exist. Throws an error if the given x and y is invalid.
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @return
