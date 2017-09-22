@@ -9,3 +9,10 @@ This proved to be successful, with music playing during the menu's running. This
 with optimized access to audio tracks and manual settings for the user.
 
 In the back end, //
+
+LIBRARY TESTING
+
+In order to test each component of the game in isolation, test suites will be required to be package
+private. That is, each library has its own tests package which will have limited to no access from
+the outside. Most likely, the configuration will be <package>.tests. JUnit suites will be a tool to
+use for this, as it helps to combine multiple test classes into one executable.
