@@ -182,7 +182,7 @@ public class Map {
 	 *
 	 * @return A ArrayList of NPC
 	 */
-	private ArrayList<NPC> getNPCS() {
+	public ArrayList<NPC> getNPCS() {
 		return this.NPCS;
 	}
 
@@ -191,7 +191,7 @@ public class Map {
 	 *
 	 * @return The map name
 	 */
-	private String getMapName() {
+	public String getMapName() {
 		return this.name;
 	}
 
