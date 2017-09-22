@@ -1,4 +1,4 @@
-package gfx.tests;
+package gfx;
 
 import javax.swing.*;
 import java.awt.*;
