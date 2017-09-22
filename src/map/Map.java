@@ -10,6 +10,7 @@ import java.util.TimerTask;
 
 import items.DoorItem;
 import items.Item;
+import npc.NPC;
 import player.Bullet;
 import player.Player;
 
@@ -31,6 +32,8 @@ public class Map {
 	// HashMap of the Items located on the map and their locations
 	private HashMap<Item, Location> items;
 
+	private ArrayList<NPC> NPCS;
+
 	// The width of the map in tiles
 	private int width;
 
@@ -49,15 +52,13 @@ public class Map {
 	// The current player
 	private Player currentPlayer;
 
-	//The name of the map
+	// The name of the map
 	private String name;
 
-	public Map(String name, HashMap<Item,Location> items) {
+	public Map(String name, HashMap<Item, Location> items) {
 		this.name = name;
 		this.items = items;
 		this.backgroundLayer = name;
-
-
 
 	}
 
@@ -77,7 +78,8 @@ public class Map {
 	}
 
 	public DoorItem getDoor(Rectangle boundingBox) {
-		// returns the door touched by the bounding box, or null if no door is touched by bounding box
+		// returns the door touched by the bounding box, or null if no door is touched
+		// by bounding box
 		return null;
 	}
 
@@ -122,7 +124,7 @@ public class Map {
 	 *
 	 * @return A HashMap of buffered images
 	 */
-	public HashMap<Item,Location> getItems() {
+	public HashMap<Item, Location> getItems() {
 		return this.items;
 	}
 
@@ -162,7 +164,6 @@ public class Map {
 		return null;
 	}
 
-
 	/**
 	 * This method takes a x and y location and rounds it to an absolute
 	 * position(tile), e.g. Tile 2.5 does not exist so it is rounded down to tile 2
@@ -174,6 +175,24 @@ public class Map {
 	 */
 	private Location positionOnMap(int x, int y) {
 		return null;
+	}
+
+	/**
+	 * This method returns all the NPC's on the map
+	 *
+	 * @return A ArrayList of NPC
+	 */
+	private ArrayList<NPC> getNPCS() {
+		return this.NPCS;
+	}
+
+	/**
+	 * This method returns the map name
+	 *
+	 * @return The map name
+	 */
+	private String getMapName() {
+		return this.name;
 	}
 
 }
