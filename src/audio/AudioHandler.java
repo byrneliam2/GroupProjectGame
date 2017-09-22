@@ -57,13 +57,13 @@ public class AudioHandler {
 
     /**
      * Initiates a new Concurrent Process, this process will close after playing.
-     * @param effect sound-effect to play
+     * @param track sound-track to play
      */
-    public void playEffect(AudioTrack effect){
-        String path = String.format("%s%s", assetsFolder, effect.getPath());
+    public void playSound(AudioTrack track){
+        String path = String.format("%s%s", assetsFolder, track.getSoundFile());
         //TODO
         try {
-            checkTrack(effect);
+            checkTrack(track);
             Clip clip = AudioSystem.getClip();
             AudioInputStream inputStream = AudioSystem.getAudioInputStream(this.getClass().getResourceAsStream(path));
             clip.open(inputStream);
