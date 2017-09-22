@@ -122,7 +122,7 @@ public class Map {
 	 *
 	 * @return A HashMap of buffered images
 	 */
-	public HashMap<Item,Location> getImageLayer() {
+	public HashMap<Item,Location> getItems() {
 		return this.items;
 	}
 
