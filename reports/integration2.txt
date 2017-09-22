@@ -8,7 +8,14 @@ the audio and display libraries were integrated and tested with a variety of sma
 This proved to be successful, with music playing during the menu's running. This will be improved
 with optimized access to audio tracks and manual settings for the user.
 
-In the back end, //
+In the back end, we organised exctly which methods we would need in the two main libraries of Player and Map. 
+This proved successful and we beleive once all the methods are fully implemented, the game will be able to be played well
+Methods added to the Map class were mostly 'check' methods that will allow the Player to check certain attributes, 
+such as whether the Player can move onto a location.
+Methods added to the Player class were mostly communication methods, which allow the controller to interact easily with the 
+Player.
+We also added a "wrapper" class to the back end which covers all the BackEnd libraries and gives a few methods which allows 
+the front end to easily get all the different lists of entities that need to be drawn.
 
 LIBRARY TESTING
 
