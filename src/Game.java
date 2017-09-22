@@ -1,13 +1,14 @@
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Image;
+import java.util.HashMap;
+import java.util.List;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
+import items.Item;
+import map.Location;
+import npc.NPC;
+import player.Bullet;
 import player.Player;
 
 /**
+ * Class for getting all the different entities in the game.
  *
  * @author Thomas Edwards
  *
@@ -16,63 +17,47 @@ public class Game {
 
 	private Player player;
 
-	public Game() {
-		JFrame frame = new JFrame();
-		JPanel panel = new JPanel() {
-			@Override
-			public void paintComponent(Graphics g) {
-				g.drawImage(getMapBackground(), 0, 0, 400, 400, null);
-				g.drawImage(getEntityForeground(), 0, 0, 400, 400, null);
-			}
-		};
-		panel.setPreferredSize(new Dimension(600, 600));
-		frame.add(panel);
-		frame.pack();
-		frame.setVisible(true);
-	}
-
-	public void startGame() {
-
-	}
-
-	public void pauseGame() {
-
+	/**
+	 * @param player
+	 *            a player which has been placed on the first map.
+	 */
+	public Game(Player player) {
+		this.player = player;
 	}
 
 	/**
-	 * Gets the background map Image.
+	 * @return the name of the current map that the player is on.
 	 */
-	public Image getMapBackground() {
-		return null;
+	public String getCurrentMap() {
+		return player.getMap().getMapName();
 	}
 
 	/**
-	 * Gets an image of the entities including items, npc's
+	 * @return the player
 	 */
-	public Image getEntityForeground() {
-		return null;
-	}
-
 	public Player getPlayer() {
 		return this.player;
 	}
 
-	private void drawBullets() {
+	/**
+	 * @return HashMap of item->location
+	 */
+	public HashMap<Item, Location> getItems() {
+		return player.getMap().getItems();
 	}
 
-	private void drawMap() {
+	/**
+	 * @return List of all npc's
+	 */
+	public List<NPC> getNPCs() {
+		return player.getMap().getNPCS();
 	}
 
-	private void drawPlayer() {
+	/**
+	 * @return List of all bullets in game.
+	 */
+	public List<Bullet> getBullets() {
+		return Bullet.bulletList;
 	}
 
-	private void drawItems() {
-	}
-
-	private void drawNPCs() {
-	}
-
-	public static void main(String[] args) {
-		new Game();
-	}
 }

@@ -12,8 +12,9 @@ import java.awt.Image;
 public interface Item {
 
 	/**
-	 * @return returns an image of this item. No guareentees on the size of image returned. Is guareenteed that the
-	 *         image has a transparant background so can be drawn on top of other images.
+	 * @return returns an image of this item. No guareentees on the size of image
+	 *         returned. Is guareenteed that the image has a transparant background
+	 *         so can be drawn on top of other images.
 	 */
 	public Image getImage();
 
@@ -29,8 +30,8 @@ public interface Item {
 	public String getDescription();
 
 	/**
-	 * @return null if this item has no owner (hasn't been picked up), otherwise the backpack of the player who owns
-	 *         this item.
+	 * @return null if this item has no owner (hasn't been picked up), otherwise the
+	 *         backpack of the player who owns this item.
 	 */
 	public Backpack getPack();
 
@@ -47,4 +48,9 @@ public interface Item {
 	 *
 	 */
 	public void remove();
+
+	/**
+	 * @return the file path, atm it is just "ItemPictures/*itemName*"
+	 */
+	public String getFilePath();
 }

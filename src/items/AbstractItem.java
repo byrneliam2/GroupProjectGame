@@ -6,28 +6,27 @@ import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
+import gfx.ImageLoader;
+
 public abstract class AbstractItem implements Item {
 	protected final String name, description;
 	protected Image image;
 	protected Backpack pack;// is null if the item is not picked up
+	protected final String filePath;
 
 	/**
 	 * @param itemName
 	 * @param itemDescription
 	 * @param imageName
-	 *            the name of the image, including the file extension, the file should be located in
-	 *            itemList/ItemPictures folder (for now).
+	 *            the name of the image, including the file extension, the file
+	 *            should be located in itemList/ItemPictures folder (for now).
 	 */
 	public AbstractItem(String itemName, String itemDescription, String imageName) {
 		this.name = itemName;
 		this.description = itemDescription;
+		filePath = "ItemPictures/" + imageName;
 
-		try {
-			InputStream i = this.getClass().getResourceAsStream("ItemPictures/" + imageName);
-			image = ImageIO.read(i);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		image = ImageLoader.image("ItemPictures", imageName, true);
 	}
 
 	@Override
@@ -63,6 +62,11 @@ public abstract class AbstractItem implements Item {
 	@Override
 	public int hashCode() {
 		return name.hashCode();
+	}
+
+	@Override
+	public String getFilePath() {
+		return filePath;
 	}
 
 }

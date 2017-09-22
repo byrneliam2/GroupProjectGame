@@ -206,6 +206,12 @@ public class Player {
 		// if you can't move, throw an exception...
 	}
 
+	public void pauseGame() {
+		// flip a global static variables, make sure all timerTasks do nothing while
+		// pause is true and controller doesn't work (except for unpause button)while
+		// pause is true
+	}
+
 	/**
 	 * @param direction
 	 *            should be an angle between 0 and 2Pi. (there's a method in
