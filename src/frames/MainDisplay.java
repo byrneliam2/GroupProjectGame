@@ -34,6 +34,8 @@ public class MainDisplay extends JComponent implements Observer {
     private Map<String, Card> cards;
     private Card currentCard, lastCard;
     private AudioHandler audioHandler;
+    private KeyboardController keyboard;
+    private MouseController mouse;
 
     public MainDisplay() {
         master = new JFrame();
@@ -46,8 +48,13 @@ public class MainDisplay extends JComponent implements Observer {
         master.setResizable(false);
         master.setUndecorated(true);
         master.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        master.addKeyListener(new KeyboardController());
-        master.addMouseListener(new MouseController());
+
+        // controller setup
+        keyboard = new KeyboardController();
+        mouse = new MouseController();
+        master.addKeyListener(keyboard);
+        master.addMouseListener(mouse);
+        master.addMouseMotionListener(mouse);
 
         // this component setup
         this.setLayout(new CardLayout());
