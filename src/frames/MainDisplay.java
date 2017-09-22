@@ -102,8 +102,8 @@ public class MainDisplay extends JComponent implements Observer {
         switchScreen("menu");
 
         //TODO: AudioTesting
-        AudioTrack track = new AudioTrack(AudioTrack.AudioFile.TEST_MUSIC, AudioTrack.AudioType.MUSIC, false);
-        audioHandler.playSound(track);
+        //AudioTrack track = new AudioTrack(AudioTrack.AudioFile.TEST_MUSIC, AudioTrack.AudioType.MUSIC, false);
+        //audioHandler.playSound(track);
     }
 
     /**
