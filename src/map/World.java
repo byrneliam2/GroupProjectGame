@@ -25,6 +25,6 @@ public class World {
 	}
 
 	public Map getStartingMap() {
-		return null;
+		return World.maps.get("StartingMap");
 	}
 }
