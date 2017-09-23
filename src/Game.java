@@ -12,7 +12,7 @@ import player.Bullet;
 import player.Player;
 
 /**
- * Class for getting all the different entities in the game.
+ * Class to be used by front end for getting all the different entities in the game and controlling them.
  *
  * @author Thomas Edwards
  *
@@ -87,7 +87,7 @@ public class Game {
 	}
 
 	/**
-	 * Interact/Pickup
+	 * Interact/Pickup a close Item
 	 */
 	public void interact() {
 		// pickup/interact
@@ -113,6 +113,9 @@ public class Game {
 
 	}
 
+	/**
+	 * Saves this Game object as a file...
+	 */
 	public void saveGame() {
 
 	}
