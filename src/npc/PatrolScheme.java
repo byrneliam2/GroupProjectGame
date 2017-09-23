@@ -26,7 +26,7 @@ public class PatrolScheme implements ControlScheme {
 	 *            amount of 'map blocks' the patrol moves by.
 	 */
 	public PatrolScheme(boolean leftRight, int patrolDistance) {
-		maxProgress = patrolDistance * Map.tileWidth;
+		maxProgress = patrolDistance * Map.tileSize;
 		this.leftRight = leftRight;
 	}
 

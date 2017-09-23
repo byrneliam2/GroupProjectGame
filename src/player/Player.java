@@ -47,8 +47,8 @@ public class Player {
 		this.yLocation = yLocation;
 		rangeCircle = new Ellipse2D.Double(xLocation - (rangeCircleWidth / 2), yLocation - (rangeCircleWidth / 2),
 				rangeCircleWidth, rangeCircleWidth);
-		boundingBox = new Rectangle(xLocation - (Map.tileWidth / 2), yLocation - (Map.tileWidth / 2), Map.tileWidth,
-				Map.tileHeight);
+		boundingBox = new Rectangle(xLocation - (Map.tileSize / 2), yLocation - (Map.tileSize / 2), Map.tileSize,
+				Map.tileSize);
 	}
 
 	/**

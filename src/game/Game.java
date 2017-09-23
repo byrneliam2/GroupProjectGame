@@ -1,13 +1,14 @@
 package game;
 
+import java.awt.*;
 import java.util.HashMap;
 import java.util.List;
 
 import items.Equipable;
 import items.Item;
 import items.Usable;
-import map.Location;
 import map.Map;
+import map.World;
 import map.WorldParser;
 import npc.NPC;
 import player.Bullet;
@@ -22,13 +23,15 @@ import player.Player;
 public class Game {
 
 	private Player player;
+	private World world;
 
 	/**
 	 * @param player
 	 *            a player which has been placed on the first map.
 	 */
 	public Game() {
-		Map startingMap = WorldParser.parse("WORLD_NAME").getStartingMap();
+		world = WorldParser.parse("WORLD_NAME");
+		Map startingMap = world.getStartingMap();
 		this.player = new Player("Tom", 50, 50, startingMap);
 	}
 
@@ -49,9 +52,16 @@ public class Game {
 	}
 
 	/**
+	 * @return game world
+	 */
+	public World getWorld() {
+		return world;
+	}
+
+	/**
 	 * @return HashMap of item->location(x,y)
 	 */
-	public HashMap<Item, Location> getItems() {
+	public HashMap<Item, Point> getItems() {
 		return player.getMap().getItems();
 	}
 
