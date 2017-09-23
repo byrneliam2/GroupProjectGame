@@ -23,4 +23,8 @@ public class World {
 		this.maps = maps;
 		this.enviroments = enviroments;
 	}
+
+	public Map getStartingMap() {
+		return null;
+	}
 }
