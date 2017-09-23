@@ -47,7 +47,7 @@ public class MainDisplay extends JComponent implements Observer {
 
         master = new JFrame();
         currentCard = null;
-        cards = new HashMap<>();
+        cards = new LinkedHashMap<>();
         audioHandler = new AudioHandler();
 
         // master frame setup
@@ -93,13 +93,11 @@ public class MainDisplay extends JComponent implements Observer {
         cards.put("settings", new SettingsCard("settings"));
 
         // get model details and construct enough map cards to fit
-        for (int i = 0; i < World.maps.size(); i++) { // TODO replace 9 with model value: for each map in world...
-            String name = "level" + i;
-            cards.put(name, new MapCard(name));
-            // set up each level
-            MapCard m = (MapCard) cards.get(name);
-            // TODO add map setup
-            //m.setBackground(
+        for (Map.Entry m : World.maps.entrySet()) {
+            String name = (String) m.getKey();
+            map.Map map = (map.Map) m.getValue();
+            MapCard mcard;
+            cards.put(name, mcard = new MapCard(name, map));
         }
 
         // setup action listeners in each card
@@ -107,10 +105,7 @@ public class MainDisplay extends JComponent implements Observer {
         for (Card c : cards.values()) c.setComponentActions(this);
 
         // add all
-        this.add(cards.get("menu"), "menu");
-        this.add(cards.get("pause"), "pause");
-        this.add(cards.get("settings"), "settings");
-        for (int i = 0; i < 9; i++) this.add(cards.get("level" + i), "level" + i);
+        cards.forEach((str, card) -> this.add(card, str));
         master.add(this);
 
         // finally, make the menu screen visible

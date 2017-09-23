@@ -7,8 +7,9 @@ package frames.cards;
  */
 
 import frames.MainDisplay;
+import gfx.ImageLoader;
 
-import java.util.List;
+import java.util.*;
 
 /**
  * The MapCard displays the state of a Map, including all Entities on screen.
@@ -18,22 +19,29 @@ public class MapCard extends Card {
     // TODO console screen for dialogue, part of this or main?
 
     private List<Entity> entities;
+    private map.Map map;
 
-    public MapCard(String n) {
+    public MapCard(String n, map.Map map) {
         super(n);
+        this.map = map;
+
+        setBackground(ImageLoader.image("maps", map.getBackgroundLayer(), false));
     }
 
     /**
      * Add a new {@link Card.Entity} to the current screen.
      * @param e entity
      */
-    public void addEntity(Entity e) {
+    private void addEntity(Entity e) {
         entities.add(e);
     }
 
     @Override
     protected void doSetup() {
-
+        panel.setLayout(null);
+        map.getItems().forEach((item, point) -> {
+            addEntity(new Entity(ImageLoader.image("items", item.getFilePath(), true), point));
+        });
     }
 
     @Override

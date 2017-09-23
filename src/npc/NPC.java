@@ -20,7 +20,7 @@ public class NPC extends Player {
 	protected TimerTask npctask;
 
 	public NPC(String name, int x, int y, Player mainPlayer, ControlScheme cs) {
-		super(name, x, y);
+		super(name, x, y, null);
 		this.p = mainPlayer;
 		this.control = cs;
 		npctask = new TimerTask() {

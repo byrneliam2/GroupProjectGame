@@ -31,8 +31,7 @@ public class Game {
 	 */
 	public Game() {
 		world = WorldParser.parse("WORLD_NAME");
-		Map startingMap = world.getStartingMap();
-		this.player = new Player("Tom", 50, 50, startingMap);
+		this.player = new Player("Tom", 50, 50, world.getStartingMap());
 	}
 
 	/******************* View Methods **********************/

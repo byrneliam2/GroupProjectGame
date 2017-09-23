@@ -9,8 +9,9 @@ package frames.cards;
 import frames.MainDisplay;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -34,7 +35,7 @@ public abstract class Card extends JPanel {
     Card(String n) {
         name = n;
         panel = new JLabel();
-        components = new HashMap<>();
+        components = new LinkedHashMap<>();
         add(panel);
         doSetup();
     }
@@ -102,13 +103,19 @@ public abstract class Card extends JPanel {
     class Entity {
 
         private BufferedImage image;
+        private Point location;
 
-        public Entity(BufferedImage image) {
+        public Entity(BufferedImage image, Point location) {
             this.image = image;
+            this.location = location;
         }
 
         public BufferedImage getImage() {
             return image;
+        }
+
+        public Point getLocation() {
+            return location;
         }
     }
 }
