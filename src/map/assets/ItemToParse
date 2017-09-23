@@ -4,9 +4,9 @@
 Example:
 
 HealthPot
-5,9
+5 9
 HealthPot
-10,2
+10 2
 
 
 
@@ -22,4 +22,4 @@ Example:
 
 Yucky Bug
 PatrolScheme, leftRight, 5
-1,1
+1 1
