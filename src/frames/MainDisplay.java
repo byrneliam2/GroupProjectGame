@@ -7,12 +7,11 @@ package frames;
  */
 
 import audio.AudioHandler;
-import audio.AudioTrack;
+import audio.tracks.*;
 import controller.KeyboardController;
 import controller.MouseController;
 import frames.cards.Card;
 import frames.cards.*;
-import map.World;
 
 import javax.swing.*;
 import javax.swing.Timer;
@@ -111,8 +110,7 @@ public class MainDisplay extends JComponent implements Observer {
         switchScreen("menu");
 
         //TODO: AudioTesting
-        //AudioTrack track = new AudioTrack(AudioTrack.AudioFile.TEST_MUSIC, AudioTrack.AudioType.MUSIC, false);
-        //audioHandler.playSound(track);
+        //audioHandler.playSound(MusicTrack.TEST_MUSIC);
     }
 
     /**

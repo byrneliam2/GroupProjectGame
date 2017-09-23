@@ -6,6 +6,7 @@ package frames.cards;
  * 300338518
  */
 
+import audio.tracks.*;
 import frames.MainDisplay;
 import gfx.GraphicsUtilities;
 import gfx.ImageLoader;
@@ -50,7 +51,7 @@ public class MenuCard extends Card {
             final JButton btn = (JButton) m.getValue();
             btn.addActionListener(e -> {
                 //TODO
-                //dsp.getAudioHandler().playSound(new AudioTrack(AudioTrack.AudioFile.CLICK, AudioTrack.AudioType.EFFECT, false));
+                //dsp.getAudioHandler().playSound(SoundTrack.CLICK);
                 switch (str) {
                     case "new":
                         dsp.update(null, "pause");

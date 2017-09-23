@@ -5,6 +5,8 @@ package audio;
  *  SWEN 222 Group Project
  */
 
+import audio.tracks.Track;
+
 import javax.sound.sampled.*;
 import java.io.IOException;
 import java.util.ArrayDeque;
@@ -16,65 +18,42 @@ import java.util.Queue;
  * sound effects, without stalling the main game Thread when a Sound-File is Requested.
  */
 public class AudioHandler {
-    private AudioTrack currentSong; //REPLACE WITH THREAD LINK WHEN READY
     private String assetsFolder;
-    private Queue<AudioTrack> musicQueue;
 
     public AudioHandler(){
         this.assetsFolder = "../assets/sounds/";
-        this.musicQueue = new ArrayDeque<>();
+        //this.musicQueue = new ArrayDeque<>();
     }
 
-    /**
-     * Adds an AudioTrack to be played, forces all previous song to stop playing.
-     * Includes a graceful transition to the new forced AudioTrack
-     * @param music background music to forcefully play
-     */
-    public void forceMusic(AudioTrack music){
-        //TODO
-        checkTrack(music);
-        this.currentSong = music;
-    }
 
     /**
-     * Adds an AudioTrack to the Queue, if the Queue was empty, begin playing music
-     * @param music background music to queue
+     * When called, this method will create a new Clip provided by the AudioSystem Class.
+     * @return Generated Clip Object.
+     * @throws LineUnavailableException Thrown if Clip cannot be generated.
      */
-    public void queueMusic(AudioTrack music){
-        //TODO EMPTY CHECKS
-        checkTrack(music);
-        this.musicQueue.offer(music);
+    private Clip generateClip() throws LineUnavailableException{
+        Clip clip = AudioSystem.getClip();
+        clip.addLineListener(e -> {
+            if(e.getType().equals(LineEvent.Type.STOP)) e.getLine().close();
+        });
+        return clip;
     }
 
-    /**
-     * Check if a SoundFile is suitable to be played through the AudioHandler.
-     * @param track AudioTrack file to be checked before running
-     * @throws AudioException When a AudioTrack is unsuitable to play
-     */
-    private void checkTrack(AudioTrack track) throws AudioException{
-        //ON BAD CASE throw new AudioException("SoundFile failed Initial Loading Checks");
-    }
-
-    /**
-     * Initiates a new Concurrent Process, this process will close after playing.
-     * @param track sound-track to play
-     */
-    public void playSound(AudioTrack track){
-        String path = String.format("%s%s", assetsFolder, track.getSoundFile());
-        //TODO
+    public void playSound(Track track){
         try {
-            checkTrack(track);
-            Clip clip = AudioSystem.getClip();
+            String path = String.format("%s%s", assetsFolder, track.getSoundFile());
+            Clip clip = generateClip();
+
             AudioInputStream inputStream = AudioSystem.getAudioInputStream(this.getClass().getResourceAsStream(path));
             clip.open(inputStream);
+
             FloatControl volume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-            volume.setValue(-20.0f);
+            volume.setValue(-20.0f);   // Requires fine tuning*/
+
             clip.start();
         } catch (LineUnavailableException | AudioException | UnsupportedAudioFileException | IOException e) {
             e.printStackTrace();
         }
     }
-
-
 }
 
