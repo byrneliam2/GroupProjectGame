@@ -40,7 +40,7 @@ public class Player {
 	 * @param xLocation
 	 * @param yLocation
 	 */
-	public Player(String name, int xLocation, int yLocation) {
+	public Player(String name, int xLocation, int yLocation, Map startingMap) {
 		this.name = name;
 		this.health = 5;
 		this.xLocation = xLocation;
