@@ -12,6 +12,7 @@ import controller.KeyboardController;
 import controller.MouseController;
 import frames.cards.Card;
 import frames.cards.*;
+import game.Game;
 
 import javax.swing.*;
 import javax.swing.Timer;
@@ -30,14 +31,19 @@ public class MainDisplay extends JComponent implements Observer {
     private JFrame master;
     private Timer timer;
 
-    /* Other attributes */
+    /* Other UI attributes */
     private Map<String, Card> cards;
     private Card currentCard, lastCard;
     private AudioHandler audioHandler;
     private KeyboardController keyboard;
     private MouseController mouse;
 
+    /* game.Game attributes */
+    private Game game;
+
     public MainDisplay() {
+        game = new Game();
+
         master = new JFrame();
         currentCard = null;
         cards = new HashMap<>();

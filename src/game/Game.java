@@ -1,3 +1,5 @@
+package game;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -114,7 +116,7 @@ public class Game {
 	}
 
 	/**
-	 * Saves this Game object as a file...
+	 * Saves this game.Game object as a file...
 	 */
 	public void saveGame() {
 
