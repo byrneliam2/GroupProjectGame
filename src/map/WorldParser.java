@@ -1,5 +1,10 @@
 package map;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Scanner;
+
 /**
  * This class is responsible for reading a text file that contains the world of
  * the game. This includes reading various map names. This class can be
@@ -19,6 +24,62 @@ public class WorldParser {
 	 * This method reads a world text file and returns a new world.
 	 */
 	public static World parse(String worldFileName) {
+		HashMap<String, Map> maps = new HashMap<String, Map>();
+		HashMap<String, Enviroment> enviroment = new HashMap<String, Enviroment>();
+
+		String fileLocation = "../assets/maps/" + worldFileName;
+		Scanner scan = null;
+		File f = null;
+
+		try {
+			f = new File(fileLocation);
+			scan = new Scanner(f);
+			if (!scan.hasNext()) {
+				throw new ParseException("World file is blank");
+			}
+			while (scan.hasNextLine()) {
+				String line = scan.next();
+				if (line.equals("enviroment")) {
+
+				} else {
+					String nMap = "../assets/maps/" + line;
+					maps.put(line, MapParser.parse(nMap));
+				}
+
+			}
+
+			World n = new World(maps, enviroment);
+			return n;
+
+		} catch (IOException | ParseException e) {
+
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+
+		} finally {
+
+			if (scan != null) {
+				scan.close();
+			}
+			if (f != null) {
+				f.exists();
+			}
+
+		}
 		return null;
+	}
+
+	public String require(String token, Scanner scan) throws ParseException {
+		if (scan.hasNext(token)) {
+			return scan.next();
+		} else {
+			throw new ParseException("Was expecting the token " + token + "but instead received " + scan.next());
+		}
+	}
+
+	public void requireSomething(Scanner scan) throws ParseException {
+		if (!scan.hasNext()) {
+			throw new ParseException("Was expecting another token but there was none");
+		}
 	}
 }

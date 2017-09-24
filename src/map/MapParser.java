@@ -84,7 +84,7 @@ public class MapParser {
 		}
 	}
 
-	public static String require(String token, Scanner scan) throws ParseException {
+	public String require(String token, Scanner scan) throws ParseException {
 		if (scan.hasNext(token)) {
 			return scan.next();
 		} else {
@@ -92,7 +92,7 @@ public class MapParser {
 		}
 	}
 
-	public static void requireSomething(Scanner scan) throws ParseException {
+	public void requireSomething(Scanner scan) throws ParseException {
 		if (!scan.hasNext()) {
 			throw new ParseException("Was expecting another token but there was none");
 		}
