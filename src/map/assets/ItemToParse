@@ -20,6 +20,11 @@ For NPC's:
 
 Example:
 
+NPC
 Yucky Bug
-PatrolScheme, leftRight, 5
+PatrolScheme true 5
 1 1
+
+Door
+mapName 4 true
+3 4

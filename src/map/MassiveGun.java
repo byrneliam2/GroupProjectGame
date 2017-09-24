@@ -7,16 +7,17 @@ import java.util.Scanner;
 import items.Item;
 import items.itemList.HealthPot;
 
-public class HealthPotion {
-	public HealthPotion() {
+public class MassiveGun {
+	public MassiveGun() {
 
 	}
 
 	public void parse(Scanner scan, HashMap<Item, Point> items) {
-		Item hp = new HealthPot();
+		Item gun = (Item) new MassiveGun();
 		int x = scan.nextInt();
 		int y = scan.nextInt();
-		Point hpLoc = new Point(x, y);
-		items.put(hp, hpLoc);
+		Point gunLoc = new Point(x, y);
+		items.put(gun, gunLoc);
 	}
+
 }

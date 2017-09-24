@@ -5,18 +5,17 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 import items.Item;
-import items.itemList.HealthPot;
 
-public class HealthPotion {
-	public HealthPotion() {
+public class RustyArmor {
+	public RustyArmor() {
 
 	}
 
 	public void parse(Scanner scan, HashMap<Item, Point> items) {
-		Item hp = new HealthPot();
+		Item RustyA = (Item) new RustyArmor();
 		int x = scan.nextInt();
 		int y = scan.nextInt();
-		Point hpLoc = new Point(x, y);
-		items.put(hp, hpLoc);
+		Point RustyAP = new Point(x, y);
+		items.put(RustyA, RustyAP);
 	}
 }
