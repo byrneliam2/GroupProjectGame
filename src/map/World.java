@@ -20,8 +20,8 @@ public class World {
 	public static HashMap<String, Enviroment> enviroments;
 
 	public World(HashMap<String, Map> maps, HashMap<String, Enviroment> enviroments) {
-		this.maps = maps;
-		this.enviroments = enviroments;
+		World.maps = maps;
+		World.enviroments = enviroments;
 	}
 
 	public Map getStartingMap() {

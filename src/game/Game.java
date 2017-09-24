@@ -26,10 +26,9 @@ public class Game {
 	public static boolean GAME_PAUSED = false;
 
 	private Player player;
-	private World world;
 
 	public Game() {
-		world = WorldParser.parse("WORLD_NAME");
+		World world = WorldParser.parse("WORLD_NAME");
 		this.player = new Player("Tom", 50, 50, world.getStartingMap());
 	}
 
@@ -47,13 +46,6 @@ public class Game {
 	 */
 	public Player getPlayer() {
 		return this.player;
-	}
-
-	/**
-	 * @return game world
-	 */
-	public World getWorld() {
-		return world;
 	}
 
 	/**
@@ -92,14 +84,6 @@ public class Game {
 	 */
 	public boolean movePlayer(int dx, int dy) throws InvalidPlayerExceptions {
 		return player.move(dx, dy);
-	}
-
-	public void pauseGame() {
-		GAME_PAUSED = true;
-	}
-
-	public void unPauseGame() {
-		GAME_PAUSED = false;
 	}
 
 	/**
@@ -144,10 +128,19 @@ public class Game {
 		player.shoot(direction);
 	}
 
+	public void pauseGame() {
+		GAME_PAUSED = true;
+	}
+
+	public void unPauseGame() {
+		GAME_PAUSED = false;
+	}
+
 	/**
 	 * Saves this game.Game object as a file...
 	 */
 	public void saveGame() {
 
 	}
+
 }
