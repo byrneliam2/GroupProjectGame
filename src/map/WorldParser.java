@@ -35,7 +35,7 @@ public class WorldParser {
 			f = new File(fileLocation);
 			scan = new Scanner(f);
 			if (!scan.hasNext()) {
-				throw new ParseException("World file is blank");
+				throw new ParseException("World file is blank 	");
 			}
 			while (scan.hasNextLine()) {
 				String line = scan.next();
