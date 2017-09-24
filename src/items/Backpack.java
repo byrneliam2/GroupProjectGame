@@ -158,4 +158,11 @@ public class Backpack {
 		return false;
 	}
 
+	public List<Item> getInventory() {
+		return this.inventory;
+	}
+
+	public List<Equipable> getEquippedItems() {
+		return this.equippedItems;
+	}
 }

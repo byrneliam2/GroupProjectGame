@@ -12,6 +12,7 @@ import map.World;
 import map.WorldParser;
 import npc.NPC;
 import player.Bullet;
+import player.InvalidPlayerExceptions;
 import player.Player;
 
 /**
@@ -22,13 +23,11 @@ import player.Player;
  */
 public class Game {
 
+	public static boolean GAME_PAUSED = false;
+
 	private Player player;
 	private World world;
 
-	/**
-	 * @param player
-	 *            a player which has been placed on the first map.
-	 */
 	public Game() {
 		world = WorldParser.parse("WORLD_NAME");
 		this.player = new Player("Tom", 50, 50, world.getStartingMap());
@@ -58,14 +57,14 @@ public class Game {
 	}
 
 	/**
-	 * @return HashMap of item->location(x,y)
+	 * @return HashMap of item->Point(x,y)
 	 */
 	public HashMap<Item, Point> getItems() {
 		return player.getMap().getItems();
 	}
 
 	/**
-	 * @return List of all npc's
+	 * @return List of all npc's, each npc has an x,y location similar to the player.
 	 */
 	public List<NPC> getNPCs() {
 		return player.getMap().getNPCS();
@@ -78,50 +77,71 @@ public class Game {
 		return Bullet.bulletList;
 	}
 
+	public List<Item> getInventory() {
+		return this.player.getBackpack().getInventory();
+	}
+
+	public List<Equipable> getEquippedItems() {
+		return this.player.getBackpack().getEquippedItems();
+	}
+
 	/******************* Controller Methods ************************/
 
 	/**
-	 * @param dx
-	 * @param dy
-	 * @return true if the player moved through a door (and thus the map needs to be updated).
+	 * @see player.Player#move(int dx, int dy)
 	 */
-	public boolean movePlayer(int dx, int dy) {
-		return false;
+	public boolean movePlayer(int dx, int dy) throws InvalidPlayerExceptions {
+		return player.move(dx, dy);
 	}
 
 	public void pauseGame() {
-
+		GAME_PAUSED = true;
 	}
 
 	public void unPauseGame() {
-
+		GAME_PAUSED = false;
 	}
 
 	/**
-	 * Interact/Pickup a close Item
+	 * @see player.Player#useItem()
 	 */
-	public void interact() {
-		// pickup/interact
+	public void interact() throws InvalidPlayerExceptions {
+		player.pickUpItem();
 	}
 
-	public void dropItem(Item i) {
-
+	/**
+	 * @see player.Player#removeItem(Item i)
+	 */
+	public void dropItem(Item i) throws InvalidPlayerExceptions {
+		player.removeItem(i);
 	}
 
-	public void equipItem(Equipable i) {
-
+	/**
+	 * @see player.Player#equipItem(Equipable i)
+	 */
+	public void equipItem(Equipable i) throws InvalidPlayerExceptions {
+		player.equipItem(i);
 	}
 
-	public void unequipItem(Equipable i) {
-
+	/**
+	 * @see player.Player#unequipItem(Equipable i)
+	 */
+	public void unequipItem(Equipable i) throws InvalidPlayerExceptions {
+		player.unequipItem(i);
 	}
 
-	public void useItem(Usable u) {
-
+	/**
+	 * @see player.Player#useItem(Usable u)
+	 */
+	public void useItem(Usable u) throws InvalidPlayerExceptions {
+		player.useItem(u);
 	}
 
-	public void shoot(double direction) {
-
+	/**
+	 * @see player.Player#shoot(double direction)
+	 */
+	public void shoot(double direction) throws InvalidPlayerExceptions {
+		player.shoot(direction);
 	}
 
 	/**

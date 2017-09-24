@@ -27,7 +27,7 @@ public class Player {
 	private Backpack itemsList = new Backpack(this);
 	private double fireRate = 1;
 	private int maxHealth = 5;
-	private int health;
+	private int health = 5;
 	private int xLocation;
 	private int yLocation;
 	private Map map;// the map which the player is currently located on.
@@ -42,7 +42,6 @@ public class Player {
 	 */
 	public Player(String name, int xLocation, int yLocation, Map startingMap) {
 		this.name = name;
-		this.health = 5;
 		this.xLocation = xLocation;
 		this.yLocation = yLocation;
 		rangeCircle = new Ellipse2D.Double(xLocation - (rangeCircleWidth / 2), yLocation - (rangeCircleWidth / 2),
@@ -192,7 +191,13 @@ public class Player {
 		return false;// if not possible
 	}
 
-	public void move(int dx, int dy) throws InvalidPlayerExceptions {
+	/**
+	 * @param dx
+	 * @param dy
+	 * @return true if the player moved through a door, false otherwise.
+	 * @throws InvalidPlayerExceptions
+	 */
+	public boolean move(int dx, int dy) throws InvalidPlayerExceptions {
 		// (Use the canMove() function from map class.)
 		// Check if you can make the move and if we can, then do the following:
 
@@ -204,6 +209,7 @@ public class Player {
 		// map.
 
 		// if you can't move, throw an exception...
+		return false;
 	}
 
 	public void pauseGame() {
@@ -217,6 +223,8 @@ public class Player {
 	 *            should be an angle between 0 and 2Pi. (there's a method in
 	 *            npc/NPC/getAngleToPlayer() which you can copy/use to calculate the
 	 *            angle from player to mouse if needed).
+	 * @throws InvalidPlayerExceptions
+	 *             if your gun is not ready to be fired yet.
 	 */
 	public void shoot(double direction) throws InvalidPlayerExceptions {
 		// make new bullet and add it to bullet list in the bullet class.
@@ -266,6 +274,10 @@ public class Player {
 
 	public int getMaxHealth() {
 		return maxHealth;
+	}
+
+	public Backpack getBackpack() {
+		return this.itemsList;
 	}
 
 	public void setMaxHealth(int max) {

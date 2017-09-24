@@ -42,4 +42,9 @@ public class DoorItem extends AbstractItem {
 		return locked;
 	}
 
+	@Override
+	public int hashCode() {
+		return doorID;
+	}
+
 }
