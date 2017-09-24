@@ -9,6 +9,7 @@ package frames.cards;
 import frames.MainDisplay;
 import gfx.ImageLoader;
 
+import javax.swing.*;
 import java.util.*;
 
 /**
@@ -16,14 +17,18 @@ import java.util.*;
  */
 public class MapCard extends Card {
 
-    // TODO console screen for dialogue, part of this or main?
+    /* Swing attributes */
+    private JTextArea console;
 
+    /* Other attributes */
     private List<Entity> entities;
     private map.Map map;
 
     public MapCard(String n, map.Map map) {
         super(n);
         this.map = map;
+
+        this.console = new JTextArea(1, 1);
 
         setBackground(ImageLoader.image("maps", map.getBackgroundLayer(), false));
     }
@@ -45,12 +50,12 @@ public class MapCard extends Card {
     }
 
     @Override
-    public void setComponentActions(MainDisplay dsp) {
-
-    }
+    public void setComponentActions(MainDisplay dsp) {}
 
     @Override
     public void redraw() {
-
+        for (Entity e : entities) {
+            // draw entity at e.getLocation()
+        }
     }
 }

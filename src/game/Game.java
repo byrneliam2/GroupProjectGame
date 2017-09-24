@@ -26,9 +26,10 @@ public class Game {
 	public static boolean GAME_PAUSED = false;
 
 	private Player player;
+	private World world;
 
 	public Game() {
-		World world = WorldParser.parse("WORLD_NAME");
+		world = WorldParser.parse("WORLD_NAME");
 		this.player = new Player("Tom", 50, 50, world.getStartingMap());
 	}
 
@@ -46,6 +47,13 @@ public class Game {
 	 */
 	public Player getPlayer() {
 		return this.player;
+	}
+
+	/**
+	 * @return game world
+	 */
+	public World getWorld() {
+		return world;
 	}
 
 	/**

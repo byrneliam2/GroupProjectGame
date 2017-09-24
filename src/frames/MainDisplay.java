@@ -44,6 +44,7 @@ public class MainDisplay extends JComponent implements Observer {
 
     public MainDisplay() {
         game = new Game();
+        game.pauseGame();
 
         master = new JFrame();
         currentCard = null;
@@ -96,8 +97,7 @@ public class MainDisplay extends JComponent implements Observer {
         for (Map.Entry m : World.maps.entrySet()) {
             String name = (String) m.getKey();
             map.Map map = (map.Map) m.getValue();
-            MapCard mcard;
-            cards.put(name, mcard = new MapCard(name, map));
+            cards.put(name, new MapCard(name, map));
         }
 
         // setup action listeners in each card
@@ -139,6 +139,15 @@ public class MainDisplay extends JComponent implements Observer {
         currentCard = cards.get(key);
         // force a redraw on the new card
         redraw();
+    }
+
+    /**
+     * Start the game timer.
+     */
+    public void start() {
+        game.unPauseGame();
+        switchScreen(game.getWorld().getStartingMap().getMapName());
+        (timer = new Timer(16, (e) -> redraw())).start();
     }
 
     /**
