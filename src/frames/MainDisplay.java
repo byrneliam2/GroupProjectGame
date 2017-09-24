@@ -165,6 +165,13 @@ public class MainDisplay extends JComponent implements Observer {
     }
 
     /**
+     * Destroy the display and its components.
+     */
+    public void dispose() {
+        master.dispose();
+    }
+
+    /**
      * Return the display's {@link AudioHandler}. This is used by the cards to
      * trigger sound effects.
      */

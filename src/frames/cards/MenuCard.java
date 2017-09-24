@@ -54,7 +54,7 @@ public class MenuCard extends Card {
                 //dsp.getAudioHandler().playSound(SoundTrack.CLICK);
                 switch (str) {
                     case "new":
-                        dsp.update(null, "pause");
+                        dsp.start();
                         break;
                     case "load":
                         JFileChooser fileChooser = new JFileChooser();
