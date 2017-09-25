@@ -49,8 +49,8 @@ public class Map {
 	// 2D array of all the images that make up the collision layer
 	private ArrayList<ArrayList<Integer>> collisionLayer;
 
-	// 2D array of all the images that make up the enviromental layer
-	private ArrayList<ArrayList<BufferedImage>> enviromentalLayer;
+	// 2D array of all the images that make up the environmental layer
+	private ArrayList<ArrayList<BufferedImage>> environmentalLayer;
 
 	// The current player
 	private Player currentPlayer;
