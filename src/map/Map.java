@@ -69,8 +69,8 @@ public class Map {
 		this.Doors = doors;
 		BufferedImage colLayer = this.loadImage(this.name, "Collision");
 		this.collisionLayer = this.loadColLayers(colLayer);
-		//BufferedImage enviromentLayer = this.loadImage(this.name, "collisionLayer");
-		//this.enviromentalLayer = this.breakUpImageIntoTiles(enviromentLayer);
+		// BufferedImage enviromentLayer = this.loadImage(this.name, "collisionLayer");
+		// this.enviromentalLayer = this.breakUpImageIntoTiles(enviromentLayer);
 	}
 
 	/**
@@ -85,8 +85,7 @@ public class Map {
 	private BufferedImage loadImage(String mapName, String layer) {
 		BufferedImage img = null;
 		try {
-			System.out.println("assets/mapImages/" + mapName + layer);
-			img = ImageIO.read(Map.class.getResource("assets/mapImages/" + mapName + layer+".png"));
+			img = ImageIO.read(Map.class.getResource("assets/mapImages/" + mapName + layer + ".png"));
 			if (img.getHeight() % 32 > 0 || img.getWidth() % 32 > 0) {
 				throw new BadMapImageException(
 						"The image you are trying to load does not have the correct Dimensions, Dimensions should be a factor of 32, the Global tile size.");
@@ -107,10 +106,10 @@ public class Map {
 	 * @return 2D ArrayList<Integer>
 	 */
 	private ArrayList<ArrayList<Integer>> loadColLayers(BufferedImage colLayerUnbroken) {
+		this.width = colLayerUnbroken.getWidth() / 32;
+		this.height = colLayerUnbroken.getHeight() / 32;
 		ArrayList<ArrayList<BufferedImage>> colLayer = this.breakUpImageIntoTiles(colLayerUnbroken);
 
-		this.width = colLayer.get(0).size();
-		this.height = colLayer.size();
 		ArrayList<ArrayList<Integer>> collLayer = new ArrayList<ArrayList<Integer>>();
 		for (int i = 0; i < this.height; i++) {
 			collLayer.add(new ArrayList<Integer>(width));
@@ -137,13 +136,15 @@ public class Map {
 	 * @return A 2D array of BufferedImages
 	 */
 	private ArrayList<ArrayList<BufferedImage>> breakUpImageIntoTiles(BufferedImage colLayer) {
+		int widthUnbroken = colLayer.getWidth();
+		int heightUnbroken = colLayer.getHeight();
 		ArrayList<ArrayList<BufferedImage>> layer = new ArrayList<ArrayList<BufferedImage>>();
-		for (int initY = 0; initY < this.height; initY += 32) {
+		for (int initY = 0; initY < heightUnbroken; initY += 32) {
 			layer.add(new ArrayList<BufferedImage>());
 		}
 
-		for (int y = 0; y < this.height; y += 32) {
-			for (int x = 0; x < this.width; x += 32) {
+		for (int y = 0; y < heightUnbroken; y += 32) {
+			for (int x = 0; x < widthUnbroken; x += 32) {
 				BufferedImage newTile = colLayer.getSubimage(x, y, Map.tileSize, Map.tileSize);
 				int posY = y / 32;
 				layer.get(posY).add(newTile);
