@@ -13,10 +13,8 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
 
 import static junit.framework.TestCase.fail;
-import static org.junit.Assert.assertArrayEquals;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ImageTests {

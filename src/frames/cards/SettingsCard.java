@@ -6,6 +6,7 @@ package frames.cards;
  * 300338518
  */
 
+import audio.tracks.SoundTrack;
 import frames.MainDisplay;
 import gfx.GraphicsUtilities;
 import gfx.ImageLoader;
@@ -45,7 +46,7 @@ public class SettingsCard extends Card {
             final String str = (String) m.getKey();
             final JButton btn = (JButton) m.getValue();
             btn.addActionListener(e -> {
-                //dsp.getAudioHandler().playEffect();
+                dsp.getAudioHandler().playSound(SoundTrack.CLICK);
                 switch (str) {
                     case "back":
                         // switch to last screen

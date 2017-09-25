@@ -38,12 +38,11 @@ public class ImageUtilities {
      * @return scaled copy of img
      */
     public static BufferedImage scale(BufferedImage img, int sw, int sh) {
-        int imageType = BufferedImage.TYPE_INT_ARGB;
-        BufferedImage scaledBI = new BufferedImage(sw, sh, imageType);
-        Graphics2D g = scaledBI.createGraphics();
+        BufferedImage scaled = new BufferedImage(sw, sh, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = scaled.createGraphics();
         g.setComposite(AlphaComposite.Src);
         g.drawImage(img, 0, 0, sw, sh, null);
         g.dispose();
-        return scaledBI;
+        return scaled;
     }
 }

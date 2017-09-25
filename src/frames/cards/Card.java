@@ -71,8 +71,7 @@ public abstract class Card extends JPanel {
 
     /**
      * Perform first time setup for this Card. This will usually involve
-     * setting up whatever components this screen holds. MapCards will likely
-     * use this method to set up their Entity list instead. If the
+     * setting up whatever components this screen holds. If the
      * added components are interactive Swing components, then they will need to
      * be properly assigned by using the {@link #setComponentActions(MainDisplay)}
      * method from the display that holds the card.

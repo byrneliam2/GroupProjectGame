@@ -51,8 +51,7 @@ public class MenuCard extends Card {
             final String str = (String) m.getKey();
             final JButton btn = (JButton) m.getValue();
             btn.addActionListener(e -> {
-                //TODO
-                //dsp.getAudioHandler().playSound(SoundTrack.CLICK);
+                dsp.getAudioHandler().playSound(SoundTrack.CLICK);
                 switch (str) {
                     case "new":
                         dsp.start();

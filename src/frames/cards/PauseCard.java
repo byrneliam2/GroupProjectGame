@@ -1,5 +1,6 @@
 package frames.cards;
 
+import audio.tracks.SoundTrack;
 import frames.MainDisplay;
 import gfx.GraphicsUtilities;
 import gfx.ImageLoader;
@@ -34,7 +35,7 @@ public class PauseCard extends Card {
             final String str = (String) m.getKey();
             final JButton btn = (JButton) m.getValue();
             btn.addActionListener(e -> {
-                //dsp.getAudioHandler().playEffect();
+                dsp.getAudioHandler().playSound(SoundTrack.CLICK);
                 JFileChooser fileChooser = new JFileChooser();
                 fileChooser.setCurrentDirectory(new File(".."));
                 fileChooser.setDialogTitle("Select a <ext> file to load");

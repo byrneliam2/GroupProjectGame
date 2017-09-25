@@ -35,9 +35,10 @@ public class MainDisplay extends JComponent implements Observer {
     private Map<String, Card> cards;
     private Card currentCard, lastCard;
     private AudioHandler audioHandler;
+    private Controller mouse;
     private Controller keyboard;
 
-    /* game.Game attributes */
+    /* Game attributes */
     private Game game;
 
     public MainDisplay() {
@@ -113,7 +114,8 @@ public class MainDisplay extends JComponent implements Observer {
     }
 
     /**
-     * Set up some Swing UI properties; override default values of UIManager.
+     * Set up some Swing UI properties (override default values of UIManager) to make
+     * stock elements look more fitting (optional.)
      */
     private void doUISetup() {
         // set the look of option panes

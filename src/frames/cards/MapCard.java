@@ -34,6 +34,20 @@ public class MapCard extends Card {
         this.console = new JTextArea(1, 1);
 
         setBackground(ImageLoader.image("MapImages", map.getBackgroundLayer(), true));
+
+        addAllEntities();
+    }
+
+    /**
+     * Add all entities to the map. This is done outside of the setup method since the map is not constructed
+     * beforehand and also because this setup does not relate to Swing components.
+     */
+    private void addAllEntities() {
+        // add all items
+        map.getItems().forEach((item, point) ->
+                addEntity(new Entity(
+                        ImageLoader.image("ItemPictures", item.getImageFileName(), true),
+                        point)));
     }
 
     /**
@@ -47,10 +61,6 @@ public class MapCard extends Card {
     @Override
     protected void doSetup() {
         panel.setLayout(new FlowLayout());
-        /*map.getItems().forEach((item, point) ->
-                addEntity(new Entity(
-                        ImageLoader.image("ItemPictures", item.getImageFileName(), true),
-                        point)));*/
     }
 
     @Override
