@@ -7,7 +7,7 @@ import player.Player;
 public class ShinyArmor extends AbstractItem implements Equipable {
 
 	public ShinyArmor() {
-		super("Shiny Armour", "Strong and shining, this armour provides +3 max health", "shinyArmor.png");
+		super("Shiny Armour", "Strong and shining, this armour provides +3 max health", "shinyArmor");
 	}
 
 	@Override

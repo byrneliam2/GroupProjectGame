@@ -9,7 +9,7 @@ public class MassiveGun extends AbstractItem implements Equipable {
 	public MassiveGun() {
 		super("Massive Gun",
 				"An incredibly large gun that plows through monsters, sets fire rate to two shots per second",
-				"massiveGun.png");
+				"massiveGun");
 	}
 
 	@Override

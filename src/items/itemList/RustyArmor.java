@@ -7,7 +7,7 @@ import player.Player;
 public class RustyArmor extends AbstractItem implements Equipable {
 
 	public RustyArmor() {
-		super("Rusty Armour", "Worn and beaten, this armour provides +1 health", "rustyArmor.png");
+		super("Rusty Armour", "Worn and beaten, this armour provides +1 health", "rustyArmor");
 	}
 
 	@Override
