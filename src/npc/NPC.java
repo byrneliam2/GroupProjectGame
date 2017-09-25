@@ -19,6 +19,17 @@ public class NPC extends Player {
 	private ControlScheme control;
 	protected TimerTask npctask;
 
+	/**
+	 * @param name
+	 * @param x
+	 *            centre pixel x Location
+	 * @param y
+	 *            centre pixel y location
+	 * @param health
+	 * @param mainPlayer
+	 * @param cs
+	 *            the control scheme of the NPC to use.
+	 */
 	public NPC(String name, int x, int y, int health, Player mainPlayer, ControlScheme cs) {
 		super(name, x, y);
 		this.p = mainPlayer;

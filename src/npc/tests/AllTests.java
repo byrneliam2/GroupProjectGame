@@ -11,7 +11,7 @@ import npc.NPC;
 import npc.PatrolScheme;
 import player.Player;
 
-public class allTests {
+public class AllTests {
 
 	private ArrayList<NPC> npcs;
 	private Player p;
@@ -22,7 +22,7 @@ public class allTests {
 		setup();
 		NPC testNPC = new NPC("bug", 5, 10, 1, p, new PatrolScheme(true, 5));
 		npcs.add(testNPC);
-		int numberOfMoves = 3;
+		int numberOfMoves = 3;// private int the number of moves that the scheme should make
 
 		testNPC.start();
 		for (int i = 1; i < numberOfMoves; i++) {

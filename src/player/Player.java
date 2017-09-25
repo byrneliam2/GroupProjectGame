@@ -261,14 +261,14 @@ public class Player {
 	}
 
 	/**
-	 * @return the x location of the player's centre point.
+	 * @return the x pixel location of the player's centre point.
 	 */
 	public int getxLocation() {
 		return xLocation;
 	}
 
 	/**
-	 * @return the x location of the player's centre point.
+	 * @return the y pixel location of the player's centre point.
 	 */
 	public int getyLocation() {
 		return yLocation;
