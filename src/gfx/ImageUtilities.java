@@ -28,4 +28,16 @@ public class ImageUtilities {
         AffineTransformOp op = new AffineTransformOp(af, AffineTransformOp.TYPE_BILINEAR);
         return op.filter(img, null);
     }
+
+    /**
+     * Scale the given image.
+     * @param img image to be scaled (note that this method produces a copy)
+     * @return scaled copy of img
+     */
+    public static BufferedImage scale(BufferedImage img) {
+        int w = img.getWidth(), h = img.getHeight();
+        AffineTransform af = AffineTransform.getScaleInstance(w/2, h/2);
+        AffineTransformOp op = new AffineTransformOp(af, AffineTransformOp.TYPE_BILINEAR);
+        return op.filter(img, null);
+    }
 }

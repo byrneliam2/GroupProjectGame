@@ -10,7 +10,9 @@ import frames.MainDisplay;
 import gfx.ImageLoader;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 /**
  * The MapCard displays the state of a Map, including all Entities on screen.
@@ -30,7 +32,7 @@ public class MapCard extends Card {
 
         this.console = new JTextArea(1, 1);
 
-        setBackground(ImageLoader.image("maps", map.getBackgroundLayer(), false));
+        setBackground(ImageLoader.image("MapImages", map.getBackgroundLayer(), false));
     }
 
     /**
@@ -43,10 +45,11 @@ public class MapCard extends Card {
 
     @Override
     protected void doSetup() {
-        panel.setLayout(null);
-        map.getItems().forEach((item, point) -> {
-            addEntity(new Entity(ImageLoader.image("items", item.getImageFileName(), true), point));
-        });
+        panel.setLayout(new FlowLayout());
+        /*map.getItems().forEach((item, point) ->
+                addEntity(new Entity(
+                        ImageLoader.image("ItemPictures", item.getImageFileName(), true),
+                        point)));*/
     }
 
     @Override

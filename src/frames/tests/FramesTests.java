@@ -7,10 +7,13 @@ package frames.tests;
  */
 
 import frames.MainDisplay;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import javax.swing.*;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class FramesTests {
 
     private void killIn3Sec() throws InterruptedException {
