@@ -1,12 +1,15 @@
 Door
-Map2 4 true
+Map2 01 true
 0 9
+Door
+Map3 02 true
+19 9
 HealthPot
-3 3
-HealthPot
-2 2
+5 5
+MassiveGun
+16 16
 NPC
 Hungry Bat
-PatrolScheme true 5
-7 3 2
+PatrolScheme false 5
+5 12 2
 

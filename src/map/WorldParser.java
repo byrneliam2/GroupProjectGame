@@ -28,7 +28,7 @@ public class WorldParser {
 	public static World parse(String worldFileName, Player current) {
 		HashMap<String, Map> maps = new HashMap<String, Map>();
 
-		String fileLocation = "assets/" + worldFileName;
+		String fileLocation = "map/assets/" + worldFileName;
 		Scanner scan = null;
 		File f = null;
 
