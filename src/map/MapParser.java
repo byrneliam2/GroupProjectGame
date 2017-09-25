@@ -5,6 +5,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -34,7 +35,7 @@ public class MapParser {
 	 */
 	public static Map parse(String mapFileName, Player current) {
 		String fileLocation = "assets/entities/" + mapFileName;
-		File f = null;
+		InputStream in=null;
 		Scanner scan = null;
 		String mapName = mapFileName;
 		HashMap<Item, Point> itms = new HashMap<Item, Point>();
@@ -42,8 +43,8 @@ public class MapParser {
 		HashMap<DoorItem, Point> doors = new HashMap<DoorItem, Point>();
 
 		try {
-			f = new File(fileLocation);
-			scan = new Scanner(f);
+			in = MapParser.class.getResourceAsStream(fileLocation);
+			scan = new Scanner(in);
 			if (!scan.hasNext()) {
 				throw new ParseException("World file is blank 	");
 			}
@@ -71,7 +72,7 @@ public class MapParser {
 			Map n = new Map(mapName, itms, npcs, doors);
 			return n;
 
-		} catch (IOException | ParseException e) {
+		} catch (ParseException e) {
 
 			e.printStackTrace();
 			System.out.println(e.getMessage());
@@ -81,8 +82,13 @@ public class MapParser {
 			if (scan != null) {
 				scan.close();
 			}
-			if (f != null) {
-				f.exists();
+			if (in != null) {
+				try {
+					in.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+					System.out.println(e.getMessage());
+				}
 			}
 
 		}
