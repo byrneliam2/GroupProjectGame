@@ -50,6 +50,12 @@ public class NPC extends Player {
 	 */
 	public void stop() {
 		npctask.cancel();
+		npctask = new TimerTask() {
+			@Override
+			public void run() {
+				update();
+			}
+		};
 	}
 
 	/**
