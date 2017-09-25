@@ -36,7 +36,7 @@ public class MockGame extends Game{
 	 * @return new nullified player
 	 */
 	public Player getPlayer() {
-		return new Player("", 0, 0, null);
+		return new Player("", 0, 0);
 	}
 
 	/**
