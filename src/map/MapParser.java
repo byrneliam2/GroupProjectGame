@@ -12,6 +12,7 @@ import java.util.Scanner;
 import items.DoorItem;
 import items.Item;
 import npc.NPC;
+import player.Player;
 
 /**
  * This class is responsible for reading a text file that contains all the
@@ -31,11 +32,11 @@ public class MapParser {
 	/**
 	 * This method reads a map text file and returns a new map
 	 */
-	public static Map parse(String mapFileName) {
-		String fileLocation = "../assets/maps/" + mapFileName;
+	public static Map parse(String mapFileName, Player current) {
+		String fileLocation = "..map//assets/maps/" + mapFileName;
 		Scanner scan = null;
 		File f = null;
-		String mapName;
+		String mapName = mapFileName;
 		HashMap<Item, Point> itms = new HashMap<Item, Point>();
 		ArrayList<NPC> npcs = new ArrayList<NPC>();
 		HashMap<DoorItem, Point> doors = new HashMap<DoorItem, Point>();
@@ -58,7 +59,7 @@ public class MapParser {
 				} else if (line.equals("ShinyArmor")) {
 					new ShinyArmor().parse(scan, itms);
 				} else if (line.equals("NPC")) {
-					new ParseNPC().parse(scan, npcs, mainPLayer);
+					new ParseNPC().parse(scan, npcs, current);
 				} else if (line.equals("Door")) {
 					new Door().parse(scan, doors);
 				} else {
@@ -85,9 +86,10 @@ public class MapParser {
 			}
 
 		}
+		return null;
 	}
 
-	public String require(String token, Scanner scan) throws ParseException {
+	public static String require(String token, Scanner scan) throws ParseException {
 		if (scan.hasNext(token)) {
 			return scan.next();
 		} else {
@@ -95,7 +97,23 @@ public class MapParser {
 		}
 	}
 
-	public void requireSomething(Scanner scan) throws ParseException {
+	public static Integer requireInteger(Scanner scan) throws ParseException {
+		if (scan.hasNextInt()) {
+			return scan.nextInt();
+		} else {
+			throw new ParseException("Was expecting a integer but instead got" + scan.next());
+		}
+	}
+
+	public static String requireString(Scanner scan) throws ParseException {
+		if (scan.hasNext()) {
+			return scan.next();
+		} else {
+			throw new ParseException("Was expecting a integer but instead got" + scan.next());
+		}
+	}
+
+	public static void requireSomething(Scanner scan) throws ParseException {
 		if (!scan.hasNext()) {
 			throw new ParseException("Was expecting another token but there was none");
 		}

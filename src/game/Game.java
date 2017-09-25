@@ -29,8 +29,10 @@ public class Game {
 	private World world;
 
 	public Game() {
-		world = WorldParser.parse("WORLD_NAME");
-		this.player = new Player("Tom", 50, 50, world.getStartingMap());
+		this.player = new Player("Tom", 50, 50);
+		world = WorldParser.parse("world",this.player);
+		this.player.setMap(world.getStartingMap());
+		
 	}
 
 	/******************* View Methods **********************/

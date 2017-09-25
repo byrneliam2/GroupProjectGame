@@ -11,16 +11,16 @@ public class Door {
 
 	}
 
-	public void parse(Scanner scan, HashMap<DoorItem, Point> doors) {
-		String name = scan.next();
-		int id = scan.nextInt();
-		String locked = scan.next();
+	public void parse(Scanner scan, HashMap<DoorItem, Point> doors) throws ParseException {
+		String name = MapParser.requireString(scan);
+		int id = MapParser.requireInteger(scan);
+		String locked = MapParser.requireString(scan);
 		boolean lockUnlock = false;
 		if (locked.equals("true")) {
 			lockUnlock = true;
 		}
-		int x = scan.nextInt();
-		int y = scan.nextInt();
+		int x = MapParser.requireInteger(scan);
+		int y = MapParser.requireInteger(scan);
 		DoorItem d = new DoorItem(name, id, lockUnlock);
 		doors.put(d, new Point(x, y));
 

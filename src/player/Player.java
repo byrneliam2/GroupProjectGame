@@ -40,7 +40,7 @@ public class Player {
 	 * @param xLocation
 	 * @param yLocation
 	 */
-	public Player(String name, int xLocation, int yLocation, Map startingMap) {
+	public Player(String name, int xLocation, int yLocation) {
 		this.name = name;
 		this.xLocation = xLocation;
 		this.yLocation = yLocation;
@@ -270,6 +270,10 @@ public class Player {
 
 	public Map getMap() {
 		return this.map;
+	}
+	
+	public void setMap(Map m) {
+		this.map = m;
 	}
 
 	public int getMaxHealth() {

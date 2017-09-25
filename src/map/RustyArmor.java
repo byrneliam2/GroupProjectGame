@@ -11,10 +11,10 @@ public class RustyArmor {
 
 	}
 
-	public void parse(Scanner scan, HashMap<Item, Point> items) {
+	public void parse(Scanner scan, HashMap<Item, Point> items) throws ParseException {
 		Item RustyA = (Item) new RustyArmor();
-		int x = scan.nextInt();
-		int y = scan.nextInt();
+		int x = MapParser.requireInteger(scan);
+		int y = MapParser.requireInteger(scan);
 		Point RustyAP = new Point(x, y);
 		items.put(RustyA, RustyAP);
 	}

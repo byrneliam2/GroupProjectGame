@@ -12,10 +12,10 @@ public class HealthPotion {
 
 	}
 
-	public void parse(Scanner scan, HashMap<Item, Point> items) {
+	public void parse(Scanner scan, HashMap<Item, Point> items) throws ParseException {
 		Item hp = new HealthPot();
-		int x = scan.nextInt();
-		int y = scan.nextInt();
+		int x = MapParser.requireInteger(scan);
+		int y = MapParser.requireInteger(scan);
 		Point hpLoc = new Point(x, y);
 		items.put(hp, hpLoc);
 	}

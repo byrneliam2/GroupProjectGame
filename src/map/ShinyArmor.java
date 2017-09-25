@@ -11,11 +11,12 @@ public class ShinyArmor {
 
 	}
 
-	public void parse(Scanner scan, HashMap<Item, Point> items) {
+	public void parse(Scanner scan, HashMap<Item, Point> items) throws ParseException {
 		Item ShinyArmor = (Item) new ShinyArmor();
-		int x = scan.nextInt();
-		int y = scan.nextInt();
+		int x = MapParser.requireInteger(scan);
+		int y = MapParser.requireInteger(scan);
 		Point ShinyAP = new Point(x, y);
 		items.put(ShinyArmor, ShinyAP);
+
 	}
 }

@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Scanner;
 
+import player.Player;
+
 /**
  * This class is responsible for reading a text file that contains the world of
  * the game. This includes reading various map names. This class can be
@@ -23,10 +25,10 @@ public class WorldParser {
 	/**
 	 * This method reads a world text file and returns a new world.
 	 */
-	public static World parse(String worldFileName) {
+	public static World parse(String worldFileName, Player current) {
 		HashMap<String, Map> maps = new HashMap<String, Map>();
 
-		String fileLocation = "../assets/maps/" + worldFileName;
+		String fileLocation = "assets/" + worldFileName;
 		Scanner scan = null;
 		File f = null;
 
@@ -38,8 +40,8 @@ public class WorldParser {
 			}
 			while (scan.hasNextLine()) {
 				String line = scan.next();
-				String nMap = "../assets/maps/" + line;
-				maps.put(line, MapParser.parse(nMap));
+				String nMap = "assets/" + line;
+				maps.put(line, MapParser.parse(nMap, current));
 			}
 
 			World n = new World(maps);

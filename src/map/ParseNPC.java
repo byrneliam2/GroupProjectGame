@@ -13,18 +13,21 @@ public class ParseNPC {
 
 	}
 
-	public void parse(Scanner scan, ArrayList<NPC> npcs, Player mainPLayer) {
-		String name = scan.next();
-		String scheme = scan.next();
-		String leftRight = scan.next();
-		int patrolDistance = scan.nextInt();
-		int x = scan.nextInt();
-		int y = scan.nextInt();
+	public void parse(Scanner scan, ArrayList<NPC> npcs, Player mainPLayer) throws ParseException {
+		String name = MapParser.requireString(scan);
+		String scheme = MapParser.requireString(scan);
+		String leftRight = MapParser.requireString(scan);
+		int patrolDistance = MapParser.requireInteger(scan);
+		int x = MapParser.requireInteger(scan);
+		int y = MapParser.requireInteger(scan);
 		Boolean LR = false;
 		if (leftRight.equals("true")) {
 			LR = true;
 		}
-		ControlScheme a = new PatrolScheme(LR, patrolDistance);
+		ControlScheme a = null;
+		if (scheme.equals("PatrolScheme")) {
+			a = new PatrolScheme(LR, patrolDistance);
+		}
 		NPC n = new NPC(name, x, y, mainPLayer, a);
 		npcs.add(n);
 	}

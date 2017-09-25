@@ -1,0 +1,11 @@
+Map2 4 true
+0 9
+HealthPot
+3 3
+HealthPot
+2 2
+NPC
+Sam
+PatrolScheme true 5
+7 3
+Door

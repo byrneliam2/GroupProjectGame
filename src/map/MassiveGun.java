@@ -12,10 +12,10 @@ public class MassiveGun {
 
 	}
 
-	public void parse(Scanner scan, HashMap<Item, Point> items) {
+	public void parse(Scanner scan, HashMap<Item, Point> items) throws ParseException {
 		Item gun = (Item) new MassiveGun();
-		int x = scan.nextInt();
-		int y = scan.nextInt();
+		int x = MapParser.requireInteger(scan);
+		int y = MapParser.requireInteger(scan);
 		Point gunLoc = new Point(x, y);
 		items.put(gun, gunLoc);
 	}
