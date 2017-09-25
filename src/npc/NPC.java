@@ -48,7 +48,7 @@ public class NPC extends Player {
 	}
 
 	private void update() {
-		control.doBestAction(this);
+		control.doBestAction(this, p);
 	}
 
 	/**

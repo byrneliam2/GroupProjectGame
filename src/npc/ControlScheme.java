@@ -1,5 +1,7 @@
 package npc;
 
+import player.Player;
+
 public interface ControlScheme {
 
 	/**
@@ -8,6 +10,6 @@ public interface ControlScheme {
 	 * @param npc
 	 *            the npc which carries out the action.
 	 */
-	public void doBestAction(NPC npc);
+	public void doBestAction(NPC npc, Player player);
 
 }

@@ -2,6 +2,7 @@ package npc;
 
 import map.Map;
 import player.InvalidPlayerExceptions;
+import player.Player;
 
 /**
  * A scheme which causes the NPC to patrol left-right or up-down. The NPC will walk the specified distance in the
@@ -31,9 +32,9 @@ public class PatrolScheme implements ControlScheme {
 	}
 
 	@Override
-	public void doBestAction(NPC npc) {
+	public void doBestAction(NPC npc, Player player) {
 		try {
-			// move the player according to the patrol direction.
+			// move the npc according to the patrol direction.
 			if (leftRight) {
 				if (!goingBack) {
 					progress++;
@@ -69,7 +70,7 @@ public class PatrolScheme implements ControlScheme {
 			}
 		} catch (InvalidPlayerExceptions e) {
 			System.out.println(
-					"Patrol ai wasn't able to do a move, it caught an exception thrown by player..." + e.getMessage());
+					"Patrol ai wasn't able to do a move, it caught the exception thrown tho so its algood!" + e.getMessage());
 		}
 	}
 
