@@ -45,7 +45,7 @@ public class MapCard extends Card {
     protected void doSetup() {
         panel.setLayout(null);
         map.getItems().forEach((item, point) -> {
-            addEntity(new Entity(ImageLoader.image("items", item.getFilePath(), true), point));
+            addEntity(new Entity(ImageLoader.image("items", item.getImageFileName(), true), point));
         });
     }
 

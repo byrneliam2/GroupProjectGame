@@ -52,5 +52,5 @@ public interface Item {
 	/**
 	 * @return the file path, atm it is just "ItemPictures/*itemName*"
 	 */
-	public String getFilePath();
+	public String getImageFileName();
 }
