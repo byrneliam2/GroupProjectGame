@@ -36,8 +36,11 @@ public class MainDisplay extends JComponent implements Observer {
     private Map<String, Card> cards;
     private Card currentCard, lastCard;
     private AudioHandler audioHandler;
-    private Controller mouse;
-    private Controller keyboard;
+    private Controller mouse, keyboard;
+
+    /* Constants */
+    public static final int WIDTH = Toolkit.getDefaultToolkit().getScreenSize().width;
+    public static final int HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().height;
 
     /* Game attributes */
     private Game game;
@@ -150,6 +153,14 @@ public class MainDisplay extends JComponent implements Observer {
         switchScreen(game.getWorld().getStartingMap().getMapName());
         //switchScreen("Map3");
         (timer = new Timer(16, (e) -> redraw())).start();
+    }
+
+    /**
+     * Stop the game timer.
+     */
+    public void stop() {
+        game.pauseGame();
+        timer.stop();
     }
 
     /**

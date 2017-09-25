@@ -36,7 +36,7 @@ public class MapCard extends Card {
 
         setBackground(ImageUtilities.scale(
                 ImageLoader.image("MapImages", map.getBackgroundLayer(), true),
-                1920, 1080));
+                MainDisplay.WIDTH, MainDisplay.HEIGHT));
 
         addAllEntities();
     }
@@ -63,7 +63,7 @@ public class MapCard extends Card {
 
     @Override
     protected void doUISetup() {
-        panel.setLayout(new FlowLayout());
+        panel.setLayout(null);
     }
 
     @Override
