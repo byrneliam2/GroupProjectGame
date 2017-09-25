@@ -39,9 +39,8 @@ public class WorldParser {
 				throw new ParseException("World file is blank 	");
 			}
 			while (scan.hasNextLine()) {
-				String line = scan.next();
-				String nMap = line;
-				maps.put(line, MapParser.parse(nMap, current));
+				String map = scan.next();
+				maps.put(map, MapParser.parse(map, current));
 			}
 
 			World n = new World(maps);
