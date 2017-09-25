@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 import items.Item;
+import items.itemList.RustyArmor;
 
 public class RustyArm {
 	public RustyArm() {
@@ -12,7 +13,7 @@ public class RustyArm {
 	}
 
 	public void parse(Scanner scan, HashMap<Item, Point> items) throws ParseException {
-		Item RustyA = (Item) new RustyArm();
+		Item RustyA = new RustyArmor();
 		int x = MapParser.requireInteger(scan);
 		int y = MapParser.requireInteger(scan);
 		Point RustyAP = new Point(x*32, y*32);

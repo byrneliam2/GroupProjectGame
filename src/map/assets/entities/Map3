@@ -3,7 +3,7 @@ Map1 04 true
 0 9
 NPC
 HungryBat
-EasyScheme
+EasyScheme false 3
 28 4 2
 ShinyArmor
 4 4
