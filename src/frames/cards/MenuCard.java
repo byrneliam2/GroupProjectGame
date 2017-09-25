@@ -29,7 +29,7 @@ public class MenuCard extends Card {
     }
 
     @Override
-    protected void doSetup() {
+    protected void doUISetup() {
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
         // put the logo in separately
         components.put("logo", GraphicsUtilities.produceSticker(

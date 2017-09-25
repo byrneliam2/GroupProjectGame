@@ -17,7 +17,7 @@ public class PauseCard extends Card {
     }
 
     @Override
-    protected void doSetup() {
+    protected void doUISetup() {
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
         // use a loop to load all the buttons into the list
         String[] files = {"back", "save", "load", "settings", "exit"};

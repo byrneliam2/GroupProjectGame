@@ -8,6 +8,7 @@ package frames.cards;
 
 import frames.MainDisplay;
 import gfx.ImageLoader;
+import gfx.ImageUtilities;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,7 +34,9 @@ public class MapCard extends Card {
 
         this.console = new JTextArea(1, 1);
 
-        setBackground(ImageLoader.image("MapImages", map.getBackgroundLayer(), true));
+        setBackground(ImageUtilities.scale(
+                ImageLoader.image("MapImages", map.getBackgroundLayer(), true),
+                1920, 1080));
 
         addAllEntities();
     }
@@ -59,7 +62,7 @@ public class MapCard extends Card {
     }
 
     @Override
-    protected void doSetup() {
+    protected void doUISetup() {
         panel.setLayout(new FlowLayout());
     }
 

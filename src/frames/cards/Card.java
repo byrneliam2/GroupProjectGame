@@ -37,7 +37,7 @@ public abstract class Card extends JPanel {
         panel = new JLabel();
         components = new LinkedHashMap<>();
         add(panel);
-        doSetup();
+        doUISetup();
     }
 
     /**
@@ -76,7 +76,7 @@ public abstract class Card extends JPanel {
      * be properly assigned by using the {@link #setComponentActions(MainDisplay)}
      * method from the display that holds the card.
      */
-    protected abstract void doSetup();
+    protected abstract void doUISetup();
 
     /**
      * Add actions to the components on screen, if there are any. This method

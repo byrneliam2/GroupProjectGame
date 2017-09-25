@@ -31,7 +31,7 @@ public class SettingsCard extends Card {
     }
 
     @Override
-    protected void doSetup() {
+    protected void doUISetup() {
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
         // back button
         components.put("back", GraphicsUtilities.produceButton(

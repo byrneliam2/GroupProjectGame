@@ -3,15 +3,13 @@ TO DO:
 - Own unit testing
 
 DISCUSSION POINTS:
-- Where everyone is up to
-- What are the next steps?
+- <none>
 
 DEADLINES
-- Next submission 22/9
 - Complete libraries by 27/9
 
 NEXT MEETING (11am CO242b):
-- 20/9
+- 27/9
 
 NEXT CODING DAY:
-- 21/9
+- 28/9
