@@ -10,10 +10,10 @@ HealthPot
 
 
 For NPC's:
-<NPC>-write NPC before declaring NPC
+<"NPC">
 <EnemyName>
 <ControlScheme>,<Constructor information...> (Check the constructor for information on what each control scheme needs)
-<x>,<y>
+<x> <y> <health>
 
 Example:
 
