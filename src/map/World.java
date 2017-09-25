@@ -19,7 +19,7 @@ public class World {
 	// all times, thus is public static
 	public static HashMap<String, Enviroment> enviroments;
 
-	public World(HashMap<String, Map> maps, HashMap<String, Enviroment> enviroments) {
+	public World(HashMap<String, Map> maps) {
 		World.maps = maps;
 		World.enviroments = enviroments;
 	}

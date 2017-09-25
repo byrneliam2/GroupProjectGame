@@ -25,7 +25,6 @@ public class WorldParser {
 	 */
 	public static World parse(String worldFileName) {
 		HashMap<String, Map> maps = new HashMap<String, Map>();
-		HashMap<String, Enviroment> enviroment = new HashMap<String, Enviroment>();
 
 		String fileLocation = "../assets/maps/" + worldFileName;
 		Scanner scan = null;
@@ -39,16 +38,11 @@ public class WorldParser {
 			}
 			while (scan.hasNextLine()) {
 				String line = scan.next();
-				if (line.equals("enviroment")) {
-
-				} else {
-					String nMap = "../assets/maps/" + line;
-					maps.put(line, MapParser.parse(nMap));
-				}
-
+				String nMap = "../assets/maps/" + line;
+				maps.put(line, MapParser.parse(nMap));
 			}
 
-			World n = new World(maps, enviroment);
+			World n = new World(maps);
 			return n;
 
 		} catch (IOException | ParseException e) {
