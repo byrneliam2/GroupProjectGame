@@ -6,14 +6,14 @@ import player.InvalidPlayerExceptions;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-import static controller.KeyboardController.KeyboardCommands.*;
+import static controller.Controller.KeyboardCommands.*;
 
 
-public class KeyboardController extends KeyAdapter {
+public class Controller extends KeyAdapter {
     private Game model;
-    private MouseController mouse;
+    private MousePosition mouse;
 
-    public KeyboardController(Game model, MouseController mouse) {
+    public Controller(Game model, MousePosition mouse) {
         this.model = model;
         this.mouse = mouse;
     }

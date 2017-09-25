@@ -4,10 +4,10 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class MouseController extends MouseAdapter {
+public class MousePosition extends MouseAdapter {
     private Point currentPosition;
 
-    public MouseController() {
+    public MousePosition() {
         this.currentPosition = new Point(0,0);
     }
 

@@ -7,13 +7,11 @@ package frames;
  */
 
 import audio.AudioHandler;
-import audio.tracks.*;
-import controller.KeyboardController;
-import controller.MouseController;
+import controller.Controller;
+import controller.MousePosition;
 import frames.cards.Card;
 import frames.cards.*;
 import game.Game;
-import game.MockGame;
 import map.World;
 
 import javax.swing.*;
@@ -37,8 +35,7 @@ public class MainDisplay extends JComponent implements Observer {
     private Map<String, Card> cards;
     private Card currentCard, lastCard;
     private AudioHandler audioHandler;
-    private KeyboardController keyboard;
-    private MouseController mouse;
+    private Controller keyboard;
 
     /* game.Game attributes */
     private Game game;
@@ -59,10 +56,9 @@ public class MainDisplay extends JComponent implements Observer {
         master.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         // controller setup
-        mouse = new MouseController();
-        keyboard = new KeyboardController(game, mouse);
+        MousePosition mouse = new MousePosition();
+        keyboard = new Controller(game, mouse);
         master.addKeyListener(keyboard);
-        master.addMouseListener(mouse);
         master.addMouseMotionListener(mouse);
 
         // this component setup
