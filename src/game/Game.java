@@ -146,6 +146,13 @@ public class Game {
 		player.shoot(direction);
 	}
 
+	/**
+	 * @return true if the player is ready to shoot false if not.
+	 */
+	public boolean readyToShoot() {
+		return player.readyToShoot();
+	}
+
 	public void pauseGame() {
 		GAME_PAUSED = true;
 	}

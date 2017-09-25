@@ -230,9 +230,19 @@ public class Player {
 	 */
 	public void shoot(double direction) throws InvalidPlayerExceptions {
 		// make new bullet and add it to bullet list in the bullet class.
-		// [extra] make it so that you can only shoot say once every second.
 
+		// start a timer to count till when the next shot is ready to shoot....
 		// if you can't shoot (for any reason) throw an exception...
+	}
+
+	/**
+	 * @return true if the player is ready to shoot or not.
+	 */
+	public boolean readyToShoot() {
+
+		// TODO whether or not the player can shoot.
+
+		return false;
 	}
 
 	/*
