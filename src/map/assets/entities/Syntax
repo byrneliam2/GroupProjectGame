@@ -1,3 +1,4 @@
+For Item's:
 <ItemName> (Must be the same name as one of the concrete classes in items package)
 <x>,<y> (Not sure how you are doing coordinates)
 
@@ -9,13 +10,15 @@ HealthPot
 10 2
 
 
+
+
 For NPC's:
 <"NPC">
 <EnemyName>
 <ControlScheme>,<Constructor information...> (Check the constructor for information on what each control scheme needs)
 <x> <y> <health>
 
-Example 1 NPC, and 1 DoorItem:
+Example:
 
 NPC
 Yucky Bug
@@ -24,10 +27,13 @@ PatrolScheme true 5
 
 
 
+
 For Door's:
 <"Door">
 <mapName> <id> <locked/unlocked>
 <x,y>
+
+Example:
 
 Door
 mapName 4 true
