@@ -39,7 +39,7 @@ public class Backpack {
 	 *            the item to pick up
 	 * @throws InvalidBackpackException
 	 *             if the backpack is full or the item already belongs to the
-	 *             player.
+	 *             player or the item to be picked up is null.
 	 */
 	public void pickUpItem(Item item) throws InvalidBackpackException {
 		if (item == null)
