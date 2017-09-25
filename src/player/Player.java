@@ -31,6 +31,7 @@ public class Player {
 	private int xLocation;// centreX
 	private int yLocation;// centreY
 	private Map map;// the map which the player is currently located on.
+	private boolean isAlive = true;
 
 	private Ellipse2D.Double rangeCircle;// the range at which the player can 'pick up' items
 	private Rectangle boundingBox;// the hit box of the player.
@@ -63,18 +64,16 @@ public class Player {
 	 */
 	public void pickUpItem() throws InvalidPlayerExceptions {
 		try {
+			// add the item to the current player pack.
+			itemsList.pickUpItem(closestItem);
+			// tells map item has been picked up, so map can remove it from map.
+			map.removeItem(closestItem);
+			// updates closest item to player
+			closestItem = map.getClosestItem(rangeCircle);
 
-			if (closestItem == null)// throw exception
-				throw new InvalidBackpackException("A null Item");
-			else {
-				// add the item to the current player pack.
-				itemsList.pickUpItem(closestItem);
-				// tells map item has been picked up, so map can remove it from map.
-				map.removeItem(closestItem);
-				// updates closest item to player
-				closestItem = map.getClosestItem(rangeCircle);
-			}
 		} catch (InvalidBackpackException e) {
+			// If the Player is trying to pickup an item which doesn't exists return this
+			// exception.
 			throw new InvalidPlayerExceptions(e.getMessage());
 		}
 	}
@@ -90,16 +89,17 @@ public class Player {
 	 */
 	public void removeItem(Item item) throws InvalidPlayerExceptions {
 		try {
+			// Remove the Item from the Player list of Items.
+			itemsList.removeItem(item);
+			// update the map with the item that has been dropped
+			map.placeItem(item, xLocation, yLocation);
+			// update the Closest item to the player rangeCircle
+			closestItem = map.getClosestItem(rangeCircle);
 
-			if(true){//!(itemsList.contains(item)
-				throw new InvalidBackpackException("A null Item");
-			}else{
-				itemsList.removeItem(item);
-				map.placeItem(item,xLocation ,yLocation);
-				closestItem = map.getClosestItem(rangeCircle);
-				}
-		}catch(InvalidBackpackException e){
-		throw new InvalidPlayerExceptions(e.getMessage());
+		} catch (InvalidBackpackException e) {
+			// If the Player is trying to remove an item which doesn't exists in the
+			// BackPack return this exception.
+			throw new InvalidPlayerExceptions(e.getMessage());
 		}
 	}
 
@@ -115,8 +115,12 @@ public class Player {
 	 */
 	public void equipItem(Equipable item) throws InvalidPlayerExceptions {
 		try {
+			// If the player wants to use the supply with the necessary items for a
+			// particular purpose.
 			itemsList.equipItem(item);
 		} catch (InvalidBackpackException e) {
+			// If the Player is trying to equip an item which doesn't exists in the BackPack
+			// return this exception.
 			throw new InvalidPlayerExceptions(e.getMessage());
 		}
 	}
@@ -132,10 +136,13 @@ public class Player {
 	 */
 	public void unequipItem(Equipable item) throws InvalidPlayerExceptions {
 		try {
+			// If the player wants to use the supply with the necessary items for a
+			// particular purpose.
 			itemsList.unequipItem(item);
 		} catch (InvalidBackpackException e) {
+			// If the Player is trying to unequip an item which doesn't exists in the
+			// BackPack return this exception.
 			throw new InvalidPlayerExceptions(e.getMessage());
-
 		}
 	}
 
@@ -149,8 +156,12 @@ public class Player {
 	 */
 	public void useItem(Usable item) throws InvalidPlayerExceptions {
 		try {
+			// If the player wants to use the supply with the necessary items for a
+			// particular purpose.
 			itemsList.useItem(item);
 		} catch (InvalidBackpackException e) {
+			// If the player wants to use the supply with the necessary items for a
+			// particular purpose.
 			throw new InvalidPlayerExceptions(e.getMessage());
 
 		}
@@ -164,18 +175,29 @@ public class Player {
 	 */
 	public void pickUpAndUse(Usable item) throws InvalidPlayerExceptions {
 		try {
+			// If the player wants to use the supply with the necessary items for a
+			// particular purpose.
 			itemsList.pickUpAndUse(item);
 		} catch (InvalidBackpackException e) {
+			// If the player wants to use the supply with the necessary items for a
+			// particular purpose.
 			throw new InvalidPlayerExceptions(e.getMessage());
 
 		}
 	}
 
 	public void takeDamage() {
-		// causes the player to take damage and lose health
-		if (true)
-			// should check whether the player is not dead....
-			return;
+		// Decrease the health of the player by one
+		this.health -= 1;
+		// check if the player is still alive and flip the IsAlive flag and then if the
+		// player is dead we have to end the game.
+		if (health == 0) {
+			// Change the isAlive flag to dead.
+			isAlive = false;
+		} else {
+			// Change the isAlive flag to still surviving.
+			isAlive = true;
+		}
 	}
 
 	/**
@@ -185,6 +207,8 @@ public class Player {
 	 * @return
 	 */
 	public boolean canOpenDoor(DoorItem doorItem) {
+		// Check if the player has the Specific KeyId to the Specific DoorId then they
+		// can go throw the door
 		if (itemsList.checkDoorID(doorItem.getDoorID())) {
 			return true;
 		}
@@ -193,7 +217,13 @@ public class Player {
 
 	private boolean canMakeMove(int dx, int dy) {
 		// Ask the map if it possible to move (((Later)))
-		if (map.canMove(dx, dy)) {
+		// make two temporary variables because I don't want to move the current status
+		// of the current Player
+		// and I pass these two temp variables to the canMove function in the map to
+		// check if it possible to make a move.
+		int tempLocationX = dx + xLocation;
+		int tempLocationY = dy + yLocation;
+		if (map.canMove(tempLocationX, tempLocationY)) {
 			return true;// if possible to move to this location
 		}
 		return false;// if not possible
@@ -206,10 +236,29 @@ public class Player {
 	 * @throws InvalidPlayerExceptions
 	 */
 	public boolean move(int dx, int dy) throws InvalidPlayerExceptions {
-		this.xLocation += dx;
-		this.yLocation += dy;
-		if (map.canMove(xLocation, yLocation)) {
-			return true;
+		// Ask the map if it possible to move (((Later)))
+		int tempLocationX = dx + xLocation;
+		// make two temporary variables because I don't want to move the current status
+		// of the current Player
+		// and I pass these two temp variables to the canMove function in the map to
+		// check if it possible to make a move.
+		int tempLocationY = dy + yLocation;
+		DoorItem door = null;
+		
+		if (map.canMove(tempLocationX, tempLocationY)) {
+			// update x, y bounding box and circle
+			this.xLocation = tempLocationX;
+			this.yLocation = tempLocationY;
+			boundingBox.translate(dx, dy);
+			rangeCircle = new Ellipse2D.Double(xLocation - (rangeCircleWidth / 2), yLocation - (rangeCircleWidth / 2),rangeCircleWidth, rangeCircleWidth);
+			if ((door = map.getDoor(boundingBox)) != null) {// if player is next to a door
+				map = map.enterDoor(door);
+			} else {
+				// update closest item
+				closestItem = map.getClosestItem(rangeCircle);
+			}
+		} else {
+
 		}
 		// (Use the canMove() function from map class.)
 		// Check if you can make the move and if we can, then do the following:
