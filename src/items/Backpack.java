@@ -42,6 +42,8 @@ public class Backpack {
 	 *             player.
 	 */
 	public void pickUpItem(Item item) throws InvalidBackpackException {
+		if (item == null)
+			throw new InvalidBackpackException("Can't pickup 'nothing' (closest item was null)");
 		if (inventory.size() >= MAX_INVENTORY)
 			throw new InvalidBackpackException("BackPack is full, can't add anymore items to it");
 		if (item.getPack() != null)
