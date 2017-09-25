@@ -15,6 +15,7 @@ import org.junit.runners.MethodSorters;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 
+import static junit.framework.TestCase.fail;
 import static org.junit.Assert.assertArrayEquals;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -25,9 +26,14 @@ public class ImageTests {
         BufferedImage img = ImageLoader.image("ui", "logo", true);
         BufferedImage rot90 = ImageUtilities.rotate(img, 90);
         BufferedImage rotated = ImageUtilities.rotate(rot90, 270);
-        byte[] arrRot = ((DataBufferByte) rotated.getData().getDataBuffer()).getData();
+        /*byte[] arrRot = ((DataBufferByte) rotated.getData().getDataBuffer()).getData();
         byte[] arrImg = ((DataBufferByte) img.getData().getDataBuffer()).getData();
-        assertArrayEquals(arrRot, arrImg);
-
+        assertArrayEquals(arrRot, arrImg);*/
+        for (int i = 0; i < img.getHeight(); i++)
+            for (int j = 0; j < img.getWidth(); j++) {
+                if (img.getRGB(i, j) != rotated.getRGB(i, j)) {
+                    fail("Not equal images!");
+                }
+            }
     }
 }

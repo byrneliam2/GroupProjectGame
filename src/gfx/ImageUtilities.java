@@ -6,6 +6,7 @@ package gfx;
  * 300338518
  */
 
+import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
@@ -30,14 +31,19 @@ public class ImageUtilities {
     }
 
     /**
-     * Scale the given image.
+     * Scale the given image to a new pixel dimension.
      * @param img image to be scaled (note that this method produces a copy)
+     * @param sw pixel width
+     * @param sh pixel height
      * @return scaled copy of img
      */
-    public static BufferedImage scale(BufferedImage img) {
-        int w = img.getWidth(), h = img.getHeight();
-        AffineTransform af = AffineTransform.getScaleInstance(w/2, h/2);
-        AffineTransformOp op = new AffineTransformOp(af, AffineTransformOp.TYPE_BILINEAR);
-        return op.filter(img, null);
+    public static BufferedImage scale(BufferedImage img, int sw, int sh) {
+        int imageType = BufferedImage.TYPE_INT_ARGB;
+        BufferedImage scaledBI = new BufferedImage(sw, sh, imageType);
+        Graphics2D g = scaledBI.createGraphics();
+        g.setComposite(AlphaComposite.Src);
+        g.drawImage(img, 0, 0, sw, sh, null);
+        g.dispose();
+        return scaledBI;
     }
 }
