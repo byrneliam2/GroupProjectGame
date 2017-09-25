@@ -9,8 +9,6 @@ import audio.tracks.Track;
 
 import javax.sound.sampled.*;
 import java.io.IOException;
-import java.util.ArrayDeque;
-import java.util.Queue;
 
 /**
  * The AudioHandler, once created by the VIEW, will allow for program to request Background-Music and Sound-Effects
@@ -34,7 +32,10 @@ public class AudioHandler {
     private Clip generateClip() throws LineUnavailableException{
         Clip clip = AudioSystem.getClip();
         clip.addLineListener(e -> {
-            if(e.getType().equals(LineEvent.Type.STOP)) e.getLine().close();
+            if(e.getType().equals(LineEvent.Type.STOP)) {
+                e.getLine().close();
+                //this.next();  //Will play next queued song
+            }
         });
         return clip;
     }
