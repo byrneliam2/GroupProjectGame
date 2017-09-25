@@ -59,8 +59,8 @@ public class MainDisplay extends JComponent implements Observer {
         master.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         // controller setup
-        keyboard = new KeyboardController();
         mouse = new MouseController();
+        keyboard = new KeyboardController(game, mouse);
         master.addKeyListener(keyboard);
         master.addMouseListener(mouse);
         master.addMouseMotionListener(mouse);
