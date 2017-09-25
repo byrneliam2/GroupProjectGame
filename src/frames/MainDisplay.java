@@ -7,6 +7,7 @@ package frames;
  */
 
 import audio.AudioHandler;
+import audio.tracks.MusicTrack;
 import controller.Controller;
 import controller.MousePosition;
 import frames.cards.Card;
@@ -110,7 +111,8 @@ public class MainDisplay extends JComponent implements Observer {
         switchScreen("menu");
 
         //TODO: AudioTesting
-        //audioHandler.playSound(MusicTrack.TEST_MUSIC);
+        audioHandler.queueBGM(MusicTrack.TEST_MUSIC);
+        audioHandler.queueBGM(MusicTrack.TEST_MUSIC);
     }
 
     /**
