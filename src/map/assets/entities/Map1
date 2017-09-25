@@ -1,3 +1,4 @@
+Door
 Map2 4 true
 0 9
 HealthPot
@@ -8,4 +9,4 @@ NPC
 Hungry Bat
 PatrolScheme true 5
 7 3
-Door
+

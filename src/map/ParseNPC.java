@@ -20,6 +20,7 @@ public class ParseNPC {
 		int patrolDistance = MapParser.requireInteger(scan);
 		int x = MapParser.requireInteger(scan);
 		int y = MapParser.requireInteger(scan);
+		int health = MapParser.requireInteger(scan);
 		Boolean LR = false;
 		if (leftRight.equals("true")) {
 			LR = true;
@@ -28,7 +29,7 @@ public class ParseNPC {
 		if (scheme.equals("PatrolScheme")) {
 			a = new PatrolScheme(LR, patrolDistance);
 		}
-		NPC n = new NPC(name, x, y, mainPLayer, a);
+		NPC n = new NPC(name, x, y, health, mainPLayer, a);
 		npcs.add(n);
 	}
 }

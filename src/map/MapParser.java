@@ -33,7 +33,7 @@ public class MapParser {
 	 * This method reads a map text file and returns a new map
 	 */
 	public static Map parse(String mapFileName, Player current) {
-		String fileLocation = "..map//assets/maps/" + mapFileName;
+		String fileLocation = "..map/assets/maps/" + mapFileName;
 		Scanner scan = null;
 		File f = null;
 		String mapName = mapFileName;
