@@ -16,7 +16,7 @@ public class HealthPotion {
 		Item hp = new HealthPot();
 		int x = MapParser.requireInteger(scan);
 		int y = MapParser.requireInteger(scan);
-		Point hpLoc = new Point(x, y);
+		Point hpLoc = new Point(x*32, y*32);
 		items.put(hp, hpLoc);
 	}
 }

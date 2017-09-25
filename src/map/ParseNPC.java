@@ -29,7 +29,7 @@ public class ParseNPC {
 		if (scheme.equals("PatrolScheme")) {
 			a = new PatrolScheme(LR, patrolDistance);
 		}
-		NPC n = new NPC(name, x, y, health, mainPLayer, a);
+		NPC n = new NPC(name, x*32, y*32, health, mainPLayer, a);
 		npcs.add(n);
 	}
 }

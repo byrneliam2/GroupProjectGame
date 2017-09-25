@@ -15,7 +15,7 @@ public class RustyArm {
 		Item RustyA = (Item) new RustyArm();
 		int x = MapParser.requireInteger(scan);
 		int y = MapParser.requireInteger(scan);
-		Point RustyAP = new Point(x, y);
+		Point RustyAP = new Point(x*32, y*32);
 		items.put(RustyA, RustyAP);
 	}
 }

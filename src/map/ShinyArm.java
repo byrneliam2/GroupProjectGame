@@ -15,7 +15,7 @@ public class ShinyArm {
 		Item ShinyArmor = (Item) new ShinyArm();
 		int x = MapParser.requireInteger(scan);
 		int y = MapParser.requireInteger(scan);
-		Point ShinyAP = new Point(x, y);
+		Point ShinyAP = new Point(x*32, y*32);
 		items.put(ShinyArmor, ShinyAP);
 
 	}

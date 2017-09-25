@@ -22,7 +22,7 @@ public class Door {
 		int x = MapParser.requireInteger(scan);
 		int y = MapParser.requireInteger(scan);
 		DoorItem d = new DoorItem(name, id, lockUnlock);
-		doors.put(d, new Point(x, y));
+		doors.put(d, new Point(x*32, y*32));
 
 	}
 }
