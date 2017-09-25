@@ -12,7 +12,7 @@ import java.awt.image.BufferedImage;
 
 /**
  * The ImageUtilities class hosts a variety of methods to manipulate images,
- * including rotation...
+ * including rotation, scaling...
  */
 public class ImageUtilities {
 
