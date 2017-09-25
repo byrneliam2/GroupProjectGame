@@ -24,8 +24,11 @@ public class World {
 		World.enviroments = enviroments;
 	}
 
+	/**
+	 * Returns the starting map of the world. That map the player will first spawn into
+	 * @return
+	 */
 	public Map getStartingMap() {
-		//return World.maps.get("StartingMap");
 		return World.maps.get("Map1");
 	}
 }
