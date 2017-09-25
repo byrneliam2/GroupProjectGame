@@ -13,6 +13,7 @@ import controller.MouseController;
 import frames.cards.Card;
 import frames.cards.*;
 import game.Game;
+import game.MockGame;
 import map.World;
 
 import javax.swing.*;
@@ -43,7 +44,7 @@ public class MainDisplay extends JComponent implements Observer {
     private Game game;
 
     public MainDisplay() {
-        game = new Game();
+        game = new MockGame();
         game.pauseGame();
 
         master = new JFrame();
