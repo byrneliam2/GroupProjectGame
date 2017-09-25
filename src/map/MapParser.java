@@ -33,9 +33,9 @@ public class MapParser {
 	 * This method reads a map text file and returns a new map
 	 */
 	public static Map parse(String mapFileName, Player current) {
-		String fileLocation = "..map/assets/maps/" + mapFileName;
-		Scanner scan = null;
+		String fileLocation = "assets/entities/" + mapFileName;
 		File f = null;
+		Scanner scan = null;
 		String mapName = mapFileName;
 		HashMap<Item, Point> itms = new HashMap<Item, Point>();
 		ArrayList<NPC> npcs = new ArrayList<NPC>();

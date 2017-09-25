@@ -40,7 +40,7 @@ public class WorldParser {
 			}
 			while (scan.hasNextLine()) {
 				String line = scan.next();
-				String nMap = "assets/" + line;
+				String nMap = line;
 				maps.put(line, MapParser.parse(nMap, current));
 			}
 
