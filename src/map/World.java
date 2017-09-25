@@ -17,7 +17,7 @@ public class World {
 
 	// A HashMap of environment names to environment objects that must be visible at
 	// all times, thus is public static
-	public static HashMap<String, Enviroment> enviroments;
+	public static HashMap<String, Environment> enviroments;
 
 	public World(HashMap<String, Map> maps) {
 		World.maps = maps;

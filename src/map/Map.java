@@ -307,7 +307,7 @@ public class Map {
 	 * @param y
 	 * @return The environment on the tile at x,y
 	 */
-	public Enviroment onEnviromentTile(int x, int y) {
+	public Environment onEnviromentTile(int x, int y) {
 		return null;
 	}
 
