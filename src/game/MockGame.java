@@ -18,10 +18,11 @@ import java.util.List;
 
 /**
  * A mock game class to use for testing.
+ * 
  * @author Thomas Edwards
  * @author Liam Byrne
  */
-public class MockGame extends Game{
+public class MockGame extends Game {
 
 	/******************* View Methods **********************/
 
@@ -79,13 +80,30 @@ public class MockGame extends Game{
 		return false;
 	}
 
-	public void interact() throws InvalidPlayerExceptions {}
-	public void dropItem(Item i) throws InvalidPlayerExceptions {}
-	public void equipItem(Equipable i) throws InvalidPlayerExceptions {}
-	public void unequipItem(Equipable i) throws InvalidPlayerExceptions {}
-	public void useItem(Usable u) throws InvalidPlayerExceptions {}
-	public void shoot(double direction) throws InvalidPlayerExceptions {}
-	public void pauseGame() {}
-	public void unPauseGame() {}
-	public void saveGame() {}
+	public void interact() throws InvalidPlayerExceptions {
+	}
+
+	public void dropItem(Item i) throws InvalidPlayerExceptions {
+	}
+
+	public void equipItem(Equipable i) throws InvalidPlayerExceptions {
+	}
+
+	public void unequipItem(Equipable i) throws InvalidPlayerExceptions {
+	}
+
+	public void useItem(Usable u) throws InvalidPlayerExceptions {
+	}
+
+	public void shoot(double direction) throws InvalidPlayerExceptions {
+	}
+
+	public void pauseGame() {
+	}
+
+	public void unPauseGame() {
+	}
+
+	public void saveGame() {
+	}
 }
