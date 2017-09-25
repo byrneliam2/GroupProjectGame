@@ -72,14 +72,13 @@ public class NPC extends Player {
 	}
 
 	/**
-	 * @return the angle FROM npc, TO player. between 0 and 2Pi. 0 being straight up.
+	 * @return the angle FROM npc -> TO player. between 0 and 2Pi. 0 being straight up.
 	 */
 	public double getAngleToPlayer() {
 		double x = super.getxLocation() - p.getxLocation();
 		double y = super.getyLocation() - p.getyLocation();
 
 		// math to calculate 360 degree angle.
-		// might have to catch divide-by-0 errors. TEST those!
 		double angle;
 		if (x > 0 && y >= 0) {// top left corner
 			angle = 3 * Math.PI / 2 + Math.atan(y / x);

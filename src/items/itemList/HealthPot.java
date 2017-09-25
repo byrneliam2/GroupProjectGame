@@ -18,10 +18,7 @@ public class HealthPot extends AbstractItem implements Usable {
 
 	@Override
 	public void use(Player player) {
-		if (player.getHealth() > player.getMaxHealth() - 1)
-			player.setHealth(player.getMaxHealth());
-		else
-			player.setHealth(player.getHealth() + 1);
+		player.setHealth(player.getHealth() + 1);
 	}
 
 }
