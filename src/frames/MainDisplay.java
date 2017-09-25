@@ -114,8 +114,8 @@ public class MainDisplay extends JComponent implements Observer {
         switchScreen("menu");
 
         //TODO: AudioTesting
-        audioHandler.queueBGM(MusicTrack.TEST_MUSIC);
-        audioHandler.queueBGM(MusicTrack.TEST_MUSIC);
+        //audioHandler.queueBGM(MusicTrack.TEST_MUSIC);
+        //audioHandler.queueBGM(MusicTrack.TEST_MUSIC);
     }
 
     /**

@@ -47,10 +47,16 @@ public class MapCard extends Card {
      */
     private void addAllEntities() {
         // add all items
+        map.getNPCS().forEach(npc ->
+                addEntity(new Entity(
+                        ImageLoader.image("ItemPictures", "key", true),
+                        new Point(npc.getxLocation(), npc.getyLocation())))
+        );
         map.getItems().forEach((item, point) ->
                 addEntity(new Entity(
                         ImageLoader.image("ItemPictures", item.getImageFileName(), true),
-                        point)));
+                        point))
+        );
     }
 
     /**
@@ -71,8 +77,12 @@ public class MapCard extends Card {
 
     @Override
     public void redraw() {
+        panel.removeAll();
         for (Entity e : entities) {
-            // draw entity at e.getLocation()
+            JLabel l = new JLabel(new ImageIcon(e.getImage()));
+            panel.add(l);
+            l.setBounds(e.getLocation().x, e.getLocation().y,
+                    e.getImage().getWidth(), e.getImage().getHeight());
         }
     }
 }

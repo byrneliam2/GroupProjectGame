@@ -7,6 +7,7 @@ package frames.cards;
  */
 
 import frames.MainDisplay;
+import gfx.ImageUtilities;
 
 import javax.swing.*;
 import java.awt.*;
@@ -104,8 +105,10 @@ public abstract class Card extends JPanel {
         private BufferedImage image;
         private Point location;
 
-        public Entity(BufferedImage image, Point location) {
-            this.image = image;
+        static final int SIZE = 100;
+
+        Entity(BufferedImage image, Point location) {
+            this.image = ImageUtilities.scale(image, SIZE, SIZE);
             this.location = location;
         }
 
