@@ -12,7 +12,7 @@ import player.Player;
  *
  */
 public class NPC extends Player {
-	private static final int SPEED = 50;// rate in milliseconds that NPC is updated
+	public static final int SPEED = 50;// rate in milliseconds that NPC is updated
 	private static Timer npcTimer = new Timer();
 
 	private Player p;
