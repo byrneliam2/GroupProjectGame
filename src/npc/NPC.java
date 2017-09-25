@@ -50,6 +50,7 @@ public class NPC extends Player {
 	 */
 	public void stop() {
 		npctask.cancel();
+		// reset the timer task so it can be started up again.
 		npctask = new TimerTask() {
 			@Override
 			public void run() {
@@ -73,7 +74,7 @@ public class NPC extends Player {
 	/**
 	 * @return the angle FROM npc, TO player. between 0 and 2Pi. 0 being straight up.
 	 */
-	protected double getAngleToPlayer() {
+	public double getAngleToPlayer() {
 		double x = super.getxLocation() - p.getxLocation();
 		double y = super.getyLocation() - p.getyLocation();
 
