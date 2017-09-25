@@ -91,6 +91,9 @@ public class NPC extends Player {
 			angle = -Math.atan(x / y);
 		}
 
+		//TODO: Could use...
+		// MathUtils.calculateAngle(super.getxLocation(), super.getyLocation(), p.getxLocation(), p.getyLocation());
+
 		return angle;
 	}
 

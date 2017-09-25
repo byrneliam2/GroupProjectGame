@@ -2,6 +2,7 @@ package controller;
 
 import game.Game;
 import player.InvalidPlayerExceptions;
+import utils.MathUtils;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -32,38 +33,21 @@ public class Controller extends KeyAdapter {
             if (keybind == KEY_RIGHT.getKeybind()) model.movePlayer(1,0);
 
             if (keybind == KEY_USE.getKeybind()) model.interact();
-            if (keybind == KEY_ATTACK.getKeybind()) model.shoot(calculateAngle());
+            if (keybind == KEY_ATTACK.getKeybind()) model.shoot(getAngle());
             if (keybind == KEY_MENU.getKeybind()) model.pauseGame();
         } catch (InvalidPlayerExceptions ie) {
             ie.printStackTrace();
         }
     }
 
-    private double calculateAngle() {
-        double pX = model.getPlayer().getxLocation();
-        double pY = model.getPlayer().getyLocation();
+    private double getAngle() {
+        double playerX = model.getPlayer().getxLocation();
+        double playerY = model.getPlayer().getyLocation();
 
-        double mX = mouse.getCurrentPosition().getX();
-        double mY = mouse.getCurrentPosition().getY();
+        double mouseX = mouse.getCurrentPosition().getX();
+        double mouseY = mouse.getCurrentPosition().getY();
 
-        double x = mX - pX;
-        double y = mY - pY;
-
-
-        // math to calculate 360 degree angle.
-        // might have to catch divide-by-0 errors. TEST those!
-        double angle;
-        if (x > 0 && y >= 0) {
-            angle = 3 * Math.PI / 2 + Math.atan(y / x);
-        } else if (x >= 0 && y < 0) {
-            angle = Math.PI - Math.atan(x / y);
-        } else if (x < 0 && y <= 0) {
-            angle = Math.PI / 2 + Math.atan(y / x);
-        } else {
-            angle = -Math.atan(x / y);
-        }
-
-        return angle;
+        return MathUtils.calculateAngle(mouseX, mouseY, playerX, playerY);
     }
 
     enum KeyboardCommands {
