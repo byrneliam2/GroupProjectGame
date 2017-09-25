@@ -15,17 +15,13 @@ public class World {
 	// thus is public static
 	public static HashMap<String, Map> maps;
 
-	// A HashMap of environment names to environment objects that must be visible at
-	// all times, thus is public static
-	public static HashMap<String, Environment> enviroments;
-
 	public World(HashMap<String, Map> maps) {
 		World.maps = maps;
-		World.enviroments = enviroments;
 	}
 
 	/**
-	 * Returns the starting map of the world. That map the player will first spawn into
+	 * Returns the starting map of the world. That map the player will first spawn
+	 * into
 	 * 
 	 * @return
 	 */
