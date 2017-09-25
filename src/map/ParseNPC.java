@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import npc.ControlScheme;
+import npc.EasyScheme;
+import npc.HardScheme;
+import npc.MediumScheme;
 import npc.NPC;
 import npc.PatrolScheme;
 import player.Player;
@@ -28,8 +31,16 @@ public class ParseNPC {
 		ControlScheme a = null;
 		if (scheme.equals("PatrolScheme")) {
 			a = new PatrolScheme(LR, patrolDistance);
+		} else if (scheme.equals("EasyScheme")) {
+			a = new EasyScheme();
+		} else if (scheme.equals("MediumScheme")) {
+			a = new MediumScheme();
+		} else if (scheme.equals("HardScheme")) {
+			a = new HardScheme();
+		} else {
+			throw new ParseException("Your file has a incorrect Control Scheme: " + scheme);
 		}
-		NPC n = new NPC(name, x*32, y*32, health, mainPLayer, a);
+		NPC n = new NPC(name, x * 32, y * 32, health, mainPLayer, a);
 		npcs.add(n);
 	}
 }
