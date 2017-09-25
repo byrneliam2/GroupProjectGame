@@ -19,8 +19,8 @@ public class NPC extends Player {
 	private ControlScheme control;
 	protected TimerTask npctask;
 
-	public NPC(String name, int x, int y, Player mainPlayer, ControlScheme cs) {
-		super(name, x, y, null);
+	public NPC(String name, int x, int y, int health, Player mainPlayer, ControlScheme cs) {
+		super(name, x, y);
 		this.p = mainPlayer;
 		this.control = cs;
 		npctask = new TimerTask() {
@@ -29,6 +29,8 @@ public class NPC extends Player {
 				update();
 			}
 		};
+		super.setMaxHealth(health);
+		super.setHealth(health);
 	}
 
 	/**

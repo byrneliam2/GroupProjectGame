@@ -253,6 +253,8 @@ public class Player {
 	}
 
 	public void setHealth(int health) {
+		if (health > maxHealth)
+			health = maxHealth;
 		this.health = health;
 	}
 
@@ -271,7 +273,7 @@ public class Player {
 	public Map getMap() {
 		return this.map;
 	}
-	
+
 	public void setMap(Map m) {
 		this.map = m;
 	}
