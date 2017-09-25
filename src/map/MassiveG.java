@@ -5,18 +5,19 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 import items.Item;
+import items.itemList.MassiveGun;
 
-public class ShinyArmor {
-	public ShinyArmor() {
+public class MassiveG {
+	public MassiveG() {
 
 	}
 
 	public void parse(Scanner scan, HashMap<Item, Point> items) throws ParseException {
-		Item ShinyArmor = (Item) new ShinyArmor();
+		Item gun = new MassiveGun();
 		int x = MapParser.requireInteger(scan);
 		int y = MapParser.requireInteger(scan);
-		Point ShinyAP = new Point(x, y);
-		items.put(ShinyArmor, ShinyAP);
-
+		Point gunLoc = new Point(x, y);
+		items.put(gun, gunLoc);
 	}
+
 }

@@ -54,11 +54,11 @@ public class MapParser {
 				if (line.equals("HealthPot")) {
 					new HealthPotion().parse(scan, itms);
 				} else if (line.equals("MassiveGun")) {
-					new MassiveGun().parse(scan, itms);
+					new MassiveG().parse(scan, itms);
 				} else if (line.equals("RustyArmor")) {
-					new RustyArmor().parse(scan, itms);
+					new RustyArm().parse(scan, itms);
 				} else if (line.equals("ShinyArmor")) {
-					new ShinyArmor().parse(scan, itms);
+					new ShinyArm().parse(scan, itms);
 				} else if (line.equals("NPC")) {
 					new ParseNPC().parse(scan, npcs, current);
 				} else if (line.equals("Door")) {

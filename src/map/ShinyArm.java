@@ -6,16 +6,17 @@ import java.util.Scanner;
 
 import items.Item;
 
-public class RustyArmor {
-	public RustyArmor() {
+public class ShinyArm {
+	public ShinyArm() {
 
 	}
 
 	public void parse(Scanner scan, HashMap<Item, Point> items) throws ParseException {
-		Item RustyA = (Item) new RustyArmor();
+		Item ShinyArmor = (Item) new ShinyArm();
 		int x = MapParser.requireInteger(scan);
 		int y = MapParser.requireInteger(scan);
-		Point RustyAP = new Point(x, y);
-		items.put(RustyA, RustyAP);
+		Point ShinyAP = new Point(x, y);
+		items.put(ShinyArmor, ShinyAP);
+
 	}
 }
