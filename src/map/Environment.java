@@ -10,7 +10,7 @@ import player.Player;
  *
  */
 public enum Environment {
-	MIST(4), FIRE(3), MUD(2), DEATH(1);
+	MIST(2), FIRE(3), MUD(4), DEATH(1);
 
 	private final int EnvironmentCode;
 

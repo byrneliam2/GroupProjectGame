@@ -69,8 +69,8 @@ public class Map {
 		this.Doors = doors;
 		BufferedImage colLayer = this.loadImage(this.name, "Collision");
 		this.collisionLayer = this.loadColLayers(colLayer);
-		// BufferedImage enviromentLayer = this.loadImage(this.name, "collisionLayer");
-		// this.enviromentalLayer = this.breakUpImageIntoTiles(enviromentLayer);
+		// BufferedImage enviromentLayer = this.loadImage(this.name, "Environment");
+		// this.environmentalLayer = this.breakUpImageIntoTiles(enviromentLayer);
 	}
 
 	/**
@@ -127,6 +127,44 @@ public class Map {
 			}
 		}
 		return collLayer;
+	}
+
+	/**
+	 * This method takes a buffered image representing the environment layer and
+	 * converts it into a 2D array of integers. Each integer representing a type of
+	 * environment
+	 * 
+	 * @param EnviroLayerUnbroken
+	 * @return
+	 */
+	private ArrayList<ArrayList<Integer>> loadEnvLayers(BufferedImage EnviroLayerUnbroken) {
+		this.width = EnviroLayerUnbroken.getWidth() / 32;
+		this.height = EnviroLayerUnbroken.getHeight() / 32;
+		ArrayList<ArrayList<BufferedImage>> EnvLayer = this.breakUpImageIntoTiles(EnviroLayerUnbroken);
+
+		ArrayList<ArrayList<Integer>> EnvironmentalLayer = new ArrayList<ArrayList<Integer>>();
+		for (int i = 0; i < this.height; i++) {
+			EnvironmentalLayer.add(new ArrayList<Integer>(width));
+		}
+
+		for (int col = 0; col < this.height; col++) {
+			for (int row = 0; row < this.width; row++) {
+				Color c = new Color(EnvLayer.get(col).get(row).getRGB(1, 1));
+				if (c.getGreen() == 0 && c.getRed() == 0 && c.getBlue() == 0) {
+					EnvironmentalLayer.get(col).add(1);
+				} else if (c.getGreen() == 255 && c.getRed() == 0 && c.getBlue() == 0) {
+					EnvironmentalLayer.get(col).add(2);
+				} else if (c.getGreen() == 0 && c.getRed() == 255 && c.getBlue() == 0) {
+					EnvironmentalLayer.get(col).add(3);
+				} else if (c.getGreen() == 0 && c.getRed() == 0 && c.getBlue() == 255) {
+					EnvironmentalLayer.get(col).add(4);
+				} else {
+					EnvironmentalLayer.get(col).add(0);
+				}
+
+			}
+		}
+		return EnvironmentalLayer;
 	}
 
 	/**
