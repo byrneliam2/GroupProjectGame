@@ -28,11 +28,12 @@ public class MapCard extends Card {
 
     public MapCard(String n, map.Map map) {
         super(n);
+        this.entities = new ArrayList<>();
         this.map = map;
 
         this.console = new JTextArea(1, 1);
 
-        setBackground(ImageLoader.image("MapImages", map.getBackgroundLayer(), false));
+        setBackground(ImageLoader.image("MapImages", map.getBackgroundLayer(), true));
     }
 
     /**

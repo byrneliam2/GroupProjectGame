@@ -95,11 +95,11 @@ public class MainDisplay extends JComponent implements Observer {
         cards.put("settings", new SettingsCard("settings"));
 
         // get model details and construct enough map cards to fit
-        /*for (Map.Entry m : World.maps.entrySet()) {
+        for (Map.Entry m : World.maps.entrySet()) {
             String name = (String) m.getKey();
             map.Map map = (map.Map) m.getValue();
             cards.put(name, new MapCard(name, map));
-        }*/
+        }
 
         // setup action listeners in each card
         // needs a reference to this class to assign correctly
