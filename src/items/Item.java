@@ -50,7 +50,11 @@ public interface Item {
 	public void remove();
 
 	/**
-	 * @return the file path, atm it is just "ItemPictures/*itemName*"
+	 * if the image is assets/img/ItemPictures/healthPot.png,
+	 * then the image name will return simply "healthPot". Use gfx.imageLoader class to load the picture properly.
+	 * All item pictures are located in the above folder. Note. not all image's are the same name as the class name.
+	 * 
+	 * @return the image name
 	 */
 	public String getImageFileName();
 }

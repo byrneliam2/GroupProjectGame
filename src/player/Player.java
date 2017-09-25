@@ -28,8 +28,8 @@ public class Player {
 	private double fireRate = 1;
 	private int maxHealth = 5;
 	private int health = 5;
-	private int xLocation;
-	private int yLocation;
+	private int xLocation;// centreX
+	private int yLocation;// centreY
 	private Map map;// the map which the player is currently located on.
 
 	private Ellipse2D.Double rangeCircle;// the range at which the player can 'pick up' items
@@ -198,6 +198,8 @@ public class Player {
 	 * @throws InvalidPlayerExceptions
 	 */
 	public boolean move(int dx, int dy) throws InvalidPlayerExceptions {
+		this.xLocation += dx;
+		this.yLocation += dy;
 		// (Use the canMove() function from map class.)
 		// Check if you can make the move and if we can, then do the following:
 
@@ -258,10 +260,16 @@ public class Player {
 		this.health = health;
 	}
 
+	/**
+	 * @return the x pixel location of the player's centre point.
+	 */
 	public int getxLocation() {
 		return xLocation;
 	}
 
+	/**
+	 * @return the y pixel location of the player's centre point.
+	 */
 	public int getyLocation() {
 		return yLocation;
 	}

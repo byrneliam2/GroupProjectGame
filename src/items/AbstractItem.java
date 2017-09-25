@@ -12,19 +12,19 @@ public abstract class AbstractItem implements Item {
 	protected final String name, description;
 	protected Image image;
 	protected Backpack pack;// is null if the item is not picked up
-	protected final String imageName;
+	protected final String imageFileName;
 
 	/**
 	 * @param itemName
 	 * @param itemDescription
-	 * @param imageName
-	 *            the name of the image, including the file extension, the file
+	 * @param imageFileName
+	 *            the name of the image, NOT including the file extension, the file
 	 *            should be located in itemList/ItemPictures folder (for now).
 	 */
-	public AbstractItem(String itemName, String itemDescription, String imageName) {
+	public AbstractItem(String itemName, String itemDescription, String imageFileName) {
 		this.name = itemName;
 		this.description = itemDescription;
-		this.imageName = imageName;
+		this.imageFileName = imageFileName;
 	}
 
 	@Override
@@ -64,7 +64,7 @@ public abstract class AbstractItem implements Item {
 
 	@Override
 	public String getImageFileName() {
-		return imageName;
+		return imageFileName;
 	}
 
 }
