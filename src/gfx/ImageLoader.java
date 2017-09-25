@@ -18,22 +18,26 @@ import java.io.IOException;
  */
 public class ImageLoader {
 
-    /**
-     * Returns the image specified by the integer parameter.
-     * @param directory name of directory within the img folder
-     * @param name file name
-     * @param transparent is the image transparent? (this chooses a .jpg or .png format depending)
-     * @return BufferedImage version of the image specified
-     */
-    public static BufferedImage image(String directory, String name, boolean transparent) {
-        BufferedImage img = null;
-        try {
-            img = ImageIO.read(ImageLoader.class.getResource(
-                    "../assets/img/" + directory + (!directory.equals("") ? "/" : "") + name +
-                            (transparent ? ".png" : ".jpg")
-            ));
-        } catch (IOException e) { e.printStackTrace(); }
+	/**
+	 * Returns the image specified by the integer parameter.
+	 * 
+	 * @param directory
+	 *            name of directory within the img folder
+	 * @param name
+	 *            file name
+	 * @param transparent
+	 *            is the image transparent? (this chooses a .jpg or .png format depending)
+	 * @return BufferedImage version of the image specified
+	 */
+	public static BufferedImage image(String directory, String name, boolean transparent) {
+		BufferedImage img = null;
+		try {
+			img = ImageIO.read(ImageLoader.class.getResource("../assets/img/" + directory
+					+ (!directory.equals("") ? "/" : "") + name + (transparent ? ".png" : ".jpg")));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
-        return img;
-    }
+		return img;
+	}
 }
