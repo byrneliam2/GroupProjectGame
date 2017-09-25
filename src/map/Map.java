@@ -67,10 +67,10 @@ public class Map {
 		this.backgroundLayer = name;
 		this.NPCS = NPCS;
 		this.Doors = doors;
-		BufferedImage colLayer = this.loadImage(this.name, "collisionLayer");
+		BufferedImage colLayer = this.loadImage(this.name, "Collision");
 		this.collisionLayer = this.loadColLayers(colLayer);
-		BufferedImage enviromentLayer = this.loadImage(this.name, "collisionLayer");
-		this.enviromentalLayer = this.breakUpImageIntoTiles(enviromentLayer);
+		//BufferedImage enviromentLayer = this.loadImage(this.name, "collisionLayer");
+		//this.enviromentalLayer = this.breakUpImageIntoTiles(enviromentLayer);
 	}
 
 	/**
@@ -85,8 +85,9 @@ public class Map {
 	private BufferedImage loadImage(String mapName, String layer) {
 		BufferedImage img = null;
 		try {
-			img = ImageIO.read(Map.class.getResource("..map/assets/mapImages/" + mapName + layer));
-			if (img.getHeight() % 2 > 0 || img.getWidth() % 2 > 0) {
+			System.out.println("assets/mapImages/" + mapName + layer);
+			img = ImageIO.read(Map.class.getResource("assets/mapImages/" + mapName + layer+".png"));
+			if (img.getHeight() % 32 > 0 || img.getWidth() % 32 > 0) {
 				throw new BadMapImageException(
 						"The image you are trying to load does not have the correct Dimensions, Dimensions should be a factor of 32, the Global tile size.");
 			}

@@ -49,7 +49,7 @@ public class MapParser {
 				throw new ParseException("World file is blank 	");
 			}
 
-			while (scan.hasNextLine()) {
+			while (scan.hasNext()) {
 				String line = scan.next();
 				if (line.equals("HealthPot")) {
 					new HealthPotion().parse(scan, itms);
@@ -107,7 +107,7 @@ public class MapParser {
 		if (scan.hasNextInt()) {
 			return scan.nextInt();
 		} else {
-			throw new ParseException("Was expecting a integer but instead got" + scan.next());
+			throw new ParseException("Was expecting a integer but instead got " + scan.next());
 		}
 	}
 
@@ -115,7 +115,7 @@ public class MapParser {
 		if (scan.hasNext()) {
 			return scan.next();
 		} else {
-			throw new ParseException("Was expecting a integer but instead got" + scan.next());
+			throw new ParseException("Was expecting a integer but instead got " + scan.next());
 		}
 	}
 

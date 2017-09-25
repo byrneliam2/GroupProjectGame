@@ -14,7 +14,7 @@ HealthPot
 
 For NPC's:
 <"NPC">
-<EnemyName>
+<EnemyName>-can't have spaces
 <ControlScheme>,<Constructor information...> (Check the constructor for information on what each control scheme needs)
 <x> <y> <health>
 
