@@ -2,6 +2,7 @@ package map;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -27,14 +28,13 @@ public class WorldParser {
 	 */
 	public static World parse(String worldFileName, Player current) {
 		HashMap<String, Map> maps = new HashMap<String, Map>();
-
-		String fileLocation = "map/assets/" + worldFileName;
+		InputStream in=null;
+		String fileLocation = "assets/" + worldFileName;
 		Scanner scan = null;
-		File f = null;
 
 		try {
-			f = new File(fileLocation);
-			scan = new Scanner(f);
+			in = WorldParser.class.getResourceAsStream(fileLocation);
+			scan = new Scanner(in);
 			if (!scan.hasNext()) {
 				throw new ParseException("World file is blank 	");
 			}
@@ -47,7 +47,7 @@ public class WorldParser {
 			World n = new World(maps);
 			return n;
 
-		} catch (IOException | ParseException e) {
+		} catch (ParseException e) {
 
 			e.printStackTrace();
 			System.out.println(e.getMessage());
@@ -57,8 +57,13 @@ public class WorldParser {
 			if (scan != null) {
 				scan.close();
 			}
-			if (f != null) {
-				f.exists();
+			if (in != null) {
+				try {
+					in.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+					System.out.println(e.getMessage());
+				}
 			}
 
 		}
