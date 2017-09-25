@@ -28,11 +28,13 @@ public class Game {
 	private Player player;
 	private World world;
 
+	/**
+	 * Sets up a new game.
+	 */
 	public Game() {
 		this.player = new Player("Tom", 50, 50);
-		world = WorldParser.parse("world",this.player);
+		world = WorldParser.parse("world", this.player);
 		this.player.setMap(world.getStartingMap());
-		
 	}
 
 	/******************* View Methods **********************/
@@ -66,23 +68,29 @@ public class Game {
 	}
 
 	/**
-	 * @return List of all npc's, each npc has an x,y location similar to the player.
+	 * @return List of all npc's, each npc has an x,y centre location similar to the player.
 	 */
 	public List<NPC> getNPCs() {
 		return player.getMap().getNPCS();
 	}
 
 	/**
-	 * @return List of all bullets in game.
+	 * @return List of all bullets in game. Each bullet has a point location.
 	 */
 	public List<Bullet> getBullets() {
 		return Bullet.bulletList;
 	}
 
+	/**
+	 * @return the player's inventory (part of the backpack)
+	 */
 	public List<Item> getInventory() {
 		return this.player.getBackpack().getInventory();
 	}
 
+	/**
+	 * @return the player's equippedItems (part of the backpack)
+	 */
 	public List<Equipable> getEquippedItems() {
 		return this.player.getBackpack().getEquippedItems();
 	}

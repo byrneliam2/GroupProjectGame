@@ -26,6 +26,7 @@ public class World {
 
 	/**
 	 * Returns the starting map of the world. That map the player will first spawn into
+	 * 
 	 * @return
 	 */
 	public Map getStartingMap() {
