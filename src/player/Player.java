@@ -64,13 +64,16 @@ public class Player {
 	public void pickUpItem() throws InvalidPlayerExceptions {
 		try {
 
-			if (closestItem == null)// throw exception....
-				// otherwise...
+			if (closestItem == null)// throw exception
+				throw new InvalidBackpackException("A null Item");
+			else {
+				// add the item to the current player pack.
 				itemsList.pickUpItem(closestItem);
-			// map.pickUpItem(closestItem);//tells map item has been picked up, so map can
-			// remove it from map.
-			// closestItem = map.closestItem();//updates closest item to player
-
+				// tells map item has been picked up, so map can remove it from map.
+				map.removeItem(closestItem);
+				// updates closest item to player
+				closestItem = map.getClosestItem(rangeCircle);
+			}
 		} catch (InvalidBackpackException e) {
 			throw new InvalidPlayerExceptions(e.getMessage());
 		}
@@ -87,13 +90,17 @@ public class Player {
 	 */
 	public void removeItem(Item item) throws InvalidPlayerExceptions {
 		try {
-			itemsList.removeItem(item);
-			// map.placedItem(item);
-			// closestItem = map.closestItem
-		} catch (InvalidBackpackException e) {
-			throw new InvalidPlayerExceptions(e.getMessage());
-		}
 
+			if(true){//!(itemsList.contains(item)
+				throw new InvalidBackpackException("A null Item");
+			}else{
+				itemsList.removeItem(item);
+				map.placeItem(item,xLocation ,yLocation);
+				closestItem = map.getClosestItem(rangeCircle);
+				}
+		}catch(InvalidBackpackException e){
+		throw new InvalidPlayerExceptions(e.getMessage());
+		}
 	}
 
 	/**
@@ -166,8 +173,9 @@ public class Player {
 
 	public void takeDamage() {
 		// causes the player to take damage and lose health
-		// should check whether the player is not dead....
-		return;
+		if (true)
+			// should check whether the player is not dead....
+			return;
 	}
 
 	/**
@@ -185,7 +193,7 @@ public class Player {
 
 	private boolean canMakeMove(int dx, int dy) {
 		// Ask the map if it possible to move (((Later)))
-		if (true) {
+		if (map.canMove(dx, dy)) {
 			return true;// if possible to move to this location
 		}
 		return false;// if not possible
@@ -200,6 +208,9 @@ public class Player {
 	public boolean move(int dx, int dy) throws InvalidPlayerExceptions {
 		this.xLocation += dx;
 		this.yLocation += dy;
+		if (map.canMove(xLocation, yLocation)) {
+			return true;
+		}
 		// (Use the canMove() function from map class.)
 		// Check if you can make the move and if we can, then do the following:
 
@@ -239,7 +250,9 @@ public class Player {
 	 * @return true if the player is ready to shoot or not.
 	 */
 	public boolean readyToShoot() {
+		if (true) {
 
+		}
 		// TODO whether or not the player can shoot.
 
 		return false;
