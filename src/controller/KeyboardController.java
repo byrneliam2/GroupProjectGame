@@ -15,6 +15,7 @@ public class KeyboardController extends KeyAdapter {
 
     public KeyboardController(Game model, MouseController mouse) {
         this.model = model;
+        this.mouse = mouse;
     }
 
     @Override
