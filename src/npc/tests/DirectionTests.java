@@ -18,7 +18,7 @@ import player.Player;
 public class DirectionTests {
 
 	@Test
-	public void testDirection1() {
+	public void testDirectionNW() {
 		Player p = new Player("", 20, 20);
 		NPC n = new NPC("bug", 25, 25, 1, p, new PatrolScheme(true, 5));
 
@@ -26,7 +26,7 @@ public class DirectionTests {
 	}
 
 	@Test
-	public void testDirection2() {
+	public void testDirectionSE() {
 		Player p = new Player("", 25, 25);
 		NPC n = new NPC("bug", 20, 20, 1, p, new PatrolScheme(true, 5));
 
@@ -34,7 +34,7 @@ public class DirectionTests {
 	}
 
 	@Test
-	public void testDirection3() {
+	public void testDirectionSW() {
 		Player p = new Player("", 15, 25);
 		NPC n = new NPC("bug", 20, 20, 1, p, new PatrolScheme(true, 5));
 
@@ -42,7 +42,7 @@ public class DirectionTests {
 	}
 
 	@Test
-	public void testDirection4() {
+	public void testDirectionNE() {
 		Player p = new Player("", 20, 20);
 		NPC n = new NPC("bug", 15, 25, 1, p, new PatrolScheme(true, 5));
 
@@ -50,7 +50,7 @@ public class DirectionTests {
 	}
 
 	@Test
-	public void testDirection5() {
+	public void testDirectionNorth() {
 		Player p = new Player("", 20, 20);
 		NPC n = new NPC("bug", 20, 25, 1, p, new PatrolScheme(true, 5));
 
@@ -58,7 +58,7 @@ public class DirectionTests {
 	}
 
 	@Test
-	public void testDirection6() {
+	public void testDirectionSouth() {
 		Player p = new Player("", 20, 25);
 		NPC n = new NPC("bug", 20, 20, 1, p, new PatrolScheme(true, 5));
 
@@ -66,7 +66,7 @@ public class DirectionTests {
 	}
 
 	@Test
-	public void testDirection7() {
+	public void testDirectionEast() {
 		Player p = new Player("", 25, 20);
 		NPC n = new NPC("bug", 20, 20, 1, p, new PatrolScheme(true, 5));
 
@@ -74,7 +74,7 @@ public class DirectionTests {
 	}
 
 	@Test
-	public void testDirection8() {
+	public void testDirectionWest() {
 		Player p = new Player("", 20, 20);
 		NPC n = new NPC("bug", 25, 20, 1, p, new PatrolScheme(true, 5));
 
