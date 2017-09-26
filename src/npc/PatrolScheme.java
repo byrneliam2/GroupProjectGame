@@ -5,9 +5,10 @@ import player.InvalidPlayerExceptions;
 import player.Player;
 
 /**
- * A scheme which causes the NPC to patrol left-right or up-down. The NPC will walk the specified distance in the
- * specified direction, then will walk back continuously walking through the loop.
- * 
+ * A scheme which causes the NPC to patrol left-right or up-down. The NPC will
+ * walk the specified distance in the specified direction, then will walk back
+ * continuously walking through the loop.
+ *
  * @author Thomas Edwards
  *
  */
@@ -22,7 +23,8 @@ public class PatrolScheme implements ControlScheme {
 
 	/**
 	 * @param leftRight
-	 *            whether to patrol first right then left (true) or first down then up (false).
+	 *            whether to patrol first right then left (true) or first down then
+	 *            up (false).
 	 * @param patrolDistance
 	 *            amount of 'map blocks' the patrol moves by.
 	 */
@@ -65,7 +67,7 @@ public class PatrolScheme implements ControlScheme {
 			// shoot at the player every 100 moves
 			shotCounter++;
 			if (shotCounter >= 100) {
-				npc.shoot(npc.getAngleToPlayer());// shoots at the player.
+				npc.shoot(npc.getPlayer().getxLocation(), npc.getPlayer().getyLocation());// shoots at the player.
 				shotCounter = 0;
 			}
 		} catch (InvalidPlayerExceptions e) {

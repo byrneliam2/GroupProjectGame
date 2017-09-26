@@ -7,6 +7,7 @@ import java.util.List;
 
 import map.Map;
 import map.World;
+import utils.MathUtils;
 import items.Backpack;
 import items.DoorItem;
 import items.Equipable;
@@ -250,13 +251,15 @@ public class Player {
 				map = enterDoor(door);
 				return true;
 			} else {
-				// just a normal move on the same map and update the closest items, xLocation, yLocation, boundingBox and rangeCircle
+				// just a normal move on the same map and update the closest items, xLocation,
+				// yLocation, boundingBox and rangeCircle
 				// update xLocation and yLocation
 				this.xLocation = tempLocationX;
 				this.yLocation = tempLocationY;
 				// update boundingBox and rangeCircle
 				boundingBox.translate(dx, dy);
-				rangeCircle = new Ellipse2D.Double(xLocation - (rangeCircleWidth / 2),yLocation - (rangeCircleWidth / 2), rangeCircleWidth, rangeCircleWidth);
+				rangeCircle = new Ellipse2D.Double(xLocation - (rangeCircleWidth / 2),
+						yLocation - (rangeCircleWidth / 2), rangeCircleWidth, rangeCircleWidth);
 				// update closest item
 				closestItem = map.getClosestItem(rangeCircle);
 				return false;
@@ -276,8 +279,9 @@ public class Player {
 		// update location in new map...
 		this.xLocation = 100;
 		this.yLocation = 100;
-		boundingBox.setLocation(xLocation,yLocation);
-		rangeCircle = new Ellipse2D.Double(xLocation - (rangeCircleWidth / 2),yLocation - (rangeCircleWidth / 2), rangeCircleWidth, rangeCircleWidth);
+		boundingBox.setLocation(xLocation, yLocation);
+		rangeCircle = new Ellipse2D.Double(xLocation - (rangeCircleWidth / 2), yLocation - (rangeCircleWidth / 2),
+				rangeCircleWidth, rangeCircleWidth);
 		return World.maps.get(Door.getMap());
 	}
 
@@ -289,24 +293,14 @@ public class Player {
 	 * @throws InvalidPlayerExceptions
 	 *             if your gun is not ready to be fired yet.
 	 */
-	public void shoot(double direction) throws InvalidPlayerExceptions {
+	public void shoot(double mouseX, double mouseY) throws InvalidPlayerExceptions {
+		// check if able to shoot, if can't shoot yet, throw exception...
+
+		double direction = MathUtils.calculateAngle(this.xLocation, this.yLocation, mouseX, mouseY);
 		// make new bullet and add it to bullet list in the bullet class.
 
 		// start a timer to count till when the next shot is ready to shoot....
 		// if you can't shoot (for any reason) throw an exception...
-	}
-
-	/**
-	 * @return true if the player is ready to shoot or not.
-	 */
-	public boolean readyToShoot() {
-		
-		if (true) {
-
-		}
-		// TODO whether or not the player can shoot.
-
-		return false;
 	}
 
 	/*
@@ -384,5 +378,9 @@ public class Player {
 
 	public double getDefaultFireRate() {
 		return defaultFireRate;
+	}
+
+	public Player getPlayer() {
+		return this;
 	}
 }
