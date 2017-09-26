@@ -16,7 +16,8 @@ import player.InvalidPlayerExceptions;
 import player.Player;
 
 /**
- * Class to be used by front end for getting all the different entities in the game and controlling them.
+ * Class to be used by front end for getting all the different entities in the
+ * game and controlling them.
  *
  * @author Thomas Edwards
  *
@@ -68,7 +69,8 @@ public class Game {
 	}
 
 	/**
-	 * @return List of all npc's, each npc has an x,y centre location similar to the player.
+	 * @return List of all npc's, each npc has an x,y centre location similar to the
+	 *         player.
 	 */
 	public List<NPC> getNPCs() {
 		return player.getMap().getNPCS();
@@ -142,15 +144,8 @@ public class Game {
 	/**
 	 * @see player.Player#shoot(double direction)
 	 */
-	public void shoot(double direction) throws InvalidPlayerExceptions {
-		player.shoot(direction);
-	}
-
-	/**
-	 * @return true if the player is ready to shoot false if not.
-	 */
-	public boolean readyToShoot() {
-		return player.readyToShoot();
+	public void shoot(double mouseX, double mouseY) throws InvalidPlayerExceptions {
+		player.shoot(mouseX, mouseY);
 	}
 
 	public void pauseGame() {

@@ -6,6 +6,7 @@ import java.awt.Rectangle;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Timer;
@@ -76,7 +77,7 @@ public class Map {
 	/**
 	 * This method locates a map layer in the assets folder of the map class using a
 	 * mapName and a layer
-	 * 
+	 *
 	 * @param mapName
 	 * @param layer
 	 * @return BufferedImage representing the layer of a given map
@@ -101,7 +102,7 @@ public class Map {
 	 * This method takes a buffered image representing the collision layer and
 	 * converts it into a 2D array of integers. Each integer representing whether
 	 * the buffered image was black or not.
-	 * 
+	 *
 	 * @param colLayer
 	 * @return 2D ArrayList<Integer>
 	 */
@@ -133,7 +134,7 @@ public class Map {
 	 * This method takes a buffered image representing the environment layer and
 	 * converts it into a 2D array of integers. Each integer representing a type of
 	 * environment
-	 * 
+	 *
 	 * @param EnviroLayerUnbroken
 	 * @return
 	 */
@@ -169,7 +170,7 @@ public class Map {
 
 	/**
 	 * This method breaks up a bufferedImage into sub images based off the TileSize.
-	 * 
+	 *
 	 * @param colLayer
 	 * @return A 2D array of BufferedImages
 	 */
@@ -224,7 +225,7 @@ public class Map {
 	/**
 	 * This method returns the door touched by a given bounding box, if there is no
 	 * door returns null
-	 * 
+	 *
 	 * @param boundingBox
 	 * @return
 	 */
@@ -240,7 +241,7 @@ public class Map {
 	/**
 	 * This method returns the item that is closest to the center of a circle.
 	 * Returns null if there are no items in the circle
-	 * 
+	 *
 	 * @param rangeCircle
 	 * @return
 	 */
@@ -277,7 +278,7 @@ public class Map {
 	/**
 	 * This method drops a given item onto a x,y spot on the Map by inserting the
 	 * new item and its pint into the HashMap of items located on this Map.
-	 * 
+	 *
 	 * @param i
 	 * @param x
 	 * @param y
@@ -290,7 +291,7 @@ public class Map {
 	/**
 	 * This method removes a given item from the map by removing the item from the
 	 * Maps HashMap of items.
-	 * 
+	 *
 	 * @param i
 	 * @return Whether or not the item was removed
 	 */
@@ -364,16 +365,6 @@ public class Map {
 			}
 		}
 		return false;
-	}
-
-	/**
-	 * This method takes a door and returns the map that it leads too
-	 * 
-	 * @param Door
-	 * @return
-	 */
-	public Map enterDoor(DoorItem Door) {
-		return World.maps.get(Door.getMap());
 	}
 
 	/**

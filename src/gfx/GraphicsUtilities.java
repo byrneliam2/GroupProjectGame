@@ -6,6 +6,8 @@ package gfx;
  * 300338518
  */
 
+import com.sun.javaws.exceptions.InvalidArgumentException;
+
 import javax.swing.*;
 import java.awt.image.BufferedImage;
 
@@ -26,6 +28,7 @@ public class GraphicsUtilities {
      * @return new JButton
      */
     public static JButton produceButton(BufferedImage main, BufferedImage roll, float alignment) {
+        if (main == null) throw new IllegalArgumentException("Primary button image cannot be null.");
         JButton button = new JButton();
         // set visual attributes
         button.setContentAreaFilled(false);
@@ -49,6 +52,7 @@ public class GraphicsUtilities {
      * @return new label
      */
     public static JLabel produceSticker(BufferedImage main, float alignment) {
+        if (main == null) throw new IllegalArgumentException("Sticker image cannot be null.");
         JLabel sticker = new JLabel();
         sticker.setIcon(new ImageIcon(main));
         sticker.setAlignmentX(alignment);

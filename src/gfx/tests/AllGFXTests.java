@@ -10,5 +10,5 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({LoadingTests.class, ImageTests.class})
+@Suite.SuiteClasses({LoadingTests.class, ImageUtilitiesTests.class, GraphicsUtilitiesTests.class})
 public class AllGFXTests {}

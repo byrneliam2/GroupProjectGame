@@ -6,7 +6,7 @@ package utils;
 public class MathUtils {
 
     /**
-     * Calculate the angle between two points
+     * Calculate the angle from p1, to p2
      * @param x1 Entity X coordinate
      * @param y1 Entity Y coordinate
      * @param x2 Player's X coordinate

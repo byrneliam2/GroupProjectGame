@@ -38,10 +38,12 @@ public class Backpack {
 	 * @param item
 	 *            the item to pick up
 	 * @throws InvalidBackpackException
-	 *             if the backpack is full or the item already belongs to the
-	 *             player.
+	 *             if the backpack is full or the item already belongs to the player
+	 *             or the item to be picked up is null.
 	 */
 	public void pickUpItem(Item item) throws InvalidBackpackException {
+		if (item == null)
+			throw new InvalidBackpackException("Can't pickup 'nothing' (closest item was null)");
 		if (inventory.size() >= MAX_INVENTORY)
 			throw new InvalidBackpackException("BackPack is full, can't add anymore items to it");
 		if (item.getPack() != null)

@@ -33,7 +33,7 @@ public class Controller extends KeyAdapter {
             if (keybind == KEY_RIGHT.getKeybind()) model.movePlayer(1,0);
 
             if (keybind == KEY_USE.getKeybind()) model.interact();
-            if (keybind == KEY_ATTACK.getKeybind()) model.shoot(getAngle());
+            if (keybind == KEY_ATTACK.getKeybind()) model.shoot(mouse.getCurrentPosition().getX(),mouse.getCurrentPosition().getY());
             if (keybind == KEY_MENU.getKeybind()) model.pauseGame();
         } catch (InvalidPlayerExceptions ie) {
             ie.printStackTrace();

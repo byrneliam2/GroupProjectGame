@@ -16,15 +16,14 @@ import org.junit.runners.MethodSorters;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBuffer;
 import java.awt.image.DataBufferByte;
-import java.awt.image.DataBufferInt;
 import java.util.Arrays;
 
 import static org.junit.Assert.assertTrue;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class ImageTests {
+public class ImageUtilitiesTests {
 
-    @Test
+    @Ignore
     public void test01_Rotation() {
         BufferedImage img = ImageLoader.image("ui", "logo", true);
         BufferedImage rotated = ImageUtilities.rotate(ImageUtilities.rotate(img, 90), 270);
