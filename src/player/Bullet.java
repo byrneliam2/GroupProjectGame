@@ -7,7 +7,8 @@ import java.util.TimerTask;
 
 /**
  * A bullet is a point object with an x,y location, when the bullet is created a
- * timer is started which updates the bullet location until the bullet hits a wall or npc.
+ * timer is started which updates the bullet location until the bullet hits a
+ * wall or npc.
  *
  * @author Thomas Edwards
  *
@@ -35,16 +36,17 @@ public class Bullet {
 	/**
 	 * Creates a new bullet and timer which updates the bullets location. The timer
 	 * is started as soon as the bullet is created.The timer updates the bullet's
-	 * location. {@link #removeBullet()} should always be called when removing a bullet as otherwise
-	 * the timer just keeps going. Adds the bullet to the bullet list.
+	 * location. {@link #removeBullet()} should always be called when removing a
+	 * bullet as otherwise the timer just keeps going. Adds the bullet to the bullet
+	 * list.
 	 *
 	 * @param startingX
 	 *            ussually the player's current location
 	 * @param startingY
 	 *            ussually the player's current location
 	 * @param direction
-	 *            an angle in radians between 0 (straight up) and 2PI (also straight up). Pi/2
-	 *            would be right, Pi would be down, 3Pi/2 would be left.
+	 *            an angle in radians between 0 (straight up) and 2PI (also straight
+	 *            up). Pi/2 would be right, Pi would be down, 3Pi/2 would be left.
 	 * @param owner
 	 *            the owner of the bullet
 	 */
@@ -105,6 +107,8 @@ public class Bullet {
 		currentX += updateX;
 		currentY += updateY;
 		// if the bullet hits an immovable area, remove it.
+		if (owner.getMap() == null)
+			System.out.println("ghdfg");
 		if (!owner.getMap().canMove((int) currentX, (int) currentY)) {
 			removeBullet();
 		}
