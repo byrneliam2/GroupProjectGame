@@ -1,9 +1,7 @@
 package controller;
 
-import game.Game;
 import game.IGame;
 import player.InvalidPlayerExceptions;
-import utils.MathUtils;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -21,34 +19,45 @@ public class Controller extends KeyAdapter {
     }
 
     @Override
-    public void keyReleased(KeyEvent e) {
-        super.keyReleased(e);
-
-        try {
-            int keybind = e.getKeyCode();
-
-            //TODO: ALL MOVEMENT KEYS ARE INCORRECT
-            if (keybind == KEY_UP.getKeybind()) model.movePlayer(0,-1);
-            if (keybind == KEY_DOWN.getKeybind()) model.movePlayer(0,1);
-            if (keybind == KEY_LEFT.getKeybind()) model.movePlayer(-1,0);
-            if (keybind == KEY_RIGHT.getKeybind()) model.movePlayer(1,0);
-
-            if (keybind == KEY_USE.getKeybind()) model.interact();
-            if (keybind == KEY_ATTACK.getKeybind()) model.shoot(mouse.getCurrentPosition().getX(),mouse.getCurrentPosition().getY());
-            if (keybind == KEY_MENU.getKeybind()) model.pauseGame();
-        } catch (InvalidPlayerExceptions ie) {
-            ie.printStackTrace();
-        }
+    public void keyPressed(KeyEvent e) {
+        super.keyPressed(e);
+        processInput(e.getKeyCode(), true);
     }
 
-    private double getAngle() {
-        double playerX = model.getPlayer().getxLocation();
-        double playerY = model.getPlayer().getyLocation();
+    @Override
+    public void keyReleased(KeyEvent e) {
+        super.keyReleased(e);
+        processInput(e.getKeyCode(), false);
+    }
 
-        double mouseX = mouse.getCurrentPosition().getX();
-        double mouseY = mouse.getCurrentPosition().getY();
-
-        return MathUtils.calculateAngle(mouseX, mouseY, playerX, playerY);
+    private void processInput(int keybind, boolean state){
+        try {
+            //TODO: ALL MOVEMENT KEYS ARE INCORRECT
+            if (keybind == KEY_UP.getKeybind()) {
+                //model.movePlayer(0, -1, state);
+            }
+            else if (keybind == KEY_DOWN.getKeybind()) {
+                //model.movePlayer(0, 1, state);
+            }
+            else if (keybind == KEY_LEFT.getKeybind()) {
+                //model.movePlayer(-1, 0, state);
+            }
+            else if (keybind == KEY_RIGHT.getKeybind()) {
+                //model.movePlayer(1, 0, state);
+            }
+            //TODO: THIS SHOULD BE THE ONLY KEY ALL INTERACTIONS
+            else if (keybind == KEY_USE.getKeybind()){
+                model.interact();
+            }
+            else if (keybind == KEY_ATTACK.getKeybind()) {
+                model.shoot(mouse.getX(), mouse.getY());
+            }
+            else if (keybind == KEY_MENU.getKeybind()) {
+                model.pauseGame();
+            }
+        } catch (InvalidPlayerExceptions e) {
+            e.printStackTrace();
+        }
     }
 
     enum KeyboardCommands {

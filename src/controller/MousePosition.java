@@ -21,9 +21,16 @@ public class MousePosition extends MouseAdapter {
     }
 
     /**
-     * @return the x and y coordinates of the mouse
+     * @return The Current X coordinate of the mouse on the screen
      */
-    Point getCurrentPosition() {
-        return currentPosition.getLocation();
+    double getX(){
+        return currentPosition.getX();
+    }
+
+    /**
+     * @return The Current Y coordinate of the mouse on the screen
+     */
+    double getY(){
+        return currentPosition.getY();
     }
 }

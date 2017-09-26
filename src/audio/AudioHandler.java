@@ -57,7 +57,7 @@ public class AudioHandler {
             clip.open(inputStream);
 
             FloatControl volume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-            volume.setValue(-20.0f);   // Requires fine tuning*/
+            volume.setValue(-20.0f);   // Requires fine tuning
 
             clip.start();
         } catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {
@@ -79,7 +79,7 @@ public class AudioHandler {
             clip.open(inputStream);
 
             FloatControl volume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-            volume.setValue(-20.0f);   // Requires fine tuning*/
+            volume.setValue(-20.0f);   // Requires fine tuning
 
             clip.start();
         } catch (LineUnavailableException | AudioException | UnsupportedAudioFileException | IOException e) {
