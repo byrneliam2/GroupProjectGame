@@ -4,6 +4,8 @@ import java.awt.Rectangle;
 import java.awt.geom.Ellipse2D;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import map.Map;
 import map.World;
@@ -34,6 +36,8 @@ public class Player {
 	private int yLocation;// centreY
 	private Map map;// the map which the player is currently located on.
 	private boolean isAlive = true;
+	private boolean isReadyToShoot = true;
+	private Timer shootTimer = new Timer();
 
 	private Ellipse2D.Double rangeCircle;// the range at which the player can 'pick up' items
 	private Rectangle boundingBox;// the hit box of the player.
@@ -296,11 +300,23 @@ public class Player {
 	public void shoot(double mouseX, double mouseY) throws InvalidPlayerExceptions {
 		// check if able to shoot, if can't shoot yet, throw exception...
 
-		double direction = MathUtils.calculateAngle(this.xLocation, this.yLocation, mouseX, mouseY);
-		// make new bullet and add it to bullet list in the bullet class.
+		if(isReadyToShoot) {
+			isReadyToShoot = false;
+			double direction = MathUtils.calculateAngle(this.xLocation, this.yLocation, mouseX, mouseY);
+			// make new bullet and add it to bullet list in the bullet class.
+			Bullet theShoots = new Bullet(xLocation, yLocation, direction, this);
+			// start a timer to count till when the next shot is ready to shoot....
+			TimerTask taskEvent = new TimerTask(){
+				public void run() {
+					isReadyToShoot = true;
+				}
+			};
+			shootTimer.schedule(taskEvent, 1000);
+			// if you can't shoot (for any reason) throw an exception...
+		}else {
+			throw new InvalidPlayerExceptions("You cant shoot at this stage");
+		}
 
-		// start a timer to count till when the next shot is ready to shoot....
-		// if you can't shoot (for any reason) throw an exception...
 	}
 
 	/*
