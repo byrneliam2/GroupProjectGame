@@ -251,6 +251,7 @@ public class Player {
 
 		// (Use the canMove() function from map class.)
 		if (map.canMove(tempLocationX, tempLocationY)) {
+		//if (true) {
 			if ((door = map.getDoor(boundingBox)) != null) {// if player is next to a door
 				map = enterDoor(door);
 				return true;

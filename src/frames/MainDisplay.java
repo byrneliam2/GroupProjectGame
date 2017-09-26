@@ -100,7 +100,7 @@ public class MainDisplay extends JComponent implements Observer {
         for (Map.Entry m : World.maps.entrySet()) {
             String name = (String) m.getKey();
             map.Map map = (map.Map) m.getValue();
-            cards.put(name, new MapCard(name, map));
+            cards.put(name, new MapCard(name, map, game));
         }
 
         // setup action listeners in each card

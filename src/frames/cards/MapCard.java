@@ -7,6 +7,8 @@ package frames.cards;
  */
 
 import frames.MainDisplay;
+import game.Game;
+import game.IGame;
 import gfx.ImageLoader;
 import gfx.ImageUtilities;
 
@@ -26,11 +28,13 @@ public class MapCard extends Card {
     /* Other attributes */
     private List<Entity> entities;
     private map.Map map;
+    private IGame game;
 
-    public MapCard(String n, map.Map map) {
+    public MapCard(String n, map.Map map, IGame game) {
         super(n);
         this.entities = new ArrayList<>();
         this.map = map;
+        this.game = game;
 
         this.console = new JTextArea(1, 1);
 
@@ -46,12 +50,14 @@ public class MapCard extends Card {
      * beforehand and also because this setup does not relate to Swing components.
      */
     private void addAllEntities() {
-        // add all items
-        map.getNPCS().forEach(npc ->
+        // add all items\
+        addEntity(new Entity(ImageLoader.image("ItemPictures", "key", true),
+                new Point(game.getPlayer().getxLocation(), game.getPlayer().getyLocation())));
+        /*map.getNPCS().forEach(npc ->
                 addEntity(new Entity(
                         ImageLoader.image("ItemPictures", "key", true),
-                        new Point(npc.getxLocation(), npc.getyLocation())))
-        );
+                        new Point(npc.getxLocation(), npc.getyLocation())))*
+        );*/
         map.getItems().forEach((item, point) ->
                 addEntity(new Entity(
                         ImageLoader.image("ItemPictures", item.getImageFileName(), true),
@@ -78,6 +84,8 @@ public class MapCard extends Card {
     @Override
     public void redraw() {
         panel.removeAll();
+        entities.clear();
+        addAllEntities();
         for (Entity e : entities) {
             JLabel l = new JLabel(new ImageIcon(e.getImage()));
             panel.add(l);

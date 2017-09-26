@@ -32,7 +32,7 @@ public class Game implements IGame {
 	 * Sets up a new game.
 	 */
 	public Game() {
-		this.player = new Player("Tom", 50, 50);
+		this.player = new Player("Tom", 500, 500);
 		world = WorldParser.parse("world", this.player);
 		this.player.setMap(world.getStartingMap());
 	}
