@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import map.Map;
+import map.World;
 import items.Backpack;
 import items.DoorItem;
 import items.Equipable;
@@ -96,9 +97,20 @@ public class Player {
 			// update the Closest item to the player rangeCircle
 			closestItem = map.getClosestItem(rangeCircle);
 
+<<<<<<< Upstream, based on branch 'master' of https://gitlab.ecs.vuw.ac.nz/swen222-2017-p1-t10/SWEN222PROJECTSNICKETYSNACKS.git
 		} catch (InvalidBackpackException e) {
 			// If the Player is trying to remove an item which doesn't exists in the
 			// BackPack return this exception.
+=======
+			if (true) {// !(itemsList.contains(item)
+				throw new InvalidBackpackException("A null Item");
+			} else {
+				itemsList.removeItem(item);
+				map.placeItem(item, xLocation, yLocation);
+				closestItem = map.getClosestItem(rangeCircle);
+			}
+		} catch (InvalidBackpackException e) {
+>>>>>>> 53f6de0 added method
 			throw new InvalidPlayerExceptions(e.getMessage());
 		}
 	}
@@ -272,6 +284,17 @@ public class Player {
 
 		// if you can't move, throw an exception...
 		return false;
+	}
+
+	/**
+	 * This method takes a door and returns the map that it leads too
+	 *
+	 * @param Door
+	 * @return
+	 */
+	private Map enterDoor(DoorItem Door) {
+		// update location in new map...
+		return World.maps.get(Door.getMap());
 	}
 
 	public void pauseGame() {

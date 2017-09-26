@@ -368,16 +368,6 @@ public class Map {
 	}
 
 	/**
-	 * This method takes a door and returns the map that it leads too
-	 *
-	 * @param Door
-	 * @return
-	 */
-	public Map enterDoor(DoorItem Door) {
-		return World.maps.get(Door.getMap());
-	}
-
-	/**
 	 * This method returns the item located at position x,y. Returns null if there
 	 * is no item. Returns an exception if the x or y position is invalid.
 	 *
