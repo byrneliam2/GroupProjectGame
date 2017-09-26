@@ -45,8 +45,8 @@ public class MainDisplay extends JComponent implements Observer {
     /* Game attributes */
     private Game game;
 
-    public MainDisplay() {
-        game = new Game();
+    public MainDisplay(Game g) {
+        game = g;
         game.pauseGame();
 
         master = new JFrame();
