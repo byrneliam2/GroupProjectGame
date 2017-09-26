@@ -11,7 +11,9 @@ import player.InvalidPlayerExceptions;
 import player.Player;
 
 /**
- * Game interface used for testing purposes.
+ * Game interface used to link the Game and MockGame(null object.)
+ * All methods inserted here are purely representative of the current
+ * methods being used by Game across the system.
  */
 public interface IGame {
 

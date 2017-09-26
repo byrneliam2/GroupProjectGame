@@ -10,5 +10,5 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({FramesTests.class})
+@Suite.SuiteClasses({FramesTests.class, CardTests.class})
 public class AllFramesTests {}

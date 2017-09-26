@@ -10,6 +10,7 @@ import frames.MainDisplay;
 import game.Game;
 import game.MockGame;
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
@@ -38,7 +39,7 @@ public class FramesTests {
     }
 
     @Test
-    public void test02_FECardDisplay() {
+    public void test02_PauseCardDisplay() {
         try {
             MainDisplay m = new MainDisplay(new MockGame());
             m.enableInputMethods(false);
@@ -50,7 +51,23 @@ public class FramesTests {
     }
 
     @Test
-    public void test03_BECardDisplay() {
+    public void test03_SettingsCardDisplay() {
+        try {
+            MainDisplay m = new MainDisplay(new MockGame());
+            m.enableInputMethods(false);
+            m.update(null, "settings");
+            killIn3Sec(m);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * WARNING: This test uses the Game class, which links it to the model!
+     * (A requirement since this tests the display of game maps)
+     */
+    @Ignore //@Test
+    public void test04_MapCardDisplay() {
         try {
             MainDisplay m = new MainDisplay(new Game());
             m.enableInputMethods(false);
@@ -62,7 +79,28 @@ public class FramesTests {
     }
 
     @Test
-    public void testXXX_DisplayingMapData() {
+    public void test05_ScreenHistory() {
+        try {
+            MainDisplay m = new MainDisplay(new MockGame());
+            m.enableInputMethods(false);
+            m.update(null, "pause");
+            m.update(null, "last");
+            killIn3Sec(m);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
+    @Test
+    public void test06_DisplayingMapData() {
+        try {
+            MainDisplay m = new MainDisplay(new Game());
+            m.enableInputMethods(false);
+            m.update(null, "Map3");
+            // TODO check item positions
+            killIn3Sec(m);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
