@@ -97,20 +97,7 @@ public class Player {
 			// update the Closest item to the player rangeCircle
 			closestItem = map.getClosestItem(rangeCircle);
 
-<<<<<<< Upstream, based on branch 'master' of https://gitlab.ecs.vuw.ac.nz/swen222-2017-p1-t10/SWEN222PROJECTSNICKETYSNACKS.git
 		} catch (InvalidBackpackException e) {
-			// If the Player is trying to remove an item which doesn't exists in the
-			// BackPack return this exception.
-=======
-			if (true) {// !(itemsList.contains(item)
-				throw new InvalidBackpackException("A null Item");
-			} else {
-				itemsList.removeItem(item);
-				map.placeItem(item, xLocation, yLocation);
-				closestItem = map.getClosestItem(rangeCircle);
-			}
-		} catch (InvalidBackpackException e) {
->>>>>>> 53f6de0 added method
 			throw new InvalidPlayerExceptions(e.getMessage());
 		}
 	}
@@ -256,15 +243,16 @@ public class Player {
 		// check if it possible to make a move.
 		int tempLocationY = dy + yLocation;
 		DoorItem door = null;
-		
+
 		if (map.canMove(tempLocationX, tempLocationY)) {
 			// update x, y bounding box and circle
 			this.xLocation = tempLocationX;
 			this.yLocation = tempLocationY;
 			boundingBox.translate(dx, dy);
-			rangeCircle = new Ellipse2D.Double(xLocation - (rangeCircleWidth / 2), yLocation - (rangeCircleWidth / 2),rangeCircleWidth, rangeCircleWidth);
+			rangeCircle = new Ellipse2D.Double(xLocation - (rangeCircleWidth / 2), yLocation - (rangeCircleWidth / 2),
+					rangeCircleWidth, rangeCircleWidth);
 			if ((door = map.getDoor(boundingBox)) != null) {// if player is next to a door
-				map = map.enterDoor(door);
+				map = enterDoor(door);
 			} else {
 				// update closest item
 				closestItem = map.getClosestItem(rangeCircle);
