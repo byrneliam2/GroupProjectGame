@@ -23,14 +23,14 @@ public class MousePosition extends MouseAdapter {
     /**
      * @return The Current X coordinate of the mouse on the screen
      */
-    double getX(){
+    public double getX(){
         return currentPosition.getX();
     }
 
     /**
      * @return The Current Y coordinate of the mouse on the screen
      */
-    double getY(){
+    public double getY(){
         return currentPosition.getY();
     }
 }

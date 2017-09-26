@@ -30,37 +30,46 @@ public class Controller extends KeyAdapter {
         processInput(e.getKeyCode(), false);
     }
 
-    private void processInput(int keybind, boolean state){
+    /**
+     * When given an input, this method will update the 'MODEL' with the users input.
+     * @param keybind the key the user pressed
+     * @param state if the user pressed (true) or released (false) the key
+     * @return true if the input succeeded, false if it didn't exist or failed.
+     */
+    public boolean processInput(int keybind, boolean state){
         try {
             //TODO: ALL MOVEMENT KEYS ARE INCORRECT
             if (keybind == KEY_UP.getKeybind()) {
-                //model.movePlayer(0, -1, state);
+                return model.movePlayer(0, -1);
             }
             else if (keybind == KEY_DOWN.getKeybind()) {
-                //model.movePlayer(0, 1, state);
+                return model.movePlayer(0, 1);
             }
             else if (keybind == KEY_LEFT.getKeybind()) {
-                //model.movePlayer(-1, 0, state);
+                return model.movePlayer(-1, 0);
             }
             else if (keybind == KEY_RIGHT.getKeybind()) {
-                //model.movePlayer(1, 0, state);
+                return model.movePlayer(1, 0);
             }
             //TODO: THIS SHOULD BE THE ONLY KEY ALL INTERACTIONS
             else if (keybind == KEY_USE.getKeybind()){
                 model.interact();
+                return true;
             }
             else if (keybind == KEY_ATTACK.getKeybind()) {
                 model.shoot(mouse.getX(), mouse.getY());
+                return true;
             }
             else if (keybind == KEY_MENU.getKeybind()) {
                 model.pauseGame();
+                return true;
             }
-        } catch (InvalidPlayerExceptions e) {
-            e.printStackTrace();
-        }
+        } catch (InvalidPlayerExceptions ignored) {}
+
+        return false;
     }
 
-    enum KeyboardCommands {
+    public enum KeyboardCommands {
         KEY_UP(KeyEvent.VK_UP),
         KEY_DOWN(KeyEvent.VK_DOWN),
         KEY_LEFT(KeyEvent.VK_LEFT),
