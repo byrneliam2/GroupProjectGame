@@ -34,6 +34,9 @@ public class WorldParser {
 
 		try {
 			in = WorldParser.class.getResourceAsStream(fileLocation);
+			if(in == null) {
+				throw new ParseException("The world file "+fileLocation+" does not exist");
+			}
 			scan = new Scanner(in);
 			if (!scan.hasNext()) {
 				throw new ParseException("World file is blank 	");
