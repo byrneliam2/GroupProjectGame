@@ -311,7 +311,7 @@ public class Player {
 					isReadyToShoot = true;
 				}
 			};
-			shootTimer.schedule(taskEvent, 1000);
+			shootTimer.schedule(taskEvent, (int)(fireRate*1000));
 			// if you can't shoot (for any reason) throw an exception...
 		}else {
 			throw new InvalidPlayerExceptions("You cant shoot at this stage");
