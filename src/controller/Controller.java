@@ -40,16 +40,16 @@ public class Controller extends KeyAdapter {
         try {
             //TODO: ALL MOVEMENT KEYS ARE INCORRECT
             if (keybind == KEY_UP.getKeybind()) {
-                return model.movePlayer(0, -1);
+                return model.movePlayer(0, -10);
             }
             else if (keybind == KEY_DOWN.getKeybind()) {
-                return model.movePlayer(0, 1);
+                return model.movePlayer(0, 10);
             }
             else if (keybind == KEY_LEFT.getKeybind()) {
-                return model.movePlayer(-1, 0);
+                return model.movePlayer(-10, 0);
             }
             else if (keybind == KEY_RIGHT.getKeybind()) {
-                return model.movePlayer(1, 0);
+                return model.movePlayer(10, 0);
             }
             //TODO: THIS SHOULD BE THE ONLY KEY ALL INTERACTIONS
             else if (keybind == KEY_USE.getKeybind()){
