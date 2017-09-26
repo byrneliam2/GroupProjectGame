@@ -244,34 +244,26 @@ public class Player {
 		int tempLocationY = dy + yLocation;
 		DoorItem door = null;
 
+		// (Use the canMove() function from map class.)
 		if (map.canMove(tempLocationX, tempLocationY)) {
-			// update x, y bounding box and circle
-			this.xLocation = tempLocationX;
-			this.yLocation = tempLocationY;
-			boundingBox.translate(dx, dy);
-			rangeCircle = new Ellipse2D.Double(xLocation - (rangeCircleWidth / 2), yLocation - (rangeCircleWidth / 2),
-					rangeCircleWidth, rangeCircleWidth);
 			if ((door = map.getDoor(boundingBox)) != null) {// if player is next to a door
 				map = enterDoor(door);
+				return true;
 			} else {
+				// just a normal move on the same map and update the closest items, xLocation, yLocation, boundingBox and rangeCircle
+				// update xLocation and yLocation
+				this.xLocation = tempLocationX;
+				this.yLocation = tempLocationY;
+				// update boundingBox and rangeCircle
+				boundingBox.translate(dx, dy);
+				rangeCircle = new Ellipse2D.Double(xLocation - (rangeCircleWidth / 2),yLocation - (rangeCircleWidth / 2), rangeCircleWidth, rangeCircleWidth);
 				// update closest item
 				closestItem = map.getClosestItem(rangeCircle);
+				return false;
 			}
 		} else {
-
+			throw new InvalidPlayerExceptions("You cant make a move/Invalid move");
 		}
-		// (Use the canMove() function from map class.)
-		// Check if you can make the move and if we can, then do the following:
-
-		// update the x and y
-		// update closest item to player
-		// closestItem = map.getClosestItem//....
-		// check that you arnt touching a door (use getDoor() method in map), if you are
-		// touching a door, move to next
-		// map.
-
-		// if you can't move, throw an exception...
-		return false;
 	}
 
 	/**
@@ -282,13 +274,11 @@ public class Player {
 	 */
 	private Map enterDoor(DoorItem Door) {
 		// update location in new map...
+		this.xLocation = 100;
+		this.yLocation = 100;
+		boundingBox.setLocation(xLocation,yLocation);
+		rangeCircle = new Ellipse2D.Double(xLocation - (rangeCircleWidth / 2),yLocation - (rangeCircleWidth / 2), rangeCircleWidth, rangeCircleWidth);
 		return World.maps.get(Door.getMap());
-	}
-
-	public void pauseGame() {
-		// flip a global static variables, make sure all timerTasks do nothing while
-		// pause is true and controller doesn't work (except for unpause button)while
-		// pause is true
 	}
 
 	/**
@@ -310,6 +300,7 @@ public class Player {
 	 * @return true if the player is ready to shoot or not.
 	 */
 	public boolean readyToShoot() {
+		
 		if (true) {
 
 		}
