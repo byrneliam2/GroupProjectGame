@@ -7,6 +7,7 @@ package frames.tests;
  */
 
 import frames.MainDisplay;
+import game.Game;
 import game.MockGame;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -28,6 +29,8 @@ public class FramesTests {
     public void test01_LaunchNoExceptions() {
         try {
             MainDisplay m = new MainDisplay(new MockGame());
+            m.enableInputMethods(false);
+            m.update(null, null);
             killIn3Sec(m);
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -36,7 +39,26 @@ public class FramesTests {
 
     @Test
     public void test02_FECardDisplay() {
+        try {
+            MainDisplay m = new MainDisplay(new MockGame());
+            m.enableInputMethods(false);
+            m.update(null, "pause");
+            killIn3Sec(m);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
+    @Test
+    public void test03_BECardDisplay() {
+        try {
+            MainDisplay m = new MainDisplay(new Game());
+            m.enableInputMethods(false);
+            m.update(null, "Map3");
+            killIn3Sec(m);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test

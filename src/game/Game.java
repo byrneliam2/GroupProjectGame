@@ -7,7 +7,6 @@ import java.util.List;
 import items.Equipable;
 import items.Item;
 import items.Usable;
-import map.Map;
 import map.World;
 import map.WorldParser;
 import npc.NPC;
@@ -22,7 +21,7 @@ import player.Player;
  * @author Thomas Edwards
  *
  */
-public class Game {
+public class Game implements IGame {
 
 	public static boolean GAME_PAUSED = false;
 
@@ -107,7 +106,7 @@ public class Game {
 	}
 
 	/**
-	 * @see player.Player#useItem()
+	 *
 	 */
 	public void interact() throws InvalidPlayerExceptions {
 		player.pickUpItem();

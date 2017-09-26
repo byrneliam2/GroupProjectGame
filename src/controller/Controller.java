@@ -1,6 +1,7 @@
 package controller;
 
 import game.Game;
+import game.IGame;
 import player.InvalidPlayerExceptions;
 import utils.MathUtils;
 
@@ -11,10 +12,10 @@ import static controller.Controller.KeyboardCommands.*;
 
 
 public class Controller extends KeyAdapter {
-    private Game model;
+    private IGame model;
     private MousePosition mouse;
 
-    public Controller(Game model, MousePosition mouse) {
+    public Controller(IGame model, MousePosition mouse) {
         this.model = model;
         this.mouse = mouse;
     }

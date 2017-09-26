@@ -3,9 +3,7 @@ package game;
 import items.Equipable;
 import items.Item;
 import items.Usable;
-import map.Map;
 import map.World;
-import map.WorldParser;
 import npc.NPC;
 import player.Bullet;
 import player.InvalidPlayerExceptions;
@@ -22,7 +20,11 @@ import java.util.List;
  * @author Thomas Edwards
  * @author Liam Byrne
  */
-public class MockGame extends Game {
+public class MockGame implements IGame {
+
+	public MockGame() {
+		new World(new HashMap<>());
+	}
 
 	/******************* View Methods **********************/
 
@@ -81,6 +83,11 @@ public class MockGame extends Game {
 	}
 
 	public void interact() throws InvalidPlayerExceptions {
+	}
+
+	@Override
+	public void shoot(double x, double y) {
+
 	}
 
 	public void dropItem(Item i) throws InvalidPlayerExceptions {

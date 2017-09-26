@@ -7,12 +7,12 @@ package frames;
  */
 
 import audio.AudioHandler;
-import audio.tracks.MusicTrack;
 import controller.Controller;
 import controller.MousePosition;
 import frames.cards.Card;
 import frames.cards.*;
 import game.Game;
+import game.IGame;
 import map.World;
 
 import javax.swing.*;
@@ -24,7 +24,8 @@ import java.util.*;
  * The MainDisplay represents the primary UI component for the front end
  * of the game. The class holds the master frame (which it adds itself to)
  * and a collection of Cards. Each Card represents a screen of the game
- * (see {@link Card} class for more information.)
+ * (see {@link Card} class for more information.) Uses the Strategy pattern
+ * by using Cards which all have specific implementations.
  */
 public class MainDisplay extends JComponent implements Observer {
 
@@ -43,9 +44,9 @@ public class MainDisplay extends JComponent implements Observer {
     public static final int HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().height;
 
     /* Game attributes */
-    private Game game;
+    private IGame game;
 
-    public MainDisplay(Game g) {
+    public MainDisplay(IGame g) {
         game = g;
         game.pauseGame();
 
