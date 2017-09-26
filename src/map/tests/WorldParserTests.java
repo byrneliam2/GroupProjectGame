@@ -16,5 +16,13 @@ public class WorldParserTests {
 		World w = WorldParser.parse("world",p1);
 		p1.setMap(w.getStartingMap());
 	}
+	
+	@Test
+	public void incorrectfilepathTest() {
+		Player p1 = new Player("Tom", 50, 50);
+		World w = WorldParser.parse("world",p1);
+		p1.setMap(w.getStartingMap());
+	}
+	
 
 }
