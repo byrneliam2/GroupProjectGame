@@ -19,7 +19,7 @@ public class PatrolNPCTests {
 	private NPC testNPC;
 
 	/**
-	 * Tests that the patrol npc moves 3 units.
+	 * Tests that the patrol npc moves 3 pixels right.
 	 */
 	@Test
 	public void testPatrol1() {
@@ -28,14 +28,13 @@ public class PatrolNPCTests {
 		int numberOfMoves = 3;// private int the number of moves that the scheme should make
 
 		testNPC.start();
-		for (int i = 1; i < numberOfMoves; i++) {
-			try {
-				Thread.sleep(NPC.SPEED);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-				fail();
-			}
+		try {// sleep for time it takes to move 3 times
+			Thread.sleep(NPC.SPEED * (numberOfMoves - 1));
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+			fail();
 		}
+
 		testNPC.stop();
 
 		assertEquals(x + numberOfMoves, testNPC.getxLocation());// NPC should have moved 3 pixels right.
