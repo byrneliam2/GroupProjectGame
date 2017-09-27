@@ -79,18 +79,24 @@ public class Controller extends KeyAdapter {
         KEY_ATTACK(KeyEvent.VK_SPACE),
         KEY_MENU(KeyEvent.VK_ESCAPE);
 
-        private int keybind;
+        private int original;
+        private int current;
 
         KeyboardCommands(int keybind) {
-            this.keybind = keybind;
+            this.original = keybind;
+            this.current = keybind;
         }
 
         public int getKeybind() {
-            return this.keybind;
+            return this.current;
         }
 
         public void setKeybind(int keybind) {
-            this.keybind = keybind;
+            this.current = keybind;
+        }
+
+        public void resetKeybind() {
+            this.current = original;
         }
     }
 

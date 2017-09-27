@@ -9,7 +9,7 @@ import audio.tracks.Track;
 
 import javax.sound.sampled.*;
 import java.util.ArrayDeque;
-import java.util.Queue;
+import java.util.Deque;
 
 /**
  * The AudioHandler, once created by the VIEW, will allow for program to request Background-Music and Sound-Effects
@@ -20,7 +20,7 @@ public class AudioHandler implements IAudioHandler {
     private String assetsFolder;
 
     private AudioClip currentSong;
-    private Queue<AudioClip> musicQueue;
+    private Deque<AudioClip> musicQueue;
 
     private int volume = -20;
 
@@ -36,16 +36,14 @@ public class AudioHandler implements IAudioHandler {
 
     @Override
     public void queueMusic(Track track) {
-        musicQueue.offer(createAudioClip(track, true));
+        musicQueue.offerLast(createAudioClip(track, true));
         if (currentSong == null) next();
     }
 
     @Override
     public void forceMusic(Track track) {
-        if (currentSong != null) currentSong.getClip().stop();
-
-        currentSong = createAudioClip(track, true);
-        startClip(currentSong);
+        musicQueue.offerFirst(createAudioClip(track, true));
+        next();
     }
 
     @Override
