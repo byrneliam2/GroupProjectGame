@@ -28,7 +28,19 @@ in the game.
 Run the tests from the items.tests package. Not many tests implemented yet.
 
 map
-//
+
+James Watt Library Info:
+I am in charge/the primary author of the Map package.
+I have completed the implementation of my Map Package.
+The main classes in my map package are the map and world classes which represent the model of the game world and game maps located in the world. Each world and map,
+is represented by a text file of which my MapParser and WorldParser are in charge of reading and creating the given worlds and map. I have chosen to implement a "waterfall" parser 
+and as such have various classes called "healthPotion" and "MassiveG" which are simply helper classes for my parser. The world and map text files which my parser reads is
+located in my assets/entities package(for maps) and assets/world for world.
+
+Testing:
+My "tests" package is located inside my map package and contains tests for the Map,World,MapParser and WorldParser. They are all Junit Test which can be run as per the usual methods.
+However due to time restraints i have yet to fully completed my testing package. As of reading this i have only implemented a few tests for each testing class.
+
 
 npc
 Package uses a Strategy design pattern.
