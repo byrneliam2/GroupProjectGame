@@ -7,6 +7,7 @@ package frames;
  */
 
 import audio.AudioHandler;
+import audio.IAudioHandler;
 import controller.Controller;
 import controller.MousePosition;
 import frames.cards.Card;
@@ -36,7 +37,7 @@ public class MainDisplay extends JComponent implements Observer {
     /* Other UI attributes */
     private Map<String, Card> cards;
     private Card currentCard, lastCard;
-    private AudioHandler audioHandler;
+    private IAudioHandler audioHandler;
     private Controller mouse, keyboard;
 
     /* Constants */
@@ -186,10 +187,10 @@ public class MainDisplay extends JComponent implements Observer {
     }
 
     /**
-     * Return the display's {@link AudioHandler}. This is used by the cards to
+     * Return the display's {@link IAudioHandler}. This is used by the cards to
      * trigger sound effects.
      */
-    public AudioHandler getAudioHandler() {
+    public IAudioHandler getAudioHandler() {
         return audioHandler;
     }
 

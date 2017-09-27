@@ -8,7 +8,6 @@ package audio;
 import audio.tracks.Track;
 
 import javax.sound.sampled.*;
-import java.io.IOException;
 import java.util.ArrayDeque;
 import java.util.Queue;
 
@@ -17,73 +16,106 @@ import java.util.Queue;
  * to run concurrently as the program runs. This Class creates separate threads for handling the music-queue and different
  * sound effects, without stalling the main game Thread when a Sound-File is Requested.
  */
-public class AudioHandler {
+public class AudioHandler implements IAudioHandler {
     private String assetsFolder;
-    private Track currentSong;
-    private Queue<Track> musicQueue;
 
-    public AudioHandler(){
+    private AudioClip currentSong;
+    private Queue<AudioClip> musicQueue;
+
+    private int volume = -20;
+
+    public AudioHandler() {
         this.assetsFolder = "../assets/sounds/";
         this.musicQueue = new ArrayDeque<>();
     }
 
-    /**
-     * When called, this method will create a new Clip provided by the AudioSystem Class.
-     * @return Generated Clip Object.
-     * @throws LineUnavailableException Thrown if Clip cannot be generated.
-     */
-    private Clip generateClip(boolean queued) throws LineUnavailableException{
-        Clip clip = AudioSystem.getClip();
-        clip.addLineListener(e -> {
-            if(e.getType().equals(LineEvent.Type.STOP)) {
-                e.getLine().close();
-                if(queued) {
-                    this.currentSong = null;
-                    playNext();
-                }
-            }
-        });
-        return clip;
+    @Override
+    public void playSound(Track track) {
+        startClip(createAudioClip(track, false));
     }
 
-    private void playNext(){
-        if(musicQueue.isEmpty()) return;
-        this.currentSong = musicQueue.poll();
+    @Override
+    public void queueMusic(Track track) {
+        musicQueue.offer(createAudioClip(track, true));
+        if (currentSong == null) next();
+    }
 
+    @Override
+    public void forceMusic(Track track) {
+        if (currentSong != null) currentSong.getClip().stop();
+
+        currentSong = createAudioClip(track, true);
+        startClip(currentSong);
+    }
+
+    @Override
+    public void next() {
+        if (currentSong != null) currentSong.getClip().stop();
+        if (musicQueue.isEmpty()) return;
+
+        currentSong = musicQueue.poll();
+        startClip(currentSong);
+    }
+
+    private void startClip(AudioClip clip) {
         try {
-            String path = String.format("%s%s", assetsFolder, this.currentSong.getSoundFile());
-            Clip clip = generateClip(true);
-            AudioInputStream inputStream = AudioSystem.getAudioInputStream(this.getClass().getResourceAsStream(path));
-            clip.open(inputStream);
+            AudioInputStream stream = AudioSystem.getAudioInputStream(getClass().getResourceAsStream(clip.getPath()));
+            clip.getClip().open(stream);
 
-            FloatControl volume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-            volume.setValue(-20.0f);   // Requires fine tuning
+            FloatControl volumeControl = (FloatControl) clip.getClip().getControl(FloatControl.Type.MASTER_GAIN);
+            volumeControl.setValue(this.volume);
 
-            clip.start();
-        } catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {
-            e.printStackTrace();
+            clip.getClip().start();
+        } catch (Exception e) {
+            throw new AudioException("Encountered Issue when starting AudioClip");
         }
     }
 
-    public void queueBGM(Track track){
-        musicQueue.offer(track);
-        if(currentSong == null) playNext();
+    /**
+     * When called, this method will create a new Clip provided by the AudioSystem Class.
+     *
+     * @return Generated Clip Object.
+     */
+    private AudioClip createAudioClip(Track track, boolean wasQueued) {
+        try {
+            AudioClip audioClip = new AudioClip(AudioSystem.getClip(), track);
+            audioClip.getClip().addLineListener(e -> {
+                if (e.getType().equals(LineEvent.Type.STOP)) {
+                    if (wasQueued) {
+                        this.currentSong = null;
+                        next();
+                    }
+                    e.getLine().close();
+                }
+            });
+
+            return audioClip;
+        } catch (LineUnavailableException e) {
+            throw new AudioException("Encountered Issue when queuing AudioClip");
+        }
     }
 
-    public void playSound(Track track){
-        try {
-            String path = String.format("%s%s", assetsFolder, track.getSoundFile());
-            Clip clip = generateClip(false);
+    private class AudioClip {
+        private String path;
+        private Clip clip;
+        private Track track;
 
-            AudioInputStream inputStream = AudioSystem.getAudioInputStream(this.getClass().getResourceAsStream(path));
-            clip.open(inputStream);
+        private AudioClip(Clip clip, Track track) {
+            this.clip = clip;
+            this.track = track;
+            this.path = String.format("%s%s", assetsFolder, track.getSoundFile());
+        }
 
-            FloatControl volume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-            volume.setValue(-20.0f);   // Requires fine tuning
+        private Clip getClip() {
+            return this.clip;
+        }
 
-            clip.start();
-        } catch (LineUnavailableException | AudioException | UnsupportedAudioFileException | IOException e) {
-            e.printStackTrace();
+        public Track getTrack() {
+            return track;
+        }
+
+        private String getPath() {
+            return path;
         }
     }
 }
