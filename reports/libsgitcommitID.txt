@@ -6,8 +6,8 @@ LIBRARY COMMIT LIST
 LIBRARY             GIT COMMIT ID
 audio               //
 controller          //
-frames              //
-gfx                 //
+frames              850b7c7
+gfx                 850b7c7
 items               //
 map                 //
 npc                 //
