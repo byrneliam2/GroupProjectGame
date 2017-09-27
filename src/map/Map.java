@@ -296,7 +296,7 @@ public class Map {
 	 * @param y
 	 */
 	public void placeItem(Item i, int x, int y) {
-		Point toDrop = this.positionOnMap(x, y);
+		Point toDrop = new Point((int) x / Map.tileSize, (int) y / Map.tileSize);
 		this.items.put(i, toDrop);
 	}
 

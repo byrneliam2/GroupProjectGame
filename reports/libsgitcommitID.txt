@@ -13,3 +13,8 @@ map                 847e5fe607a221dfbf2dc4ef3141d93cf2c94051 or in short form 84
 npc                 7ea14cdb
 player              7183afcf
 save_load           7183afcf
+
+
+James Watt Library Info:
+I am in charge/the primary author of the Map package
+I have completed the implementation of my Map Package. However my testing package is still underway, i have implemented some small test's for the World, Map, MapParser, and World Parser.
