@@ -8,6 +8,7 @@ package frames.cards;
 
 import frames.MainDisplay;
 import gfx.ImageUtilities;
+import items.Item;
 
 import javax.swing.*;
 import java.awt.*;
@@ -102,12 +103,14 @@ public abstract class Card extends JPanel {
      */
     class Entity {
 
+        private EntityType type;
         private BufferedImage image;
         private Point location;
 
         static final int SIZE = 100;
 
-        Entity(BufferedImage image, Point location) {
+        Entity(EntityType type, BufferedImage image, Point location) {
+            this.type = type;
             this.image = ImageUtilities.scale(image, SIZE, SIZE);
             this.location = location;
         }
@@ -119,5 +122,14 @@ public abstract class Card extends JPanel {
         public Point getLocation() {
             return location;
         }
+    }
+
+    /**
+     * Declares the type of object the {@link Entity} represents.
+     */
+    enum EntityType {
+        ITEM,
+        PLAYER,
+        NPC
     }
 }

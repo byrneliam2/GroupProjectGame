@@ -7,7 +7,6 @@ package frames.cards;
  */
 
 import frames.MainDisplay;
-import game.Game;
 import game.IGame;
 import gfx.ImageLoader;
 import gfx.ImageUtilities;
@@ -51,7 +50,8 @@ public class MapCard extends Card {
      */
     private void addAllEntities() {
         // add all items\
-        addEntity(new Entity(ImageLoader.image("ItemPictures", "key", true),
+        addEntity(new Entity(EntityType.PLAYER,
+                ImageLoader.image("ItemPictures", "key", true),
                 new Point(game.getPlayer().getxLocation(), game.getPlayer().getyLocation())));
         /*map.getNPCS().forEach(npc ->
                 addEntity(new Entity(
@@ -60,6 +60,7 @@ public class MapCard extends Card {
         );*/
         map.getItems().forEach((item, point) ->
                 addEntity(new Entity(
+                        EntityType.ITEM,
                         ImageLoader.image("ItemPictures", item.getImageFileName(), true),
                         point))
         );

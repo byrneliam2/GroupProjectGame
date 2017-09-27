@@ -40,7 +40,6 @@ public class MainDisplay extends JComponent implements Observer {
     private Map<String, Card> cards;
     private Card currentCard, lastCard;
     private IAudioHandler audioHandler;
-    private Controller mouse, keyboard;
 
     /* Constants */
     public static final int WIDTH = Toolkit.getDefaultToolkit().getScreenSize().width;
@@ -61,15 +60,15 @@ public class MainDisplay extends JComponent implements Observer {
         // master frame setup
         master.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         master.setResizable(false);
+        master.setFocusable(true);
         master.setUndecorated(true);
         master.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         // controller setup
         MousePosition mouse = new MousePosition();
-        keyboard = new Controller(game, mouse);
+        Controller keyboard = new Controller(game, mouse);
         master.addKeyListener(keyboard);
         master.addMouseMotionListener(mouse);
-        master.setFocusable(true);
 
         // this component setup
         this.setLayout(new CardLayout());
@@ -157,6 +156,13 @@ public class MainDisplay extends JComponent implements Observer {
     }
 
     /**
+     * Determine whether the timer is currently running.
+     */
+    public boolean isTimerRunning() {
+        return timer.isRunning();
+    }
+
+    /**
      * Stop the game timer.
      */
     public void stop() {
@@ -183,10 +189,6 @@ public class MainDisplay extends JComponent implements Observer {
      */
     public void dispose() {
         master.dispose();
-    }
-
-    public Timer getTimer() {
-        return timer;
     }
 
     public IAudioHandler getAudioHandler() {

@@ -10,7 +10,6 @@ import frames.MainDisplay;
 import game.Game;
 import game.MockGame;
 import org.junit.FixMethodOrder;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
@@ -101,8 +100,8 @@ public class FramesTests {
     public void test07_Timer() {
         MainDisplay m = new MainDisplay(new Game());
         m.start();
-        assertTrue(m.getTimer().isRunning());
+        assertTrue(m.isTimerRunning());
         m.stop();
-        assertFalse(m.getTimer().isRunning());
+        assertFalse(m.isTimerRunning());
     }
 }
