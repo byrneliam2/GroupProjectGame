@@ -21,7 +21,7 @@ map
 //
 
 npc
-//
+//Run the test suite called allTests
 
 player
 //

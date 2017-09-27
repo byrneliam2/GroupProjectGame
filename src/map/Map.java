@@ -62,9 +62,11 @@ public class Map {
 	// Doors on the current map
 	HashMap<DoorItem, Point> Doors;
 
-	public Map(String name, HashMap<Item, Point> items, ArrayList<NPC> NPCS, HashMap<DoorItem, Point> doors) {
+	public Map(String name, Player player, HashMap<Item, Point> items, ArrayList<NPC> NPCS,
+			HashMap<DoorItem, Point> doors) {
 		this.name = name;
 		this.items = items;
+		this.currentPlayer = player;
 		this.backgroundLayer = name;
 		this.NPCS = NPCS;
 		this.Doors = doors;
@@ -230,6 +232,8 @@ public class Map {
 	 * @return
 	 */
 	public DoorItem getDoor(Rectangle boundingBox) {
+		if (Doors == null)
+			return null;
 		for (DoorItem d : this.Doors.keySet()) {
 			if (boundingBox.contains(this.Doors.get(d))) {
 				return d;
@@ -246,6 +250,8 @@ public class Map {
 	 * @return
 	 */
 	public Item getClosestItem(Ellipse2D rangeCircle) {
+		if (items == null)
+			return null;
 
 		HashMap<Item, Point> closeItems = new HashMap<Item, Point>();
 		for (Item item : this.items.keySet()) {
@@ -311,6 +317,8 @@ public class Map {
 	 * @param y
 	 */
 	public boolean canMove(int x, int y) {
+		x = (int) (x / tileSize);
+		y = (int) (y / tileSize);
 		Point mapPos = this.positionOnMap(x, y);
 		if (this.collisionLayer.get((int) mapPos.getY()).get((int) mapPos.getX()) == 1) {
 			return false;

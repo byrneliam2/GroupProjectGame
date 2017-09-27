@@ -35,7 +35,7 @@ public class MapParser {
 	 */
 	public static Map parse(String mapFileName, Player current) {
 		String fileLocation = "assets/entities/" + mapFileName;
-		InputStream in=null;
+		InputStream in = null;
 		Scanner scan = null;
 		String mapName = mapFileName;
 		HashMap<Item, Point> itms = new HashMap<Item, Point>();
@@ -69,7 +69,7 @@ public class MapParser {
 
 			}
 
-			Map n = new Map(mapName, itms, npcs, doors);
+			Map n = new Map(mapName, current, itms, npcs, doors);
 			return n;
 
 		} catch (ParseException e) {

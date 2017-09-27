@@ -34,6 +34,7 @@ public class NPC extends Player {
 		super(name, x, y);
 		this.p = mainPlayer;
 		this.control = cs;
+		super.setMap(mainPlayer.getMap());
 		npctask = new TimerTask() {
 			@Override
 			public void run() {
@@ -90,7 +91,7 @@ public class NPC extends Player {
 			angle = -Math.atan(x / y);
 		}
 
-		//TODO: Could use...
+		// TODO: Could use...
 		// MathUtils.calculateAngle(super.getxLocation(), super.getyLocation(), p.getxLocation(), p.getyLocation());
 
 		return angle;

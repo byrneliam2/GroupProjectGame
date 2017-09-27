@@ -240,18 +240,13 @@ public class Player {
 	 * @throws InvalidPlayerExceptions
 	 */
 	public boolean move(int dx, int dy) throws InvalidPlayerExceptions {
-		// Ask the map if it possible to move (((Later)))
 		int tempLocationX = dx + xLocation;
-		// make two temporary variables because I don't want to move the current status
-		// of the current Player
-		// and I pass these two temp variables to the canMove function in the map to
-		// check if it possible to make a move.
 		int tempLocationY = dy + yLocation;
 		DoorItem door = null;
 
-		// (Use the canMove() function from map class.)
-		if (map.canMove(tempLocationX, tempLocationY)) {
-		//if (true) {
+		// if (map.canMove(tempLocationX, tempLocationY)) {
+		if (true) {
+			// if (true) {
 			if ((door = map.getDoor(boundingBox)) != null) {// if player is next to a door
 				map = enterDoor(door);
 				return true;
@@ -301,20 +296,21 @@ public class Player {
 	public void shoot(double mouseX, double mouseY) throws InvalidPlayerExceptions {
 		// check if able to shoot, if can't shoot yet, throw exception...
 
-		if(isReadyToShoot) {
+		if (isReadyToShoot) {
 			isReadyToShoot = false;
 			double direction = MathUtils.calculateAngle(this.xLocation, this.yLocation, mouseX, mouseY);
-			// make new bullet and add it to bullet list in the bullet class.
-			Bullet theShoots = new Bullet(xLocation, yLocation, direction, this);
+			// make a new bullet
+			new Bullet(xLocation, yLocation, direction, this);
+			
 			// start a timer to count till when the next shot is ready to shoot....
-			TimerTask taskEvent = new TimerTask(){
+			TimerTask taskEvent = new TimerTask() {
 				public void run() {
 					isReadyToShoot = true;
 				}
 			};
-			shootTimer.schedule(taskEvent, (int)(fireRate*1000));
+			shootTimer.schedule(taskEvent, (int) (fireRate * 1000));
 			// if you can't shoot (for any reason) throw an exception...
-		}else {
+		} else {
 			throw new InvalidPlayerExceptions("You cant shoot at this stage");
 		}
 

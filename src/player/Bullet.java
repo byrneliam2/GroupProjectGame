@@ -22,7 +22,7 @@ public class Bullet {
 	/**
 	 * How quickley bullets move/are updated
 	 */
-	private static final int rateOfUpdate = 100;
+	public static final int BulletSpeed = 100;
 	/**
 	 * Timer which is responsible for updating all bullets in the bullet list.
 	 */
@@ -96,7 +96,7 @@ public class Bullet {
 				update();
 			}
 		};
-		bulletTimer.scheduleAtFixedRate(bulletTask, 0, rateOfUpdate);
+		bulletTimer.scheduleAtFixedRate(bulletTask, 0, BulletSpeed);
 	}
 
 	/**
@@ -106,7 +106,7 @@ public class Bullet {
 	private void update() {
 		currentX += updateX;
 		currentY += updateY;
-		
+
 		// if the bullet hits an immovable area, remove it.
 		if (!owner.getMap().canMove((int) currentX, (int) currentY)) {
 			removeBullet();
@@ -119,19 +119,19 @@ public class Bullet {
 
 	private void calculateUpdateAmount(double angle) {
 		if (angle < Math.PI / 2) {
-			updateY = Math.cos(angle);
+			updateY = -Math.cos(angle);
 			updateX = Math.sin(angle);
 		} else if (angle < Math.PI) {
 			angle = angle - Math.PI / 2;
-			updateY = -Math.sin(angle);
+			updateY = Math.sin(angle);
 			updateX = Math.cos(angle);
-		} else if (angle < Math.PI) {
+		} else if (angle < 3 * Math.PI / 2) {
 			angle = angle - Math.PI;
-			updateY = -Math.cos(angle);
+			updateY = Math.cos(angle);
 			updateX = -Math.sin(angle);
 		} else if (angle < 2 * Math.PI) {
 			angle = angle - 3 * Math.PI / 2;
-			updateY = Math.sin(angle);
+			updateY = -Math.sin(angle);
 			updateX = -Math.cos(angle);
 		} else {
 			throw new Error("Angle given was greater than 2Pi");
