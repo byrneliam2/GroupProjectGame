@@ -33,6 +33,8 @@ public class SettingsCard extends Card {
     @Override
     protected void doUISetup() {
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
+        // volume slider
+        components.put("volume", new JSlider());
         // back button
         components.put("back", GraphicsUtilities.produceButton(
                 ImageLoader.image("ui", "bu_back", true),
@@ -62,6 +64,7 @@ public class SettingsCard extends Card {
         panel.removeAll();
         // add the components in a top to bottom order, adding glue where we want space
         panel.add(Box.createVerticalGlue());
+        panel.add(components.get("volume"));
         panel.add(components.get("back"));
         panel.add(Box.createVerticalGlue());
     }
