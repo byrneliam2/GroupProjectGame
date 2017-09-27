@@ -53,8 +53,9 @@ public class Player {
 		this.yLocation = yLocation;
 		rangeCircle = new Ellipse2D.Double(xLocation - (rangeCircleWidth / 2), yLocation - (rangeCircleWidth / 2),
 				rangeCircleWidth, rangeCircleWidth);
-		boundingBox = new Rectangle(xLocation - (Map.tileSize / 2), yLocation - (Map.tileSize / 2), Map.tileSize,
-				Map.tileSize);
+		//boundingBox = new Rectangle(xLocation - (Map.tileSize / 2), yLocation - (Map.tileSize / 2), Map.tileSize,
+		//		Map.tileSize);
+		boundingBox = new Rectangle(xLocation, yLocation, Map.tileSize, Map.tileSize);
 	}
 
 	/**
@@ -244,16 +245,13 @@ public class Player {
 		int tempLocationY = dy + yLocation;
 		DoorItem door = null;
 
-		// if (map.canMove(tempLocationX, tempLocationY)) {
-		if (true) {
+		if (map.canMove(tempLocationX, tempLocationY)) {
 			// if (true) {
 			if ((door = map.getDoor(boundingBox)) != null) {// if player is next to a door
 				map = enterDoor(door);
 				return true;
 			} else {
-				// just a normal move on the same map and update the closest items, xLocation,
-				// yLocation, boundingBox and rangeCircle
-				// update xLocation and yLocation
+				// just a normal move
 				this.xLocation = tempLocationX;
 				this.yLocation = tempLocationY;
 				// update boundingBox and rangeCircle
@@ -301,7 +299,7 @@ public class Player {
 			double direction = MathUtils.calculateAngle(this.xLocation, this.yLocation, mouseX, mouseY);
 			// make a new bullet
 			new Bullet(xLocation, yLocation, direction, this);
-			
+
 			// start a timer to count till when the next shot is ready to shoot....
 			TimerTask taskEvent = new TimerTask() {
 				public void run() {
