@@ -115,6 +115,10 @@ public abstract class Card extends JPanel {
             this.location = location;
         }
 
+        public EntityType getType() {
+            return type;
+        }
+
         public BufferedImage getImage() {
             return image;
         }
@@ -130,6 +134,7 @@ public abstract class Card extends JPanel {
     enum EntityType {
         ITEM,
         PLAYER,
-        NPC
+        NPC,
+        SPECIAL
     }
 }

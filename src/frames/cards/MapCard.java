@@ -84,9 +84,12 @@ public class MapCard extends Card {
 
     @Override
     public void redraw() {
+        // reset the component lists
         panel.removeAll();
         entities.clear();
+        // add all entities that exist on the screen still back
         addAllEntities();
+        // draw the lot
         for (Entity e : entities) {
             JLabel l = new JLabel(new ImageIcon(e.getImage()));
             panel.add(l);
