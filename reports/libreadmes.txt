@@ -42,5 +42,8 @@ In the Player class I have implemented a pick up item which checks if an item is
 then the player can pick it up I used a Rectangle library to implement this boundingbox
 
 save_load
-A typical way of implementing a deep clone is to go through a class and write code to create new objects and copy over all of the values to these new objects. This can be a time-consuming process if the object being cloned is complicated. A simple way of performing a deep clone is for all of the classes that make up a class to implement the Serializable interface. If this is the case, we can serialize all of the values of the object and then deserialize all of these values to a new object. This in essence is a shortcut to performing a deep copy, since all of the values get copied over into new objects.
+A typical way of implementing a deep clone is to go through a class and write code to create new objects and copy over all of the values to these new objects. 
+This can be a time-consuming process if the object being cloned is complicated. A simple way of performing a deep clone is for all of the classes that make up 
+a class to implement the Serializable interface. If this is the case, we can serialize all of the values of the object and then deserialize all of these values 
+to a new object. This in essence is a shortcut to performing a deep copy, since all of the values get copied over into new objects.
 
