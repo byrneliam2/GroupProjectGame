@@ -27,7 +27,7 @@ public class AudioHandler implements IAudioHandler {
     public AudioHandler() {
         this.assetsFolder = "../assets/sounds/";
         this.musicQueue = new ArrayDeque<>();
-        setAudioVolume(0.6f);
+        this.currentVolume = 0.6f;
     }
 
     @Override
@@ -50,7 +50,10 @@ public class AudioHandler implements IAudioHandler {
 
     @Override
     public void next() {
-        if (currentSong != null) currentSong.getClip().stop();
+        if (currentSong != null) {
+            currentSong.getClip().stop();
+            return;
+        }
         if (musicQueue.isEmpty()) return;
 
         currentSong = musicQueue.poll();

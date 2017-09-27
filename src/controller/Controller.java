@@ -20,13 +20,13 @@ public class Controller extends KeyAdapter {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		super.keyPressed(e);
-		processInput(e.getKeyCode(), true);
+		processInput(e.getKeyCode());
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		super.keyReleased(e);
-		processInput(e.getKeyCode(), false);
+		processInput(e.getKeyCode());
 	}
 
 	/**
@@ -34,14 +34,11 @@ public class Controller extends KeyAdapter {
 	 * 
 	 * @param keybind
 	 *            the key the user pressed
-	 * @param state
-	 *            if the user pressed (true) or released (false) the key
 	 * @return true if the input succeeded, false if it didn't exist or failed.
 	 */
-	public boolean processInput(int keybind, boolean state) {
-		System.out.println(keybind);
+	public boolean processInput(int keybind) {
 		try {
-			// TODO: ALL MOVEMENT KEYS ARE INCORRECT (NEED STATE AT THE END WHEN DISCUSSED)
+			System.out.println(keybind);
 			if (keybind == KEY_UP.getKeybind()) {
 				return model.movePlayer(0, -1);
 			} else if (keybind == KEY_DOWN.getKeybind()) {
@@ -51,7 +48,6 @@ public class Controller extends KeyAdapter {
 			} else if (keybind == KEY_RIGHT.getKeybind()) {
 				return model.movePlayer(1, 0);
 			}
-			// TODO: THIS SHOULD BE THE ONLY KEY ALL INTERACTIONS
 			else if (keybind == KEY_USE.getKeybind()) {
 				model.interact();
 				return true;
