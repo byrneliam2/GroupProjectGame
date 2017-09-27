@@ -186,10 +186,10 @@ public class MainDisplay extends JComponent implements Observer {
         master.dispose();
     }
 
-    /**
-     * Return the display's {@link IAudioHandler}. This is used by the cards to
-     * trigger sound effects.
-     */
+    public Timer getTimer() {
+        return timer;
+    }
+
     public IAudioHandler getAudioHandler() {
         return audioHandler;
     }

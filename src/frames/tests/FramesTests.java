@@ -16,6 +16,9 @@ import org.junit.runners.MethodSorters;
 
 import javax.swing.*;
 
+import static junit.framework.TestCase.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class FramesTests {
 
@@ -24,7 +27,11 @@ public class FramesTests {
         Thread.sleep(3000);
     }
 
-    /* ======================================================== */
+    /* ============================================================================== */
+
+    // Note the usage of MockGame within these tests.
+    // Where the details of the game are not required, the MockGame is used.
+    // The Game class is only used where required.
 
     @Test
     public void test01_LaunchNoExceptions() {
@@ -62,11 +69,7 @@ public class FramesTests {
         }
     }
 
-    /**
-     * WARNING: This test uses the Game class, which links it to the model!
-     * (A requirement since this tests the display of game maps)
-     */
-    @Ignore //@Test
+    @Test
     public void test04_MapCardDisplay() {
         try {
             MainDisplay m = new MainDisplay(new Game());
@@ -80,27 +83,26 @@ public class FramesTests {
 
     @Test
     public void test05_ScreenHistory() {
-        try {
-            MainDisplay m = new MainDisplay(new MockGame());
-            m.enableInputMethods(false);
-            m.update(null, "pause");
-            m.update(null, "last");
-            killIn3Sec(m);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        MainDisplay m = new MainDisplay(new MockGame());
+        m.enableInputMethods(false);
+        m.update(null, "pause");
+        m.update(null, "last");
     }
 
     @Test
     public void test06_DisplayingMapData() {
-        try {
-            MainDisplay m = new MainDisplay(new Game());
-            m.enableInputMethods(false);
-            m.update(null, "Map3");
-            // TODO check item positions
-            killIn3Sec(m);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        MainDisplay m = new MainDisplay(new Game());
+        m.enableInputMethods(false);
+        m.update(null, "Map3");
+        // TODO check item positions
+    }
+
+    @Test
+    public void test07_Timer() {
+        MainDisplay m = new MainDisplay(new Game());
+        m.start();
+        assertTrue(m.getTimer().isRunning());
+        m.stop();
+        assertFalse(m.getTimer().isRunning());
     }
 }
