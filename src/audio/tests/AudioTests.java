@@ -12,13 +12,10 @@ import javax.swing.*;
 
 import static org.junit.Assert.*;
 
-/**
- * Relies on Automated Testing
- */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class AudioTests {
 
-    //Track.class (and children)
+    //Track Interface and Implemented enums
 
     @Test
     public void test01_MusicTrack(){
@@ -32,17 +29,32 @@ public class AudioTests {
         assertTrue(track.getSoundFile().contains("click.wav"));
     }
 
-    //AudioHandler.class (Automated)
+    //AudioHandler.class Testing
 
     @Test
-    public void test03_playSound() throws InterruptedException{
+    public void test03_testInvalidSong() throws InterruptedException{
         IAudioHandler audio = new AudioHandler();
+        try {
+            audio.playSound(() -> "not_valid_track.mp3");
+            fail("Should have failed");
+        } catch (AudioException ignored) {}
+    }
+
+    /**
+     * Automated Testing: A valid test is determined by two clicks.
+     */
+
+    @Test
+    public void test04_playSound() throws InterruptedException{
+        IAudioHandler audio = new AudioHandler();
+        audio.playSound(SoundTrack.CLICK);
+        Thread.sleep(500);
         audio.playSound(SoundTrack.CLICK);
         Thread.sleep(1000);
     }
 
     @Test
-    public void test04_queueMusic() throws InterruptedException{
+    public void test05_queueMusic() throws InterruptedException{
         IAudioHandler audio = new AudioHandler();
         audio.queueMusic(SoundTrack.CLICK);
         audio.queueMusic(SoundTrack.CLICK);
@@ -50,8 +62,9 @@ public class AudioTests {
     }
 
     @Test
-    public void test05_next() throws InterruptedException{
+    public void test06_next() throws InterruptedException{
         IAudioHandler audio = new AudioHandler();
+        audio.queueMusic(SoundTrack.CLICK);
         audio.queueMusic(SoundTrack.CLICK);
         audio.queueMusic(SoundTrack.CLICK);
         audio.next();
@@ -59,7 +72,7 @@ public class AudioTests {
     }
 
     @Test
-    public void test06_forceMusic() throws InterruptedException{
+    public void test07_forceMusic() throws InterruptedException{
         IAudioHandler audio = new AudioHandler();
         audio.queueMusic(SoundTrack.CLICK);
         audio.queueMusic(SoundTrack.CLICK);
@@ -68,7 +81,7 @@ public class AudioTests {
     }
 
     @Test
-    public void test07_volumeControl() throws InterruptedException{
+    public void test08_volumeControl() throws InterruptedException{
         IAudioHandler audio = new AudioHandler();
         audio.setAudioVolume(1.0f);
         audio.playSound(SoundTrack.CLICK);
@@ -79,15 +92,6 @@ public class AudioTests {
         audio.setAudioVolume(0.0f);
         audio.playSound(SoundTrack.CLICK);
         Thread.sleep(1000);
-    }
-
-    @Test
-    public void test08_testInvalidSong() throws InterruptedException{
-        IAudioHandler audio = new AudioHandler();
-        try {
-            audio.playSound(() -> "not_valid_track.mp3");
-            fail("Should have failed");
-        } catch (AudioException ignored) {}
     }
 
 }
