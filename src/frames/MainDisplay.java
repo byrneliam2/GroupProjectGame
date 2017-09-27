@@ -117,6 +117,7 @@ public class MainDisplay extends JComponent implements Observer {
 
         // finally, make the menu screen visible
         switchScreen("menu");
+        //audioHandler.queueMusic(MusicTrack.TEST_MUSIC);
     }
 
     /**
@@ -152,7 +153,6 @@ public class MainDisplay extends JComponent implements Observer {
     public void start() {
         game.unPauseGame();
         switchScreen(game.getWorld().getStartingMap().getMapName());
-        //switchScreen("Map3");
         (timer = new Timer(16, (e) -> redraw())).start();
     }
 
