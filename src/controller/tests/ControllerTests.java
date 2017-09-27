@@ -121,7 +121,7 @@ public class ControllerTests {
     public void test12_moveUp() {
         MousePosition mouse = new MousePosition();
         MockGame game = new MockGame() {
-            public boolean movePlayer(int dx, int dy) throws InvalidPlayerExceptions { return (dx == 0 && dy == -1); }
+            public boolean movePlayer(int dx, int dy) throws InvalidPlayerExceptions { return dy < 0; }
         };
         Controller c = new Controller(game, mouse);
         assertTrue(c.processInput(KeyEvent.VK_W, true));
@@ -131,7 +131,7 @@ public class ControllerTests {
     public void test13_moveDown() {
         MousePosition mouse = new MousePosition();
         MockGame game = new MockGame() {
-            public boolean movePlayer(int dx, int dy) throws InvalidPlayerExceptions { return (dx == 0 && dy == 1); }
+            public boolean movePlayer(int dx, int dy) throws InvalidPlayerExceptions { return dy > 0; }
         };
         Controller c = new Controller(game, mouse);
         assertTrue(c.processInput(KeyEvent.VK_S, true));
@@ -141,7 +141,7 @@ public class ControllerTests {
     public void test14_moveLeft() {
         MousePosition mouse = new MousePosition();
         MockGame game = new MockGame() {
-            public boolean movePlayer(int dx, int dy) throws InvalidPlayerExceptions { return (dx == -1 && dy == 0); }
+            public boolean movePlayer(int dx, int dy) throws InvalidPlayerExceptions { return dx < 0; }
         };
         Controller c = new Controller(game, mouse);
         assertTrue(c.processInput(KeyEvent.VK_A, true));
@@ -151,7 +151,7 @@ public class ControllerTests {
     public void test15_moveRight() {
         MousePosition mouse = new MousePosition();
         MockGame game = new MockGame() {
-            public boolean movePlayer(int dx, int dy) throws InvalidPlayerExceptions { return (dx == 1 && dy == 0); }
+            public boolean movePlayer(int dx, int dy) throws InvalidPlayerExceptions { return dx > 1; }
         };
         Controller c = new Controller(game, mouse);
         assertTrue(c.processInput(KeyEvent.VK_D, true));

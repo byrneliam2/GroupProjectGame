@@ -37,8 +37,9 @@ public class Controller extends KeyAdapter {
      * @return true if the input succeeded, false if it didn't exist or failed.
      */
     public boolean processInput(int keybind, boolean state){
+        System.out.println(keybind);
         try {
-            //TODO: ALL MOVEMENT KEYS ARE INCORRECT
+            //TODO: ALL MOVEMENT KEYS ARE INCORRECT (NEED STATE AT THE END WHEN DISCUSSED)
             if (keybind == KEY_UP.getKeybind()) {
                 return model.movePlayer(0, -10);
             }
