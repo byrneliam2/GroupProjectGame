@@ -22,16 +22,18 @@ public class AudioHandler implements IAudioHandler {
     private AudioClip currentSong;
     private Deque<AudioClip> musicQueue;
 
-    private int volume = -20;
+    private float currentVolume;
 
     public AudioHandler() {
         this.assetsFolder = "../assets/sounds/";
         this.musicQueue = new ArrayDeque<>();
+        setAudioVolume(0.6f);
     }
 
     @Override
     public void playSound(Track track) {
-        startClip(createAudioClip(track, false));
+        AudioClip clip = createAudioClip(track, false);
+        startClip(clip);
     }
 
     @Override
@@ -55,25 +57,15 @@ public class AudioHandler implements IAudioHandler {
         startClip(currentSong);
     }
 
-    private void startClip(AudioClip clip) {
-        try {
-            AudioInputStream stream = AudioSystem.getAudioInputStream(getClass().getResourceAsStream(clip.getPath()));
-            clip.getClip().open(stream);
+    @Override
+    public void setAudioVolume(float percentage) {
+        if(percentage < 0.0f) percentage = 0.0f;
+        else if(percentage > 1.0f) percentage = 1.0f;
+        this.currentVolume = percentage;
 
-            FloatControl volumeControl = (FloatControl) clip.getClip().getControl(FloatControl.Type.MASTER_GAIN);
-            volumeControl.setValue(this.volume);
-
-            clip.getClip().start();
-        } catch (Exception e) {
-            throw new AudioException("Encountered Issue when starting AudioClip");
-        }
+        if(currentSong != null) setClipVolume(currentSong);
     }
 
-    /**
-     * When called, this method will create a new Clip provided by the AudioSystem Class.
-     *
-     * @return Generated Clip Object.
-     */
     private AudioClip createAudioClip(Track track, boolean wasQueued) {
         try {
             AudioClip audioClip = new AudioClip(AudioSystem.getClip(), track);
@@ -93,23 +85,41 @@ public class AudioHandler implements IAudioHandler {
         }
     }
 
+    private void startClip(AudioClip clip) {
+        try {
+            AudioInputStream stream = AudioSystem.getAudioInputStream(getClass().getResourceAsStream(clip.getPath()));
+
+            clip.getClip().open(stream);
+            setClipVolume(clip);
+            clip.getClip().start();
+        } catch (Exception e) {
+            throw new AudioException("Encountered Issue when starting AudioClip");
+        }
+    }
+
+    private void setClipVolume(AudioClip clip){
+        FloatControl volume = (FloatControl) clip.getClip().getControl(FloatControl.Type.MASTER_GAIN);
+        BooleanControl mute = (BooleanControl) clip.getClip().getControl(BooleanControl.Type.MUTE);
+
+        if(currentVolume == 0.0f) mute.setValue(true);
+        else {
+            volume.setValue((int) (-50 + (50 * currentVolume)));
+            mute.setValue(false);
+        }
+    }
+
+
     private class AudioClip {
         private String path;
         private Clip clip;
-        private Track track;
 
         private AudioClip(Clip clip, Track track) {
             this.clip = clip;
-            this.track = track;
             this.path = String.format("%s%s", assetsFolder, track.getSoundFile());
         }
 
         private Clip getClip() {
             return this.clip;
-        }
-
-        public Track getTrack() {
-            return track;
         }
 
         private String getPath() {

@@ -30,4 +30,10 @@ public interface IAudioHandler {
      * If another song doesn't exist, the next() method will just return.
      */
     public void next();
+
+    /**
+     * Allow for the implementer to change the volume for all audio-tracks being played.
+     * @param percentage A value between 0.0f and 1.0f
+     */
+    public void setAudioVolume(float percentage);
 }
