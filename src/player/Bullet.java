@@ -106,9 +106,8 @@ public class Bullet {
 	private void update() {
 		currentX += updateX;
 		currentY += updateY;
+		
 		// if the bullet hits an immovable area, remove it.
-		if (owner.getMap() == null)
-			System.out.println("ghdfg");
 		if (!owner.getMap().canMove((int) currentX, (int) currentY)) {
 			removeBullet();
 		}
