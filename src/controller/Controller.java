@@ -38,7 +38,6 @@ public class Controller extends KeyAdapter {
 	 */
 	public boolean processInput(int keybind) {
 		try {
-			System.out.println(keybind);
 			if (keybind == KEY_UP.getKeybind()) {
 				return model.movePlayer(0, -1);
 			} else if (keybind == KEY_DOWN.getKeybind()) {

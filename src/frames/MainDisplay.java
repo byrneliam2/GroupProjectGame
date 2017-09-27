@@ -69,6 +69,7 @@ public class MainDisplay extends JComponent implements Observer {
         keyboard = new Controller(game, mouse);
         master.addKeyListener(keyboard);
         master.addMouseMotionListener(mouse);
+        master.setFocusable(true);
 
         // this component setup
         this.setLayout(new CardLayout());
