@@ -21,7 +21,7 @@ public class WorldParserTests {
 		p1.setMap(w.getStartingMap());
 	}
 	
-	@Test
+	@Test(expected = ParseException.class)
 	public void incorrectmapPathways() throws ParseException, BadMapImageException, IOException{
 		Player p1 = new Player("Tom", 50, 50);
 		World w = WorldParser.parse("vfbsf",p1);
