@@ -32,8 +32,12 @@ public class MapParser {
 
 	/**
 	 * This method reads a map text file and returns a new map
+	 * 
+	 * @throws ParseException
+	 * @throws IOException 
+	 * @throws BadMapImageException 
 	 */
-	public static Map parse(String mapFileName, Player current) {
+	public static Map parse(String mapFileName, Player current) throws ParseException, BadMapImageException, IOException {
 		String fileLocation = "assets/entities/" + mapFileName;
 		InputStream in = null;
 		Scanner scan = null;
@@ -72,11 +76,6 @@ public class MapParser {
 			Map n = new Map(mapName, current, itms, npcs, doors);
 			return n;
 
-		} catch (ParseException e) {
-
-			e.printStackTrace();
-			System.out.println(e.getMessage());
-
 		} finally {
 
 			if (scan != null) {
@@ -92,7 +91,6 @@ public class MapParser {
 			}
 
 		}
-		return null;
 	}
 
 	public static String require(String token, Scanner scan) throws ParseException {

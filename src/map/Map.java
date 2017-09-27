@@ -51,7 +51,11 @@ public class Map {
 	private ArrayList<ArrayList<Integer>> collisionLayer;
 
 	// 2D array of all the images that make up the environmental layer
-	private ArrayList<ArrayList<BufferedImage>> environmentalLayer;
+	// Black(1) is for death
+	// Green(2) is for mud
+	// Blue(4) is for mist
+	// Red(3) is for fire
+	private ArrayList<ArrayList<Integer>> environmentalLayer;
 
 	// The current player
 	private Player currentPlayer;
@@ -63,7 +67,7 @@ public class Map {
 	HashMap<DoorItem, Point> Doors;
 
 	public Map(String name, Player player, HashMap<Item, Point> items, ArrayList<NPC> NPCS,
-			HashMap<DoorItem, Point> doors) {
+			HashMap<DoorItem, Point> doors) throws BadMapImageException, IOException {
 		this.name = name;
 		this.items = items;
 		this.currentPlayer = player;
@@ -72,8 +76,8 @@ public class Map {
 		this.Doors = doors;
 		BufferedImage colLayer = this.loadImage(this.name, "Collision");
 		this.collisionLayer = this.loadColLayers(colLayer);
-		// BufferedImage enviromentLayer = this.loadImage(this.name, "Environment");
-		// this.environmentalLayer = this.breakUpImageIntoTiles(enviromentLayer);
+		BufferedImage enviromentLayer = this.loadImage(this.name, "Environment");
+		this.environmentalLayer = this.loadEnvLayers(enviromentLayer);
 	}
 
 	/**
@@ -84,19 +88,17 @@ public class Map {
 	 * @param layer
 	 * @return BufferedImage representing the layer of a given map
 	 * @throws BadMapImageException
+	 * @throws IOException
 	 */
-	private BufferedImage loadImage(String mapName, String layer) {
+	private BufferedImage loadImage(String mapName, String layer) throws BadMapImageException, IOException {
 		BufferedImage img = null;
-		try {
-			img = ImageIO.read(Map.class.getResource("assets/mapImages/" + mapName + layer + ".png"));
-			if (img.getHeight() % 32 > 0 || img.getWidth() % 32 > 0) {
-				throw new BadMapImageException(
-						"The image you are trying to load does not have the correct Dimensions, Dimensions should be a factor of 32, the Global tile size.");
-			}
-		} catch (IOException | BadMapImageException e) {
-			e.printStackTrace();
-			System.out.println(e.getMessage());
+
+		img = ImageIO.read(Map.class.getResource("assets/mapImages/" + mapName + layer + ".png"));
+		if (img.getHeight() % 32 > 0 || img.getWidth() % 32 > 0) {
+			throw new BadMapImageException(
+					"The image you are trying to load does not have the correct Dimensions, Dimensions should be a factor of 32, the Global tile size.");
 		}
+
 		return img;
 	}
 
@@ -141,8 +143,6 @@ public class Map {
 	 * @return
 	 */
 	private ArrayList<ArrayList<Integer>> loadEnvLayers(BufferedImage EnviroLayerUnbroken) {
-		this.width = EnviroLayerUnbroken.getWidth() / 32;
-		this.height = EnviroLayerUnbroken.getHeight() / 32;
 		ArrayList<ArrayList<BufferedImage>> EnvLayer = this.breakUpImageIntoTiles(EnviroLayerUnbroken);
 
 		ArrayList<ArrayList<Integer>> EnvironmentalLayer = new ArrayList<ArrayList<Integer>>();
@@ -153,16 +153,19 @@ public class Map {
 		for (int col = 0; col < this.height; col++) {
 			for (int row = 0; row < this.width; row++) {
 				Color c = new Color(EnvLayer.get(col).get(row).getRGB(1, 1));
-				if (c.getGreen() == 0 && c.getRed() == 0 && c.getBlue() == 0) {
+				if (c.getGreen() == 0 && c.getRed() == 0 && c.getBlue() == 0) {// Black(1) is for death environment
 					EnvironmentalLayer.get(col).add(1);
-				} else if (c.getGreen() == 255 && c.getRed() == 0 && c.getBlue() == 0) {
+				} else if (c.getGreen() == 255 && c.getRed() == 0 && c.getBlue() == 0) {// Green(2) is for mud
+																						// environment
 					EnvironmentalLayer.get(col).add(2);
-				} else if (c.getGreen() == 0 && c.getRed() == 255 && c.getBlue() == 0) {
+				} else if (c.getGreen() == 0 && c.getRed() == 255 && c.getBlue() == 0) {// Red(3) is for fire
+																						// environment
 					EnvironmentalLayer.get(col).add(3);
-				} else if (c.getGreen() == 0 && c.getRed() == 0 && c.getBlue() == 255) {
+				} else if (c.getGreen() == 0 && c.getRed() == 0 && c.getBlue() == 255) {// Blue(4) is for mist
+																						// environment
 					EnvironmentalLayer.get(col).add(4);
 				} else {
-					EnvironmentalLayer.get(col).add(0);
+					EnvironmentalLayer.get(col).add(0);// (0) is for no environment
 				}
 
 			}
@@ -250,12 +253,15 @@ public class Map {
 	 * @return
 	 */
 	public Item getClosestItem(Ellipse2D rangeCircle) {
+		int middle = Map.tileSize / 2;
 		if (items == null)
 			return null;
 
 		HashMap<Item, Point> closeItems = new HashMap<Item, Point>();
 		for (Item item : this.items.keySet()) {
-			if (rangeCircle.contains(this.items.get(item))) {
+			// this.items.get(item)
+			if (rangeCircle.contains(new Point((int) this.items.get(item).getX() + middle,
+					(int) this.items.get(item).getY() + middle))) {
 				closeItems.put(item, this.items.get(item));
 			}
 		}
@@ -264,8 +270,8 @@ public class Map {
 		Item closest = null;
 		double closestDistanceFromCenter = Double.MAX_VALUE;
 		for (Item item : closeItems.keySet()) {
-			double itemX = this.items.get(item).getX();
-			double itemY = this.items.get(item).getY();
+			double itemX = this.items.get(item).getX() + middle;
+			double itemY = this.items.get(item).getY() + middle;
 
 			double distX = Math.abs(centerX - itemX);
 			double distY = Math.abs(centerY - itemY);
@@ -311,7 +317,7 @@ public class Map {
 
 	/**
 	 * This method decides whether a position on the map can be moved over by a
-	 * entity
+	 * entity, if the x and y is out of the map returns false
 	 *
 	 * @param x
 	 * @param y
@@ -319,12 +325,63 @@ public class Map {
 	public boolean canMove(int x, int y) {
 		x = (int) (x / tileSize);
 		y = (int) (y / tileSize);
+		if (x < 0 || y < 0 || (x + this.width) > 0 || (y + this.height) > 0) {
+			return false;
+		}
 		Point mapPos = this.positionOnMap(x, y);
 		if (this.collisionLayer.get((int) mapPos.getY()).get((int) mapPos.getX()) == 1) {
 			return false;
 		} else {
 			return true;
 		}
+	}
+
+	/**
+	 * This method decides whether a position on the map can be moved over by a
+	 * rectangle, using the rectangles four corners
+	 * 
+	 * @param r
+	 * @return
+	 */
+	public boolean canMove(Rectangle r) {
+
+		double topLx = r.getX();
+		double topLy = r.getY();
+		if (this.collisionLayer.get((int) (topLy / Map.tileSize)).get((int) (topLx / Map.tileSize)) == 1) {
+			return false;
+		}
+		if (((int) (topLx / Map.tileSize)) < 0 || ((int) (topLy / Map.tileSize)) < 0) {
+			return false;
+		}
+
+		double topRx = r.getX() + r.getWidth();
+		double topRy = r.getY();
+		if (this.collisionLayer.get((int) (topRy / Map.tileSize)).get((int) (topRx / Map.tileSize)) == 1) {
+			return false;
+		}
+		if (((int) (topRx / Map.tileSize)) > 0 || ((int) (topRy / Map.tileSize)) > 0) {
+			return false;
+		}
+
+		double botLx = r.getX();
+		double botLy = r.getY() + r.getHeight();
+		if (this.collisionLayer.get((int) (botLy / Map.tileSize)).get((int) (botLx / Map.tileSize)) == 1) {
+			return false;
+		}
+		if (((int) (botLx / Map.tileSize)) < 0 || ((int) (botLy / Map.tileSize)) < 0) {
+			return false;
+		}
+
+		double botRx = r.getX() + r.getWidth();
+		double botRy = r.getY() + r.getHeight();
+		if (this.collisionLayer.get((int) (botRy / Map.tileSize)).get((int) (botRx / Map.tileSize)) == 1) {
+			return false;
+		}
+		if (((int) (botRx / Map.tileSize)) > 0 || ((int) (botRy / Map.tileSize)) > 0) {
+			return false;
+		}
+
+		return true;
 	}
 
 	/**
@@ -347,15 +404,29 @@ public class Map {
 
 	/**
 	 * This method returns the environment on a given tile specified by a x and y
-	 * value, returns null if there is no item. Returns an exception if the x or y
-	 * position is invalid.
+	 * value, returns null if there is no environment. Returns an exception if the x
+	 * or y position is invalid. //Black(1) is for death //Green(2) is for mud
+	 * //Blue(4) is for mist //Red(3) is for fire
 	 *
 	 * @param x
 	 * @param y
 	 * @return The environment on the tile at x,y
 	 */
 	public Environment onEnviromentTile(int x, int y) {
-		return null;
+		x = (int) (x / tileSize);
+		y = (int) (y / tileSize);
+		int environment = this.environmentalLayer.get(y).get(x);
+		if (environment == 0) {
+			return null;
+		} else if (environment == 1) {
+			return Environment.DEATH;
+		} else if (environment == 2) {
+			return Environment.MUD;
+		} else if (environment == 3) {
+			return Environment.FIRE;
+		} else {
+			return Environment.MIST;
+		}
 	}
 
 	/**
@@ -365,8 +436,8 @@ public class Map {
 	 * @param y
 	 * @return
 	 */
-	public boolean itemAtTile(double x, double y) {
-		Point pos = this.positionOnMap(x, y);
+	public boolean itemAtTile(int x, int y) {
+		Point pos = new Point((int) x / Map.tileSize, (int) y / Map.tileSize);
 		for (Item itm : this.items.keySet()) {
 			if (this.items.get(itm).getX() == pos.getX() && this.items.get(itm).getY() == pos.getY()) {
 				return true;
@@ -383,8 +454,8 @@ public class Map {
 	 * @param y
 	 * @return
 	 */
-	public Item itemAt(double x, double y) {
-		Point pos = this.positionOnMap(x, y);
+	public Item itemAt(int x, int y) {
+		Point pos = new Point((int) x / Map.tileSize, (int) y / Map.tileSize);
 		for (Item itm : this.items.keySet()) {
 			if (this.items.get(itm).getX() == pos.getX() && this.items.get(itm).getY() == pos.getY()) {
 				return itm;

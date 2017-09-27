@@ -25,17 +25,21 @@ public class WorldParser {
 
 	/**
 	 * This method reads a world text file and returns a new world.
+	 * 
+	 * @throws ParseException
+	 * @throws IOException 
+	 * @throws BadMapImageException 
 	 */
-	public static World parse(String worldFileName, Player current) {
+	public static World parse(String worldFileName, Player current) throws ParseException, BadMapImageException, IOException {
 		HashMap<String, Map> maps = new HashMap<String, Map>();
-		InputStream in=null;
+		InputStream in = null;
 		String fileLocation = "assets/" + worldFileName;
 		Scanner scan = null;
 
 		try {
 			in = WorldParser.class.getResourceAsStream(fileLocation);
-			if(in == null) {
-				throw new ParseException("The world file "+fileLocation+" does not exist");
+			if (in == null) {
+				throw new ParseException("The world file " + fileLocation + " does not exist");
 			}
 			scan = new Scanner(in);
 			if (!scan.hasNext()) {
@@ -48,11 +52,6 @@ public class WorldParser {
 
 			World n = new World(maps);
 			return n;
-
-		} catch (ParseException e) {
-
-			e.printStackTrace();
-			System.out.println(e.getMessage());
 
 		} finally {
 
@@ -69,7 +68,6 @@ public class WorldParser {
 			}
 
 		}
-		return null;
 	}
 
 	public String require(String token, Scanner scan) throws ParseException {

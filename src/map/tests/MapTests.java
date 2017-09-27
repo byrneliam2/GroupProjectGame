@@ -2,14 +2,17 @@ package map.tests;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
+
 import org.junit.Test;
 
+import map.BadMapImageException;
 import map.Map;
 
 public class MapTests {
 
 	@Test
-	public void testCanMove() {
+	public void testCanMove() throws BadMapImageException, IOException {
 		Map m = new Map("map1", null, null, null, null);
 
 		assertFalse(m.canMove(0, 0));
