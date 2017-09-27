@@ -15,13 +15,13 @@ gfx
 All tests can be run as a suite by using the AllGFXTests class.
 
 items
-//
+// Run the tests from the items.tests package.
 
 map
 //
 
 npc
-//Run the test suite called allTests
+//Run the test suite called allTests, havent tested them on other computers yet however (which might cause issues with the simultaneous threads)
 
 player
 //
