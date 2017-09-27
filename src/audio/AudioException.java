@@ -1,10 +1,10 @@
 package audio;
 
 /**
- * This Class is Thrown when AudioHandler encounters an error attempting to play/queue a sound file.
+ * This Class is Thrown when classes implementing IAudioHandler encounter an error attempting to play/queue a sound file.
  */
 public class AudioException extends RuntimeException{
-    public AudioException(String message) {
+    AudioException(String message) {
         super(message);
     }
 }

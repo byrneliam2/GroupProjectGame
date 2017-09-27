@@ -12,9 +12,9 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 /**
- * The AudioHandler, once created by the VIEW, will allow for program to request Background-Music and Sound-Effects
- * to run concurrently as the program runs. This Class creates separate threads for handling the music-queue and different
- * sound effects, without stalling the main game Thread when a Sound-File is Requested.
+ * The AudioHandler, once created by the VIEW, will allow for program to queue Background-Music, and play Sound Effects
+ * on the fly. The AudioLevels of the sound-files can be changed during runtime to allow the user to set their preferred
+ * audio levels if the current setup is too loud, or too quiet.
  */
 public class AudioHandler implements IAudioHandler {
     private String assetsFolder;
@@ -50,34 +50,47 @@ public class AudioHandler implements IAudioHandler {
 
     @Override
     public void next() {
+        //Stop the current song if it is currently playing
         if (currentSong != null) {
             currentSong.getClip().stop();
             return;
         }
         if (musicQueue.isEmpty()) return;
-
+        //Play the next song in queue
         currentSong = musicQueue.poll();
         startClip(currentSong);
     }
 
     @Override
     public void setAudioVolume(float percentage) {
+        //Check that the audio is in bounds
         if(percentage < 0.0f) percentage = 0.0f;
         else if(percentage > 1.0f) percentage = 1.0f;
         this.currentVolume = percentage;
-
+        //Change the volume setting, and change song that is currently being played
         if(currentSong != null) setClipVolume(currentSong);
     }
 
+    /**
+     * This method is used to create an AudioClip, AudioClips are used by the program to store all data (Clips/FilePaths)
+     * which are required for music to be played. This simplifies setup and allows for each Clip to automatically
+     * close the AudioStream to prevent Memory leaks.
+     * @param track Used to store the filename in the AudioClip object.
+     * @param wasQueued Tells the AudioHandler to automatically skip to the next song.
+     * @return The Created AudioClip Object.
+     */
     private AudioClip createAudioClip(Track track, boolean wasQueued) {
         try {
+            //Create the AudioClip
             AudioClip audioClip = new AudioClip(AudioSystem.getClip(), track);
             audioClip.getClip().addLineListener(e -> {
                 if (e.getType().equals(LineEvent.Type.STOP)) {
+                    //Enqueue next song on end
                     if (wasQueued) {
                         this.currentSong = null;
                         next();
                     }
+                    //Close the Stream to save memory
                     e.getLine().close();
                 }
             });
@@ -88,10 +101,14 @@ public class AudioHandler implements IAudioHandler {
         }
     }
 
+    /**
+     * This method is called to start a new clip (when the next song is enqueued, or when a sound-effect is required).
+     * This allows for an AudioInputStream to be opened, and for the volume to be changed to the preferred settings.
+     * @param clip The AudioClip that needs to be played.
+     */
     private void startClip(AudioClip clip) {
         try {
             AudioInputStream stream = AudioSystem.getAudioInputStream(getClass().getResourceAsStream(clip.getPath()));
-
             clip.getClip().open(stream);
             setClipVolume(clip);
             clip.getClip().start();
@@ -100,6 +117,11 @@ public class AudioHandler implements IAudioHandler {
         }
     }
 
+    /**
+     * This method will change the volume of the clip to the current settings, if the current settings are at 0%,
+     * the sound-file will be muted.
+     * @param clip The AudioClip that needs to have it's sound set / Muted
+     */
     private void setClipVolume(AudioClip clip){
         FloatControl volume = (FloatControl) clip.getClip().getControl(FloatControl.Type.MASTER_GAIN);
         BooleanControl mute = (BooleanControl) clip.getClip().getControl(BooleanControl.Type.MUTE);
@@ -112,6 +134,11 @@ public class AudioHandler implements IAudioHandler {
     }
 
 
+    /**
+     * The AudioClip class stores all data required by the AudioHandler to play a Sound-Effect or Play Music.
+     * This class can only be created by the AudioHandler, to be used by the AudioHandler. If a user wishes to play
+     * a song, they will need to select an enum which extends the 'Track' interface.
+     */
     private class AudioClip {
         private String path;
         private Clip clip;

@@ -8,13 +8,13 @@ public enum SoundTrack implements Track{
     /* Sound Files */
     CLICK("click.wav");
 
-    private String filepath;
+    private String filename;
 
     SoundTrack(String musicTrack) {
-        this.filepath = musicTrack;
+        this.filename = musicTrack;
     }
 
     public String getSoundFile() {
-        return ("effects/" +  filepath);
+        return ("effects/" + filename);
     }
 }

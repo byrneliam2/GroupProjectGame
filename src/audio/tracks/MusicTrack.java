@@ -8,13 +8,13 @@ public enum MusicTrack implements Track{
     /* Music Files */
     TEST_MUSIC("test_track.wav");
 
-    private String filepath;
+    private String filename;
 
     MusicTrack(String musicTrack) {
-        this.filepath = musicTrack;
+        this.filename = musicTrack;
     }
 
     public String getSoundFile() {
-        return ("music/" +  filepath);
+        return ("music/" + filename);
     }
 }
