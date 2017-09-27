@@ -5,10 +5,15 @@ Each package has it's own test package which contains different class to test di
 of the package.
 
 audio
-//
+All tests for this Library can be located in 'audio.tests.AudioTests' using JUnit4.
+Please note:
+    Some tests requires the user to listen to different 'clicks' for each method.
+    When you encounter these tests, the 'correct output' occurs when a test plays
+    a 'Click' sound twice (which could be at different volumes).
 
 controller
-//
+The movement controls for the Controller library can be tested by running the 'Launcher', and starting a game.
+Each test can be run from the 'controller.tests.ControllerTests' using JUnit4.
 
 frames
 Run Launcher to launch game and see frames library in use.
