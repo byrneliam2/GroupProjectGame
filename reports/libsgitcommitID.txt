@@ -11,5 +11,5 @@ gfx                 850b7c7
 items               23e1978b
 map                 //
 npc                 7ea14cdb
-player              //
-save_load           //
+player              7183afcf
+save_load           7183afcf
