@@ -26,7 +26,7 @@ public class AudioTests {
         assertTrue(track.getSoundFile().contains("click.wav"));
     }
 
-    //AudioHandler
+    //AudioHandler.class
 
 
 
