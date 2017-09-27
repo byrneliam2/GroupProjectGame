@@ -1,6 +1,9 @@
 SWEN 222
 Team SnicketySnacks (James Watt, Thomas Edwards, Liam Byrne, Mohsen Javaher, Andrew McManaway)
 
+Each package has it's own test package which contains different class to test different aspects 
+of the package.
+
 audio
 //
 
@@ -15,16 +18,20 @@ gfx
 All tests can be run as a suite by using the AllGFXTests class.
 
 items
-// Run the tests from the items.tests package.
+Contains the itemList folder which is simply a list of all the current actual items
+in the game.
+Run the tests from the items.tests package. Not many tests implemented yet.
 
 map
 //
 
 npc
-//Run the test suite called allTests, havent tested them on other computers yet however (which might cause issues with the simultaneous threads)
+Package uses a Strategy design pattern.
+Run the test suite called allTests, havent tested them on other computers yet.
+(which might cause issues because of the simultaneous threads)
 
 player
-//
+Shooting tests mostly implemented and working well.... (Mohesn->...
 
 save_load
 //
