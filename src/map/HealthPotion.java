@@ -15,8 +15,8 @@ public class HealthPotion {
 		Item hp = new HealthPot();
 		int x = MapParser.requireInteger(scan);
 		int y = MapParser.requireInteger(scan);
-		hp.setX(x);
-		hp.setY(y);
+		hp.setX(x * Map.tileSize);
+		hp.setY(y * Map.tileSize);
 		items.add(hp);
 	}
 }

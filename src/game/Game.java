@@ -68,7 +68,7 @@ public class Game implements IGame {
 	/**
 	 * @return HashMap of item->Point(x,y)
 	 */
-	public HashMap<Item, Point> getItems() {
+	public List<Item> getItems() {
 		return player.getMap().getItems();
 	}
 

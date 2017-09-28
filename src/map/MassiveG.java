@@ -15,8 +15,8 @@ public class MassiveG {
 		Item gun = new MassiveGun();
 		int x = MapParser.requireInteger(scan);
 		int y = MapParser.requireInteger(scan);
-		gun.setX(x);
-		gun.setY(y);
+		gun.setX(x * Map.tileSize);
+		gun.setY(y * Map.tileSize);
 		items.add(gun);
 	}
 

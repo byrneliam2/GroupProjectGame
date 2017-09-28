@@ -15,8 +15,8 @@ public class ShinyArm {
 		Item ShinyArmor = new ShinyArmor();
 		int x = MapParser.requireInteger(scan);
 		int y = MapParser.requireInteger(scan);
-		ShinyArmor.setX(x);
-		ShinyArmor.setY(y);
+		ShinyArmor.setX(x*Map.tileSize);
+		ShinyArmor.setY(y*Map.tileSize);
 		items.add(ShinyArmor);
 
 	}

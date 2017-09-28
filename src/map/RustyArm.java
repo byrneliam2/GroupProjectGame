@@ -15,8 +15,8 @@ public class RustyArm {
 		Item RustyA = new RustyArmor();
 		int x = MapParser.requireInteger(scan);
 		int y = MapParser.requireInteger(scan);
-		RustyA.setX(x);
-		RustyA.setY(y);
+		RustyA.setX(x*Map.tileSize);
+		RustyA.setY(y*Map.tileSize);
 		items.add(RustyA);
 	}
 }
