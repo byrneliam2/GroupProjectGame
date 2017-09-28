@@ -260,7 +260,7 @@ public class Map {
 			return null;
 		// TODO change items to use a bounding box too not a point.... or use the centre
 		// point
-		// currently using the top left corner.
+		// currently using the top left corner pointS.
 		Item closest = null;
 		int distance = 0;
 		for (Item item : this.items) {
