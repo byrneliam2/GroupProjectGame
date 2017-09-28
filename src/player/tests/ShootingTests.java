@@ -77,9 +77,6 @@ public class ShootingTests {
 		try {
 			p.shoot(mouseX, mouseY);
 			assertEquals(1, Bullet.bulletList.size());
-			sleep(1100);
-			p.shoot(mouseX, mouseY);
-			assertEquals(2, Bullet.bulletList.size());
 		} catch (InvalidPlayerExceptions e) {
 			fail();
 		}
@@ -193,7 +190,9 @@ public class ShootingTests {
 	}
 
 	public void setup() {
-		Bullet.bulletList.clear();
+		for (Bullet b : Bullet.bulletList) {
+			b.removeBullet();
+		}
 		p = new Player("Thomas", xLocation, yLocation);
 		npcs = new ArrayList<NPC>();
 		m = new Map("Map1", p, null, npcs, null);
