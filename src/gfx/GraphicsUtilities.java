@@ -7,6 +7,7 @@ package gfx;
  */
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
@@ -37,7 +38,7 @@ public class GraphicsUtilities {
             button.setRolloverEnabled(true);
             button.setRolloverIcon(new ImageIcon(roll));
         }
-        // force middle alignment
+        // set alignment
         button.setAlignmentX(alignment);
         // done
         return button;
@@ -62,7 +63,11 @@ public class GraphicsUtilities {
      * @return new JSlider
      */
     public static JSlider produceSlider() {
-        JSlider slider = new JSlider();
+        JSlider slider = new JSlider(JSlider.HORIZONTAL);
+        slider.setPaintTicks(false);
+        slider.setPaintLabels(false);
+        slider.setBackground(Color.WHITE);
+        slider.setForeground(Color.BLUE);
         return slider;
     }
 }

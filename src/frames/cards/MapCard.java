@@ -49,13 +49,17 @@ public class MapCard extends Card {
      * beforehand and also because this setup does not relate to Swing components.
      */
     private void addAllEntities() {
-        // add UI element entities
+        // ================================ UI ENTITIES =====================================
+
         // add player health
         for (int i = 0; i < game.getPlayer().getHealth(); i++) {
             addEntity(new Entity(EntityType.SPECIAL,
                     ImageLoader.image("ui", "heart", true),
                     new Point((i+1) * 100, 100)));
         }
+
+        // =============================== GAME ENTITIES =====================================
+
         // add player
         addEntity(new Entity(EntityType.PLAYER,
                 ImageLoader.image("ItemPictures", "key", true),

@@ -8,13 +8,10 @@ package frames;
 
 import audio.AudioHandler;
 import audio.IAudioHandler;
-import audio.tracks.MusicTrack;
-import audio.tracks.SoundTrack;
 import controller.Controller;
 import controller.MousePosition;
 import frames.cards.Card;
 import frames.cards.*;
-import game.Game;
 import game.IGame;
 import map.World;
 
@@ -123,6 +120,7 @@ public class MainDisplay extends JComponent implements Observer {
      * Set up some Swing UI properties (override default values of UIManager) to make
      * stock elements look more fitting (optional.)
      */
+    @SuppressWarnings("unused")
     private void doUISetup() {
         // set the look of option panes
         // https://stackoverflow.com/questions/1951558/list-of-java-swing-ui-properties
