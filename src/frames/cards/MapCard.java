@@ -10,6 +10,9 @@ import frames.MainDisplay;
 import game.IGame;
 import gfx.ImageLoader;
 import gfx.ImageUtilities;
+import items.Item;
+import npc.NPC;
+import player.Player;
 
 import javax.swing.*;
 import java.awt.*;
@@ -41,48 +44,60 @@ public class MapCard extends Card {
                 ImageLoader.image("MapImages", map.getBackgroundLayer(), true),
                 MainDisplay.WIDTH, MainDisplay.HEIGHT));
 
-        addAllEntities();
+        addUIEntities();
+        addGameEntities();
     }
 
     /**
      * Add all entities to the map. This is done outside of the setup method since the map is not constructed
      * beforehand and also because this setup does not relate to Swing components.
      */
-    private void addAllEntities() {
-        // ================================ UI ENTITIES =====================================
-
-        // add player health
-        for (int i = 0; i < game.getPlayer().getHealth(); i++) {
-            addEntity(new Entity(EntityType.SPECIAL,
-                    ImageLoader.image("ui", "heart", true),
-                    new Point((i+1) * 100, 100)));
-        }
-
-        // =============================== GAME ENTITIES =====================================
-
+    private void addGameEntities() {
         // add player
-        addEntity(new Entity(EntityType.PLAYER,
+        addGameEntity(new Entity(game.getPlayer(), EntityType.PLAYER,
                 ImageLoader.image("ItemPictures", "key", true),
                 new Point(game.getPlayer().getxLocation(), game.getPlayer().getyLocation()))
         );
         // add all NPCs
-        map.getNPCS().forEach(npc ->
-                addEntity(new Entity(EntityType.NPC,
-                        ImageLoader.image("ItemPictures", "key", true),
-                        new Point(npc.getxLocation(), npc.getyLocation())))
+        map.getNPCS().forEach(npc -> addGameEntity(new Entity(
+                npc, EntityType.NPC,
+                ImageLoader.image("ItemPictures", "key", true),
+                new Point(npc.getxLocation(), npc.getyLocation())))
         );
         // add all items
-        map.getItems().forEach((item, point) ->
-                addEntity(new Entity(
-                        EntityType.ITEM,
-                        ImageLoader.image("ItemPictures", item.getImageFileName(), true),
-                        point))
+        map.getItems().forEach(item -> addGameEntity(new Entity(
+                item, EntityType.ITEM,
+                ImageLoader.image("ItemPictures", item.getImageFileName(), true),
+                new Point(item.getX(), item.getY())))
         );
+    }
+
+    private void addUIEntities() {
+        // add player health
+        /*for (int i = 0; i < game.getPlayer().getHealth(); i++) {
+            addGameEntity(new Entity(game.getPlayer(), EntityType.SPECIAL,
+                    ImageLoader.image("game", "heart", true),
+                    new Point((i+1) * 100, 100)));
+        }*/
     }
 
     private void updateEntities() {
         for (Entity e : entities) {
-            //
+            Object o = e.getObject();
+            switch(e.getType()) {
+                case ITEM:
+                    Item i = (Item) o;
+                    e.setLocation(new Point(i.getX(), i.getY()));
+                    break;
+                case PLAYER:
+                    Player p = (Player) o;
+                    e.setLocation(new Point(p.getxLocation(), p.getyLocation()));
+                    break;
+                case NPC:
+                    NPC n = (NPC) o;
+                    e.setLocation(new Point(n.getxLocation(), n.getyLocation()));
+                    break;
+            }
         }
     }
 
@@ -90,7 +105,7 @@ public class MapCard extends Card {
      * Add a new {@link Card.Entity} to the current screen.
      * @param e entity
      */
-    private void addEntity(Entity e) {
+    private void addGameEntity(Entity e) {
         entities.add(e);
     }
 
@@ -106,9 +121,7 @@ public class MapCard extends Card {
     public void redraw() {
         // reset the component lists
         panel.removeAll();
-        entities.clear();
-        // add all entities that exist on the screen still back
-        addAllEntities();
+        updateEntities();
         // draw the lot
         for (Entity e : entities) {
             JLabel l = new JLabel(new ImageIcon(e.getImage()));

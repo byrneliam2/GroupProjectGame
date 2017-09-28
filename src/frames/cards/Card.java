@@ -110,16 +110,22 @@ public abstract class Card extends JPanel {
      */
     class Entity {
 
+        private Object object;
         private EntityType type;
         private BufferedImage image;
         private Point location;
 
         static final int SIZE = 100;
 
-        Entity(EntityType type, BufferedImage image, Point location) {
+        Entity(Object object, EntityType type, BufferedImage image, Point location) {
+            this.object = object;
             this.type = type;
             this.image = ImageUtilities.scale(image, SIZE, SIZE);
             this.location = location;
+        }
+
+        public Object getObject() {
+            return object;
         }
 
         public EntityType getType() {
@@ -133,6 +139,10 @@ public abstract class Card extends JPanel {
         public Point getLocation() {
             return location;
         }
+
+        public void setLocation(Point location) {
+            this.location = location;
+        }
     }
 
     /**
@@ -141,7 +151,6 @@ public abstract class Card extends JPanel {
     enum EntityType {
         ITEM,
         PLAYER,
-        NPC,
-        SPECIAL
+        NPC
     }
 }
