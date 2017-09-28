@@ -25,9 +25,9 @@ public class PatrolNPCTests {
 	public void testPatrol1() {
 		int x = 500, y = 400;
 		setup(x, y, 1);
-		int numberOfMoves = 3;// private int the number of moves that the scheme should make
+		int numberOfMoves = 3;// the number of moves that the scheme should make
 
-		testNPC.start();
+		testNPC.start();// starts the npc off
 		try {// sleep for time it takes to move 3 times
 			Thread.sleep(NPC.SPEED * (numberOfMoves - 1));
 		} catch (InterruptedException e) {
@@ -35,8 +35,9 @@ public class PatrolNPCTests {
 			fail();
 		}
 
-		testNPC.stop();
+		testNPC.stop();// stops the npc
 
+		// checks the npc's position
 		assertEquals(x + numberOfMoves, testNPC.getxLocation());// NPC should have moved 3 pixels right.
 		assertEquals(y, testNPC.getyLocation());
 	}
@@ -71,9 +72,9 @@ public class PatrolNPCTests {
 
 	/**
 	 * Sleeps for the amount of time taken to do x number of npc moves...
-	 * 
+	 *
 	 * DONT use 1, as it wont sleep for anything.
-	 * 
+	 *
 	 * @param numberOfMoves
 	 *            any number greater than 1.
 	 */

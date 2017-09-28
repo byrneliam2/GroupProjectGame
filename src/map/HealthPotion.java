@@ -1,7 +1,6 @@
 package map;
 
-import java.awt.Point;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 import items.Item;
@@ -12,11 +11,12 @@ public class HealthPotion {
 
 	}
 
-	public void parse(Scanner scan, HashMap<Item, Point> items) throws ParseException {
+	public void parse(Scanner scan, List<Item> items) throws ParseException {
 		Item hp = new HealthPot();
 		int x = MapParser.requireInteger(scan);
 		int y = MapParser.requireInteger(scan);
-		Point hpLoc = new Point(x*32, y*32);
-		items.put(hp, hpLoc);
+		hp.setX(x);
+		hp.setY(y);
+		items.add(hp);
 	}
 }

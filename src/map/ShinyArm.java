@@ -1,7 +1,6 @@
 package map;
 
-import java.awt.Point;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 import items.Item;
@@ -12,12 +11,13 @@ public class ShinyArm {
 
 	}
 
-	public void parse(Scanner scan, HashMap<Item, Point> items) throws ParseException {
+	public void parse(Scanner scan, List<Item> items) throws ParseException {
 		Item ShinyArmor = new ShinyArmor();
 		int x = MapParser.requireInteger(scan);
 		int y = MapParser.requireInteger(scan);
-		Point ShinyAP = new Point(x*32, y*32);
-		items.put(ShinyArmor, ShinyAP);
+		ShinyArmor.setX(x);
+		ShinyArmor.setY(y);
+		items.add(ShinyArmor);
 
 	}
 }

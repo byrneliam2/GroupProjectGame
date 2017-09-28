@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -34,9 +35,9 @@ public class Map {
 	public static final int tileSize = 32;
 
 	// HashMap of the Items located on the map and their locations
-	private HashMap<Item, Point> items;
+	private List<Item> items;
 
-	private ArrayList<NPC> NPCS;
+	private List<NPC> NPCS;
 
 	// The width of the map in tiles
 	private int width;
@@ -66,8 +67,8 @@ public class Map {
 	// Doors on the current map
 	HashMap<DoorItem, Point> Doors;
 
-	public Map(String name, Player player, HashMap<Item, Point> items, ArrayList<NPC> NPCS,
-			HashMap<DoorItem, Point> doors) throws BadMapImageException, IOException {
+	public Map(String name, Player player, List<Item> items, ArrayList<NPC> NPCS, HashMap<DoorItem, Point> doors)
+			throws BadMapImageException, IOException {
 		this.name = name;
 		this.items = items;
 		this.currentPlayer = player;
@@ -257,34 +258,11 @@ public class Map {
 		if (items == null)
 			return null;
 
-		HashMap<Item, Point> closeItems = new HashMap<Item, Point>();
-		for (Item item : this.items.keySet()) {
-			// this.items.get(item)
-			if (rangeCircle.contains(new Point((int) this.items.get(item).getX() + middle,
-					(int) this.items.get(item).getY() + middle))) {
-				closeItems.put(item, this.items.get(item));
-			}
-		}
-		double centerX = rangeCircle.getCenterX();
-		double centerY = rangeCircle.getCenterY();
 		Item closest = null;
-		double closestDistanceFromCenter = Double.MAX_VALUE;
-		for (Item item : closeItems.keySet()) {
-			double itemX = this.items.get(item).getX() + middle;
-			double itemY = this.items.get(item).getY() + middle;
+		for (Item item : this.items) {
 
-			double distX = Math.abs(centerX - itemX);
-			double distY = Math.abs(centerY - itemY);
-			if (distX < closestDistanceFromCenter) {
-				closestDistanceFromCenter = distX;
-				closest = item;
-			}
-			if (distY < closestDistanceFromCenter) {
-				closestDistanceFromCenter = distY;
-				closest = item;
-			}
 		}
-		return closest;
+		return null;
 	}
 
 	/**
@@ -297,7 +275,8 @@ public class Map {
 	 */
 	public void placeItem(Item i, int x, int y) {
 		Point toDrop = new Point((int) x / Map.tileSize, (int) y / Map.tileSize);
-		this.items.put(i, toDrop);
+		i.setX(x);
+		i.setY(y);
 	}
 
 	/**
@@ -308,11 +287,7 @@ public class Map {
 	 * @return Whether or not the item was removed
 	 */
 	public boolean removeItem(Item i) {
-		if (!this.items.containsKey(i)) {
-			return false;
-		}
-		this.items.remove(i);
-		return true;
+		return this.items.remove(i);
 	}
 
 	/**
@@ -339,7 +314,7 @@ public class Map {
 	/**
 	 * This method decides whether a position on the map can be moved over by a
 	 * rectangle, using the rectangles four corners
-	 * 
+	 *
 	 * @param r
 	 * @return
 	 */
@@ -398,7 +373,7 @@ public class Map {
 	 *
 	 * @return A HashMap of buffered images
 	 */
-	public HashMap<Item, Point> getItems() {
+	public List<Item> getItems() {
 		return this.items;
 	}
 
@@ -438,8 +413,8 @@ public class Map {
 	 */
 	public boolean itemAtTile(int x, int y) {
 		Point pos = new Point((int) x / Map.tileSize, (int) y / Map.tileSize);
-		for (Item itm : this.items.keySet()) {
-			if (this.items.get(itm).getX() == pos.getX() && this.items.get(itm).getY() == pos.getY()) {
+		for (Item itm : this.items) {
+			if (itm.getX() == pos.getX() && itm.getY() == pos.getY()) {
 				return true;
 			}
 		}
@@ -456,8 +431,8 @@ public class Map {
 	 */
 	public Item itemAt(int x, int y) {
 		Point pos = new Point((int) x / Map.tileSize, (int) y / Map.tileSize);
-		for (Item itm : this.items.keySet()) {
-			if (this.items.get(itm).getX() == pos.getX() && this.items.get(itm).getY() == pos.getY()) {
+		for (Item itm : this.items) {
+			if (itm.getX() == pos.getX() && itm.getY() == pos.getY()) {
 				return itm;
 			}
 		}
@@ -482,7 +457,7 @@ public class Map {
 	 *
 	 * @return A ArrayList of NPC
 	 */
-	public ArrayList<NPC> getNPCS() {
+	public List<NPC> getNPCS() {
 		return this.NPCS;
 	}
 

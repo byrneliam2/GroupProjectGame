@@ -13,6 +13,7 @@ public abstract class AbstractItem implements Item {
 	protected Image image;
 	protected Backpack pack;// is null if the item is not picked up
 	protected final String imageFileName;
+	protected int x, y;
 
 	/**
 	 * @param itemName
@@ -65,6 +66,26 @@ public abstract class AbstractItem implements Item {
 	@Override
 	public String getImageFileName() {
 		return imageFileName;
+	}
+
+	@Override
+	public int getX() {
+		return x;
+	}
+
+	@Override
+	public int getY() {
+		return y;
+	}
+
+	@Override
+	public void setX(int newX) {
+		x = newX;
+	}
+
+	@Override
+	public void setY(int newY) {
+		y = newY;
 	}
 
 }

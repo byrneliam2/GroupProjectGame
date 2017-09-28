@@ -49,11 +49,20 @@ public interface Item {
 	 */
 	public void remove();
 
+	public int getX();
+
+	public int getY();
+
+	public void setX(int newX);
+
+	public void setY(int newY);
+
 	/**
-	 * if the image is assets/img/ItemPictures/healthPot.png,
-	 * then the image name will return simply "healthPot". Use gfx.imageLoader class to load the picture properly.
-	 * All item pictures are located in the above folder. Note. not all image's are the same name as the class name.
-	 * 
+	 * if the image is assets/img/ItemPictures/healthPot.png, then the image name
+	 * will return simply "healthPot". Use gfx.imageLoader class to load the picture
+	 * properly. All item pictures are located in the above folder. Note. not all
+	 * image's are the same name as the class name.
+	 *
 	 * @return the image name
 	 */
 	public String getImageFileName();

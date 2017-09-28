@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 import items.DoorItem;
@@ -20,7 +21,7 @@ import player.Player;
  * information for a single map. This includes reading various items. This class
  * can be considered a Map factory and thus has no referenceable constructor and
  * a parser method that can be accessed from anywhere.
- * 
+ *
  * @author James
  *
  */
@@ -32,17 +33,17 @@ public class MapParser {
 
 	/**
 	 * This method reads a map text file and returns a new map
-	 * 
+	 *
 	 * @throws ParseException
-	 * @throws IOException 
-	 * @throws BadMapImageException 
+	 * @throws IOException
+	 * @throws BadMapImageException
 	 */
 	public static Map parse(String mapFileName, Player current) throws ParseException, BadMapImageException, IOException {
 		String fileLocation = "assets/entities/" + mapFileName;
 		InputStream in = null;
 		Scanner scan = null;
 		String mapName = mapFileName;
-		HashMap<Item, Point> itms = new HashMap<Item, Point>();
+		List<Item> itms = new ArrayList<Item>();
 		ArrayList<NPC> npcs = new ArrayList<NPC>();
 		HashMap<DoorItem, Point> doors = new HashMap<DoorItem, Point>();
 
