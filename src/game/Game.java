@@ -53,6 +53,11 @@ public class Game implements IGame {
 		return this.player;
 	}
 
+	@Override
+	public boolean isOver() {
+		return false;
+	}
+
 	/**
 	 * @return game world
 	 */

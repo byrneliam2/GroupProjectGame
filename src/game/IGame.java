@@ -30,4 +30,6 @@ public interface IGame {
     void shoot(double x, double y) throws InvalidPlayerExceptions;
 
     Player getPlayer();
+
+    boolean isOver();
 }

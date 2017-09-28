@@ -37,7 +37,11 @@ public abstract class Card extends JPanel {
         name = n;
         panel = new JLabel();
         components = new LinkedHashMap<>();
+
+        //setLayout(new BorderLayout());
+        //add(panel, BorderLayout.CENTER);
         add(panel);
+
         doUISetup();
     }
 

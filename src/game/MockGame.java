@@ -42,6 +42,11 @@ public class MockGame implements IGame {
 		return new Player("", 0, 0);
 	}
 
+	@Override
+	public boolean isOver() {
+		return false;
+	}
+
 	/**
 	 * @return game world
 	 */
