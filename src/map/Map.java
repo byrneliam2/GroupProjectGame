@@ -67,8 +67,7 @@ public class Map {
 	// Doors on the current map
 	List<DoorItem> doors;
 
-	public Map(String name, Player player, List<Item> items, ArrayList<NPC> NPCS, List<DoorItem> doors)
-			throws BadMapImageException, IOException {
+	public Map(String name, Player player, List<Item> items, ArrayList<NPC> NPCS, List<DoorItem> doors) {
 		this.name = name;
 		this.items = items;
 		this.currentPlayer = player;
@@ -91,16 +90,23 @@ public class Map {
 	 * @throws BadMapImageException
 	 * @throws IOException
 	 */
-	private BufferedImage loadImage(String mapName, String layer) throws BadMapImageException, IOException {
+	private BufferedImage loadImage(String mapName, String layer) {
 		BufferedImage img = null;
 
-		img = ImageIO.read(Map.class.getResource("assets/mapImages/" + mapName + layer + ".png"));
-		if (img.getHeight() % 32 > 0 || img.getWidth() % 32 > 0) {
-			throw new BadMapImageException(
-					"The image you are trying to load does not have the correct Dimensions, Dimensions should be a factor of 32, the Global tile size.");
-		}
+		try {
+			img = ImageIO.read(Map.class.getResource("assets/mapImages/" + mapName + layer + ".png"));
+			if (img.getHeight() % 32 > 0 || img.getWidth() % 32 > 0) {
+				throw new BadMapImageException(
+						"The image you are trying to load does not have the correct Dimensions, Dimensions should be a factor of 32, the Global tile size.");
+			}
 
-		return img;
+			return img;
+		} catch (IOException | BadMapImageException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+
 	}
 
 	/**

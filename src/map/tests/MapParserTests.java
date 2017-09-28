@@ -13,7 +13,7 @@ import player.Player;
 public class MapParserTests {
 
 	@Test
-	public void test() throws ParseException, BadMapImageException, IOException {
+	public void testCorrectMaps() {
 		Player p1 = new Player("Tom", 50, 50);
 		World w = WorldParser.parse("world",p1);
 		p1.setMap(w.getStartingMap());

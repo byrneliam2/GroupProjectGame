@@ -30,7 +30,7 @@ public class WorldParser {
 	 * @throws IOException 
 	 * @throws BadMapImageException 
 	 */
-	public static World parse(String worldFileName, Player current) throws ParseException, BadMapImageException, IOException {
+	public static World parse(String worldFileName, Player current) {
 		HashMap<String, Map> maps = new HashMap<String, Map>();
 		InputStream in = null;
 		String fileLocation = "assets/" + worldFileName;
@@ -52,7 +52,8 @@ public class WorldParser {
 
 			World n = new World(maps);
 			return n;
-
+		}catch(ParseException e) {
+			e.printStackTrace();
 		} finally {
 
 			if (scan != null) {
@@ -68,6 +69,7 @@ public class WorldParser {
 			}
 
 		}
+		return null;
 	}
 
 	public String require(String token, Scanner scan) throws ParseException {
