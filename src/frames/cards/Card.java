@@ -151,6 +151,7 @@ public abstract class Card extends JPanel {
     enum EntityType {
         ITEM,
         PLAYER,
-        NPC
+        NPC,
+        BULLET
     }
 }
