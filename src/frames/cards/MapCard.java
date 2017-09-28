@@ -24,13 +24,12 @@ import java.util.List;
  */
 public class MapCard extends Card {
 
-    /* Swing attributes */
-    private JTextArea console;
-
-    /* Other attributes */
     private List<Entity> entities;
     private map.Map map;
     private IGame game;
+
+    private static final int HEART_Y = 100;
+    private static final int CONSOLE_FACTOR = 15;
 
     public MapCard(String n, map.Map map, IGame game) {
         super(n);
@@ -38,34 +37,31 @@ public class MapCard extends Card {
         this.map = map;
         this.game = game;
 
-        this.console = new JTextArea(1, 1);
-
         setBackground(ImageUtilities.scale(
                 ImageLoader.image("MapImages", map.getBackgroundLayer(), true),
                 MainDisplay.WIDTH, MainDisplay.HEIGHT));
 
-        addUIEntities();
-        addGameEntities();
+        addEntities();
     }
 
     /**
      * Add all entities to the map. This is done outside of the setup method since the map is not constructed
      * beforehand and also because this setup does not relate to Swing components.
      */
-    private void addGameEntities() {
+    private void addEntities() {
         // add player
-        addGameEntity(new Entity(game.getPlayer(), EntityType.PLAYER,
+        addEntity(new Entity(game.getPlayer(), EntityType.PLAYER,
                 ImageLoader.image("ItemPictures", "key", true),
                 new Point(game.getPlayer().getxLocation(), game.getPlayer().getyLocation()))
         );
         // add all NPCs
-        map.getNPCS().forEach(npc -> addGameEntity(new Entity(
+        map.getNPCS().forEach(npc -> addEntity(new Entity(
                 npc, EntityType.NPC,
                 ImageLoader.image("ItemPictures", "key", true),
                 new Point(npc.getxLocation(), npc.getyLocation())))
         );
         // add all items
-        map.getItems().forEach(item -> addGameEntity(new Entity(
+        map.getItems().forEach(item -> addEntity(new Entity(
                 item, EntityType.ITEM,
                 ImageLoader.image("ItemPictures", item.getImageFileName(), true),
                 new Point(item.getX(), item.getY())))
@@ -75,7 +71,7 @@ public class MapCard extends Card {
     private void addUIEntities() {
         // add player health
         /*for (int i = 0; i < game.getPlayer().getHealth(); i++) {
-            addGameEntity(new Entity(game.getPlayer(), EntityType.SPECIAL,
+            addEntity(new Entity(game.getPlayer(), EntityType.SPECIAL,
                     ImageLoader.image("game", "heart", true),
                     new Point((i+1) * 100, 100)));
         }*/
@@ -105,7 +101,7 @@ public class MapCard extends Card {
      * Add a new {@link Card.Entity} to the current screen.
      * @param e entity
      */
-    private void addGameEntity(Entity e) {
+    private void addEntity(Entity e) {
         entities.add(e);
     }
 
