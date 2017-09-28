@@ -28,4 +28,10 @@ public class World {
 	public Map getStartingMap() {
 		return World.maps.get("Map3");
 	}
+
+	public static HashMap<String, Map> getMaps() {
+		return maps;
+	}
+	
+	
 }

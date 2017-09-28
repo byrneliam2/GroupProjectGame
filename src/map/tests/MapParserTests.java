@@ -5,6 +5,8 @@ import java.io.IOException;
 import org.junit.Test;
 
 import map.BadMapImageException;
+import map.Map;
+import map.MapParser;
 import map.ParseException;
 import map.World;
 import map.WorldParser;
@@ -15,35 +17,15 @@ public class MapParserTests {
 	@Test
 	public void testCorrectMaps() {
 		Player p1 = new Player("Tom", 50, 50);
-		World w = WorldParser.parse("world",p1);
-		p1.setMap(w.getStartingMap());
-	}
-	
-	@Test(expected = ParseException.class)
-	public void incorrectmapPathways() throws ParseException, BadMapImageException, IOException{
-		Player p1 = new Player("Tom", 50, 50);
-		World w = WorldParser.parse("vfbsf",p1);
-		p1.setMap(w.getStartingMap());
-	}
-	
-	@Test
-	public void incorectmapsize() throws ParseException, BadMapImageException, IOException {
-		Player p1 = new Player("Tom", 50, 50);
-		World w = WorldParser.parse("world",p1);
-		p1.setMap(w.getStartingMap());
-	}
-	
-	@Test
-	public void incorrectItemPlacement() throws ParseException, BadMapImageException, IOException {
-		Player p1 = new Player("Tom", 50, 50);
-		World w = WorldParser.parse("world",p1);
-		p1.setMap(w.getStartingMap());
+		Map m = MapParser.parse("Map1", p1);
+		assert (m != null);
 	}
 
 	@Test
-	public void invalidItems() throws ParseException, BadMapImageException, IOException {
+	public void incorrectmapPathways() {
 		Player p1 = new Player("Tom", 50, 50);
-		World w = WorldParser.parse("world",p1);
-		p1.setMap(w.getStartingMap());
+		Map m = MapParser.parse("dssd", p1);
+		assert (m == null);
 	}
+
 }
