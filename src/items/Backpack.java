@@ -91,6 +91,8 @@ public class Backpack {
 			throw new InvalidBackpackException(
 					"Item was not in the backpack (Note. Item could be equipped in which case, unequip it, then drop it)");
 
+		item.setX(owner.getxLocation());
+		item.setY(owner.getyLocation());
 		item.remove();// removes items link to backpack.
 	}
 

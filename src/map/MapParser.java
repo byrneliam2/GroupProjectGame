@@ -38,14 +38,15 @@ public class MapParser {
 	 * @throws IOException
 	 * @throws BadMapImageException
 	 */
-	public static Map parse(String mapFileName, Player current) throws ParseException, BadMapImageException, IOException {
+	public static Map parse(String mapFileName, Player current)
+			throws ParseException, BadMapImageException, IOException {
 		String fileLocation = "assets/entities/" + mapFileName;
 		InputStream in = null;
 		Scanner scan = null;
 		String mapName = mapFileName;
 		List<Item> itms = new ArrayList<Item>();
 		ArrayList<NPC> npcs = new ArrayList<NPC>();
-		HashMap<DoorItem, Point> doors = new HashMap<DoorItem, Point>();
+		List<DoorItem> doors = new ArrayList<DoorItem>();
 
 		try {
 			in = MapParser.class.getResourceAsStream(fileLocation);

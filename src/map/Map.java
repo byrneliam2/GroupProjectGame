@@ -65,16 +65,16 @@ public class Map {
 	private String name;
 
 	// Doors on the current map
-	HashMap<DoorItem, Point> Doors;
+	List<DoorItem> doors;
 
-	public Map(String name, Player player, List<Item> items, ArrayList<NPC> NPCS, HashMap<DoorItem, Point> doors)
+	public Map(String name, Player player, List<Item> items, ArrayList<NPC> NPCS, List<DoorItem> doors)
 			throws BadMapImageException, IOException {
 		this.name = name;
 		this.items = items;
 		this.currentPlayer = player;
 		this.backgroundLayer = name;
 		this.NPCS = NPCS;
-		this.Doors = doors;
+		this.doors = doors;
 		BufferedImage colLayer = this.loadImage(this.name, "Collision");
 		this.collisionLayer = this.loadColLayers(colLayer);
 		BufferedImage enviromentLayer = this.loadImage(this.name, "Environment");
@@ -230,16 +230,17 @@ public class Map {
 
 	/**
 	 * This method returns the door touched by a given bounding box, if there is no
-	 * door returns null
+	 * door returns null. Assumes a door is one tile block in size.
 	 *
 	 * @param boundingBox
 	 * @return
 	 */
 	public DoorItem getDoor(Rectangle boundingBox) {
-		if (Doors == null)
+		if (doors == null)
 			return null;
-		for (DoorItem d : this.Doors.keySet()) {
-			if (boundingBox.contains(this.Doors.get(d))) {
+		for (DoorItem d : this.doors) {
+			Rectangle doorRect = new Rectangle(d.getX(), d.getY(), tileSize, tileSize);
+			if (boundingBox.intersects(doorRect)) {
 				return d;
 			}
 		}
@@ -257,7 +258,7 @@ public class Map {
 		int middle = Map.tileSize / 2;
 		if (items == null)
 			return null;
-
+		// TODO
 		Item closest = null;
 		for (Item item : this.items) {
 

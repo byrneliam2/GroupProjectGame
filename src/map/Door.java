@@ -1,7 +1,6 @@
 package map;
 
-import java.awt.Point;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 import items.DoorItem;
@@ -11,7 +10,7 @@ public class Door {
 
 	}
 
-	public void parse(Scanner scan, HashMap<DoorItem, Point> doors) throws ParseException {
+	public void parse(Scanner scan, List<DoorItem> doors) throws ParseException {
 		String name = MapParser.requireString(scan);
 		int id = MapParser.requireInteger(scan);
 		String locked = MapParser.requireString(scan);
@@ -22,7 +21,9 @@ public class Door {
 		int x = MapParser.requireInteger(scan);
 		int y = MapParser.requireInteger(scan);
 		DoorItem d = new DoorItem(name, id, lockUnlock);
-		doors.put(d, new Point(x*32, y*32));
+		d.setX(x * Map.tileSize);
+		d.setY(y * Map.tileSize);
+		doors.add(d);
 
 	}
 }
