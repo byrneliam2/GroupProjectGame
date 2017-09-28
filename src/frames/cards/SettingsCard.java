@@ -34,7 +34,9 @@ public class SettingsCard extends Card {
     protected void doUISetup() {
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
         // volume slider
-        components.put("volume", new JSlider());
+        components.put("volume", GraphicsUtilities.produceSlider());
+        // difficulty?
+        //
         // back button
         components.put("back", GraphicsUtilities.produceButton(
                 ImageLoader.image("ui", "bu_back", true),

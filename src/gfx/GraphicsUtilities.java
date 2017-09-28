@@ -6,8 +6,6 @@ package gfx;
  * 300338518
  */
 
-import com.sun.javaws.exceptions.InvalidArgumentException;
-
 import javax.swing.*;
 import java.awt.image.BufferedImage;
 
@@ -49,7 +47,7 @@ public class GraphicsUtilities {
      * Creates and returns a sticker, or a non-interactive label, with the specified image.
      * @param main image to attach
      * @param alignment sets x alignment value (0 for left, 1 for right)
-     * @return new label
+     * @return new JLabel
      */
     public static JLabel produceSticker(BufferedImage main, float alignment) {
         if (main == null) throw new IllegalArgumentException("Sticker image cannot be null.");
@@ -59,4 +57,12 @@ public class GraphicsUtilities {
         return sticker;
     }
 
+    /**
+     * Creates and returns a slider...
+     * @return new JSlider
+     */
+    public static JSlider produceSlider() {
+        JSlider slider = new JSlider();
+        return slider;
+    }
 }

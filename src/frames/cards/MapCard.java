@@ -49,21 +49,37 @@ public class MapCard extends Card {
      * beforehand and also because this setup does not relate to Swing components.
      */
     private void addAllEntities() {
-        // add all items\
+        // add UI element entities
+        // add player health
+        for (int i = 0; i < game.getPlayer().getHealth(); i++) {
+            addEntity(new Entity(EntityType.SPECIAL,
+                    ImageLoader.image("ui", "heart", true),
+                    new Point((i+1) * 100, 100)));
+        }
+        // add player
         addEntity(new Entity(EntityType.PLAYER,
                 ImageLoader.image("ItemPictures", "key", true),
-                new Point(game.getPlayer().getxLocation(), game.getPlayer().getyLocation())));
-        /*map.getNPCS().forEach(npc ->
-                addEntity(new Entity(
+                new Point(game.getPlayer().getxLocation(), game.getPlayer().getyLocation()))
+        );
+        // add all NPCs
+        map.getNPCS().forEach(npc ->
+                addEntity(new Entity(EntityType.NPC,
                         ImageLoader.image("ItemPictures", "key", true),
-                        new Point(npc.getxLocation(), npc.getyLocation())))*
-        );*/
+                        new Point(npc.getxLocation(), npc.getyLocation())))
+        );
+        // add all items
         map.getItems().forEach((item, point) ->
                 addEntity(new Entity(
                         EntityType.ITEM,
                         ImageLoader.image("ItemPictures", item.getImageFileName(), true),
                         point))
         );
+    }
+
+    private void updateEntities() {
+        for (Entity e : entities) {
+            //
+        }
     }
 
     /**

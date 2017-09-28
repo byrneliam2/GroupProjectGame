@@ -8,7 +8,6 @@ package frames.cards;
 
 import frames.MainDisplay;
 import gfx.ImageUtilities;
-import items.Item;
 
 import javax.swing.*;
 import java.awt.*;
@@ -99,7 +98,11 @@ public abstract class Card extends JPanel {
 
     /**
      * A Card Entity is any animated element inside a Card. This does not include
-     * separate Swing entities such as buttons and background images.
+     * separate Swing entities such as buttons and background images. It does include
+     * on-screen indicators that refer to the game directly, however. These are identifed
+     * using the SPECIAL tag for the Entity's {@link EntityType}. An Entity knows little
+     * about the object it represents, it is more of a holding object than a functional
+     * component.
      */
     class Entity {
 
