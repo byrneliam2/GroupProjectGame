@@ -54,8 +54,8 @@ public class Map {
 	// 2D array of all the images that make up the environmental layer
 	// Black(1) is for death
 	// Green(2) is for mud
-	// Blue(4) is for mist
 	// Red(3) is for fire
+	// Blue(4) is for mist
 	private ArrayList<ArrayList<Integer>> environmentalLayer;
 
 	// The current player
@@ -258,12 +258,21 @@ public class Map {
 		int middle = Map.tileSize / 2;
 		if (items == null)
 			return null;
-		// TODO
+		// TODO change items to use a bounding box too not a point.... or use the centre
+		// point
+		// currently using the top left corner.
 		Item closest = null;
+		int distance = 0;
 		for (Item item : this.items) {
-
+			if (rangeCircle.contains(new Point(item.getX(), item.getY()))) {
+				int dist = (int) Math.hypot(item.getX(), item.getY());
+				if (closest == null || dist < distance) {
+					closest = item;
+					distance = dist;
+				}
+			}
 		}
-		return null;
+		return closest;
 	}
 
 	/**
@@ -276,13 +285,13 @@ public class Map {
 	 */
 	public void placeItem(Item i, int x, int y) {
 		Point toDrop = new Point((int) x / Map.tileSize, (int) y / Map.tileSize);
-		i.setX(x);
+		i.setX(x);// might be unnessicary TODO.
 		i.setY(y);
 	}
 
 	/**
 	 * This method removes a given item from the map by removing the item from the
-	 * Maps HashMap of items.
+	 * List of items.
 	 *
 	 * @param i
 	 * @return Whether or not the item was removed
