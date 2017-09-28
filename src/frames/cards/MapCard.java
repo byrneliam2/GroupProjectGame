@@ -28,7 +28,7 @@ public class MapCard extends Card {
     private map.Map map;
     private IGame game;
 
-    private static final int HEART_Y = 100;
+    private static final int HEART_POS = 100;
     private static final int CONSOLE_FACTOR = 15;
 
     public MapCard(String n, map.Map map, IGame game) {
@@ -73,7 +73,7 @@ public class MapCard extends Card {
         /*for (int i = 0; i < game.getPlayer().getHealth(); i++) {
             addEntity(new Entity(game.getPlayer(), EntityType.SPECIAL,
                     ImageLoader.image("game", "heart", true),
-                    new Point((i+1) * 100, 100)));
+                    new Point((i+1) * HEART_POS, HEART_POS)));
         }*/
     }
 
