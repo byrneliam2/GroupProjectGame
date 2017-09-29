@@ -33,7 +33,7 @@ import player.Player;
  */
 public class Map {
 	// Size of a individual tile
-	public static int tileSize = 32;
+	public static int tileSize = 60;
 
 	// HashMap of the Items located on the map and their locations
 	private List<Item> items;
@@ -92,11 +92,11 @@ public class Map {
 	 */
 	public void loadAllLayers(int newWidth, int newHeight) {
 		BufferedImage colLayer = ImageLoader.image("MapImages", this.name + "Collision", true);
-		this.width = colLayer.getWidth() / 32;
-		this.height = colLayer.getHeight() / 32;
+		//this.width = colLayer.getWidth() / 32;
+		//this.height = colLayer.getHeight() / 32;
 
 		colLayer = ImageUtilities.scale(colLayer, newWidth, newHeight);
-		this.tileSize = (int) newWidth / this.width;
+		//this.tileSize = (int) newWidth / this.width;
 		this.collisionLayer = this.loadColLayers(colLayer);
 
 	}
