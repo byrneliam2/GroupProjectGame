@@ -81,7 +81,7 @@ public class Map {
 		// this.environmentalLheightayer = this.loadEnvLayers(enviromentLayer);
 	}
 
-	public void LoadAllLayers(int scaleX,int scaleY,int tileSize) {
+	public void loadAllLayers(int scaleX,int scaleY,int tileSize) {
 
 	}
 
