@@ -90,7 +90,7 @@ public class Map {
 	 * @param tileSize
 	 */
 	public void loadAllLayers(int newWidth,int newHeight) {
-		BufferedImage colLayer = ImageLoader.image("MapImages", this.name+"Collision",false);
+		BufferedImage colLayer = ImageLoader.image("MapImages", this.name+"Collision",true);
 		this.width = colLayer.getWidth()/32;
 		this.height = colLayer.getHeight()/32;
 
@@ -102,6 +102,7 @@ public class Map {
 
 
 	}
+	public void loadAllLayers(int scaleX,int scaleY,int tileSize) {}
 
 
 

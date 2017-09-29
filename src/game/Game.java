@@ -4,6 +4,8 @@ import java.awt.*;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 import items.Equipable;
 import items.Item;
@@ -23,7 +25,7 @@ import utils.Direction;
  * @author Thomas Edwards
  *
  */
-public class Game implements IGame,Serializable {
+public class Game extends Observable implements IGame, Serializable {
 
 	public static boolean GAME_PAUSED = false;
 

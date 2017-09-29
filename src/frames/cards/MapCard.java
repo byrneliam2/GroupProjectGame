@@ -28,8 +28,7 @@ public class MapCard extends Card {
     private map.Map map;
     private IGame game;
 
-    private static final int HEART_POS = 50;
-    private static final int CONSOLE_FACTOR = 15;
+    private static final int HEART_X = 50;
 
     public MapCard(String n, map.Map map, IGame game) {
         super(n);
@@ -73,9 +72,9 @@ public class MapCard extends Card {
     private void addUIEntities() {
         // add player health
         for (int i = 0; i < game.getPlayer().getHealth(); i++) {
-            addEntity(new Entity(game.getPlayer(), EntityType.BULLET,
+            addEntity(new Entity(game.getPlayer(), EntityType.BULLET, // FIXME
                     ImageLoader.image("game", "heart", true),
-                    new Point(HEART_POS + (i * HEART_POS), 0), 50));
+                    new Point(HEART_X + (i * HEART_X), 0), 50));
         }
     }
 
@@ -119,7 +118,10 @@ public class MapCard extends Card {
     public void redraw() {
         // reset the component lists
         panel.removeAll();
-        updateEntities();
+        //updateEntities();
+        entities.clear();
+        addEntities();
+        addUIEntities();
         // draw the lot
         for (Entity e : entities) {
             JLabel l = new JLabel(new ImageIcon(e.getImage()));
