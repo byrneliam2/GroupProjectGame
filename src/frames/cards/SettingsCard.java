@@ -46,19 +46,48 @@ public class SettingsCard extends Card {
     @Override
     public void setComponentActions(MainDisplay dsp) {
         for (Map.Entry m : components.entrySet()) {
-            if (!(m.getValue() instanceof JButton)) continue;
             final String str = (String) m.getKey();
-            final JButton btn = (JButton) m.getValue();
-            btn.addActionListener(e -> {
-                dsp.getAudioHandler().playSound(SoundTrack.CLICK);
-                switch (str) {
-                    case "back":
-                        // switch to last screen
-                        dsp.update(null, "last");
-                        break;
-                }
-            });
+            // Note how we have to divert the action setting to different
+            // methods, since we deal with more than just JButtons here
+            if (m.getValue() instanceof JButton)
+                doButtonAction(str, (JButton) m.getValue(), dsp);
+            else if (m.getValue() instanceof JSlider)
+                doSliderAction(str, (JSlider) m.getValue(), dsp);
         }
+    }
+
+    /**
+     * Set actions exclusively for JButtons.
+     * @param str name of component
+     * @param btn button
+     * @param dsp display to divert actions to
+     */
+    private void doButtonAction(String str, JButton btn, MainDisplay dsp) {
+        btn.addActionListener(e -> {
+            dsp.getAudioHandler().playSound(SoundTrack.CLICK);
+            switch (str) {
+                case "back":
+                    // switch to last screen
+                    dsp.update(null, "last");
+                    break;
+            }
+        });
+    }
+
+    /**
+     * Set actions exclusively for JSliders.
+     * @param str name of component
+     * @param sld slider
+     * @param dsp display to divert actions to
+     */
+    private void doSliderAction(String str, JSlider sld, MainDisplay dsp) {
+        sld.addChangeListener((e) -> {
+            switch(str) {
+                case "volume":
+                    dsp.getAudioHandler().setAudioVolume(sld.getValue()/100f);
+                    break;
+            }
+        });
     }
 
     @Override
