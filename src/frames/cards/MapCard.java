@@ -69,6 +69,9 @@ public class MapCard extends Card {
         );
     }
 
+    /**
+     * Add UI entities to the screen.
+     */
     private void addUIEntities() {
         // add player health
         for (int i = 0; i < game.getPlayer().getHealth(); i++) {
@@ -78,6 +81,9 @@ public class MapCard extends Card {
         }
     }
 
+    /**
+     * Update the location of all game entities... FIXME
+     */
     private void updateEntities() {
         for (Entity e : entities) {
             Object o = e.getObject();

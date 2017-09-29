@@ -37,8 +37,6 @@ public class Game extends Observable implements IGame, Serializable {
 	 */
 	public Game() {
 		this.player = new Player("Tom", 500, 500);
-		/*world = WorldParser.parse("world", this.player);
-		this.player.setMap(world.getStartingMap());*/
 	}
 
 	/**
@@ -46,6 +44,7 @@ public class Game extends Observable implements IGame, Serializable {
 	 */
 	public void startGame() {
 		world = WorldParser.parse("world", this.player);
+		//this.player...FIXME add manual bounding box scaling (from new tileSize)
 		this.player.setMap(world.getStartingMap());
 	}
 
