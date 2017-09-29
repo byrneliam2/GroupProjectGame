@@ -38,8 +38,6 @@ public abstract class Card extends JPanel {
         panel = new JLabel();
         components = new LinkedHashMap<>();
 
-        //setLayout(new BorderLayout());
-        //add(panel, BorderLayout.CENTER);
         add(panel);
 
         doUISetup();
@@ -117,10 +115,19 @@ public abstract class Card extends JPanel {
 
         static final int SIZE = 100;
 
-        Entity(Object object, EntityType type, BufferedImage image, Point location) {
+        /**
+         * @param object object that this entity represents
+         * @param type type of the object
+         * @param image image of the object
+         * @param location location of the object
+         * @param size size to scale to; if 0, a default size of 100 will be used
+         */
+        Entity(Object object, EntityType type, BufferedImage image, Point location, int size) {
             this.object = object;
             this.type = type;
-            this.image = ImageUtilities.scale(image, SIZE, SIZE);
+            this.image = ImageUtilities.scale(image,
+                    size != 0 ? size : SIZE,
+                    size != 0 ? size : SIZE);
             this.location = location;
         }
 

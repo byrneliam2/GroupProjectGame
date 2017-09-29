@@ -78,7 +78,7 @@ public class Map {
 		BufferedImage colLayer = this.loadImage(this.name, "Collision");
 		this.collisionLayer = this.loadColLayers(colLayer);
 		// BufferedImage enviromentLayer = this.loadImage(this.name, "Environment");
-		// this.environmentalLayer = this.loadEnvLayers(enviromentLayer);
+		// this.environmentalLheightayer = this.loadEnvLayers(enviromentLayer);
 	}
 
 	/**
@@ -109,6 +109,8 @@ public class Map {
 		return null;
 
 	}
+
+
 
 	/**
 	 * This method takes a buffered image representing the collision layer and
@@ -208,7 +210,7 @@ public class Map {
 	/**
 	 * Checks whether the bullet has hit either the player or any NPC's
 	 *
-	 * @param b
+	 * @param bheight
 	 *            the bullet to check.
 	 * @return true if the bullet hit a player/npc false otherwise.
 	 */
@@ -318,11 +320,12 @@ public class Map {
 	 * @param y
 	 */
 	public boolean canMove(int x, int y) {
-		x = (int) (x / tileSize);
-		y = (int) (y / tileSize);
-		if (x < 0 || y < 0 || x > this.width || y > this.height) {
+		if (x < 0 || y < 0 || x > this.width*Map.tileSize || y > this.height*Map.tileSize) {
 			return false;
 		}
+		x = (int) (x / tileSize);
+		y = (int) (y / tileSize);
+
 		Point mapPos = this.positionOnMap(x, y);
 		if (this.collisionLayer.get((int) mapPos.getY()).get((int) mapPos.getX()) == 1) {
 			return false;
