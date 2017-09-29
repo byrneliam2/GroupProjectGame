@@ -75,10 +75,14 @@ public class Map {
 		this.backgroundLayer = name;
 		this.NPCS = NPCS;
 		this.doors = doors;
-		BufferedImage colLayer = this.loadImage(this.name, "Collision");
-		this.collisionLayer = this.loadColLayers(colLayer);
+		//BufferedImage colLayer = this.loadImage(this.name, "Collision");
+		//this.collisionLayer = this.loadColLayers(colLayer);
 		// BufferedImage enviromentLayer = this.loadImage(this.name, "Environment");
 		// this.environmentalLheightayer = this.loadEnvLayers(enviromentLayer);
+	}
+
+	public void LoadAllLayers(int scaleX,int scaleY,int tileSize) {
+
 	}
 
 	/**
@@ -96,7 +100,7 @@ public class Map {
 
 		try {
 			img = ImageIO.read(Map.class.getResource("assets/mapImages/" + mapName + layer + ".png"));
-			if (img.getHeight() % 32 > 0 || img.getWidth() % 32 > 0) {
+			if (img.getHeight() % Map.tileSize > 0 || img.getWidth() % Map.tileSize > 0) {
 				throw new BadMapImageException(
 						"The image you are trying to load does not have the correct Dimensions, Dimensions should be a factor of 32, the Global tile size.");
 			}
@@ -119,8 +123,8 @@ public class Map {
 	 * @return 2D ArrayList<Integer>
 	 */
 	private ArrayList<ArrayList<Integer>> loadColLayers(BufferedImage colLayerUnbroken) {
-		this.width = colLayerUnbroken.getWidth() / 32;
-		this.height = colLayerUnbroken.getHeight() / 32;
+		this.width = colLayerUnbroken.getWidth() / Map.tileSize;
+		this.height = colLayerUnbroken.getHeight() / Map.tileSize;
 		ArrayList<ArrayList<BufferedImage>> colLayer = this.breakUpImageIntoTiles(colLayerUnbroken);
 
 		ArrayList<ArrayList<Integer>> collLayer = new ArrayList<ArrayList<Integer>>();
@@ -191,14 +195,14 @@ public class Map {
 		int widthUnbroken = colLayer.getWidth();
 		int heightUnbroken = colLayer.getHeight();
 		ArrayList<ArrayList<BufferedImage>> layer = new ArrayList<ArrayList<BufferedImage>>();
-		for (int initY = 0; initY < heightUnbroken; initY += 32) {
+		for (int initY = 0; initY < heightUnbroken; initY += Map.tileSize) {
 			layer.add(new ArrayList<BufferedImage>());
 		}
 
-		for (int y = 0; y < heightUnbroken; y += 32) {
-			for (int x = 0; x < widthUnbroken; x += 32) {
+		for (int y = 0; y < heightUnbroken; y += Map.tileSize) {
+			for (int x = 0; x < widthUnbroken; x += Map.tileSize) {
 				BufferedImage newTile = colLayer.getSubimage(x, y, Map.tileSize, Map.tileSize);
-				int posY = y / 32;
+				int posY = y / Map.tileSize;
 				layer.get(posY).add(newTile);
 			}
 		}
