@@ -66,6 +66,7 @@ public class GraphicsUtilities {
         JSlider slider = new JSlider(JSlider.HORIZONTAL);
         slider.setPaintTicks(false);
         slider.setPaintLabels(false);
+        slider.setMaximumSize(new Dimension(225, 225));
         slider.setBackground(Color.WHITE);
         slider.setForeground(Color.BLUE);
         return slider;

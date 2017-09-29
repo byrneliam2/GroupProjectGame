@@ -72,7 +72,7 @@ public class Controller extends KeyAdapter {
                     return true;
                 }
             }
-        } catch (InvalidPlayerExceptions ignored) { }
+        } catch (InvalidPlayerExceptions e) { e.printStackTrace(); }
 
         return false;
     }

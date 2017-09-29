@@ -28,7 +28,7 @@ public class MapCard extends Card {
     private map.Map map;
     private IGame game;
 
-    private static final int HEART_POS = 100;
+    private static final int HEART_POS = 50;
     private static final int CONSOLE_FACTOR = 15;
 
     public MapCard(String n, map.Map map, IGame game) {
@@ -41,6 +41,7 @@ public class MapCard extends Card {
                 ImageLoader.image("MapImages", map.getBackgroundLayer(), true),
                 MainDisplay.WIDTH, MainDisplay.HEIGHT));
 
+        addUIEntities();
         addEntities();
     }
 
@@ -51,30 +52,30 @@ public class MapCard extends Card {
     private void addEntities() {
         // add player
         addEntity(new Entity(game.getPlayer(), EntityType.PLAYER,
-                ImageLoader.image("ItemPictures", "key", true),
-                new Point(game.getPlayer().getxLocation(), game.getPlayer().getyLocation()))
+                ImageLoader.image("ItemPictures", "healthPotion", true),
+                new Point(game.getPlayer().getxLocation(), game.getPlayer().getyLocation()), 0)
         );
         // add all NPCs
         map.getNPCS().forEach(npc -> addEntity(new Entity(
                 npc, EntityType.NPC,
                 ImageLoader.image("ItemPictures", "key", true),
-                new Point(npc.getxLocation(), npc.getyLocation())))
+                new Point(npc.getxLocation(), npc.getyLocation()), 0))
         );
         // add all items
         map.getItems().forEach(item -> addEntity(new Entity(
                 item, EntityType.ITEM,
                 ImageLoader.image("ItemPictures", item.getImageFileName(), true),
-                new Point(item.getX(), item.getY())))
+                new Point(item.getX(), item.getY()), 0))
         );
     }
 
     private void addUIEntities() {
         // add player health
-        /*for (int i = 0; i < game.getPlayer().getHealth(); i++) {
-            addEntity(new Entity(game.getPlayer(), EntityType.SPECIAL,
+        for (int i = 0; i < game.getPlayer().getHealth(); i++) {
+            addEntity(new Entity(game.getPlayer(), EntityType.BULLET,
                     ImageLoader.image("game", "heart", true),
-                    new Point((i+1) * HEART_POS, HEART_POS)));
-        }*/
+                    new Point(HEART_POS + (i * HEART_POS), 0), 50));
+        }
     }
 
     private void updateEntities() {

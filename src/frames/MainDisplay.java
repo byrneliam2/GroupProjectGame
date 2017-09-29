@@ -26,6 +26,8 @@ import java.util.*;
  * and a collection of Cards. Each Card represents a screen of the game
  * (see {@link Card} class for more information.) Uses the Strategy pattern
  * by using Cards which all have specific implementations.
+ *
+ * TODO change map loading to new game process
  */
 public class MainDisplay extends JComponent implements Observer {
 
