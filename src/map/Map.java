@@ -37,6 +37,7 @@ public class Map {
 	// HashMap of the Items located on the map and their locations
 	private List<Item> items;
 
+	// List of all NPC's located on this map
 	private List<NPC> NPCS;
 
 	// The width of the map in tiles
@@ -76,8 +77,8 @@ public class Map {
 		this.doors = doors;
 		BufferedImage colLayer = this.loadImage(this.name, "Collision");
 		this.collisionLayer = this.loadColLayers(colLayer);
-		BufferedImage enviromentLayer = this.loadImage(this.name, "Environment");
-		this.environmentalLayer = this.loadEnvLayers(enviromentLayer);
+		// BufferedImage enviromentLayer = this.loadImage(this.name, "Environment");
+		// this.environmentalLayer = this.loadEnvLayers(enviromentLayer);
 	}
 
 	/**
