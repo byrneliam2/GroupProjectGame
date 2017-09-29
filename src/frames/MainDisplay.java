@@ -41,8 +41,8 @@ public class MainDisplay extends JComponent implements Observer {
     private Controller controller;
 
     /* Constants */
-    public static final int WIDTH = Toolkit.getDefaultToolkit().getScreenSize().width;
-    public static final int HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().height;
+    public static final int WIDTH = 1920;
+    public static final int HEIGHT = 1080;
 
     /* Game attributes */
     private IGame game;
@@ -58,10 +58,11 @@ public class MainDisplay extends JComponent implements Observer {
 
         // master frame setup
         master.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        master.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         master.setResizable(false);
         master.setFocusable(true);
         master.setUndecorated(true);
-        master.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //master.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         // controller setup
         MousePosition mouse = new MousePosition();

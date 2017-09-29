@@ -12,6 +12,7 @@ import gfx.GraphicsUtilities;
 import gfx.ImageLoader;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.Map;
 
 /**
@@ -99,6 +100,8 @@ public class SettingsCard extends Card {
         panel.add(Box.createVerticalGlue());
         panel.add(components.get("mastervol"));
         panel.add(components.get("mastervolume"));
+        panel.add(Box.createRigidArea(
+                new Dimension(GraphicsUtilities.BUTTON_SIZE, GraphicsUtilities.BUTTON_SIZE/9)));
         panel.add(components.get("back"));
         panel.add(Box.createVerticalGlue());
     }

@@ -18,6 +18,8 @@ import java.awt.image.BufferedImage;
  */
 public class GraphicsUtilities {
 
+    public static final int BUTTON_SIZE = 225;
+
     /**
      * Creates and returns a transparent, roll-over enabled button with a set image.
      * Button images have a dimension of 225 x 75 pixels.
@@ -59,14 +61,15 @@ public class GraphicsUtilities {
     }
 
     /**
-     * Creates and returns a slider...
+     * Creates and returns a slider that is locked to be the same width as the buttons.
+     * The slider has a default range of 0 to 100 and an initial value of 50.
      * @return new JSlider
      */
     public static JSlider produceSlider() {
         JSlider slider = new JSlider(JSlider.HORIZONTAL);
         slider.setPaintTicks(false);
         slider.setPaintLabels(false);
-        slider.setMaximumSize(new Dimension(225, 225));
+        slider.setMaximumSize(new Dimension(BUTTON_SIZE, BUTTON_SIZE));
         slider.setBackground(Color.WHITE);
         slider.setForeground(Color.BLUE);
         return slider;
