@@ -26,7 +26,7 @@ public class Controller extends KeyAdapter {
         this.mouse = mouse;
         this.pressed = new HashSet<>();
 
-        new Timer(1000/20, (e)-> update()).start();
+        new Timer(1000/60, (e)-> update()).start();
     }
 
     /**
