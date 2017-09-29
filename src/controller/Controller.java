@@ -6,6 +6,8 @@ import utils.Direction;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.HashSet;
+import java.util.Set;
 
 import static controller.Controller.KeyboardCommands.*;
 
@@ -16,19 +18,20 @@ import static controller.Controller.KeyboardCommands.*;
 public class Controller extends KeyAdapter {
     private IGame model;
     private MousePosition mouse;
+    private Set<Integer> pressed;
 
     public Controller(IGame model, MousePosition mouse) {
         this.model = model;
         this.mouse = mouse;
+        this.pressed = new HashSet<>();
     }
 
     /**
      * Whenever a user pressed a key, the event will be sent off for processing
      */
     @Override
-    public void keyPressed(KeyEvent e) {
-        super.keyPressed(e);
-        processInput(e.getKeyCode(), true);
+    public synchronized void keyPressed(KeyEvent e) {
+        this.pressed.add(e.getKeyCode());
     }
 
     /**
@@ -36,8 +39,13 @@ public class Controller extends KeyAdapter {
      */
     @Override
     public void keyReleased(KeyEvent e) {
-        super.keyReleased(e);
-        processInput(e.getKeyCode(), false);
+        this.pressed.remove(e.getKeyCode());
+    }
+
+    public void update() {
+        for (Integer i : pressed) {
+            processInput(i);
+        }
     }
 
     /**
@@ -46,35 +54,27 @@ public class Controller extends KeyAdapter {
      * @param keybind the key the user pressed
      * @return true if the input succeeded, false if it didn't exist or failed.
      */
-    public boolean processInput(int keybind, boolean pressed) {
+    public boolean processInput(int keybind) {
         try {
-            if (pressed) {
-                //All Movement Commands (Can loop)
-                if (keybind == KEY_UP.getKeybind()) {
-                    model.movePlayer(Direction.UP);
-                } else if (keybind == KEY_DOWN.getKeybind()) {
-                    model.movePlayer(Direction.DOWN);
-                } else if (keybind == KEY_LEFT.getKeybind()) {
-                    model.movePlayer(Direction.LEFT);
-                } else if (keybind == KEY_RIGHT.getKeybind()) {
-                    model.movePlayer(Direction.RIGHT);
-                }
-            } else {
-                //All other Commands (Can't loop)
-                if (keybind == KEY_USE.getKeybind()) {
-                    model.interact();
-                    return true;
-                } else if (keybind == KEY_ATTACK.getKeybind()) {
-                    model.shoot(mouse.getX(), mouse.getY());
-                    return true;
-                } else if (keybind == KEY_MENU.getKeybind()) {
-                    model.pauseGame();
-                    return true;
-                }
+            //All Movement Commands (Can loop)
+            if (keybind == KEY_UP.getKeybind()) model.movePlayer(Direction.UP);
+            if (keybind == KEY_DOWN.getKeybind()) model.movePlayer(Direction.DOWN);
+            if (keybind == KEY_LEFT.getKeybind()) model.movePlayer(Direction.LEFT);
+            if (keybind == KEY_RIGHT.getKeybind()) model.movePlayer(Direction.RIGHT);
+            //All other Commands (Can't loop)
+            if (keybind == KEY_USE.getKeybind()) {
+                model.interact();
+                return true;
+            } if (keybind == KEY_ATTACK.getKeybind()) {
+                model.shoot(mouse.getX(), mouse.getY());
+                return true;
+            } if (keybind == KEY_MENU.getKeybind()) {
+                model.pauseGame();
+                return true;
             }
         } catch (InvalidPlayerExceptions ignored) { }
 
-        return false;
+        return true;
     }
 
     /**

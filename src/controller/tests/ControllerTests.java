@@ -116,7 +116,7 @@ public class ControllerTests {
             public boolean movePlayer(int dx, int dy) throws InvalidPlayerExceptions { return dy < 0; }
         };
         Controller c = new Controller(game, mouse);
-        assertTrue(c.processInput(KeyEvent.VK_UP, true));
+        assertTrue(c.processInput(KeyEvent.VK_UP));
     }
 
     @Test
@@ -126,7 +126,7 @@ public class ControllerTests {
             public boolean movePlayer(int dx, int dy) throws InvalidPlayerExceptions { return dy > 0; }
         };
         Controller c = new Controller(game, mouse);
-        assertTrue(c.processInput(KeyEvent.VK_DOWN, true));
+        assertTrue(c.processInput(KeyEvent.VK_DOWN));
     }
 
     @Test
@@ -136,7 +136,7 @@ public class ControllerTests {
             public boolean movePlayer(int dx, int dy) throws InvalidPlayerExceptions { return dx < 0; }
         };
         Controller c = new Controller(game, mouse);
-        assertTrue(c.processInput(KeyEvent.VK_LEFT, true));
+        assertTrue(c.processInput(KeyEvent.VK_LEFT));
     }
 
     @Test
@@ -146,7 +146,7 @@ public class ControllerTests {
             public boolean movePlayer(int dx, int dy) throws InvalidPlayerExceptions { return dx > 1; }
         };
         Controller c = new Controller(game, mouse);
-        assertTrue(c.processInput(KeyEvent.VK_RIGHT, true));
+        assertTrue(c.processInput(KeyEvent.VK_RIGHT));
     }
 
 

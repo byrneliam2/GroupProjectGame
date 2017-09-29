@@ -37,6 +37,7 @@ public class MainDisplay extends JComponent implements Observer {
     private Map<String, Card> cards;
     private Card currentCard, lastCard;
     private IAudioHandler audioHandler;
+    private Controller controller;
 
     /* Constants */
     public static final int WIDTH = Toolkit.getDefaultToolkit().getScreenSize().width;
@@ -63,8 +64,8 @@ public class MainDisplay extends JComponent implements Observer {
 
         // controller setup
         MousePosition mouse = new MousePosition();
-        Controller keyboard = new Controller(game, mouse);
-        master.addKeyListener(keyboard);
+        controller = new Controller(game, mouse);
+        master.addKeyListener(controller);
         master.addMouseMotionListener(mouse);
 
         // this component setup
@@ -150,7 +151,10 @@ public class MainDisplay extends JComponent implements Observer {
     public void start() {
         game.unPauseGame();
         switchScreen(game.getWorld().getStartingMap().getMapName());
-        (timer = new Timer(16, (e) -> redraw())).start();
+        (timer = new Timer(16, (e) -> {
+            redraw();
+            controller.update();
+        })).start();
     }
 
     /**
