@@ -6,7 +6,8 @@ package audio.tracks;/*
 
 public enum MusicTrack implements Track{
     /* Music Files */
-    TEST_MUSIC("test_track.wav");
+    TEST_MUSIC("test_track.wav"),
+    TEST_MUSIC_2("test_music_2.wav");
 
     private String filename;
 
