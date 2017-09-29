@@ -1,5 +1,6 @@
 package player;
 
+import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.geom.Ellipse2D;
 import java.util.ArrayList;
@@ -27,17 +28,20 @@ public class Player {
 	private final String name;
 	private final double defaultFireRate = 1;
 
+
 	private Item closestItem;
 	private Backpack itemsList = new Backpack(this);
 	private double fireRate = 1;
 	private int maxHealth = 5;
 	private int health = 5;
+	private int speed = 5;
 	private int xLocation;// centreX
 	private int yLocation;// centreY
 	private Map map;// the map which the player is currently located on.
 	private boolean isAlive = true;
 	private boolean isReadyToShoot = true;
 	private Timer shootTimer = new Timer();
+	private Image playerImage;
 
 	private Ellipse2D.Double rangeCircle;// the range at which the player can 'pick up' items
 	private Rectangle boundingBox;// the hit box of the player.
@@ -394,4 +398,21 @@ public class Player {
 	public Player getPlayer() {
 		return this;
 	}
+
+	public Image getPlayerImage() {
+		return playerImage;
+	}
+
+	public int getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(int speed) {
+		this.speed = speed;
+	}
+
+	public void setPlayerImage(Image playerImage) {
+		this.playerImage = playerImage;
+	}
+
 }

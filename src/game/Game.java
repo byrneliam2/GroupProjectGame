@@ -1,6 +1,7 @@
 package game;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 
@@ -21,7 +22,7 @@ import player.Player;
  * @author Thomas Edwards
  *
  */
-public class Game implements IGame {
+public class Game implements IGame,Serializable {
 
 	public static boolean GAME_PAUSED = false;
 
