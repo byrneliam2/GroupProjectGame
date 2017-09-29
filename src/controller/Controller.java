@@ -2,6 +2,7 @@ package controller;
 
 import game.IGame;
 import player.InvalidPlayerExceptions;
+import utils.Direction;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -50,13 +51,13 @@ public class Controller extends KeyAdapter {
             if (pressed) {
                 //All Movement Commands (Can loop)
                 if (keybind == KEY_UP.getKeybind()) {
-                    return model.movePlayer(0, -5);
+                    model.movePlayer(Direction.UP);
                 } else if (keybind == KEY_DOWN.getKeybind()) {
-                    return model.movePlayer(0, 5);
+                    model.movePlayer(Direction.DOWN);
                 } else if (keybind == KEY_LEFT.getKeybind()) {
-                    return model.movePlayer(-5, 0);
+                    model.movePlayer(Direction.LEFT);
                 } else if (keybind == KEY_RIGHT.getKeybind()) {
-                    return model.movePlayer(5, 0);
+                    model.movePlayer(Direction.RIGHT);
                 }
             } else {
                 //All other Commands (Can't loop)

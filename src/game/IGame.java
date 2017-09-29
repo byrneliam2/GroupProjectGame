@@ -9,6 +9,7 @@ package game;
 import map.World;
 import player.InvalidPlayerExceptions;
 import player.Player;
+import utils.Direction;
 
 /**
  * Game interface used to link the Game and MockGame(null object.)
@@ -23,7 +24,7 @@ public interface IGame {
 
     World getWorld();
 
-    boolean movePlayer(int i, int i1) throws InvalidPlayerExceptions;
+    void movePlayer(Direction dir) throws InvalidPlayerExceptions;
 
     void interact() throws InvalidPlayerExceptions;
 

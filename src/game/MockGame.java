@@ -8,6 +8,7 @@ import npc.NPC;
 import player.Bullet;
 import player.InvalidPlayerExceptions;
 import player.Player;
+import utils.Direction;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -83,8 +84,8 @@ public class MockGame implements IGame {
 		return new ArrayList<>();
 	}
 
-	public boolean movePlayer(int dx, int dy) throws InvalidPlayerExceptions {
-		return false;
+	public void movePlayer(Direction dir) throws InvalidPlayerExceptions {
+
 	}
 
 	public void interact() throws InvalidPlayerExceptions {

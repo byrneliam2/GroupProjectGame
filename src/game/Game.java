@@ -14,6 +14,7 @@ import npc.NPC;
 import player.Bullet;
 import player.InvalidPlayerExceptions;
 import player.Player;
+import utils.Direction;
 
 /**
  * Class to be used by front end for getting all the different entities in the
@@ -107,8 +108,21 @@ public class Game implements IGame,Serializable {
 	/**
 	 * @see player.Player#move(int dx, int dy)
 	 */
-	public boolean movePlayer(int dx, int dy) throws InvalidPlayerExceptions {
-		return player.move(dx, dy);
+	public void movePlayer(Direction dir) throws InvalidPlayerExceptions {
+		switch(dir){
+			case UP:
+				player.move(0, -player.getSpeed());
+				break;
+			case DOWN:
+				player.move(0, player.getSpeed());
+				break;
+			case LEFT:
+				player.move(-player.getSpeed(), 0);
+				break;
+			case RIGHT:
+				player.move(player.getSpeed(), 0);
+				break;
+		}
 	}
 
 	/**
@@ -147,7 +161,7 @@ public class Game implements IGame,Serializable {
 	}
 
 	/**
-	 * @see player.Player#shoot(double direction)
+	 * @see player.Player#shoot(double mouseX, double mouseY)
 	 */
 	public void shoot(double mouseX, double mouseY) throws InvalidPlayerExceptions {
 		player.shoot(mouseX, mouseY);
