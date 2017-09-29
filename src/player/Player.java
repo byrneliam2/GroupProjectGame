@@ -23,7 +23,7 @@ import items.Usable;
  */
 public class Player {
 	/* constants */
-	private static final int rangeCircleWidth = 50;
+	private static final int rangeCircleWidth = 2 * Map.tileSize;
 	private final String name;
 	private final double defaultFireRate = 1;
 
@@ -362,6 +362,10 @@ public class Player {
 
 	public double getDefaultFireRate() {
 		return defaultFireRate;
+	}
+
+	public Ellipse2D getRangeCircle() {
+		return this.rangeCircle;
 	}
 
 	public Player getPlayer() {

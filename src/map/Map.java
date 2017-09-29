@@ -271,7 +271,9 @@ public class Map {
 		int distance = 0;
 		for (Item item : this.items) {
 			if (rangeCircle.contains(new Point(item.getX(), item.getY()))) {
-				int dist = (int) Math.hypot(item.getX(), item.getY());
+				int xDist = Math.abs((int) (item.getX() - rangeCircle.getCenterX()));
+				int yDist = Math.abs((int) (item.getY() - rangeCircle.getCenterY()));
+				int dist = (int) Math.hypot(xDist, yDist);
 				if (closest == null || dist < distance) {
 					closest = item;
 					distance = dist;
