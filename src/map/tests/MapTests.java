@@ -127,4 +127,6 @@ public class MapTests {
 		assertEquals(i2, m.getClosestItem(p1.getRangeCircle()));
 	}
 
+
+
 }
