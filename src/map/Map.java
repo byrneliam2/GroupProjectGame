@@ -76,10 +76,32 @@ public class Map {
 		this.backgroundLayer = name;
 		this.NPCS = NPCS;
 		this.doors = doors;
-		BufferedImage colLayer = this.loadImage(this.name, "Collision");
-		this.collisionLayer = this.loadColLayers(colLayer);
+		this.loadAllLayers(1920, 1080);
+		//BufferedImage colLayer = this.loadImage(this.name, "Collision");
+		//this.collisionLayer = this.loadColLayers(colLayer);
 		// BufferedImage enviromentLayer = this.loadImage(this.name, "Environment");
 		// this.environmentalLheightayer = this.loadEnvLayers(enviromentLayer);
+	}
+
+	/**
+	 * This method takes the collision and environment layers and scales them to the
+	 * correct size, then loads them.
+	 *
+	 * @param scaleX
+	 * @param scaleY
+	 * @param tileSize
+	 */
+	public void loadAllLayers(int newWidth, int newHeight) {
+		BufferedImage colLayer = ImageLoader.image("MapImages", this.name + "Collision", true);
+		this.width = colLayer.getWidth() / 32;
+		this.height = colLayer.getHeight() / 32;
+		System.out.println(width);
+		System.out.println(height);
+
+		colLayer = ImageUtilities.scale(colLayer, newWidth, newHeight);
+		// this.tileSize = (int) newWidth / this.width;
+		this.collisionLayer = this.loadColLayers(colLayer);
+
 	}
 
 	/**
@@ -97,13 +119,15 @@ public class Map {
 
 		try {
 			img = ImageIO.read(Map.class.getResource("assets/mapImages/" + mapName + layer + ".png"));
-			if (img.getHeight() % Map.tileSize > 0 || img.getWidth() % Map.tileSize > 0) {
-				throw new BadMapImageException(
-						"The image you are trying to load does not have the correct Dimensions, Dimensions should be a factor of 32, the Global tile size.");
-			}
+			// if (img.getHeight() % Map.tileSize > 0 || img.getWidth() % Map.tileSize > 0)
+			// {
+			// throw new BadMapImageException(
+			// "The image you are trying to load does not have the correct Dimensions,
+			// Dimensions should be a factor of 32, the Global tile size.");
+			// }
 
 			return img;
-		} catch (IOException | BadMapImageException e) {
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
