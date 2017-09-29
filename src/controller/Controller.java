@@ -4,6 +4,7 @@ import game.IGame;
 import player.InvalidPlayerExceptions;
 import utils.Direction;
 
+import javax.swing.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.HashSet;
@@ -24,6 +25,8 @@ public class Controller extends KeyAdapter {
         this.model = model;
         this.mouse = mouse;
         this.pressed = new HashSet<>();
+
+        new Timer(1000/20, (e)-> update()).start();
     }
 
     /**
@@ -57,11 +60,12 @@ public class Controller extends KeyAdapter {
     public boolean processInput(int keybind) {
         try {
             //All Movement Commands (Can loop)
-            if (keybind == KEY_UP.getKeybind()) model.movePlayer(Direction.UP);
-            if (keybind == KEY_DOWN.getKeybind()) model.movePlayer(Direction.DOWN);
-            if (keybind == KEY_LEFT.getKeybind()) model.movePlayer(Direction.LEFT);
-            if (keybind == KEY_RIGHT.getKeybind()) model.movePlayer(Direction.RIGHT);
-            //All other Commands (Can't loop)
+            if (keybind == KEY_UP.getKeybind()) model.movePlayer(Direction.N);
+            if (keybind == KEY_DOWN.getKeybind()) model.movePlayer(Direction.S);
+            if (keybind == KEY_LEFT.getKeybind()) model.movePlayer(Direction.W);
+            if (keybind == KEY_RIGHT.getKeybind()) model.movePlayer(Direction.E);
+
+
             if (keybind == KEY_USE.getKeybind()) {
                 model.interact();
                 return true;
@@ -72,8 +76,9 @@ public class Controller extends KeyAdapter {
                 model.pauseGame();
                 return true;
             }
-        } catch (InvalidPlayerExceptions e) { e.printStackTrace(); }
-
+        } catch (InvalidPlayerExceptions e) {
+            System.out.println(e.getMessage());
+        }
         return true;
     }
 

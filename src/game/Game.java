@@ -117,20 +117,7 @@ public class Game implements IGame,Serializable {
 	 * @see player.Player#move(int dx, int dy)
 	 */
 	public void movePlayer(Direction dir) throws InvalidPlayerExceptions {
-		switch(dir){
-			case UP:
-				player.move(0, -player.getSpeed());
-				break;
-			case DOWN:
-				player.move(0, player.getSpeed());
-				break;
-			case LEFT:
-				player.move(-player.getSpeed(), 0);
-				break;
-			case RIGHT:
-				player.move(player.getSpeed(), 0);
-				break;
-		}
+		player.move(player.getSpeed() * dir.getX(), player.getSpeed() * dir.getY());
 	}
 
 	/**

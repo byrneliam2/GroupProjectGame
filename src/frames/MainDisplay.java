@@ -159,10 +159,7 @@ public class MainDisplay extends JComponent implements Observer {
         this.doMapSetup();
         switchScreen(game.getWorld().getStartingMap().getMapName());
 
-        (timer = new Timer(1000/60, (e) -> {
-            redraw();
-            controller.update();
-        })).start();
+        (timer = new Timer(1000/60, (e) -> redraw())).start();
 
         game.unPauseGame();
     }
