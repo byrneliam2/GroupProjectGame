@@ -35,6 +35,14 @@ public class Game implements IGame,Serializable {
 	 */
 	public Game() {
 		this.player = new Player("Tom", 500, 500);
+		/*world = WorldParser.parse("world", this.player);
+		this.player.setMap(world.getStartingMap());*/
+	}
+
+	/**
+	 * Start the new game.
+	 */
+	public void startGame() {
 		world = WorldParser.parse("world", this.player);
 		this.player.setMap(world.getStartingMap());
 	}

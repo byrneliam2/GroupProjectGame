@@ -18,6 +18,8 @@ import utils.Direction;
  */
 public interface IGame {
 
+    void startGame();
+
     void pauseGame();
 
     void unPauseGame();

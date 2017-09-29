@@ -26,8 +26,6 @@ import java.util.*;
  * and a collection of Cards. Each Card represents a screen of the game
  * (see {@link Card} class for more information.) Uses the Strategy pattern
  * by using Cards which all have specific implementations.
- *
- * TODO change map loading to new game process
  */
 public class MainDisplay extends JComponent implements Observer {
 
@@ -99,13 +97,6 @@ public class MainDisplay extends JComponent implements Observer {
         cards.put("pause", new PauseCard("pause"));
         cards.put("settings", new SettingsCard("settings"));
 
-        // get model details and construct enough map cards to fit
-        for (Map.Entry m : World.maps.entrySet()) {
-            String name = (String) m.getKey();
-            map.Map map = (map.Map) m.getValue();
-            cards.put(name, new MapCard(name, map, game));
-        }
-
         // setup action listeners in each card
         // needs a reference to this class to assign correctly
         for (Card c : cards.values()) c.setComponentActions(this);
@@ -135,6 +126,19 @@ public class MainDisplay extends JComponent implements Observer {
     }
 
     /**
+     * Add all map cards to the collection and to this component.
+     */
+    private void doMapSetup() {
+        // get model details and construct enough map cards to fit
+        for (Map.Entry m : World.maps.entrySet()) {
+            String name = (String) m.getKey();
+            map.Map map = (map.Map) m.getValue();
+            cards.put(name, new MapCard(name, map, game));
+            this.add(cards.get(name), name);
+        }
+    }
+
+    /**
      * Change the current screen that is being displayed.
      * @param key name of panel to switch to
      */
@@ -151,12 +155,16 @@ public class MainDisplay extends JComponent implements Observer {
      * Start the game timer.
      */
     public void start() {
-        game.unPauseGame();
+        game.startGame();
+        this.doMapSetup();
         switchScreen(game.getWorld().getStartingMap().getMapName());
+
         (timer = new Timer(16, (e) -> {
             redraw();
             controller.update();
         })).start();
+
+        game.unPauseGame();
     }
 
     /**

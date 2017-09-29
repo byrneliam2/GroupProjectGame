@@ -111,6 +111,11 @@ public class MockGame implements IGame {
 	public void shoot(double direction) throws InvalidPlayerExceptions {
 	}
 
+	@Override
+	public void startGame() {
+
+	}
+
 	public void pauseGame() {
 	}
 
