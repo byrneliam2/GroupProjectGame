@@ -26,7 +26,7 @@ public class Controller extends KeyAdapter {
         this.mouse = mouse;
         this.pressed = new HashSet<>();
 
-        new Timer(1000/60, (e)-> update()).start();
+        new Timer(1000/20, (e)-> update()).start();
     }
 
     /**
@@ -61,23 +61,21 @@ public class Controller extends KeyAdapter {
         try {
             //All Movement Commands (Can loop)
             if (keybind == KEY_UP.getKeybind()) model.movePlayer(Direction.N);
-            if (keybind == KEY_DOWN.getKeybind()) model.movePlayer(Direction.S);
-            if (keybind == KEY_LEFT.getKeybind()) model.movePlayer(Direction.W);
-            if (keybind == KEY_RIGHT.getKeybind()) model.movePlayer(Direction.E);
-
-
-            if (keybind == KEY_USE.getKeybind()) {
+            else if (keybind == KEY_DOWN.getKeybind()) model.movePlayer(Direction.S);
+            else if (keybind == KEY_LEFT.getKeybind()) model.movePlayer(Direction.W);
+            else if (keybind == KEY_RIGHT.getKeybind()) model.movePlayer(Direction.E);
+            else if (keybind == KEY_USE.getKeybind()) {
                 model.interact();
                 return true;
-            } if (keybind == KEY_ATTACK.getKeybind()) {
+            }else  if (keybind == KEY_ATTACK.getKeybind()) {
                 model.shoot(mouse.getX(), mouse.getY());
                 return true;
-            } if (keybind == KEY_MENU.getKeybind()) {
+            }else  if (keybind == KEY_MENU.getKeybind()) {
                 model.pauseGame();
                 return true;
             }
         } catch (InvalidPlayerExceptions e) {
-            System.out.println(e.getMessage());
+            //System.out.println(e.getMessage());
         }
         return true;
     }
