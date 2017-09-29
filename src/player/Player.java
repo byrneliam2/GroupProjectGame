@@ -31,7 +31,6 @@ public class Player {
 	private final String name;
 	private final double defaultFireRate = 1;
 
-
 	private Item closestItem;
 	private Backpack itemsList = new Backpack(this);
 	private double fireRate = 1;
@@ -62,17 +61,18 @@ public class Player {
 
 	/**
 	 * This method sets the global tile size
-	 * 	THIS IS A QUICK FIX, THIS NEEDS TO BE CHANGED
+	 * THIS IS A QUICK FIX, THIS NEEDS TO BE CHANGED
+	 * 
 	 * @param newWidth
 	 * @param newHeight
 	 */
 	public void setGlobalTileSize(int newWidth, int newHeight) {
-			BufferedImage colLayer = ImageLoader.image("MapImages", "Map3Collision", true);
-			int width = colLayer.getWidth() / 32;
-			int height = colLayer.getHeight() / 32;
+		BufferedImage colLayer = ImageLoader.image("MapImages", "Map3Collision", true);
+		int width = colLayer.getWidth() / 32;
+		int height = colLayer.getHeight() / 32;
 
-			colLayer = ImageUtilities.scale(colLayer, newWidth, newHeight);
-			Map.tileSize = (int) newWidth / width;
+		colLayer = ImageUtilities.scale(colLayer, newWidth, newHeight);
+		Map.tileSize = (int) newWidth / width;
 
 	}
 

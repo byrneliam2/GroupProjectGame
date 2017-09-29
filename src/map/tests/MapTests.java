@@ -12,15 +12,24 @@ import items.itemList.MassiveGun;
 import map.BadMapImageException;
 import map.Map;
 import map.MapParser;
+import player.InvalidPlayerExceptions;
 import player.Player;
 
 public class MapTests {
 
+	private int x = 90, y = 90;
+	private Player p1;
+	private Map m;
+
+	public void setup() {
+		p1 = new Player("Tom", x, y);
+		m = MapParser.parse("Map3", p1);
+		p1.setMap(m);
+	}
+
 	@Test
 	public void testCanMove() {
-		Player p1 = new Player("Tom", 50, 50);
-		Map m = MapParser.parse("Map1", p1);
-
+		setup();
 		assertFalse(m.canMove(-1, -1));
 		assertFalse(m.canMove(0, 0));
 		assertFalse(m.canMove(5, 5));
@@ -30,50 +39,47 @@ public class MapTests {
 
 	@Test
 	public void testDropItemOnMap() {
-		Player p1 = new Player("Tom", 50, 50);
-		Map m = MapParser.parse("Map1", p1);
+		setup();
 		Item i = new HealthPot();
-		assertEquals(2, m.getItems().size());// map starts with two items.
+		assertEquals(1, m.getItems().size());// map starts with two items.
 
 		m.placeItem(i, 100, 100);
 
-		assertEquals(3, m.getItems().size());
-		assertEquals(100, m.getItems().get(2).getX());
-		assertEquals(100, m.getItems().get(2).getY());
+		assertEquals(2, m.getItems().size());
+		assertEquals(100, m.getItems().get(1).getX());
+		assertEquals(100, m.getItems().get(1).getY());
 	}
 
 	@Test
 	public void testPickUpItemOnMap() {
-		Player p1 = new Player("Tom", 50, 50);
-		Map m = MapParser.parse("Map1", p1);
+		setup();
 		Item i = new HealthPot();
-		assertEquals(2, m.getItems().size());// map starts with two items.
+		assertEquals(1, m.getItems().size());// map starts with two items.
 
 		m.placeItem(i, 100, 100);
 		m.removeItem(i);
-		assertEquals(2, m.getItems().size());// map goes back to two items
+		assertEquals(1, m.getItems().size());// map goes back to two items
 	}
 
 	@Test
 	public void testRepeatedDrop() {
-		Player p1 = new Player("Tom", 50, 50);
-		Map m = MapParser.parse("Map1", p1);
+		setup();
 		Item i = new HealthPot();
-		assertEquals(2, m.getItems().size());// map starts with two items.
+		assertEquals(1, m.getItems().size());// map starts with two items.
 
-		m.placeItem(i, 50, 50);
-		assertEquals(3, m.getItems().size());
-		assertEquals(50, m.getItems().get(2).getX());
-		assertEquals(50, m.getItems().get(2).getY());
+		m.placeItem(i, x, y);
+		assertEquals(2, m.getItems().size());
+		assertEquals(x, m.getItems().get(1).getX());
+		assertEquals(y, m.getItems().get(1).getY());
 		m.removeItem(i);
-		assertEquals(2, m.getItems().size());// map goes back to two items
+		assertEquals(1, m.getItems().size());// map goes back to two items
 
 		m.placeItem(i, 150, 150);
-		assertEquals(3, m.getItems().size());
-		assertEquals(150, m.getItems().get(2).getX());
-		assertEquals(150, m.getItems().get(2).getY());
+		assertEquals(2, m.getItems().size());
+		assertEquals(150, m.getItems().get(1).getX());
+		assertEquals(150, m.getItems().get(1).getY());
 		m.removeItem(i);
-		assertEquals(2, m.getItems().size());// map goes back to two items
+		assertEquals(1, m.getItems().size());// map goes back to two items
 
 	}
 
@@ -82,10 +88,7 @@ public class MapTests {
 	 */
 	@Test
 	public void testRangeCircle() {
-		Player p1 = new Player("Tom", 50, 50);
-		// centre of circle is at aproximatly 82,82.
-
-		Map m = MapParser.parse("Map1", p1);
+		setup();
 		Item i = new HealthPot();
 		m.placeItem(i, (int) p1.getRangeCircle().getCenterX(), (int) p1.getRangeCircle().getCenterY());
 
@@ -98,11 +101,10 @@ public class MapTests {
 	 */
 	@Test
 	public void testRangeCircle2() {
-		Player p1 = new Player("Tom", 50, 50);
-		Map m = MapParser.parse("Map1", p1);
+		setup();
 		Item i = new HealthPot();
 
-		m.placeItem(i, 50 + Map.tileSize, 51);
+		m.placeItem(i, x + Map.tileSize, x + 1);
 
 		// tests item at very edge of range circle
 		assertEquals(i, m.getClosestItem(p1.getRangeCircle()));
@@ -113,20 +115,60 @@ public class MapTests {
 	 */
 	@Test
 	public void testRangeCircle3() {
-		Player p1 = new Player("Tom", 50, 50);
-		Map m = MapParser.parse("Map1", p1);
+		setup();
 		Item i = new HealthPot();
 		Item i2 = new MassiveGun();
 		Item i3 = new HealthPot();
 
-		m.placeItem(i, 50, 50 + Map.tileSize);
-		m.placeItem(i2, 60, 50 + Map.tileSize);
-		m.placeItem(i3, 55, 50 + Map.tileSize);
+		m.placeItem(i, x, y + Map.tileSize);
+		m.placeItem(i2, x + 10, y + Map.tileSize);
+		m.placeItem(i3, x + 5, y + Map.tileSize);
 
 		// tests item at very edge of range circle
 		assertEquals(i2, m.getClosestItem(p1.getRangeCircle()));
 	}
 
+	/**
+	 * Tests the range circle on 3 items in a Vertical line.
+	 */
+	@Test
+	public void testRangeCircle4() {
+		setup();
+		Item i = new HealthPot();
+		Item i2 = new MassiveGun();
+		Item i3 = new HealthPot();
 
+		m.placeItem(i, x + Map.tileSize, y);
+		m.placeItem(i2, x + Map.tileSize, y + 10);
+		m.placeItem(i3, x + Map.tileSize, y + 5);
+
+		// tests item at very edge of range circle
+		assertEquals(i2, m.getClosestItem(p1.getRangeCircle()));
+	}
+
+	/**
+	 * Tests the range circle is still correct once player has moved
+	 */
+	@Test
+	public void testRangeCircle5() {
+		setup();
+		Item i = new HealthPot();
+		Item i2 = new MassiveGun();
+
+		m.placeItem(i, x + Map.tileSize, y + 10);
+		m.placeItem(i2, x + 1 + Map.tileSize, y + 10);
+
+		// item i should be closest
+		assertEquals(i, m.getClosestItem(p1.getRangeCircle()));
+
+		try {
+			p1.move(1, 0);
+		} catch (InvalidPlayerExceptions e) {
+			e.printStackTrace();
+			fail();
+		}
+		// item i2 should be closest.
+		assertEquals(i2, m.getClosestItem(p1.getRangeCircle()));
+	}
 
 }

@@ -95,8 +95,8 @@ public class Map {
 		BufferedImage colLayer = ImageLoader.image("MapImages", this.name + "Collision", true);
 		this.width = colLayer.getWidth() / 32;
 		this.height = colLayer.getHeight() / 32;
-		System.out.println(width);
-		System.out.println(height);
+		// System.out.println(width);
+		// System.out.println(height);
 
 		colLayer = ImageUtilities.scale(colLayer, newWidth, newHeight);
 		// this.tileSize = (int) newWidth / this.width;
@@ -219,8 +219,8 @@ public class Map {
 		for (int initY = 0; initY < heightUnbroken; initY += Map.tileSize) {
 			layer.add(new ArrayList<BufferedImage>());
 		}
-		System.out.println(widthUnbroken);
-		System.out.println(heightUnbroken);
+		// System.out.println(widthUnbroken);
+		// System.out.println(heightUnbroken);
 		for (int y = 0; y < heightUnbroken; y += Map.tileSize) {
 			for (int x = 0; x < widthUnbroken; x += Map.tileSize) {
 				BufferedImage newTile = colLayer.getSubimage(x, y, Map.tileSize, Map.tileSize);
@@ -288,19 +288,17 @@ public class Map {
 	 * @return
 	 */
 	public Item getClosestItem(Ellipse2D rangeCircle) {
-		int middle = Map.tileSize / 2;
 		if (items == null)
 			return null;
-		// TODO change items to use a bounding box too not a point.... or use the centre
-		// point
-		// currently using the top left corner pointS.
+		// TODO change items to use centre Point.
 		Item closest = null;
-		int distance = 0;
+		double distance = 0;
 		for (Item item : this.items) {
 			if (rangeCircle.contains(new Point(item.getX(), item.getY()))) {
-				int xDist = Math.abs((int) (item.getX() - rangeCircle.getCenterX()));
-				int yDist = Math.abs((int) (item.getY() - rangeCircle.getCenterY()));
-				int dist = (int) Math.hypot(xDist, yDist);
+				double xDist = (item.getX() - rangeCircle.getCenterX());
+				double yDist = (item.getY() - rangeCircle.getCenterY());
+				double dist = Math.hypot(xDist, yDist);// actual distance from
+
 				if (closest == null || dist < distance) {
 					closest = item;
 					distance = dist;
@@ -361,6 +359,9 @@ public class Map {
 	/**
 	 * This method decides whether a position on the map can be moved over by a
 	 * rectangle, using the rectangles four corners
+	 * 
+	 * OPTIMISING: remove checking around the outside of map as these should never occur.
+	 * OPTIMISING: make the corners 'move along' as you go to each corner rather than recalculating total 8 values.
 	 *
 	 * @param r
 	 * @return
@@ -376,7 +377,7 @@ public class Map {
 			return false;
 		}
 
-		double topRx = r.getX() + r.getWidth();
+		double topRx = r.getX() + r.getWidth() - 1;
 		double topRy = r.getY();
 		if (topRx > (this.width * Map.tileSize) || topRy > (this.height * Map.tileSize)) {
 			return false;
@@ -386,7 +387,7 @@ public class Map {
 		}
 
 		double botLx = r.getX();
-		double botLy = r.getY() + r.getHeight();
+		double botLy = r.getY() + r.getHeight() - 1;
 		if ((botLx) < 0 || (botLy) < 0) {
 			return false;
 		}
@@ -395,8 +396,8 @@ public class Map {
 			return false;
 		}
 
-		double botRx = r.getX() + r.getWidth();
-		double botRy = r.getY() + r.getHeight();
+		double botRx = r.getX() + r.getWidth() - 1;
+		double botRy = r.getY() + r.getHeight() - 1;
 		if (botRx > (this.width * Map.tileSize) || botRy > (this.height * Map.tileSize)) {
 			return false;
 		}
