@@ -11,17 +11,18 @@ import player.Player;
 public class WorldTests {
 
 	@Test
-	public void startingMapNotLoaded() {
+	public void correctStartingMap() {
 		Player p1 = new Player("Tom", 50, 50);
-		World w = WorldParser.parse("world2", p1);
-		assert(w.getStartingMap()==null);
+		World w = WorldParser.parse("world", p1);
+		assert(w.getStartingMap()!=null);
+		assert(w.getStartingMap().getMapName().equals("Map3"));
 	}
-	
+
 	@Test
 	public void CorrectAmountOfMaps() {
 		Player p1 = new Player("Tom", 50, 50);
-		World w = WorldParser.parse("world2", p1);
-		assert(World.getMaps().size()==1);
+		World w = WorldParser.parse("world", p1);
+		assert(World.getMaps().size()==3);
 	}
 
 }

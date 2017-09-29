@@ -37,6 +37,7 @@ public class Map {
 	// HashMap of the Items located on the map and their locations
 	private List<Item> items;
 
+	// List of all NPC's located on this map
 	private List<NPC> NPCS;
 
 	// The width of the map in tiles
@@ -76,8 +77,8 @@ public class Map {
 		this.doors = doors;
 		BufferedImage colLayer = this.loadImage(this.name, "Collision");
 		this.collisionLayer = this.loadColLayers(colLayer);
-		BufferedImage enviromentLayer = this.loadImage(this.name, "Environment");
-		this.environmentalLayer = this.loadEnvLayers(enviromentLayer);
+		// BufferedImage enviromentLayer = this.loadImage(this.name, "Environment");
+		// this.environmentalLayer = this.loadEnvLayers(enviromentLayer);
 	}
 
 	/**
@@ -271,7 +272,9 @@ public class Map {
 		int distance = 0;
 		for (Item item : this.items) {
 			if (rangeCircle.contains(new Point(item.getX(), item.getY()))) {
-				int dist = (int) Math.hypot(item.getX(), item.getY());
+				int xDist = Math.abs((int) (item.getX() - rangeCircle.getCenterX()));
+				int yDist = Math.abs((int) (item.getY() - rangeCircle.getCenterY()));
+				int dist = (int) Math.hypot(xDist, yDist);
 				if (closest == null || dist < distance) {
 					closest = item;
 					distance = dist;
@@ -283,7 +286,7 @@ public class Map {
 
 	/**
 	 * This method drops a given item onto a x,y spot on the Map by inserting the
-	 * new item and its pint into the HashMap of items located on this Map.
+	 * new item into this maps ArrayList of items
 	 *
 	 * @param i
 	 * @param x
@@ -291,6 +294,7 @@ public class Map {
 	 */
 	public void placeItem(Item i, int x, int y) {
 		Point toDrop = new Point((int) x / Map.tileSize, (int) y / Map.tileSize);
+		this.items.add(i);
 		i.setX(x);// might be unnessicary TODO.
 		i.setY(y);
 	}
@@ -316,7 +320,7 @@ public class Map {
 	public boolean canMove(int x, int y) {
 		x = (int) (x / tileSize);
 		y = (int) (y / tileSize);
-		if (x < 0 || y < 0 || (x + this.width) > 0 || (y + this.height) > 0) {
+		if (x < 0 || y < 0 || x > this.width || y > this.height) {
 			return false;
 		}
 		Point mapPos = this.positionOnMap(x, y);
@@ -350,7 +354,7 @@ public class Map {
 		if (this.collisionLayer.get((int) (topRy / Map.tileSize)).get((int) (topRx / Map.tileSize)) == 1) {
 			return false;
 		}
-		if (((int) (topRx / Map.tileSize)) > 0 || ((int) (topRy / Map.tileSize)) > 0) {
+		if (((int) (topRx / Map.tileSize)) > (this.width*Map.tileSize) || ((int) (topRy / Map.tileSize)) > (this.height*Map.tileSize)) {
 			return false;
 		}
 
@@ -368,7 +372,7 @@ public class Map {
 		if (this.collisionLayer.get((int) (botRy / Map.tileSize)).get((int) (botRx / Map.tileSize)) == 1) {
 			return false;
 		}
-		if (((int) (botRx / Map.tileSize)) > 0 || ((int) (botRy / Map.tileSize)) > 0) {
+		if (((int) (botRx / Map.tileSize)) > (this.width*Map.tileSize) || ((int) (botRy / Map.tileSize)) > (this.height*Map.tileSize)) {
 			return false;
 		}
 

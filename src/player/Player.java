@@ -24,7 +24,7 @@ import items.Usable;
  */
 public class Player {
 	/* constants */
-	private static final int rangeCircleWidth = 50;
+	private static final int rangeCircleWidth = 2 * Map.tileSize;
 	private final String name;
 	private final double defaultFireRate = 1;
 
@@ -53,12 +53,7 @@ public class Player {
 	 */
 	public Player(String name, int xLocation, int yLocation) {
 		this.name = name;
-		this.xLocation = xLocation;
-		this.yLocation = yLocation;
-		rangeCircle = new Ellipse2D.Double(xLocation - (rangeCircleWidth / 2), yLocation - (rangeCircleWidth / 2),
-				rangeCircleWidth, rangeCircleWidth);
-		//boundingBox = new Rectangle(xLocation - (Map.tileSize / 2), yLocation - (Map.tileSize / 2), Map.tileSize,
-		//		Map.tileSize);
+		rangeCircle = new Ellipse2D.Double(xLocation, yLocation, rangeCircleWidth, rangeCircleWidth);
 		boundingBox = new Rectangle(xLocation, yLocation, Map.tileSize, Map.tileSize);
 	}
 
@@ -103,7 +98,7 @@ public class Player {
 			// Remove the Item from the Player list of Items.
 			itemsList.removeItem(item);
 			// update the map with the item that has been dropped
-			map.placeItem(item, xLocation, yLocation);
+			map.placeItem(item, (int) boundingBox.getCenterX(), (int) boundingBox.getCenterY());
 			// update the Closest item to the player rangeCircle
 			closestItem = map.getClosestItem(rangeCircle);
 
@@ -224,49 +219,32 @@ public class Player {
 		return false;
 	}
 
-	private boolean canMakeMove(int dx, int dy) {
-		// Ask the map if it possible to move (((Later)))
-		// make two temporary variables because I don't want to move the current status
-		// of the current Player
-		// and I pass these two temp variables to the canMove function in the map to
-		// check if it possible to make a move.
-		int tempLocationX = dx + xLocation;
-		int tempLocationY = dy + yLocation;
-		if (map.canMove(tempLocationX, tempLocationY)) {
-			return true;// if possible to move to this location
-		}
-		return false;// if not possible
-	}
-
 	/**
 	 * @param dx
 	 * @param dy
 	 * @return true if the player moved through a door, false otherwise.
 	 * @throws InvalidPlayerExceptions
+	 *             if the player tries to make an invalid move.
 	 */
 	public boolean move(int dx, int dy) throws InvalidPlayerExceptions {
-		int tempLocationX = dx + xLocation;
-		int tempLocationY = dy + yLocation;
 		DoorItem door = null;
+		boundingBox.translate(dx, dy);
+		if (map.canMove(boundingBox)) {
 
-		if (map.canMove(tempLocationX, tempLocationY)) {
-			// if (true) {
 			if ((door = map.getDoor(boundingBox)) != null) {// if player is next to a door
 				map = enterDoor(door);
+				closestItem = map.getClosestItem(rangeCircle);
 				return true;
-			} else {
-				// just a normal move
-				this.xLocation = tempLocationX;
-				this.yLocation = tempLocationY;
+			} else {// make a normal move.
 				// update boundingBox and rangeCircle
-				boundingBox.translate(dx, dy);
-				rangeCircle = new Ellipse2D.Double(xLocation - (rangeCircleWidth / 2),
-						yLocation - (rangeCircleWidth / 2), rangeCircleWidth, rangeCircleWidth);
+				rangeCircle = new Ellipse2D.Double(boundingBox.getX(), boundingBox.getY(), rangeCircleWidth,
+						rangeCircleWidth);
 				// update closest item
 				closestItem = map.getClosestItem(rangeCircle);
 				return false;
 			}
 		} else {
+			boundingBox.translate(-dx, -dy);
 			throw new InvalidPlayerExceptions("You cant make a move/Invalid move");
 		}
 	}
@@ -279,11 +257,8 @@ public class Player {
 	 */
 	private Map enterDoor(DoorItem Door) {
 		// update location in new map...
-		this.xLocation = 100;
-		this.yLocation = 100;
-		boundingBox.setLocation(xLocation, yLocation);
-		rangeCircle = new Ellipse2D.Double(xLocation - (rangeCircleWidth / 2), yLocation - (rangeCircleWidth / 2),
-				rangeCircleWidth, rangeCircleWidth);
+		boundingBox.setLocation(100, 100);
+		rangeCircle = new Ellipse2D.Double(boundingBox.getX(), boundingBox.getY(), rangeCircleWidth, rangeCircleWidth);
 		return World.maps.get(Door.getMap());
 	}
 
@@ -300,9 +275,9 @@ public class Player {
 
 		if (isReadyToShoot) {
 			isReadyToShoot = false;
-			double direction = MathUtils.calculateAngle(this.xLocation, this.yLocation, mouseX, mouseY);
+			double direction = MathUtils.calculateAngle(boundingBox.getX(), boundingBox.getY(), mouseX, mouseY);
 			// make a new bullet
-			new Bullet(xLocation, yLocation, direction, this);
+			new Bullet(boundingBox.getX(), boundingBox.getY(), direction, this);
 
 			// start a timer to count till when the next shot is ready to shoot....
 			TimerTask taskEvent = new TimerTask() {
@@ -311,8 +286,8 @@ public class Player {
 				}
 			};
 			shootTimer.schedule(taskEvent, (int) (fireRate * 1000));
-			// if you can't shoot (for any reason) throw an exception...
-		} else {
+
+		} else {// if you can't shoot (for any reason) throw an exception...
 			throw new InvalidPlayerExceptions("You cant shoot at this stage");
 		}
 
@@ -347,14 +322,14 @@ public class Player {
 	 * @return the x pixel location of the player's centre point.
 	 */
 	public int getxLocation() {
-		return xLocation;
+		return (int) boundingBox.getX();
 	}
 
 	/**
 	 * @return the y pixel location of the player's centre point.
 	 */
 	public int getyLocation() {
-		return yLocation;
+		return (int) boundingBox.getY();
 	}
 
 	public Rectangle getBoundingBox() {
@@ -393,6 +368,10 @@ public class Player {
 
 	public double getDefaultFireRate() {
 		return defaultFireRate;
+	}
+
+	public Ellipse2D getRangeCircle() {
+		return this.rangeCircle;
 	}
 
 	public Player getPlayer() {
