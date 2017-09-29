@@ -316,7 +316,7 @@ public class Map {
 	public boolean canMove(int x, int y) {
 		x = (int) (x / tileSize);
 		y = (int) (y / tileSize);
-		if (x < 0 || y < 0 || (x + this.width) > 0 || (y + this.height) > 0) {
+		if (x < 0 || y < 0 || x > this.width || y > this.height) {
 			return false;
 		}
 		Point mapPos = this.positionOnMap(x, y);

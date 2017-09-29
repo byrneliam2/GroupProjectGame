@@ -109,6 +109,7 @@ public class Bullet {
 
 		// if the bullet hits an immovable area, remove it.
 		if (!owner.getMap().canMove((int) currentX, (int) currentY)) {
+			System.out.println("removed bullet location " + this.getX() + ", " + this.getY());
 			removeBullet();
 		}
 		// if the bullet hits a npc, remove it
