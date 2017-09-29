@@ -83,6 +83,8 @@ public class MapTests {
 	@Test
 	public void testRangeCircle() {
 		Player p1 = new Player("Tom", 50, 50);
+		// centre of circle is at aproximatly 82,82.
+
 		Map m = MapParser.parse("Map1", p1);
 		Item i = new HealthPot();
 		m.placeItem(i, (int) p1.getRangeCircle().getCenterX(), (int) p1.getRangeCircle().getCenterY());
@@ -107,7 +109,7 @@ public class MapTests {
 	}
 
 	/**
-	 * Tests the range circle on 3 items in line.
+	 * Tests the range circle on 3 items in a horizontal line.
 	 */
 	@Test
 	public void testRangeCircle3() {
