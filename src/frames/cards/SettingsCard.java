@@ -34,7 +34,9 @@ public class SettingsCard extends Card {
     protected void doUISetup() {
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
         // volume slider
-        components.put("volume", GraphicsUtilities.produceSlider());
+        components.put("mastervol", GraphicsUtilities.produceSticker(
+                ImageLoader.image("ui", "mastervol", true), 0.5f));
+        components.put("mastervolume", GraphicsUtilities.produceSlider());
         // difficulty?
         //
         // back button
@@ -83,7 +85,7 @@ public class SettingsCard extends Card {
     private void doSliderAction(String str, JSlider sld, MainDisplay dsp) {
         sld.addChangeListener((e) -> {
             switch(str) {
-                case "volume":
+                case "mastervolume":
                     dsp.getAudioHandler().setAudioVolume(sld.getValue()/100f);
                     break;
             }
@@ -95,7 +97,8 @@ public class SettingsCard extends Card {
         panel.removeAll();
         // add the components in a top to bottom order, adding glue where we want space
         panel.add(Box.createVerticalGlue());
-        panel.add(components.get("volume"));
+        panel.add(components.get("mastervol"));
+        panel.add(components.get("mastervolume"));
         panel.add(components.get("back"));
         panel.add(Box.createVerticalGlue());
     }
