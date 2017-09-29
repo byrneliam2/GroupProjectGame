@@ -39,7 +39,7 @@ public class MapCard extends Card {
         setBackground(ImageUtilities.scale(
                 ImageLoader.image("MapImages", map.getBackgroundLayer(), true),
                 MainDisplay.WIDTH, MainDisplay.HEIGHT));
-        //this.map.loadAllLayers(MainDisplay.WIDTH, MainDisplay.HEIGHT);
+        this.map.loadAllLayers(MainDisplay.WIDTH, MainDisplay.HEIGHT);
 
         addUIEntities();
         addEntities();
