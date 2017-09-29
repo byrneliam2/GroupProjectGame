@@ -110,8 +110,6 @@ public class Map {
 
 	}
 
-
-
 	/**
 	 * This method takes a buffered image representing the collision layer and
 	 * converts it into a 2D array of integers. Each integer representing whether
@@ -320,7 +318,7 @@ public class Map {
 	 * @param y
 	 */
 	public boolean canMove(int x, int y) {
-		if (x < 0 || y < 0 || x > this.width*Map.tileSize || y > this.height*Map.tileSize) {
+		if (x < 0 || y < 0 || x > this.width * Map.tileSize || y > this.height * Map.tileSize) {
 			return false;
 		}
 		x = (int) (x / tileSize);
@@ -345,37 +343,39 @@ public class Map {
 
 		double topLx = r.getX();
 		double topLy = r.getY();
-		if (this.collisionLayer.get((int) (topLy / Map.tileSize)).get((int) (topLx / Map.tileSize)) == 1) {
+		if (topLx < 0 || topLy < 0) {
 			return false;
 		}
-		if (((int) (topLx / Map.tileSize)) < 0 || ((int) (topLy / Map.tileSize)) < 0) {
+		if (this.collisionLayer.get((int) (topLy / Map.tileSize)).get((int) (topLx / Map.tileSize)) == 1) {
 			return false;
 		}
 
 		double topRx = r.getX() + r.getWidth();
 		double topRy = r.getY();
-		if (this.collisionLayer.get((int) (topRy / Map.tileSize)).get((int) (topRx / Map.tileSize)) == 1) {
+		if (topRx > (this.width * Map.tileSize) || topRy > (this.height * Map.tileSize)) {
 			return false;
 		}
-		if (((int) (topRx / Map.tileSize)) > (this.width*Map.tileSize) || ((int) (topRy / Map.tileSize)) > (this.height*Map.tileSize)) {
+		if (this.collisionLayer.get((int) (topRy / Map.tileSize)).get((int) (topRx / Map.tileSize)) == 1) {
 			return false;
 		}
 
 		double botLx = r.getX();
 		double botLy = r.getY() + r.getHeight();
-		if (this.collisionLayer.get((int) (botLy / Map.tileSize)).get((int) (botLx / Map.tileSize)) == 1) {
+		if ((botLx) < 0 || (botLy) < 0) {
 			return false;
 		}
-		if (((int) (botLx / Map.tileSize)) < 0 || ((int) (botLy / Map.tileSize)) < 0) {
+
+		if (this.collisionLayer.get((int) (botLy / Map.tileSize)).get((int) (botLx / Map.tileSize)) == 1) {
 			return false;
 		}
 
 		double botRx = r.getX() + r.getWidth();
 		double botRy = r.getY() + r.getHeight();
-		if (this.collisionLayer.get((int) (botRy / Map.tileSize)).get((int) (botRx / Map.tileSize)) == 1) {
+		if (botRx > (this.width * Map.tileSize) || botRy > (this.height * Map.tileSize)) {
 			return false;
 		}
-		if (((int) (botRx / Map.tileSize)) > (this.width*Map.tileSize) || ((int) (botRy / Map.tileSize)) > (this.height*Map.tileSize)) {
+
+		if (this.collisionLayer.get((int) (botRy / Map.tileSize)).get((int) (botRx / Map.tileSize)) == 1) {
 			return false;
 		}
 
