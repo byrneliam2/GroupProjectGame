@@ -286,7 +286,7 @@ public class Map {
 
 	/**
 	 * This method drops a given item onto a x,y spot on the Map by inserting the
-	 * new item and its pint into the HashMap of items located on this Map.
+	 * new item into this maps ArrayList of items
 	 *
 	 * @param i
 	 * @param x
@@ -354,7 +354,7 @@ public class Map {
 		if (this.collisionLayer.get((int) (topRy / Map.tileSize)).get((int) (topRx / Map.tileSize)) == 1) {
 			return false;
 		}
-		if (((int) (topRx / Map.tileSize)) > 0 || ((int) (topRy / Map.tileSize)) > 0) {
+		if (((int) (topRx / Map.tileSize)) > (this.width*Map.tileSize) || ((int) (topRy / Map.tileSize)) > (this.height*Map.tileSize)) {
 			return false;
 		}
 
@@ -372,7 +372,7 @@ public class Map {
 		if (this.collisionLayer.get((int) (botRy / Map.tileSize)).get((int) (botRx / Map.tileSize)) == 1) {
 			return false;
 		}
-		if (((int) (botRx / Map.tileSize)) > 0 || ((int) (botRy / Map.tileSize)) > 0) {
+		if (((int) (botRx / Map.tileSize)) > (this.width*Map.tileSize) || ((int) (botRy / Map.tileSize)) > (this.height*Map.tileSize)) {
 			return false;
 		}
 
