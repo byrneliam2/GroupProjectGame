@@ -291,6 +291,7 @@ public class Map {
 	 */
 	public void placeItem(Item i, int x, int y) {
 		Point toDrop = new Point((int) x / Map.tileSize, (int) y / Map.tileSize);
+		this.items.add(i);
 		i.setX(x);// might be unnessicary TODO.
 		i.setY(y);
 	}

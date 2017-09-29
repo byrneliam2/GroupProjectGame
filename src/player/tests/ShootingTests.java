@@ -69,7 +69,8 @@ public class ShootingTests {
 	}
 
 	/**
-	 * Tests that the bullet List contains the correct info after creating a bullet
+	 * Tests that the bullet List contains the correct info after shotting two
+	 * bullets
 	 */
 	@Test
 	public void testShooting4() {
