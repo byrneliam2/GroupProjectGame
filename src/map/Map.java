@@ -16,6 +16,7 @@ import java.util.TimerTask;
 import javax.imageio.ImageIO;
 
 import gfx.ImageLoader;
+import gfx.ImageUtilities;
 import items.DoorItem;
 import items.Item;
 import npc.NPC;
@@ -32,7 +33,7 @@ import player.Player;
  */
 public class Map {
 	// Size of a individual tile
-	public static final int tileSize = 32;
+	public static int tileSize = 32;
 
 	// HashMap of the Items located on the map and their locations
 	private List<Item> items;
@@ -82,7 +83,25 @@ public class Map {
 	}
 
 
-	public void loadAllLayers(int scaleX,int scaleY,int tileSize) {
+	/**
+	 * This method takes the collision and environment layers and scales them to the correct size, then loads them.
+	 * @param scaleX
+	 * @param scaleY
+	 * @param tileSize
+	 */
+	public void loadAllLayers(int newWidth,int newHeight) {
+		BufferedImage colLayer = ImageLoader.image("MapImages", this.name+"Collision",false);
+		this.width = colLayer.getWidth()/32;
+		this.height = colLayer.getHeight()/32;
+
+		colLayer = ImageUtilities.scale(colLayer, newWidth, newHeight);
+		this.tileSize = (int)newWidth/this.width;
+		this.collisionLayer = this.loadColLayers(colLayer);
+
+
+
+
+	}
 
 
 
@@ -124,8 +143,6 @@ public class Map {
 	 * @return 2D ArrayList<Integer>
 	 */
 	private ArrayList<ArrayList<Integer>> loadColLayers(BufferedImage colLayerUnbroken) {
-		this.width = colLayerUnbroken.getWidth() / Map.tileSize;
-		this.height = colLayerUnbroken.getHeight() / Map.tileSize;
 		ArrayList<ArrayList<BufferedImage>> colLayer = this.breakUpImageIntoTiles(colLayerUnbroken);
 
 		ArrayList<ArrayList<Integer>> collLayer = new ArrayList<ArrayList<Integer>>();
