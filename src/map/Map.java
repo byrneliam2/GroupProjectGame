@@ -81,9 +81,10 @@ public class Map {
 		// this.environmentalLheightayer = this.loadEnvLayers(enviromentLayer);
 	}
 
+
 	public void loadAllLayers(int scaleX,int scaleY,int tileSize) {
 
-	}
+
 
 	/**
 	 * This method locates a map layer in the assets folder of the map class using a
