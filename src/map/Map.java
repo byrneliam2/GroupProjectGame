@@ -76,35 +76,33 @@ public class Map {
 		this.backgroundLayer = name;
 		this.NPCS = NPCS;
 		this.doors = doors;
-		//BufferedImage colLayer = this.loadImage(this.name, "Collision");
-		//this.collisionLayer = this.loadColLayers(colLayer);
+		// BufferedImage colLayer = this.loadImage(this.name, "Collision");
+		// this.collisionLayer = this.loadColLayers(colLayer);
 		// BufferedImage enviromentLayer = this.loadImage(this.name, "Environment");
 		// this.environmentalLheightayer = this.loadEnvLayers(enviromentLayer);
 	}
 
-
 	/**
-	 * This method takes the collision and environment layers and scales them to the correct size, then loads them.
+	 * This method takes the collision and environment layers and scales them to the
+	 * correct size, then loads them.
+	 *
 	 * @param scaleX
 	 * @param scaleY
 	 * @param tileSize
 	 */
-	public void loadAllLayers(int newWidth,int newHeight) {
-		BufferedImage colLayer = ImageLoader.image("MapImages", this.name+"Collision",true);
-		this.width = colLayer.getWidth()/32;
-		this.height = colLayer.getHeight()/32;
+	public void loadAllLayers(int newWidth, int newHeight) {
+		BufferedImage colLayer = ImageLoader.image("MapImages", this.name + "Collision", true);
+		this.width = colLayer.getWidth() / 32;
+		this.height = colLayer.getHeight() / 32;
 
 		colLayer = ImageUtilities.scale(colLayer, newWidth, newHeight);
-		this.tileSize = (int)newWidth/this.width;
+		this.tileSize = (int) newWidth / this.width;
 		this.collisionLayer = this.loadColLayers(colLayer);
 
-
-
-
 	}
-	public void loadAllLayers(int scaleX,int scaleY,int tileSize) {}
 
-
+	public void loadAllLayers(int scaleX, int scaleY, int tileSize) {
+	}
 
 	/**
 	 * This method locates a map layer in the assets folder of the map class using a
@@ -156,11 +154,13 @@ public class Map {
 				Color c = new Color(colLayer.get(col).get(row).getRGB(1, 1));
 				if (c.getGreen() == 0 && c.getRed() == 0 && c.getBlue() == 0) {
 					collLayer.get(col).add(1);
+
 				} else {
 					collLayer.get(col).add(0);
-				}
 
+				}
 			}
+
 		}
 		return collLayer;
 	}
@@ -217,7 +217,8 @@ public class Map {
 		for (int initY = 0; initY < heightUnbroken; initY += Map.tileSize) {
 			layer.add(new ArrayList<BufferedImage>());
 		}
-
+		System.out.println(widthUnbroken);
+		System.out.println(heightUnbroken);
 		for (int y = 0; y < heightUnbroken; y += Map.tileSize) {
 			for (int x = 0; x < widthUnbroken; x += Map.tileSize) {
 				BufferedImage newTile = colLayer.getSubimage(x, y, Map.tileSize, Map.tileSize);

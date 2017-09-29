@@ -3,11 +3,14 @@ package player;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.geom.Ellipse2D;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import gfx.ImageLoader;
+import gfx.ImageUtilities;
 import map.Map;
 import map.World;
 import utils.MathUtils;
@@ -55,6 +58,22 @@ public class Player {
 		this.name = name;
 		rangeCircle = new Ellipse2D.Double(xLocation, yLocation, rangeCircleWidth, rangeCircleWidth);
 		boundingBox = new Rectangle(xLocation, yLocation, Map.tileSize, Map.tileSize);
+	}
+
+	/**
+	 * This method sets the global tile size
+	 * 	THIS IS A QUICK FIX, THIS NEEDS TO BE CHANGED
+	 * @param newWidth
+	 * @param newHeight
+	 */
+	public void setGlobalTileSize(int newWidth, int newHeight) {
+			BufferedImage colLayer = ImageLoader.image("MapImages", this.name + "Collision", true);
+			int width = colLayer.getWidth() / 32;
+			int height = colLayer.getHeight() / 32;
+
+			colLayer = ImageUtilities.scale(colLayer, newWidth, newHeight);
+			Map.tileSize = (int) newWidth / width;
+
 	}
 
 	/**
