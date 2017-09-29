@@ -94,6 +94,8 @@ public class Map {
 		BufferedImage colLayer = ImageLoader.image("MapImages", this.name + "Collision", true);
 		this.width = colLayer.getWidth() / 32;
 		this.height = colLayer.getHeight() / 32;
+		System.out.println(width);
+		System.out.println(height);
 
 		colLayer = ImageUtilities.scale(colLayer, newWidth, newHeight);
 		// this.tileSize = (int) newWidth / this.width;
@@ -364,7 +366,7 @@ public class Map {
 	 * @return
 	 */
 	public boolean canMove(Rectangle r) {
-
+		// May have to add more points to check for collisions
 		double topLx = r.getX();
 		double topLy = r.getY();
 		if (topLx < 0 || topLy < 0) {
