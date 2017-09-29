@@ -17,39 +17,39 @@ import static controller.Controller.KeyboardCommands.*;
  * their player.
  */
 public class Controller extends KeyAdapter {
-    private IGame model;
-    private MousePosition mouse;
-    private Set<Integer> pressed;
+	private IGame model;
+	private MousePosition mouse;
+	private Set<Integer> pressed;
 
-    public Controller(IGame model, MousePosition mouse) {
-        this.model = model;
-        this.mouse = mouse;
-        this.pressed = new HashSet<>();
+	public Controller(IGame model, MousePosition mouse) {
+		this.model = model;
+		this.mouse = mouse;
+		this.pressed = new HashSet<>();
 
         new Timer(1000/20, (e)-> update()).start();
     }
 
-    /**
-     * Whenever a user pressed a key, the event will be sent off for processing
-     */
-    @Override
-    public synchronized void keyPressed(KeyEvent e) {
-        this.pressed.add(e.getKeyCode());
-    }
+	/**
+	 * Whenever a user pressed a key, the event will be sent off for processing
+	 */
+	@Override
+	public synchronized void keyPressed(KeyEvent e) {
+		this.pressed.add(e.getKeyCode());
+	}
 
-    /**
-     * Whenever a user releases a key, the event will be sent off for processing
-     */
-    @Override
-    public void keyReleased(KeyEvent e) {
-        this.pressed.remove(e.getKeyCode());
-    }
+	/**
+	 * Whenever a user releases a key, the event will be sent off for processing
+	 */
+	@Override
+	public void keyReleased(KeyEvent e) {
+		this.pressed.remove(e.getKeyCode());
+	}
 
-    public void update() {
-        for (Integer i : pressed) {
-            processInput(i);
-        }
-    }
+	public void update() {
+		for (Integer i : pressed) {
+			processInput(i);
+		}
+	}
 
     /**
      * When given an input, this method will update the 'MODEL' with the users input.
@@ -80,33 +80,33 @@ public class Controller extends KeyAdapter {
         return true;
     }
 
-    /**
-     * Holds all Keybinds for the game, the user can change each keybind using the 'setKeybind()' method.
-     */
-    public enum KeyboardCommands {
-        //All Keyboard inputs required by the game
-        KEY_UP(KeyEvent.VK_UP), KEY_DOWN(KeyEvent.VK_DOWN), KEY_LEFT(KeyEvent.VK_LEFT), KEY_RIGHT(
-                KeyEvent.VK_RIGHT), KEY_USE(KeyEvent.VK_F), KEY_ATTACK(KeyEvent.VK_SPACE), KEY_MENU(KeyEvent.VK_ESCAPE);
+	/**
+	 * Holds all Keybinds for the game, the user can change each keybind using the 'setKeybind()' method.
+	 */
+	public enum KeyboardCommands {
+		// All Keyboard inputs required by the game
+		KEY_UP(KeyEvent.VK_UP), KEY_DOWN(KeyEvent.VK_DOWN), KEY_LEFT(KeyEvent.VK_LEFT), KEY_RIGHT(
+				KeyEvent.VK_RIGHT), KEY_USE(KeyEvent.VK_F), KEY_ATTACK(KeyEvent.VK_SPACE), KEY_MENU(KeyEvent.VK_ESCAPE);
 
-        private int original;
-        private int current;
+		private int original;
+		private int current;
 
-        KeyboardCommands(int keybind) {
-            this.original = keybind;
-            this.current = keybind;
-        }
+		KeyboardCommands(int keybind) {
+			this.original = keybind;
+			this.current = keybind;
+		}
 
-        public int getKeybind() {
-            return this.current;
-        }
+		public int getKeybind() {
+			return this.current;
+		}
 
-        public void setKeybind(int keybind) {
-            this.current = keybind;
-        }
+		public void setKeybind(int keybind) {
+			this.current = keybind;
+		}
 
-        public void resetKeybind() {
-            this.current = original;
-        }
-    }
+		public void resetKeybind() {
+			this.current = original;
+		}
+	}
 
 }
