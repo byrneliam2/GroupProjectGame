@@ -67,7 +67,7 @@ public class Player {
 	 * @param newHeight
 	 */
 	public void setGlobalTileSize(int newWidth, int newHeight) {
-			BufferedImage colLayer = ImageLoader.image("MapImages", this.name + "Collision", true);
+			BufferedImage colLayer = ImageLoader.image("MapImages", "Map3Collision", true);
 			int width = colLayer.getWidth() / 32;
 			int height = colLayer.getHeight() / 32;
 

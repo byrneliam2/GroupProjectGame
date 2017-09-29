@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import frames.MainDisplay;
 import items.Equipable;
 import items.Item;
 import items.Usable;
@@ -44,7 +45,7 @@ public class Game extends Observable implements IGame, Serializable {
 	 */
 	public void startGame() {
 		world = WorldParser.parse("world", this.player);
-		//this.player...FIXME add manual bounding box scaling (from new tileSize)
+		//this.player.setGlobalTileSize(MainDisplay.WIDTH, MainDisplay.HEIGHT);
 		this.player.setMap(world.getStartingMap());
 	}
 
