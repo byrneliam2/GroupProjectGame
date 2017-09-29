@@ -52,7 +52,7 @@ public class MapCard extends Card {
     private void addEntities() {
         // add player
         addEntity(new Entity(game.getPlayer(), EntityType.PLAYER,
-                ImageLoader.image("ItemPictures", "healthPotion", true),
+                ImageLoader.image("game", "playerRect", true),
                 new Point(game.getPlayer().getxLocation(), game.getPlayer().getyLocation()), 0)
         );
         // add all NPCs

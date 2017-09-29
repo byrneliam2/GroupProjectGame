@@ -199,7 +199,7 @@ public class ShootingTests {
 		Bullet.bulletList.clear();
 		p = new Player("Thomas", xLocation, yLocation);
 		npcs = new ArrayList<NPC>();
-		m = new Map("Map1", p, null, npcs, null);
+		m = new Map("Map3", p, null, npcs, null);
 		p.setMap(m);
 	}
 

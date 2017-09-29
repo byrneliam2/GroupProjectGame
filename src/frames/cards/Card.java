@@ -22,143 +22,149 @@ import java.util.Map;
  */
 public abstract class Card extends JPanel {
 
-    /* Swing attributes */
-    JLabel panel;
-    Map<String, JComponent> components;
+	/* Swing attributes */
+	JLabel panel;
+	Map<String, JComponent> components;
 
-    /* Other attributes */
-    private String name;
+	/* Other attributes */
+	private String name;
 
-    /**
-     * Each Card has a name associated with it for locating purposes.
-     * @param n name
-     */
-    Card(String n) {
-        name = n;
-        panel = new JLabel();
-        components = new LinkedHashMap<>();
+	/**
+	 * Each Card has a name associated with it for locating purposes.
+	 * 
+	 * @param n
+	 *            name
+	 */
+	Card(String n) {
+		name = n;
+		panel = new JLabel();
+		components = new LinkedHashMap<>();
 
-        add(panel);
+		add(panel);
 
-        doUISetup();
-    }
+		doUISetup();
+	}
 
-    /**
-     * Get the name of this Card.
-     */
-    public String getName() {
-        return name;
-    }
+	/**
+	 * Get the name of this Card.
+	 */
+	public String getName() {
+		return name;
+	}
 
-    /**
-     * Perform the operations required for Swing to update the component.
-     */
-    public void update() {
-        this.revalidate();
-        this.repaint();
-    }
+	/**
+	 * Perform the operations required for Swing to update the component.
+	 */
+	public void update() {
+		this.revalidate();
+		this.repaint();
+	}
 
-    /**
-     * Set the background image of this card. This is done by adding the image
-     * to the label panel that takes up the whole card. Many cards will have some
-     * kind of background image that persists throughout its existence, therefore
-     * this should be considered as a "setup" method that should be called
-     * on creation. This method must be manually called for maps since the image is
-     * not static across all maps.
-     * @param bg image to set background to
-     */
-    @SuppressWarnings("WeakerAccess")
-    public void setBackground(BufferedImage bg) {
-        panel.setIcon(new ImageIcon(bg));
-    }
+	/**
+	 * Set the background image of this card. This is done by adding the image
+	 * to the label panel that takes up the whole card. Many cards will have some
+	 * kind of background image that persists throughout its existence, therefore
+	 * this should be considered as a "setup" method that should be called
+	 * on creation. This method must be manually called for maps since the image is
+	 * not static across all maps.
+	 * 
+	 * @param bg
+	 *            image to set background to
+	 */
+	@SuppressWarnings("WeakerAccess")
+	public void setBackground(BufferedImage bg) {
+		panel.setIcon(new ImageIcon(bg));
+	}
 
-    /**
-     * Perform first time setup for this Card. This will usually involve
-     * setting up whatever components this screen holds. If the
-     * added components are interactive Swing components, then they will need to
-     * be properly assigned by using the {@link #setComponentActions(MainDisplay)}
-     * method from the display that holds the card.
-     */
-    protected abstract void doUISetup();
+	/**
+	 * Perform first time setup for this Card. This will usually involve
+	 * setting up whatever components this screen holds. If the
+	 * added components are interactive Swing components, then they will need to
+	 * be properly assigned by using the {@link #setComponentActions(MainDisplay)}
+	 * method from the display that holds the card.
+	 */
+	protected abstract void doUISetup();
 
-    /**
-     * Add actions to the components on screen, if there are any. This method
-     * will usually only function if there are interactive components (buttons,
-     * sliders, etc.) held in the card's reference map.
-     * @param dsp display that holds this card. Used to link actions to events that
-     *            occur in the main view class.
-     */
-    public abstract void setComponentActions(MainDisplay dsp);
+	/**
+	 * Add actions to the components on screen, if there are any. This method
+	 * will usually only function if there are interactive components (buttons,
+	 * sliders, etc.) held in the card's reference map.
+	 * 
+	 * @param dsp
+	 *            display that holds this card. Used to link actions to events that
+	 *            occur in the main view class.
+	 */
+	public abstract void setComponentActions(MainDisplay dsp);
 
-    /**
-     * Redraw the elements present on the current card. Note that this method only
-     * draws the elements again, it does not revalidate or repaint the component.
-     * The {@link #update()} method should be called after redraw to ensure an
-     * observable update is performed.
-     */
-    public abstract void redraw();
+	/**
+	 * Redraw the elements present on the current card. Note that this method only
+	 * draws the elements again, it does not revalidate or repaint the component.
+	 * The {@link #update()} method should be called after redraw to ensure an
+	 * observable update is performed.
+	 */
+	public abstract void redraw();
 
-    /**
-     * A Card Entity is any animated element inside a Card. This does not include
-     * separate Swing entities such as buttons and background images. It does include
-     * on-screen indicators that refer to the game directly, however. These are identifed
-     * using the SPECIAL tag for the Entity's {@link EntityType}. An Entity knows little
-     * about the object it represents, it is more of a holding object than a functional
-     * component.
-     */
-    class Entity {
+	/**
+	 * A Card Entity is any animated element inside a Card. This does not include
+	 * separate Swing entities such as buttons and background images. It does include
+	 * on-screen indicators that refer to the game directly, however. These are identifed
+	 * using the SPECIAL tag for the Entity's {@link EntityType}. An Entity knows little
+	 * about the object it represents, it is more of a holding object than a functional
+	 * component.
+	 */
+	class Entity {
 
-        private Object object;
-        private EntityType type;
-        private BufferedImage image;
-        private Point location;
+		private Object object;
+		private EntityType type;
+		private BufferedImage image;
+		private Point location;
 
-        static final int SIZE = 100;
+		static final int SIZE = 60;
 
-        /**
-         * @param object object that this entity represents
-         * @param type type of the object
-         * @param image image of the object
-         * @param location location of the object
-         * @param size size to scale to; if 0, a default size of 100 will be used
-         */
-        Entity(Object object, EntityType type, BufferedImage image, Point location, int size) {
-            this.object = object;
-            this.type = type;
-            this.image = ImageUtilities.scale(image,
-                    size != 0 ? size : SIZE,
-                    size != 0 ? size : SIZE);
-            this.location = location;
-        }
+		/**
+		 * @param object
+		 *            object that this entity represents
+		 * @param type
+		 *            type of the object
+		 * @param image
+		 *            image of the object
+		 * @param location
+		 *            location of the object
+		 * @param size
+		 *            size to scale to; if 0, a default size of 100 will be used
+		 */
+		Entity(Object object, EntityType type, BufferedImage image, Point location, int size) {
+			this.object = object;
+			this.type = type;
+			this.image = ImageUtilities.scale(image, size != 0 ? size : SIZE, size != 0 ? size : SIZE);
+			this.location = location;
+		}
 
-        public Object getObject() {
-            return object;
-        }
+		public Object getObject() {
+			return object;
+		}
 
-        public EntityType getType() {
-            return type;
-        }
+		public EntityType getType() {
+			return type;
+		}
 
-        public BufferedImage getImage() {
-            return image;
-        }
+		public BufferedImage getImage() {
+			return image;
+		}
 
-        public Point getLocation() {
-            return location;
-        }
+		public Point getLocation() {
+			return location;
+		}
 
-        public void setLocation(Point location) {
-            this.location = location;
-        }
-    }
+		public void setLocation(Point location) {
+			this.location = location;
+		}
+	}
 
-    /**
-     * Declares the type of object the {@link Entity} represents.
-     */
-    enum EntityType {
-        ITEM,
-        PLAYER,
-        NPC,
-        BULLET
-    }
+	/**
+	 * Declares the type of object the {@link Entity} represents.
+	 */
+	enum EntityType {
+		ITEM, PLAYER, NPC, BULLET
+	}
 }
