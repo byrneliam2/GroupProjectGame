@@ -71,6 +71,12 @@ public class AudioHandler implements IAudioHandler {
         if(currentSong != null) setClipVolume(currentSong);
     }
 
+    @Override
+    public void stop() {
+        musicQueue.clear();
+        next();
+    }
+
     /**
      * This method is used to create an AudioClip, AudioClips are used by the program to store all data (Clips/FilePaths)
      * which are required for music to be played. This simplifies setup and allows for each Clip to automatically

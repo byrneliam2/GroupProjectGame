@@ -36,4 +36,9 @@ public interface IAudioHandler {
      * @param percentage A value between 0.0f and 1.0f
      */
     void setAudioVolume(float percentage);
+
+    /**
+     * When called, all music currently playing will stop, and the queue will be emptied.
+     */
+    void stop();
 }
