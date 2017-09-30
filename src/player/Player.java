@@ -358,7 +358,7 @@ public class Player {
 	}
 
 	public boolean isDead() {
-		return !this.isDead;
+		return this.isDead;
 	}
 
 	public void setMap(Map m) {

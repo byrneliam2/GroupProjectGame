@@ -109,6 +109,8 @@ public class MapCard extends Card {
 					break;
 				case PLAYER: case NPC:
 					Player p = (Player) o; // since an NPC is a Player
+					//if(p.isDead())
+					//	itemsToRemove.add(e);
 					e.setLocation(new Point(p.getxLocation(), p.getyLocation()));
 					break;
 			}
