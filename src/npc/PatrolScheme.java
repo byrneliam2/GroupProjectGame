@@ -35,31 +35,32 @@ public class PatrolScheme implements ControlScheme {
 
 	@Override
 	public void doBestAction(NPC npc, Player player) {
+		int move = 5;
 		try {
 			// move the npc according to the patrol direction.
 			if (leftRight) {
 				if (!goingBack) {
-					progress++;
+					progress += move;
 					if (progress >= maxProgress)
 						goingBack = true;
-					npc.move(1, 0);
+					npc.move(move, 0);
 				} else {
-					progress--;
+					progress -= move;
 					if (progress <= 0)
 						goingBack = false;
-					npc.move(-1, 0);
+					npc.move(-move, 0);
 				}
 			} else {
 				if (!goingBack) {
-					progress++;
+					progress += move;
 					if (progress >= maxProgress)
 						goingBack = true;
-					npc.move(0, 1);
+					npc.move(0, move);
 				} else {
-					progress--;
+					progress -= move;
 					if (progress <= 0)
 						goingBack = false;
-					npc.move(0, -1);
+					npc.move(0, -move);
 
 				}
 			}

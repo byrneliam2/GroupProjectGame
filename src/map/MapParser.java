@@ -49,8 +49,8 @@ public class MapParser {
 
 		try {
 			in = MapParser.class.getResourceAsStream(fileLocation);
-			if(in==null) {
-				throw new ParseException("The file "+fileLocation+" does not exist");
+			if (in == null) {
+				throw new ParseException("The file " + fileLocation + " does not exist");
 			}
 			scan = new Scanner(in);
 			if (!scan.hasNext()) {

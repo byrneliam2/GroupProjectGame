@@ -38,35 +38,7 @@ public class PatrolNPCTests {
 		testNPC.stop();// stops the npc
 
 		// checks the npc's position
-		assertEquals(x + numberOfMoves, testNPC.getxLocation());// NPC should have moved 3 pixels right.
-		assertEquals(y, testNPC.getyLocation());
-	}
-
-	/**
-	 * Tests that the patrol npc turns around after one tile.
-	 */
-	@Test
-	public void testPatrol2() {
-		int x = 500, y = 400;
-		setup(x, y, 1);
-		int numberOfMoves = Map.tileSize;// private int the number of moves that the scheme should make
-
-		testNPC.start();
-		sleep(numberOfMoves);
-		testNPC.stop();
-
-		assertEquals(x + Map.tileSize, testNPC.getxLocation());// NPC should have moved one map spot across.
-		assertEquals(y, testNPC.getyLocation());
-
-		// at this point, the next move should move the NPC back the way it came from.
-		testNPC.start();
-		try {
-			Thread.sleep(NPC.SPEED / 10);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		testNPC.stop();
-		assertEquals(x + Map.tileSize - 1, testNPC.getxLocation());// NPC should have moved one map spot across.
+		assertEquals(x + numberOfMoves * 5, testNPC.getxLocation());// NPC should have moved 3 pixels right.
 		assertEquals(y, testNPC.getyLocation());
 	}
 
@@ -95,6 +67,7 @@ public class PatrolNPCTests {
 		m = new Map("Map3", p, null, npcs, null);
 		p.setMap(m);
 		testNPC = new NPC("bug", npcX, npcY, 1, p, new PatrolScheme(true, patrolDuration));
+		testNPC.setMap(m);
 		npcs.add(testNPC);
 	}
 

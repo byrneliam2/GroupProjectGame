@@ -10,6 +10,6 @@ MassiveGun
 16 16
 NPC
 HungryBat
-PatrolScheme false 5
-5 12 2
+PatrolScheme true 5
+5 18 2
 

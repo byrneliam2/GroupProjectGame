@@ -77,6 +77,10 @@ public class Map {
 		this.NPCS = NPCS;
 		this.doors = doors;
 		this.loadAllLayers(1920, 1080);
+		for (NPC npc : NPCS) {
+			npc.setMap(this);
+			npc.start();
+		}
 		// BufferedImage colLayer = this.loadImage(this.name, "Collision");
 		// this.collisionLayer = this.loadColLayers(colLayer);
 		// BufferedImage enviromentLayer = this.loadImage(this.name, "Environment");

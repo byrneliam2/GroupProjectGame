@@ -250,7 +250,6 @@ public class Player {
 		DoorItem door = null;
 		boundingBox.translate(dx, dy);
 		if (map.canMove(boundingBox)) {
-
 			if ((door = map.getDoor(boundingBox)) != null) {// if player is next to a door
 				map = enterDoor(door);
 				closestItem = map.getClosestItem(rangeCircle);
@@ -343,14 +342,14 @@ public class Player {
 	 * @return the x pixel location of the player's centre point.
 	 */
 	public int getxLocation() {
-		return (int) boundingBox.getX();
+		return (int) boundingBox.getX() - 3;
 	}
 
 	/**
 	 * @return the y pixel location of the player's centre point.
 	 */
 	public int getyLocation() {
-		return (int) boundingBox.getY();
+		return (int) boundingBox.getY() - 3;
 	}
 
 	public Rectangle getBoundingBox() {

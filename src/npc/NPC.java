@@ -3,6 +3,7 @@ package npc;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import map.Map;
 import player.Player;
 
 /**
@@ -34,7 +35,6 @@ public class NPC extends Player {
 		super(name, x, y);
 		this.p = mainPlayer;
 		this.control = cs;
-		super.setMap(mainPlayer.getMap());
 		npctask = new TimerTask() {
 			@Override
 			public void run() {
