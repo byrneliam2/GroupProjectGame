@@ -31,6 +31,8 @@ public class Bullet {
 	 */
 	private static Timer bulletTimer = new Timer();
 
+	public static final int bulletSize = 20;
+
 	/**
 	 * How quickley bullets move/are updated
 	 */
@@ -40,8 +42,8 @@ public class Bullet {
 	public static BufferedImage npcBullet1 = ImageLoader.image("npcImages", "bullet", true);
 	{
 		{
-			playerBullet1 = ImageUtilities.scale(playerBullet1, 20, 20);
-			npcBullet1 = ImageUtilities.scale(npcBullet1, 20, 20);
+			playerBullet1 = ImageUtilities.scale(playerBullet1, bulletSize, bulletSize);
+			npcBullet1 = ImageUtilities.scale(npcBullet1, bulletSize, bulletSize);
 		}
 	}
 
