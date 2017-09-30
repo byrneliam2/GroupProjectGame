@@ -3,4 +3,5 @@
 /out/
 
 # Other
-
+/.idea/
+/.settings/
