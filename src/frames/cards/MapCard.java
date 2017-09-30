@@ -11,7 +11,6 @@ import game.IGame;
 import gfx.ImageLoader;
 import gfx.ImageUtilities;
 import items.Item;
-import npc.NPC;
 import player.Bullet;
 import player.Player;
 
@@ -32,7 +31,6 @@ public class MapCard extends Card {
 
 	private List<Entity> entities;
 	private List<Entity> elements;
-	private List<Entity> hearts;
 	private map.Map map;
 	private IGame game;
 
@@ -43,7 +41,6 @@ public class MapCard extends Card {
 
 		this.entities = new ArrayList<>();
 		this.elements = new ArrayList<>();
-		this.hearts = new ArrayList<>();
 
 		this.map = map;
 		this.game = game;
@@ -54,7 +51,6 @@ public class MapCard extends Card {
 
 		addEntities();
 		addUIEntities();
-		addHearts();
 	}
 
 	/**
@@ -84,20 +80,13 @@ public class MapCard extends Card {
 	 * Add UI entities to the screen.
 	 */
 	private void addUIEntities() {
-
-    }
-
-	/**
-	 * Add player health (hearts) to the screen.
-	 */
-	private void addHearts() {
-		hearts.clear();
+		// add player health
 		for (int i = 0; i < game.getPlayer().getHealth(); i++) {
 			addUIEntity(new Entity(game.getPlayer(), EntityType.HEART,
 					ImageLoader.image("game", "heart", true),
-					new Point(HEART_X + (i * HEART_X), 0), 50), true);
+					new Point(HEART_X + (i * HEART_X), 0), 50));
 		}
-	}
+    }
 
 	/**
 	 * Update the location of all game entities, if they are indeed a game entity.
@@ -138,7 +127,7 @@ public class MapCard extends Card {
 		for (Entity e : elements) {
 			switch (e.getType()) {
 				case HEART:
-					if (game.getPlayer().getHealth() != hearts.size()) addHearts();
+					//if (game.getPlayer().getHealth() != hearts.size()) addHearts();
 					break;
 				case DIALOGUE:
 					break;
@@ -151,9 +140,8 @@ public class MapCard extends Card {
 		entities.add(e);
 	}
 
-	private void addUIEntity(Entity e, boolean isHeart) {
-		if (isHeart) hearts.add(e);
-		else elements.add(e);
+	private void addUIEntity(Entity e) {
+		elements.add(e);
 	}
 
 	@Override protected void doUISetup() {
@@ -176,6 +164,5 @@ public class MapCard extends Card {
 		};
 		for (Entity e : entities) draw.accept(e);
 		for (Entity e : elements) draw.accept(e);
-		for (Entity e : hearts)   draw.accept(e);
 	}
 }
