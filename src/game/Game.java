@@ -43,7 +43,7 @@ public class Game extends Observable implements IGame, Serializable {
 	/**
 	 * Start the new game.
 	 */
-	public void startGame() {
+	public void newGame() {
 		world = WorldParser.parse("world", this.player);
 		//this.player.setGlobalTileSize(MainDisplay.WIDTH, MainDisplay.HEIGHT);
 		this.player.setMap(world.getStartingMap());

@@ -53,7 +53,8 @@ public class MenuCard extends Card {
                 dsp.getAudioHandler().playSound(SoundTrack.CLICK);
                 switch (str) {
                     case "new":
-                        dsp.start();
+                        dsp.newGame();
+                        dsp.startTimer();
                         break;
                     case "load":
                         JFileChooser fileChooser = new JFileChooser();

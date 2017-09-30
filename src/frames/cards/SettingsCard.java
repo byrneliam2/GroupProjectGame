@@ -34,11 +34,13 @@ public class SettingsCard extends Card {
     @Override
     protected void doUISetup() {
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
+        // difficulty?
+        //
         // volume slider
         components.put("mastervol", GraphicsUtilities.produceSticker(
                 ImageLoader.image("ui", "mastervol", true), 0.5f));
         components.put("mastervolume", GraphicsUtilities.produceSlider());
-        // difficulty?
+        // key binding
         //
         // back button
         components.put("back", GraphicsUtilities.produceButton(

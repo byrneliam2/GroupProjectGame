@@ -154,15 +154,22 @@ public class MainDisplay extends JComponent implements Observer {
     }
 
     /**
-     * Start the game timer.
+     * Load a new game. This consists of calling the newGame method on Game
+     * and setting up the map cards.
      */
-    public void start() {
-        game.startGame();
+    public void newGame() {
+        game.newGame();
         this.doMapSetup();
+    }
+
+    /**
+     * Switch to the first map and start the game redraw timer. This essentially
+     * boots the game since it un-pauses it and allows the entity update
+     * mechanism to execute.
+     */
+    public void startTimer() {
         switchScreen(game.getWorld().getStartingMap().getMapName());
-
-        (timer = new Timer(1000/60, (e) -> redraw())).start();
-
+        (timer = new Timer(FRAMERATE, (e) -> redraw())).start();
         game.unPauseGame();
     }
 
@@ -176,7 +183,7 @@ public class MainDisplay extends JComponent implements Observer {
     /**
      * Stop the game timer.
      */
-    public void stop() {
+    public void stopTimer() {
         game.pauseGame();
         timer.stop();
     }
