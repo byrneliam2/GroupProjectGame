@@ -3,7 +3,11 @@ Map3 04 true
 0 3
 NPC
 HungryBat
+EasyScheme true 9
+28 26 2
+NPC
+HungryBat2
 PatrolScheme true 9
-28 6 2
+28 8 2
 ShinyArmor
 4 4
