@@ -37,7 +37,7 @@ public class MainDisplay extends JComponent implements Observer {
     private Map<String, Card> cards;
     private Card currentCard, lastCard;
     private IAudioHandler audioHandler;
-    private IController controller;
+    @SuppressWarnings({"FieldCanBeLocal", "unused"}) private IController controller;
 
     /* Constants */
     public static final int WIDTH  = 1920;
@@ -175,6 +175,14 @@ public class MainDisplay extends JComponent implements Observer {
     }
 
     /**
+     * Pause the game.
+     */
+    private void pauseGame() {
+        stopTimer();
+        switchScreen("pause");
+    }
+
+    /**
      * Switch to the first map and start the game redraw timer. This essentially
      * boots the game since it un-pauses it and allows the entity update
      * mechanism to execute.
@@ -192,10 +200,10 @@ public class MainDisplay extends JComponent implements Observer {
     }
 
     /**
-     * Stop the game timer.
+     * Stop the game timer. This does not call to pause the game since this operation
+     * is done manually before the display's timer is set to hold (see {@link game.Game#pauseGame}.
      */
     public void stopTimer() {
-        game.pauseGame();
         timer.stop();
     }
 
@@ -229,9 +237,13 @@ public class MainDisplay extends JComponent implements Observer {
         // switch screen if need be (use arg)
         if (arg != null && arg instanceof String) {
             String str = (String) arg;
-            if (str.equals("last"))
-                switchScreen(lastCard.getName());
-            else switchScreen(str);
+            // list special cases
+            switch (str) {
+                case "last":    switchScreen(lastCard.getName());  break;
+                case "pause":   pauseGame();                       break;
+                case "unpause": startTimer();                      break;
+                default:        switchScreen(str);                 break;
+            }
         }
         else redraw();
     }

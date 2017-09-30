@@ -24,6 +24,8 @@ public interface IGame {
 
     void set(Object arg);
 
+    String getCurrentMap();
+
     void newGame();
 
     void pauseGame();

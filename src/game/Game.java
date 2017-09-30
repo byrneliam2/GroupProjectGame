@@ -171,6 +171,7 @@ public class Game extends Observable implements IGame, Serializable {
 	public void unPauseGame() {
 		GAME_PAUSED = false;
 		this.player.getMap().startMapNPCs();
+		set(getCurrentMap());
 	}
 
 	@Override
