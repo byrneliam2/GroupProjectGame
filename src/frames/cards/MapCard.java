@@ -123,11 +123,12 @@ public class MapCard extends Card {
 		for (Entity e : elements) {
 			switch (e.getType()) {
 			case HEART:
-					if (++numHearts > game.getPlayer().getHealth())
-						elementsToRemove.add(e);
-					break;
-				case DIALOGUE:
-					break;
+				int numHearts = 0;// CHANGE THIS LIAM JUST DID IT TO COMPILE
+				if (++numHearts > game.getPlayer().getHealth())
+					elementsToRemove.add(e);
+				break;
+			case DIALOGUE:
+				break;
 			}
 		}
 		elements.removeAll(elementsToRemove);
