@@ -9,8 +9,7 @@ package frames;
 import audio.AudioHandler;
 import audio.IAudioHandler;
 import audio.tracks.MusicTrack;
-import controller.Controller;
-import controller.MousePosition;
+import controller.*;
 import frames.cards.Card;
 import frames.cards.*;
 import game.IGame;
@@ -38,6 +37,7 @@ public class MainDisplay extends JComponent implements Observer {
     private Map<String, Card> cards;
     private Card currentCard, lastCard;
     private IAudioHandler audioHandler;
+    private IController controller;
 
     /* Constants */
     public static final int WIDTH  = 1920;
@@ -64,10 +64,14 @@ public class MainDisplay extends JComponent implements Observer {
         //master.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         // controller setup
-        MousePosition mouse = new MousePosition();
-        Controller controller = new Controller(game, mouse);
-        master.addKeyListener(controller);
+        KeyListener keyboard = new KeyListener();
+        MouseListener mouse = new MouseListener();
+
+        master.addKeyListener(keyboard);
+        master.addMouseListener(mouse);
         master.addMouseMotionListener(mouse);
+
+        controller = new Controller(game, keyboard, mouse);
 
         // this component setup
         this.setLayout(new CardLayout());
