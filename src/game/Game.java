@@ -66,7 +66,7 @@ public class Game extends Observable implements IGame, Serializable {
 
 	@Override
 	public boolean isOver() {
-		return false;
+		return player.isDead();// TODO a win condition once we implement a boss fight.
 	}
 
 	/**
@@ -165,7 +165,8 @@ public class Game extends Observable implements IGame, Serializable {
 
 	public void pauseGame() {
 		GAME_PAUSED = true;
-		this.player.getMap().pauseMapNPCs();
+		if (this.player.getMap() != null)
+			this.player.getMap().pauseMapNPCs();
 	}
 
 	public void unPauseGame() {

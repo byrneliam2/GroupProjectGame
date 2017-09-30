@@ -67,8 +67,7 @@ public class PatrolScheme implements ControlScheme {
 				}
 			}
 		} catch (InvalidPlayerExceptions e) {
-			System.out.println("Patrol ai wasn't able to do a move, it caught the exception thrown tho so its algood!"
-					+ e.getMessage());
+			// do Nothing.
 		}
 		// shoot at the player every 100 moves
 		shotCounter++;

@@ -36,12 +36,6 @@ public class NPC extends Player {
 		super(name, x, y);
 		this.p = mainPlayer;
 		this.control = cs;
-		npctask = new TimerTask() {
-			@Override
-			public void run() {
-				update();
-			}
-		};
 		super.setMaxHealth(health);
 		super.setHealth(health);
 	}
@@ -52,13 +46,6 @@ public class NPC extends Player {
 	 */
 	public void stop() {
 		npctask.cancel();
-		// reset the timer task so it can be started up again.
-		npctask = new TimerTask() {
-			@Override
-			public void run() {
-				update();
-			}
-		};
 	}
 
 	/**
@@ -66,6 +53,12 @@ public class NPC extends Player {
 	 * around.
 	 */
 	public void start() {
+		npctask = new TimerTask() {
+			@Override
+			public void run() {
+				update();
+			}
+		};
 		npcTimer.scheduleAtFixedRate(npctask, 0, updateRate);
 	}
 

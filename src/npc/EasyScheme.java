@@ -45,16 +45,16 @@ public class EasyScheme implements ControlScheme {
 		RandDirection() {
 			double rand1 = Math.random();
 			double rand2 = Math.random();
-			if (rand1 < 0.33) {
+			if (rand1 < 0.4) {
 				x = -1;
-			} else if (rand1 < 0.66) {
+			} else if (rand1 < 0.6) {
 				x = 0;
 			} else {
 				x = 1;
 			}
-			if (rand2 < 0.33) {
+			if (rand2 < 0.4) {
 				y = -1;
-			} else if (rand2 < 0.66) {
+			} else if (rand2 < 0.6) {
 				y = 0;
 			} else {
 				y = 1;

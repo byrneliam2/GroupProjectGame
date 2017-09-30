@@ -376,6 +376,10 @@ public class Player {
 		return this.map;
 	}
 
+	public boolean isDead() {
+		return !this.isAlive;
+	}
+
 	public void setMap(Map m) {
 		this.map = m;
 	}
