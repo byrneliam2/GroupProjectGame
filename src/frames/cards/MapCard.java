@@ -34,7 +34,7 @@ public class MapCard extends Card {
 	private map.Map map;
 	private IGame game;
 
-	private static final int HEART_X = 50;
+	private static final int ELEMENT_LOC_A = 50;
 
 	public MapCard(String n, map.Map map, IGame game) {
 		super(n);
@@ -87,10 +87,14 @@ public class MapCard extends Card {
 		for (int i = 0; i < game.getPlayer().getHealth(); i++) {
 			addUIEntity(new Entity(game.getPlayer(), EntityType.HEART,
 					ImageLoader.image("game", "heart", true),
-					new Point(HEART_X + (i * HEART_X), 0), 50));
+					new Point(ELEMENT_LOC_A + (i * ELEMENT_LOC_A), 0), ELEMENT_LOC_A));
 		}
 		// add inventory items
-		//
+		for (int i = 0; i < game.getPlayer().getBackpack().getInventorySize(); i++) {
+			addUIEntity(new Entity(game.getPlayer(), EntityType.ITEMFRAME,
+					ImageLoader.image("game", "itemframe", true),
+					new Point(MainDisplay.WIDTH - ELEMENT_LOC_A - (i * ELEMENT_LOC_A), 5), ELEMENT_LOC_A));
+		}
 		// add dialogue, if any
 		//
 	}
@@ -112,8 +116,7 @@ public class MapCard extends Card {
 				if (i.getPack() != null) itemsToRemove.add(e);
 				else e.setLocation(new Point(i.getX(), i.getY()));
 				break;
-			case PLAYER:
-			case NPC:
+			case PLAYER: case NPC:
 				Player p = (Player) o; // since an NPC is a Player
 				if (p.isDead()) itemsToRemove.add(e);
 				else e.setLocation(new Point(p.getxLocation(), p.getyLocation()));
@@ -134,6 +137,8 @@ public class MapCard extends Card {
 			case HEART:
 				if (++numHearts > game.getPlayer().getHealth())
 					elementsToRemove.add(e);
+				break;
+			case ITEMFRAME:
 				break;
 			case DIALOGUE:
 				break;
