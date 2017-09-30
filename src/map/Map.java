@@ -292,16 +292,16 @@ public class Map {
 			return null;
 		// TODO change items to use centre Point.
 		Item closest = null;
-		double distance = 0;
+		double ClosestDistance = 0;
 		for (Item item : this.items) {
 			if (rangeCircle.contains(new Point(item.getX(), item.getY()))) {
 				double xDist = (item.getX() - rangeCircle.getCenterX());
 				double yDist = (item.getY() - rangeCircle.getCenterY());
-				double dist = Math.hypot(xDist, yDist);// actual distance from
+				double dist = Math.hypot(xDist, yDist);// actual distance to Item
 
-				if (closest == null || dist < distance) {
+				if (closest == null || dist < ClosestDistance) {
 					closest = item;
-					distance = dist;
+					ClosestDistance = dist;
 				}
 			}
 		}

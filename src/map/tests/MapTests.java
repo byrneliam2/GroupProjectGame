@@ -155,8 +155,8 @@ public class MapTests {
 		Item i = new HealthPot();
 		Item i2 = new MassiveGun();
 
-		m.placeItem(i, x + Map.tileSize, y + 10);
-		m.placeItem(i2, x + 1 + Map.tileSize, y + 10);
+		m.placeItem(i, x + Map.tileSize / 2, y + 10);
+		m.placeItem(i2, x + 1 + Map.tileSize / 2, y + 10);
 
 		// item i should be closest
 		assertEquals(i, m.getClosestItem(p1.getRangeCircle()));

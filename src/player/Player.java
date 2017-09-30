@@ -55,7 +55,8 @@ public class Player {
 	 */
 	public Player(String name, int xLocation, int yLocation) {
 		this.name = name;
-		rangeCircle = new Ellipse2D.Double(xLocation, yLocation, rangeCircleWidth, rangeCircleWidth);
+		rangeCircle = new Ellipse2D.Double(xLocation - Map.tileSize / 2, yLocation - Map.tileSize / 2, rangeCircleWidth,
+				rangeCircleWidth);
 		boundingBox = new Rectangle(xLocation, yLocation, Map.tileSize, Map.tileSize);
 	}
 
@@ -255,8 +256,8 @@ public class Player {
 				closestItem = map.getClosestItem(rangeCircle);
 				return true;
 			} else {// make a normal move.
-				// update boundingBox and rangeCircle
-				rangeCircle = new Ellipse2D.Double(boundingBox.getX(), boundingBox.getY(), rangeCircleWidth,
+				// update rangeCircle
+				rangeCircle.setFrame(rangeCircle.getX() + dx, rangeCircle.getY() + dy, rangeCircleWidth,
 						rangeCircleWidth);
 				// update closest item
 				closestItem = map.getClosestItem(rangeCircle);
