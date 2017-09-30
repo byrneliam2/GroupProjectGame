@@ -79,19 +79,17 @@ public class Map {
 		this.doors = doors;
 		this.loadAllLayers(1920, 1080);
 
-		// sets the npc's up, note you'll still have to call startMapNPC's() to start them moving
+		// sets the npc's up, note you'll still have to call startMapNPC's() to start
+		// them moving
 		for (NPC npc : NPCS) {
 			npc.setMap(this);
 		}
 
-		// BufferedImage colLayer = this.loadImage(this.name, "Collision");
-		// this.collisionLayer = this.loadColLayers(colLayer);
-		// BufferedImage enviromentLayer = this.loadImage(this.name, "Environment");
-		// this.environmentalLheightayer = this.loadEnvLayers(enviromentLayer);
 	}
 
 	/**
-	 * Pauses all of the map's npc's so that they don't move. Usefull to call when the player changes maps.
+	 * Pauses all of the map's npc's so that they don't move. Usefull to call when
+	 * the player changes maps.
 	 */
 	public void pauseMapNPCs() {
 		for (NPC npc : NPCS) {
@@ -130,43 +128,8 @@ public class Map {
 		BufferedImage colLayer = ImageLoader.image("MapImages", this.name + "Collision", true);
 		this.width = colLayer.getWidth() / 32;
 		this.height = colLayer.getHeight() / 32;
-		// System.out.println(width);
-		// System.out.println(height);
-
 		colLayer = ImageUtilities.scale(colLayer, newWidth, newHeight);
-		// this.tileSize = (int) newWidth / this.width;
 		this.collisionLayer = this.loadColLayers(colLayer);
-
-	}
-
-	/**
-	 * This method locates a map layer in the assets folder of the map class using a
-	 * mapName and a layer
-	 *
-	 * @param mapName
-	 * @param layer
-	 * @return BufferedImage representing the layer of a given map
-	 * @throws BadMapImageException
-	 * @throws IOException
-	 */
-	private BufferedImage loadImage(String mapName, String layer) {
-		BufferedImage img = null;
-
-		try {
-			img = ImageIO.read(Map.class.getResource("assets/mapImages/" + mapName + layer + ".png"));
-			// if (img.getHeight() % Map.tileSize > 0 || img.getWidth() % Map.tileSize > 0)
-			// {
-			// throw new BadMapImageException(
-			// "The image you are trying to load does not have the correct Dimensions,
-			// Dimensions should be a factor of 32, the Global tile size.");
-			// }
-
-			return img;
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
 
 	}
 
@@ -254,8 +217,6 @@ public class Map {
 		for (int initY = 0; initY < heightUnbroken; initY += Map.tileSize) {
 			layer.add(new ArrayList<BufferedImage>());
 		}
-		// System.out.println(widthUnbroken);
-		// System.out.println(heightUnbroken);
 		for (int y = 0; y < heightUnbroken; y += Map.tileSize) {
 			for (int x = 0; x < widthUnbroken; x += Map.tileSize) {
 				BufferedImage newTile = colLayer.getSubimage(x, y, Map.tileSize, Map.tileSize);
@@ -329,7 +290,7 @@ public class Map {
 		Item closest = null;
 		double ClosestDistance = 0;
 		for (Item item : this.items) {
-			// centre point of item is used.
+			// center point of item is used.
 			if (rangeCircle.contains(new Point(item.getX() + tileSize / 2, item.getY() + tileSize / 2))) {
 				double xDist = (item.getX() - rangeCircle.getCenterX());
 				double yDist = (item.getY() - rangeCircle.getCenterY());
@@ -354,7 +315,7 @@ public class Map {
 	 */
 	public void placeItem(Item i, int x, int y) {
 		this.items.add(i);
-		i.setX(x);// might be unnessicary TODO.
+		i.setX(x);// might be unnecessary TODO.
 		i.setY(y);
 	}
 
@@ -395,8 +356,9 @@ public class Map {
 	 * This method decides whether a position on the map can be moved over by a
 	 * rectangle, using the rectangles four corners
 	 * 
-	 * OPTIMISING: remove checking around the outside of map as these should never occur.
-	 * OPTIMISING: make the corners 'move along' as you go to each corner rather than recalculating total 8 values.
+	 * OPTIMISING: remove checking around the outside of map as these should never
+	 * occur. OPTIMISING: make the corners 'move along' as you go to each corner
+	 * rather than recalculating total 8 values.
 	 *
 	 * @param r
 	 * @return
@@ -470,9 +432,12 @@ public class Map {
 	 *
 	 * @param x
 	 * @param y
-	 * @return The environment on the tile at x,y
+	 * @return The environment on the tile closest to x,y
 	 */
 	public Environment onEnviromentTile(int x, int y) {
+		if (x < 0 || y < 0 || x > this.width * Map.tileSize || y > this.height * Map.tileSize) {
+			return null;
+		}
 		x = (int) (x / tileSize);
 		y = (int) (y / tileSize);
 		int environment = this.environmentalLayer.get(y).get(x);

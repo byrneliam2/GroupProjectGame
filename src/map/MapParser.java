@@ -60,17 +60,19 @@ public class MapParser {
 			while (scan.hasNext()) {
 				String line = scan.next();
 				if (line.equals("HealthPot")) {
-					new HealthPotion().parse(scan, itms);
+					new HealthPotParser().parse(scan, itms);
 				} else if (line.equals("MassiveGun")) {
-					new MassiveG().parse(scan, itms);
+					new MassiveGunParser().parse(scan, itms);
 				} else if (line.equals("RustyArmor")) {
-					new RustyArm().parse(scan, itms);
+					new RustyArmParser().parse(scan, itms);
 				} else if (line.equals("ShinyArmor")) {
-					new ShinyArm().parse(scan, itms);
-				} else if (line.equals("NPC")) {
-					new ParseNPC().parse(scan, npcs, current);
+					new ShinyArmParser().parse(scan, itms);
+				} else if (line.equals("Npc")) {
+					new NpcParser().parse(scan, npcs, current);
 				} else if (line.equals("Door")) {
-					new Door().parse(scan, doors);
+					new DoorParser().parse(scan, doors);
+				} else if (line.equals("Key")) {
+					new KeyParser().parse(scan, itms);
 				} else {
 					throw new ParseException("Invalid text file");
 				}

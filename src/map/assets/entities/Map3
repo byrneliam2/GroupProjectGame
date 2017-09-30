@@ -1,11 +1,11 @@
 Door
 Map3 04 true
 0 3
-NPC
+Npc
 HungryBat
 EasyScheme true 9
 28 26 2
-NPC
+Npc
 HungryBat2
 PatrolScheme true 9
 28 8 2
@@ -17,3 +17,7 @@ MassiveGun
 4 8
 HealthPot
 29 4
+Key 04
+5 5
+
+

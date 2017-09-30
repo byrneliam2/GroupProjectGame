@@ -4,20 +4,19 @@ import java.util.List;
 import java.util.Scanner;
 
 import items.Item;
-import items.itemList.ShinyArmor;
+import items.itemList.HealthPot;
 
-public class ShinyArm {
-	public ShinyArm() {
+public class HealthPotParser {
+	public HealthPotParser() {
 
 	}
 
 	public void parse(Scanner scan, List<Item> items) throws ParseException {
-		Item ShinyArmor = new ShinyArmor();
+		Item hp = new HealthPot();
 		int x = MapParser.requireInteger(scan);
 		int y = MapParser.requireInteger(scan);
-		ShinyArmor.setX(x*Map.tileSize);
-		ShinyArmor.setY(y*Map.tileSize);
-		items.add(ShinyArmor);
-
+		hp.setX(x * Map.tileSize);
+		hp.setY(y * Map.tileSize);
+		items.add(hp);
 	}
 }

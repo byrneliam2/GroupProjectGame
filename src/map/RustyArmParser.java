@@ -6,8 +6,8 @@ import java.util.Scanner;
 import items.Item;
 import items.itemList.RustyArmor;
 
-public class RustyArm {
-	public RustyArm() {
+public class RustyArmParser {
+	public RustyArmParser() {
 
 	}
 

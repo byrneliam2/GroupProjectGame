@@ -5,8 +5,8 @@ import java.util.Scanner;
 
 import items.DoorItem;
 
-public class Door {
-	public Door() {
+public class DoorParser {
+	public DoorParser() {
 
 	}
 

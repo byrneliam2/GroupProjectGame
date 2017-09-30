@@ -6,8 +6,8 @@ import java.util.Scanner;
 import items.Item;
 import items.itemList.MassiveGun;
 
-public class MassiveG {
-	public MassiveG() {
+public class MassiveGunParser {
+	public MassiveGunParser() {
 
 	}
 

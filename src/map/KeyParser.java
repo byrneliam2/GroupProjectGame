@@ -4,19 +4,21 @@ import java.util.List;
 import java.util.Scanner;
 
 import items.Item;
-import items.itemList.HealthPot;
+import items.Key;
 
-public class HealthPotion {
-	public HealthPotion() {
+public class KeyParser {
+	public KeyParser() {
 
 	}
 
 	public void parse(Scanner scan, List<Item> items) throws ParseException {
-		Item hp = new HealthPot();
+		int id = MapParser.requireInteger(scan);
 		int x = MapParser.requireInteger(scan);
 		int y = MapParser.requireInteger(scan);
-		hp.setX(x * Map.tileSize);
-		hp.setY(y * Map.tileSize);
-		items.add(hp);
+
+		Item key = new Key(id);
+		key.setX(x * Map.tileSize);
+		key.setY(y * Map.tileSize);
+		items.add(key);
 	}
 }

@@ -11,8 +11,8 @@ import npc.NPC;
 import npc.PatrolScheme;
 import player.Player;
 
-public class ParseNPC {
-	public ParseNPC() {
+public class NpcParser {
+	public NpcParser() {
 
 	}
 

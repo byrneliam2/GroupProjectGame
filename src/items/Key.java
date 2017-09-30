@@ -11,7 +11,7 @@ public class Key extends AbstractItem {
 	private int id;
 
 	public Key(int id) {
-		super("Key", "A key which which can unlock a door", "key.png");
+		super("Key", "A key which which can unlock a door", "key");
 		this.id = id;
 	}
 
