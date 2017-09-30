@@ -45,12 +45,16 @@ public class MapCard extends Card {
 		this.map = map;
 		this.game = game;
 
-		setBackground(ImageUtilities.scale(ImageLoader.image("MapImages", map.getBackgroundLayer(), true),
+		setBackground(ImageUtilities.scale(
+				ImageLoader.image("MapImages", map.getBackgroundLayer(), true),
 				MainDisplay.WIDTH, MainDisplay.HEIGHT));
 
 		addEntities();
 		addUIEntities();
 	}
+
+	/* ======================================= ADDING ============================================ */
+	/* ======================= Are only called upon creation of card ============================= */
 
 	/**
 	 * Add all entities to the map. This is done outside of the setup method since the map is not constructed
@@ -58,16 +62,21 @@ public class MapCard extends Card {
 	 */
 	private void addEntities() {
 		// add player
-		addGameEntity(new Entity(game.getPlayer(), EntityType.PLAYER, ImageLoader.image("game", "playerRect", true),
-				new Point(game.getPlayer().getxLocation(), game.getPlayer().getyLocation()), 0));
+		addGameEntity(new Entity(game.getPlayer(), EntityType.PLAYER,
+				ImageLoader.image("game", "playerRect", true),
+				new Point(game.getPlayer().getxLocation(), game.getPlayer().getyLocation()), 0)
+		);
 		// add all NPCs
-		map.getNPCS().forEach(npc -> addGameEntity(new Entity(npc, EntityType.NPC,
-				ImageLoader.image("game", "bug", true), new Point(npc.getxLocation(), npc.getyLocation()), 0)));
+		map.getNPCS().forEach(npc -> addGameEntity(
+				new Entity(npc, EntityType.NPC,
+						ImageLoader.image("game", "bug", true),
+				new Point(npc.getxLocation(), npc.getyLocation()), 0))
+		);
 		// add all items
-		map.getItems()
-				.forEach(item -> addGameEntity(new Entity(item, EntityType.ITEM,
-						ImageLoader.image("ItemPictures", item.getImageFileName(), true),
-						new Point(item.getX(), item.getY()), 0)));
+		map.getItems().forEach(item -> addGameEntity(new Entity(item, EntityType.ITEM,
+				ImageLoader.image("ItemPictures", item.getImageFileName(), true),
+				new Point(item.getX(), item.getY()), 0))
+		);
 	}
 
 	/**
@@ -76,10 +85,14 @@ public class MapCard extends Card {
 	private void addUIEntities() {
 		// add player health
 		for (int i = 0; i < game.getPlayer().getHealth(); i++) {
-			addUIEntity(new Entity(game.getPlayer(), EntityType.HEART, ImageLoader.image("game", "heart", true),
+			addUIEntity(new Entity(game.getPlayer(), EntityType.HEART,
+					ImageLoader.image("game", "heart", true),
 					new Point(HEART_X + (i * HEART_X), 0), 50));
 		}
-	}
+    }
+
+    /* ====================================== UPDATERS =========================================== */
+	/* ============================== Called on each redraw ====================================== */
 
 	/**
 	 * Update the location of all game entities, if they are indeed a game entity.
@@ -90,26 +103,19 @@ public class MapCard extends Card {
 		for (Entity e : entities) {
 			Object o = e.getObject();
 			switch (e.getType()) {
-			case ITEM:
-				Item i = (Item) o;
-				if (i.getPack() != null)
-					itemsToRemove.add(e);
-				else
-					e.setLocation(new Point(i.getX(), i.getY()));
-				break;
-			case PLAYER:
-			case NPC:
-				Player p = (Player) o; // since an NPC is a Player
-				e.setLocation(new Point(p.getxLocation(), p.getyLocation()));
-				break;
-			case BULLET:
-				Bullet b = (Bullet) o;
-				// e.setLocation(new Point(b.getX(), b.getY()));
-				break;
-			// everything else goes here
-			default:
-				updateElements();
-				break;
+				case ITEM:
+					Item i = (Item) o;
+					if (i.getPack() != null) itemsToRemove.add(e);
+					else e.setLocation(new Point(i.getX(), i.getY()));
+					break;
+				case PLAYER: case NPC:
+					Player p = (Player) o; // since an NPC is a Player
+					e.setLocation(new Point(p.getxLocation(), p.getyLocation()));
+					break;
+				case BULLET:
+					Bullet b = (Bullet) o;
+					//e.setLocation(new Point(b.getX(), b.getY()));
+					break;
 			}
 		}
 		entities.removeAll(itemsToRemove);
@@ -120,9 +126,10 @@ public class MapCard extends Card {
 	 */
 	private void updateElements() {
 		List<Entity> elementsToRemove = new ArrayList<>();
+		int numHearts = 0;
 		for (Entity e : elements) {
 			switch (e.getType()) {
-			case HEART:
+				case HEART:
 					if (++numHearts > game.getPlayer().getHealth())
 						elementsToRemove.add(e);
 					break;
@@ -133,6 +140,8 @@ public class MapCard extends Card {
 		elements.removeAll(elementsToRemove);
 	}
 
+	/* ===================================== UTILITIES ========================================= */
+
 	private void addGameEntity(Entity e) {
 		entities.add(e);
 	}
@@ -141,30 +150,27 @@ public class MapCard extends Card {
 		elements.add(e);
 	}
 
-	@Override
-	protected void doUISetup() {
+	@Override protected void doUISetup() {
 		panel.setLayout(null);
 	}
 
-	@Override
-	public void setComponentActions(MainDisplay dsp) {
-	}
+	@Override public void setComponentActions(MainDisplay dsp) {}
 
 	@Override
 	public void redraw() {
 		// reset the component lists
 		panel.removeAll();
 		updateEntities();
+		updateElements();
 		// draw the lot
 		Consumer<Entity> draw = (e) -> {
 			JLabel l = new JLabel(new ImageIcon(e.getImage()));
 			panel.add(l);
-			l.setBounds(e.getLocation().x, e.getLocation().y, e.getImage().getWidth(), e.getImage().getHeight());
+			l.setBounds(e.getLocation().x, e.getLocation().y,
+                    e.getImage().getWidth(), e.getImage().getHeight());
 		};
-		for (Entity e : entities)
-			draw.accept(e);
-		for (Entity e : elements)
-			draw.accept(e);
+		for (Entity e : entities) draw.accept(e);
+		for (Entity e : elements) draw.accept(e);
 
 		for (int i = 0; i < Bullet.bulletList.size(); i++) {
 			Bullet b = Bullet.bulletList.get(i);
