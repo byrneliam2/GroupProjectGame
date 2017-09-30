@@ -235,25 +235,23 @@ public class Map {
 	 * @return true if the bullet hit a player/npc false otherwise.
 	 */
 	public boolean checkBulletHit(Bullet b) {
-		String bulletOwner = b.getOwner().getName();
 		double bulletX = b.getX();
 		double bulletY = b.getY();
 		Point bulletLocation = new Point();
 		bulletLocation.setLocation(bulletX, bulletY);
-		for (NPC entity : this.NPCS) {
-			if (!entity.getName().equals(bulletOwner)) {
-				if (entity.getBoundingBox().contains(bulletLocation)) {
-					entity.takeDamage();
+
+		if (b.getOwner() == this.currentPlayer) {
+			for (NPC npc : this.NPCS) {// check if any npc's are hit by the bullet
+				if (npc.getBoundingBox().contains(bulletLocation)) {
+					npc.takeDamage();
 					return true;
 				}
 			}
+		} else if (this.currentPlayer.getBoundingBox().contains(bulletLocation)) {
+			this.currentPlayer.takeDamage();
+			return true;
 		}
-		if (!this.currentPlayer.getName().equals(bulletOwner)) {
-			if (this.currentPlayer.getBoundingBox().contains(bulletLocation)) {
-				this.currentPlayer.takeDamage();
-				return true;
-			}
-		}
+
 		return false;
 	}
 
