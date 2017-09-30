@@ -62,33 +62,17 @@ public class NPC extends Player {
 		npcTimer.scheduleAtFixedRate(npctask, 0, updateRate);
 	}
 
-	private void update() {
-		control.doBestAction(this, p);
+	@Override
+	public void takeDamage() {
+		super.health--;
+		if (super.health <= 0) {
+			stop();
+			p.getMap().removeNPC(this);
+		}
 	}
 
-	/**
-	 * @return the angle FROM npc -> TO player. between 0 and 2Pi. 0 being straight up.
-	 */
-	public double getAngleToPlayer() {
-		double x = super.getxLocation() - p.getxLocation();
-		double y = super.getyLocation() - p.getyLocation();
-
-		// math to calculate 360 degree angle.
-		double angle;
-		if (x > 0 && y >= 0) {// top left corner
-			angle = 3 * Math.PI / 2 + Math.atan(y / x);
-		} else if (x >= 0 && y < 0) {// bottom left corner
-			angle = Math.PI - Math.atan(x / y);
-		} else if (x < 0 && y <= 0) {// bottom right corner
-			angle = Math.PI / 2 + Math.atan(y / x);
-		} else {// else if (x <= 0 && y > 0)//top right corner
-			angle = -Math.atan(x / y);
-		}
-
-		// TODO: Could use...
-		// MathUtils.calculateAngle(super.getxLocation(), super.getyLocation(), p.getxLocation(), p.getyLocation());
-
-		return angle;
+	private void update() {
+		control.doBestAction(this, p);
 	}
 
 }

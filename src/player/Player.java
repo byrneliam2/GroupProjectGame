@@ -36,7 +36,7 @@ public class Player {
 	private Backpack itemsList = new Backpack(this);
 	private double fireRate = 1;
 	private int maxHealth = 5;
-	private int health = 5;
+	protected int health = 5;
 	private int speed = 6;
 	private int xLocation;// centreX
 	private int yLocation;// centreY

@@ -105,6 +105,10 @@ public class Map {
 		}
 	}
 
+	public void removeNPC(NPC toBeRemoved) {
+		NPCS.remove(toBeRemoved);
+	}
+
 	/**
 	 * This method takes the collision and environment layers and scales them to the
 	 * correct size, then loads them.

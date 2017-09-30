@@ -45,7 +45,6 @@ public class Game extends Observable implements IGame, Serializable {
 	 */
 	public void newGame() {
 		world = WorldParser.parse("world", this.player);
-		world.getStartingMap().startMapNPCs();
 	}
 
 	/******************* View Methods **********************/
