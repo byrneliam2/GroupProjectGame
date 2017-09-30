@@ -31,9 +31,7 @@ public abstract class Card extends JPanel {
 
 	/**
 	 * Each Card has a name associated with it for locating purposes.
-	 * 
-	 * @param n
-	 *            name
+	 * @param n name
 	 */
 	Card(String n) {
 		name = n;
@@ -68,8 +66,7 @@ public abstract class Card extends JPanel {
 	 * on creation. This method must be manually called for maps since the image is
 	 * not static across all maps.
 	 * 
-	 * @param bg
-	 *            image to set background to
+	 * @param bg image to set background to
 	 */
 	@SuppressWarnings("WeakerAccess")
 	public void setBackground(BufferedImage bg) {
@@ -89,9 +86,7 @@ public abstract class Card extends JPanel {
 	 * Add actions to the components on screen, if there are any. This method
 	 * will usually only function if there are interactive components (buttons,
 	 * sliders, etc.) held in the card's reference map.
-	 * 
-	 * @param dsp
-	 *            display that holds this card. Used to link actions to events that
+	 * @param dsp display that holds this card. Used to link actions to events that
 	 *            occur in the main view class.
 	 */
 	public abstract void setComponentActions(MainDisplay dsp);
@@ -105,12 +100,11 @@ public abstract class Card extends JPanel {
 	public abstract void redraw();
 
 	/**
-	 * A Card Entity is any animated element inside a Card. This does not include
+	 * A Card Entity represents an animated element inside a Card. This does not include
 	 * separate Swing entities such as buttons and background images. It does include
 	 * on-screen indicators that refer to the game directly, however. These are identifed
-	 * using the SPECIAL tag for the Entity's {@link EntityType}. An Entity knows little
-	 * about the object it represents, it is more of a holding object than a functional
-	 * component.
+	 * using the SPECIAL tag for the Entity's {@link EntityType}. Small items that persist
+	 * for short periods of time, such as bullets, do not count as entities.
 	 */
 	class Entity {
 
@@ -122,16 +116,11 @@ public abstract class Card extends JPanel {
 		static final int SIZE = 60;
 
 		/**
-		 * @param object
-		 *            object that this entity represents
-		 * @param type
-		 *            type of the object
-		 * @param image
-		 *            image of the object
-		 * @param location
-		 *            location of the object
-		 * @param size
-		 *            size to scale to; if 0, a default size of 100 will be used
+		 * @param object   object that this entity represents
+		 * @param type     type of the object
+		 * @param image    image of the object
+		 * @param location location of the object
+		 * @param size     size to scale to; if 0, a default size of {@link #SIZE} will be used
 		 */
 		Entity(Object object, EntityType type, BufferedImage image, Point location, int size) {
 			this.object = object;

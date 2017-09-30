@@ -48,7 +48,7 @@ public class MapCard extends Card {
 				ImageLoader.image("MapImages", map.getBackgroundLayer(), true),
 				MainDisplay.WIDTH, MainDisplay.HEIGHT));
 
-		addEntities();
+		addInitialEntities();
 		addUIEntities();
 	}
 
@@ -59,7 +59,7 @@ public class MapCard extends Card {
 	 * Add all entities to the map. This is done outside of the setup method since the map is not constructed
 	 * beforehand and also because this setup does not relate to Swing components.
 	 */
-	private void addEntities() {
+	private void addInitialEntities() {
 		// add player
 		addGameEntity(new Entity(game.getPlayer(), EntityType.PLAYER,
 				ImageLoader.image("playerImages", "playerRect", true),
@@ -78,7 +78,8 @@ public class MapCard extends Card {
 	}
 
 	/**
-	 * Add UI entities to the screen.
+	 * Add UI entities to the screen. To avoid confusion between the lists, UI entities are
+	 * referred to as "elements."
 	 */
 	private void addUIEntities() {
 		// add player health
@@ -87,6 +88,10 @@ public class MapCard extends Card {
 					ImageLoader.image("game", "heart", true),
 					new Point(HEART_X + (i * HEART_X), 0), 50));
 		}
+		// add inventory items
+		//
+		// add dialogue, if any
+		//
 	}
 
 	/* ====================================== UPDATERS =========================================== */
@@ -109,7 +114,7 @@ public class MapCard extends Card {
 			case PLAYER:
 			case NPC:
 				Player p = (Player) o; // since an NPC is a Player
-				if (p.isDead()) itemsToRemove.add(e); // FIXME this line never true!
+				if (p.isDead()) itemsToRemove.add(e);
 				else e.setLocation(new Point(p.getxLocation(), p.getyLocation()));
 				break;
 			}
@@ -118,7 +123,7 @@ public class MapCard extends Card {
 	}
 
 	/**
-	 * Update the elements list.
+	 * Update the UI elements list.
 	 */
 	private void updateElements() {
 		List<Entity> elementsToRemove = new ArrayList<>();
