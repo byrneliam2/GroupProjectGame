@@ -1,26 +1,20 @@
 package player;
 
-import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.geom.Ellipse2D;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import game.Game;
-import gfx.ImageLoader;
-import gfx.ImageUtilities;
-import map.Map;
-import map.World;
-import utils.MathUtils;
 import items.Backpack;
 import items.DoorItem;
 import items.Equipable;
 import items.InvalidBackpackException;
 import items.Item;
 import items.Usable;
+import map.Map;
+import map.World;
+import utils.MathUtils;
 
 /**
  * @author javahemohs Created by javahemohs on 19/09/17.
@@ -29,25 +23,25 @@ import items.Usable;
 public class Player {
 	/* constants */
 	private static final int rangeCircleWidth = 2 * Map.tileSize;
-	private final String name;
-	private final double defaultFireRate = 1;
+	private static final double defaultFireRate = 1;
 
+	private final String name;
 	private Item closestItem;
 	private Backpack itemsList = new Backpack(this);
-	private double fireRate = 1;
-	private int maxHealth = 5;
+
 	protected int health = 5;
+	private int maxHealth = 5;
 	private int speed = 6;
 	private int xLocation;// centreX
 	private int yLocation;// centreY
+	private double fireRate = 1;// in seconds, smaller numbers mean less time between shots
+	private static Timer shotTimer = new Timer();
 	private Map map;// the map which the player is currently located on.
-	private boolean isAlive = true;
+	private boolean isDead = false;
 	private boolean isReadyToShoot = true;
-	private Timer shootTimer = new Timer();
-	private Image playerImage;
 
 	private Ellipse2D.Double rangeCircle;// the range at which the player can 'pick up' items
-	private Rectangle boundingBox;// the hit box of the player.
+	private Rectangle playerBox;// the hit box representing the location of the player.
 
 	/**
 	 * @param name
@@ -58,24 +52,7 @@ public class Player {
 		this.name = name;
 		rangeCircle = new Ellipse2D.Double(xLocation - Map.tileSize / 2, yLocation - Map.tileSize / 2, rangeCircleWidth,
 				rangeCircleWidth);
-		boundingBox = new Rectangle(xLocation + 3, yLocation + 3, Map.tileSize - 6, Map.tileSize - 6);
-	}
-
-	/**
-	 * This method sets the global tile size
-	 * THIS IS A QUICK FIX, THIS NEEDS TO BE CHANGED
-	 * 
-	 * @param newWidth
-	 * @param newHeight
-	 */
-	public void setGlobalTileSize(int newWidth, int newHeight) {
-		BufferedImage colLayer = ImageLoader.image("MapImages", "Map3Collision", true);
-		int width = colLayer.getWidth() / 32;
-		int height = colLayer.getHeight() / 32;
-
-		colLayer = ImageUtilities.scale(colLayer, newWidth, newHeight);
-		Map.tileSize = (int) newWidth / width;
-
+		playerBox = new Rectangle(xLocation + 3, yLocation + 3, Map.tileSize - 6, Map.tileSize - 6);
 	}
 
 	/**
@@ -122,9 +99,9 @@ public class Player {
 			// Remove the Item from the Player list of Items.
 			itemsList.removeItem(item);
 			// update the map with the item that has been dropped
-			map.placeItem(item, (int) boundingBox.getCenterX(), (int) boundingBox.getCenterY());
+			map.placeItem(item, (int) playerBox.getCenterX(), (int) playerBox.getCenterY());
 			// update the Closest item to the player rangeCircle
-			closestItem = map.getClosestItem(rangeCircle);
+			closestItem = item;
 
 		} catch (InvalidBackpackException e) {
 			throw new InvalidPlayerExceptions(e.getMessage());
@@ -143,12 +120,9 @@ public class Player {
 	 */
 	public void equipItem(Equipable item) throws InvalidPlayerExceptions {
 		try {
-			// If the player wants to use the supply with the necessary items for a
-			// particular purpose.
+			// equips the item
 			itemsList.equipItem(item);
 		} catch (InvalidBackpackException e) {
-			// If the Player is trying to equip an item which doesn't exists in the BackPack
-			// return this exception.
 			throw new InvalidPlayerExceptions(e.getMessage());
 		}
 	}
@@ -164,12 +138,9 @@ public class Player {
 	 */
 	public void unequipItem(Equipable item) throws InvalidPlayerExceptions {
 		try {
-			// If the player wants to use the supply with the necessary items for a
-			// particular purpose.
+			// un-equips the item
 			itemsList.unequipItem(item);
 		} catch (InvalidBackpackException e) {
-			// If the Player is trying to unequip an item which doesn't exists in the
-			// BackPack return this exception.
 			throw new InvalidPlayerExceptions(e.getMessage());
 		}
 	}
@@ -184,14 +155,10 @@ public class Player {
 	 */
 	public void useItem(Usable item) throws InvalidPlayerExceptions {
 		try {
-			// If the player wants to use the supply with the necessary items for a
-			// particular purpose.
+			// use the item
 			itemsList.useItem(item);
 		} catch (InvalidBackpackException e) {
-			// If the player wants to use the supply with the necessary items for a
-			// particular purpose.
 			throw new InvalidPlayerExceptions(e.getMessage());
-
 		}
 	}
 
@@ -214,17 +181,15 @@ public class Player {
 		}
 	}
 
+	/**
+	 * Causes the player to take 1 damage and if the player is dead, changes the isDead flag to true.
+	 */
 	public void takeDamage() {
 		// Decrease the health of the player by one
 		this.health -= 1;
-		// check if the player is still alive and flip the IsAlive flag and then if the
-		// player is dead we have to end the game.
+		// check if the player is still alive and flip the IsAlive flag
 		if (health <= 0) {
-			// Change the isAlive flag to dead.
-			isAlive = false;
-		} else {
-			// Change the isAlive flag to still surviving.
-			isAlive = true;
+			isDead = true;
 		}
 	}
 
@@ -232,11 +197,10 @@ public class Player {
 	 * If it is possible for a player to open a door.
 	 *
 	 * @param doorItem
-	 * @return
+	 * @return true if the player can open the door
 	 */
 	public boolean canOpenDoor(DoorItem doorItem) {
-		// Check if the player has the Specific KeyId to the Specific DoorId then they
-		// can go throw the door
+		// Check if the player has the Specific KeyId to the Specific DoorId
 		if (itemsList.checkDoorID(doorItem.getDoorID())) {
 			return true;
 		}
@@ -262,9 +226,10 @@ public class Player {
 			throw new InvalidPlayerExceptions("Game is paused, you cannot move");
 		}
 
-		boundingBox.translate(dx, dy);
-		if (map.canMove(boundingBox)) {
-			if ((door = map.getDoor(boundingBox)) != null) {// if player is next to a door
+		playerBox.translate(dx, dy);
+		if (map.canMove(playerBox)) {
+			// if player is next to a door and the door is unlocked or you have the key, go through...
+			if ((door = map.getDoor(playerBox)) != null && (!door.isLocked() || canOpenDoor(door))) {
 				map = enterDoor(door);
 				closestItem = map.getClosestItem(rangeCircle);
 				return true;
@@ -277,29 +242,33 @@ public class Player {
 				return false;
 			}
 		} else {
-			boundingBox.translate(-dx, -dy);
+			playerBox.translate(-dx, -dy);
 			throw new InvalidPlayerExceptions("You cant make a move/Invalid move");
 		}
 	}
 
 	/**
-	 * This method takes a door and returns the map that it leads too
+	 * This method closes the current map and starts the new map, returns the new map that the door leads to.
 	 *
 	 * @param Door
 	 * @return
 	 */
 	private Map enterDoor(DoorItem Door) {
 		// update location in new map...
-		boundingBox.setLocation(1500, 100);
+		playerBox.setLocation(1500, 100);
+
 		rangeCircle = new Ellipse2D.Double(xLocation - Map.tileSize / 2, yLocation - Map.tileSize / 2, rangeCircleWidth,
 				rangeCircleWidth);
-		return World.maps.get(Door.getMap());
+		map.pauseMapNPCs();
+		Map newMap = World.maps.get(Door.getMap());
+		newMap.startMapNPCs();
+		return newMap;
 	}
 
 	/**
 	 * @param direction
 	 *            should be an angle between 0 and 2Pi. (there's a method in
-	 *            npc/NPC/getAngleToPlayer() which you can copy/use to calculate the
+	 *            MathUtil package. which you can use to calculate the
 	 *            angle from player to mouse if needed).
 	 * @throws InvalidPlayerExceptions
 	 *             if your gun is not ready to be fired yet.
@@ -311,9 +280,9 @@ public class Player {
 
 		if (isReadyToShoot) {
 			isReadyToShoot = false;
-			double direction = MathUtils.calculateAngle(boundingBox.getX(), boundingBox.getY(), mouseX, mouseY);
+			double direction = MathUtils.calculateAngle(playerBox.getX(), playerBox.getY(), mouseX, mouseY);
 			// make a new bullet
-			new Bullet(boundingBox.getX(), boundingBox.getY(), direction, this);
+			new Bullet(playerBox.getX(), playerBox.getY(), direction, this);
 
 			// start a timer to count till when the next shot is ready to shoot....
 			TimerTask taskEvent = new TimerTask() {
@@ -321,10 +290,10 @@ public class Player {
 					isReadyToShoot = true;
 				}
 			};
-			shootTimer.schedule(taskEvent, (int) (fireRate * 1000));
+			shotTimer.schedule(taskEvent, (int) (fireRate * 1000));
 
 		} else {// if you can't shoot (for any reason) throw an exception...
-			throw new InvalidPlayerExceptions("You cant shoot at this stage");
+			throw new InvalidPlayerExceptions("You cant shoot because your weapon is not ready to shoot yet....");
 		}
 
 	}
@@ -348,6 +317,10 @@ public class Player {
 		return health;
 	}
 
+	/**
+	 * @param health
+	 *            the health to set health to, can't be more than max health...
+	 */
 	public void setHealth(int health) {
 		if (health > maxHealth)
 			health = maxHealth;
@@ -355,21 +328,21 @@ public class Player {
 	}
 
 	/**
-	 * @return the x pixel location of the player's centre point.
+	 * @return the x pixel location of the player's top left point.
 	 */
 	public int getxLocation() {
-		return (int) boundingBox.getX() - 3;
+		return (int) playerBox.getX() - 3;
 	}
 
 	/**
-	 * @return the y pixel location of the player's centre point.
+	 * @return the y pixel location of the player's top left point.
 	 */
 	public int getyLocation() {
-		return (int) boundingBox.getY() - 3;
+		return (int) playerBox.getY() - 3;
 	}
 
 	public Rectangle getBoundingBox() {
-		return this.boundingBox;
+		return this.playerBox;
 	}
 
 	public Map getMap() {
@@ -377,7 +350,7 @@ public class Player {
 	}
 
 	public boolean isDead() {
-		return !this.isAlive;
+		return !this.isDead;
 	}
 
 	public void setMap(Map m) {
@@ -418,20 +391,12 @@ public class Player {
 		return this;
 	}
 
-	public Image getPlayerImage() {
-		return playerImage;
-	}
-
 	public int getSpeed() {
 		return speed;
 	}
 
 	public void setSpeed(int speed) {
 		this.speed = speed;
-	}
-
-	public void setPlayerImage(Image playerImage) {
-		this.playerImage = playerImage;
 	}
 
 }
