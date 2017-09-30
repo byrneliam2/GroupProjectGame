@@ -32,25 +32,25 @@ import player.Player;
  *
  */
 public class Map {
-	// Size of a individual tile
-	public static int tileSize = 60;
+	/** pixel size of a individual tile */
+	public static final int tileSize = 60;
 
-	// HashMap of the Items located on the map and their locations
+	/** HashMap of the Items located on the map and their locations */
 	private List<Item> items;
 
-	// List of all NPC's located on this map
+	/** List of all NPC's located on this map */
 	private List<NPC> NPCS;
 
-	// The width of the map in tiles
+	/** The width of the map in tiles */
 	private int width;
 
-	// The height of the map in tiles.
+	/** The height of the map in tiles. */
 	private int height;
 
-	// 2D array of all the images that make up the backGround layer
+	/** 2D array of all the images that make up the backGround layer */
 	private String backgroundLayer;
 
-	// 2D array of all the images that make up the collision layer
+	/** 2D array of all the images that make up the collision layer */
 	private ArrayList<ArrayList<Integer>> collisionLayer;
 
 	// 2D array of all the images that make up the environmental layer
@@ -60,26 +60,26 @@ public class Map {
 	// Blue(4) is for mist
 	private ArrayList<ArrayList<Integer>> environmentalLayer;
 
-	// The current player
+	/** The current player */
 	private Player currentPlayer;
 
-	// The name of the map
+	/** The name of the map */
 	private String name;
 
-	// Doors on the current map
+	/** Doors on the current map */
 	List<DoorItem> doors;
 
 	public Map(String name, Player player, List<Item> items, ArrayList<NPC> NPCS, List<DoorItem> doors) {
 		this.name = name;
 		this.items = items;
 		this.currentPlayer = player;
-		player.setMap(this);
+		player.setMap(this);// sets the player up
 		this.backgroundLayer = name;
 		this.NPCS = NPCS;
 		this.doors = doors;
 		this.loadAllLayers(1920, 1080);
 
-		// fixes npc's
+		// sets the npc's up, note you'll still have to call startMapNPC's() to start them moving
 		for (NPC npc : NPCS) {
 			npc.setMap(this);
 		}
@@ -91,7 +91,7 @@ public class Map {
 	}
 
 	/**
-	 * Pauses all of the map's npc's so that they don't move.
+	 * Pauses all of the map's npc's so that they don't move. Usefull to call when the player changes maps.
 	 */
 	public void pauseMapNPCs() {
 		for (NPC npc : NPCS) {
@@ -99,12 +99,21 @@ public class Map {
 		}
 	}
 
+	/**
+	 * Starts all the npc's moving in this map.
+	 */
 	public void startMapNPCs() {
 		for (NPC npc : NPCS) {
 			npc.start();
 		}
 	}
 
+	/**
+	 * Removes the specified npc from the map and from the game.
+	 * 
+	 * @param toBeRemoved
+	 *            the npc to be gone
+	 */
 	public void removeNPC(NPC toBeRemoved) {
 		NPCS.remove(toBeRemoved);
 	}
@@ -344,7 +353,6 @@ public class Map {
 	 * @param y
 	 */
 	public void placeItem(Item i, int x, int y) {
-		Point toDrop = new Point((int) x / Map.tileSize, (int) y / Map.tileSize);
 		this.items.add(i);
 		i.setX(x);// might be unnessicary TODO.
 		i.setY(y);

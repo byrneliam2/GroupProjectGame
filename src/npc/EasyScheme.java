@@ -34,7 +34,7 @@ public class EasyScheme implements ControlScheme {
 		if (shotCounter > 200) {
 			shotCounter = 0;
 			new Bullet(npc.getxLocation(), npc.getyLocation(), MathUtils.calculateAngle(npc.getxLocation(),
-					npc.getyLocation(), player.getxLocation(), player.getyLocation()), npc);
+					npc.getyLocation(), player.getxLocation(), player.getyLocation()), npc, 4);
 			randDir = new RandDirection();
 		}
 	}

@@ -26,13 +26,14 @@ public class Bullet {
 	 */
 	public static List<Bullet> bulletList = new ArrayList<>();
 	/**
-	 * How quickley bullets move/are updated
-	 */
-	public static final int BulletSpeed = 4;
-	/**
 	 * Timer which is responsible for updating all bullets in the bullet list.
 	 */
 	private static Timer bulletTimer = new Timer();
+
+	/**
+	 * How quickley bullets move/are updated
+	 */
+	private final int bulletSpeed;
 
 	public static BufferedImage bulletImg = ImageLoader.image("game", "bullet", true);
 	{
@@ -63,9 +64,10 @@ public class Bullet {
 	 * @param owner
 	 *            the owner of the bullet
 	 */
-	public Bullet(double startingX, double startingY, double direction, Player owner) {
+	public Bullet(double startingX, double startingY, double direction, Player owner, int bulletSpeed) {
 		currentX = startingX;
 		currentY = startingY;
+		this.bulletSpeed = bulletSpeed;
 		this.owner = owner;
 		calculateUpdateAmount(direction);
 		bulletList.add(this);
@@ -135,20 +137,20 @@ public class Bullet {
 
 	private void calculateUpdateAmount(double angle) {
 		if (angle < Math.PI / 2) {
-			updateY = -Math.cos(angle) * BulletSpeed;
-			updateX = Math.sin(angle) * BulletSpeed;
+			updateY = -Math.cos(angle) * bulletSpeed;
+			updateX = Math.sin(angle) * bulletSpeed;
 		} else if (angle < Math.PI) {
 			angle = angle - Math.PI / 2;
-			updateY = Math.sin(angle) * BulletSpeed;
-			updateX = Math.cos(angle) * BulletSpeed;
+			updateY = Math.sin(angle) * bulletSpeed;
+			updateX = Math.cos(angle) * bulletSpeed;
 		} else if (angle < 3 * Math.PI / 2) {
 			angle = angle - Math.PI;
-			updateY = Math.cos(angle) * BulletSpeed;
-			updateX = -Math.sin(angle) * BulletSpeed;
+			updateY = Math.cos(angle) * bulletSpeed;
+			updateX = -Math.sin(angle) * bulletSpeed;
 		} else if (angle < 2 * Math.PI) {
 			angle = angle - 3 * Math.PI / 2;
-			updateY = -Math.sin(angle) * BulletSpeed;
-			updateX = -Math.cos(angle) * BulletSpeed;
+			updateY = -Math.sin(angle) * bulletSpeed;
+			updateX = -Math.cos(angle) * bulletSpeed;
 		} else {
 			throw new Error("Angle given was greater than 2Pi");
 		}

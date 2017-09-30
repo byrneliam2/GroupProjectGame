@@ -282,7 +282,7 @@ public class Player {
 			isReadyToShoot = false;
 			double direction = MathUtils.calculateAngle(playerBox.getX(), playerBox.getY(), mouseX, mouseY);
 			// make a new bullet
-			new Bullet(playerBox.getX(), playerBox.getY(), direction, this);
+			new Bullet(getCentreX(), getCentreY(), direction, this,8);
 
 			// start a timer to count till when the next shot is ready to shoot....
 			TimerTask taskEvent = new TimerTask() {
@@ -339,6 +339,14 @@ public class Player {
 	 */
 	public int getyLocation() {
 		return (int) playerBox.getY() - 3;
+	}
+
+	public int getCentreX() {
+		return (int) playerBox.getCenterX();
+	}
+
+	public int getCentreY() {
+		return (int) playerBox.getCenterY();
 	}
 
 	public Rectangle getBoundingBox() {
