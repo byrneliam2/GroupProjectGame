@@ -24,7 +24,7 @@ import java.util.List;
  */
 public class MapCard extends Card {
 
-	private List<Entity> entities;
+	private List<Entity> entities, elements;
 	private map.Map map;
 	private IGame game;
 
@@ -36,7 +36,8 @@ public class MapCard extends Card {
 		this.map = map;
 		this.game = game;
 
-		setBackground(ImageUtilities.scale(ImageLoader.image("MapImages", map.getBackgroundLayer(), true),
+		setBackground(ImageUtilities.scale(
+				ImageLoader.image("MapImages", map.getBackgroundLayer(), true),
 				MainDisplay.WIDTH, MainDisplay.HEIGHT));
 
 		addUIEntities();
@@ -49,16 +50,21 @@ public class MapCard extends Card {
 	 */
 	private void addEntities() {
 		// add player
-		addEntity(new Entity(game.getPlayer(), EntityType.PLAYER, ImageLoader.image("game", "playerRect", true),
-				new Point(game.getPlayer().getxLocation(), game.getPlayer().getyLocation()), 0));
+		addGameEntity(new Entity(game.getPlayer(), EntityType.PLAYER,
+				ImageLoader.image("game", "playerRect", true),
+				new Point(game.getPlayer().getxLocation(), game.getPlayer().getyLocation()), 0)
+		);
 		// add all NPCs
-		map.getNPCS().forEach(npc -> addEntity(new Entity(npc, EntityType.NPC, ImageLoader.image("game", "bug", true),
-				new Point(npc.getxLocation(), npc.getyLocation()), 0)));
+		map.getNPCS().forEach(npc -> addGameEntity(
+				new Entity(npc, EntityType.NPC,
+						ImageLoader.image("game", "bug", true),
+				new Point(npc.getxLocation(), npc.getyLocation()), 0))
+		);
 		// add all items
-		map.getItems()
-				.forEach(item -> addEntity(new Entity(item, EntityType.ITEM,
-						ImageLoader.image("ItemPictures", item.getImageFileName(), true),
-						new Point(item.getX(), item.getY()), 0)));
+		map.getItems().forEach(item -> addGameEntity(new Entity(item, EntityType.ITEM,
+				ImageLoader.image("ItemPictures", item.getImageFileName(), true),
+				new Point(item.getX(), item.getY()), 0))
+		);
 	}
 
 	/**
@@ -67,22 +73,11 @@ public class MapCard extends Card {
 	private void addUIEntities() {
 		// add player health
 		for (int i = 0; i < game.getPlayer().getHealth(); i++) {
-			addEntity(new Entity(game.getPlayer(), EntityType.BULLET, // FIXME
-					ImageLoader.image("game", "heart", true), new Point(HEART_X + (i * HEART_X), 0), 50));
-		}
-	}
-/*
-	/**
-	 * Add UI entities to the screen.
-	 *
-	private void addUIEntities() {
-		// add player health
-		for (int i = 0; i < game.getPlayer().getHealth(); i++) {
-			addEntity(new Entity(game.getPlayer(), EntityType.SPECIAL, ImageLoader.image("game", "heart", true),
+			addGameEntity(new Entity(game.getPlayer(), EntityType.SPECIAL,
+					ImageLoader.image("game", "heart", true),
 					new Point(HEART_X + (i * HEART_X), 0), 50));
 		}
 	}
-	*/
 
 
 	/**
@@ -95,10 +90,8 @@ public class MapCard extends Card {
 			switch (e.getType()) {
 			case ITEM:
 				Item i = (Item) o;
-				if (i.getPack() != null)
-					itemsToRemove.add(e);
-				else
-					e.setLocation(new Point(i.getX(), i.getY()));
+				if (i.getPack() != null) itemsToRemove.add(e);
+				else e.setLocation(new Point(i.getX(), i.getY()));
 				break;
 			case PLAYER:
 				Player p = (Player) o;
@@ -119,12 +112,13 @@ public class MapCard extends Card {
 
 	/**
 	 * Add a new {@link Card.Entity} to the current screen.
-	 * 
-	 * @param e
-	 *            entity
 	 */
-	private void addEntity(Entity e) {
+	private void addGameEntity(Entity e) {
 		entities.add(e);
+	}
+
+	private void addUIElement(Entity e) {
+		elements.add(e);
 	}
 
 	@Override
@@ -133,8 +127,7 @@ public class MapCard extends Card {
 	}
 
 	@Override
-	public void setComponentActions(MainDisplay dsp) {
-	}
+	public void setComponentActions(MainDisplay dsp) {}
 
 	@Override
 	public void redraw() {
@@ -145,7 +138,8 @@ public class MapCard extends Card {
 		for (Entity e : entities) {
 			JLabel l = new JLabel(new ImageIcon(e.getImage()));
 			panel.add(l);
-			l.setBounds(e.getLocation().x, e.getLocation().y, e.getImage().getWidth(), e.getImage().getHeight());
+			l.setBounds(e.getLocation().x, e.getLocation().y,
+					e.getImage().getWidth(), e.getImage().getHeight());
 		}
 	}
 }
