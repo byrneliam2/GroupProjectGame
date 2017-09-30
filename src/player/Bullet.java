@@ -1,5 +1,6 @@
 package player;
 
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -7,6 +8,8 @@ import java.util.TimerTask;
 
 import frames.MainDisplay;
 import game.Game;
+import gfx.ImageLoader;
+import gfx.ImageUtilities;
 
 /**
  * A bullet is a point object with an x,y location, when the bullet is created a
@@ -30,6 +33,13 @@ public class Bullet {
 	 * Timer which is responsible for updating all bullets in the bullet list.
 	 */
 	private static Timer bulletTimer = new Timer();
+
+	public static BufferedImage bulletImg = ImageLoader.image("game", "bullet", true);
+	{
+		{
+			bulletImg = ImageUtilities.scale(bulletImg, 12, 12);
+		}
+	}
 
 	private double currentX, currentY;
 	private double updateX, updateY;
