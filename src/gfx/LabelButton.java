@@ -4,7 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class LabelButton extends JButton{
+public class LabelButton extends JButton {
+
     private String text;
     private final int WIDTH, HEIGHT;
 
@@ -30,7 +31,7 @@ public class LabelButton extends JButton{
         g2d.setColor(Color.white);
         g2d.drawRect(0,0,WIDTH,HEIGHT);
 
-        Font font = new Font("Gill Sans MT Condensed", Font.BOLD, 32);
+        Font font = new Font("Gill Sans MT Condensed", Font.BOLD, 30);
         FontMetrics metrics = g2d.getFontMetrics(font);
         g2d.setFont(font);
 
@@ -40,7 +41,7 @@ public class LabelButton extends JButton{
         g2d.drawString(this.text, x, y);
         this.setIcon(new ImageIcon(main));
 
-        if(rollover){
+        if (rollover) {
             BufferedImage roll = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB);
             g2d = roll.createGraphics();
             g2d.setRenderingHints(rh);
