@@ -85,12 +85,14 @@ public class MapCard extends Card {
      * Update the location of all game entities... FIXME
      */
     private void updateEntities() {
+        List<Entity> itemsToRemove = new ArrayList<>();
         for (Entity e : entities) {
             Object o = e.getObject();
             switch(e.getType()) {
                 case ITEM:
                     Item i = (Item) o;
-                    e.setLocation(new Point(i.getX(), i.getY()));
+                    if (i.getPack() != null) itemsToRemove.add(e);
+                    else e.setLocation(new Point(i.getX(), i.getY()));
                     break;
                 case PLAYER:
                     Player p = (Player) o;
@@ -102,6 +104,7 @@ public class MapCard extends Card {
                     break;
             }
         }
+        entities.removeAll(itemsToRemove);
     }
 
     /**
