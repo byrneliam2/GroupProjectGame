@@ -36,7 +36,7 @@ public class Player {
 	private double fireRate = 1;
 	private int maxHealth = 5;
 	private int health = 5;
-	private int speed = 8;
+	private int speed = 6;
 	private int xLocation;// centreX
 	private int yLocation;// centreY
 	private Map map;// the map which the player is currently located on.
