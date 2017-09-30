@@ -172,6 +172,11 @@ public class Game extends Observable implements IGame, Serializable {
 		GAME_PAUSED = false;
 	}
 
+	@Override
+	public boolean isPaused() {
+		return GAME_PAUSED;
+	}
+
 	/**
 	 * Saves this game.Game object as a file...
 	 */
