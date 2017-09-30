@@ -1,8 +1,10 @@
 package npc;
 
 import map.Map;
+import player.Bullet;
 import player.InvalidPlayerExceptions;
 import player.Player;
+import utils.MathUtils;
 
 /**
  * A scheme which causes the NPC to patrol left-right or up-down. The NPC will
@@ -64,17 +66,18 @@ public class PatrolScheme implements ControlScheme {
 
 				}
 			}
-
-			// shoot at the player every 100 moves
-			shotCounter++;
-			if (shotCounter >= 100) {
-				npc.shoot(player.getxLocation(), player.getyLocation());// shoots at the player.
-				shotCounter = 0;
-			}
 		} catch (InvalidPlayerExceptions e) {
 			System.out.println("Patrol ai wasn't able to do a move, it caught the exception thrown tho so its algood!"
 					+ e.getMessage());
 		}
+		// shoot at the player every 100 moves
+		shotCounter++;
+		if (shotCounter >= 100) {
+			new Bullet(npc.getxLocation(), npc.getyLocation(), MathUtils.calculateAngle(npc.getxLocation(),
+					npc.getyLocation(), player.getxLocation(), player.getyLocation()), npc);
+			shotCounter = 0;
+		}
+
 	}
 
 }

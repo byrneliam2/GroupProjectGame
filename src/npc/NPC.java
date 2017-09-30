@@ -14,7 +14,7 @@ import player.Player;
  *
  */
 public class NPC extends Player {
-	public static final int SPEED = MainDisplay.FRAMERATE;// rate in milliseconds that NPC is updated
+	public static final int updateRate = MainDisplay.FRAMERATE;// rate in milliseconds that NPC is updated
 	private static Timer npcTimer = new Timer();
 
 	private Player p;
@@ -66,7 +66,7 @@ public class NPC extends Player {
 	 * around.
 	 */
 	public void start() {
-		npcTimer.scheduleAtFixedRate(npctask, 0, SPEED);
+		npcTimer.scheduleAtFixedRate(npctask, 0, updateRate);
 	}
 
 	private void update() {

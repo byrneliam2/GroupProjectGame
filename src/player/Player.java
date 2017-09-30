@@ -248,6 +248,13 @@ public class Player {
 	 */
 	public boolean move(int dx, int dy) throws InvalidPlayerExceptions {
 		DoorItem door = null;
+
+		// temporary solution to stopping diagonal movements from being twice as fast.
+		if (dy != 0 || dx != 0) {
+			dx = dx / 2;
+			dy = dy / 2;
+		}
+
 		boundingBox.translate(dx, dy);
 		if (map.canMove(boundingBox)) {
 			if ((door = map.getDoor(boundingBox)) != null) {// if player is next to a door
