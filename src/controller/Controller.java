@@ -93,8 +93,8 @@ public class Controller extends KeyAdapter {
 	 */
 	public enum KeyboardCommands {
 		// All Keyboard inputs required by the game
-		KEY_UP(KeyEvent.VK_UP), KEY_DOWN(KeyEvent.VK_DOWN), KEY_LEFT(KeyEvent.VK_LEFT), KEY_RIGHT(
-				KeyEvent.VK_RIGHT), KEY_USE(KeyEvent.VK_F), KEY_ATTACK(KeyEvent.VK_SPACE), KEY_MENU(KeyEvent.VK_ESCAPE);
+		KEY_UP(KeyEvent.VK_W), KEY_DOWN(KeyEvent.VK_S), KEY_LEFT(KeyEvent.VK_A), KEY_RIGHT(
+				KeyEvent.VK_D), KEY_USE(KeyEvent.VK_F), KEY_ATTACK(KeyEvent.VK_SPACE), KEY_MENU(KeyEvent.VK_ESCAPE);
 
 		private int original;
 		private int current;
