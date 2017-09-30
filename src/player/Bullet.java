@@ -22,7 +22,7 @@ public class Bullet {
 	/**
 	 * How quickley bullets move/are updated
 	 */
-	public static final int BulletSpeed = 100;
+	public static final int BulletSpeed = 50;
 	/**
 	 * Timer which is responsible for updating all bullets in the bullet list.
 	 */

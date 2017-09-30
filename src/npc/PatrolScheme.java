@@ -68,7 +68,7 @@ public class PatrolScheme implements ControlScheme {
 			// shoot at the player every 100 moves
 			shotCounter++;
 			if (shotCounter >= 100) {
-				npc.shoot(npc.getPlayer().getxLocation(), npc.getPlayer().getyLocation());// shoots at the player.
+				npc.shoot(player.getxLocation(), player.getyLocation());// shoots at the player.
 				shotCounter = 0;
 			}
 		} catch (InvalidPlayerExceptions e) {
