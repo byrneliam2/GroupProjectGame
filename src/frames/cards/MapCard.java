@@ -12,6 +12,7 @@ import gfx.ImageLoader;
 import gfx.ImageUtilities;
 import items.Item;
 import npc.NPC;
+import player.Bullet;
 import player.Player;
 
 import javax.swing.*;
@@ -24,7 +25,8 @@ import java.util.List;
  */
 public class MapCard extends Card {
 
-	private List<Entity> entities, elements;
+	private List<Entity> entities;
+	private List<Entity> elements;
 	private map.Map map;
 	private IGame game;
 
@@ -32,8 +34,10 @@ public class MapCard extends Card {
 
 	public MapCard(String n, map.Map map, IGame game) {
 		super(n);
+
 		this.entities = new ArrayList<>();
 		this.elements = new ArrayList<>();
+
 		this.map = map;
 		this.game = game;
 
@@ -74,7 +78,7 @@ public class MapCard extends Card {
 	private void addUIEntities() {
         // add player health
         for (int i = 0; i < game.getPlayer().getHealth(); i++) {
-            addUIEntity(new Entity(game.getPlayer(), EntityType.SPECIAL,
+            addUIEntity(new Entity(game.getPlayer(), EntityType.HEART,
                     ImageLoader.image("game", "heart", true),
                     new Point(HEART_X + (i * HEART_X), 0), 50));
         }
@@ -89,31 +93,47 @@ public class MapCard extends Card {
 		for (Entity e : entities) {
 			Object o = e.getObject();
 			switch (e.getType()) {
-			case ITEM:
-				Item i = (Item) o;
-				if (i.getPack() != null) itemsToRemove.add(e);
-				else e.setLocation(new Point(i.getX(), i.getY()));
-				break;
-			case PLAYER:
-				Player p = (Player) o;
-				e.setLocation(new Point(p.getxLocation(), p.getyLocation()));
-				break;
-			case NPC:
-				NPC n = (NPC) o;
-				e.setLocation(new Point(n.getxLocation(), n.getyLocation()));
-				break;
-			case BULLET:
-				break;
-			case SPECIAL:
-				break;
+				case ITEM:
+					Item i = (Item) o;
+					if (i.getPack() != null) itemsToRemove.add(e);
+					else e.setLocation(new Point(i.getX(), i.getY()));
+					break;
+				case PLAYER:
+					Player p = (Player) o;
+					e.setLocation(new Point(p.getxLocation(), p.getyLocation()));
+					break;
+				case NPC:
+					NPC n = (NPC) o;
+					e.setLocation(new Point(n.getxLocation(), n.getyLocation()));
+					break;
+				case BULLET:
+					Bullet b = (Bullet) o;
+					//e.setLocation(new Point(b.getX(), b.getY()));
+					break;
+				// everything else goes here
+				default:
+					updateElements();
+					break;
 			}
 		}
 		entities.removeAll(itemsToRemove);
 	}
 
 	/**
-	 * Add a new {@link Card.Entity} to the current screen.
+	 * Update the elements list.
 	 */
+	private void updateElements() {
+		for (Entity e : elements) {
+			Object o = e.getObject();
+			switch (e.getType()) {
+				case HEART:
+					break;
+				case DIALOGUE:
+					break;
+			}
+		}
+	}
+
 	private void addGameEntity(Entity e) {
 		entities.add(e);
 	}
@@ -122,13 +142,11 @@ public class MapCard extends Card {
 		elements.add(e);
 	}
 
-	@Override
-	protected void doUISetup() {
+	@Override protected void doUISetup() {
 		panel.setLayout(null);
 	}
 
-	@Override
-	public void setComponentActions(MainDisplay dsp) {}
+	@Override public void setComponentActions(MainDisplay dsp) {}
 
 	@Override
 	public void redraw() {
@@ -139,7 +157,8 @@ public class MapCard extends Card {
 		for (Entity e : entities) {
 			JLabel l = new JLabel(new ImageIcon(e.getImage()));
 			panel.add(l);
-			l.setBounds(e.getLocation().x, e.getLocation().y, e.getImage().getWidth(), e.getImage().getHeight());
+			l.setBounds(e.getLocation().x, e.getLocation().y,
+					e.getImage().getWidth(), e.getImage().getHeight());
 		}
 	}
 }
