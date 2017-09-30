@@ -24,7 +24,6 @@ import java.util.function.Consumer;
  * The MapCard displays the state of a Map, including all Entities on screen.
  * TODO Dialogue popups
  * TODO Inventory screen
- * TODO Proper player health [selected]
  * TODO Player animations
  */
 public class MapCard extends Card {
