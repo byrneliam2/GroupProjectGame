@@ -22,7 +22,7 @@ public interface IGame {
 
     void giveObserver(Observer o);
 
-    void set();
+    void set(Object arg);
 
     void newGame();
 

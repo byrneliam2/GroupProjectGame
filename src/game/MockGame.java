@@ -116,7 +116,7 @@ public class MockGame implements IGame {
 	public void giveObserver(Observer o) {}
 
 	@Override
-	public void set() {}
+	public void set(Object arg) {}
 
 	@Override
 	public void newGame() {
