@@ -74,14 +74,15 @@ public class MapCard extends Card {
 	private void addUIEntities() {
         // add player health
         for (int i = 0; i < game.getPlayer().getHealth(); i++) {
-            addUIElement(new Entity(game.getPlayer(), EntityType.BULLET, // FIXME
+            addUIEntity(new Entity(game.getPlayer(), EntityType.SPECIAL,
                     ImageLoader.image("game", "heart", true),
                     new Point(HEART_X + (i * HEART_X), 0), 50));
         }
     }
 
 	/**
-	 * Update the location of all game entities... FIXME
+	 * Update the location of all game entities, if they are indeed a game entity.
+	 * UI entities are dealt with external of this method.
 	 */
 	private void updateEntities() {
 		List<Entity> itemsToRemove = new ArrayList<>();
@@ -117,7 +118,7 @@ public class MapCard extends Card {
 		entities.add(e);
 	}
 
-	private void addUIElement(Entity e) {
+	private void addUIEntity(Entity e) {
 		elements.add(e);
 	}
 
