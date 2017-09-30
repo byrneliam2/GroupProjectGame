@@ -47,9 +47,9 @@ public class Bullet {
 		{
 			playerBullet1 = ImageUtilities.scale(playerBullet1, bulletSize, bulletSize);
 			npcBullet1 = ImageUtilities.scale(npcBullet1, bulletSize, bulletSize);
-			npcBullet2 = ImageUtilities.scale(npcBullet1, bulletSize, bulletSize);
-			npcBullet3 = ImageUtilities.scale(npcBullet1, bulletSize, bulletSize);
-			npcBullet4 = ImageUtilities.scale(npcBullet1, bulletSize, bulletSize);
+			npcBullet2 = ImageUtilities.scale(npcBullet2, bulletSize, bulletSize);
+			npcBullet3 = ImageUtilities.scale(npcBullet3, bulletSize, bulletSize);
+			npcBullet4 = ImageUtilities.scale(npcBullet4, bulletSize, bulletSize);
 		}
 	}
 
