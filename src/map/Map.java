@@ -290,11 +290,12 @@ public class Map {
 	public Item getClosestItem(Ellipse2D rangeCircle) {
 		if (items == null)
 			return null;
-		// TODO change items to use centre Point.
+
 		Item closest = null;
 		double ClosestDistance = 0;
 		for (Item item : this.items) {
-			if (rangeCircle.contains(new Point(item.getX(), item.getY()))) {
+			// centre point of item is used.
+			if (rangeCircle.contains(new Point(item.getX() + tileSize / 2, item.getY() + tileSize / 2))) {
 				double xDist = (item.getX() - rangeCircle.getCenterX());
 				double yDist = (item.getY() - rangeCircle.getCenterY());
 				double dist = Math.hypot(xDist, yDist);// actual distance to Item
