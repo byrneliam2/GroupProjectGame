@@ -49,6 +49,7 @@ public class MainDisplay extends JComponent implements Observer {
 
     public MainDisplay(IGame g) {
         game = g;
+        g.giveObserver(this);
 
         master = new JFrame();
         currentCard = null;
@@ -166,12 +167,19 @@ public class MainDisplay extends JComponent implements Observer {
     }
 
     /**
+     * Start a new game by opening the first world and starting the timer.
+     */
+    public void startGame() {
+        switchScreen(game.getWorld().getStartingMap().getMapName());
+        startTimer();
+    }
+
+    /**
      * Switch to the first map and start the game redraw timer. This essentially
      * boots the game since it un-pauses it and allows the entity update
      * mechanism to execute.
      */
     public void startTimer() {
-        switchScreen(game.getWorld().getStartingMap().getMapName());
         (timer = new Timer(FRAMERATE, (e) -> redraw())).start();
         game.unPauseGame();
     }

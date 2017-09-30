@@ -171,6 +171,7 @@ public class Game extends Observable implements IGame, Serializable {
 		GAME_PAUSED = true;
 		if (this.player.getMap() != null)
 			this.player.getMap().pauseMapNPCs();
+		set("pause");
 	}
 
 	public void unPauseGame() {
@@ -191,8 +192,8 @@ public class Game extends Observable implements IGame, Serializable {
 	}
 
 	@Override
-	public void set() {
+	public void set(Object arg) {
 		setChanged();
-		notifyObservers(null);
+		notifyObservers(arg);
 	}
 }

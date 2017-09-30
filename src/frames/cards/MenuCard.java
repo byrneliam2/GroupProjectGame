@@ -56,7 +56,7 @@ public class MenuCard extends Card {
                 switch (str) {
                     case "new":
                         dsp.newGame();
-                        dsp.startTimer();
+                        dsp.startGame();
                         break;
                     case "load":
                         JFileChooser fileChooser = new JFileChooser();
