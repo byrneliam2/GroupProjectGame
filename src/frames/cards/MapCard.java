@@ -73,11 +73,22 @@ public class MapCard extends Card {
 	private void addUIEntities() {
 		// add player health
 		for (int i = 0; i < game.getPlayer().getHealth(); i++) {
-			addGameEntity(new Entity(game.getPlayer(), EntityType.SPECIAL,
-					ImageLoader.image("game", "heart", true),
+			addEntity(new Entity(game.getPlayer(), EntityType.BULLET, // FIXME
+					ImageLoader.image("game", "heart", true), new Point(HEART_X + (i * HEART_X), 0), 50));
+		}
+	}
+/*
+	/**
+	 * Add UI entities to the screen.
+	 *
+	private void addUIEntities() {
+		// add player health
+		for (int i = 0; i < game.getPlayer().getHealth(); i++) {
+			addEntity(new Entity(game.getPlayer(), EntityType.SPECIAL, ImageLoader.image("game", "heart", true),
 					new Point(HEART_X + (i * HEART_X), 0), 50));
 		}
 	}
+	*/
 
 
 	/**
@@ -112,6 +123,9 @@ public class MapCard extends Card {
 
 	/**
 	 * Add a new {@link Card.Entity} to the current screen.
+	 * 
+	 * @param e
+	 *            entity
 	 */
 	private void addGameEntity(Entity e) {
 		entities.add(e);
