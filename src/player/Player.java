@@ -23,7 +23,7 @@ import utils.MathUtils;
 public class Player {
 	/* constants */
 	private static final int rangeCircleWidth = 2 * Map.tileSize;
-	private static final double defaultFireRate = 1;
+	private static final double defaultFireRate = 0.2;
 
 	private final String name;
 	private Item closestItem;
@@ -32,7 +32,7 @@ public class Player {
 	protected int health = 5;
 	private int maxHealth = 5;
 	private int speed = 6;
-	private double fireRate = 1;// in seconds, smaller numbers mean less time between shots
+	private double fireRate = defaultFireRate;// in seconds, smaller numbers mean less time between shots
 	private static Timer shotTimer = new Timer();
 	private Map map;// the map which the player is currently located on.
 	private boolean isDead = false;
