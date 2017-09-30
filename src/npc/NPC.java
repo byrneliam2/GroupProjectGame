@@ -3,6 +3,7 @@ package npc;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import frames.MainDisplay;
 import map.Map;
 import player.Player;
 
@@ -13,7 +14,7 @@ import player.Player;
  *
  */
 public class NPC extends Player {
-	public static final int SPEED = 50;// rate in milliseconds that NPC is updated
+	public static final int SPEED = MainDisplay.FRAMERATE;// rate in milliseconds that NPC is updated
 	private static Timer npcTimer = new Timer();
 
 	private Player p;

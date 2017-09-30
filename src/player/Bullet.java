@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import frames.MainDisplay;
+
 /**
  * A bullet is a point object with an x,y location, when the bullet is created a
  * timer is started which updates the bullet location until the bullet hits a
@@ -22,7 +24,7 @@ public class Bullet {
 	/**
 	 * How quickley bullets move/are updated
 	 */
-	public static final int BulletSpeed = 50;
+	public static final int BulletSpeed = MainDisplay.FRAMERATE;
 	/**
 	 * Timer which is responsible for updating all bullets in the bullet list.
 	 */
