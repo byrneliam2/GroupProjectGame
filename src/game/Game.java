@@ -33,13 +33,6 @@ public class Game extends Observable implements IGame, Serializable {
 	private Player player;
 	private World world;
 
-	/**
-	 * Sets up a new game.
-	 */
-	public Game() {
-		this.player = new Player("Tom", 500, 500);
-	}
-
 	@Override
 	public void giveObserver(Observer o) {
 		this.addObserver(o);
@@ -49,7 +42,8 @@ public class Game extends Observable implements IGame, Serializable {
 	 * Start the new game.
 	 */
 	public void newGame() {
-		world = WorldParser.parse("world", this.player);
+		this.player = new Player("Tom", 500, 500);
+		this.world = WorldParser.parse("world", this.player);
 	}
 
 	/******************* View Methods **********************/
