@@ -13,7 +13,7 @@ import utils.MathUtils;
  */
 public class EasyScheme implements ControlScheme {
 
-	private RandDirection randDir = new RandDirection();;
+	private utils.Direction randDir = getRandomDir();
 	private int shotCounter = 0;
 
 	public EasyScheme() {
@@ -26,7 +26,7 @@ public class EasyScheme implements ControlScheme {
 			npc.move(randDir.getX() * npc.getSpeed() / 2, randDir.getY() * npc.getSpeed() / 2);
 		} catch (InvalidPlayerExceptions e) {
 			// if we run into a wall, then choose a new direction...
-			randDir = new RandDirection();
+			randDir = getRandomDir();
 		}
 
 		// shoot at the player every 200 moves. and then change direction
@@ -35,39 +35,13 @@ public class EasyScheme implements ControlScheme {
 			shotCounter = 0;
 			new Bullet(npc.getxLocation(), npc.getyLocation(), MathUtils.calculateAngle(npc.getxLocation(),
 					npc.getyLocation(), player.getxLocation(), player.getyLocation()), npc, 4);
-			randDir = new RandDirection();
+			randDir = getRandomDir();
 		}
 	}
 
-	private class RandDirection {
-		private int x, y;
-
-		RandDirection() {
-			double rand1 = Math.random();
-			double rand2 = Math.random();
-			if (rand1 < 0.4) {
-				x = -1;
-			} else if (rand1 < 0.6) {
-				x = 0;
-			} else {
-				x = 1;
-			}
-			if (rand2 < 0.4) {
-				y = -1;
-			} else if (rand2 < 0.6) {
-				y = 0;
-			} else {
-				y = 1;
-			}
-		}
-
-		public int getX() {
-			return x;
-		}
-
-		public int getY() {
-			return y;
-		}
+	public utils.Direction getRandomDir() {
+		int dir = (int) (Math.random() * 8);
+		return utils.Direction.VALUES.get(dir);
 	}
 
 }

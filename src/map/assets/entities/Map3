@@ -7,8 +7,12 @@ EasyScheme true 9
 28 26 2
 Npc
 HungryBat2
-PatrolScheme true 9
+MediumScheme true 9
 28 8 2
+Npc
+HungryBat3
+HardScheme true 9
+28 29 1
 ShinyArmor
 4 4
 RustyArmor
