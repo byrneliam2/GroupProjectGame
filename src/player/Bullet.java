@@ -24,7 +24,7 @@ public class Bullet {
 	/**
 	 * How quickley bullets move/are updated
 	 */
-	public static final int BulletSpeed = MainDisplay.FRAMERATE;
+	public static final int BulletSpeed = 4;
 	/**
 	 * Timer which is responsible for updating all bullets in the bullet list.
 	 */
@@ -98,7 +98,7 @@ public class Bullet {
 				update();
 			}
 		};
-		bulletTimer.scheduleAtFixedRate(bulletTask, 0, BulletSpeed);
+		bulletTimer.scheduleAtFixedRate(bulletTask, 0, MainDisplay.FRAMERATE);
 	}
 
 	/**
@@ -121,20 +121,20 @@ public class Bullet {
 
 	private void calculateUpdateAmount(double angle) {
 		if (angle < Math.PI / 2) {
-			updateY = -Math.cos(angle);
-			updateX = Math.sin(angle);
+			updateY = -Math.cos(angle) * BulletSpeed;
+			updateX = Math.sin(angle) * BulletSpeed;
 		} else if (angle < Math.PI) {
 			angle = angle - Math.PI / 2;
-			updateY = Math.sin(angle);
-			updateX = Math.cos(angle);
+			updateY = Math.sin(angle) * BulletSpeed;
+			updateX = Math.cos(angle) * BulletSpeed;
 		} else if (angle < 3 * Math.PI / 2) {
 			angle = angle - Math.PI;
-			updateY = Math.cos(angle);
-			updateX = -Math.sin(angle);
+			updateY = Math.cos(angle) * BulletSpeed;
+			updateX = -Math.sin(angle) * BulletSpeed;
 		} else if (angle < 2 * Math.PI) {
 			angle = angle - 3 * Math.PI / 2;
-			updateY = -Math.sin(angle);
-			updateX = -Math.cos(angle);
+			updateY = -Math.sin(angle) * BulletSpeed;
+			updateX = -Math.cos(angle) * BulletSpeed;
 		} else {
 			throw new Error("Angle given was greater than 2Pi");
 		}

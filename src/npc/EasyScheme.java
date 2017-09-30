@@ -13,7 +13,7 @@ import utils.MathUtils;
  */
 public class EasyScheme implements ControlScheme {
 
-	private RandDirection randDir;
+	private RandDirection randDir = new RandDirection();;
 	private int shotCounter = 0;
 
 	public EasyScheme() {
@@ -21,13 +21,11 @@ public class EasyScheme implements ControlScheme {
 
 	@Override
 	public void doBestAction(NPC npc, Player player) {
-
-		if (randDir == null) {
-			randDir = new RandDirection();
-		}
 		try {
+			// move at half the player's speed.
 			npc.move(randDir.getX() * npc.getSpeed() / 2, randDir.getY() * npc.getSpeed() / 2);
 		} catch (InvalidPlayerExceptions e) {
+			// if we run into a wall, then choose a new direction...
 			randDir = new RandDirection();
 		}
 
