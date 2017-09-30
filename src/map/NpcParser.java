@@ -9,6 +9,7 @@ import npc.HardScheme;
 import npc.MediumScheme;
 import npc.NPC;
 import npc.PatrolScheme;
+import npc.SuicidalScheme;
 import player.Player;
 
 public class NpcParser {
@@ -37,6 +38,8 @@ public class NpcParser {
 			a = new MediumScheme();
 		} else if (scheme.equals("HardScheme")) {
 			a = new HardScheme();
+		} else if (scheme.equals("SuicidalScheme")) {
+			a = new SuicidalScheme();
 		} else {
 			throw new ParseException("Your file has a incorrect Control Scheme: " + scheme);
 		}

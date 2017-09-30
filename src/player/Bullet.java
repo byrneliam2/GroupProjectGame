@@ -38,12 +38,18 @@ public class Bullet {
 	 */
 	private final int bulletSpeed;
 
-	public static BufferedImage playerBullet1 = ImageLoader.image("playerImages", "bullet", true);
-	public static BufferedImage npcBullet1 = ImageLoader.image("npcImages", "bullet", true);
+	private static BufferedImage playerBullet1 = ImageLoader.image("playerImages", "bullet", true);
+	private static BufferedImage npcBullet1 = ImageLoader.image("npcImages", "bullet", true);
+	private static BufferedImage npcBullet2 = ImageLoader.image("npcImages", "bullet2", true);
+	private static BufferedImage npcBullet3 = ImageLoader.image("npcImages", "bullet3", true);
+	private static BufferedImage npcBullet4 = ImageLoader.image("npcImages", "bullet4", true);
 	{
 		{
 			playerBullet1 = ImageUtilities.scale(playerBullet1, bulletSize, bulletSize);
 			npcBullet1 = ImageUtilities.scale(npcBullet1, bulletSize, bulletSize);
+			npcBullet2 = ImageUtilities.scale(npcBullet1, bulletSize, bulletSize);
+			npcBullet3 = ImageUtilities.scale(npcBullet1, bulletSize, bulletSize);
+			npcBullet4 = ImageUtilities.scale(npcBullet1, bulletSize, bulletSize);
 		}
 	}
 
@@ -51,6 +57,7 @@ public class Bullet {
 	private double updateX, updateY;
 	private Player owner;
 	private TimerTask bulletTask;
+	private String bulletType;
 
 	/**
 	 * Creates a new bullet and timer which updates the bullets location. The timer
@@ -69,10 +76,12 @@ public class Bullet {
 	 * @param owner
 	 *            the owner of the bullet
 	 */
-	public Bullet(double startingX, double startingY, double direction, Player owner, int bulletSpeed) {
+	public Bullet(double startingX, double startingY, double direction, Player owner, int bulletSpeed,
+			String bulletType) {
 		currentX = startingX;
 		currentY = startingY;
 		this.bulletSpeed = bulletSpeed;
+		this.bulletType = bulletType;
 		this.owner = owner;
 		calculateUpdateAmount(direction);
 		bulletList.add(this);
@@ -93,6 +102,21 @@ public class Bullet {
 	 */
 	public double getX() {
 		return currentX;
+	}
+
+	public BufferedImage getBulletPic() {
+		if (bulletType.equals("playerBullet1"))
+			return Bullet.playerBullet1;
+		if (bulletType.equals("npcBullet1"))
+			return Bullet.npcBullet1;
+		if (bulletType.equals("npcBullet2"))
+			return Bullet.npcBullet2;
+		if (bulletType.equals("npcBullet3"))
+			return Bullet.npcBullet3;
+		if (bulletType.equals("npcBullet4"))
+			return Bullet.npcBullet4;
+
+		throw new Error("The Bullet type: " + bulletType + " is not implemented yet");
 	}
 
 	/**

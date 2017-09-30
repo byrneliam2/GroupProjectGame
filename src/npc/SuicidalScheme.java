@@ -1,43 +1,53 @@
 package npc;
 
+import map.Map;
+import player.Bullet;
 import player.InvalidPlayerExceptions;
 import player.Player;
+import utils.Direction;
+import utils.MathUtils;
 
 public class SuicidalScheme implements ControlScheme {
-	private utils.Direction[] directions = new utils.Direction[8];
+	private double moveX, moveY, angle;
+	private int moveCount = 60;
 
 	public SuicidalScheme() {
 	}
 
 	@Override
 	public void doBestAction(NPC npc, Player player) {
-		fillDirections(npc, player);
-		int i = 0;
-		while (true) {
-			try {
-				npc.move(directions[i].getX(), directions[i].getY());
-				break;
-			} catch (InvalidPlayerExceptions e) {
-				i++;
+		if (moveCount >= 60) {
+			chooseBestDir(npc, player);
+			moveCount = 0;
+		}
+		try {
+			npc.move(moveX, moveY);
+			moveCount++;
+			if (MathUtils.getDistance(npc.getCentreX(), npc.getCentreY(), player.getCentreX(),
+					player.getCentreY()) < Map.tileSize * 3 && moveCount % 10 == 0) {
+				new Bullet(
+						npc.getxLocation(), npc.getyLocation(), MathUtils.calculateAngle(npc.getxLocation(),
+								npc.getyLocation(), player.getxLocation(), player.getyLocation()),
+						npc, 4, "npcBullet2");
 			}
+		} catch (InvalidPlayerExceptions e) {
+			chooseSideDir();
+			moveCount = 40;
 		}
 	}
 
-	void fillDirections(NPC npc, Player player) {
-		double distX = npc.getCentreX() - player.getCentreX();
-		double distY = npc.getCentreY() - player.getCentreY();
-		//figure out first 4, then place opposites in the other direction.
-		
-		if (distX > 0 && distY >= 0) {// move towards top left corner
-			//need to figure out whether between N- NW or NW- W
-				//need to figure out which of the two you are closer too.
+	private void chooseSideDir() {
+		double number = Math.random() > 0.5 ? Math.PI / 2 : -Math.PI / 2;
+		angle = angle + number;
+		moveX = Math.sin(angle) * 4;
+		moveY = -Math.cos(angle) * 4;
+		angle = angle - number;
+	}
 
-		} else if (distX <= 0 && distY > 0) {// top right
+	private void chooseBestDir(NPC npc, Player player) {
+		angle = MathUtils.calculateAngle(npc.getCentreX(), npc.getCentreY(), player.getCentreX(), player.getCentreY());
 
-		} else if (distX < 0 && distY <= 0) {// bottom right
-
-		} else {// bottom left
-
-		}
+		moveX = Math.sin(angle) * 5;
+		moveY = -Math.cos(angle) * 5;
 	}
 }

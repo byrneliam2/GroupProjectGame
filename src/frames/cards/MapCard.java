@@ -167,8 +167,7 @@ public class MapCard extends Card {
 	private void updateBullets() {
 		for (int i = 0; i < Bullet.bulletList.size(); i++) {
 			Bullet b = Bullet.bulletList.get(i);
-			Image img = b.getOwner() == game.getPlayer() ?
-					Bullet.playerBullet1 : Bullet.npcBullet1;
+			Image img = b.getBulletPic();
 			draw(img, (int) b.getX() - Bullet.bulletSize/2,
 					(int) b.getY() - Bullet.bulletSize/2,
 					img.getWidth(null), img.getHeight(null));

@@ -3,16 +3,8 @@ Map3 04 true
 0 3
 Npc
 HungryBat
-EasyScheme true 9
+SuicidalScheme true 9
 28 26 2
-Npc
-HungryBat2
-MediumScheme true 9
-28 8 2
-Npc
-HungryBat3
-HardScheme true 9
-28 29 1
 ShinyArmor
 4 4
 RustyArmor

@@ -34,12 +34,12 @@ public class HardScheme implements ControlScheme {
 		if (moveCounter > 200) {
 			moveCounter = 0;
 			new Bullet(npc.getxLocation(), npc.getyLocation(), MathUtils.calculateAngle(npc.getxLocation(),
-					npc.getyLocation(), player.getxLocation(), player.getyLocation()), npc, 4);
+					npc.getyLocation(), player.getxLocation(), player.getyLocation()), npc, 4, "npcBullet1");
 			randDir = getRandomDir();
 		} else if (moveCounter == 100 || moveCounter == 90 || moveCounter == 190 || moveCounter == 50
 				|| moveCounter == 52) {
 			new Bullet(npc.getxLocation(), npc.getyLocation(), MathUtils.calculateAngle(npc.getxLocation(),
-					npc.getyLocation(), player.getxLocation(), player.getyLocation()), npc, 4);
+					npc.getyLocation(), player.getxLocation(), player.getyLocation()), npc, 4, "npcBullet1");
 		}
 	}
 

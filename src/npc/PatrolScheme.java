@@ -75,7 +75,7 @@ public class PatrolScheme implements ControlScheme {
 			new Bullet(npc.getxLocation() + Map.tileSize / 2, npc.getyLocation() + Map.tileSize / 2,
 					MathUtils.calculateAngle(npc.getxLocation(), npc.getyLocation(), player.getxLocation(),
 							player.getyLocation()),
-					npc, 4);
+					npc, 4, "npcBullet3");
 			shotCounter = 0;
 		}
 
