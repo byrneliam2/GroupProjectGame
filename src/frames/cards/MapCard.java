@@ -71,25 +71,13 @@ public class MapCard extends Card {
 	 * Add UI entities to the screen.
 	 */
 	private void addUIEntities() {
-		// add player health
-		for (int i = 0; i < game.getPlayer().getHealth(); i++) {
-			addEntity(new Entity(game.getPlayer(), EntityType.BULLET, // FIXME
-					ImageLoader.image("game", "heart", true), new Point(HEART_X + (i * HEART_X), 0), 50));
-		}
-	}
-/*
-	/**
-	 * Add UI entities to the screen.
-	 *
-	private void addUIEntities() {
-		// add player health
-		for (int i = 0; i < game.getPlayer().getHealth(); i++) {
-			addEntity(new Entity(game.getPlayer(), EntityType.SPECIAL, ImageLoader.image("game", "heart", true),
-					new Point(HEART_X + (i * HEART_X), 0), 50));
-		}
-	}
-	*/
-
+        // add player health
+        for (int i = 0; i < game.getPlayer().getHealth(); i++) {
+            addUIElement(new Entity(game.getPlayer(), EntityType.BULLET, // FIXME
+                    ImageLoader.image("game", "heart", true),
+                    new Point(HEART_X + (i * HEART_X), 0), 50));
+        }
+    }
 
 	/**
 	 * Update the location of all game entities... FIXME
