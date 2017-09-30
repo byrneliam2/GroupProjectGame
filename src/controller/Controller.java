@@ -85,7 +85,7 @@ public class Controller extends KeyAdapter {
 		} catch (InvalidPlayerExceptions e) {
 			// System.out.println(e.getMessage());
 		}
-		return true;
+		return false;
 	}
 
 	/**
