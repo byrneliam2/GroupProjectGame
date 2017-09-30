@@ -14,6 +14,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Observer;
 
 /**
  * A mock game class to use for testing.
@@ -110,6 +111,12 @@ public class MockGame implements IGame {
 
 	public void shoot(double direction) throws InvalidPlayerExceptions {
 	}
+
+	@Override
+	public void giveObserver(Observer o) {}
+
+	@Override
+	public void set() {}
 
 	@Override
 	public void newGame() {

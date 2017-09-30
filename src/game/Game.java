@@ -40,6 +40,11 @@ public class Game extends Observable implements IGame, Serializable {
 		this.player = new Player("Tom", 500, 500);
 	}
 
+	@Override
+	public void giveObserver(Observer o) {
+		this.addObserver(o);
+	}
+
 	/**
 	 * Start the new game.
 	 */
@@ -185,4 +190,9 @@ public class Game extends Observable implements IGame, Serializable {
 
 	}
 
+	@Override
+	public void set() {
+		setChanged();
+		notifyObservers(null);
+	}
 }

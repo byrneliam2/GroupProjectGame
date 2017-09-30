@@ -11,12 +11,18 @@ import player.InvalidPlayerExceptions;
 import player.Player;
 import utils.Direction;
 
+import java.util.Observer;
+
 /**
  * Game interface used to link the Game and MockGame(null object.)
  * All methods inserted here are purely representative of the current
  * methods being used by Game across the system.
  */
 public interface IGame {
+
+    void giveObserver(Observer o);
+
+    void set();
 
     void newGame();
 

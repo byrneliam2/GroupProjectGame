@@ -109,9 +109,8 @@ public class MapCard extends Card {
 			case PLAYER:
 			case NPC:
 				Player p = (Player) o; // since an NPC is a Player
-				// if(p.isDead())
-				// itemsToRemove.add(e);
-				e.setLocation(new Point(p.getxLocation(), p.getyLocation()));
+				if (p.isDead()) itemsToRemove.add(e); // FIXME this line never true!
+				else e.setLocation(new Point(p.getxLocation(), p.getyLocation()));
 				break;
 			}
 		}
@@ -151,7 +150,7 @@ public class MapCard extends Card {
 
 			JLabel l = new JLabel(new ImageIcon(img));
 			panel.add(l);
-			l.setBounds((int) b.getX() - Bullet.bulletSize / 2, (int) b.getY() - Bullet.bulletSize / 2,
+			l.setBounds((int) b.getX() - Bullet.bulletSize/2, (int) b.getY() - Bullet.bulletSize/2,
 					img.getWidth(null), img.getHeight(null));
 		}
 	}
@@ -172,8 +171,7 @@ public class MapCard extends Card {
 	}
 
 	@Override
-	public void setComponentActions(MainDisplay dsp) {
-	}
+	public void setComponentActions(MainDisplay dsp) {}
 
 	@Override
 	public void redraw() {
@@ -187,7 +185,8 @@ public class MapCard extends Card {
 		Consumer<Entity> draw = (e) -> {
 			JLabel l = new JLabel(new ImageIcon(e.getImage()));
 			panel.add(l);
-			l.setBounds(e.getLocation().x, e.getLocation().y, e.getImage().getWidth(), e.getImage().getHeight());
+			l.setBounds(e.getLocation().x, e.getLocation().y,
+					e.getImage().getWidth(), e.getImage().getHeight());
 		};
 		for (Entity e : entities) draw.accept(e);
 		for (Entity e : elements) draw.accept(e);
