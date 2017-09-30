@@ -49,7 +49,6 @@ public class MainDisplay extends JComponent implements Observer {
 
     public MainDisplay(IGame g) {
         game = g;
-        game.pauseGame();
 
         master = new JFrame();
         currentCard = null;

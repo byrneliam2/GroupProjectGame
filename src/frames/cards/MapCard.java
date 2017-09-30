@@ -19,18 +19,20 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * The MapCard displays the state of a Map, including all Entities on screen.
  * TODO Dialogue popups
  * TODO Inventory screen
- * TODO Proper player health
+ * TODO Proper player health [selected]
  * TODO Player animations
  */
 public class MapCard extends Card {
 
 	private List<Entity> entities;
 	private List<Entity> elements;
+	private List<Entity> hearts;
 	private map.Map map;
 	private IGame game;
 
@@ -41,6 +43,7 @@ public class MapCard extends Card {
 
 		this.entities = new ArrayList<>();
 		this.elements = new ArrayList<>();
+		this.hearts = new ArrayList<>();
 
 		this.map = map;
 		this.game = game;
@@ -49,8 +52,9 @@ public class MapCard extends Card {
 				ImageLoader.image("MapImages", map.getBackgroundLayer(), true),
 				MainDisplay.WIDTH, MainDisplay.HEIGHT));
 
-		addUIEntities();
 		addEntities();
+		addUIEntities();
+		addHearts();
 	}
 
 	/**
@@ -80,13 +84,20 @@ public class MapCard extends Card {
 	 * Add UI entities to the screen.
 	 */
 	private void addUIEntities() {
-        // add player health
-        for (int i = 0; i < game.getPlayer().getHealth(); i++) {
-            addUIEntity(new Entity(game.getPlayer(), EntityType.HEART,
-                    ImageLoader.image("game", "heart", true),
-                    new Point(HEART_X + (i * HEART_X), 0), 50));
-        }
+
     }
+
+	/**
+	 * Add player health (hearts) to the screen.
+	 */
+	private void addHearts() {
+		hearts.clear();
+		for (int i = 0; i < game.getPlayer().getHealth(); i++) {
+			addUIEntity(new Entity(game.getPlayer(), EntityType.HEART,
+					ImageLoader.image("game", "heart", true),
+					new Point(HEART_X + (i * HEART_X), 0), 50), true);
+		}
+	}
 
 	/**
 	 * Update the location of all game entities, if they are indeed a game entity.
@@ -102,13 +113,9 @@ public class MapCard extends Card {
 					if (i.getPack() != null) itemsToRemove.add(e);
 					else e.setLocation(new Point(i.getX(), i.getY()));
 					break;
-				case PLAYER:
-					Player p = (Player) o;
+				case PLAYER: case NPC:
+					Player p = (Player) o; // since an NPC is a Player
 					e.setLocation(new Point(p.getxLocation(), p.getyLocation()));
-					break;
-				case NPC:
-					NPC n = (NPC) o;
-					e.setLocation(new Point(n.getxLocation(), n.getyLocation()));
 					break;
 				case BULLET:
 					Bullet b = (Bullet) o;
@@ -127,23 +134,26 @@ public class MapCard extends Card {
 	 * Update the elements list.
 	 */
 	private void updateElements() {
+		List<Entity> elementsToRemove = new ArrayList<>();
 		for (Entity e : elements) {
-			Object o = e.getObject();
 			switch (e.getType()) {
 				case HEART:
+					if (game.getPlayer().getHealth() != hearts.size()) addHearts();
 					break;
 				case DIALOGUE:
 					break;
 			}
 		}
+		elements.removeAll(elementsToRemove);
 	}
 
 	private void addGameEntity(Entity e) {
 		entities.add(e);
 	}
 
-	private void addUIEntity(Entity e) {
-		elements.add(e);
+	private void addUIEntity(Entity e, boolean isHeart) {
+		if (isHeart) hearts.add(e);
+		else elements.add(e);
 	}
 
 	@Override protected void doUISetup() {
@@ -158,11 +168,14 @@ public class MapCard extends Card {
 		panel.removeAll();
 		updateEntities();
 		// draw the lot
-		for (Entity e : entities) {
+		Consumer<Entity> draw = (e) -> {
 			JLabel l = new JLabel(new ImageIcon(e.getImage()));
 			panel.add(l);
 			l.setBounds(e.getLocation().x, e.getLocation().y,
 					e.getImage().getWidth(), e.getImage().getHeight());
-		}
+		};
+		for (Entity e : entities) draw.accept(e);
+		for (Entity e : elements) draw.accept(e);
+		for (Entity e : hearts)   draw.accept(e);
 	}
 }
