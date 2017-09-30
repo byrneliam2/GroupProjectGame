@@ -130,10 +130,12 @@ public class MapCard extends Card {
 	 */
 	private void updateElements() {
 		List<Entity> elementsToRemove = new ArrayList<>();
+		int numHearts = 0;
 		for (Entity e : elements) {
 			switch (e.getType()) {
 				case HEART:
-					//if (game.getPlayer().getHealth() != hearts.size()) addHearts();
+					if (++numHearts > game.getPlayer().getHealth())
+						elementsToRemove.add(e);
 					break;
 				case DIALOGUE:
 					break;
