@@ -216,14 +216,14 @@ public class Player {
 	 */
 	public boolean move(int dx, int dy) throws InvalidPlayerExceptions {
 		DoorItem door = null;
-
-		// temporary solution to stopping diagonal movements from being twice as fast.
-		if (dy != 0 || dx != 0) {
-			dx = dx / 2;
-			dy = dy / 2;
-		}
 		if (Game.GAME_PAUSED) {
 			throw new InvalidPlayerExceptions("Game is paused, you cannot move");
+		}
+
+		// temporary solution to stopping diagonal movements from being twice as fast.
+		if (Math.abs(dy) == Math.abs(dx) && dy != 0) {
+			dx = (int) Math.round(dx * 0.5);
+			dy = (int) Math.round(dy * 0.5);
 		}
 
 		playerBox.translate(dx, dy);
@@ -282,7 +282,7 @@ public class Player {
 			isReadyToShoot = false;
 			double direction = MathUtils.calculateAngle(playerBox.getX(), playerBox.getY(), mouseX, mouseY);
 			// make a new bullet
-			new Bullet(getCentreX(), getCentreY(), direction, this,8);
+			new Bullet(getCentreX(), getCentreY(), direction, this, 8);
 
 			// start a timer to count till when the next shot is ready to shoot....
 			TimerTask taskEvent = new TimerTask() {
