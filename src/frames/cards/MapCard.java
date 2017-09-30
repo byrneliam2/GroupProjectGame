@@ -25,6 +25,7 @@ import java.util.function.Consumer;
  * TODO Dialogue popups
  * TODO Inventory screen
  * TODO Player animations
+ * TODO Add mouse crosshair
  */
 public class MapCard extends Card {
 
@@ -147,15 +148,16 @@ public class MapCard extends Card {
 	 * is not worth counting them as entities.
 	 */
 	private void updateBullets() {
-		for (Bullet b : Bullet.bulletList) {
+		for (int i = 0; i < Bullet.bulletList.size(); i++) {
+			Bullet b = Bullet.bulletList.get(i);
 			Image img = b.getOwner() == game.getPlayer() ? Bullet.playerBullet1 : Bullet.npcBullet1;
 
 			// bullets have a separate drawer from other entities since it has different size
 			// requirements
 			JLabel l = new JLabel(new ImageIcon(img));
 			panel.add(l);
-			l.setBounds((int) b.getX() - Bullet.bulletSize/2,
-					(int) b.getY() - Bullet.bulletSize/2,
+			l.setBounds((int) b.getX() - Bullet.bulletSize / 2,
+					(int) b.getY() - Bullet.bulletSize / 2,
 					img.getWidth(null), img.getHeight(null));
 		}
 	}
