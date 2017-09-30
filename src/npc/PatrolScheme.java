@@ -35,7 +35,7 @@ public class PatrolScheme implements ControlScheme {
 
 	@Override
 	public void doBestAction(NPC npc, Player player) {
-		int move = player.getSpeed();// moves at same speed as player
+		int move = player.getSpeed() / 2;// moves at same speed as player
 		try {
 			// move the npc according to the patrol direction.
 			if (leftRight) {

@@ -138,8 +138,7 @@ public class MapCard extends Card {
 		for (Entity e : entities) {
 			JLabel l = new JLabel(new ImageIcon(e.getImage()));
 			panel.add(l);
-			l.setBounds(e.getLocation().x, e.getLocation().y,
-					e.getImage().getWidth(), e.getImage().getHeight());
+			l.setBounds(e.getLocation().x, e.getLocation().y, e.getImage().getWidth(), e.getImage().getHeight());
 		}
 	}
 }

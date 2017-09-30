@@ -27,8 +27,8 @@ public class Controller extends KeyAdapter {
 		this.mouse = mouse;
 		this.pressed = new HashSet<>();
 
-        new Timer(MainDisplay.FRAMERATE, (e)-> update()).start();
-    }
+		new Timer(MainDisplay.FRAMERATE, (e) -> update()).start();
+	}
 
 	/**
 	 * Whenever a user pressed a key, the event will be sent off for processing
@@ -47,40 +47,46 @@ public class Controller extends KeyAdapter {
 	}
 
 	public void update() {
-	    if(model.isPaused()) return;
+		if (model.isPaused())
+			return;
 		for (Integer i : pressed) {
 			processInput(i);
 		}
 	}
 
-    /**
-     * When given an input, this method will update the 'MODEL' with the users input.
-     *
-     * @param keybind the key the user pressed
-     * @return true if the input succeeded, false if it didn't exist or failed.
-     */
-    public boolean processInput(int keybind) {
-        try {
-            //All Movement Commands (Can loop)
-            if (keybind == KEY_UP.getKeybind()) model.movePlayer(Direction.N);
-            else if (keybind == KEY_DOWN.getKeybind()) model.movePlayer(Direction.S);
-            else if (keybind == KEY_LEFT.getKeybind()) model.movePlayer(Direction.W);
-            else if (keybind == KEY_RIGHT.getKeybind()) model.movePlayer(Direction.E);
-            else if (keybind == KEY_USE.getKeybind()) {
-                model.interact();
-                return true;
-            }else  if (keybind == KEY_ATTACK.getKeybind()) {
-                model.shoot(mouse.getX(), mouse.getY());
-                return true;
-            }else  if (keybind == KEY_MENU.getKeybind()) {
-                model.pauseGame();
-                return true;
-            }
-        } catch (InvalidPlayerExceptions e) {
-            //System.out.println(e.getMessage());
-        }
-        return true;
-    }
+	/**
+	 * When given an input, this method will update the 'MODEL' with the users input.
+	 *
+	 * @param keybind
+	 *            the key the user pressed
+	 * @return true if the input succeeded, false if it didn't exist or failed.
+	 */
+	public boolean processInput(int keybind) {
+		try {
+			// All Movement Commands (Can loop)
+			if (keybind == KEY_UP.getKeybind())
+				model.movePlayer(Direction.N);
+			else if (keybind == KEY_DOWN.getKeybind())
+				model.movePlayer(Direction.S);
+			else if (keybind == KEY_LEFT.getKeybind())
+				model.movePlayer(Direction.W);
+			else if (keybind == KEY_RIGHT.getKeybind())
+				model.movePlayer(Direction.E);
+			else if (keybind == KEY_USE.getKeybind()) {
+				model.interact();
+				return true;
+			} else if (keybind == KEY_ATTACK.getKeybind()) {
+				model.shoot(mouse.getX(), mouse.getY());
+				return true;
+			} else if (keybind == KEY_MENU.getKeybind()) {
+				model.pauseGame();
+				return true;
+			}
+		} catch (InvalidPlayerExceptions e) {
+			// System.out.println(e.getMessage());
+		}
+		return true;
+	}
 
 	/**
 	 * Holds all Keybinds for the game, the user can change each keybind using the 'setKeybind()' method.
