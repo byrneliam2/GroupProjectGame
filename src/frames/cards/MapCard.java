@@ -151,7 +151,8 @@ public class MapCard extends Card {
 
 			JLabel l = new JLabel(new ImageIcon(img));
 			panel.add(l);
-			l.setBounds((int) b.getX(), (int) b.getY(), img.getWidth(null), img.getHeight(null));
+			l.setBounds((int) b.getX() - Bullet.bulletSize / 2, (int) b.getY() - Bullet.bulletSize / 2,
+					img.getWidth(null), img.getHeight(null));
 		}
 	}
 
