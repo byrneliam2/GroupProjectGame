@@ -45,8 +45,7 @@ public class Game extends Observable implements IGame, Serializable {
 	 */
 	public void newGame() {
 		world = WorldParser.parse("world", this.player);
-		//this.player.setGlobalTileSize(MainDisplay.WIDTH, MainDisplay.HEIGHT);
-		this.player.setMap(world.getStartingMap());
+		world.getStartingMap().startMapNPCs();
 	}
 
 	/******************* View Methods **********************/
@@ -78,7 +77,7 @@ public class Game extends Observable implements IGame, Serializable {
 	}
 
 	/**
-	 * @return HashMap of item->Point(x,y)
+	 * @return list of items currently located on the map.
 	 */
 	public List<Item> getItems() {
 		return player.getMap().getItems();
@@ -166,10 +165,12 @@ public class Game extends Observable implements IGame, Serializable {
 
 	public void pauseGame() {
 		GAME_PAUSED = true;
+		this.player.getMap().pauseMapNPCs();
 	}
 
 	public void unPauseGame() {
 		GAME_PAUSED = false;
+		this.player.getMap().startMapNPCs();
 	}
 
 	@Override

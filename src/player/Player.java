@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import game.Game;
 import gfx.ImageLoader;
 import gfx.ImageUtilities;
 import map.Map;
@@ -89,6 +90,9 @@ public class Player {
 	 *             player or, there is no item next to the player
 	 */
 	public void pickUpItem() throws InvalidPlayerExceptions {
+		if (Game.GAME_PAUSED) {
+			throw new InvalidPlayerExceptions("Game is paused, you cannot pickup Items");
+		}
 		try {
 			// add the item to the current player pack.
 			itemsList.pickUpItem(closestItem);
@@ -215,7 +219,7 @@ public class Player {
 		this.health -= 1;
 		// check if the player is still alive and flip the IsAlive flag and then if the
 		// player is dead we have to end the game.
-		if (health == 0) {
+		if (health <= 0) {
 			// Change the isAlive flag to dead.
 			isAlive = false;
 		} else {
@@ -253,6 +257,9 @@ public class Player {
 		if (dy != 0 || dx != 0) {
 			dx = dx / 2;
 			dy = dy / 2;
+		}
+		if (Game.GAME_PAUSED) {
+			throw new InvalidPlayerExceptions("Game is paused, you cannot move");
 		}
 
 		boundingBox.translate(dx, dy);
@@ -298,7 +305,9 @@ public class Player {
 	 *             if your gun is not ready to be fired yet.
 	 */
 	public void shoot(double mouseX, double mouseY) throws InvalidPlayerExceptions {
-		// check if able to shoot, if can't shoot yet, throw exception...
+		if (Game.GAME_PAUSED) {
+			throw new InvalidPlayerExceptions("Game is paused, you cannot shoot");
+		}
 
 		if (isReadyToShoot) {
 			isReadyToShoot = false;

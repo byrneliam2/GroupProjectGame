@@ -73,21 +73,36 @@ public class Map {
 		this.name = name;
 		this.items = items;
 		this.currentPlayer = player;
+		player.setMap(this);
 		this.backgroundLayer = name;
 		this.NPCS = NPCS;
 		this.doors = doors;
 		this.loadAllLayers(1920, 1080);
 
-		// temporary fix for npc's
+		// fixes npc's
 		for (NPC npc : NPCS) {
 			npc.setMap(this);
-			npc.start();
 		}
-		
+
 		// BufferedImage colLayer = this.loadImage(this.name, "Collision");
 		// this.collisionLayer = this.loadColLayers(colLayer);
 		// BufferedImage enviromentLayer = this.loadImage(this.name, "Environment");
 		// this.environmentalLheightayer = this.loadEnvLayers(enviromentLayer);
+	}
+
+	/**
+	 * Pauses all of the map's npc's so that they don't move.
+	 */
+	public void pauseMapNPCs() {
+		for (NPC npc : NPCS) {
+			npc.stop();
+		}
+	}
+
+	public void startMapNPCs() {
+		for (NPC npc : NPCS) {
+			npc.start();
+		}
 	}
 
 	/**

@@ -6,6 +6,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import frames.MainDisplay;
+import game.Game;
 
 /**
  * A bullet is a point object with an x,y location, when the bullet is created a
@@ -106,6 +107,9 @@ public class Bullet {
 	 * location of the map or another player/npc.
 	 */
 	private void update() {
+		if (Game.GAME_PAUSED) {// do no updates when paused...
+			return;
+		}
 		currentX += updateX;
 		currentY += updateY;
 
