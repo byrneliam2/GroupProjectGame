@@ -44,7 +44,8 @@ public class MapCard extends Card {
 		this.map = map;
 		this.game = game;
 
-		setBackground(ImageUtilities.scale(ImageLoader.image("MapImages", map.getBackgroundLayer(), true),
+		setBackground(ImageUtilities.scale(
+				ImageLoader.image("MapImages", map.getBackgroundLayer(), true),
 				MainDisplay.WIDTH, MainDisplay.HEIGHT));
 
 		addEntities();
@@ -60,17 +61,20 @@ public class MapCard extends Card {
 	 */
 	private void addEntities() {
 		// add player
-		addGameEntity(
-				new Entity(game.getPlayer(), EntityType.PLAYER, ImageLoader.image("playerImages", "playerRect", true),
-						new Point(game.getPlayer().getxLocation(), game.getPlayer().getyLocation()), 0));
+		addGameEntity(new Entity(game.getPlayer(), EntityType.PLAYER,
+				ImageLoader.image("playerImages", "playerRect", true),
+						new Point(game.getPlayer().getxLocation(), game.getPlayer().getyLocation()), 0)
+		);
 		// add all NPCs
 		map.getNPCS().forEach(npc -> addGameEntity(new Entity(npc, EntityType.NPC,
-				ImageLoader.image("npcImages", "bug", true), new Point(npc.getxLocation(), npc.getyLocation()), 0)));
+				ImageLoader.image("npcImages", "bug", true),
+				new Point(npc.getxLocation(), npc.getyLocation()), 0))
+		);
 		// add all items
-		map.getItems()
-				.forEach(item -> addGameEntity(new Entity(item, EntityType.ITEM,
-						ImageLoader.image("ItemPictures", item.getImageFileName(), true),
-						new Point(item.getX(), item.getY()), 0)));
+		map.getItems().forEach(item -> addGameEntity(new Entity(item, EntityType.ITEM,
+				ImageLoader.image("ItemPictures", item.getImageFileName(), true),
+				new Point(item.getX(), item.getY()), 0))
+		);
 	}
 
 	/**
@@ -79,7 +83,8 @@ public class MapCard extends Card {
 	private void addUIEntities() {
 		// add player health
 		for (int i = 0; i < game.getPlayer().getHealth(); i++) {
-			addUIEntity(new Entity(game.getPlayer(), EntityType.HEART, ImageLoader.image("game", "heart", true),
+			addUIEntity(new Entity(game.getPlayer(), EntityType.HEART,
+					ImageLoader.image("game", "heart", true),
 					new Point(HEART_X + (i * HEART_X), 0), 50));
 		}
 	}
@@ -98,10 +103,8 @@ public class MapCard extends Card {
 			switch (e.getType()) {
 			case ITEM:
 				Item i = (Item) o;
-				if (i.getPack() != null)
-					itemsToRemove.add(e);
-				else
-					e.setLocation(new Point(i.getX(), i.getY()));
+				if (i.getPack() != null) itemsToRemove.add(e);
+				else e.setLocation(new Point(i.getX(), i.getY()));
 				break;
 			case PLAYER:
 			case NPC:
@@ -143,15 +146,13 @@ public class MapCard extends Card {
 		for (int i = 0; i < Bullet.bulletList.size(); i++) {
 			Bullet b = Bullet.bulletList.get(i);
 			Image img;
-			if (b.getOwner() == game.getPlayer()) {
-				img = Bullet.playerBullet1;
-			} else {
-				img = Bullet.npcBullet1;
-			}
+			if (b.getOwner() == game.getPlayer()) img = Bullet.playerBullet1;
+			else img = Bullet.npcBullet1;
 
 			JLabel l = new JLabel(new ImageIcon(img));
 			panel.add(l);
-			l.setBounds((int) b.getX(), (int) b.getY(), img.getWidth(null), img.getHeight(null));
+			l.setBounds((int) b.getX(), (int) b.getY(),
+					img.getWidth(null), img.getHeight(null));
 		}
 	}
 
@@ -188,9 +189,7 @@ public class MapCard extends Card {
 			panel.add(l);
 			l.setBounds(e.getLocation().x, e.getLocation().y, e.getImage().getWidth(), e.getImage().getHeight());
 		};
-		for (Entity e : entities)
-			draw.accept(e);
-		for (Entity e : elements)
-			draw.accept(e);
+		for (Entity e : entities) draw.accept(e);
+		for (Entity e : elements) draw.accept(e);
 	}
 }
