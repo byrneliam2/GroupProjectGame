@@ -53,6 +53,9 @@ public class MapCard extends Card {
 		addUIEntities();
 	}
 
+	/* ======================================= ADDING ============================================ */
+	/* ======================= Are only called upon creation of card ============================= */
+
 	/**
 	 * Add all entities to the map. This is done outside of the setup method since the map is not constructed
 	 * beforehand and also because this setup does not relate to Swing components.
@@ -87,6 +90,9 @@ public class MapCard extends Card {
 					new Point(HEART_X + (i * HEART_X), 0), 50));
 		}
     }
+
+    /* ====================================== UPDATERS =========================================== */
+	/* ============================== Called on each redraw ====================================== */
 
 	/**
 	 * Update the location of all game entities, if they are indeed a game entity.
@@ -135,6 +141,8 @@ public class MapCard extends Card {
 		}
 		elements.removeAll(elementsToRemove);
 	}
+
+	/* ===================================== UTILITIES ========================================= */
 
 	private void addGameEntity(Entity e) {
 		entities.add(e);

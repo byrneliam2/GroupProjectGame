@@ -40,6 +40,8 @@ public class PauseCard extends Card {
                 fileChooser.setCurrentDirectory(new File(".."));
                 fileChooser.setDialogTitle("Select a <ext> file to load");
                 switch (str) {
+                    case "back":
+                        break;
                     case "save":
                         if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {}
                         break;
