@@ -66,6 +66,7 @@ public class NPC extends Player {
 	public void takeDamage() {
 		super.health--;
 		if (super.health <= 0) {
+			super.isDead = true;
 			stop();
 			p.getMap().removeNPC(this);
 		}

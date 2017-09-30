@@ -29,13 +29,13 @@ public class Player {
 	private Item closestItem;
 	private Backpack itemsList = new Backpack(this);
 
+	protected boolean isDead = false;
 	protected int health = 5;
 	private int maxHealth = 5;
 	private int speed = 6;
 	private double fireRate = defaultFireRate;// in seconds, smaller numbers mean less time between shots
 	private static Timer shotTimer = new Timer();
 	private Map map;// the map which the player is currently located on.
-	private boolean isDead = false;
 	private boolean isReadyToShoot = true;
 
 	private Ellipse2D.Double rangeCircle;// the range at which the player can 'pick up' items
