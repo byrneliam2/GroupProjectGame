@@ -36,10 +36,8 @@ public class MapCard extends Card {
 		this.map = map;
 		this.game = game;
 
-
-        setBackground(ImageUtilities.scale(
-                ImageLoader.image("MapImages", map.getBackgroundLayer(), true),
-                MainDisplay.WIDTH, MainDisplay.HEIGHT));
+		setBackground(ImageUtilities.scale(ImageLoader.image("MapImages", map.getBackgroundLayer(), true),
+				MainDisplay.WIDTH, MainDisplay.HEIGHT));
 
 		addUIEntities();
 		addEntities();
@@ -63,7 +61,6 @@ public class MapCard extends Card {
 						new Point(item.getX(), item.getY()), 0)));
 	}
 
-<<<<<<< HEAD
 	/**
 	 * Add UI entities to the screen.
 	 */
@@ -74,21 +71,20 @@ public class MapCard extends Card {
 					ImageLoader.image("game", "heart", true), new Point(HEART_X + (i * HEART_X), 0), 50));
 		}
 	}
-=======
-    /**
-     * Add UI entities to the screen.
-     */
-    private void addUIEntities() {
-        // add player health
-        for (int i = 0; i < game.getPlayer().getHealth(); i++) {
-            addEntity(new Entity(game.getPlayer(), EntityType.SPECIAL,
-                    ImageLoader.image("game", "heart", true),
-                    new Point(HEART_X + (i * HEART_X), 0), 50));
-        }
-    }
->>>>>>> branch 'master' of https://gitlab.ecs.vuw.ac.nz/swen222-2017-p1-t10/SWEN222PROJECTSNICKETYSNACKS.git
+/*
+	/**
+	 * Add UI entities to the screen.
+	 *
+	private void addUIEntities() {
+		// add player health
+		for (int i = 0; i < game.getPlayer().getHealth(); i++) {
+			addEntity(new Entity(game.getPlayer(), EntityType.SPECIAL, ImageLoader.image("game", "heart", true),
+					new Point(HEART_X + (i * HEART_X), 0), 50));
+		}
+	}
+	*/
 
-<<<<<<< HEAD
+
 	/**
 	 * Update the location of all game entities... FIXME
 	 */
@@ -112,41 +108,14 @@ public class MapCard extends Card {
 				NPC n = (NPC) o;
 				e.setLocation(new Point(n.getxLocation(), n.getyLocation()));
 				break;
+			case BULLET:
+				break;
+			case SPECIAL:
+				break;
 			}
 		}
 		entities.removeAll(itemsToRemove);
 	}
-=======
-    /**
-     * Update the location of all game entities... FIXME
-     */
-    private void updateEntities() {
-        List<Entity> itemsToRemove = new ArrayList<>();
-        for (Entity e : entities) {
-            Object o = e.getObject();
-            switch(e.getType()) {
-                case ITEM:
-                    Item i = (Item) o;
-                    if (i.getPack() != null) itemsToRemove.add(e);
-                    else e.setLocation(new Point(i.getX(), i.getY()));
-                    break;
-                case PLAYER:
-                    Player p = (Player) o;
-                    e.setLocation(new Point(p.getxLocation(), p.getyLocation()));
-                    break;
-                case NPC:
-                    NPC n = (NPC) o;
-                    e.setLocation(new Point(n.getxLocation(), n.getyLocation()));
-                    break;
-                case BULLET:
-                    break;
-                case SPECIAL:
-                    break;
-            }
-        }
-        entities.removeAll(itemsToRemove);
-    }
->>>>>>> branch 'master' of https://gitlab.ecs.vuw.ac.nz/swen222-2017-p1-t10/SWEN222PROJECTSNICKETYSNACKS.git
 
 	/**
 	 * Add a new {@link Card.Entity} to the current screen.
