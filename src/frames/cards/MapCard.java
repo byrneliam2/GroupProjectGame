@@ -33,6 +33,7 @@ public class MapCard extends Card {
 	public MapCard(String n, map.Map map, IGame game) {
 		super(n);
 		this.entities = new ArrayList<>();
+		this.elements = new ArrayList<>();
 		this.map = map;
 		this.game = game;
 
@@ -111,9 +112,6 @@ public class MapCard extends Card {
 
 	/**
 	 * Add a new {@link Card.Entity} to the current screen.
-	 * 
-	 * @param e
-	 *            entity
 	 */
 	private void addGameEntity(Entity e) {
 		entities.add(e);
