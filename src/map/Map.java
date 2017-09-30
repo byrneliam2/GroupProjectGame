@@ -131,6 +131,10 @@ public class Map {
 		colLayer = ImageUtilities.scale(colLayer, newWidth, newHeight);
 		this.collisionLayer = this.loadColLayers(colLayer);
 
+		BufferedImage EnvLayer = ImageLoader.image("MapImages", this.name + "Environment", true);
+		EnvLayer = ImageUtilities.scale(EnvLayer, newWidth, newHeight);
+		this.environmentalLayer = this.loadColLayers(colLayer);
+
 	}
 
 	/**
