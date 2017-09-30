@@ -59,4 +59,9 @@ public class GraphicsUtilitiesTests {
             fail("Expecting IllegalArgumentException.");
         } catch (IllegalArgumentException ignored) {}
     }
+
+    @Test
+    public void test06_MakeSlider() {
+        assertNotNull(GraphicsUtilities.produceSlider());
+    }
 }
