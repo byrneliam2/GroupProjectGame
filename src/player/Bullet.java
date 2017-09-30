@@ -2,6 +2,7 @@ package player;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -35,10 +36,12 @@ public class Bullet {
 	 */
 	private final int bulletSpeed;
 
-	public static BufferedImage bulletImg = ImageLoader.image("game", "bullet", true);
+	public static BufferedImage playerBullet1 = ImageLoader.image("playerImages", "bullet", true);
+	public static BufferedImage npcBullet1 = ImageLoader.image("npcImages", "bullet", true);
 	{
 		{
-			bulletImg = ImageUtilities.scale(bulletImg, 12, 12);
+			playerBullet1 = ImageUtilities.scale(playerBullet1, 20, 20);
+			npcBullet1 = ImageUtilities.scale(npcBullet1, 20, 20);
 		}
 	}
 

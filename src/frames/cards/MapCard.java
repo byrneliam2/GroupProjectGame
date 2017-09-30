@@ -44,8 +44,7 @@ public class MapCard extends Card {
 		this.map = map;
 		this.game = game;
 
-		setBackground(ImageUtilities.scale(
-				ImageLoader.image("MapImages", map.getBackgroundLayer(), true),
+		setBackground(ImageUtilities.scale(ImageLoader.image("MapImages", map.getBackgroundLayer(), true),
 				MainDisplay.WIDTH, MainDisplay.HEIGHT));
 
 		addEntities();
@@ -61,21 +60,17 @@ public class MapCard extends Card {
 	 */
 	private void addEntities() {
 		// add player
-		addGameEntity(new Entity(game.getPlayer(), EntityType.PLAYER,
-				ImageLoader.image("game", "playerRect", true),
-				new Point(game.getPlayer().getxLocation(), game.getPlayer().getyLocation()), 0)
-		);
+		addGameEntity(
+				new Entity(game.getPlayer(), EntityType.PLAYER, ImageLoader.image("playerImages", "playerRect", true),
+						new Point(game.getPlayer().getxLocation(), game.getPlayer().getyLocation()), 0));
 		// add all NPCs
-		map.getNPCS().forEach(npc -> addGameEntity(
-				new Entity(npc, EntityType.NPC,
-						ImageLoader.image("game", "bug", true),
-				new Point(npc.getxLocation(), npc.getyLocation()), 0))
-		);
+		map.getNPCS().forEach(npc -> addGameEntity(new Entity(npc, EntityType.NPC,
+				ImageLoader.image("npcImages", "bug", true), new Point(npc.getxLocation(), npc.getyLocation()), 0)));
 		// add all items
-		map.getItems().forEach(item -> addGameEntity(new Entity(item, EntityType.ITEM,
-				ImageLoader.image("ItemPictures", item.getImageFileName(), true),
-				new Point(item.getX(), item.getY()), 0))
-		);
+		map.getItems()
+				.forEach(item -> addGameEntity(new Entity(item, EntityType.ITEM,
+						ImageLoader.image("ItemPictures", item.getImageFileName(), true),
+						new Point(item.getX(), item.getY()), 0)));
 	}
 
 	/**
@@ -84,13 +79,12 @@ public class MapCard extends Card {
 	private void addUIEntities() {
 		// add player health
 		for (int i = 0; i < game.getPlayer().getHealth(); i++) {
-			addUIEntity(new Entity(game.getPlayer(), EntityType.HEART,
-					ImageLoader.image("game", "heart", true),
+			addUIEntity(new Entity(game.getPlayer(), EntityType.HEART, ImageLoader.image("game", "heart", true),
 					new Point(HEART_X + (i * HEART_X), 0), 50));
 		}
-    }
+	}
 
-    /* ====================================== UPDATERS =========================================== */
+	/* ====================================== UPDATERS =========================================== */
 	/* ============================== Called on each redraw ====================================== */
 
 	/**
@@ -102,17 +96,20 @@ public class MapCard extends Card {
 		for (Entity e : entities) {
 			Object o = e.getObject();
 			switch (e.getType()) {
-				case ITEM:
-					Item i = (Item) o;
-					if (i.getPack() != null) itemsToRemove.add(e);
-					else e.setLocation(new Point(i.getX(), i.getY()));
-					break;
-				case PLAYER: case NPC:
-					Player p = (Player) o; // since an NPC is a Player
-					//if(p.isDead())
-					//	itemsToRemove.add(e);
-					e.setLocation(new Point(p.getxLocation(), p.getyLocation()));
-					break;
+			case ITEM:
+				Item i = (Item) o;
+				if (i.getPack() != null)
+					itemsToRemove.add(e);
+				else
+					e.setLocation(new Point(i.getX(), i.getY()));
+				break;
+			case PLAYER:
+			case NPC:
+				Player p = (Player) o; // since an NPC is a Player
+				// if(p.isDead())
+				// itemsToRemove.add(e);
+				e.setLocation(new Point(p.getxLocation(), p.getyLocation()));
+				break;
 			}
 		}
 		entities.removeAll(itemsToRemove);
@@ -126,31 +123,37 @@ public class MapCard extends Card {
 		int numHearts = 0;
 		for (Entity e : elements) {
 			switch (e.getType()) {
-				case HEART:
-					if (++numHearts > game.getPlayer().getHealth())
-						elementsToRemove.add(e);
-					break;
-				case DIALOGUE:
-					break;
+			case HEART:
+				if (++numHearts > game.getPlayer().getHealth())
+					elementsToRemove.add(e);
+				break;
+			case DIALOGUE:
+				break;
 			}
 		}
 		elements.removeAll(elementsToRemove);
 	}
 
-    /**
-     * Draw the bullets that are currently present in the game world. These do not
-     * count as entities since they are have a lesser time of existence and so it
-     * is not worth counting them as entities.
-     */
-    private void updateBullets() {
-        for (int i = 0; i < Bullet.bulletList.size(); i++) {
-            Bullet b = Bullet.bulletList.get(i);
-            Image img = Bullet.bulletImg;
-            JLabel l = new JLabel(new ImageIcon(Bullet.bulletImg));
-            panel.add(l);
-            l.setBounds((int) b.getX(), (int) b.getY(), img.getWidth(null), img.getHeight(null));
-        }
-    }
+	/**
+	 * Draw the bullets that are currently present in the game world. These do not
+	 * count as entities since they are have a lesser time of existence and so it
+	 * is not worth counting them as entities.
+	 */
+	private void updateBullets() {
+		for (int i = 0; i < Bullet.bulletList.size(); i++) {
+			Bullet b = Bullet.bulletList.get(i);
+			Image img;
+			if (b.getOwner() == game.getPlayer()) {
+				img = Bullet.playerBullet1;
+			} else {
+				img = Bullet.npcBullet1;
+			}
+
+			JLabel l = new JLabel(new ImageIcon(img));
+			panel.add(l);
+			l.setBounds((int) b.getX(), (int) b.getY(), img.getWidth(null), img.getHeight(null));
+		}
+	}
 
 	/* ===================================== UTILITIES ========================================= */
 
@@ -162,11 +165,14 @@ public class MapCard extends Card {
 		elements.add(e);
 	}
 
-	@Override protected void doUISetup() {
+	@Override
+	protected void doUISetup() {
 		panel.setLayout(null);
 	}
 
-	@Override public void setComponentActions(MainDisplay dsp) {}
+	@Override
+	public void setComponentActions(MainDisplay dsp) {
+	}
 
 	@Override
 	public void redraw() {
@@ -180,10 +186,11 @@ public class MapCard extends Card {
 		Consumer<Entity> draw = (e) -> {
 			JLabel l = new JLabel(new ImageIcon(e.getImage()));
 			panel.add(l);
-			l.setBounds(e.getLocation().x, e.getLocation().y,
-                    e.getImage().getWidth(), e.getImage().getHeight());
+			l.setBounds(e.getLocation().x, e.getLocation().y, e.getImage().getWidth(), e.getImage().getHeight());
 		};
-		for (Entity e : entities) draw.accept(e);
-		for (Entity e : elements) draw.accept(e);
+		for (Entity e : entities)
+			draw.accept(e);
+		for (Entity e : elements)
+			draw.accept(e);
 	}
 }
