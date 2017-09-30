@@ -1,120 +1,69 @@
 package controller;
 
+import controller.enums.Command;
 import frames.MainDisplay;
 import game.IGame;
 import player.InvalidPlayerExceptions;
 import utils.Direction;
 
 import javax.swing.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.util.HashSet;
 import java.util.Set;
 
-import static controller.Controller.KeyboardCommands.*;
+public class Controller implements IController{
+    private IGame game;
+    private Set<Command> currentCommands;
+    private MouseListener mouse;
 
-/**
- * The Main Class for the Controller Library, contains all logic for the user to control
- * their player.
- */
-public class Controller extends KeyAdapter {
-	private IGame model;
-	private MousePosition mouse;
-	private Set<Integer> pressed;
+    public Controller(IGame game, KeyListener keyboard, MouseListener mouse) {
+        this.game = game;
+        this.mouse = mouse;
+        this.currentCommands = new HashSet<>();
 
-	public Controller(IGame model, MousePosition mouse) {
-		this.model = model;
-		this.mouse = mouse;
-		this.pressed = new HashSet<>();
+        keyboard.setController(this);
+        mouse.setController(this);
 
-		new Timer(MainDisplay.FRAMERATE, (e) -> update()).start();
-	}
+        new Timer(MainDisplay.FRAMERATE, (e) -> update()).start();
+    }
 
-	/**
-	 * Whenever a user pressed a key, the event will be sent off for processing
-	 */
-	@Override
-	public synchronized void keyPressed(KeyEvent e) {
-		this.pressed.add(e.getKeyCode());
-	}
+    void notifyCommands(Command cmd, boolean pressed){
+        if(pressed) currentCommands.add(cmd);
+        else currentCommands.remove(cmd);
+    }
 
-	/**
-	 * Whenever a user releases a key, the event will be sent off for processing
-	 */
-	@Override
-	public void keyReleased(KeyEvent e) {
-		this.pressed.remove(e.getKeyCode());
-	}
+    private void processCommand(Command cmd){
+        try {
+            if(!game.isPaused()){
+                switch (cmd) {
+                    case MOVE_UP:
+                        game.movePlayer(Direction.N);
+                        break;
+                    case MOVE_LEFT:
+                        game.movePlayer(Direction.W);
+                        break;
+                    case MOVE_DOWN:
+                        game.movePlayer(Direction.S);
+                        break;
+                    case MOVE_RIGHT:
+                        game.movePlayer(Direction.E);
+                        break;
+                    case INTERACT:
+                        game.interact();
+                        break;
+                    case SHOOT:
+                        game.shoot(mouse.getX(), mouse.getY());
+                        break;
+                    case PAUSE:
+                        game.pauseGame();
+                        break;
+                }
+            } else if(cmd == Command.PAUSE) game.unPauseGame();
 
-	public void update() {
-		if (model.isPaused())
-			return;
-		for (Integer i : pressed) {
-			processInput(i);
-		}
-	}
+        } catch(InvalidPlayerExceptions ignored) { }
+    }
 
-	/**
-	 * When given an input, this method will update the 'MODEL' with the users input.
-	 *
-	 * @param keybind
-	 *            the key the user pressed
-	 * @return true if the input succeeded, false if it didn't exist or failed.
-	 */
-	public boolean processInput(int keybind) {
-		try {
-			// All Movement Commands (Can loop)
-			if (keybind == KEY_UP.getKeybind())
-				model.movePlayer(Direction.N);
-			else if (keybind == KEY_DOWN.getKeybind())
-				model.movePlayer(Direction.S);
-			else if (keybind == KEY_LEFT.getKeybind())
-				model.movePlayer(Direction.W);
-			else if (keybind == KEY_RIGHT.getKeybind())
-				model.movePlayer(Direction.E);
-			else if (keybind == KEY_USE.getKeybind()) {
-				model.interact();
-				return true;
-			} else if (keybind == KEY_ATTACK.getKeybind()) {
-				model.shoot(mouse.getX(), mouse.getY());
-				return true;
-			} else if (keybind == KEY_MENU.getKeybind()) {
-				model.pauseGame();
-				return true;
-			}
-		} catch (InvalidPlayerExceptions e) {
-			// System.out.println(e.getMessage());
-		}
-		return false;
-	}
-
-	/**
-	 * Holds all Keybinds for the game, the user can change each keybind using the 'setKeybind()' method.
-	 */
-	public enum KeyboardCommands {
-		// All Keyboard inputs required by the game
-		KEY_UP(KeyEvent.VK_W), KEY_DOWN(KeyEvent.VK_S), KEY_LEFT(KeyEvent.VK_A), KEY_RIGHT(
-				KeyEvent.VK_D), KEY_USE(KeyEvent.VK_F), KEY_ATTACK(KeyEvent.VK_SPACE), KEY_MENU(KeyEvent.VK_ESCAPE);
-
-		private int original;
-		private int current;
-
-		KeyboardCommands(int keybind) {
-			this.original = keybind;
-			this.current = keybind;
-		}
-
-		public int getKeybind() {
-			return this.current;
-		}
-
-		public void setKeybind(int keybind) {
-			this.current = keybind;
-		}
-
-		public void resetKeybind() {
-			this.current = original;
-		}
-	}
-
+    @Override
+    public void update() {
+        currentCommands.forEach(this::processCommand);
+    }
 }
