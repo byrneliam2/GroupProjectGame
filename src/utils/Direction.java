@@ -4,20 +4,26 @@ public enum Direction {
     N(0,-1),
     E(1, 0),
     S(0, 1),
-    W(-1, 0);
+    W(-1, 0),
+    
+	NE(0.785,-0.785),
+	SE(0.785,0.785),
+	SW(-0.785,0.785),
+	NW(-0.785,-0.785);
+	
 
-    int x,y;
+    private double x,y;
 
-    Direction(int x, int y) {
+    Direction(double x, double y) {
         this.x = x;
         this.y = y;
     }
 
-    public int getX() {
+    public double getX() {
         return x;
     }
 
-    public int getY() {
+    public double getY() {
         return y;
     }
 }
