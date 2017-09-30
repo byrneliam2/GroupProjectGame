@@ -18,7 +18,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
-import java.util.function.Consumer;
 
 /**
  * The MapCard displays the state of a Map, including all Entities on screen.
@@ -26,14 +25,21 @@ import java.util.function.Consumer;
  * TODO Inventory screen
  * TODO Player animations
  * TODO Add mouse crosshair
+ * TODO adding of entities mid-game
  */
 public class MapCard extends Card {
 
+	/* Primary attributes */
 	private List<Entity> entities;
 	private List<Entity> elements;
 	private map.Map map;
 	private IGame game;
 
+	/* Secondary attributes */
+	private int heartIndex;
+	private int frameIndex;
+
+	/* Constants */
 	private static final int ELEMENT_LOC_A = 50;
 
 	public MapCard(String n, map.Map map, IGame game) {
@@ -41,7 +47,6 @@ public class MapCard extends Card {
 
 		this.entities = new ArrayList<>();
 		this.elements = new ArrayList<>();
-
 		this.map = map;
 		this.game = game;
 
@@ -87,13 +92,15 @@ public class MapCard extends Card {
 		for (int i = 0; i < game.getPlayer().getHealth(); i++) {
 			addUIEntity(new Entity(game.getPlayer(), EntityType.HEART,
 					ImageLoader.image("game", "heart", true),
-					new Point(ELEMENT_LOC_A + (i * ELEMENT_LOC_A), 0), ELEMENT_LOC_A));
+					new Point(heartIndex = ELEMENT_LOC_A + (i * ELEMENT_LOC_A), 0),
+					ELEMENT_LOC_A));
 		}
 		// add inventory items
 		for (int i = 0; i < game.getPlayer().getBackpack().getInventorySize(); i++) {
 			addUIEntity(new Entity(game.getPlayer(), EntityType.ITEMFRAME,
 					ImageLoader.image("game", "itemframe", true),
-					new Point(MainDisplay.WIDTH - ELEMENT_LOC_A - (i * ELEMENT_LOC_A), 5), ELEMENT_LOC_A));
+					new Point(frameIndex = MainDisplay.WIDTH - ELEMENT_LOC_A - (i * ELEMENT_LOC_A), 5),
+					ELEMENT_LOC_A));
 		}
 		// add dialogue, if any
 		//
@@ -108,13 +115,17 @@ public class MapCard extends Card {
 	 */
 	private void updateEntities() {
 		List<Entity> itemsToRemove = new ArrayList<>();
+		int numItems = 0;
 		for (Entity e : entities) {
 			Object o = e.getObject();
 			switch (e.getType()) {
 			case ITEM:
 				Item i = (Item) o;
 				if (i.getPack() != null) itemsToRemove.add(e);
-				else e.setLocation(new Point(i.getX(), i.getY()));
+				else {
+					e.setLocation(new Point(i.getX(), i.getY()));
+					numItems++;
+				}
 				break;
 			case PLAYER: case NPC:
 				Player p = (Player) o; // since an NPC is a Player
@@ -124,6 +135,7 @@ public class MapCard extends Card {
 			}
 		}
 		entities.removeAll(itemsToRemove);
+		if (numItems < map.getItems().size()) {}
 	}
 
 	/**
@@ -155,14 +167,10 @@ public class MapCard extends Card {
 	private void updateBullets() {
 		for (int i = 0; i < Bullet.bulletList.size(); i++) {
 			Bullet b = Bullet.bulletList.get(i);
-			Image img = b.getOwner() == game.getPlayer() ? Bullet.playerBullet1 : Bullet.npcBullet1;
-
-			// bullets have a separate drawer from other entities since it has different size
-			// requirements
-			JLabel l = new JLabel(new ImageIcon(img));
-			panel.add(l);
-			l.setBounds((int) b.getX() - Bullet.bulletSize / 2,
-					(int) b.getY() - Bullet.bulletSize / 2,
+			Image img = b.getOwner() == game.getPlayer() ?
+					Bullet.playerBullet1 : Bullet.npcBullet1;
+			draw(img, (int) b.getX() - Bullet.bulletSize/2,
+					(int) b.getY() - Bullet.bulletSize/2,
 					img.getWidth(null), img.getHeight(null));
 		}
 	}
@@ -194,13 +202,20 @@ public class MapCard extends Card {
 		updateElements();
 		updateBullets();
 		// draw the lot
-		Consumer<Entity> draw = (e) -> {
-			JLabel l = new JLabel(new ImageIcon(e.getImage()));
-			panel.add(l);
-			l.setBounds(e.getLocation().x, e.getLocation().y,
+		for (Entity e : entities)
+			draw(e.getImage(), e.getLocation().x, e.getLocation().y,
 					e.getImage().getWidth(), e.getImage().getHeight());
-		};
-		for (Entity e : entities) draw.accept(e);
-		for (Entity e : elements) draw.accept(e);
+		for (Entity e : elements)
+			draw(e.getImage(), e.getLocation().x, e.getLocation().y,
+					e.getImage().getWidth(), e.getImage().getHeight());
+	}
+
+	/**
+	 * Draw the entity by adding it to a JLabel and specifying its position.
+	 */
+	private void draw(Image image, int x, int y, int w, int h) {
+		JLabel l = new JLabel(new ImageIcon(image));
+		panel.add(l);
+		l.setBounds(x, y, w, h);
 	}
 }
