@@ -39,7 +39,6 @@ public class MapCard extends Card {
         setBackground(ImageUtilities.scale(
                 ImageLoader.image("MapImages", map.getBackgroundLayer(), true),
                 MainDisplay.WIDTH, MainDisplay.HEIGHT));
-        //this.map.loadAllLayers(MainDisplay.WIDTH, MainDisplay.HEIGHT);
 
         addUIEntities();
         addEntities();
@@ -75,7 +74,7 @@ public class MapCard extends Card {
     private void addUIEntities() {
         // add player health
         for (int i = 0; i < game.getPlayer().getHealth(); i++) {
-            addEntity(new Entity(game.getPlayer(), EntityType.BULLET, // FIXME
+            addEntity(new Entity(game.getPlayer(), EntityType.SPECIAL,
                     ImageLoader.image("game", "heart", true),
                     new Point(HEART_X + (i * HEART_X), 0), 50));
         }
@@ -101,6 +100,10 @@ public class MapCard extends Card {
                 case NPC:
                     NPC n = (NPC) o;
                     e.setLocation(new Point(n.getxLocation(), n.getyLocation()));
+                    break;
+                case BULLET:
+                    break;
+                case SPECIAL:
                     break;
             }
         }

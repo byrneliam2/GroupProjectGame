@@ -26,6 +26,14 @@ public class FramesTests {
         Thread.sleep(3000);
     }
 
+    private MainDisplay makeDisplay(boolean mock) {
+        MainDisplay m = new MainDisplay(mock ? new MockGame() : new Game());
+        m.enableInputMethods(false);
+        m.getAudioHandler().stop();
+        m.newGame();
+        return m;
+    }
+
     /* ============================================================================== */
 
     // Note the usage of MockGame within these tests.
@@ -35,8 +43,7 @@ public class FramesTests {
     @Test
     public void test01_LaunchNoExceptions() {
         try {
-            MainDisplay m = new MainDisplay(new MockGame());
-            m.enableInputMethods(false);
+            MainDisplay m = makeDisplay(true);
             m.update(null, null);
             killIn3Sec(m);
         } catch (InterruptedException e) {
@@ -47,8 +54,7 @@ public class FramesTests {
     @Test
     public void test02_PauseCardDisplay() {
         try {
-            MainDisplay m = new MainDisplay(new MockGame());
-            m.enableInputMethods(false);
+            MainDisplay m = makeDisplay(true);
             m.update(null, "pause");
             killIn3Sec(m);
         } catch (InterruptedException e) {
@@ -59,8 +65,7 @@ public class FramesTests {
     @Test
     public void test03_SettingsCardDisplay() {
         try {
-            MainDisplay m = new MainDisplay(new MockGame());
-            m.enableInputMethods(false);
+            MainDisplay m = makeDisplay(true);
             m.update(null, "settings");
             killIn3Sec(m);
         } catch (InterruptedException e) {
@@ -71,8 +76,7 @@ public class FramesTests {
     @Test
     public void test04_MapCardDisplay() {
         try {
-            MainDisplay m = new MainDisplay(new Game());
-            m.enableInputMethods(false);
+            MainDisplay m = makeDisplay(false);
             m.update(null, "Map3");
             killIn3Sec(m);
         } catch (InterruptedException e) {
@@ -82,26 +86,24 @@ public class FramesTests {
 
     @Test
     public void test05_ScreenHistory() {
-        MainDisplay m = new MainDisplay(new MockGame());
-        m.enableInputMethods(false);
+        MainDisplay m = makeDisplay(true);
         m.update(null, "pause");
         m.update(null, "last");
     }
 
     @Test
     public void test06_DisplayingMapData() {
-        MainDisplay m = new MainDisplay(new Game());
-        m.enableInputMethods(false);
+        MainDisplay m = makeDisplay(false);
         m.update(null, "Map3");
         // TODO check item positions
     }
 
     @Test
     public void test07_Timer() {
-        MainDisplay m = new MainDisplay(new Game());
-        m.start();
+        MainDisplay m = makeDisplay(false);
+        m.startTimer();
         assertTrue(m.isTimerRunning());
-        m.stop();
+        m.stopTimer();
         assertFalse(m.isTimerRunning());
     }
 }

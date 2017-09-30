@@ -112,7 +112,7 @@ public class MockGame implements IGame {
 	}
 
 	@Override
-	public void startGame() {
+	public void newGame() {
 
 	}
 
