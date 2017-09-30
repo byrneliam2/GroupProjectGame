@@ -32,8 +32,6 @@ public class Player {
 	protected int health = 5;
 	private int maxHealth = 5;
 	private int speed = 6;
-	private int xLocation;// centreX
-	private int yLocation;// centreY
 	private double fireRate = 1;// in seconds, smaller numbers mean less time between shots
 	private static Timer shotTimer = new Timer();
 	private Map map;// the map which the player is currently located on.
@@ -41,7 +39,7 @@ public class Player {
 	private boolean isReadyToShoot = true;
 
 	private Ellipse2D.Double rangeCircle;// the range at which the player can 'pick up' items
-	private Rectangle playerBox;// the hit box representing the location of the player.
+	private Rectangle.Double playerBox;// the hit box representing the location of the player.
 
 	/**
 	 * @param name
@@ -52,7 +50,7 @@ public class Player {
 		this.name = name;
 		rangeCircle = new Ellipse2D.Double(xLocation - Map.tileSize / 2, yLocation - Map.tileSize / 2, rangeCircleWidth,
 				rangeCircleWidth);
-		playerBox = new Rectangle(xLocation + 3, yLocation + 3, Map.tileSize - 6, Map.tileSize - 6);
+		playerBox = new Rectangle.Double(xLocation + 3, yLocation + 3, Map.tileSize - 6, Map.tileSize - 6);
 	}
 
 	/**
@@ -214,19 +212,13 @@ public class Player {
 	 * @throws InvalidPlayerExceptions
 	 *             if the player tries to make an invalid move.
 	 */
-	public boolean move(int dx, int dy) throws InvalidPlayerExceptions {
+	public boolean move(double dx, double dy) throws InvalidPlayerExceptions {
 		DoorItem door = null;
 		if (Game.GAME_PAUSED) {
 			throw new InvalidPlayerExceptions("Game is paused, you cannot move");
 		}
 
-		// temporary solution to stopping diagonal movements from being twice as fast.
-		if (Math.abs(dy) == Math.abs(dx) && dy != 0) {
-			dx = (int) Math.round(dx * 0.5);
-			dy = (int) Math.round(dy * 0.5);
-		}
-
-		playerBox.translate(dx, dy);
+		playerBox.setFrame(playerBox.getX() + dx, playerBox.getY() + dy, playerBox.getWidth(), playerBox.getHeight());
 		if (map.canMove(playerBox)) {
 			// if player is next to a door and the door is unlocked or you have the key, go through...
 			if ((door = map.getDoor(playerBox)) != null && (!door.isLocked() || canOpenDoor(door))) {
@@ -242,7 +234,8 @@ public class Player {
 				return false;
 			}
 		} else {
-			playerBox.translate(-dx, -dy);
+			playerBox.setFrame(playerBox.getX() - dx, playerBox.getY() - dy, playerBox.getWidth(),
+					playerBox.getHeight());
 			throw new InvalidPlayerExceptions("You cant make a move/Invalid move");
 		}
 	}
@@ -255,10 +248,10 @@ public class Player {
 	 */
 	private Map enterDoor(DoorItem Door) {
 		// update location in new map...
-		playerBox.setLocation(1500, 100);
+		playerBox.setFrame(1500, 100, playerBox.getWidth(), playerBox.getHeight());
 
-		rangeCircle = new Ellipse2D.Double(xLocation - Map.tileSize / 2, yLocation - Map.tileSize / 2, rangeCircleWidth,
-				rangeCircleWidth);
+		rangeCircle = new Ellipse2D.Double(playerBox.getX() - Map.tileSize / 2, playerBox.getY() - Map.tileSize / 2,
+				rangeCircleWidth, rangeCircleWidth);
 		map.pauseMapNPCs();
 		Map newMap = World.maps.get(Door.getMap());
 		newMap.startMapNPCs();
@@ -331,25 +324,25 @@ public class Player {
 	 * @return the x pixel location of the player's top left point.
 	 */
 	public int getxLocation() {
-		return (int) playerBox.getX() - 3;
+		return (int) Math.round(playerBox.getX() - 3);
 	}
 
 	/**
 	 * @return the y pixel location of the player's top left point.
 	 */
 	public int getyLocation() {
-		return (int) playerBox.getY() - 3;
+		return (int) Math.round(playerBox.getY() - 3);
 	}
 
 	public int getCentreX() {
-		return (int) playerBox.getCenterX();
+		return (int) Math.round(playerBox.getCenterX());
 	}
 
 	public int getCentreY() {
-		return (int) playerBox.getCenterY();
+		return (int) Math.round(playerBox.getCenterY());
 	}
 
-	public Rectangle getBoundingBox() {
+	public Rectangle.Double getBoundingBox() {
 		return this.playerBox;
 	}
 

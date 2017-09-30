@@ -264,7 +264,7 @@ public class Map {
 	 * @param boundingBox
 	 * @return
 	 */
-	public DoorItem getDoor(Rectangle boundingBox) {
+	public DoorItem getDoor(Rectangle.Double boundingBox) {
 		if (doors == null)
 			return null;
 		for (DoorItem d : this.doors) {
@@ -363,7 +363,7 @@ public class Map {
 	 * @param r
 	 * @return
 	 */
-	public boolean canMove(Rectangle r) {
+	public boolean canMove(Rectangle.Double r) {
 		// May have to add more points to check for collisions
 		double topLx = r.getX();
 		double topLy = r.getY();
