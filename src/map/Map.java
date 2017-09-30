@@ -272,8 +272,8 @@ public class Map {
 		if (doors == null)
 			return null;
 		for (DoorItem d : this.doors) {
-			Rectangle doorRect = new Rectangle(d.getX(), d.getY(), tileSize, tileSize);
-			if (boundingBox.intersects(doorRect)) {
+			Point doorPoint = d.getCentrePoint();
+			if (boundingBox.contains(doorPoint)) {
 				return d;
 			}
 		}

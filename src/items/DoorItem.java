@@ -1,5 +1,10 @@
 package items;
 
+import java.awt.Point;
+import java.awt.Rectangle;
+
+import map.Map;
+
 /**
  * This class represent a door, a door leads to another map. In this case each
  * door has the name of the map it leads to.
@@ -11,10 +16,18 @@ public class DoorItem extends AbstractItem {
 
 	private int doorID;
 	private boolean locked;
+	private Point p;
 
-	public DoorItem(String map, int ID, boolean locked) {
+	public DoorItem(String map, int ID, boolean locked, int x, int y) {
 		super(map, "A door linking to map: " + map + " with ID: " + ID, null);
 		this.doorID = ID;
+		super.setX(x);
+		super.setY(y);
+		p = new Point(x + Map.tileSize / 2, y + Map.tileSize / 2);
+	}
+
+	public Point getCentrePoint() {
+		return p;
 	}
 
 	public String getMap() {

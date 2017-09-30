@@ -277,8 +277,9 @@ public class Player {
 	 */
 	private Map enterDoor(DoorItem Door) {
 		// update location in new map...
-		boundingBox.setLocation(100, 100);
-		rangeCircle = new Ellipse2D.Double(boundingBox.getX(), boundingBox.getY(), rangeCircleWidth, rangeCircleWidth);
+		boundingBox.setLocation(1500, 100);
+		rangeCircle = new Ellipse2D.Double(xLocation - Map.tileSize / 2, yLocation - Map.tileSize / 2, rangeCircleWidth,
+				rangeCircleWidth);
 		return World.maps.get(Door.getMap());
 	}
 

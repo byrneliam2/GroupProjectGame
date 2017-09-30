@@ -20,9 +20,7 @@ public class Door {
 		}
 		int x = MapParser.requireInteger(scan);
 		int y = MapParser.requireInteger(scan);
-		DoorItem d = new DoorItem(name, id, lockUnlock);
-		d.setX(x * Map.tileSize);
-		d.setY(y * Map.tileSize);
+		DoorItem d = new DoorItem(name, id, lockUnlock, x * Map.tileSize, y * Map.tileSize);
 		doors.add(d);
 
 	}
