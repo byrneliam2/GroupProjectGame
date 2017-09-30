@@ -165,6 +165,6 @@ public abstract class Card extends JPanel {
 	 * Declares the type of object the {@link Entity} represents.
 	 */
 	enum EntityType {
-		ITEM, PLAYER, NPC, BULLET, HEART, DIALOGUE
+		ITEM, PLAYER, NPC, HEART, DIALOGUE
 	}
 }

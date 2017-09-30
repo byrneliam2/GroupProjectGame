@@ -112,10 +112,6 @@ public class MapCard extends Card {
 					Player p = (Player) o; // since an NPC is a Player
 					e.setLocation(new Point(p.getxLocation(), p.getyLocation()));
 					break;
-				case BULLET:
-					Bullet b = (Bullet) o;
-					//e.setLocation(new Point(b.getX(), b.getY()));
-					break;
 			}
 		}
 		entities.removeAll(itemsToRemove);
@@ -140,6 +136,21 @@ public class MapCard extends Card {
 		elements.removeAll(elementsToRemove);
 	}
 
+    /**
+     * Draw the bullets that are currently present in the game world. These do not
+     * count as entities since they are have a lesser time of existence and so it
+     * is not worth counting them as entities.
+     */
+    private void updateBullets() {
+        for (int i = 0; i < Bullet.bulletList.size(); i++) {
+            Bullet b = Bullet.bulletList.get(i);
+            Image img = Bullet.bulletImg;
+            JLabel l = new JLabel(new ImageIcon(Bullet.bulletImg));
+            panel.add(l);
+            l.setBounds((int) b.getX(), (int) b.getY(), img.getWidth(null), img.getHeight(null));
+        }
+    }
+
 	/* ===================================== UTILITIES ========================================= */
 
 	private void addGameEntity(Entity e) {
@@ -160,8 +171,10 @@ public class MapCard extends Card {
 	public void redraw() {
 		// reset the component lists
 		panel.removeAll();
+		// do updates
 		updateEntities();
 		updateElements();
+		updateBullets();
 		// draw the lot
 		Consumer<Entity> draw = (e) -> {
 			JLabel l = new JLabel(new ImageIcon(e.getImage()));
@@ -171,13 +184,5 @@ public class MapCard extends Card {
 		};
 		for (Entity e : entities) draw.accept(e);
 		for (Entity e : elements) draw.accept(e);
-
-		for (int i = 0; i < Bullet.bulletList.size(); i++) {
-			Bullet b = Bullet.bulletList.get(i);
-			Image img = Bullet.bulletImg;
-			JLabel l = new JLabel(new ImageIcon(Bullet.bulletImg));
-			panel.add(l);
-			l.setBounds((int) b.getX(), (int) b.getY(), img.getWidth(null), img.getHeight(null));
-		}
 	}
 }
