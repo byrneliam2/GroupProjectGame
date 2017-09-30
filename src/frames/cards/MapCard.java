@@ -50,12 +50,12 @@ public class MapCard extends Card {
      * beforehand and also because this setup does not relate to Swing components.
      */
     private void addEntities() {
-        // add player TODO: FIX THIS (Lag)
+        // add player
         addEntity(new Entity(game.getPlayer(), EntityType.PLAYER,
                 ImageLoader.image("game", "playerRect", true),
                 new Point(game.getPlayer().getxLocation(), game.getPlayer().getyLocation()), 0)
         );
-        /*// add all NPCs
+        // add all NPCs
         map.getNPCS().forEach(npc -> addEntity(new Entity(
                 npc, EntityType.NPC,
                 ImageLoader.image("ItemPictures", "key", true),
@@ -66,7 +66,7 @@ public class MapCard extends Card {
                 item, EntityType.ITEM,
                 ImageLoader.image("ItemPictures", item.getImageFileName(), true),
                 new Point(item.getX(), item.getY()), 0))
-        );*/
+        );
     }
 
     /**
@@ -124,10 +124,7 @@ public class MapCard extends Card {
     public void redraw() {
         // reset the component lists
         panel.removeAll();
-        //updateEntities();
-        entities.clear();
-        addEntities();
-        addUIEntities();
+        updateEntities();
         // draw the lot
         for (Entity e : entities) {
             JLabel l = new JLabel(new ImageIcon(e.getImage()));

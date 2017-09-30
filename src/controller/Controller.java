@@ -1,5 +1,6 @@
 package controller;
 
+import frames.MainDisplay;
 import game.IGame;
 import player.InvalidPlayerExceptions;
 import utils.Direction;
@@ -26,7 +27,7 @@ public class Controller extends KeyAdapter {
 		this.mouse = mouse;
 		this.pressed = new HashSet<>();
 
-        new Timer(1000/20, (e)-> update()).start();
+        new Timer(MainDisplay.FRAMERATE, (e)-> update()).start();
     }
 
 	/**
