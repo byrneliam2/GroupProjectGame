@@ -122,6 +122,11 @@ public class MockGame implements IGame {
 	public void unPauseGame() {
 	}
 
+	@Override
+	public boolean isPaused() {
+		return false;
+	}
+
 	public void saveGame() {
 	}
 }

@@ -47,6 +47,7 @@ public class Controller extends KeyAdapter {
 	}
 
 	public void update() {
+	    if(model.isPaused()) return;
 		for (Integer i : pressed) {
 			processInput(i);
 		}

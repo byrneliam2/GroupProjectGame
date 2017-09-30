@@ -24,6 +24,8 @@ public interface IGame {
 
     void unPauseGame();
 
+    boolean isPaused();
+
     World getWorld();
 
     void movePlayer(Direction dir) throws InvalidPlayerExceptions;
