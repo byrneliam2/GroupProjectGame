@@ -29,7 +29,7 @@ public class PatrolNPCTests {
 
 		testNPC.start();// starts the npc off
 		try {// sleep for time it takes to move 3 times
-			Thread.sleep(NPC.SPEED * (numberOfMoves - 1));
+			Thread.sleep(NPC.updateRate * (numberOfMoves - 1));
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 			fail();
@@ -53,7 +53,7 @@ public class PatrolNPCTests {
 	public void sleep(int numberOfMoves) {
 		for (int i = 1; i < numberOfMoves; i++) {
 			try {
-				Thread.sleep(NPC.SPEED);
+				Thread.sleep(NPC.updateRate);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 				fail();
