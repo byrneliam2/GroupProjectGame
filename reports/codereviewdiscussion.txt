@@ -16,8 +16,8 @@ Map:
 The Map package was reviewed by Tom, he thought it was done in a pretty neat way with different "layers" representing different 
 parts of the map. The maps were also designed in a pretty awesome map editor which meant that they were all the same 
 theme and they all look great! Some of the methods havent been fully tested but that's great as it gives us something to do.
-Some improvements to possibly implement might be to split the class up into a few subclasses so that we don't have a giant subclass.
-Also putting all the item parsing methods into a single class so that we can more easily add items is something we plan to do in 
+Some improvements to possibly implement might be to split the Map class up into a few subclasses so that we don't have a giant class.
+Also putting all the item parsing methods into a single class so that we can more easily add new items is something we plan to do in 
 future.
 
 SaveLoad:
