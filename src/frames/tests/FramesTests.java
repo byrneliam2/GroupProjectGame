@@ -55,6 +55,7 @@ public class FramesTests {
     public void test02_PauseCardDisplay() {
         try {
             MainDisplay m = makeDisplay(true);
+            m.startTimer();
             m.update(null, "pause");
             killIn3Sec(m);
         } catch (InterruptedException e) {
@@ -87,7 +88,7 @@ public class FramesTests {
     @Test
     public void test05_ScreenHistory() {
         MainDisplay m = makeDisplay(true);
-        m.update(null, "pause");
+        m.update(null, "settings");
         m.update(null, "last");
     }
 
