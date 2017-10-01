@@ -113,7 +113,7 @@ public class MainDisplay extends JComponent implements Observer {
 
         // finally, make the menu screen visible
         switchScreen("menu");
-        audioHandler.queueMusic(MusicTrack.TEST_MUSIC);
+        audioHandler.queueMusic(MusicTrack.MAIN_MENU);
     }
 
     /**
