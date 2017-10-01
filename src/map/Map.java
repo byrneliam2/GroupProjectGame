@@ -514,6 +514,15 @@ public class Map {
 		return this.NPCS;
 	}
 
+	public DoorItem getDoor(int doorID) {
+		for (DoorItem d : doors) {
+			if (d.getDoorID() == doorID) {
+				return d;
+			}
+		}
+		return null;
+	}
+
 	/**
 	 * This method returns the map name
 	 *
