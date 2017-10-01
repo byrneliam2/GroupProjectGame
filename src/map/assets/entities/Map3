@@ -12,8 +12,8 @@ Map5 03 true
 15 0
 Npc
 HungryBat
-PatrolScheme false 1
-2 26 2
+HardScheme false 1
+28 26 2
 ShinyArmor
 4 4
 RustyArmor

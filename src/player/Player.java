@@ -23,7 +23,7 @@ import utils.MathUtils;
 public class Player {
 	/* constants */
 	private static final int rangeCircleWidth = 2 * Map.tileSize;
-	private static final double defaultFireRate = 0.2;
+	private static final double defaultFireRate = 1;
 
 	private final String name;
 	private Item closestItem;
@@ -247,8 +247,12 @@ public class Player {
 	 * @return
 	 */
 	private Map enterDoor(DoorItem Door) {
-		// update location in new map...
-		playerBox.setFrame(1500, 100, playerBox.getWidth(), playerBox.getHeight());
+		Map newMap = World.maps.get(Door.getMap());
+		// works because each doorWay has two door items of the same name.
+		DoorItem oppDoor = newMap.getDoor(Door.getDoorID());
+
+		// update player's location on new map...
+		playerBox.setFrame(oppDoor.getX(), oppDoor.getY(), playerBox.getWidth(), playerBox.getHeight());
 
 		rangeCircle = new Ellipse2D.Double(playerBox.getX() - Map.tileSize / 2, playerBox.getY() - Map.tileSize / 2,
 				rangeCircleWidth, rangeCircleWidth);
@@ -257,8 +261,7 @@ public class Player {
 		for (int i = Bullet.bulletList.size() - 1; i >= 0; i--) {
 			Bullet.bulletList.get(i).removeBullet();
 		}
-		//start the new map off...
-		Map newMap = World.maps.get(Door.getMap());
+		// start the new map off...
 		newMap.startMapNPCs();
 		return newMap;
 	}
