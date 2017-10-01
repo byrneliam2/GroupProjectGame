@@ -40,3 +40,15 @@ simple solution to approaching the issue of items. The backpack class is essenti
 of potential to over complicate this class, and i'm pleased to say that the primary author thomas did not over complicate the dynamics of items what so ever. I think that
 the use of inheritance is excellent and that there are a sufficient amount of tests for the given classes. I would not change anything in this class except maybe some of
 the comments on methods or even better create a read me to explain how the classes interact.
+
+AI enemies:
+Reviewer: Mohsen. javaher
+This package is set out and written in excellent fashion. This package has many small classes that make up the enemy in the game. Each enemy has it's own class and extends a ControlScheme Interface in this interface there is a
+doBestAction(NPC,Player) which takes a non player character and a player and it does the operations on them. There are Three type of Schemes(Easy,Medium,Hard) in this package which helps to have
+a back up idea. The EasySchema is not AI at all the class has been implemented by the random() function which returns a random direction and it will move the NPC to that direction 
+and if there is a wall then the function has to generate a new random number, so in the easyEscheme shoot at the player every 200 moves and then change direction
+also in the mediumEscheme shoot at the player every 100 moves and then change direction. 
+HardScheme the class has been implemented in an AI way fantastic code skills in this class. To implement the AI part of the project the enemy is getting the current status of the Player and then it 
+sends the the bullets to that status however the game is running and the Player can make a move so if the player is too slow it will be decreasing the health of the Player.
+Also in the enemy class there is a shoot method which has been implemented by the TimerTask which needs a schedual which is kind of thecertain amount of seconds that it takes to be reloaded for the shoots.
+
