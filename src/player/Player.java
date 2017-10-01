@@ -273,7 +273,10 @@ public class Player {
 
 		if (isReadyToShoot) {
 			isReadyToShoot = false;
-			double direction = MathUtils.calculateAngle(playerBox.getX(), playerBox.getY(), mouseX, mouseY);
+			double x = playerBox.getX() + (playerBox.width/2);
+			double y = playerBox.getY() + (playerBox.height/2);
+
+			double direction = MathUtils.calculateAngle(x, y, mouseX, mouseY);
 			// make a new bullet
 			new Bullet(getCentreX(), getCentreY(), direction, this, 8, "playerBullet1");
 

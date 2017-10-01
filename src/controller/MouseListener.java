@@ -9,10 +9,12 @@ import java.awt.event.MouseEvent;
 
 public class MouseListener extends MouseAdapter {
     private Controller parent;
-    private Point currentPosition;
+    private int mouseX;
+    private int mouseY;
 
     public MouseListener() {
-        this.currentPosition = new Point(0,0);
+        this.mouseX = 0;
+        this.mouseY = 0;
     }
 
     @Override
@@ -25,9 +27,18 @@ public class MouseListener extends MouseAdapter {
         notifyController(e.getButton(), false);
     }
 
+    /* Listeners Required for Shooting Direction */
+
     @Override
     public void mouseMoved(MouseEvent e) {
-        this.currentPosition.setLocation(e.getX(),e.getY());
+        this.mouseX = e.getX();
+        this.mouseY = e.getY();
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        this.mouseX = e.getX();
+        this.mouseY = e.getY();
     }
 
     private void notifyController(Integer input, boolean pressed){
@@ -47,13 +58,13 @@ public class MouseListener extends MouseAdapter {
      * @return The Current X coordinate of the mouse on the screen
      */
     public double getX(){
-        return currentPosition.getX();
+        return this.mouseX;
     }
 
     /**
      * @return The Current Y coordinate of the mouse on the screen
      */
     public double getY(){
-        return currentPosition.getY();
+        return this.mouseY;
     }
 }
