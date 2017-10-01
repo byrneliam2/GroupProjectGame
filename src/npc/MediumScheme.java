@@ -33,12 +33,12 @@ public class MediumScheme implements ControlScheme {
 		moveCounter++;
 		if (moveCounter > 200) {
 			moveCounter = 0;
-			new Bullet(npc.getxLocation(), npc.getyLocation(), MathUtils.calculateAngle(npc.getxLocation(),
-					npc.getyLocation(), player.getxLocation(), player.getyLocation()), npc, 4, "npcBullet1");
+			new Bullet(npc.getCentreX(), npc.getCentreY(), MathUtils.calculateAngle(npc.getxLocation(),
+					npc.getyLocation(), player.getCentreX(), player.getCentreY()), npc, 4, "npcBullet1");
 			randDir = getRandomDir();
 		} else if (moveCounter == 100) {
-			new Bullet(npc.getxLocation(), npc.getyLocation(), MathUtils.calculateAngle(npc.getxLocation(),
-					npc.getyLocation(), player.getxLocation(), player.getyLocation()), npc, 4, "npcBullet1");
+			new Bullet(npc.getCentreX(), npc.getCentreY(), MathUtils.calculateAngle(npc.getxLocation(),
+					npc.getyLocation(), player.getCentreX(), player.getCentreY()), npc, 4, "npcBullet1");
 		}
 	}
 
