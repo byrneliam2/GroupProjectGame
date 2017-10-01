@@ -3,3 +3,11 @@ Team SnicketySnacks (James Watt, Thomas Edwards, Liam Byrne, Mohsen Javaher, And
 
 CODE REVIEW DISCUSSION
 
+Our code review was a successful endeavour. The game team is divided in front and back end developers, and so to
+embrace this setup, the code reviewers were other developers working in the same end of the project.
+
+The front end was modified greatly, with changes to how the view draws some of the elements on the screen being the
+most prevalent modification. The controller was completely revamped to allow easy key binding and the use of a common
+interface across the majority of the individual components.
+
+The back end was...

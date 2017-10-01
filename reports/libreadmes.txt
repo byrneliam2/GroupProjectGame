@@ -17,7 +17,7 @@ Each test can be run from the 'controller.tests.ControllerTests' using JUnit4.
 
 frames
 Run Launcher to launch game and see frames library in use.
-Tests can be run through the FramesTests class.
+Tests can be run through the AllFramesTests class.
 
 gfx
 All tests can be run as a suite by using the AllGFXTests class.

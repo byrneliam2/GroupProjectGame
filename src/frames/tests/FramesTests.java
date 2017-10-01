@@ -93,14 +93,7 @@ public class FramesTests {
     }
 
     @Test
-    public void test06_DisplayingMapData() {
-        MainDisplay m = makeDisplay(false);
-        m.update(null, "Map3");
-        // TODO check item positions
-    }
-
-    @Test
-    public void test07_Timer() {
+    public void test06_Timer() {
         MainDisplay m = makeDisplay(false);
         m.startTimer();
         assertTrue(m.isTimerRunning());
