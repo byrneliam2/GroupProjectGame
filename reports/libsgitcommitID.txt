@@ -4,8 +4,8 @@ Team SnicketySnacks (James Watt, Thomas Edwards, Liam Byrne, Mohsen Javaher, And
 LIBRARY COMMIT LIST
 
 LIBRARY             GIT COMMIT ID
-audio               f7086fb
-controller          f7086fb
+audio               cc3c071
+controller          cc3c071
 frames              850b7c7
 gfx                 850b7c7
 items               23e1978b
