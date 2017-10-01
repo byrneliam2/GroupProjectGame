@@ -133,7 +133,7 @@ public class Map {
 
 		BufferedImage EnvLayer = ImageLoader.image("MapImages", this.name + "Environment", true);
 		EnvLayer = ImageUtilities.scale(EnvLayer, newWidth, newHeight);
-		this.environmentalLayer = this.loadColLayers(colLayer);
+		this.environmentalLayer = this.loadEnvLayers(EnvLayer);
 
 	}
 
@@ -191,7 +191,7 @@ public class Map {
 				if (c.getGreen() == 0 && c.getRed() == 0 && c.getBlue() == 0) {// Black(1) is for death environment
 					EnvironmentalLayer.get(col).add(1);
 				} else if (c.getGreen() == 255 && c.getRed() == 0 && c.getBlue() == 0) {// Green(2) is for mud
-																						// environment
+					// environment
 					EnvironmentalLayer.get(col).add(2);
 				} else if (c.getGreen() == 0 && c.getRed() == 255 && c.getBlue() == 0) {// Red(3) is for fire
 																						// environment
@@ -293,9 +293,10 @@ public class Map {
 		double ClosestDistance = 0;
 		for (Item item : this.items) {
 			// center point of item is used.
-			if (rangeCircle.contains(new Point(item.getX() + tileSize / 2, item.getY() + tileSize / 2))) {
-				double xDist = (item.getX() - rangeCircle.getCenterX());
-				double yDist = (item.getY() - rangeCircle.getCenterY());
+			Point itm = new Point(item.getX() + Map.tileSize / 2, item.getY() + Map.tileSize / 2);
+			if (rangeCircle.contains(itm)) {
+				double xDist = (itm.getX() - rangeCircle.getCenterX());
+				double yDist = (itm.getY() - rangeCircle.getCenterY());
 				double dist = Math.hypot(xDist, yDist);// actual distance to Item
 
 				if (closest == null || dist < ClosestDistance) {
@@ -309,7 +310,7 @@ public class Map {
 
 	/**
 	 * This method drops a given item onto a x,y spot on the Map by inserting the
-	 * new item into this maps ArrayList of items
+	 * new item into this maps ArrayList of items.
 	 *
 	 * @param i
 	 * @param x
