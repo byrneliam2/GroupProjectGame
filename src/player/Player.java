@@ -253,6 +253,11 @@ public class Player {
 		rangeCircle = new Ellipse2D.Double(playerBox.getX() - Map.tileSize / 2, playerBox.getY() - Map.tileSize / 2,
 				rangeCircleWidth, rangeCircleWidth);
 		map.pauseMapNPCs();
+		// removes all the bullets from the game when you go through the door.
+		for (int i = Bullet.bulletList.size() - 1; i >= 0; i--) {
+			Bullet.bulletList.get(i).removeBullet();
+		}
+		//start the new map off...
 		Map newMap = World.maps.get(Door.getMap());
 		newMap.startMapNPCs();
 		return newMap;
@@ -273,8 +278,8 @@ public class Player {
 
 		if (isReadyToShoot) {
 			isReadyToShoot = false;
-			double x = playerBox.getX() + (playerBox.width/2);
-			double y = playerBox.getY() + (playerBox.height/2);
+			double x = playerBox.getX() + (playerBox.width / 2);
+			double y = playerBox.getY() + (playerBox.height / 2);
 
 			double direction = MathUtils.calculateAngle(x, y, mouseX, mouseY);
 			// make a new bullet

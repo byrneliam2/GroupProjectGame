@@ -29,11 +29,9 @@ public class SuicidalScheme implements ControlScheme {
 			npc.move(moveX, moveY);
 			moveCount++;
 			if (MathUtils.getDistance(npc.getCentreX(), npc.getCentreY(), player.getCentreX(),
-					player.getCentreY()) < Map.tileSize * 3 && moveCount % 10 == 0) {
-				new Bullet(
-						npc.getxLocation(), npc.getyLocation(), MathUtils.calculateAngle(npc.getxLocation(),
-								npc.getyLocation(), player.getxLocation(), player.getyLocation()),
-						npc, 10, "npcBullet2");
+					player.getCentreY()) < Map.tileSize * 3 && moveCount % 8 == 0) {
+				new Bullet(npc.getCentreX(), npc.getCentreY(), MathUtils.calculateAngle(npc.getxLocation(),
+						npc.getyLocation(), player.getCentreX(), player.getCentreY()), npc, 10, "npcBullet2");
 			}
 		} catch (InvalidPlayerExceptions e) {
 			chooseSideDir();

@@ -12,8 +12,8 @@ Map5 03 true
 15 0
 Npc
 HungryBat
-SuicidalScheme true 9
-28 26 2
+PatrolScheme false 1
+2 26 2
 ShinyArmor
 4 4
 RustyArmor
