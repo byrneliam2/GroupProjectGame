@@ -8,11 +8,11 @@ audio               cc3c071
 controller          cc3c071
 frames              850b7c7
 gfx                 850b7c7
-items               23e1978b
-map                 81ca194da795cfd707288da9b95bf48828aee4d1 or in short form 81ca194d
-npc                 7ea14cdb
-player              7183afcf
-save_load           7183afcf
+items               d5b7f98
+map                 9299d78
+npc                 d631fa2
+player              83c57ec
+save_load           e3a7f89
 
 
 James Watt Library Info:
