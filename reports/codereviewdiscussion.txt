@@ -37,4 +37,5 @@ Reviewer: James. Watt
 This package has many small classes that make up the items in the game and the players backpack. Each item has its own class and extends a abstractItem, each item can
 then implement an extra functionality class depending on the item, these being equippable and Usable. I found this class layout to be very logical, and a good
 simple solution to approaching the issue of items. The backpack class is essentially an arrayList with restrictions which again is logical and simple. I think there was a lot
-of potential
+of potential to over complicate this class, and i'm pleased to say that the primary author thomas did not over complicate the dynamics of items what so ever. I think that
+the use of inheritance is excellent and that there are a sufficient amount of tests for the given classes.
