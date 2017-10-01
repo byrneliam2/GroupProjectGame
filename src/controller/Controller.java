@@ -1,12 +1,10 @@
 package controller;
 
 import controller.enums.Command;
-import frames.MainDisplay;
 import game.IGame;
 import player.InvalidPlayerExceptions;
 import utils.Direction;
 
-import javax.swing.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,8 +20,6 @@ public class Controller implements IController {
 
         keyboard.setController(this);
         mouse.setController(this);
-
-        new Timer(MainDisplay.FRAMERATE, (e) -> update()).start();
     }
 
     /**
