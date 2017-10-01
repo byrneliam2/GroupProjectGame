@@ -15,7 +15,7 @@ In the backend...
 Map: 
 The Map package was reviewed by Tom, he thought it was done in a pretty neat way with different "layers" representing different 
 parts of the map. The maps were also designed in a pretty awesome map editor which meant that they were all the same 
-theme and they all look great! Some of the methods havent been fully tested but that's great as it gives us something to do.
+theme and they all look great! Some of the methods haven't been fully tested but that's great as it gives us something to do.
 Some improvements to possibly implement might be to split the Map class up into a few subclasses so that we don't have a giant class.
 Also putting all the item parsing methods into a single class so that we can more easily add new items is something we plan to do in 
 future.
@@ -24,3 +24,17 @@ SaveLoad:
 The saving and loading features haven't been implemented yet, however the planned method of using serialisation makes this quite an easy 
 task as we simply have to turn the Game (and potentially all its subclasses, not sure yet) into a byte stream and then save the byte stream 
 to a file.
+
+Player Package:
+Reviewer: James. Watt
+The class itself is set out and written in excellent fashion. No method is overly large and all thrown exceptions are appropriate for the situation.
+There are a good amount of player tests for the current point in development which are spread across the player and map packages, there will need to be more
+in future as more features are added. The only thing that i see that needs touch ups is some of the method comments which seem a little bit out dated or do
+not contain enough information. However as integration and testing is still occurring this is not a bad thing as methods and method parameters are still likely to change. 
+
+Item Package:
+Reviewer: James. Watt
+This package has many small classes that make up the items in the game and the players backpack. Each item has its own class and extends a abstractItem, each item can
+then implement an extra functionality class depending on the item, these being equippable and Usable. I found this class layout to be very logical, and a good
+simple solution to approaching the issue of items. The backpack class is essentially an arrayList with restrictions which again is logical and simple. I think there was a lot
+of potential
