@@ -23,6 +23,7 @@ import java.util.Observer;
  * @author Liam Byrne
  */
 public class MockGame implements IGame {
+	private boolean paused = false;
 
 	public MockGame() {
 		new World(new HashMap<>());
@@ -124,14 +125,16 @@ public class MockGame implements IGame {
 	}
 
 	public void pauseGame() {
+		paused = true;
 	}
 
 	public void unPauseGame() {
+		paused = false;
 	}
 
 	@Override
 	public boolean isPaused() {
-		return false;
+		return paused;
 	}
 
 	public void saveGame() {

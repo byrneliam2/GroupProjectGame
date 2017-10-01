@@ -188,7 +188,10 @@ public class MainDisplay extends JComponent implements Observer {
      * mechanism to execute.
      */
     public void startTimer() {
-        (timer = new Timer(FRAMERATE, (e) -> redraw())).start();
+        (timer = new Timer(FRAMERATE, (e) -> {
+            redraw();
+            controller.update();
+        })).start();
         game.unPauseGame();
     }
 
