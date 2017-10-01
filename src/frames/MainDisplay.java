@@ -13,6 +13,7 @@ import controller.*;
 import frames.cards.Card;
 import frames.cards.*;
 import game.IGame;
+import gfx.ImageLoader;
 import map.World;
 
 import javax.swing.*;
@@ -51,12 +52,13 @@ public class MainDisplay extends JComponent implements Observer {
         game = g;
         g.giveObserver(this);
 
-        master = new JFrame();
+        master = new JFrame("The Illusion of the Prophecy");
         currentCard = null;
         cards = new LinkedHashMap<>();
         audioHandler = new AudioHandler();
 
         // master frame setup
+        master.setIconImage(ImageLoader.image("ui", "logo", true));
         master.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         master.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         master.setResizable(false);
