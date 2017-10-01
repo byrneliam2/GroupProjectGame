@@ -1,5 +1,6 @@
 package frames.cards;
 
+import audio.tracks.MusicTrack;
 import audio.tracks.SoundTrack;
 import frames.MainDisplay;
 import gfx.GraphicsUtilities;
@@ -53,6 +54,7 @@ public class PauseCard extends Card {
                         dsp.update(null, "settings");
                         break;
                     case "exit":
+                        dsp.getAudioHandler().forceMusic(MusicTrack.MAIN_MENU);
                         dsp.update(null, "menu");
                         break;
                 }

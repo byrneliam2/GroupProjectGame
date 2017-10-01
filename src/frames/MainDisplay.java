@@ -171,6 +171,7 @@ public class MainDisplay extends JComponent implements Observer {
      */
     public void startGame() {
         switchScreen(game.getWorld().getStartingMap().getMapName());
+        audioHandler.forceMusic(MusicTrack.TEST_MUSIC);
         startTimer();
     }
 
