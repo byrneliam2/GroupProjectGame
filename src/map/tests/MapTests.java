@@ -35,7 +35,7 @@ public class MapTests {
 	}
 
 	@Test
-	public void envTest() {
+	public void enviromentTest() {
 		this.environmentCollisionSetup();
 		for (int i = 24; i <= 27; i++) {
 			for (int j = 0; j < 32; j++) {
