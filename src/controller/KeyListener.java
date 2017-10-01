@@ -19,6 +19,11 @@ public class KeyListener extends KeyAdapter{
         notifyController(e.getKeyCode(), false);
     }
 
+    /**
+     * Notifies the Controller of a Key Event.
+     * @param input The key with an event change
+     * @param pressed If the key was Clicked or Released.
+     */
     private void notifyController(Integer input, boolean pressed){
         for(Command cmd : Command.values()) {
             if(!cmd.getType().equals(InputType.KEYBOARD)) continue;
@@ -27,6 +32,10 @@ public class KeyListener extends KeyAdapter{
         }
     }
 
+    /**
+     * Add the Controller as a parent for notifications in the future.
+     * @param parent The Controller
+     */
     void setController(Controller parent){
         this.parent = parent;
     }

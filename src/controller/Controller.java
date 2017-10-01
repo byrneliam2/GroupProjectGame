@@ -26,6 +26,13 @@ public class Controller implements IController {
         new Timer(MainDisplay.FRAMERATE, (e) -> update()).start();
     }
 
+    /**
+     * Both children Objects, Keyboard and Mouse, will notify their parent (this) if a command is pressed.
+     * This will then be added to a set of all the current keys being pressed, so that when 'update()' is called
+     * the Controller will know which commands to invoke.
+     * @param cmd The command to logged
+     * @param pressed If the command is being pressed, or if released
+     */
     void notifyCommands(Command cmd, boolean pressed) {
         if (pressed)
             currentCommands.add(cmd);
@@ -33,6 +40,10 @@ public class Controller implements IController {
             currentCommands.remove(cmd);
     }
 
+    /**
+     * This method is to be called during a game update, this will instruct IGame object on how to control the player.
+     * @param cmd The command to be invoked.
+     */
     private void processCommand(Command cmd) {
         try {
             if (!game.isPaused()) {

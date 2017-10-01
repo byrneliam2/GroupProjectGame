@@ -41,6 +41,11 @@ public class MouseListener extends MouseAdapter {
         this.mouseY = e.getY();
     }
 
+    /**
+     * Notifies the Controller of a Mouse Click.
+     * @param input The Mouse-Key with an event change
+     * @param pressed If the mouse was Clicked or Released.
+     */
     private void notifyController(Integer input, boolean pressed){
         for(Command cmd : Command.values()) {
             if(!cmd.getType().equals(InputType.MOUSE)) continue;
@@ -49,6 +54,10 @@ public class MouseListener extends MouseAdapter {
         }
     }
 
+    /**
+     * Add the Controller as a parent for notifications in the future.
+     * @param parent The Controller
+     */
     void setController(Controller parent){
         this.parent = parent;
     }
