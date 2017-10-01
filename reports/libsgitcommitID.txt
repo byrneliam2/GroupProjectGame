@@ -8,13 +8,9 @@ audio               cc3c071
 controller          cc3c071
 frames              850b7c7
 gfx                 850b7c7
-items               d5b7f98
+items               f9b1bd899bb5ebcee2c199cc585c7835a40d1cc5
 map                 9299d78
 npc                 d631fa2
-player              83c57ec
+player              f9b1bd899bb5ebcee2c199cc585c7835a40d1cc5
 save_load           e3a7f89
 
-
-James Watt Library Info:
-I am in charge/the primary author of the Map package
-I have completed the implementation of my Map Package. However my testing package is still underway, i have implemented some small test's for the World, Map, MapParser, and World Parser.
