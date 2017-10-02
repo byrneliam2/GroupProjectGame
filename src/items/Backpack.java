@@ -52,7 +52,7 @@ public class Backpack {
 		item.pickUp(this);
 		if (item instanceof Key) {// if you pick up a key, add it to the key section
 			Key key = (Key) item;
-			keys.add(key);
+			keys.add(key); // FIXME: Can pick up infinite keys?
 			return;
 		}
 		inventory.add(item);
