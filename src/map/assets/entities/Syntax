@@ -1,3 +1,12 @@
+NOTES:
+-All <x> <y> are TILE locations, not pixel locations.
+-When making doors make sure they match up with the doors on the map.
+-When making doors make sure that the door <id> is the same on doors on either side of the doors.
+
+
+
+
+
 For Item:
 <ItemName> (Must be the same name as one of the concrete classes in items package)
 <x> <y> (Not sure how you are doing coordinates)
@@ -7,10 +16,15 @@ HealthPot
 5 9
 
 
+
+
 For npc:
 <"Npc">
 <EnemyName>-can't have spaces
-<ControlScheme> <Constructor information...> (Check the class for information on what each control scheme needs)
+
+<ControlScheme> <patrol leftRight(true/false)> <patrolNumber of tiles>
+(NOTE. If the control scheme is not "PatrolScheme" then the two extra bits are useless but still have to be put in)
+
 <x> <y> <health>
 
 Example:
@@ -20,15 +34,19 @@ PatrolScheme true 5
 1 1 2
 
 
+
+
 For Door:
 <"Door">
-<mapName> <id> <locked/unlocked>
+<mapName> <id> <locked(true)/unlocked(false)>
 <x> <y>
 
 Example:
 Door
-mapName 4 true
+mapName 05 true
 3 4
+
+
 
 
 For Keys:
@@ -40,5 +58,5 @@ Key 5
 6 6
 
 
- 
+
 
