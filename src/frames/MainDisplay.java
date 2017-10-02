@@ -114,8 +114,7 @@ public class MainDisplay extends JComponent implements Observer {
         master.add(this);
 
         // finally, make the menu screen visible
-        switchScreen("menu");
-        audioHandler.queueMusic(MusicTrack.MAIN_MENU);
+        menu();
     }
 
     /**
@@ -159,6 +158,12 @@ public class MainDisplay extends JComponent implements Observer {
         redraw();
     }
 
+    private void menu() {
+        switchScreen("menu");
+        audioHandler.stop();
+        audioHandler.queueMusic(MusicTrack.MAIN_MENU);
+    }
+
     /**
      * Load a new game. This consists of calling the newGame method on Game
      * and setting up the map cards.
@@ -184,6 +189,14 @@ public class MainDisplay extends JComponent implements Observer {
     private void pauseGame() {
         stopTimer();
         switchScreen("pause");
+    }
+
+    /**
+     * Stop the game and return to the main menu.
+     */
+    private void stopGame() {
+        stopTimer();
+        menu();
     }
 
     /**
@@ -248,6 +261,7 @@ public class MainDisplay extends JComponent implements Observer {
             switch (str) {
                 case "last":    switchScreen(lastCard.getName());  break;
                 case "pause":   pauseGame();                       break;
+                case "stop":    stopGame();                        break;
                 case "unpause": startTimer();                      break;
                 default:        switchScreen(str);                 break;
             }

@@ -193,6 +193,12 @@ public class MapCard extends Card {
 
 	@Override
 	public void redraw() {
+		if (game.isOver())
+			if (JOptionPane.showConfirmDialog(this,
+					"Game over!", "You are dead!", JOptionPane.DEFAULT_OPTION,
+					JOptionPane.ERROR_MESSAGE) == 0)
+				game.stopGame();
+
 		// reset the component lists
 		panel.removeAll();
 		// do updates
