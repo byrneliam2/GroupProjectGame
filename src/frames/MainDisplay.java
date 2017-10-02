@@ -84,6 +84,8 @@ public class MainDisplay extends JComponent implements Observer {
         master.setVisible(true);
     }
 
+    /* =========================================================================================== */
+
     /**
      * Perform first time setup for the MainDisplay.
      */
@@ -145,6 +147,8 @@ public class MainDisplay extends JComponent implements Observer {
         }
     }
 
+    /* =========================================================================================== */
+
     /**
      * Change the current screen that is being displayed.
      * @param key name of panel to switch to
@@ -163,6 +167,8 @@ public class MainDisplay extends JComponent implements Observer {
         audioHandler.stop();
         audioHandler.queueMusic(MusicTrack.MAIN_MENU);
     }
+
+    /* =========================================================================================== */
 
     /**
      * Load a new game. This consists of calling the newGame method on Game
@@ -199,6 +205,8 @@ public class MainDisplay extends JComponent implements Observer {
         menu();
     }
 
+    /* =========================================================================================== */
+
     /**
      * Switch to the first map and start the game redraw timer. This essentially
      * boots the game since it un-pauses it and allows the entity update
@@ -226,6 +234,8 @@ public class MainDisplay extends JComponent implements Observer {
     public void stopTimer() {
         timer.stop();
     }
+
+    /* =========================================================================================== */
 
     /**
      * Redraw the display by calling redraw on the current card and

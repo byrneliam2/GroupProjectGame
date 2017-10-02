@@ -24,7 +24,7 @@ import java.util.List;
  * TODO Dialogue popups
  * TODO Inventory screen
  * TODO Player animations
- * TODO adding of entities mid-game
+ * TODO adding of entities mid-game (divide into static and dynamic?)
  */
 public class MapCard extends Card {
 
