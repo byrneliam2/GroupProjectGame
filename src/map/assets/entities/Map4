@@ -1,9 +1,17 @@
 Door
-Map3 04 true
+Map8 02 true
 31 10
 Door
-Map3 04 true
+Map8 02 true
 31 9
+
+Door
+Map10 04 true
+16 0
+Door
+Map10 04 true
+17 0
+ 
 Npc
 HungryBear
 PatrolScheme false 12

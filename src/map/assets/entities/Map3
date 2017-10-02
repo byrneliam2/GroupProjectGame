@@ -1,15 +1,19 @@
 Door
-Map4 04 true
+Map8 01 true
 0 3
+
 Door
-Map4 04 true
+Map8 01 true
 0 4
+
 Door
-Map5 03 true
+Map7 03 true
 14 0
+
 Door
-Map5 03 true
+Map7 03 true
 15 0
+
 Npc
 HungryBat
 HardScheme false 1
