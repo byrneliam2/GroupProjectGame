@@ -8,7 +8,7 @@ audio               cc3c071
 controller          cc3c071
 frames              850b7c7
 gfx                 850b7c7
-items               f9b1bd899bb5ebcee2c199cc585c7835a40d1cc5
+items               bf6e762
 map                 9299d78
 npc                 d631fa2
 player              f9b1bd899bb5ebcee2c199cc585c7835a40d1cc5

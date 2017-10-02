@@ -214,7 +214,17 @@ public class ExternalItemsTests {
 
     @Test
     public void test14_DoorItems() {
+        DoorItem d = new DoorItem("nomap", 0, true, 100, 0);
+        assertTrue(d.isLocked());
+        assertTrue(d.getMap().equals("nomap"));
+        assertTrue(d.getDoorID() == 0);
+    }
 
+    @Test
+    public void test15_DoorItems() {
+        DoorItem d = new DoorItem("nomap", 0, true, 100, 0);
+        d.unlockDoor();
+        assertFalse(d.isLocked());
     }
 
 }
