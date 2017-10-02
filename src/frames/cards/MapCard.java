@@ -24,7 +24,6 @@ import java.util.List;
  * TODO Dialogue popups
  * TODO Inventory screen
  * TODO Player animations
- * TODO Add mouse cross-hair
  * TODO adding of entities mid-game
  */
 public class MapCard extends Card {
