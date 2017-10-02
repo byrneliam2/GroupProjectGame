@@ -162,7 +162,6 @@ public class Bullet {
 		if (owner.getMap().checkBulletHit(this)) {
 			removeBullet();
 		}
-
 		// removes the bullet if it somehow gets off the map
 		if (currentX > 2000 || currentX < 0 || currentY > 2000 || currentY < 0) {
 			removeBullet();

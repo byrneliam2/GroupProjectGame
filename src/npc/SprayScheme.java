@@ -30,7 +30,7 @@ public class SprayScheme extends MediumScheme {
 	 */
 	@Override
 	public void decideShooting(NPC npc, Player player) {
-		// shoot at the player every 100 moves change direction every 200
+		// shoot at the player when sprayRate is divisable and change direction every 200
 		if (moveCounter > 200) {
 			moveCounter = 0;
 			randDir = getRandomDir();
