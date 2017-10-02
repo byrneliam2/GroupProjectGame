@@ -108,7 +108,7 @@ public class Map {
 
 	/**
 	 * Removes the specified npc from the map and from the game.
-	 * 
+	 *
 	 * @param toBeRemoved
 	 *            the npc to be gone
 	 */
@@ -341,11 +341,10 @@ public class Map {
 	 * @param y
 	 */
 	public boolean canMove(int x, int y) {
-		if (x < 0 || y < 0 || x > this.width * Map.tileSize || y > this.height * Map.tileSize) {
-			return false;
-		}
 		x = (int) (x / tileSize);
 		y = (int) (y / tileSize);
+		if (x < 0 || y < 0 || x >= this.width || y >= this.height)
+			return false;
 
 		Point mapPos = this.positionOnMap(x, y);
 		if (this.collisionLayer.get((int) mapPos.getY()).get((int) mapPos.getX()) == 1) {
@@ -358,7 +357,7 @@ public class Map {
 	/**
 	 * This method decides whether a position on the map can be moved over by a
 	 * rectangle, using the rectangles four corners
-	 * 
+	 *
 	 * OPTIMISING: remove checking around the outside of map as these should never
 	 * occur. OPTIMISING: make the corners 'move along' as you go to each corner
 	 * rather than recalculating total 8 values.
