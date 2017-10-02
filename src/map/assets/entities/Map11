@@ -1,2 +1,23 @@
+Door
+Map10 08 true
+15 17
+Door
+Map10 08 true
+16 17
+
+Door
+Map12 09 true
+31 8
+Door
+Map12 09 true
+31 9
+
+Door
+Map13 10 true
+15 0 
+Door
+Map13 10 true
+16 0
+
 HealthPot
 29 4

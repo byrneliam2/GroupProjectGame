@@ -1,8 +1,13 @@
 Door
-Map3 03 true
+Map7 07 true
 16 17
+
 Door
-Map3 03 true
-15 17
+Map6 11 true
+15 0
+Door 
+Map6 11 true
+16 0
+
 HealthPot
 29 4
