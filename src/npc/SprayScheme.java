@@ -36,15 +36,16 @@ public class SprayScheme extends MediumScheme {
 			randDir = getRandomDir();
 		}
 		if (moveCounter % sprayRate == 0) {
-			new Bullet(npc.getCentreX(), npc.getCentreY(), 0, npc, 4, "npcBullet1");// N
-			new Bullet(npc.getCentreX(), npc.getCentreY(), Math.PI, npc, 4, "npcBullet1");// S
-			new Bullet(npc.getCentreX(), npc.getCentreY(), Math.PI / 2, npc, 4, "npcBullet1");// E
-			new Bullet(npc.getCentreX(), npc.getCentreY(), 3 * Math.PI / 2, npc, 4, "npcBullet1");// W
+			double offset = Math.random() * Math.PI / 8;
+			new Bullet(npc.getCentreX(), npc.getCentreY(), 0 + offset, npc, 4, "npcBullet1");// N
+			new Bullet(npc.getCentreX(), npc.getCentreY(), Math.PI + offset, npc, 4, "npcBullet1");// S
+			new Bullet(npc.getCentreX(), npc.getCentreY(), Math.PI / 2 + offset, npc, 4, "npcBullet1");// E
+			new Bullet(npc.getCentreX(), npc.getCentreY(), 3 * Math.PI / 2 + offset, npc, 4, "npcBullet1");// W
 
-			new Bullet(npc.getCentreX(), npc.getCentreY(), Math.PI / 4, npc, 4, "npcBullet1");// NE
-			new Bullet(npc.getCentreX(), npc.getCentreY(), 3 * Math.PI / 4, npc, 4, "npcBullet1");// SE
-			new Bullet(npc.getCentreX(), npc.getCentreY(), 5 * Math.PI / 4, npc, 4, "npcBullet1");// SW
-			new Bullet(npc.getCentreX(), npc.getCentreY(), 7 * Math.PI / 4, npc, 4, "npcBullet1");// NW
+			new Bullet(npc.getCentreX(), npc.getCentreY(), Math.PI / 4 + offset, npc, 4, "npcBullet1");// NE
+			new Bullet(npc.getCentreX(), npc.getCentreY(), 3 * Math.PI / 4 + offset, npc, 4, "npcBullet1");// SE
+			new Bullet(npc.getCentreX(), npc.getCentreY(), 5 * Math.PI / 4 + offset, npc, 4, "npcBullet1");// SW
+			new Bullet(npc.getCentreX(), npc.getCentreY(), 7 * Math.PI / 4 + offset, npc, 4, "npcBullet1");// NW
 		}
 	}
 
