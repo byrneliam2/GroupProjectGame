@@ -20,11 +20,8 @@ HealthPot
 
 For npc:
 <"Npc">
-<EnemyName>-can't have spaces
-
-<ControlScheme> <patrol leftRight(true/false)> <patrolNumber of tiles>
-(NOTE. If the control scheme is not "PatrolScheme" then the two extra bits are useless but still have to be put in)
-
+<EnemyName>//can't have spaces
+<ControlScheme> <true/false> <integer>  //the two parameters arnt used for all schemes, check the constructor of each scheme to see what they do
 <x> <y> <health>
 
 Example:
