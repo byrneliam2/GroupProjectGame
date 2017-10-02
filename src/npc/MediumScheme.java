@@ -13,8 +13,8 @@ import utils.MathUtils;
  */
 public class MediumScheme implements ControlScheme {
 
-	private utils.Direction randDir = getRandomDir();
-	private int moveCounter = 0;
+	protected utils.Direction randDir = getRandomDir();
+	protected int moveCounter = 0;
 
 	public MediumScheme() {
 	}
@@ -29,8 +29,18 @@ public class MediumScheme implements ControlScheme {
 			randDir = getRandomDir();
 		}
 
-		// shoot at the player every 100 moves change direction every 200
 		moveCounter++;
+		decideShooting(npc, player);
+	}
+
+	/**
+	 * Descides whether it is time to shoot, if it is, then make a new bullet.
+	 * 
+	 * @param npc
+	 * @param player
+	 */
+	public void decideShooting(NPC npc, Player player) {
+		// shoot at the player every 100 moves change direction every 200
 		if (moveCounter > 200) {
 			moveCounter = 0;
 			new Bullet(npc.getCentreX(), npc.getCentreY(), MathUtils.calculateAngle(npc.getxLocation(),
