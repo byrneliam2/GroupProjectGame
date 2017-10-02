@@ -252,7 +252,7 @@ public class Player {
 		DoorItem oppDoor = newMap.getDoor(Door.getDoorID());
 
 		// update player's location on new map...
-		playerBox.setFrame(oppDoor.getX(), oppDoor.getY(), playerBox.getWidth(), playerBox.getHeight());
+		setPlayerPosition(oppDoor);
 
 		rangeCircle = new Ellipse2D.Double(playerBox.getX() - Map.tileSize / 2, playerBox.getY() - Map.tileSize / 2,
 				rangeCircleWidth, rangeCircleWidth);
@@ -264,6 +264,18 @@ public class Player {
 		// start the new map off...
 		newMap.startMapNPCs();
 		return newMap;
+	}
+
+	private void setPlayerPosition(DoorItem door) {
+		if(door.getX()==1860) {//entering on right...
+			playerBox.setFrame(1820, door.getY(), playerBox.width, playerBox.height);
+		}else if (door.getX()==0) {//entering on left
+			playerBox.setFrame(40, door.getY(), playerBox.width, playerBox.height);
+		}else if (door.getY()==1020) {//entering on bottom
+			playerBox.setFrame(door.getX(), 980, playerBox.width, playerBox.height);
+		}else if (door.getY()==0) {//entering on bottom
+			playerBox.setFrame(door.getX(), 40, playerBox.width, playerBox.height);
+		}
 	}
 
 	/**
