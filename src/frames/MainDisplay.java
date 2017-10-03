@@ -183,7 +183,7 @@ public class MainDisplay extends JComponent implements Observer {
      * Start a new game by opening the first world and starting the timer.
      */
     public void startGame() {
-        switchScreen(game.getWorld().getStartingMap().getMapName());
+        switchScreen(game.getWorld().getStartingMap().getName());
         audioHandler.stop();
         audioHandler.queueMusic(MusicTrack.TEST_MUSIC);
         startTimer();

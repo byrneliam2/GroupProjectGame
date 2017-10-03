@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import org.junit.Test;
 
+import items.DoorItem;
 import items.Item;
 import items.itemList.HealthPot;
 import items.itemList.MassiveGun;
@@ -21,6 +22,7 @@ public class MapTests {
 	private int x = 90, y = 90;
 	private Player p1;
 	private Map m;
+	private Map m2;
 
 	public void setup() {
 		p1 = new Player("Tom", x, y);
@@ -31,6 +33,13 @@ public class MapTests {
 	public void environmentCollisionSetup() {
 		p1 = new Player("Tom", x, y);
 		m = MapParser.parse("MapTest", p1);
+		p1.setMap(m);
+	}
+	
+	public void doorSetup() {
+		p1 = new Player("Tom", 150, 150);
+		m = MapParser.parse("Map3", p1);
+		m2 = MapParser.parse("Map8", p1);
 		p1.setMap(m);
 	}
 
@@ -95,6 +104,23 @@ public class MapTests {
 			}
 
 		}
+	}
+	
+	@Test
+	public void doorTest() throws InvalidPlayerExceptions {
+		//Player starts on Map3 and should move over the door and into Map8
+		this.doorSetup();
+		assert(p1.getxLocation()==150);
+		assert(p1.getyLocation()==150);
+
+		assertFalse(p1.move(120,240));
+		assert(p1.getxLocation()==200);
+		assert(p1.getyLocation()==200);
+		assertEquals(m2.getName(),p1.getMap().getName());
+		
+		
+		
+		
 	}
 
 	@Test

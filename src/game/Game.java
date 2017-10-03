@@ -52,7 +52,7 @@ public class Game extends Observable implements IGame, Serializable {
 	 * @return the name of the current map that the player is on.
 	 */
 	public String getCurrentMap() {
-		return player.getMap().getMapName();
+		return player.getMap().getName();
 	}
 
 	/**

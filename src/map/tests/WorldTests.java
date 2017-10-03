@@ -15,7 +15,7 @@ public class WorldTests {
 		Player p1 = new Player("Tom", 50, 50);
 		World w = WorldParser.parse("world", p1);
 		assert(w.getStartingMap()!=null);
-		assert(w.getStartingMap().getMapName().equals("Map3"));
+		assert(w.getStartingMap().getName().equals("Map3"));
 	}
 
 	@Test

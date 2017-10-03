@@ -341,10 +341,10 @@ public class Map {
 	 * @param y
 	 */
 	public boolean canMove(int x, int y) {
+		if (x < 0 || y < 0 || x > this.width * Map.tileSize || y > this.height * Map.tileSize)
+			return false;
 		x = (int) (x / tileSize);
 		y = (int) (y / tileSize);
-		if (x < 0 || y < 0 || x >= this.width || y >= this.height)
-			return false;
 
 		Point mapPos = this.positionOnMap(x, y);
 		if (this.collisionLayer.get((int) mapPos.getY()).get((int) mapPos.getX()) == 1) {
@@ -367,41 +367,40 @@ public class Map {
 	 */
 	public boolean canMove(Rectangle.Double r) {
 		// May have to add more points to check for collisions
-		double topLx = r.getX();
-		double topLy = r.getY();
-		if (topLx < 0 || topLy < 0) {
+		double posX = r.getX();
+		double posY = r.getY();
+		if (posX < 0 || posY < 0) {
 			return false;
 		}
-		if (this.collisionLayer.get((int) (topLy / Map.tileSize)).get((int) (topLx / Map.tileSize)) == 1) {
-			return false;
-		}
-
-		double topRx = r.getX() + r.getWidth() - 1;
-		double topRy = r.getY();
-		if (topRx > (this.width * Map.tileSize) || topRy > (this.height * Map.tileSize)) {
-			return false;
-		}
-		if (this.collisionLayer.get((int) (topRy / Map.tileSize)).get((int) (topRx / Map.tileSize)) == 1) {
+		if (this.collisionLayer.get((int) (posY / Map.tileSize)).get((int) (posX / Map.tileSize)) == 1) {
 			return false;
 		}
 
-		double botLx = r.getX();
-		double botLy = r.getY() + r.getHeight() - 1;
-		if ((botLx) < 0 || (botLy) < 0) {
+		posX = posX + r.getWidth() - 1;
+		if (posX > (this.width * Map.tileSize) || posY > (this.height * Map.tileSize)) {
+			return false;
+		}
+		if (this.collisionLayer.get((int) (posY / Map.tileSize)).get((int) (posX / Map.tileSize)) == 1) {
 			return false;
 		}
 
-		if (this.collisionLayer.get((int) (botLy / Map.tileSize)).get((int) (botLx / Map.tileSize)) == 1) {
+		posX = posX - r.getWidth() + 1;
+		posY = posY + r.getHeight() - 1;
+		if ((posX) < 0 || (posY) < 0) {
 			return false;
 		}
 
-		double botRx = r.getX() + r.getWidth() - 1;
-		double botRy = r.getY() + r.getHeight() - 1;
-		if (botRx > (this.width * Map.tileSize) || botRy > (this.height * Map.tileSize)) {
+		if (this.collisionLayer.get((int) (posY / Map.tileSize)).get((int) (posX / Map.tileSize)) == 1) {
 			return false;
 		}
 
-		if (this.collisionLayer.get((int) (botRy / Map.tileSize)).get((int) (botRx / Map.tileSize)) == 1) {
+		posX = posX + r.getWidth() - 1;
+		
+		if (posX > (this.width * Map.tileSize) || posY > (this.height * Map.tileSize)) {
+			return false;
+		}
+
+		if (this.collisionLayer.get((int) (posY / Map.tileSize)).get((int) (posX / Map.tileSize)) == 1) {
 			return false;
 		}
 
@@ -527,7 +526,7 @@ public class Map {
 	 *
 	 * @return The map name
 	 */
-	public String getMapName() {
+	public String getName() {
 		return this.name;
 	}
 
