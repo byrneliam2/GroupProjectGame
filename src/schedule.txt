@@ -3,7 +3,8 @@ TO DO:
 - Own unit testing
 
 DISCUSSION POINTS:
-- <none>
+- Liam - max health more than 5, and updating when items are picked up.
+- Drew - possibly a second type of attack right mouse click or maybe a dash?
 
 DEADLINES
 - Complete libraries by 27/9

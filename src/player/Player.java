@@ -74,7 +74,6 @@ public class Player {
 			map.removeItem(closestItem);
 			// updates closest item to player
 			closestItem = map.getClosestItem(rangeCircle);
-
 		} catch (InvalidBackpackException e) {
 			// If the Player is trying to pickup an item which doesn't exists return this
 			// exception.
