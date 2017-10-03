@@ -45,4 +45,6 @@ public interface IGame {
     Player getPlayer();
 
     boolean isOver();
+
+    void stopGame();
 }

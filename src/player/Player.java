@@ -23,12 +23,11 @@ import utils.MathUtils;
 public class Player {
 	/* constants */
 	private static final int rangeCircleWidth = 2 * Map.tileSize;
-	private static final double defaultFireRate = 0.8;
+	private static final double defaultFireRate = 0.2;
 
 	private final String name;
 	private Item closestItem;
 	private Backpack itemsList = new Backpack(this);
-
 	protected boolean isDead = false;
 	protected int health = 5;
 	private int maxHealth = 5;

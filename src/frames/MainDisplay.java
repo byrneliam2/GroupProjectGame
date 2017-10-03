@@ -84,6 +84,8 @@ public class MainDisplay extends JComponent implements Observer {
         master.setVisible(true);
     }
 
+    /* =========================================================================================== */
+
     /**
      * Perform first time setup for the MainDisplay.
      */
@@ -114,8 +116,7 @@ public class MainDisplay extends JComponent implements Observer {
         master.add(this);
 
         // finally, make the menu screen visible
-        switchScreen("menu");
-        audioHandler.queueMusic(MusicTrack.MAIN_MENU);
+        menu();
     }
 
     /**
@@ -146,6 +147,8 @@ public class MainDisplay extends JComponent implements Observer {
         }
     }
 
+    /* =========================================================================================== */
+
     /**
      * Change the current screen that is being displayed.
      * @param key name of panel to switch to
@@ -158,6 +161,14 @@ public class MainDisplay extends JComponent implements Observer {
         // force a redraw on the new card
         redraw();
     }
+
+    private void menu() {
+        switchScreen("menu");
+        audioHandler.stop();
+        audioHandler.queueMusic(MusicTrack.MAIN_MENU);
+    }
+
+    /* =========================================================================================== */
 
     /**
      * Load a new game. This consists of calling the newGame method on Game
@@ -187,6 +198,16 @@ public class MainDisplay extends JComponent implements Observer {
     }
 
     /**
+     * Stop the game and return to the main menu.
+     */
+    private void stopGame() {
+        stopTimer();
+        menu();
+    }
+
+    /* =========================================================================================== */
+
+    /**
      * Switch to the first map and start the game redraw timer. This essentially
      * boots the game since it un-pauses it and allows the entity update
      * mechanism to execute.
@@ -213,6 +234,8 @@ public class MainDisplay extends JComponent implements Observer {
     public void stopTimer() {
         timer.stop();
     }
+
+    /* =========================================================================================== */
 
     /**
      * Redraw the display by calling redraw on the current card and
@@ -248,6 +271,7 @@ public class MainDisplay extends JComponent implements Observer {
             switch (str) {
                 case "last":    switchScreen(lastCard.getName());  break;
                 case "pause":   pauseGame();                       break;
+                case "stop":    stopGame();                        break;
                 case "unpause": startTimer();                      break;
                 default:        switchScreen(str);                 break;
             }

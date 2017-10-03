@@ -162,6 +162,11 @@ public class Game extends Observable implements IGame, Serializable {
 	}
 
 	@Override
+	public void stopGame() {
+		set("stop");
+	}
+
+	@Override
 	public void set(Object arg) {
 		setChanged();
 		notifyObservers(arg);

@@ -24,7 +24,7 @@ import java.util.List;
  * TODO Dialogue popups
  * TODO Inventory screen
  * TODO Player animations
- * TODO adding of entities mid-game
+ * TODO adding of entities mid-game (divide into static and dynamic?)
  */
 public class MapCard extends Card {
 
@@ -173,6 +173,19 @@ public class MapCard extends Card {
 		}
 	}
 
+	/**
+	 * Check if the game is over. If so, present a message to the player and stop the game
+	 * upon acknowledgment.
+	 */
+	private void checkGameOver() {
+		if (game.isOver())
+			if (JOptionPane.showConfirmDialog(this,
+					"Game over!", "You are dead!", JOptionPane.DEFAULT_OPTION,
+					JOptionPane.ERROR_MESSAGE) == 0) {
+				game.stopGame();
+			}
+	}
+
 	/* ===================================== UTILITIES ========================================= */
 
 	private void addGameEntity(Entity e) {
@@ -193,6 +206,8 @@ public class MapCard extends Card {
 
 	@Override
 	public void redraw() {
+		// check game state
+		checkGameOver();
 		// reset the component lists
 		panel.removeAll();
 		// do updates

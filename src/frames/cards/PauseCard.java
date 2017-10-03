@@ -54,9 +54,7 @@ public class PauseCard extends Card {
                         dsp.update(null, "settings");
                         break;
                     case "exit":
-                        dsp.getAudioHandler().stop();
-                        dsp.getAudioHandler().queueMusic(MusicTrack.MAIN_MENU);
-                        dsp.update(null, "menu");
+                        dsp.update(null, "stop");
                         break;
                 }
             });
