@@ -3,6 +3,8 @@ TO DO:
 - External testing
 
 DISCUSSION POINTS:
+- No lectures next week, good time to get things done
+- Can't get too comfortable where we are, still lots to do
 - Liam - max health more than 5, and updating when items are picked up.
 - Drew - possibly a second type of attack right mouse click or maybe a dash?
 - James - need a new potion image for a new restore-health-to-max potion
