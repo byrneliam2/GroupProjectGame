@@ -29,14 +29,10 @@ import java.util.List;
 public class MapCard extends Card {
 
 	/* Primary attributes */
-	private List<Entity> entities;
-	private List<Entity> elements;
+	private List<Entity> statics;
+	private List<Entity> dynamics;
 	private map.Map map;
 	private IGame game;
-
-	/* Secondary attributes */
-	private int heartIndex;
-	private int frameIndex;
 
 	/* Constants */
 	private static final int ELEMENT_LOC_A = 50;
@@ -44,8 +40,8 @@ public class MapCard extends Card {
 	public MapCard(String n, map.Map map, IGame game) {
 		super(n);
 
-		this.entities = new ArrayList<>();
-		this.elements = new ArrayList<>();
+		this.statics  = new ArrayList<>();
+		this.dynamics = new ArrayList<>();
 		this.map = map;
 		this.game = game;
 
@@ -53,109 +49,112 @@ public class MapCard extends Card {
 				ImageLoader.image("MapImages", map.getBackgroundLayer(), true),
 				MainDisplay.WIDTH, MainDisplay.HEIGHT));
 
-		addInitialEntities();
-		addUIEntities();
+		addStaticEntities();
+		addDynamicEntities();
 	}
 
-	/* ======================================= ADDING ============================================ */
-	/* ======================= Are only called upon creation of card ============================= */
+	/* ========================================== ADDING ========================================= */
 
 	/**
-	 * Add all entities to the map. This is done outside of the setup method since the map is not constructed
-	 * beforehand and also because this setup does not relate to Swing components.
+	 * Add all static entities to the map. Static entities are ones that are created as part of the map
+	 * and can be removed, but not added back. This is done outside of the setup method since the map
+	 * is not constructed beforehand and also because this setup does not relate to Swing components.
 	 */
-	private void addInitialEntities() {
+	private void addStaticEntities() {
 		// add player
-		addGameEntity(new Entity(game.getPlayer(), EntityType.PLAYER,
+		addStaticEntity(new Entity(game.getPlayer(), EntityType.PLAYER,
 				ImageLoader.image("playerImages", "playerRect", true),
 						new Point(game.getPlayer().getxLocation(), game.getPlayer().getyLocation()), 0)
 		);
 		// add all NPCs
-		map.getNPCS().forEach(npc -> addGameEntity(new Entity(npc, EntityType.NPC,
+		map.getNPCS().forEach(npc -> addStaticEntity(new Entity(npc, EntityType.NPC,
 				ImageLoader.image("npcImages", "bug", true),
 				new Point(npc.getxLocation(), npc.getyLocation()), 0))
-		);
-		// add all items
-		map.getItems().forEach(item -> addGameEntity(new Entity(item, EntityType.ITEM,
-				ImageLoader.image("ItemPictures", item.getImageFileName(), true),
-				new Point(item.getX(), item.getY()), 0))
 		);
 	}
 
 	/**
-	 * Add UI entities to the screen. To avoid confusion between the lists, UI entities are
-	 * referred to as "elements."
+	 * Add dynamic entities to the screen. Dynamic entities have the ability to be added in dynamically
+	 * (hence the name) as well as everything a static entity can do.
 	 */
-	private void addUIEntities() {
+	private void addDynamicEntities() {
+		// add all items
+		map.getItems().forEach(item -> addDynamicEntity(new Entity(item, EntityType.ITEM,
+				ImageLoader.image("ItemPictures", item.getImageFileName(), true),
+				new Point(item.getX(), item.getY()), 0))
+		);
 		// add player health
 		for (int i = 0; i < game.getPlayer().getHealth(); i++) {
-			addUIEntity(new Entity(game.getPlayer(), EntityType.HEART,
+			addDynamicEntity(new Entity(game.getPlayer(), EntityType.HEART,
 					ImageLoader.image("game", "heart", true),
-					new Point(heartIndex = ELEMENT_LOC_A + (i * ELEMENT_LOC_A), 0),
+					new Point(ELEMENT_LOC_A + (i * ELEMENT_LOC_A), 0),
 					ELEMENT_LOC_A));
 		}
 		// add inventory items
 		for (int i = 0; i < game.getPlayer().getBackpack().getInventorySize(); i++) {
-			addUIEntity(new Entity(game.getPlayer(), EntityType.ITEMFRAME,
+			addDynamicEntity(new Entity(game.getPlayer(), EntityType.ITEMFRAME,
 					ImageLoader.image("game", "itemframe", true),
-					new Point(frameIndex = MainDisplay.WIDTH - ELEMENT_LOC_A - (i * ELEMENT_LOC_A), 5),
+					new Point(MainDisplay.WIDTH - ELEMENT_LOC_A - (i * ELEMENT_LOC_A), 5),
 					ELEMENT_LOC_A));
 		}
 		// add dialogue, if any
 		//
 	}
 
-	/* ====================================== UPDATERS =========================================== */
-	/* ============================== Called on each redraw ====================================== */
+	/* ========================================= UPDATERS ======================================== */
 
 	/**
-	 * Update the location of all game entities, if they are indeed a game entity.
-	 * UI entities are dealt with external of this method.
+	 * Update the location of all static entities and remove any that do not exist within the map
+	 * as of the method call.
 	 */
-	private void updateEntities() {
-		List<Entity> itemsToRemove = new ArrayList<>();
-		int numItems = 0;
-		for (Entity e : entities) {
+	private void updateStaticEntities() {
+		List<Entity> toRemove = new ArrayList<>();
+		for (Entity e : statics) {
 			Object o = e.getObject();
 			switch (e.getType()) {
-			case ITEM:
-				Item i = (Item) o;
-				if (i.getPack() != null) itemsToRemove.add(e);
-				else {
-					e.setLocation(new Point(i.getX(), i.getY()));
-					numItems++;
-				}
-				break;
-			case PLAYER: case NPC:
-				Player p = (Player) o; // since an NPC is a Player
-				if (p.isDead()) itemsToRemove.add(e);
-				else e.setLocation(new Point(p.getxLocation(), p.getyLocation()));
-				break;
+				// only static entities (ones that can't be dynamically added) are Player instances
+				case PLAYER: case NPC:
+					Player p = (Player) o; // since an NPC is a Player
+					if (p.isDead()) toRemove.add(e);
+					else e.setLocation(new Point(p.getxLocation(), p.getyLocation()));
+					break;
 			}
 		}
-		entities.removeAll(itemsToRemove);
-		if (numItems < map.getItems().size()) {}
+		statics.removeAll(toRemove);
 	}
 
 	/**
-	 * Update the UI elements list.
+	 * Update the dynamic entities list.
 	 */
-	private void updateElements() {
-		List<Entity> elementsToRemove = new ArrayList<>();
-		int numHearts = 0;
-		for (Entity e : elements) {
+	private void updateDynamicEntities() {
+		List<Entity> toRemove = new ArrayList<>();
+		int numHearts = 0, numItems = 0;
+		for (Entity e : dynamics) {
 			switch (e.getType()) {
-			case HEART:
-				if (++numHearts > game.getPlayer().getHealth())
-					elementsToRemove.add(e);
-				break;
-			case ITEMFRAME:
-				break;
-			case DIALOGUE:
-				break;
+				case ITEM:
+					Item i = (Item) e.getObject();
+					if (i.getPack() != null) toRemove.add(e);
+					else {
+						e.setLocation(new Point(i.getX(), i.getY()));
+						numItems++;
+					}
+					break;
+				case HEART:
+					if (++numHearts > game.getPlayer().getHealth())
+						toRemove.add(e);
+					break;
+				case ITEMFRAME:
+					break;
+				case DIALOGUE:
+					break;
 			}
 		}
-		elements.removeAll(elementsToRemove);
+		dynamics.removeAll(toRemove);
+		if (numItems < map.getItems().size() ||
+				numHearts < game.getPlayer().getHealth()) {
+			dynamics.clear();
+			addDynamicEntities();
+		}
 	}
 
 	/**
@@ -186,14 +185,14 @@ public class MapCard extends Card {
 			}
 	}
 
-	/* ===================================== UTILITIES ========================================= */
+	/* ========================================= UTILITIES ====================================== */
 
-	private void addGameEntity(Entity e) {
-		entities.add(e);
+	private void addStaticEntity(Entity e) {
+		statics.add(e);
 	}
 
-	private void addUIEntity(Entity e) {
-		elements.add(e);
+	private void addDynamicEntity(Entity e) {
+		dynamics.add(e);
 	}
 
 	@Override
@@ -211,14 +210,14 @@ public class MapCard extends Card {
 		// reset the component lists
 		panel.removeAll();
 		// do updates
-		updateEntities();
-		updateElements();
+		updateStaticEntities();
+		updateDynamicEntities();
 		updateBullets();
 		// draw the lot
-		for (Entity e : entities)
+		for (Entity e : statics)
 			draw(e.getImage(), e.getLocation().x, e.getLocation().y,
 					e.getImage().getWidth(), e.getImage().getHeight());
-		for (Entity e : elements)
+		for (Entity e : dynamics)
 			draw(e.getImage(), e.getLocation().x, e.getLocation().y,
 					e.getImage().getWidth(), e.getImage().getHeight());
 	}
