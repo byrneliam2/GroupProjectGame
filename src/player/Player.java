@@ -23,7 +23,7 @@ import utils.MathUtils;
 public class Player {
 	/* constants */
 	private static final int rangeCircleWidth = 2 * Map.tileSize;
-	private static final double defaultFireRate = 1;
+	private static final double defaultFireRate = 0.8;
 
 	private final String name;
 	private Item closestItem;
@@ -117,12 +117,7 @@ public class Player {
 	 *             item is not part of a player's backpack.
 	 */
 	public void equipItem(Equipable item) throws InvalidPlayerExceptions {
-		try {
-			// equips the item
-			itemsList.equipItem(item);
-		} catch (InvalidBackpackException e) {
-			throw new InvalidPlayerExceptions(e.getMessage());
-		}
+		throw new Error("Implementation removed");
 	}
 
 	/**
@@ -135,12 +130,7 @@ public class Player {
 	 *             unequipped area is full.
 	 */
 	public void unequipItem(Equipable item) throws InvalidPlayerExceptions {
-		try {
-			// un-equips the item
-			itemsList.unequipItem(item);
-		} catch (InvalidBackpackException e) {
-			throw new InvalidPlayerExceptions(e.getMessage());
-		}
+		throw new Error("Implementation removed");
 	}
 
 	/**
@@ -267,13 +257,13 @@ public class Player {
 	}
 
 	private void setPlayerPosition(DoorItem door) {
-		if(door.getX()==1860) {//entering on right...
+		if (door.getX() == 1860) {// entering on right...
 			playerBox.setFrame(1820, door.getY(), playerBox.width, playerBox.height);
-		}else if (door.getX()==0) {//entering on left
+		} else if (door.getX() == 0) {// entering on left
 			playerBox.setFrame(40, door.getY(), playerBox.width, playerBox.height);
-		}else if (door.getY()==1020) {//entering on bottom
+		} else if (door.getY() == 1020) {// entering on bottom
 			playerBox.setFrame(door.getX(), 980, playerBox.width, playerBox.height);
-		}else if (door.getY()==0) {//entering on bottom
+		} else if (door.getY() == 0) {// entering on bottom
 			playerBox.setFrame(door.getX(), 40, playerBox.width, playerBox.height);
 		}
 	}

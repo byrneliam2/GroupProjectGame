@@ -14,12 +14,10 @@ import player.Player;
  */
 public class Backpack {
 	/* Constants */
-	public static final int MAX_EQUIPABLE_ITEMS = 2;
 	public static final int MAX_INVENTORY = 20;
 
 	private Player owner;
 	private List<Item> inventory = new ArrayList<Item>(MAX_INVENTORY);
-	private List<Equipable> equippedItems = new ArrayList<Equipable>(MAX_EQUIPABLE_ITEMS);
 	private List<Key> keys = new ArrayList<Key>();
 
 	/**
@@ -54,9 +52,14 @@ public class Backpack {
 			Key key = (Key) item;
 			keys.add(key); // FIXME: Can pick up infinite keys?
 			return;
+		} else if (item instanceof Equipable) {
+			Equipable equip = (Equipable) item;
+			equip.provideBonus(owner);
+		} else if (item instanceof Usable) {
+			Usable use = (Usable) item;
+			use.use(owner);
 		}
 		inventory.add(item);
-
 	}
 
 	/**
@@ -96,41 +99,7 @@ public class Backpack {
 		item.remove();// removes items link to backpack.
 	}
 
-	/**
-	 * Equips this item, providing its given bonuses to the player, moving the item
-	 * into the 'equipped' section of the player's backpack.
-	 *
-	 * @throws InvalidBackpackException
-	 *             if the player already has the max number of items equipped or the
-	 *             item is not part of a player's backpack.
-	 */
-	public void equipItem(Equipable item) throws InvalidBackpackException {
-		if (!inventory.remove(item))// removes the item from the non-equipped section of pack
-			throw new InvalidBackpackException("Item was not in the backpack");
-		if (equippedItems.size() >= MAX_EQUIPABLE_ITEMS)
-			throw new InvalidBackpackException("Max amount of equipped items has been reached");
 
-		equippedItems.add(item);
-		item.provideBonus(owner);
-	}
-
-	/**
-	 * Unequips this item, removing its given bonuses from the player it was
-	 * equipped to and moving it out of the 'equipped' section of the backpack.
-	 *
-	 * @throws InvalidBackpackException
-	 *             if the item was not equipped to any player or the pack's
-	 *             unequipped area is full.
-	 */
-	public void unequipItem(Equipable item) throws InvalidBackpackException {
-		if (!equippedItems.remove(item))// removes item from equiped section of pack
-			throw new InvalidBackpackException("Item was not equipped");
-		if (inventory.size() >= MAX_INVENTORY)
-			throw new InvalidBackpackException("Can't unequip as there are too many items in the inventory");
-
-		inventory.add(item);
-		item.removeBonus(owner);
-	}
 
 	/**
 	 * Uses this item on the player and removes it from the inventory
@@ -166,9 +135,6 @@ public class Backpack {
 		return this.inventory;
 	}
 
-	public List<Equipable> getEquippedItems() {
-		return this.equippedItems;
-	}
 
 	public int getInventorySize() {
 		return inventory.size();

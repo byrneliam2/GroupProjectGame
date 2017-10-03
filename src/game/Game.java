@@ -103,13 +103,6 @@ public class Game extends Observable implements IGame, Serializable {
 		return this.player.getBackpack().getInventory();
 	}
 
-	/**
-	 * @return the player's equippedItems (part of the backpack)
-	 */
-	public List<Equipable> getEquippedItems() {
-		return this.player.getBackpack().getEquippedItems();
-	}
-
 	/******************* Controller Methods ************************/
 
 	/**
@@ -127,27 +120,6 @@ public class Game extends Observable implements IGame, Serializable {
 	 */
 	public void interact() throws InvalidPlayerExceptions {
 		player.pickUpItem();
-	}
-
-	/**
-	 * @see player.Player#removeItem(Item i)
-	 */
-	public void dropItem(Item i) throws InvalidPlayerExceptions {
-		player.removeItem(i);
-	}
-
-	/**
-	 * @see player.Player#equipItem(Equipable i)
-	 */
-	public void equipItem(Equipable i) throws InvalidPlayerExceptions {
-		player.equipItem(i);
-	}
-
-	/**
-	 * @see player.Player#unequipItem(Equipable i)
-	 */
-	public void unequipItem(Equipable i) throws InvalidPlayerExceptions {
-		player.unequipItem(i);
 	}
 
 	/**
