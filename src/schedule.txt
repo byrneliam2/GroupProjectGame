@@ -1,6 +1,6 @@
 TO DO:
 - Implementation and integration
-- Own unit testing
+- External testing
 
 DISCUSSION POINTS:
 - Liam - max health more than 5, and updating when items are picked up.
@@ -8,11 +8,10 @@ DISCUSSION POINTS:
 - James - need a new potion image for a new restore-health-to-max potion
 
 DEADLINES
-- Complete libraries by 27/9
-- Code review by 1/10
+- External tests done by 6/10
 
 NEXT MEETING (11am CO242b):
 - 4/10
 
 NEXT CODING DAY:
-- 28/9
+- 5/10
