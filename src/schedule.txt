@@ -13,7 +13,7 @@ DEADLINES
 - External tests done by 6/10
 
 NEXT MEETING (11am CO242b):
-- 4/10
+- ?
 
 NEXT CODING DAY:
 - 5/10
