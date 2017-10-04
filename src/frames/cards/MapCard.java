@@ -24,7 +24,6 @@ import java.util.List;
  * TODO Dialogue popups
  * TODO Inventory screen
  * TODO Player animations
- * TODO adding of entities mid-game (divide into static and dynamic?)
  */
 public class MapCard extends Card {
 
@@ -92,9 +91,10 @@ public class MapCard extends Card {
 		}
 		// add inventory items
 		for (int i = 0; i < game.getPlayer().getBackpack().getInventorySize(); i++) {
-			addDynamicEntity(new Entity(game.getPlayer(), EntityType.ITEMFRAME,
-					ImageLoader.image("game", "itemframe", true),
-					new Point(MainDisplay.WIDTH - ELEMENT_LOC_A - (i * ELEMENT_LOC_A), 5),
+			addDynamicEntity(new Entity(game.getPlayer(), EntityType.INVENTORY,
+					ImageLoader.image("ItemPictures", game.getPlayer().getBackpack()
+							.getInventory().get(i).getImageFileName(), true),
+					new Point(MainDisplay.WIDTH - (2 * ELEMENT_LOC_A) - (i * ELEMENT_LOC_A), 5),
 					ELEMENT_LOC_A));
 		}
 		// add dialogue, if any
@@ -128,7 +128,7 @@ public class MapCard extends Card {
 	 */
 	private void updateDynamicEntities() {
 		List<Entity> toRemove = new ArrayList<>();
-		int numHearts = 0, numItems = 0;
+		int numHearts = 0, numItems = 0, numInventory = 0;
 		for (Entity e : dynamics) {
 			switch (e.getType()) {
 				case ITEM:
@@ -143,16 +143,19 @@ public class MapCard extends Card {
 					if (++numHearts > game.getPlayer().getHealth())
 						toRemove.add(e);
 					break;
-				case ITEMFRAME:
+				case INVENTORY:
+					numInventory++;
 					break;
-				case DIALOGUE:
+				case STRING:
 					break;
 			}
 		}
 		dynamics.removeAll(toRemove);
+
 		if (numItems < map.getItems().size() ||
-				numHearts < game.getPlayer().getHealth()) {
-			dynamics.clear();
+				numHearts < game.getPlayer().getHealth() ||
+				numInventory < game.getPlayer().getBackpack().getInventorySize()) {
+			dynamics.clear(); // FIXME need more optimized solution
 			addDynamicEntities();
 		}
 	}
