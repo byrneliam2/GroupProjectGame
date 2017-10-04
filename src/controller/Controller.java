@@ -75,4 +75,9 @@ public class Controller implements IController {
         if (!game.isPaused())
             currentCommands.forEach(this::processCommand);
     }
+
+    @Override
+    public void reloadController() {
+        currentCommands.clear();
+    }
 }
