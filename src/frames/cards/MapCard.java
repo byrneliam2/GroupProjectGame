@@ -18,6 +18,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 /**
@@ -26,7 +27,6 @@ import java.util.stream.Collectors;
  * {@link Card.Entity}s.
  * TODO Dialogue popups
  * TODO Player animations
- * TODO Check efficiency of full-list replenishment vs selected in dynamic entities
  */
 public class MapCard extends Card {
 
@@ -164,18 +164,17 @@ public class MapCard extends Card {
 		}
 		dynamics.removeAll(toRemove);
 
-		if (numItems < map.getItems().size()) {
-			removeAllDynamicsOfType(EntityType.ITEM);
-			addDynamicEntities(EntityType.ITEM, false);
-		}
-		if (numHearts < game.getPlayer().getHealth()) {
-			removeAllDynamicsOfType(EntityType.HEART);
-			addDynamicEntities(EntityType.HEART, false);
-		}
-		if (numInventory < game.getPlayer().getBackpack().getInventorySize()) {
-			removeAllDynamicsOfType(EntityType.INVENTORY);
-			addDynamicEntities(EntityType.INVENTORY, false);
-		}
+		// update dynamic items accordingly
+		EntityType type = null;
+		Consumer<EntityType> dyn = t -> {
+			removeAllDynamicsOfType(t);
+			addDynamicEntities(t, false);
+		};
+		if (numItems < map.getItems().size()) 				type = EntityType.ITEM;
+		if (numHearts < game.getPlayer().getHealth()) 		type = EntityType.HEART;
+		if (numInventory < game.getPlayer().getBackpack()
+				.getInventorySize()) 						type = EntityType.INVENTORY;
+		if (type != null) dyn.accept(type);
 	}
 
 	/**
