@@ -18,6 +18,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * The MapCard displays the state of a Map, including all Entities on screen.
@@ -49,7 +50,7 @@ public class MapCard extends Card {
 				MainDisplay.WIDTH, MainDisplay.HEIGHT));
 
 		addStaticEntities();
-		addDynamicEntities();
+		addDynamicEntities(null, true);
 	}
 
 	/* ========================================== ADDING ========================================= */
@@ -76,29 +77,34 @@ public class MapCard extends Card {
 	 * Add dynamic entities to the screen. Dynamic entities have the ability to be added in dynamically
 	 * (hence the name) as well as everything a static entity can do.
 	 */
-	private void addDynamicEntities() {
-		// add all items
-		map.getItems().forEach(item -> addDynamicEntity(new Entity(item, EntityType.ITEM,
-				ImageLoader.image("ItemPictures", item.getImageFileName(), true),
-				new Point(item.getX(), item.getY()), 0))
-		);
-		// add player health
-		for (int i = 0; i < game.getPlayer().getHealth(); i++) {
-			addDynamicEntity(new Entity(game.getPlayer(), EntityType.HEART,
-					ImageLoader.image("game", "heart", true),
-					new Point(ELEMENT_LOC_A + (i * ELEMENT_LOC_A), 0),
-					ELEMENT_LOC_A));
-		}
-		// add inventory items
-		for (int i = 0; i < game.getPlayer().getBackpack().getInventorySize(); i++) {
-			addDynamicEntity(new Entity(game.getPlayer(), EntityType.INVENTORY,
-					ImageLoader.image("ItemPictures", game.getPlayer().getBackpack()
-							.getInventory().get(i).getImageFileName(), true),
-					new Point(MainDisplay.WIDTH - (2 * ELEMENT_LOC_A) - (i * ELEMENT_LOC_A), 5),
-					ELEMENT_LOC_A));
-		}
-		// add dialogue, if any
-		//
+	private void addDynamicEntities(EntityType type, boolean all) {
+		if (type == EntityType.ITEM || all)
+			// add all items
+			map.getItems().forEach(item -> addDynamicEntity(new Entity(item, EntityType.ITEM,
+					ImageLoader.image("ItemPictures", item.getImageFileName(), true),
+					new Point(item.getX(), item.getY()), 0))
+			);
+		if (type == EntityType.HEART || all)
+			// add player health
+			for (int i = 0; i < game.getPlayer().getHealth(); i++) {
+				addDynamicEntity(new Entity(game.getPlayer(), EntityType.HEART,
+						ImageLoader.image("game", "heart", true),
+						new Point(ELEMENT_LOC_A + (i * ELEMENT_LOC_A), 0),
+						ELEMENT_LOC_A));
+			}
+		if (type == EntityType.INVENTORY || all)
+			// add inventory items
+			for (int i = 0; i < game.getPlayer().getBackpack().getInventorySize(); i++) {
+				addDynamicEntity(new Entity(game.getPlayer(), EntityType.INVENTORY,
+						ImageLoader.image("ItemPictures", game.getPlayer().getBackpack()
+								.getInventory().get(i).getImageFileName(), true),
+						new Point(MainDisplay.WIDTH - (2 * ELEMENT_LOC_A) - (i * ELEMENT_LOC_A), 5),
+						ELEMENT_LOC_A));
+			}
+		// noinspection StatementWithEmptyBody
+		if (type == EntityType.STRING || all) {}
+			// add dialogue, if any
+			//
 	}
 
 	/* ========================================= UPDATERS ======================================== */
@@ -152,11 +158,17 @@ public class MapCard extends Card {
 		}
 		dynamics.removeAll(toRemove);
 
-		if (numItems < map.getItems().size() ||
-				numHearts < game.getPlayer().getHealth() ||
-				numInventory < game.getPlayer().getBackpack().getInventorySize()) {
-			dynamics.clear(); // FIXME need more optimized solution
-			addDynamicEntities();
+		if (numItems < map.getItems().size()) {
+			removeAllDynamicsOfType(EntityType.ITEM);
+			addDynamicEntities(EntityType.ITEM, false);
+		}
+		if (numHearts < game.getPlayer().getHealth()) {
+			removeAllDynamicsOfType(EntityType.HEART);
+			addDynamicEntities(EntityType.HEART, false);
+		}
+		if (numInventory < game.getPlayer().getBackpack().getInventorySize()) {
+			removeAllDynamicsOfType(EntityType.INVENTORY);
+			addDynamicEntities(EntityType.INVENTORY, false);
 		}
 	}
 
@@ -196,6 +208,11 @@ public class MapCard extends Card {
 
 	private void addDynamicEntity(Entity e) {
 		dynamics.add(e);
+	}
+
+	private void removeAllDynamicsOfType(EntityType type) {
+		List<Entity> oftype = dynamics.stream().filter(e -> e.getType() == type).collect(Collectors.toList());
+		dynamics.removeAll(oftype);
 	}
 
 	@Override
