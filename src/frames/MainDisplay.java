@@ -162,6 +162,10 @@ public class MainDisplay extends JComponent implements Observer {
         redraw();
     }
 
+    /**
+     * Switch to the menu screen. At the same time, cue the menu music and reset all
+     * controller commands so that none persist in new games.
+     */
     private void menu() {
         switchScreen("menu");
         controller.reloadController();

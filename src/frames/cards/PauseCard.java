@@ -1,6 +1,5 @@
 package frames.cards;
 
-import audio.tracks.MusicTrack;
 import audio.tracks.SoundTrack;
 import frames.MainDisplay;
 import gfx.GraphicsUtilities;
@@ -10,6 +9,10 @@ import javax.swing.*;
 import java.io.File;
 import java.util.Map;
 
+/**
+ * The PauseCard is similar to the {@link MenuCard} in terms of operations, but it has a different background
+ * to differentiate it from the menu.
+ */
 public class PauseCard extends Card {
 
     public PauseCard(String n) {

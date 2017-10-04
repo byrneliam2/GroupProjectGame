@@ -21,9 +21,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * The MapCard displays the state of a Map, including all Entities on screen.
+ * The MapCard displays the state of a Map, including all Entities on screen. The MapCard's state
+ * at any time is representative of the current game, using a combination of specially-typed
+ * {@link Card.Entity}s.
  * TODO Dialogue popups
- * TODO Inventory screen
  * TODO Player animations
  */
 public class MapCard extends Card {
