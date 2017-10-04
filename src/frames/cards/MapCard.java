@@ -104,9 +104,13 @@ public class MapCard extends Card {
 						ELEMENT_LOC_A));
 			}
 		// noinspection StatementWithEmptyBody
-		if (type == EntityType.STRING || all) {}
+		if (type == EntityType.STRING || all) {
 			// add dialogue, if any
-			//
+			String str = "Hello!";
+			addDynamicEntity(new Entity(str, EntityType.STRING,
+					null, new Point(MainDisplay.WIDTH/2, MainDisplay.HEIGHT - ELEMENT_LOC_A),
+					ELEMENT_LOC_A));
+		}
 	}
 
 	/* ========================================= UPDATERS ======================================== */
