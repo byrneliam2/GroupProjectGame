@@ -38,7 +38,7 @@ public class MainDisplay extends JComponent implements Observer {
     private Map<String, Card> cards;
     private Card currentCard, lastCard;
     private IAudioHandler audioHandler;
-    @SuppressWarnings({"FieldCanBeLocal", "unused"}) private IController controller;
+    private IController controller;
 
     /* Constants */
     public static final int WIDTH  = 1920;

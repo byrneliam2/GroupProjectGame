@@ -1,5 +1,3 @@
-- NPCs from last map persist in new games
-- Health potions not working all the time/going over max
+- Middle of doors not working sometimes
 - Grassland map collisions
 - Still carrying health potions after use
-- Movement gets stuck after new game

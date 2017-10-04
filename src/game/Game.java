@@ -24,154 +24,151 @@ import utils.Direction;
  * game and controlling them.
  *
  * @author Thomas Edwards
- *
  */
 public class Game extends Observable implements IGame, Serializable {
 
-	public static boolean GAME_PAUSED = false;
+    public static boolean GAME_PAUSED = false;
 
-	private Player player;
-	private World world;
+    private Player player;
+    private World world;
 
-	@Override
-	public void giveObserver(Observer o) {
-		this.addObserver(o);
-	}
+    @Override
+    public void giveObserver(Observer o) {
+        this.addObserver(o);
+    }
 
-	/**
-	 * Start the new game.
-	 */
-	public void newGame() {
-		this.player = new Player("Tom", 500, 500);
-		this.world = WorldParser.parse("world", this.player);
-	}
+    /**
+     * Start the new game.
+     */
+    public void newGame() {
+        this.player = new Player("Tom", 500, 500);
+        this.world = WorldParser.parse("world", this.player);
+    }
 
-	/******************* View Methods **********************/
+    /******************* View Methods **********************/
 
-	/**
-	 * @return the name of the current map that the player is on.
-	 */
-	public String getCurrentMap() {
-		return player.getMap().getName();
-	}
+    /**
+     * @return the name of the current map that the player is on.
+     */
+    public String getCurrentMap() {
+        return player.getMap().getName();
+    }
 
-	/**
-	 * @return the player
-	 */
-	public Player getPlayer() {
-		return this.player;
-	}
+    /**
+     * @return the player
+     */
+    public Player getPlayer() {
+        return this.player;
+    }
 
-	@Override
-	public boolean isOver() {
-		return player.isDead();// TODO a win condition once we implement a boss fight.
-	}
+    @Override
+    public boolean isOver() {
+        return player.isDead();// TODO a win condition once we implement a boss fight.
+    }
 
-	/**
-	 * @return game world
-	 */
-	public World getWorld() {
-		return world;
-	}
+    /**
+     * @return game world
+     */
+    public World getWorld() {
+        return world;
+    }
 
-	/**
-	 * @return list of items currently located on the map.
-	 */
-	public List<Item> getItems() {
-		return player.getMap().getItems();
-	}
+    /**
+     * @return list of items currently located on the map.
+     */
+    public List<Item> getItems() {
+        return player.getMap().getItems();
+    }
 
-	/**
-	 * @return List of all npc's, each npc has an x,y centre location similar to the
-	 *         player.
-	 */
-	public List<NPC> getNPCs() {
-		return player.getMap().getNPCS();
-	}
+    /**
+     * @return List of all npc's, each npc has an x,y centre location similar to the
+     * player.
+     */
+    public List<NPC> getNPCs() {
+        return player.getMap().getNPCS();
+    }
 
-	/**
-	 * @return List of all bullets in game. Each bullet has a point location.
-	 */
-	public List<Bullet> getBullets() {
-		return Bullet.bulletList;
-	}
+    /**
+     * @return List of all bullets in game. Each bullet has a point location.
+     */
+    public List<Bullet> getBullets() {
+        return Bullet.bulletList;
+    }
 
-	/**
-	 * @return the player's inventory (part of the backpack)
-	 */
-	public List<Item> getInventory() {
-		return this.player.getBackpack().getInventory();
-	}
+    /**
+     * @return the player's inventory (part of the backpack)
+     */
+    public List<Item> getInventory() {
+        return this.player.getBackpack().getInventory();
+    }
 
-	/******************* Controller Methods ************************/
+    /******************* Controller Methods ************************/
 
-	/**
-	 * @see player.Player#move(int dx, int dy)
-	 */
-	public void movePlayer(Direction dir) throws InvalidPlayerExceptions {
-		//if the movement caused a change in maps... notify observers
-		if (player.move(player.getSpeed() * dir.getX(), player.getSpeed() * dir.getY())) {
-			set(getCurrentMap());
-		}
-	}
+    /**
+     * @see player.Player#move(int dx, int dy)
+     */
+    public void movePlayer(Direction dir) throws InvalidPlayerExceptions {
+        //if the movement caused a change in maps... notify observers
+        if (player.move(player.getSpeed() * dir.getX(), player.getSpeed() * dir.getY())) {
+            set(getCurrentMap());
+        }
+    }
 
-	/**
-	 *
-	 */
-	public void interact() throws InvalidPlayerExceptions {
-		player.pickUpItem();
-	}
+    public void interact() throws InvalidPlayerExceptions {
+        player.pickUpItem();
+    }
 
-	/**
-	 * @see player.Player#useItem(Usable u)
-	 */
-	public void useItem(Usable u) throws InvalidPlayerExceptions {
-		player.useItem(u);
-	}
+    /**
+     * @see player.Player#useItem(Usable u)
+     */
+    public void useItem(Usable u) throws InvalidPlayerExceptions {
+        player.useItem(u);
+    }
 
-	/**
-	 * @see player.Player#shoot(double mouseX, double mouseY)
-	 */
-	public void shoot(double mouseX, double mouseY) throws InvalidPlayerExceptions {
-		player.shoot(mouseX, mouseY);
-	}
+    /**
+     * @see player.Player#shoot(double mouseX, double mouseY)
+     */
+    public void shoot(double mouseX, double mouseY) throws InvalidPlayerExceptions {
+        player.shoot(mouseX, mouseY);
+    }
 
-	public void pauseGame() {
-		GAME_PAUSED = true;
-		if (this.player.getMap() != null)
-			this.player.getMap().pauseMapNPCs();
-		set("pause");
-	}
+    public void pauseGame() {
+        GAME_PAUSED = true;
+        if (this.player.getMap() != null)
+            this.player.getMap().pauseMapNPCs();
+        set("pause");
+    }
 
-	public void unPauseGame() {
-		GAME_PAUSED = false;
-		this.player.getMap().startMapNPCs();
-		set(getCurrentMap());
-	}
+    public void unPauseGame() {
+        GAME_PAUSED = false;
+        this.player.getMap().startMapNPCs();
+        set(getCurrentMap());
+    }
 
-	@Override
-	public boolean isPaused() {
-		return GAME_PAUSED;
-	}
+    @Override
+    public boolean isPaused() {
+        return GAME_PAUSED;
+    }
 
-	/**
-	 * Saves this game.Game object as a file...
-	 */
-	public void saveGame() {
+    /**
+     * Saves this game.Game object as a file...
+     */
+    public void saveGame() {
 
-	}
+    }
 
-	@Override
-	public void stopGame() {
-		GAME_PAUSED = true;
-		if (this.player.getMap() != null)
-			this.player.getMap().pauseMapNPCs();
-		set("stop");
-	}
+    @Override
+    public void stopGame() {
+        GAME_PAUSED = true;
+        if (this.player.getMap() != null)
+            this.player.getMap().pauseMapNPCs();
+        getBullets().clear();
+        set("stop");
+    }
 
-	@Override
-	public void set(Object arg) {
-		setChanged();
-		notifyObservers(arg);
-	}
+    @Override
+    public void set(Object arg) {
+        setChanged();
+        notifyObservers(arg);
+    }
 }
