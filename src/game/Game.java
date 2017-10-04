@@ -1,16 +1,11 @@
 package game;
 
-import java.awt.*;
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-import frames.MainDisplay;
-import items.Equipable;
 import items.Item;
-import items.Usable;
 import map.World;
 import map.WorldParser;
 import npc.NPC;
@@ -47,66 +42,29 @@ public class Game extends Observable implements IGame, Serializable {
 
     /******************* View Methods **********************/
 
-    /**
-     * @return the name of the current map that the player is on.
-     */
+    @Override
     public String getCurrentMap() {
         return player.getMap().getName();
     }
 
-    /**
-     * @return the player
-     */
+    @Override
     public Player getPlayer() {
         return this.player;
     }
 
     @Override
-    public boolean isOver() {
+    public boolean isLost() {
         return player.isDead();// TODO a win condition once we implement a boss fight.
     }
 
-    /**
-     * @return game world
-     */
+    @Override
     public World getWorld() {
         return world;
     }
 
-    /**
-     * @return list of items currently located on the map.
-     */
-    public List<Item> getItems() {
-        return player.getMap().getItems();
-    }
-
-    /**
-     * @return List of all npc's, each npc has an x,y centre location similar to the
-     * player.
-     */
-    public List<NPC> getNPCs() {
-        return player.getMap().getNPCS();
-    }
-
-    /**
-     * @return List of all bullets in game. Each bullet has a point location.
-     */
-    public List<Bullet> getBullets() {
-        return Bullet.bulletList;
-    }
-
-    /**
-     * @return the player's inventory (part of the backpack)
-     */
-    public List<Item> getInventory() {
-        return this.player.getBackpack().getInventory();
-    }
-
     /******************* Controller Methods ************************/
 
-    /**
-     * @see player.Player#move(int dx, int dy)
-     */
+    @Override
     public void movePlayer(Direction dir) throws InvalidPlayerExceptions {
         //if the movement caused a change in maps... notify observers
         if (player.move(player.getSpeed() * dir.getX(), player.getSpeed() * dir.getY())) {
@@ -114,24 +72,17 @@ public class Game extends Observable implements IGame, Serializable {
         }
     }
 
+    @Override
     public void interact() throws InvalidPlayerExceptions {
         player.pickUpItem();
     }
 
-    /**
-     * @see player.Player#useItem(Usable u)
-     */
-    public void useItem(Usable u) throws InvalidPlayerExceptions {
-        player.useItem(u);
-    }
-
-    /**
-     * @see player.Player#shoot(double mouseX, double mouseY)
-     */
+    @Override
     public void shoot(double mouseX, double mouseY) throws InvalidPlayerExceptions {
         player.shoot(mouseX, mouseY);
     }
 
+    @Override
     public void pauseGame() {
         GAME_PAUSED = true;
         if (this.player.getMap() != null)
@@ -139,6 +90,7 @@ public class Game extends Observable implements IGame, Serializable {
         set("pause");
     }
 
+    @Override
     public void unPauseGame() {
         GAME_PAUSED = false;
         this.player.getMap().startMapNPCs();
@@ -154,7 +106,7 @@ public class Game extends Observable implements IGame, Serializable {
      * Saves this game.Game object as a file...
      */
     public void saveGame() {
-
+        //
     }
 
     @Override
@@ -162,7 +114,7 @@ public class Game extends Observable implements IGame, Serializable {
         GAME_PAUSED = true;
         if (this.player.getMap() != null)
             this.player.getMap().pauseMapNPCs();
-        getBullets().clear();
+        Bullet.bulletList.clear();
         set("stop");
     }
 
