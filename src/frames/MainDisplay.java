@@ -164,6 +164,7 @@ public class MainDisplay extends JComponent implements Observer {
 
     private void menu() {
         switchScreen("menu");
+        controller.reloadController();
         audioHandler.stop();
         audioHandler.queueMusic(MusicTrack.MAIN_MENU);
     }

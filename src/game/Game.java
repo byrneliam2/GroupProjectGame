@@ -163,6 +163,9 @@ public class Game extends Observable implements IGame, Serializable {
 
 	@Override
 	public void stopGame() {
+		GAME_PAUSED = true;
+		if (this.player.getMap() != null)
+			this.player.getMap().pauseMapNPCs();
 		set("stop");
 	}
 
