@@ -197,10 +197,12 @@ public class MapCard extends Card {
 	 * upon acknowledgment.
 	 */
 	private void checkGameOver() {
-		if (game.isLost())
+		int cond = game.isOver();
+		if (cond == 1 || cond == 2)
 			if (JOptionPane.showConfirmDialog(this,
-					"Game over!", "You are dead!", JOptionPane.DEFAULT_OPTION,
-					JOptionPane.ERROR_MESSAGE) == 0) {
+					cond == 1 ? "You are dead!" : "======= You Win! =======", "Game over!",
+					JOptionPane.DEFAULT_OPTION,
+					cond == 1 ? JOptionPane.ERROR_MESSAGE : JOptionPane.INFORMATION_MESSAGE) == 0) {
 				game.stopGame();
 			}
 	}

@@ -53,8 +53,11 @@ public class Game extends Observable implements IGame, Serializable {
     }
 
     @Override
-    public boolean isLost() {
-        return player.isDead();// TODO a win condition once we implement a boss fight.
+    public int isOver() {
+        if (false) return 2; // TODO win condition
+        if (player.isDead()) return 1;
+        else return 0;
+
     }
 
     @Override

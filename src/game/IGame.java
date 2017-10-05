@@ -93,10 +93,10 @@ public interface IGame {
     Player getPlayer();
 
     /**
-     * Determine if the game is lost.
-     * @return is game lost?
+     * Determine if the game is over.
+     * @return 0 for false, 1 for lost, 2 for won
      */
-    boolean isLost();
+    int isOver();
 
     /**
      * Save the current game.

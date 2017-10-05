@@ -38,8 +38,8 @@ public class MockGame implements IGame {
     }
 
     @Override
-    public boolean isLost() {
-        return false;
+    public int isOver() {
+        return 0;
     }
 
     @Override
