@@ -38,7 +38,7 @@ public class LabelButton extends JButton {
         g2d.setFont(font);
         g2d.setColor(Color.white);
 
-        g2d.drawImage(ImageLoader.image("ui", "Button", true), 0, 0, WIDTH, HEIGHT, null);
+        g2d.drawImage(ImageLoader.image("ui", "button", true), 0, 0, WIDTH, HEIGHT, null);
         g2d.drawString(this.text, x, y);
         this.setIcon(new ImageIcon(normal));
 
@@ -48,7 +48,7 @@ public class LabelButton extends JButton {
         g2d.setFont(font);
         g2d.setColor(Color.white);
 
-        g2d.drawImage(ImageLoader.image("ui", "Clicked", true), 0, 0, WIDTH, HEIGHT, null);
+        g2d.drawImage(ImageLoader.image("ui", "clicked", true), 0, 0, WIDTH, HEIGHT, null);
         g2d.drawString(this.text, x, y);
         this.setPressedIcon(new ImageIcon(clicked));
 
@@ -58,7 +58,7 @@ public class LabelButton extends JButton {
         g2d.setFont(font);
         g2d.setColor(Color.white);
 
-        g2d.drawImage(ImageLoader.image("ui", "Rollover", true), 0, 0, WIDTH, HEIGHT, null);
+        g2d.drawImage(ImageLoader.image("ui", "rollover", true), 0, 0, WIDTH, HEIGHT, null);
         g2d.drawString(this.text, x, y);
         this.setRolloverEnabled(true);
         this.setRolloverIcon(new ImageIcon(rollover));
