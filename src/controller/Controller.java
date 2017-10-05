@@ -59,8 +59,11 @@ public class Controller implements IController {
                     case INTERACT:
                         game.interact();
                         break;
-                    case SHOOT:
+                    case PRIMARY_ATTACK:
                         game.shoot(mouse.getX(), mouse.getY());
+                        break;
+                    case SECONDARY_ATTACK:
+                        //game.shoot(mouse.getX(), mouse.getY()); TODO: After Secondary File is Implemented
                         break;
                     case PAUSE:
                         game.pauseGame();
