@@ -35,18 +35,14 @@ public class MenuCard extends Card {
         components.put("logo", GraphicsUtilities.produceSticker(
                 ImageLoader.image("ui", "logo", true), 0.5f));
         // use a loop to load all the buttons into the list
-        //String[] files = {"new", "load", "settings", "info", "exit"};
+        String[] files = {"new", "load", "settings", "info", "exit"};
         //String[] files = {"load", "settings", "info", "exit"};
-        components.put("new", new LabelButton("New Game", 225, 75));
-        components.put("load", new LabelButton("Load", 225, 75));
-        components.put("settings", new LabelButton("Settings", 225, 75));
-        components.put("info", new LabelButton("Info", 225, 75));
-        components.put("exit", new LabelButton("Exit", 225, 75));
-        /*for (String s : files) {
+        //components.put("new", new LabelButton("New Game", 225, 75));
+        for (String s : files) {
             components.put(s, GraphicsUtilities.produceButton(
                     ImageLoader.image("ui", "bu_" + s, true),
                     ImageLoader.image("ui", "bu_" + s + "_r", false), 0.5f));
-        }*/
+        }
     }
 
     @Override
