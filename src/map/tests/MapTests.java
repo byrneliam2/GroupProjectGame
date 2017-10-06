@@ -3,18 +3,18 @@ package map.tests;
 import static org.junit.Assert.*;
 
 import java.awt.Rectangle;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
+import java.util.Collections;
 
+import map.*;
 import org.junit.Test;
 
 import common.items.Item;
 import items.DoorItem;
 import items.itemList.HealthPot;
 import items.itemList.MassiveGun;
-import map.Environment;
-import map.Map;
-import map.MapParser;
-import map.World;
-import map.WorldParser;
 import npc.NPC;
 import npc.PatrolScheme;
 import player.Bullet;
@@ -431,5 +431,67 @@ public class MapTests {
 		// item i2 should be closest.
 		assertEquals(i2, m.getClosestItem(p1.getRangeCircle()));
 	}
+
+	/* EXTERNAL TESTING STARTS HERE */
+
+	/**
+	 * Tests if total the doors field == null, return null when trying to get a door
+	 */
+	@Test
+	public void testNullDoors(){
+		p1 = new Player("Tom", 120, 130);
+		m = new Map("MapTest", p1, new ArrayList<>(), new ArrayList<>(), null);
+		p1.setMap(m);
+
+		assertNull(m.getDoor(new Rectangle2D.Double(1,1,1,1)));
+	}
+
+	/**
+	 * Tests if total the doors field == null, return null when trying to get a door
+	 */
+	@Test
+	public void testNullItems(){
+		p1 = new Player("Tom", 120, 130);
+		m = new Map("MapTest", p1, null, new ArrayList<>(), new ArrayList<>());
+		p1.setMap(m);
+
+		assertNull(m.getClosestItem(new Ellipse2D.Double(1,1,1,1)));
+	}
+
+	/**
+	 * Tests if the Background Layer is Returned
+	 */
+	@Test
+	public void testGetBackground(){
+		p1 = new Player("Tom", 120, 130);
+		m = MapParser.parse("MapTest", p1);
+		p1.setMap(m);
+
+		assertEquals("MapTest", m.getBackgroundLayer());
+	}
+
+	/**
+	 * Tests if the Background Layer is Returned
+	 */
+	@Test
+	public void testThrowException(){
+		try{
+			throw new BadMapImageException("test");
+		} catch (BadMapImageException e) {
+			assertEquals("Test", e.getMessage());
+		}
+	}
+
+	/**
+	 * Tests Environment Enum
+	 */
+	@Test
+	public void getEnvironmentCode(){
+		assertTrue(1 == Environment.DEATH.getEnviromentCode());
+		assertTrue(2 == Environment.MIST.getEnviromentCode());
+		assertTrue(3 == Environment.FIRE.getEnviromentCode());
+		assertTrue(4 == Environment.MUD.getEnviromentCode());
+	}
+
 
 }
