@@ -10,7 +10,7 @@ frames              f6b9ce4
 gfx                 796109a226feb1f73ea9ec7fb5a7c5848d38e1d9
 items               bf6e762
 map                 dd79a74
-npc                 d631fa2
+npc                 51196f7
 player              5a72f98
 save_load           796109a226feb1f73ea9ec7fb5a7c5848d38e1d9
 

@@ -24,5 +24,6 @@ which a majority of the game relies on to run.
         - I have attempted to get a larger coverage, this involved running coverage for the entire Map package,
           and then creating tests for all of the remaining minor if / while branches that may not normally occur.
     NPC:
-        -
-        -
+        - I have created a new 'NPCTests' test class which holds the new External Tests for the NPC Package,
+          this was created due to the limited amount of tests added previously. I made it my goal to make the
+          NPC.class have 100% coverage, which has been achieved.
