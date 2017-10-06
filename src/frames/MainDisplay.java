@@ -10,6 +10,7 @@ import audio.AudioHandler;
 import audio.common.IAudioHandler;
 import audio.common.MusicTrack;
 import controller.*;
+import controller.common.IController;
 import frames.cards.Card;
 import frames.cards.*;
 import game.IGame;
