@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import common.DisplayValues;
 import frames.MainDisplay;
 import game.Game;
 import gfx.ImageLoader;
@@ -140,7 +141,7 @@ public class Bullet {
 				update();
 			}
 		};
-		bulletTimer.scheduleAtFixedRate(bulletTask, 0, MainDisplay.FRAMERATE);
+		bulletTimer.scheduleAtFixedRate(bulletTask, 0, DisplayValues.FRAMERATE);
 	}
 
 	/**

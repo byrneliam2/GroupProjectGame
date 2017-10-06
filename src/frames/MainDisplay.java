@@ -9,13 +9,13 @@ package frames;
 import audio.AudioHandler;
 import audio.common.IAudioHandler;
 import audio.common.MusicTrack;
+import common.DisplayValues;
 import controller.*;
 import controller.common.IController;
 import frames.cards.Card;
 import frames.cards.*;
 import game.IGame;
 import gfx.ImageLoader;
-import map.World;
 
 import javax.swing.*;
 import javax.swing.Timer;
@@ -42,11 +42,6 @@ public class MainDisplay extends JComponent implements Observer {
     private IAudioHandler audioHandler;
     private IController controller;
 
-    /* Constants */
-    public static final int WIDTH  = 1920;
-    public static final int HEIGHT = 1080;
-    public static final int FRAMERATE = 1000/60;
-
     /* Game attributes */
     private IGame game;
 
@@ -62,7 +57,7 @@ public class MainDisplay extends JComponent implements Observer {
         // master frame setup
         master.setIconImage(ImageLoader.image("ui", "logo", true));
         master.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        master.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        master.setPreferredSize(new Dimension(DisplayValues.WIDTH, DisplayValues.HEIGHT));
         master.setResizable(false);
         master.setFocusable(true);
         master.setUndecorated(true);
@@ -138,7 +133,8 @@ public class MainDisplay extends JComponent implements Observer {
      */
     private void doMapSetup() {
         // get model details and construct enough map cards to fit
-        for (Map.Entry m : World.maps.entrySet()) {
+        // noinspection AccessStaticViaInstance
+        for (Map.Entry m : game.getWorld().maps.entrySet()) {
             String name = (String) m.getKey();
             map.Map map = (map.Map) m.getValue();
             cards.put(name, new MapCard(name, map, game));
@@ -234,7 +230,7 @@ public class MainDisplay extends JComponent implements Observer {
      * mechanism to execute.
      */
     public void startTimer() {
-        (timer = new Timer(FRAMERATE, (e) -> {
+        (timer = new Timer(DisplayValues.FRAMERATE, (e) -> {
             redraw();
             controller.update();
         })).start();

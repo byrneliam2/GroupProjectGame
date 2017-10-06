@@ -1,17 +1,29 @@
 package controller.tests;
 
+import controller.Controller;
+import controller.common.Command;
+import game.IGame;
+import game.MockGame;
 import org.junit.FixMethodOrder;
+import org.junit.Test;
 import org.junit.runners.MethodSorters;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Set;
+
+import static org.junit.Assert.*;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ControllerTests {
 
     //KeyboardCommands.class Reflection Tests
 
-    /*@Test
+    @Test
     public void test01_processCommand() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         IGame game = new MockGame();
-        Controller controller = new Controller(game, new KeyListener(null), new MouseListener());
+        Controller controller = new Controller(game);
         Method method = Controller.class.getDeclaredMethod("processCommand", Command.class);
         method.setAccessible(true);
 
@@ -20,10 +32,12 @@ public class ControllerTests {
         assertTrue(game.isPaused());
     }
 
+
+
     @Test
     public void test02_notifyCommands_Pressed() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, NoSuchFieldException {
         IGame game = new MockGame();
-        Controller controller = new Controller(game, new KeyListener(), new MouseListener());
+        Controller controller = new Controller(game);
         Method method = Controller.class.getDeclaredMethod("notifyCommands", Command.class, boolean.class);
         method.setAccessible(true);
 
@@ -38,7 +52,7 @@ public class ControllerTests {
     @Test
     public void test03_notifyCommands_Released() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, NoSuchFieldException {
         IGame game = new MockGame();
-        Controller controller = new Controller(game, new KeyListener(), new MouseListener());
+        Controller controller = new Controller(game);
         Method method = Controller.class.getDeclaredMethod("notifyCommands", Command.class, boolean.class);
         method.setAccessible(true);
 
@@ -55,7 +69,7 @@ public class ControllerTests {
     @Test
     public void test04_update() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         IGame game = new MockGame();
-        Controller controller = new Controller(game, new KeyListener(), new MouseListener());
+        Controller controller = new Controller(game);
         Method method = Controller.class.getDeclaredMethod("notifyCommands", Command.class, boolean.class);
         method.setAccessible(true);
         method.invoke(controller, Command.PAUSE, true);
@@ -68,7 +82,7 @@ public class ControllerTests {
     @Test
     public void test05_reloadController() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, NoSuchFieldException {
         IGame game = new MockGame();
-        Controller controller = new Controller(game, new KeyListener(), new MouseListener());
+        Controller controller = new Controller(game);
         Method method = Controller.class.getDeclaredMethod("notifyCommands", Command.class, boolean.class);
         method.setAccessible(true);
 
@@ -80,5 +94,5 @@ public class ControllerTests {
         assertTrue(commands.contains(Command.PAUSE));
         controller.reloadController();
         assertFalse(commands.contains(Command.PAUSE));
-    }*/
+    }
 }

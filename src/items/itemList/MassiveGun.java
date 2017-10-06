@@ -7,19 +7,18 @@ import player.Player;
 public class MassiveGun extends AbstractItem implements Equipable {
 
 	public MassiveGun() {
-		super("Massive Gun",
-				"An incredibly large gun that plows through monsters, sets fire rate to two shots per second",
+		super("Massive Gun", "An incredibly large gun that plows through monsters, doubles your fire rate",
 				"massiveGun");
 	}
 
 	@Override
 	public void provideBonus(Player p) {
-		p.setFireRate(0.5);
+		p.setFireRate(p.getFireRate() / 2);
 	}
 
 	@Override
 	public void removeBonus(Player p) {
-		p.setFireRate(p.getDefaultFireRate());
+		p.setFireRate(p.getFireRate() * 2);
 	}
 
 }

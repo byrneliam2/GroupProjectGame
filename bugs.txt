@@ -1,3 +1,0 @@
-- Middle of doors not working sometimes
-- Grassland map collisions
-- Still carrying health potions after use

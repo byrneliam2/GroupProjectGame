@@ -6,6 +6,7 @@ package frames.cards;
  * 300338518
  */
 
+import common.DisplayValues;
 import frames.MainDisplay;
 import game.IGame;
 import gfx.ImageLoader;
@@ -49,7 +50,7 @@ public class MapCard extends Card {
 
 		setBackground(ImageUtilities.scale(
 				ImageLoader.image("MapImages", map.getBackgroundLayer(), true),
-				MainDisplay.WIDTH, MainDisplay.HEIGHT));
+				DisplayValues.WIDTH, DisplayValues.HEIGHT));
 
 		addStaticEntities();
 		addDynamicEntities(null, true);
@@ -100,7 +101,7 @@ public class MapCard extends Card {
 				addDynamicEntity(new Entity(game.getPlayer(), EntityType.INVENTORY,
 						ImageLoader.image("ItemPictures", game.getPlayer().getBackpack()
 								.getInventory().get(i).getImageFileName(), true),
-						new Point(MainDisplay.WIDTH - (2 * ELEMENT_LOC_A) - (i * ELEMENT_LOC_A), 5),
+						new Point(DisplayValues.WIDTH - (2 * ELEMENT_LOC_A) - (i * ELEMENT_LOC_A), 5),
 						ELEMENT_LOC_A));
 			}
 		// noinspection StatementWithEmptyBody
@@ -108,7 +109,7 @@ public class MapCard extends Card {
 			// add dialogue, if any
 			String str = "Hello!";
 			addDynamicEntity(new Entity(str, EntityType.STRING,
-					null, new Point(MainDisplay.WIDTH/2, MainDisplay.HEIGHT - ELEMENT_LOC_A),
+					null, new Point(DisplayValues.WIDTH/2, DisplayValues.HEIGHT - ELEMENT_LOC_A),
 					ELEMENT_LOC_A));
 		}
 	}
