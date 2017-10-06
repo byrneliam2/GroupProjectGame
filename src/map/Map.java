@@ -71,7 +71,6 @@ public class Map {
 		this.NPCS = NPCS;
 		this.doors = doors;
 		this.loadAllLayers(1920, 1080);
-
 		// sets the npc's up, note you'll still have to call startMapNPC's() to start
 		// them moving
 		for (NPC npc : NPCS) {
@@ -359,10 +358,7 @@ public class Map {
 		double posX = r.getX();
 		double posY = r.getY();
 
-		//System.out.println("TopLeftX: " + posX);
-		//System.out.println("TopLeftY: " + posY);
-		//System.out.println("===================");
-		if (posX < 0 || posY < 0) {
+		if (posX < 0 || posY < 0 || posX > (this.width * Map.tileSize) || posY > (this.height * Map.tileSize)) {
 			return false;
 		}
 		if (this.collisionLayer.get((int) (posY / Map.tileSize)).get((int) (posX / Map.tileSize)) == 1) {

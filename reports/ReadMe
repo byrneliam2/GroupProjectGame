@@ -1,0 +1,8 @@
+This is group 10's read me for the external testing section of this group assignment
+James:
+I am in charge of externally testing gfx,audio and save/load packages.
+-At this stage of the project the save/load functionality is still under development so externally testing it is
+impossible at this point.
+-I have added a few tests to the audio package and have stated in more detail in the tests itself what i did
+and what i thought of the current tests.
+-For graphics

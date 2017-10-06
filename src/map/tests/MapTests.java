@@ -179,7 +179,6 @@ public class MapTests {
 		// Rectangle with invalid bottom right
 		Rectangle.Double rBR0 = new Rectangle.Double(300, 300, 10, 32 * Map.tileSize);
 		Rectangle.Double rBR1 = new Rectangle.Double(300, 35 * Map.tileSize, 10, 10);
-		System.out.println("Should be like 2000: " + rBR1.getMaxY());
 		assertFalse(m.canMove(rBR0));
 		assertFalse(m.canMove(rBR1));
 	}
@@ -189,6 +188,7 @@ public class MapTests {
 		// Player starts on Map3 and should move over the door and into Map8
 		this.doorSetup();
 		assert (w.getStartingMap().getName().equals("Map3"));
+		w.getStartingMap().startMapNPCs();
 		DoorItem d = w.getStartingMap().getDoor(01);
 		// Player starts at 150,150
 		assertEquals(150, p1.getCentreX());
@@ -206,7 +206,7 @@ public class MapTests {
 		// Move player over door
 		assertFalse(p1.move(-50, 0));
 		assertTrue(p1.move(-60, 0));
-		// System.out.println(p1.getMap().getName()+"d");
+
 		assertEquals("Map8", p1.getMap().getName());
 
 	}
@@ -235,6 +235,7 @@ public class MapTests {
 		this.doorSetup();
 		assertEquals(1, w.getStartingMap().getNPCS().size());
 		NPC c = w.getStartingMap().getNPCS().get(0);
+		w.getStartingMap().startMapNPCs();
 		w.getStartingMap().pauseMapNPCs();
 		assertFalse(c.stop());
 		w.getStartingMap().startMapNPCs();
@@ -245,18 +246,19 @@ public class MapTests {
 	@Test
 	public void testNpcBulletHitting() throws InvalidPlayerExceptions, InterruptedException {
 		// Bullet direction is 0-2Pie, 0 being north,pie being south,
-		this.doorSetup();
-		p1.move(250, 50);
+		p1 = new Player("Tom", 370, 170);
+
+		w = WorldParser.parse("world", p1);
+		NPC c = w.getStartingMap().getNPCS().get(0);
+		int health = p1.getHealth();
 		assertEquals(400, p1.getCentreX());
 		assertEquals(200, p1.getCentreY());
-		Bullet b = new Bullet(400, 400, 0, p1, 0, "npcBullet1");
-		assertFalse(this.w.getStartingMap().checkBulletHit(b));
-		System.out.println("NpcBulletY: " + b.getY());
-		Thread.sleep(8000);
+		Bullet b = new Bullet(400, 400, 0, c, 3, "npcBullet1");
+
+		Thread.sleep(980);
 		assert (400 == b.getX());
-		System.out.println(b.getX());
-		System.out.println("NpcBulletY: " + b.getY());
-		assertTrue(this.w.getStartingMap().checkBulletHit(b));
+
+		assertEquals(health - 1, p1.getHealth());
 
 	}
 
@@ -264,14 +266,17 @@ public class MapTests {
 	public void testPlayerBulletHitting() throws InvalidPlayerExceptions, InterruptedException {
 		// Bullet direction is 0-2Pie, 0 being north,pie being south,
 		this.doorSetup();
-		NPC c = new NPC("bug", 400, 200, 200, this.p1, new PatrolScheme(false, 5));
-		Bullet b = new Bullet(400, 400, 0, p1, 0, "playerBullet1");
-		assertFalse(this.w.getStartingMap().checkBulletHit(b));
-		System.out.println("PlayerBulletY: " + b.getY());
-		Thread.sleep(8000);
-		assert (400 == b.getX());
-		System.out.println("BullePlayerBulletY: " + b.getY());
-		assertTrue(this.w.getStartingMap().checkBulletHit(b));
+		NPC c = w.getStartingMap().getNPCS().get(0);
+		c.start();
+		c.start();
+
+		Bullet b = new Bullet(926, 878, 0, p1, 2, "playerBullet1");
+
+		int health = c.getHealth();
+
+		Thread.sleep(3000);
+
+		assertEquals(health - 1, c.getHealth());
 
 	}
 
