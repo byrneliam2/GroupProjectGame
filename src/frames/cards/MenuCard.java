@@ -31,13 +31,15 @@ public class MenuCard extends Card {
 	protected void doUISetup() {
 		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 		// put the logo in separately
-		components.put("logo", GraphicsUtilities.produceSticker(ImageLoader.image("ui", "logo", true), 0.5f));
+		components.put("logo", GraphicsUtilities.produceSticker(
+				ImageLoader.image("ui", "logo", true), 0.5f));
 		// use a loop to load all the buttons into the list
 		String[] files = { "new", "load", "settings", "info", "exit" };
 		// String[] files = {"load", "settings", "info", "exit"};
 		// components.put("new", new LabelButton("New Game", 225, 75));
 		for (String s : files) {
-			components.put(s, GraphicsUtilities.produceButton(ImageLoader.image("ui", "bu_" + s, true),
+			components.put(s, GraphicsUtilities.produceButton(
+					ImageLoader.image("ui", "bu_" + s, true),
 					ImageLoader.image("ui", "bu_" + s + "_r", false), 0.5f));
 		}
 	}
