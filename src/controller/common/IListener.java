@@ -1,7 +1,8 @@
-package controller;
+package controller.common;
 
-import controller.enums.Command;
-import controller.enums.InputType;
+import controller.Controller;
+import controller.common.Command;
+import controller.common.InputType;
 
 public interface IListener {
 

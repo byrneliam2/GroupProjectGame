@@ -1,6 +1,7 @@
 package controller;
 
-import controller.enums.Command;
+import controller.common.Command;
+import controller.common.IController;
 import game.IGame;
 import player.InvalidPlayerExceptions;
 import utils.Direction;
@@ -32,7 +33,7 @@ public class Controller implements IController {
      * @param cmd The command to logged
      * @param pressed If the command is being pressed, or if released
      */
-    void notifyCommands(Command cmd, boolean pressed) {
+    public void notifyCommands(Command cmd, boolean pressed) {
         if (pressed)
             currentCommands.add(cmd);
         else

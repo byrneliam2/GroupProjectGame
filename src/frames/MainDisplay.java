@@ -7,8 +7,8 @@ package frames;
  */
 
 import audio.AudioHandler;
-import audio.IAudioHandler;
-import audio.tracks.MusicTrack;
+import audio.common.IAudioHandler;
+import audio.common.MusicTrack;
 import controller.*;
 import frames.cards.Card;
 import frames.cards.*;

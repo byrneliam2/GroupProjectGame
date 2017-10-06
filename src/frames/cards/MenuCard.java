@@ -6,7 +6,7 @@ package frames.cards;
  * 300338518
  */
 
-import audio.tracks.*;
+import audio.common.*;
 import frames.MainDisplay;
 import gfx.GraphicsUtilities;
 import gfx.ImageLoader;

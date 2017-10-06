@@ -1,6 +1,6 @@
-package audio;
+package audio.common;
 
-import audio.tracks.Track;
+import audio.common.Track;
 
 public interface IAudioHandler {
 
@@ -32,7 +32,7 @@ public interface IAudioHandler {
     void next();
 
     /**
-     * Allow for the implementer to change the volume for all audio-tracks being played.
+     * Allow for the implementer to change the volume for all audio-common being played.
      * @param percentage A value between 0.0f and 1.0f
      */
     void setAudioVolume(float percentage);
