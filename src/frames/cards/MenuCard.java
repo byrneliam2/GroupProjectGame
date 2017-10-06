@@ -80,7 +80,6 @@ public class MenuCard extends Card {
             });
         }
     }
->>>>>>> branch 'master' of https://gitlab.ecs.vuw.ac.nz/swen222-2017-p1-t10/SWEN222PROJECTSNICKETYSNACKS.git
 
 	@Override
 	public void redraw() {
