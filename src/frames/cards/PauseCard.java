@@ -41,7 +41,7 @@ public class PauseCard extends Card {
             btn.addActionListener(e -> {
                 dsp.getAudioHandler().playSound(SoundTrack.CLICK);
                 JFileChooser fileChooser = new JFileChooser();
-                fileChooser.setCurrentDirectory(new File(".."));
+                fileChooser.setCurrentDirectory(new File("."));
                 fileChooser.setDialogTitle("Select a <ext> file to load");
                 switch (str) {
                     case "back":

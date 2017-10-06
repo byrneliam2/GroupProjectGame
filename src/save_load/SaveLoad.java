@@ -20,25 +20,28 @@ public class SaveLoad implements IGame, Serializable {
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
+	private static String thePath;
 
-	public SaveLoad(Game g) {
-
-		saveGame(g);
+	public SaveLoad(Game g,String theFilePath) {
+		this.thePath = theFilePath;
+		saveGame(g, theFilePath);
 	}
 
 	public static void main(String[] args) {
 		Game newGame = new Game();
-		saveGame(newGame);
+		saveGame(newGame,thePath);
 	}
 
-	public static void saveGame(Game g) {
+	public static void saveGame(Game g, String theFilePath) {
+		System.out.println("THIS IS ACTUALLY THE SAVING FUNCTION");
 		/*
 		 * This method will take any Object as a parameter, so as long as the class
 		 * implements the serializable interface.
 		 */
+		//File thePathFile = new File("./GroupProject/src/assets/saveGames");
 		FileOutputStream theSavedGame = null;
 		try {
-			theSavedGame = new FileOutputStream("saveGame");
+			theSavedGame = new FileOutputStream(theFilePath);
 			ObjectOutputStream theByteCode = new ObjectOutputStream(theSavedGame);
 			theByteCode.writeObject(g);
 			theByteCode.close();
@@ -148,7 +151,7 @@ public class SaveLoad implements IGame, Serializable {
 	}
 
 	@Override
-	public void saveGame() {
+	public void saveGame(String filePath) {
 		// TODO Auto-generated method stub
 
 	}

@@ -101,7 +101,7 @@ public interface IGame {
     /**
      * Save the current game.
      */
-    void saveGame();
+    void saveGame(String filePath);
 
     /**
      * Stop the game entirely.

@@ -79,7 +79,7 @@ public class MockGame implements IGame {
     }
 
     @Override
-    public void saveGame() {}
+    public void saveGame(String filePath) {}
 
     @Override
     public void stopGame() {}

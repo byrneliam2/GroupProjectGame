@@ -11,8 +11,7 @@ public class allTests {
 
 	@Test
 	public void testSaving() {
-		Game g = new Game();
-		SaveLoad.saveGame(g);
+
 	}
 
 	@Test

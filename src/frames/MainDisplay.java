@@ -214,7 +214,8 @@ public class MainDisplay extends JComponent implements Observer {
      * @param selectedFile file selected
      */
     public void saveGame(File selectedFile) {
-        game.saveGame();
+		System.out.println("SaveGame CHRI IS HELPING ME: " + selectedFile.getAbsolutePath());
+        game.saveGame(selectedFile.getAbsolutePath());
     }
 
     /**
