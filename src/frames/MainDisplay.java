@@ -19,6 +19,7 @@ import map.World;
 import javax.swing.*;
 import javax.swing.Timer;
 import java.awt.*;
+import java.io.File;
 import java.util.*;
 
 /**
@@ -209,15 +210,17 @@ public class MainDisplay extends JComponent implements Observer {
 
     /**
      * Save the current game.
+     * @param selectedFile file selected
      */
-    public void saveGame() {
+    public void saveGame(File selectedFile) {
         game.saveGame();
     }
 
     /**
      * Load a game from a save file.
+     * @param selectedFile file selected
      */
-    public void loadGame() {
+    public void loadGame(File selectedFile) {
         //
     }
 
