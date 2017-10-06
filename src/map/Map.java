@@ -359,8 +359,7 @@ public class Map {
 	 * rectangle, using the rectangles four corners
 	 *
 	 * OPTIMISING: remove checking around the outside of map as these should never
-	 * occur. OPTIMISING: make the corners 'move along' as you go to each corner
-	 * rather than recalculating total 8 values.
+	 * occur.
 	 *
 	 * @param r
 	 * @return
