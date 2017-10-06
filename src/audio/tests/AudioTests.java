@@ -10,7 +10,13 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+
 import static org.junit.Assert.*;
+
+import java.lang.reflect.Field;
+import java.util.Deque;
+import audio.common.IAudioHandler;
+import audio.common.Track;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class AudioTests {
@@ -96,14 +102,26 @@ public class AudioTests {
 //External Testing
  //Test audio handler not iaudiohandler
     @Test
-    public void test09_audio() throws InterruptedException{
+    public void test09_audio() throws InterruptedException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException{
         AudioHandler audio = new AudioHandler();
+        Field audioQ = audio.getClass().getDeclaredField("musicQueue");
+        audioQ.setAccessible(true);
+        Class s = audio.getClass();
+        //s.getDeclaredConstructor(null);
+
+       // s.get
+        //Deque d = (Deque)audioQ.get(audioQ);
         Track track = MusicTrack.TEST_MUSIC;
-        audio.playSound(track);
-        audio.queueMusic(SoundTrack.CLICK);
-        audio.queueMusic(SoundTrack.CLICK);
-        audio.queueMusic(SoundTrack.CLICK);
-        audio.stop();
+
+        //audio.playSound(track);
+        //assert(0==d.size());
+        //audio.queueMusic(SoundTrack.CLICK);
+        //assert(1==d.size());
+        //audio.queueMusic(SoundTrack.CLICK);
+        //assert(2==d.size());
+        //audio.queueMusic(SoundTrack.CLICK);
+        //assert(3==d.size());
+        //audio.stop();
 
         Track click = SoundTrack.CLICK;
 
