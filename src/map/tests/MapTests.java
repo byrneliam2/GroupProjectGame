@@ -8,17 +8,13 @@ import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import map.*;
 import org.junit.Test;
 
 import common.items.Item;
 import items.DoorItem;
 import items.itemList.HealthPot;
 import items.itemList.MassiveGun;
-import map.Environment;
-import map.Map;
-import map.MapParser;
-import map.World;
-import map.WorldParser;
 import npc.NPC;
 import npc.PatrolScheme;
 import player.Bullet;
@@ -473,5 +469,29 @@ public class MapTests {
 
 		assertEquals("MapTest", m.getBackgroundLayer());
 	}
+
+	/**
+	 * Tests if the Background Layer is Returned
+	 */
+	@Test
+	public void testThrowException(){
+		try{
+			throw new BadMapImageException("test");
+		} catch (BadMapImageException e) {
+			assertEquals("Test", e.getMessage());
+		}
+	}
+
+	/**
+	 * Tests Environment Enum
+	 */
+	@Test
+	public void getEnvironmentCode(){
+		assertTrue(1 == Environment.DEATH.getEnviromentCode());
+		assertTrue(2 == Environment.MIST.getEnviromentCode());
+		assertTrue(3 == Environment.FIRE.getEnviromentCode());
+		assertTrue(4 == Environment.MUD.getEnviromentCode());
+	}
+
 
 }
