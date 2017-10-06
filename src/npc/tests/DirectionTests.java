@@ -7,7 +7,7 @@ import org.junit.Test;
 import npc.NPC;
 import npc.PatrolScheme;
 import player.Player;
-import utils.MathUtils;
+import common.MathUtils;
 
 /**
  * Test that the correct direction is gotten by the getAngleToPlayer method.

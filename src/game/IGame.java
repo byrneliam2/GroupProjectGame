@@ -9,7 +9,7 @@ package game;
 import map.World;
 import player.InvalidPlayerExceptions;
 import player.Player;
-import utils.Direction;
+import common.Direction;
 
 import java.util.Observer;
 

@@ -1,18 +1,15 @@
 package game;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-import items.Item;
 import map.World;
 import map.WorldParser;
-import npc.NPC;
 import player.Bullet;
 import player.InvalidPlayerExceptions;
 import player.Player;
-import utils.Direction;
+import common.Direction;
 
 /**
  * Class to be used by front end for getting all the different entities in the

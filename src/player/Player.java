@@ -14,7 +14,7 @@ import items.Item;
 import items.Usable;
 import map.Map;
 import map.World;
-import utils.MathUtils;
+import common.MathUtils;
 
 /**
  * @author javahemohs Created by javahemohs on 19/09/17.

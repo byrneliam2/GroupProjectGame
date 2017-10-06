@@ -4,7 +4,7 @@ import controller.common.Command;
 import controller.common.IController;
 import game.IGame;
 import player.InvalidPlayerExceptions;
-import utils.Direction;
+import common.Direction;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.MouseAdapter;

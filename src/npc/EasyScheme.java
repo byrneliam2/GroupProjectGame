@@ -3,7 +3,7 @@ package npc;
 import player.Bullet;
 import player.InvalidPlayerExceptions;
 import player.Player;
-import utils.MathUtils;
+import common.MathUtils;
 
 /**
  * This scheme slowly shoots at the player and moves randomly
@@ -13,7 +13,7 @@ import utils.MathUtils;
  */
 public class EasyScheme implements ControlScheme {
 
-	private utils.Direction randDir = getRandomDir();
+	private common.Direction randDir = getRandomDir();
 	private int shotCounter = 0;
 
 	public EasyScheme() {
@@ -39,9 +39,9 @@ public class EasyScheme implements ControlScheme {
 		}
 	}
 
-	public utils.Direction getRandomDir() {
+	public common.Direction getRandomDir() {
 		int dir = (int) (Math.random() * 8);
-		return utils.Direction.VALUES.get(dir);
+		return common.Direction.VALUES.get(dir);
 	}
 
 }

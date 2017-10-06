@@ -1,4 +1,4 @@
-package utils;
+package common;
 
 /**
  * Shared Utility class for various different calculations
