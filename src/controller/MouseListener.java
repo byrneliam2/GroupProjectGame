@@ -10,7 +10,8 @@ public class MouseListener extends MouseAdapter implements IListener{
     private int mouseX;
     private int mouseY;
 
-    public MouseListener() {
+    public MouseListener(Controller parent) {
+        this.parent = parent;
         this.mouseX = 0;
         this.mouseY = 0;
     }
@@ -37,14 +38,6 @@ public class MouseListener extends MouseAdapter implements IListener{
     public void mouseDragged(MouseEvent e) {
         this.mouseX = e.getX();
         this.mouseY = e.getY();
-    }
-
-    /**
-     * Add the Controller as a parent for notifications in the future.
-     * @param parent The Controller
-     */
-    void setController(Controller parent){
-        this.parent = parent;
     }
 
 

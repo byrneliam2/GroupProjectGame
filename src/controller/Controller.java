@@ -5,21 +5,24 @@ import game.IGame;
 import player.InvalidPlayerExceptions;
 import utils.Direction;
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.MouseAdapter;
 import java.util.HashSet;
 import java.util.Set;
 
 public class Controller implements IController {
     private IGame game;
     private Set<Command> currentCommands;
+    private KeyListener keyboard;
     private MouseListener mouse;
 
-    public Controller(IGame game, KeyListener keyboard, MouseListener mouse) {
+    public Controller(IGame game) {
         this.game = game;
-        this.mouse = mouse;
         this.currentCommands = new HashSet<>();
 
-        keyboard.setController(this);
-        mouse.setController(this);
+        //Setup Listeners
+        keyboard = new KeyListener(this);
+        mouse = new MouseListener(this);
     }
 
     /**
@@ -82,5 +85,15 @@ public class Controller implements IController {
     @Override
     public void reloadController() {
         currentCommands.clear();
+    }
+
+    @Override
+    public KeyAdapter getKeyAdapter() {
+        return keyboard;
+    }
+
+    @Override
+    public MouseAdapter getMouseAdapter() {
+        return mouse;
     }
 }

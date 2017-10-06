@@ -19,6 +19,7 @@ import map.World;
 import javax.swing.*;
 import javax.swing.Timer;
 import java.awt.*;
+import java.io.File;
 import java.util.*;
 
 /**
@@ -66,15 +67,12 @@ public class MainDisplay extends JComponent implements Observer {
         master.setUndecorated(true);
         //master.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-        // controller setup
-        KeyListener keyboard = new KeyListener();
-        MouseListener mouse = new MouseListener();
+        controller = new Controller(game);
 
-        master.addKeyListener(keyboard);
-        master.addMouseListener(mouse);
-        master.addMouseMotionListener(mouse);
+        master.addKeyListener(controller.getKeyAdapter());
+        master.addMouseListener(controller.getMouseAdapter());
+        master.addMouseMotionListener(controller.getMouseAdapter());
 
-        controller = new Controller(game, keyboard, mouse);
 
         // this component setup
         this.setLayout(new CardLayout());
@@ -208,6 +206,22 @@ public class MainDisplay extends JComponent implements Observer {
     private void stopGame() {
         stopTimer();
         menu();
+    }
+
+    /**
+     * Save the current game.
+     * @param selectedFile file selected
+     */
+    public void saveGame(File selectedFile) {
+        game.saveGame();
+    }
+
+    /**
+     * Load a game from a save file.
+     * @param selectedFile file selected
+     */
+    public void loadGame(File selectedFile) {
+        //
     }
 
     /* =========================================================================================== */

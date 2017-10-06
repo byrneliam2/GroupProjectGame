@@ -43,43 +43,44 @@ public class MenuCard extends Card {
 		}
 	}
 
-	@Override
-	public void setComponentActions(MainDisplay dsp) {
-		for (Map.Entry m : components.entrySet()) {
-			if (!(m.getValue() instanceof JButton))
-				continue;
-			final String str = (String) m.getKey();
-			final JButton btn = (JButton) m.getValue();
-			btn.addActionListener(e -> {
-				dsp.getAudioHandler().playSound(SoundTrack.CLICK);
-				switch (str) {
-				case "new":
-					dsp.newGame();
-					dsp.startGame();
-					break;
-				case "load":
-					JFileChooser fileChooser = new JFileChooser();
-					fileChooser.setCurrentDirectory(new File(".."));
-					fileChooser.setDialogTitle("Select a <ext> file to load");
-					if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-					
-						}
-					break;
-				case "settings":
-					dsp.update(null, "settings");
-					break;
-				case "info":
-					showInfo();
-					break;
-				case "exit":
-					if (JOptionPane.showConfirmDialog(this, "Are you sure you wish to exit?", "Exit Game",
-							JOptionPane.YES_NO_OPTION) == 0)
-						System.exit(0);
-					break;
-				}
-			});
-		}
-	}
+    @Override
+    public void setComponentActions(MainDisplay dsp) {
+        for (Map.Entry m : components.entrySet()) {
+            if (!(m.getValue() instanceof JButton)) continue;
+            final String str = (String) m.getKey();
+            final JButton btn = (JButton) m.getValue();
+            btn.addActionListener(e -> {
+                dsp.getAudioHandler().playSound(SoundTrack.CLICK);
+                switch (str) {
+                    case "new":
+                        dsp.newGame();
+                        dsp.startGame();
+                        break;
+                    case "load":
+                        JFileChooser fileChooser = new JFileChooser();
+                        fileChooser.setCurrentDirectory(new File(".."));
+                        fileChooser.setDialogTitle("Select a <ext> file to load");
+                        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+                            dsp.loadGame(fileChooser.getSelectedFile());
+                        }
+                        break;
+                    case "settings":
+                        dsp.update(null, "settings");
+                        break;
+                    case "info":
+                        showInfo();
+                        break;
+                    case "exit":
+                        if (JOptionPane.showConfirmDialog(this,
+                                "Are you sure you wish to exit?", "Exit Game",
+                            JOptionPane.YES_NO_OPTION) == 0)
+                            System.exit(0);
+                        break;
+                }
+            });
+        }
+    }
+>>>>>>> branch 'master' of https://gitlab.ecs.vuw.ac.nz/swen222-2017-p1-t10/SWEN222PROJECTSNICKETYSNACKS.git
 
 	@Override
 	public void redraw() {
