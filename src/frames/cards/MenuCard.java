@@ -18,32 +18,30 @@ import java.io.File;
 import java.util.Map;
 
 /**
- * The MenuCard represents the main menu of the game. This contains buttons that start,
- * load or end the game, along with a link to the {@link SettingsCard}.
+ * The MenuCard represents the main menu of the game. This contains buttons that
+ * start, load or end the game, along with a link to the {@link SettingsCard}.
  */
 public class MenuCard extends Card {
 
-    public MenuCard(String n) {
-        super(n);
-        setBackground(ImageLoader.image("ui","menu", false));
-    }
+	public MenuCard(String n) {
+		super(n);
+		setBackground(ImageLoader.image("ui", "menu", false));
+	}
 
-    @Override
-    protected void doUISetup() {
-        panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-        // put the logo in separately
-        components.put("logo", GraphicsUtilities.produceSticker(
-                ImageLoader.image("ui", "logo", true), 0.5f));
-        // use a loop to load all the buttons into the list
-        String[] files = {"new", "load", "settings", "info", "exit"};
-        //String[] files = {"load", "settings", "info", "exit"};
-        //components.put("new", new LabelButton("New Game", 225, 75));
-        for (String s : files) {
-            components.put(s, GraphicsUtilities.produceButton(
-                    ImageLoader.image("ui", "bu_" + s, true),
-                    ImageLoader.image("ui", "bu_" + s + "_r", false), 0.5f));
-        }
-    }
+	@Override
+	protected void doUISetup() {
+		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
+		// put the logo in separately
+		components.put("logo", GraphicsUtilities.produceSticker(ImageLoader.image("ui", "logo", true), 0.5f));
+		// use a loop to load all the buttons into the list
+		String[] files = { "new", "load", "settings", "info", "exit" };
+		// String[] files = {"load", "settings", "info", "exit"};
+		// components.put("new", new LabelButton("New Game", 225, 75));
+		for (String s : files) {
+			components.put(s, GraphicsUtilities.produceButton(ImageLoader.image("ui", "bu_" + s, true),
+					ImageLoader.image("ui", "bu_" + s + "_r", false), 0.5f));
+		}
+	}
 
     @Override
     public void setComponentActions(MainDisplay dsp) {
@@ -82,32 +80,32 @@ public class MenuCard extends Card {
             });
         }
     }
+>>>>>>> branch 'master' of https://gitlab.ecs.vuw.ac.nz/swen222-2017-p1-t10/SWEN222PROJECTSNICKETYSNACKS.git
 
-    @Override
-    public void redraw() {
-        panel.removeAll();
-        // add the components in a top to bottom order, adding glue where we want space
-        panel.add(Box.createVerticalGlue());
-        panel.add(components.get("logo"));
-        panel.add(Box.createRigidArea(new Dimension(100, 25)));
-        panel.add(components.get("new"));
-        panel.add(components.get("load"));
-        panel.add(components.get("settings"));
-        panel.add(components.get("info"));
-        panel.add(components.get("exit"));
-        panel.add(Box.createVerticalGlue());
-    }
+	@Override
+	public void redraw() {
+		panel.removeAll();
+		// add the components in a top to bottom order, adding glue where we want space
+		panel.add(Box.createVerticalGlue());
+		panel.add(components.get("logo"));
+		panel.add(Box.createRigidArea(new Dimension(100, 25)));
+		panel.add(components.get("new"));
+		panel.add(components.get("load"));
+		panel.add(components.get("settings"));
+		panel.add(components.get("info"));
+		panel.add(components.get("exit"));
+		panel.add(Box.createVerticalGlue());
+	}
 
-    /**
-     * Show some information about the game and those who made it.
-     */
-    private void showInfo() {
-        String about = "THE ILLUSION OF THE PROPHECY\n" +
-                "A game made for SWEN 222 at Victoria University of Wellington.\n\n" +
-                "Made by:\n- Liam Byrne (github.com/byrneliam2)\n- James Watt (github.com/Hiccup246)\n" +
-                "- Thomas Edwards (github.com/tomBeep)\n- Mohsen Javaher (github.com/javahemohs)\n" +
-                "- Andrew McManaway (github.com/McManaway1)\n\n" +
-                "17 October 2017";
-        JOptionPane.showMessageDialog(this, about, "Credits", JOptionPane.PLAIN_MESSAGE);
-    }
+	/**
+	 * Show some information about the game and those who made it.
+	 */
+	private void showInfo() {
+		String about = "THE ILLUSION OF THE PROPHECY\n"
+				+ "A game made for SWEN 222 at Victoria University of Wellington.\n\n"
+				+ "Made by:\n- Liam Byrne (github.com/byrneliam2)\n- James Watt (github.com/Hiccup246)\n"
+				+ "- Thomas Edwards (github.com/tomBeep)\n- Mohsen Javaher (github.com/javahemohs)\n"
+				+ "- Andrew McManaway (github.com/McManaway1)\n\n" + "17 October 2017";
+		JOptionPane.showMessageDialog(this, about, "Credits", JOptionPane.PLAIN_MESSAGE);
+	}
 }

@@ -217,7 +217,8 @@ public class Player {
 				// update rangeCircle
 				rangeCircle.setFrame(rangeCircle.getX() + dx, rangeCircle.getY() + dy, rangeCircleWidth,
 						rangeCircleWidth);
-				// update closest item
+				// update closest itemest item to player
+				
 				closestItem = map.getClosestItem(rangeCircle);
 				return false;
 			}
