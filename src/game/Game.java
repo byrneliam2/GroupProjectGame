@@ -1,17 +1,15 @@
 package game;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-import items.Item;
 import map.World;
 import map.WorldParser;
-import npc.NPC;
 import player.Bullet;
 import player.InvalidPlayerExceptions;
 import player.Player;
+import save_load.SaveLoad;
 import utils.Direction;
 
 /**
@@ -22,108 +20,117 @@ import utils.Direction;
  */
 public class Game extends Observable implements IGame, Serializable {
 
-    public static boolean GAME_PAUSED = false;
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
 
-    private Player player;
-    private World world;
+	public static boolean GAME_PAUSED = false;
 
-    @Override
-    public void giveObserver(Observer o) {
-        this.addObserver(o);
-    }
+	private Player player;
+	private World world;
 
-    /**
-     * Start the new game.
-     */
-    public void newGame() {
-        this.player = new Player("Tom", 500, 500);
-        this.world = WorldParser.parse("world", this.player);
-    }
+	@Override
+	public void giveObserver(Observer o) {
+		this.addObserver(o);
+	}
 
-    /******************* View Methods **********************/
+	/**
+	 * Start the new game.
+	 */
+	public void newGame() {
+		this.player = new Player("Tom", 500, 500);
+		this.world = WorldParser.parse("world", this.player);
+	}
 
-    @Override
-    public String getCurrentMap() {
-        return player.getMap().getName();
-    }
+	/******************* View Methods **********************/
 
-    @Override
-    public Player getPlayer() {
-        return this.player;
-    }
+	@Override
+	public String getCurrentMap() {
+		return player.getMap().getName();
+	}
 
-    @Override
-    public int isOver() {
-        if (false) return 2; // TODO win condition
-        if (player.isDead()) return 1;
-        else return 0;
+	@Override
+	public Player getPlayer() {
+		return this.player;
+	}
 
-    }
+	@Override
+	public int isOver() {
+		if (false)
+			return 2; // TODO win condition
+		if (player.isDead())
+			return 1;
+		else
+			return 0;
 
-    @Override
-    public World getWorld() {
-        return world;
-    }
+	}
 
-    /******************* Controller Methods ************************/
+	@Override
+	public World getWorld() {
+		return world;
+	}
 
-    @Override
-    public void movePlayer(Direction dir) throws InvalidPlayerExceptions {
-        //if the movement caused a change in maps... notify observers
-        if (player.move(player.getSpeed() * dir.getX(), player.getSpeed() * dir.getY())) {
-            set(getCurrentMap());
-        }
-    }
+	/******************* Controller Methods ************************/
 
-    @Override
-    public void interact() throws InvalidPlayerExceptions {
-        player.pickUpItem();
-    }
+	@Override
+	public void movePlayer(Direction dir) throws InvalidPlayerExceptions {
+		// if the movement caused a change in maps... notify observers
+		if (player.move(player.getSpeed() * dir.getX(), player.getSpeed() * dir.getY())) {
+			set(getCurrentMap());
+		}
+	}
 
-    @Override
-    public void shoot(double mouseX, double mouseY) throws InvalidPlayerExceptions {
-        player.shoot(mouseX, mouseY);
-    }
+	@Override
+	public void interact() throws InvalidPlayerExceptions {
+		player.pickUpItem();
+	}
 
-    @Override
-    public void pauseGame() {
-        GAME_PAUSED = true;
-        if (this.player.getMap() != null)
-            this.player.getMap().pauseMapNPCs();
-        set("pause");
-    }
+	@Override
+	public void shoot(double mouseX, double mouseY) throws InvalidPlayerExceptions {
+		player.shoot(mouseX, mouseY);
+	}
 
-    @Override
-    public void unPauseGame() {
-        GAME_PAUSED = false;
-        this.player.getMap().startMapNPCs();
-        set(getCurrentMap());
-    }
+	@Override
+	public void pauseGame() {
+		GAME_PAUSED = true;
+		if (this.player.getMap() != null)
+			this.player.getMap().pauseMapNPCs();
+		set("pause");
+	}
 
-    @Override
-    public boolean isPaused() {
-        return GAME_PAUSED;
-    }
+	@Override
+	public void unPauseGame() {
+		GAME_PAUSED = false;
+		this.player.getMap().startMapNPCs();
+		set(getCurrentMap());
+	}
 
-    /**
-     * Saves this game.Game object as a file...
-     */
-    public void saveGame() {
-        //
-    }
+	@Override
+	public boolean isPaused() {
+		return GAME_PAUSED;
+	}
 
-    @Override
-    public void stopGame() {
-        GAME_PAUSED = true;
-        if (this.player.getMap() != null)
-            this.player.getMap().pauseMapNPCs();
-        Bullet.bulletList.clear();
-        set("stop");
-    }
+	/**
+	 * Saves this game.Game object as a file...
+	 */
+	public void saveGame() {
+		System.out.println("saveGame"+this);
+		SaveLoad saveLoad = new SaveLoad(this);
+	}
 
-    @Override
-    public void set(Object arg) {
-        setChanged();
-        notifyObservers(arg);
-    }
+	@Override
+	public void stopGame() {
+		GAME_PAUSED = true;
+		if (this.player.getMap() != null)
+			this.player.getMap().pauseMapNPCs();
+		Bullet.bulletList.clear();
+		set("stop");
+	}
+
+	@Override
+	public void set(Object arg) {
+		setChanged();
+		notifyObservers(arg);
+	}
 }
