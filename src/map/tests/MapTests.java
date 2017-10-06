@@ -476,7 +476,7 @@ public class MapTests {
 	@Test
 	public void testThrowException(){
 		try{
-			throw new BadMapImageException("test");
+			throw new BadMapImageException("Test");
 		} catch (BadMapImageException e) {
 			assertEquals("Test", e.getMessage());
 		}
