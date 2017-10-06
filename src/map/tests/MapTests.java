@@ -2,14 +2,22 @@ package map.tests;
 
 import static org.junit.Assert.*;
 
+import java.awt.Rectangle;
+
 import org.junit.Test;
 
 import common.items.Item;
+import items.DoorItem;
 import items.itemList.HealthPot;
 import items.itemList.MassiveGun;
 import map.Environment;
 import map.Map;
 import map.MapParser;
+import map.World;
+import map.WorldParser;
+import npc.NPC;
+import npc.PatrolScheme;
+import player.Bullet;
 import player.InvalidPlayerExceptions;
 import player.Player;
 
@@ -19,6 +27,7 @@ public class MapTests {
 	private Player p1;
 	private Map m;
 	private Map m2;
+	private World w;
 
 	public void setup() {
 		p1 = new Player("Tom", x, y);
@@ -31,12 +40,10 @@ public class MapTests {
 		m = MapParser.parse("MapTest", p1);
 		p1.setMap(m);
 	}
-	
+
 	public void doorSetup() {
-		p1 = new Player("Tom", 150, 150);
-		m = MapParser.parse("Map3", p1);
-		m2 = MapParser.parse("Map8", p1);
-		p1.setMap(m);
+		p1 = new Player("Tom", 120, 120);
+		w = WorldParser.parse("world", p1);
 	}
 
 	@Test
@@ -80,7 +87,16 @@ public class MapTests {
 	}
 
 	@Test
-	public void testCanMove() {
+	public void enviromentTestInvalidPoints() {
+		this.environmentCollisionSetup();
+		assertNull(m.onEnviromentTile(-1, 0));
+		assertNull(m.onEnviromentTile(0, -1));
+		assertNull(m.onEnviromentTile(-1, -1));
+
+	}
+
+	@Test
+	public void testCanMoveSpecificTiles() {
 		this.environmentCollisionSetup();
 		assertFalse(m.canMove(-1, -1));
 		assertFalse(m.canMove(-1, 2));
@@ -89,6 +105,12 @@ public class MapTests {
 		assertFalse(m.canMove(33 * Map.tileSize, 33 * Map.tileSize));
 		assertFalse(m.canMove(33 * Map.tileSize, 5 * Map.tileSize));
 		assertFalse(m.canMove(5 * Map.tileSize, 33 * Map.tileSize));
+
+	}
+
+	@Test
+	public void testCanMoveAtEveryPoint() {
+		this.environmentCollisionSetup();
 
 		for (int i = 0; i < 32; i++) {
 			for (int j = 0; j < 18; j++) {
@@ -101,22 +123,162 @@ public class MapTests {
 
 		}
 	}
-	
+
+	@Test
+	public void testCanMoveAtEveryPointRectangle() {
+		this.environmentCollisionSetup();
+		// Rectangle is 1 smaller than it should be so there are no overlaps
+		for (int i = 0; i < 32; i++) {
+			for (int j = 0; j < 18; j++) {
+				Rectangle.Double r = new Rectangle.Double(i * Map.tileSize, j * Map.tileSize, Map.tileSize - 1,
+						Map.tileSize - 1);
+				if (i >= 13 && i <= 15) {
+					assertFalse(m.canMove(r));
+				} else {
+					assertTrue(m.canMove(r));
+				}
+			}
+
+		}
+	}
+
+	@Test
+	public void testCanMoveRectangleInvalidBottomLeft() {
+		this.environmentCollisionSetup();
+
+		// Rectangle with invalid bottom left
+		Rectangle.Double rBL0 = new Rectangle.Double(-1, 300, 10, 10);
+		assertFalse(m.canMove(rBL0));
+
+	}
+
+	@Test
+	public void moveRectangleInvalidTopLeft() {
+		this.environmentCollisionSetup();
+		// Rectangle with invalid top left
+		Rectangle.Double rTL0 = new Rectangle.Double(-1, 300, 10, 10);
+		Rectangle.Double rTL1 = new Rectangle.Double(-1, -1, 10, 10);
+		assertFalse(m.canMove(rTL0));
+		assertFalse(m.canMove(rTL1));
+	}
+
+	@Test
+	public void moveRectangleInvalidTopRight() {
+		this.environmentCollisionSetup();
+		// Rectangle with invalid top right
+		Rectangle.Double rTR0 = new Rectangle.Double(300, 300, 32 * Map.tileSize, 10);
+		Rectangle.Double rTR1 = new Rectangle.Double(Map.tileSize * 35, 300, 10, 10);
+		assertFalse(m.canMove(rTR0));
+		assertFalse(m.canMove(rTR1));
+
+	}
+
+	@Test
+	public void moveRectangleInvalidBottomRight() {
+		this.environmentCollisionSetup();
+		// Rectangle with invalid bottom right
+		Rectangle.Double rBR0 = new Rectangle.Double(300, 300, 10, 32 * Map.tileSize);
+		Rectangle.Double rBR1 = new Rectangle.Double(300, 35 * Map.tileSize, 10, 10);
+		System.out.println("Should be like 2000: " + rBR1.getMaxY());
+		assertFalse(m.canMove(rBR0));
+		assertFalse(m.canMove(rBR1));
+	}
+
 	@Test
 	public void doorTest() throws InvalidPlayerExceptions {
-		//Player starts on Map3 and should move over the door and into Map8
+		// Player starts on Map3 and should move over the door and into Map8
 		this.doorSetup();
-		assert(p1.getxLocation()==150);
-		assert(p1.getyLocation()==150);
+		assert (w.getStartingMap().getName().equals("Map3"));
+		DoorItem d = w.getStartingMap().getDoor(01);
+		// Player starts at 150,150
+		assertEquals(150, p1.getCentreX());
+		assertEquals(150, p1.getCentreY());
 
-		assertFalse(p1.move(120,240));
-		assert(p1.getxLocation()==200);
-		assert(p1.getyLocation()==200);
-		assertEquals(m2.getName(),p1.getMap().getName());
-		
-		
-		
-		
+		// Assert door is at 30,210
+		assert (30 == d.getCentrePoint().getX());
+		assert (210 == d.getCentrePoint().getY());
+
+		// move player to 150,210
+		assertFalse(p1.move(0, 60));
+		assertEquals(150, p1.getCentreX());
+		assertEquals(210, p1.getCentreY());
+
+		// Move player over door
+		assertFalse(p1.move(-50, 0));
+		assertTrue(p1.move(-60, 0));
+		// System.out.println(p1.getMap().getName()+"d");
+		assertEquals("Map8", p1.getMap().getName());
+
+	}
+
+	@Test
+	public void testRemovingNpc() {
+		this.doorSetup();
+		assertEquals(1, w.getStartingMap().getNPCS().size());
+		w.getStartingMap().removeNPC(w.getStartingMap().getNPCS().get(0));
+		assertEquals(0, w.getStartingMap().getNPCS().size());
+	}
+
+	@Test
+	public void testAddingNpc() {
+		this.doorSetup();
+		NPC c = new NPC("bug", 200, 200, 200, this.p1, new PatrolScheme(false, 5));
+		assertEquals(1, w.getStartingMap().getNPCS().size());
+		w.getStartingMap().getNPCS().add(c);
+		assertEquals(2, w.getStartingMap().getNPCS().size());
+	}
+
+	@Test
+	public void testStoppingStartingNpc() {
+		// Works on the basis that stopping a NPC returns true if it is not already
+		// stopped
+		this.doorSetup();
+		assertEquals(1, w.getStartingMap().getNPCS().size());
+		NPC c = w.getStartingMap().getNPCS().get(0);
+		w.getStartingMap().pauseMapNPCs();
+		assertFalse(c.stop());
+		w.getStartingMap().startMapNPCs();
+		assertTrue(c.stop());
+
+	}
+
+	@Test
+	public void testNpcBulletHitting() throws InvalidPlayerExceptions, InterruptedException {
+		// Bullet direction is 0-2Pie, 0 being north,pie being south,
+		this.doorSetup();
+		p1.move(250, 50);
+		assertEquals(400, p1.getCentreX());
+		assertEquals(200, p1.getCentreY());
+		Bullet b = new Bullet(400, 400, 0, p1, 0, "npcBullet1");
+		assertFalse(this.w.getStartingMap().checkBulletHit(b));
+		System.out.println("NpcBulletY: " + b.getY());
+		Thread.sleep(8000);
+		assert (400 == b.getX());
+		System.out.println(b.getX());
+		System.out.println("NpcBulletY: " + b.getY());
+		assertTrue(this.w.getStartingMap().checkBulletHit(b));
+
+	}
+
+	@Test
+	public void testPlayerBulletHitting() throws InvalidPlayerExceptions, InterruptedException {
+		// Bullet direction is 0-2Pie, 0 being north,pie being south,
+		this.doorSetup();
+		NPC c = new NPC("bug", 400, 200, 200, this.p1, new PatrolScheme(false, 5));
+		Bullet b = new Bullet(400, 400, 0, p1, 0, "playerBullet1");
+		assertFalse(this.w.getStartingMap().checkBulletHit(b));
+		System.out.println("PlayerBulletY: " + b.getY());
+		Thread.sleep(8000);
+		assert (400 == b.getX());
+		System.out.println("BullePlayerBulletY: " + b.getY());
+		assertTrue(this.w.getStartingMap().checkBulletHit(b));
+
+	}
+
+	@Test
+	public void nullDoorTest() {
+		this.doorSetup();
+		assertNull(w.getStartingMap().getDoor(100));
 	}
 
 	@Test
@@ -130,6 +292,13 @@ public class MapTests {
 		assertEquals(2, m.getItems().size());
 		assertEquals(100, m.getItems().get(1).getX());
 		assertEquals(100, m.getItems().get(1).getY());
+	}
+
+	@Test
+	public void testBackgroundLayer() {
+		this.doorSetup();
+		assertEquals("Map3", w.getStartingMap().getName());
+
 	}
 
 	@Test

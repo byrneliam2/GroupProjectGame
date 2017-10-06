@@ -43,8 +43,8 @@ public class NPC extends Player {
 	 * stops the timer which controls this NPC, which causes the NPC to simply stand
 	 * still.
 	 */
-	public void stop() {
-		npctask.cancel();
+	public boolean stop() {
+		return npctask.cancel();
 	}
 
 	/**

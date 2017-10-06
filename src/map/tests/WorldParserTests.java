@@ -17,7 +17,7 @@ public class WorldParserTests {
 	@Test
 	public void testCorrectWorld() {
 		Player p1 = new Player("Tom", 50, 50);
-		World w = WorldParser.parse("world2", p1);
+		World w = WorldParser.parse("world", p1);
 		p1.setMap(w.getStartingMap());
 		assertTrue(w != null);
 	}
@@ -27,6 +27,14 @@ public class WorldParserTests {
 		Player p1 = new Player("Tom", 50, 50);
 		World w = WorldParser.parse("vfbsf", p1);
 		assertTrue(w == null);
+	}
+	
+	@Test
+	public void correctMapsAreLoaded() {
+		Player p1 = new Player("Tom", 50, 50);
+		World w = WorldParser.parse("world", p1);
+		p1.setMap(w.getStartingMap());
+		assert(12==w.getMaps().size());
 	}
 
 }

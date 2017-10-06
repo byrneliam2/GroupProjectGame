@@ -81,7 +81,7 @@ public class Map {
 	}
 
 	/**
-	 * Pauses all of the map's npc's so that they don't move. Usefull to call when
+	 * Pauses all of the map's npc's so that they don't move. Useful to call when
 	 * the player changes maps.
 	 */
 	public void pauseMapNPCs() {
@@ -358,6 +358,10 @@ public class Map {
 		// Top Left
 		double posX = r.getX();
 		double posY = r.getY();
+
+		//System.out.println("TopLeftX: " + posX);
+		//System.out.println("TopLeftY: " + posY);
+		//System.out.println("===================");
 		if (posX < 0 || posY < 0) {
 			return false;
 		}
@@ -442,41 +446,6 @@ public class Map {
 		} else {
 			return Environment.MIST;
 		}
-	}
-
-	/**
-	 * This method returns whether there is a item on a given spot
-	 *
-	 * @param x
-	 * @param y
-	 * @return
-	 */
-	public boolean itemAtTile(int x, int y) {
-		Point pos = new Point((int) x / Map.tileSize, (int) y / Map.tileSize);
-		for (Item itm : this.items) {
-			if (itm.getX() == pos.getX() && itm.getY() == pos.getY()) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	/**
-	 * This method returns the item located at position x,y. Returns null if there
-	 * is no item. Returns an exception if the x or y position is invalid.
-	 *
-	 * @param x
-	 * @param y
-	 * @return
-	 */
-	public Item itemAt(int x, int y) {
-		Point pos = new Point((int) x / Map.tileSize, (int) y / Map.tileSize);
-		for (Item itm : this.items) {
-			if (itm.getX() == pos.getX() && itm.getY() == pos.getY()) {
-				return itm;
-			}
-		}
-		return null;
 	}
 
 	/**

@@ -17,7 +17,7 @@ public class MapParserTests {
 	@Test
 	public void testCorrectMaps() {
 		Player p1 = new Player("Tom", 50, 50);
-		Map m = MapParser.parse("Map1", p1);
+		Map m = MapParser.parse("Map3", p1);
 		assert (m != null);
 	}
 

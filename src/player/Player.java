@@ -245,6 +245,7 @@ public class Player {
 
 		rangeCircle = new Ellipse2D.Double(playerBox.getX() - Map.tileSize / 2, playerBox.getY() - Map.tileSize / 2,
 				rangeCircleWidth, rangeCircleWidth);
+		
 		map.pauseMapNPCs();
 		// removes all the bullets from the game when you go through the door.
 		for (int i = Bullet.bulletList.size() - 1; i >= 0; i--) {
