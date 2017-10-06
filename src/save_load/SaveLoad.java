@@ -5,7 +5,7 @@ import game.IGame;
 import map.World;
 import player.InvalidPlayerExceptions;
 import player.Player;
-import utils.Direction;
+import common.Direction;
 
 import java.io.File;
 import java.io.FileOutputStream;
