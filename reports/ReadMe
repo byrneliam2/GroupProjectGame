@@ -6,3 +6,8 @@ impossible at this point.
 -I have added a few tests to the audio package and have stated in more detail in the tests itself what i did
 and what i thought of the current tests.
 -For graphics
+
+Liam:
+I have written some external tests for the items package, these can be found in the test class aptly named so.
+All tests from items can be run with the AllItemsTests class.
+Please note that not all the tests may pass, since items is undergoing a major redo currently.
