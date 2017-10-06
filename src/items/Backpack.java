@@ -51,15 +51,15 @@ public class Backpack {
 		if (item instanceof Key) {// if you pick up a key, add it to the key section
 			Key key = (Key) item;
 			keys.add(key); // FIXME: Can pick up infinite keys?
-			return;
 		} else if (item instanceof Equipable) {
 			Equipable equip = (Equipable) item;
 			equip.provideBonus(owner);
+			inventory.add(item);
 		} else if (item instanceof Usable) {
 			Usable use = (Usable) item;
 			use.use(owner);
 		}
-		inventory.add(item);
+		
 	}
 
 	/**
