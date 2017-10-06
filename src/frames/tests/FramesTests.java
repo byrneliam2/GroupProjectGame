@@ -94,7 +94,7 @@ public class FramesTests {
 
     @Test
     public void test06_Timer() {
-        MainDisplay m = makeDisplay(false);
+        MainDisplay m = makeDisplay(true);
         m.startTimer();
         assertTrue(m.isTimerRunning());
         m.stopTimer();
