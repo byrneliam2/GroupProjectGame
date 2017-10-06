@@ -1,4 +1,6 @@
-package items;
+package common.items;
+
+import items.Backpack;
 
 import java.awt.Image;
 

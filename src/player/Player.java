@@ -10,7 +10,7 @@ import items.Backpack;
 import items.DoorItem;
 import items.Equipable;
 import items.InvalidBackpackException;
-import items.Item;
+import common.items.Item;
 import items.Usable;
 import map.Map;
 import map.World;

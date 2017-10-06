@@ -11,7 +11,7 @@ import frames.MainDisplay;
 import game.IGame;
 import gfx.ImageLoader;
 import gfx.ImageUtilities;
-import items.Item;
+import common.items.Item;
 import player.Bullet;
 import player.Player;
 

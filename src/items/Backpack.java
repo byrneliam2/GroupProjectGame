@@ -3,6 +3,7 @@ package items;
 import java.util.ArrayList;
 import java.util.List;
 
+import common.items.Item;
 import player.Player;
 
 /**

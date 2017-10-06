@@ -3,7 +3,7 @@ package map;
 import java.util.List;
 import java.util.Scanner;
 
-import items.Item;
+import common.items.Item;
 import items.Key;
 
 public class KeyParser {

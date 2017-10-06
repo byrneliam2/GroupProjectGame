@@ -5,20 +5,13 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import javax.imageio.ImageIO;
 
 import gfx.ImageLoader;
 import gfx.ImageUtilities;
 import items.DoorItem;
-import items.Item;
+import common.items.Item;
 import npc.NPC;
 import player.Bullet;
 import player.Player;
