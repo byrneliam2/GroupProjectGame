@@ -8,6 +8,10 @@ import java.awt.event.KeyEvent;
 public class KeyListener extends KeyAdapter implements IListener{
     private Controller parent;
 
+    public KeyListener(Controller parent) {
+        this.parent = parent;
+    }
+
     @Override
     public void keyPressed(KeyEvent e) {
         notifyController(e.getKeyCode(), InputType.KEYBOARD, parent,true);
@@ -16,13 +20,5 @@ public class KeyListener extends KeyAdapter implements IListener{
     @Override
     public void keyReleased(KeyEvent e) {
         notifyController(e.getKeyCode(), InputType.KEYBOARD, parent,false);
-    }
-
-    /**
-     * Add the Controller as a parent for notifications in the future.
-     * @param parent The Controller
-     */
-    void setController(Controller parent){
-        this.parent = parent;
     }
 }
