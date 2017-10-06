@@ -6,8 +6,10 @@ import java.util.Scanner;
 import items.Item;
 import items.itemList.HealthPot;
 import items.itemList.MassiveGun;
+import items.itemList.MaxHealthPot;
 import items.itemList.RustyArmor;
 import items.itemList.ShinyArmor;
+import items.itemList.SmallGun;
 
 public class ItemParser {
 
@@ -20,8 +22,12 @@ public class ItemParser {
 			setItemPosition(scan,new RustyArmor(),items);
 		} else if (itemName.equals("ShinyArmor")) {
 			setItemPosition(scan,new ShinyArmor(),items);
-		}  else {
-			throw new ParseException("Invalid text file");
+		}else if (itemName.equals("MaxHealthPot")) {
+			setItemPosition(scan,new MaxHealthPot(),items);
+		} else if (itemName.equals("SmallGun")) {
+			setItemPosition(scan,new SmallGun(),items);
+		}   else {
+			throw new ParseException("Unrecognised Item or entity name");
 		}
 	}
 

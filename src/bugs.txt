@@ -3,4 +3,3 @@
 - NPC's can move through doors
 - Environments don't work
 - No image for MaxhealthPotion and small gun
-- No parser for the above two items
