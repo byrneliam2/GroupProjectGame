@@ -48,10 +48,14 @@ public class PauseCard extends Card {
                         dsp.update(null, "unpause");
                         break;
                     case "save":
-                        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {}
+                        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+                            dsp.saveGame();
+                        }
                         break;
                     case "load":
-                        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {}
+                        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+                            dsp.loadGame();
+                        }
                         break;
                     case "settings":
                         dsp.update(null, "settings");
