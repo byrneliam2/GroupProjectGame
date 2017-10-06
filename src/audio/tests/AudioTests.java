@@ -91,5 +91,29 @@ public class AudioTests {
         audio.playSound(SoundTrack.CLICK);
         Thread.sleep(1000);
     }
+//External Testing
+ //Test audio handler not iaudiohandler
+    @Test
+    public void test09_audio() throws InterruptedException{
+        AudioHandler audio = new AudioHandler();
+        Track track = MusicTrack.TEST_MUSIC;
+        audio.playSound(track);
+        audio.queueMusic(SoundTrack.CLICK);
+        audio.queueMusic(SoundTrack.CLICK);
+        audio.queueMusic(SoundTrack.CLICK);
+        audio.stop();
+
+        Track click = SoundTrack.CLICK;
+
+
+
+
+
+
+        Thread.sleep(500);
+
+    }
+
+
 
 }
