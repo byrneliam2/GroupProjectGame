@@ -10,7 +10,6 @@ import audio.AudioHandler;
 import audio.common.IAudioHandler;
 import audio.common.MusicTrack;
 import controller.*;
-import controller.common.IController;
 import frames.cards.Card;
 import frames.cards.*;
 import game.IGame;
@@ -20,6 +19,7 @@ import map.World;
 import javax.swing.*;
 import javax.swing.Timer;
 import java.awt.*;
+import java.io.File;
 import java.util.*;
 
 /**
@@ -206,6 +206,22 @@ public class MainDisplay extends JComponent implements Observer {
     private void stopGame() {
         stopTimer();
         menu();
+    }
+
+    /**
+     * Save the current game.
+     * @param selectedFile file selected
+     */
+    public void saveGame(File selectedFile) {
+        game.saveGame();
+    }
+
+    /**
+     * Load a game from a save file.
+     * @param selectedFile file selected
+     */
+    public void loadGame(File selectedFile) {
+        //
     }
 
     /* =========================================================================================== */
