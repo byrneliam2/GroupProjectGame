@@ -2,5 +2,5 @@
 - Grassland map collisions
 - NPC's can move through doors
 - Environments don't work
-- Gun item sets bullet speed to slower
-- No image for MaxhealthPotion
+- No image for MaxhealthPotion and small gun
+- No parser for the above two items
