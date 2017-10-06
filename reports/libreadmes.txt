@@ -23,9 +23,7 @@ gfx
 All tests can be run as a suite by using the AllGFXTests class.
 
 items
-Contains the itemList folder which is simply a list of all the current actual items
-in the game.
-Run the tests from the items.tests package. Not many tests implemented yet.
+Run the AllItemsTests class to run all tests as a suite.
 
 map
 
