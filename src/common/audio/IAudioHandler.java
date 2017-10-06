@@ -1,6 +1,4 @@
-package audio.common;
-
-import audio.common.Track;
+package common.audio;
 
 public interface IAudioHandler {
 

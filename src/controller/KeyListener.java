@@ -1,7 +1,7 @@
 package controller;
 
-import controller.common.IListener;
-import controller.common.InputType;
+import common.controller.IListener;
+import common.controller.InputType;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;

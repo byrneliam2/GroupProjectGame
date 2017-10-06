@@ -7,11 +7,11 @@ package frames;
  */
 
 import audio.AudioHandler;
-import audio.common.IAudioHandler;
-import audio.common.MusicTrack;
+import common.audio.IAudioHandler;
+import common.audio.MusicTrack;
 import common.utils.DisplayValues;
 import controller.*;
-import controller.common.IController;
+import common.controller.IController;
 import frames.cards.Card;
 import frames.cards.*;
 import game.IGame;

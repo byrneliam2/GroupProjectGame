@@ -1,8 +1,6 @@
-package controller.common;
+package common.controller;
 
 import controller.Controller;
-import controller.common.Command;
-import controller.common.InputType;
 
 public interface IListener {
 

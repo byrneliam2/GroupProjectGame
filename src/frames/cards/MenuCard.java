@@ -6,11 +6,10 @@ package frames.cards;
  * 300338518
  */
 
-import audio.common.*;
+import common.audio.SoundTrack;
 import frames.MainDisplay;
 import gfx.GraphicsUtilities;
 import gfx.ImageLoader;
-import gfx.LabelButton;
 
 import javax.swing.*;
 import java.awt.*;

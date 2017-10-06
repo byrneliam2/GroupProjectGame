@@ -2,8 +2,10 @@ package audio.tests;
 
 import audio.AudioException;
 import audio.AudioHandler;
-import audio.common.IAudioHandler;
-import audio.common.*;
+import common.audio.IAudioHandler;
+import common.audio.MusicTrack;
+import common.audio.SoundTrack;
+import common.audio.Track;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;

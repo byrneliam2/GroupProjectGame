@@ -1,4 +1,4 @@
-package controller.common;
+package common.controller;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.MouseAdapter;

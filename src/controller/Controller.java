@@ -1,7 +1,7 @@
 package controller;
 
-import controller.common.Command;
-import controller.common.IController;
+import common.controller.Command;
+import common.controller.IController;
 import game.IGame;
 import player.InvalidPlayerExceptions;
 import common.utils.Direction;

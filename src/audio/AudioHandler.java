@@ -5,8 +5,8 @@ package audio;
  *  SWEN 222 Group Project
  */
 
-import audio.common.IAudioHandler;
-import audio.common.Track;
+import common.audio.IAudioHandler;
+import common.audio.Track;
 
 import javax.sound.sampled.*;
 import java.util.ArrayDeque;
