@@ -1,0 +1,5 @@
+- Exact middle of doors don't work
+- Grassland map collisions
+- NPC's can move through doors
+- Environments don't work
+- No image for MaxhealthPotion and small gun

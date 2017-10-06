@@ -1,25 +1,29 @@
 package controller;
 
-import controller.enums.Command;
+import common.controller.Command;
+import common.controller.IController;
 import game.IGame;
 import player.InvalidPlayerExceptions;
-import utils.Direction;
+import common.utils.Direction;
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.MouseAdapter;
 import java.util.HashSet;
 import java.util.Set;
 
 public class Controller implements IController {
     private IGame game;
     private Set<Command> currentCommands;
+    private KeyListener keyboard;
     private MouseListener mouse;
 
-    public Controller(IGame game, KeyListener keyboard, MouseListener mouse) {
+    public Controller(IGame game) {
         this.game = game;
-        this.mouse = mouse;
         this.currentCommands = new HashSet<>();
 
-        keyboard.setController(this);
-        mouse.setController(this);
+        //Setup Listeners
+        keyboard = new KeyListener(this);
+        mouse = new MouseListener(this);
     }
 
     /**
@@ -29,7 +33,7 @@ public class Controller implements IController {
      * @param cmd The command to logged
      * @param pressed If the command is being pressed, or if released
      */
-    void notifyCommands(Command cmd, boolean pressed) {
+    public void notifyCommands(Command cmd, boolean pressed) {
         if (pressed)
             currentCommands.add(cmd);
         else
@@ -59,8 +63,11 @@ public class Controller implements IController {
                     case INTERACT:
                         game.interact();
                         break;
-                    case SHOOT:
+                    case PRIMARY_ATTACK:
                         game.shoot(mouse.getX(), mouse.getY());
+                        break;
+                    case SECONDARY_ATTACK:
+                        //game.shoot(mouse.getX(), mouse.getY()); TODO: After Secondary File is Implemented
                         break;
                     case PAUSE:
                         game.pauseGame();
@@ -74,5 +81,20 @@ public class Controller implements IController {
     public void update() {
         if (!game.isPaused())
             currentCommands.forEach(this::processCommand);
+    }
+
+    @Override
+    public void reloadController() {
+        currentCommands.clear();
+    }
+
+    @Override
+    public KeyAdapter getKeyAdapter() {
+        return keyboard;
+    }
+
+    @Override
+    public MouseAdapter getMouseAdapter() {
+        return mouse;
     }
 }

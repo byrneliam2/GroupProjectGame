@@ -5,20 +5,13 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import javax.imageio.ImageIO;
 
 import gfx.ImageLoader;
 import gfx.ImageUtilities;
 import items.DoorItem;
-import items.Item;
+import common.items.Item;
 import npc.NPC;
 import player.Bullet;
 import player.Player;
@@ -343,11 +336,10 @@ public class Map {
 	public boolean canMove(int x, int y) {
 		if (x < 0 || y < 0 || x > this.width * Map.tileSize || y > this.height * Map.tileSize)
 			return false;
-		x = (int) (x / tileSize);
-		y = (int) (y / tileSize);
+		x = (int) (x / Map.tileSize);
+		y = (int) (y / Map.tileSize);
 
-		Point mapPos = this.positionOnMap(x, y);
-		if (this.collisionLayer.get((int) mapPos.getY()).get((int) mapPos.getX()) == 1) {
+		if (this.collisionLayer.get(y).get(x) == 1) {
 			return false;
 		} else {
 			return true;
@@ -358,14 +350,12 @@ public class Map {
 	 * This method decides whether a position on the map can be moved over by a
 	 * rectangle, using the rectangles four corners
 	 *
-	 * OPTIMISING: remove checking around the outside of map as these should never
-	 * occur.
-	 *
 	 * @param r
 	 * @return
 	 */
 	public boolean canMove(Rectangle.Double r) {
-		// May have to add more points to check for collisions
+
+		// Top Left
 		double posX = r.getX();
 		double posY = r.getY();
 		if (posX < 0 || posY < 0) {
@@ -374,28 +364,18 @@ public class Map {
 		if (this.collisionLayer.get((int) (posY / Map.tileSize)).get((int) (posX / Map.tileSize)) == 1) {
 			return false;
 		}
-
-		posX = posX + r.getWidth() - 1;
-		if (posX > (this.width * Map.tileSize) || posY > (this.height * Map.tileSize)) {
+		// Top right
+		posX = posX + r.getWidth();
+		if (posX > (this.width * Map.tileSize)) {
 			return false;
 		}
 		if (this.collisionLayer.get((int) (posY / Map.tileSize)).get((int) (posX / Map.tileSize)) == 1) {
 			return false;
 		}
 
-		posX = posX - r.getWidth() + 1;
-		posY = posY + r.getHeight() - 1;
-		if ((posX) < 0 || (posY) < 0) {
-			return false;
-		}
-
-		if (this.collisionLayer.get((int) (posY / Map.tileSize)).get((int) (posX / Map.tileSize)) == 1) {
-			return false;
-		}
-
-		posX = posX + r.getWidth() - 1;
-		
-		if (posX > (this.width * Map.tileSize) || posY > (this.height * Map.tileSize)) {
+		// Bottom right
+		posY = posY + r.getHeight();
+		if (posY > (this.height * Map.tileSize)) {
 			return false;
 		}
 
@@ -403,7 +383,17 @@ public class Map {
 			return false;
 		}
 
+		// Bottom Left
+		posX = posX - r.getWidth();
+		if ((posX) < 0) {
+			return false;
+		}
+
+		if (this.collisionLayer.get((int) (posY / Map.tileSize)).get((int) (posX / Map.tileSize)) == 1) {
+			return false;
+		}
 		return true;
+
 	}
 
 	/**
@@ -487,19 +477,6 @@ public class Map {
 			}
 		}
 		return null;
-	}
-
-	/**
-	 * This method takes a x and y location and rounds it to an absolute
-	 * position(tile), e.g. Tile 2.5 does not exist so it is rounded down to tile 2
-	 * which does exist. Throws an error if the given x and y is invalid.
-	 *
-	 * @param x
-	 * @param y
-	 * @return
-	 */
-	private Point positionOnMap(double x, double y) {
-		return new Point((int) x, (int) y);
 	}
 
 	/**

@@ -4,7 +4,7 @@ import map.Map;
 import player.Bullet;
 import player.InvalidPlayerExceptions;
 import player.Player;
-import utils.MathUtils;
+import common.utils.MathUtils;
 
 /**
  * A scheme which causes the NPC to patrol left-right or up-down. The NPC will

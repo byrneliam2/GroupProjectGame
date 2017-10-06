@@ -2,15 +2,11 @@ package map.tests;
 
 import static org.junit.Assert.*;
 
-import java.io.IOException;
-
 import org.junit.Test;
 
-import items.DoorItem;
-import items.Item;
+import common.items.Item;
 import items.itemList.HealthPot;
 import items.itemList.MassiveGun;
-import map.BadMapImageException;
 import map.Environment;
 import map.Map;
 import map.MapParser;

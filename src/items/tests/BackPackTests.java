@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import items.Backpack;
 import items.InvalidBackpackException;
-import items.Item;
+import common.items.Item;
 import items.Usable;
 import items.itemList.HealthPot;
 import player.Player;

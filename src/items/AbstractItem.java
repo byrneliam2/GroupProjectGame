@@ -1,12 +1,8 @@
 package items;
 
 import java.awt.Image;
-import java.io.IOException;
-import java.io.InputStream;
 
-import javax.imageio.ImageIO;
-
-import gfx.ImageLoader;
+import common.items.Item;
 
 public abstract class AbstractItem implements Item {
 	protected final String name, description;

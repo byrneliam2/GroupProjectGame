@@ -2,18 +2,26 @@ package audio.tests;
 
 import audio.AudioException;
 import audio.AudioHandler;
-import audio.IAudioHandler;
-import audio.tracks.*;
+import common.audio.IAudioHandler;
+import common.audio.MusicTrack;
+import common.audio.SoundTrack;
+import common.audio.Track;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+
 import static org.junit.Assert.*;
+
+import java.lang.reflect.Field;
+import java.util.Deque;
+import common.audio.IAudioHandler;
+import common.audio.Track;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class AudioTests {
 
-    //Track Interface and Implemented enums
+    //Track Interface and Implemented common
 
     @Test
     public void test01_MusicTrack(){
@@ -91,5 +99,41 @@ public class AudioTests {
         audio.playSound(SoundTrack.CLICK);
         Thread.sleep(1000);
     }
+//External Testing
+ //Test audio handler not iaudiohandler
+    @Test
+    public void test09_audio() throws InterruptedException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException{
+        AudioHandler audio = new AudioHandler();
+        Field audioQ = audio.getClass().getDeclaredField("musicQueue");
+        audioQ.setAccessible(true);
+        Class s = audio.getClass();
+        //s.getDeclaredConstructor(null);
+
+       // s.get
+        //Deque d = (Deque)audioQ.get(audioQ);
+        Track track = MusicTrack.TEST_MUSIC;
+
+        //audio.playSound(track);
+        //assert(0==d.size());
+        //audio.queueMusic(SoundTrack.CLICK);
+        //assert(1==d.size());
+        //audio.queueMusic(SoundTrack.CLICK);
+        //assert(2==d.size());
+        //audio.queueMusic(SoundTrack.CLICK);
+        //assert(3==d.size());
+        //audio.stop();
+
+        Track click = SoundTrack.CLICK;
+
+
+
+
+
+
+        Thread.sleep(500);
+
+    }
+
+
 
 }

@@ -1,4 +1,4 @@
-package audio.tracks;
+package common.audio;
 
 public interface Track {
     String getSoundFile();

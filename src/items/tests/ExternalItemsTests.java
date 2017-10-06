@@ -6,11 +6,9 @@ package items.tests;
  * 300338518
  */
 
+import common.items.Item;
 import items.*;
 import items.itemList.HealthPot;
-import items.itemList.MassiveGun;
-import items.itemList.RustyArmor;
-import items.itemList.ShinyArmor;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;

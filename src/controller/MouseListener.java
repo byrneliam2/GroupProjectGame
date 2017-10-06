@@ -1,30 +1,30 @@
 package controller;
 
-import controller.enums.Command;
-import controller.enums.InputType;
+import common.controller.IListener;
+import common.controller.InputType;
 
-import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class MouseListener extends MouseAdapter {
+public class MouseListener extends MouseAdapter implements IListener {
     private Controller parent;
     private int mouseX;
     private int mouseY;
 
-    public MouseListener() {
+    public MouseListener(Controller parent) {
+        this.parent = parent;
         this.mouseX = 0;
         this.mouseY = 0;
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        notifyController(e.getButton(), true);
+        notifyController(e.getButton(), InputType.MOUSE, parent,true);
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        notifyController(e.getButton(), false);
+        notifyController(e.getButton(), InputType.MOUSE, parent,false);
     }
 
     /* Listeners Required for Shooting Direction */
@@ -39,27 +39,6 @@ public class MouseListener extends MouseAdapter {
     public void mouseDragged(MouseEvent e) {
         this.mouseX = e.getX();
         this.mouseY = e.getY();
-    }
-
-    /**
-     * Notifies the Controller of a Mouse Click.
-     * @param input The Mouse-Key with an event change
-     * @param pressed If the mouse was Clicked or Released.
-     */
-    private void notifyController(Integer input, boolean pressed){
-        for(Command cmd : Command.values()) {
-            if(!cmd.getType().equals(InputType.MOUSE)) continue;
-            else if(!cmd.getValue().equals(input)) continue;
-            parent.notifyCommands(cmd, pressed);
-        }
-    }
-
-    /**
-     * Add the Controller as a parent for notifications in the future.
-     * @param parent The Controller
-     */
-    void setController(Controller parent){
-        this.parent = parent;
     }
 
 

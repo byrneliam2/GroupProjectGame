@@ -1,4 +1,4 @@
-package controller.enums;
+package common.controller;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -12,7 +12,8 @@ public enum Command {
 
     /* Interact Commands */
     INTERACT(InputType.KEYBOARD, KeyEvent.VK_F),
-    SHOOT(InputType.MOUSE, MouseEvent.BUTTON1),
+    PRIMARY_ATTACK(InputType.MOUSE, MouseEvent.BUTTON1),
+    SECONDARY_ATTACK(InputType.MOUSE, MouseEvent.BUTTON2),
 
     /* Game Commands */
     PAUSE(InputType.KEYBOARD, KeyEvent.VK_ESCAPE);

@@ -1,18 +1,19 @@
 TO DO:
 - Implementation and integration
-- Own unit testing
+- External testing
 
 DISCUSSION POINTS:
+- No lectures next week, good time to get things done
+- Can't get too comfortable where we are, still lots to do
 - Liam - max health more than 5, and updating when items are picked up.
-- Drew - possibly a second type of attack right mouse click or maybe a dash?
+- Drew - possibly a second type of attack right mouse click or maybe a dash? <Implemented>
 - James - need a new potion image for a new restore-health-to-max potion
 
 DEADLINES
-- Complete libraries by 27/9
-- Code review by 1/10
+- External tests done by 6/10
 
 NEXT MEETING (11am CO242b):
-- 4/10
+- ?
 
 NEXT CODING DAY:
-- 28/9
+- 5/10

@@ -1,7 +1,6 @@
 package frames.cards;
 
-import audio.tracks.MusicTrack;
-import audio.tracks.SoundTrack;
+import common.audio.SoundTrack;
 import frames.MainDisplay;
 import gfx.GraphicsUtilities;
 import gfx.ImageLoader;
@@ -10,6 +9,10 @@ import javax.swing.*;
 import java.io.File;
 import java.util.Map;
 
+/**
+ * The PauseCard is similar to the {@link MenuCard} in terms of operations, but it has a different background
+ * to differentiate it from the menu.
+ */
 public class PauseCard extends Card {
 
     public PauseCard(String n) {
@@ -38,17 +41,21 @@ public class PauseCard extends Card {
             btn.addActionListener(e -> {
                 dsp.getAudioHandler().playSound(SoundTrack.CLICK);
                 JFileChooser fileChooser = new JFileChooser();
-                fileChooser.setCurrentDirectory(new File(".."));
+                fileChooser.setCurrentDirectory(new File("."));
                 fileChooser.setDialogTitle("Select a <ext> file to load");
                 switch (str) {
                     case "back":
                         dsp.update(null, "unpause");
                         break;
                     case "save":
-                        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {}
+                        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+                            dsp.saveGame(fileChooser.getSelectedFile());
+                        }
                         break;
                     case "load":
-                        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {}
+                        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+                            dsp.loadGame(fileChooser.getSelectedFile());
+                        }
                         break;
                     case "settings":
                         dsp.update(null, "settings");

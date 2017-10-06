@@ -2,12 +2,11 @@ package player;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import frames.MainDisplay;
+import common.utils.DisplayValues;
 import game.Game;
 import gfx.ImageLoader;
 import gfx.ImageUtilities;
@@ -140,7 +139,7 @@ public class Bullet {
 				update();
 			}
 		};
-		bulletTimer.scheduleAtFixedRate(bulletTask, 0, MainDisplay.FRAMERATE);
+		bulletTimer.scheduleAtFixedRate(bulletTask, 0, DisplayValues.FRAMERATE);
 	}
 
 	/**

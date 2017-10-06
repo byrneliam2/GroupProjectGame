@@ -1,18 +1,13 @@
 package map;
 
-import java.awt.Point;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
 import items.DoorItem;
-import items.Item;
+import common.items.Item;
 import npc.NPC;
 import player.Player;
 
@@ -59,22 +54,14 @@ public class MapParser {
 
 			while (scan.hasNext()) {
 				String line = scan.next();
-				if (line.equals("HealthPot")) {
-					new HealthPotParser().parse(scan, itms);
-				} else if (line.equals("MassiveGun")) {
-					new MassiveGunParser().parse(scan, itms);
-				} else if (line.equals("RustyArmor")) {
-					new RustyArmParser().parse(scan, itms);
-				} else if (line.equals("ShinyArmor")) {
-					new ShinyArmParser().parse(scan, itms);
-				} else if (line.equals("Npc")) {
+				if (line.equals("Npc")) {
 					new NpcParser().parse(scan, npcs, current);
 				} else if (line.equals("Door")) {
 					new DoorParser().parse(scan, doors);
 				} else if (line.equals("Key")) {
 					new KeyParser().parse(scan, itms);
 				} else {
-					throw new ParseException("Invalid text file");
+					ItemParser.parseItem(line, scan, itms);
 				}
 
 			}

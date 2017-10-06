@@ -6,7 +6,7 @@ package frames.cards;
  * 300338518
  */
 
-import audio.tracks.SoundTrack;
+import common.audio.SoundTrack;
 import frames.MainDisplay;
 import gfx.GraphicsUtilities;
 import gfx.ImageLoader;
@@ -23,6 +23,7 @@ import java.util.Map;
  * memory aspect; this class notifies MainDisplay of a switch to the previous screen
  * through the observer update mechanism. That is, the "Back" button escapes to the
  * "last" screen on the display.
+ * TODO key binding settings
  */
 public class SettingsCard extends Card {
 
@@ -34,8 +35,6 @@ public class SettingsCard extends Card {
     @Override
     protected void doUISetup() {
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-        // difficulty?
-        //
         // volume slider
         components.put("mastervol", GraphicsUtilities.produceSticker(
                 ImageLoader.image("ui", "mastervol", true), 0.5f));

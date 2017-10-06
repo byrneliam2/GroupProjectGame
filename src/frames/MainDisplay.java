@@ -7,18 +7,20 @@ package frames;
  */
 
 import audio.AudioHandler;
-import audio.IAudioHandler;
-import audio.tracks.MusicTrack;
+import common.audio.IAudioHandler;
+import common.audio.MusicTrack;
+import common.utils.DisplayValues;
 import controller.*;
+import common.controller.IController;
 import frames.cards.Card;
 import frames.cards.*;
 import game.IGame;
 import gfx.ImageLoader;
-import map.World;
 
 import javax.swing.*;
 import javax.swing.Timer;
 import java.awt.*;
+import java.io.File;
 import java.util.*;
 
 /**
@@ -38,12 +40,7 @@ public class MainDisplay extends JComponent implements Observer {
     private Map<String, Card> cards;
     private Card currentCard, lastCard;
     private IAudioHandler audioHandler;
-    @SuppressWarnings({"FieldCanBeLocal", "unused"}) private IController controller;
-
-    /* Constants */
-    public static final int WIDTH  = 1920;
-    public static final int HEIGHT = 1080;
-    public static final int FRAMERATE = 1000/60;
+    private IController controller;
 
     /* Game attributes */
     private IGame game;
@@ -60,21 +57,18 @@ public class MainDisplay extends JComponent implements Observer {
         // master frame setup
         master.setIconImage(ImageLoader.image("ui", "logo", true));
         master.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        master.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        master.setPreferredSize(new Dimension(DisplayValues.WIDTH, DisplayValues.HEIGHT));
         master.setResizable(false);
         master.setFocusable(true);
         master.setUndecorated(true);
         //master.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-        // controller setup
-        KeyListener keyboard = new KeyListener();
-        MouseListener mouse = new MouseListener();
+        controller = new Controller(game);
 
-        master.addKeyListener(keyboard);
-        master.addMouseListener(mouse);
-        master.addMouseMotionListener(mouse);
+        master.addKeyListener(controller.getKeyAdapter());
+        master.addMouseListener(controller.getMouseAdapter());
+        master.addMouseMotionListener(controller.getMouseAdapter());
 
-        controller = new Controller(game, keyboard, mouse);
 
         // this component setup
         this.setLayout(new CardLayout());
@@ -139,7 +133,8 @@ public class MainDisplay extends JComponent implements Observer {
      */
     private void doMapSetup() {
         // get model details and construct enough map cards to fit
-        for (Map.Entry m : World.maps.entrySet()) {
+        // noinspection AccessStaticViaInstance
+        for (Map.Entry m : game.getWorld().maps.entrySet()) {
             String name = (String) m.getKey();
             map.Map map = (map.Map) m.getValue();
             cards.put(name, new MapCard(name, map, game));
@@ -162,8 +157,13 @@ public class MainDisplay extends JComponent implements Observer {
         redraw();
     }
 
+    /**
+     * Switch to the menu screen. At the same time, cue the menu music and reset all
+     * controller commands so that none persist in new games.
+     */
     private void menu() {
         switchScreen("menu");
+        controller.reloadController();
         audioHandler.stop();
         audioHandler.queueMusic(MusicTrack.MAIN_MENU);
     }
@@ -205,6 +205,23 @@ public class MainDisplay extends JComponent implements Observer {
         menu();
     }
 
+    /**
+     * Save the current game.
+     * @param selectedFile file selected
+     */
+    public void saveGame(File selectedFile) {
+		System.out.println("SaveGame CHRI IS HELPING ME: " + selectedFile.getAbsolutePath());
+        game.saveGame(selectedFile.getAbsolutePath());
+    }
+
+    /**
+     * Load a game from a save file.
+     * @param selectedFile file selected
+     */
+    public void loadGame(File selectedFile) {
+        //
+    }
+
     /* =========================================================================================== */
 
     /**
@@ -213,7 +230,7 @@ public class MainDisplay extends JComponent implements Observer {
      * mechanism to execute.
      */
     public void startTimer() {
-        (timer = new Timer(FRAMERATE, (e) -> {
+        (timer = new Timer(DisplayValues.FRAMERATE, (e) -> {
             redraw();
             controller.update();
         })).start();

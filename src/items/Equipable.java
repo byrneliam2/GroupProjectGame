@@ -1,5 +1,6 @@
 package items;
 
+import common.items.Item;
 import player.Player;
 
 /**
