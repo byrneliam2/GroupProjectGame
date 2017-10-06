@@ -6,11 +6,10 @@ package frames.cards;
  * 300338518
  */
 
-import audio.tracks.*;
+import audio.common.*;
 import frames.MainDisplay;
 import gfx.GraphicsUtilities;
 import gfx.ImageLoader;
-import gfx.LabelButton;
 
 import javax.swing.*;
 import java.awt.*;
@@ -62,9 +61,7 @@ public class MenuCard extends Card {
                         JFileChooser fileChooser = new JFileChooser();
                         fileChooser.setCurrentDirectory(new File(".."));
                         fileChooser.setDialogTitle("Select a <ext> file to load");
-                        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-                            dsp.loadGame();
-                        }
+                        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {}
                         break;
                     case "settings":
                         dsp.update(null, "settings");

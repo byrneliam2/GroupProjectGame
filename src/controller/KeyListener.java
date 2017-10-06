@@ -1,11 +1,12 @@
 package controller;
 
-import controller.enums.InputType;
+import controller.common.IListener;
+import controller.common.InputType;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class KeyListener extends KeyAdapter implements IListener{
+public class KeyListener extends KeyAdapter implements IListener {
     private Controller parent;
 
     public KeyListener(Controller parent) {

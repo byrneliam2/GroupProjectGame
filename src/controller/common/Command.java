@@ -1,4 +1,4 @@
-package controller.enums;
+package controller.common;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;

@@ -1,11 +1,12 @@
 package controller;
 
-import controller.enums.InputType;
+import controller.common.IListener;
+import controller.common.InputType;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class MouseListener extends MouseAdapter implements IListener{
+public class MouseListener extends MouseAdapter implements IListener {
     private Controller parent;
     private int mouseX;
     private int mouseY;

@@ -1,6 +1,6 @@
 package frames.cards;
 
-import audio.tracks.SoundTrack;
+import audio.common.SoundTrack;
 import frames.MainDisplay;
 import gfx.GraphicsUtilities;
 import gfx.ImageLoader;
@@ -48,14 +48,10 @@ public class PauseCard extends Card {
                         dsp.update(null, "unpause");
                         break;
                     case "save":
-                        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-                            dsp.saveGame();
-                        }
+                        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {}
                         break;
                     case "load":
-                        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-                            dsp.loadGame();
-                        }
+                        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {}
                         break;
                     case "settings":
                         dsp.update(null, "settings");

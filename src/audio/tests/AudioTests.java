@@ -2,8 +2,8 @@ package audio.tests;
 
 import audio.AudioException;
 import audio.AudioHandler;
-import audio.IAudioHandler;
-import audio.tracks.*;
+import audio.common.IAudioHandler;
+import audio.common.*;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class AudioTests {
 
-    //Track Interface and Implemented enums
+    //Track Interface and Implemented common
 
     @Test
     public void test01_MusicTrack(){

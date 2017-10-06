@@ -1,21 +1,7 @@
 package controller.tests;
 
-import controller.Controller;
-import controller.KeyListener;
-import controller.MouseListener;
-import controller.enums.Command;
-import game.IGame;
-import game.MockGame;
 import org.junit.FixMethodOrder;
-import org.junit.Test;
 import org.junit.runners.MethodSorters;
-
-import static org.junit.Assert.*;
-
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.Set;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ControllerTests {

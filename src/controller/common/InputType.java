@@ -1,4 +1,4 @@
-package controller.enums;
+package controller.common;
 
 public enum InputType {
     MOUSE, KEYBOARD;

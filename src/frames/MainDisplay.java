@@ -7,9 +7,10 @@ package frames;
  */
 
 import audio.AudioHandler;
-import audio.IAudioHandler;
-import audio.tracks.MusicTrack;
+import audio.common.IAudioHandler;
+import audio.common.MusicTrack;
 import controller.*;
+import controller.common.IController;
 import frames.cards.Card;
 import frames.cards.*;
 import game.IGame;
@@ -205,20 +206,6 @@ public class MainDisplay extends JComponent implements Observer {
     private void stopGame() {
         stopTimer();
         menu();
-    }
-
-    /**
-     * Save the current game.
-     */
-    public void saveGame() {
-        game.saveGame();
-    }
-
-    /**
-     * Load a game from a save file.
-     */
-    public void loadGame() {
-        //
     }
 
     /* =========================================================================================== */
