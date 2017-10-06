@@ -207,6 +207,20 @@ public class MainDisplay extends JComponent implements Observer {
         menu();
     }
 
+    /**
+     * Save the current game.
+     */
+    public void saveGame() {
+        game.saveGame();
+    }
+
+    /**
+     * Load a game from a save file.
+     */
+    public void loadGame() {
+        //
+    }
+
     /* =========================================================================================== */
 
     /**
