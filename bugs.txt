@@ -1,3 +1,5 @@
 - Middle of doors not working sometimes
 - Grassland map collisions
-- Still carrying health potions after use
+- NPC's can move through doors
+- Environments don't work
+- Gun item sets bullet speed to slower
