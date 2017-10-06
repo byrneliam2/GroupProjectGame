@@ -343,11 +343,10 @@ public class Map {
 	public boolean canMove(int x, int y) {
 		if (x < 0 || y < 0 || x > this.width * Map.tileSize || y > this.height * Map.tileSize)
 			return false;
-		x = (int) (x / tileSize);
-		y = (int) (y / tileSize);
+		x = (int) (x / Map.tileSize);
+		y = (int) (y / Map.tileSize);
 
-		Point mapPos = this.positionOnMap(x, y);
-		if (this.collisionLayer.get((int) mapPos.getY()).get((int) mapPos.getX()) == 1) {
+		if (this.collisionLayer.get(y).get(x) == 1) {
 			return false;
 		} else {
 			return true;
@@ -485,19 +484,6 @@ public class Map {
 			}
 		}
 		return null;
-	}
-
-	/**
-	 * This method takes a x and y location and rounds it to an absolute
-	 * position(tile), e.g. Tile 2.5 does not exist so it is rounded down to tile 2
-	 * which does exist. Throws an error if the given x and y is invalid.
-	 *
-	 * @param x
-	 * @param y
-	 * @return
-	 */
-	private Point positionOnMap(double x, double y) {
-		return new Point((int) x, (int) y);
 	}
 
 	/**
