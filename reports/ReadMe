@@ -11,3 +11,14 @@ Liam:
 I have written some external tests for the items package, these can be found in the test class aptly named so.
 All tests from items can be run with the AllItemsTests class.
 Please note that not all the tests may pass, since items is undergoing a major redo currently.
+
+Drew:
+I been placed in charge of being the External Tester for the Map and NPC Classes, both of which are packages
+which a majority of the game relies on to run.
+    Map:
+        - I have created an 'AllMapTests' test class to automatically run every Test for the Map Package.
+        - I have attempted to get a larger coverage, this involved running coverage for the entire Map package,
+          and then creating tests for all of the remaining minor if / while branches that may not normally occur.
+    NPC:
+        -
+        -

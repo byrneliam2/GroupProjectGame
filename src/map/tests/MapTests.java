@@ -3,6 +3,10 @@ package map.tests;
 import static org.junit.Assert.*;
 
 import java.awt.Rectangle;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
+import java.util.Collections;
 
 import org.junit.Test;
 
@@ -430,6 +434,44 @@ public class MapTests {
 		}
 		// item i2 should be closest.
 		assertEquals(i2, m.getClosestItem(p1.getRangeCircle()));
+	}
+
+	/* EXTERNAL TESTING STARTS HERE */
+
+	/**
+	 * Tests if total the doors field == null, return null when trying to get a door
+	 */
+	@Test
+	public void testNullDoors(){
+		p1 = new Player("Tom", 120, 130);
+		m = new Map("MapTest", p1, new ArrayList<>(), new ArrayList<>(), null);
+		p1.setMap(m);
+
+		assertNull(m.getDoor(new Rectangle2D.Double(1,1,1,1)));
+	}
+
+	/**
+	 * Tests if total the doors field == null, return null when trying to get a door
+	 */
+	@Test
+	public void testNullItems(){
+		p1 = new Player("Tom", 120, 130);
+		m = new Map("MapTest", p1, null, new ArrayList<>(), new ArrayList<>());
+		p1.setMap(m);
+
+		assertNull(m.getClosestItem(new Ellipse2D.Double(1,1,1,1)));
+	}
+
+	/**
+	 * Tests if the Background Layer is Returned
+	 */
+	@Test
+	public void testGetBackground(){
+		p1 = new Player("Tom", 120, 130);
+		m = MapParser.parse("MapTest", p1);
+		p1.setMap(m);
+
+		assertEquals("MapTest", m.getBackgroundLayer());
 	}
 
 }
