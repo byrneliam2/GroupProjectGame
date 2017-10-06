@@ -1,9 +1,10 @@
 package npc;
 
+import common.utils.Direction;
 import player.Bullet;
 import player.InvalidPlayerExceptions;
 import player.Player;
-import common.MathUtils;
+import common.utils.MathUtils;
 
 /**
  * Moves very fast and shoots very fast
@@ -13,7 +14,7 @@ import common.MathUtils;
  */
 public class HardScheme implements ControlScheme {
 
-	private common.Direction randDir = getRandomDir();
+	private Direction randDir = getRandomDir();
 	private int moveCounter = 0;
 
 	public HardScheme() {
@@ -43,9 +44,9 @@ public class HardScheme implements ControlScheme {
 		}
 	}
 
-	public common.Direction getRandomDir() {
+	public Direction getRandomDir() {
 		int dir = (int) (Math.random() * 8);
-		return common.Direction.VALUES.get(dir);
+		return Direction.VALUES.get(dir);
 	}
 
 }

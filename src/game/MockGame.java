@@ -3,7 +3,7 @@ package game;
 import map.World;
 import player.InvalidPlayerExceptions;
 import player.Player;
-import common.Direction;
+import common.utils.Direction;
 
 import java.util.HashMap;
 import java.util.Observer;

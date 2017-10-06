@@ -1,9 +1,10 @@
 package npc;
 
+import common.utils.Direction;
 import player.Bullet;
 import player.InvalidPlayerExceptions;
 import player.Player;
-import common.MathUtils;
+import common.utils.MathUtils;
 
 /**
  * Moves randomly and shoots the player fast.
@@ -13,7 +14,7 @@ import common.MathUtils;
  */
 public class MediumScheme implements ControlScheme {
 
-	protected common.Direction randDir = getRandomDir();
+	protected Direction randDir = getRandomDir();
 	protected int moveCounter = 0;
 
 	public MediumScheme() {
@@ -52,9 +53,9 @@ public class MediumScheme implements ControlScheme {
 		}
 	}
 
-	public common.Direction getRandomDir() {
+	public Direction getRandomDir() {
 		int dir = (int) (Math.random() * 8);
-		return common.Direction.VALUES.get(dir);
+		return Direction.VALUES.get(dir);
 	}
 
 }

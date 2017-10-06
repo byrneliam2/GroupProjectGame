@@ -3,9 +3,7 @@ package npc;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import common.DisplayValues;
-import frames.MainDisplay;
-import map.Map;
+import common.utils.DisplayValues;
 import player.Player;
 
 /**

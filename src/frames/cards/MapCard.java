@@ -6,7 +6,7 @@ package frames.cards;
  * 300338518
  */
 
-import common.DisplayValues;
+import common.utils.DisplayValues;
 import frames.MainDisplay;
 import game.IGame;
 import gfx.ImageLoader;

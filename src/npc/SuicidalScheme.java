@@ -4,7 +4,7 @@ import map.Map;
 import player.Bullet;
 import player.InvalidPlayerExceptions;
 import player.Player;
-import common.MathUtils;
+import common.utils.MathUtils;
 
 /**
  * A scheme where the npc move towards the player and when its close, shoots the player very quickly.

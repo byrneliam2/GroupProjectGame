@@ -10,7 +10,7 @@ import player.Bullet;
 import player.InvalidPlayerExceptions;
 import player.Player;
 import save_load.SaveLoad;
-import common.Direction;
+import common.utils.Direction;
 
 /**
  * Class to be used by front end for getting all the different entities in the

@@ -1,4 +1,4 @@
-package common;
+package common.utils;
 
 /*
  * SWEN 222 Group Project

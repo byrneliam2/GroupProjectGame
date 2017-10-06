@@ -9,7 +9,7 @@ package frames;
 import audio.AudioHandler;
 import audio.common.IAudioHandler;
 import audio.common.MusicTrack;
-import common.DisplayValues;
+import common.utils.DisplayValues;
 import controller.*;
 import controller.common.IController;
 import frames.cards.Card;

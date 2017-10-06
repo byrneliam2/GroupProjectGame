@@ -2,13 +2,11 @@ package player;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import common.DisplayValues;
-import frames.MainDisplay;
+import common.utils.DisplayValues;
 import game.Game;
 import gfx.ImageLoader;
 import gfx.ImageUtilities;
