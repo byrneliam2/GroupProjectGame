@@ -12,6 +12,7 @@ import gfx.ImageLoader;
 import gfx.ImageUtilities;
 import items.DoorItem;
 import common.items.Item;
+import common.map.iMap;
 import npc.NPC;
 import player.Bullet;
 import player.Player;
@@ -24,7 +25,7 @@ import player.Player;
  * @author James
  *
  */
-public class Map {
+public class Map implements iMap {
 	/** pixel size of a individual tile */
 	public static final int tileSize = 60;
 
@@ -116,7 +117,7 @@ public class Map {
 	 * @param scaleY
 	 * @param tileSize
 	 */
-	public void loadAllLayers(int newWidth, int newHeight) {
+	private void loadAllLayers(int newWidth, int newHeight) {
 		BufferedImage colLayer = ImageLoader.image("MapImages", this.name + "Collision", true);
 		this.width = colLayer.getWidth() / 32;
 		this.height = colLayer.getHeight() / 32;
@@ -424,7 +425,7 @@ public class Map {
 	 * @param y
 	 * @return The environment on the tile closest to x,y
 	 */
-	public Environment onEnviromentTile(int x, int y) {
+	public Environment onEnvironmentTile(int x, int y) {
 		if (x < 0 || y < 0 || x > this.width * Map.tileSize || y > this.height * Map.tileSize) {
 			return null;
 		}
@@ -449,7 +450,7 @@ public class Map {
 	 *
 	 * @return A ArrayList of NPC
 	 */
-	public List<NPC> getNPCS() {
+	public List<NPC> getNPCs() {
 		return this.NPCS;
 	}
 

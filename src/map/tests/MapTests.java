@@ -51,34 +51,34 @@ public class MapTests {
 		this.environmentCollisionSetup();
 		for (int i = 24; i <= 27; i++) {
 			for (int j = 0; j < 32; j++) {
-				assert (m.onEnviromentTile(i * Map.tileSize, j).equals(Environment.DEATH));
+				assert (m.onEnvironmentTile(i * Map.tileSize, j).equals(Environment.DEATH));
 			}
 		}
 
 		for (int i = 17; i <= 20; i++) {
 			for (int j = 0; j < 32; j++) {
-				assert (m.onEnviromentTile(i * Map.tileSize, j).equals(Environment.FIRE));
+				assert (m.onEnvironmentTile(i * Map.tileSize, j).equals(Environment.FIRE));
 			}
 		}
 
 		for (int i = 17; i <= 20; i++) {
 			for (int j = 0; j < 32; j++) {
-				assert (m.onEnviromentTile(i * Map.tileSize, j).equals(Environment.FIRE));
+				assert (m.onEnvironmentTile(i * Map.tileSize, j).equals(Environment.FIRE));
 			}
 		}
 
 		for (int i = 10; i <= 13; i++) {
 			for (int j = 0; j < 32; j++) {
-				assert (m.onEnviromentTile(i * Map.tileSize, j).equals(Environment.MUD));
+				assert (m.onEnvironmentTile(i * Map.tileSize, j).equals(Environment.MUD));
 			}
 		}
 
 		for (int i = 0; i <= 6; i++) {
 			for (int j = 0; j < 32; j++) {
 				if (i > 2) {
-					assert (m.onEnviromentTile(i * Map.tileSize, j).equals(Environment.MIST));
+					assert (m.onEnvironmentTile(i * Map.tileSize, j).equals(Environment.MIST));
 				} else {
-					assertNull(m.onEnviromentTile(i * Map.tileSize, j));
+					assertNull(m.onEnvironmentTile(i * Map.tileSize, j));
 				}
 
 			}
@@ -89,9 +89,9 @@ public class MapTests {
 	@Test
 	public void enviromentTestInvalidPoints() {
 		this.environmentCollisionSetup();
-		assertNull(m.onEnviromentTile(-1, 0));
-		assertNull(m.onEnviromentTile(0, -1));
-		assertNull(m.onEnviromentTile(-1, -1));
+		assertNull(m.onEnvironmentTile(-1, 0));
+		assertNull(m.onEnvironmentTile(0, -1));
+		assertNull(m.onEnvironmentTile(-1, -1));
 
 	}
 
@@ -214,18 +214,18 @@ public class MapTests {
 	@Test
 	public void testRemovingNpc() {
 		this.doorSetup();
-		assertEquals(1, w.getStartingMap().getNPCS().size());
-		w.getStartingMap().removeNPC(w.getStartingMap().getNPCS().get(0));
-		assertEquals(0, w.getStartingMap().getNPCS().size());
+		assertEquals(1, w.getStartingMap().getNPCs().size());
+		w.getStartingMap().removeNPC(w.getStartingMap().getNPCs().get(0));
+		assertEquals(0, w.getStartingMap().getNPCs().size());
 	}
 
 	@Test
 	public void testAddingNpc() {
 		this.doorSetup();
 		NPC c = new NPC("bug", 200, 200, 200, this.p1, new PatrolScheme(false, 5));
-		assertEquals(1, w.getStartingMap().getNPCS().size());
-		w.getStartingMap().getNPCS().add(c);
-		assertEquals(2, w.getStartingMap().getNPCS().size());
+		assertEquals(1, w.getStartingMap().getNPCs().size());
+		w.getStartingMap().getNPCs().add(c);
+		assertEquals(2, w.getStartingMap().getNPCs().size());
 	}
 
 	@Test
@@ -233,8 +233,8 @@ public class MapTests {
 		// Works on the basis that stopping a NPC returns true if it is not already
 		// stopped
 		this.doorSetup();
-		assertEquals(1, w.getStartingMap().getNPCS().size());
-		NPC c = w.getStartingMap().getNPCS().get(0);
+		assertEquals(1, w.getStartingMap().getNPCs().size());
+		NPC c = w.getStartingMap().getNPCs().get(0);
 		w.getStartingMap().startMapNPCs();
 		w.getStartingMap().pauseMapNPCs();
 		assertFalse(c.stop());
@@ -249,7 +249,7 @@ public class MapTests {
 		p1 = new Player("Tom", 370, 170);
 
 		w = WorldParser.parse("world", p1);
-		NPC c = w.getStartingMap().getNPCS().get(0);
+		NPC c = w.getStartingMap().getNPCs().get(0);
 		int health = p1.getHealth();
 		assertEquals(400, p1.getCentreX());
 		assertEquals(200, p1.getCentreY());
@@ -266,7 +266,7 @@ public class MapTests {
 	public void testPlayerBulletHitting() throws InvalidPlayerExceptions, InterruptedException {
 		// Bullet direction is 0-2Pie, 0 being north,pie being south,
 		this.doorSetup();
-		NPC c = w.getStartingMap().getNPCS().get(0);
+		NPC c = w.getStartingMap().getNPCs().get(0);
 		c.start();
 		c.start();
 

@@ -70,7 +70,7 @@ public class MapCard extends Card {
 						new Point(game.getPlayer().getxLocation(), game.getPlayer().getyLocation()), 0)
 		);
 		// add all NPCs
-		map.getNPCS().forEach(npc -> addStaticEntity(new Entity(npc, EntityType.NPC,
+		map.getNPCs().forEach(npc -> addStaticEntity(new Entity(npc, EntityType.NPC,
 				ImageLoader.image("npcImages", "bug", true),
 				new Point(npc.getxLocation(), npc.getyLocation()), 0))
 		);
