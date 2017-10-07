@@ -1,2 +1,1 @@
-- Exact middle of doors don't work
 - Get locked doors working for both images and backend
