@@ -334,7 +334,7 @@ public class Map implements iMap {
 	 * @param y
 	 */
 	public boolean canMove(int x, int y) {
-		if (x < 0 || y < 0 || x > this.width * Map.tileSize || y > this.height * Map.tileSize)
+		if (x < 0 || y < 0 || x >= this.width * Map.tileSize || y >= this.height * Map.tileSize)
 			return false;
 		x = (int) (x / Map.tileSize);
 		y = (int) (y / Map.tileSize);
@@ -359,7 +359,7 @@ public class Map implements iMap {
 		double posX = r.getX();
 		double posY = r.getY();
 
-		if (posX < 0 || posY < 0 || posX > (this.width * Map.tileSize) || posY > (this.height * Map.tileSize)) {
+		if (posX < 0 || posY < 0 || posX >= (this.width * Map.tileSize) || posY >= (this.height * Map.tileSize)) {
 			return false;
 		}
 		if (this.collisionLayer.get((int) (posY / Map.tileSize)).get((int) (posX / Map.tileSize)) == 1) {
@@ -367,7 +367,7 @@ public class Map implements iMap {
 		}
 		// Top right
 		posX = posX + r.getWidth();
-		if (posX > (this.width * Map.tileSize)) {
+		if (posX >= (this.width * Map.tileSize)) {
 			return false;
 		}
 		if (this.collisionLayer.get((int) (posY / Map.tileSize)).get((int) (posX / Map.tileSize)) == 1) {
@@ -376,7 +376,7 @@ public class Map implements iMap {
 
 		// Bottom right
 		posY = posY + r.getHeight();
-		if (posY > (this.height * Map.tileSize)) {
+		if (posY >= (this.height * Map.tileSize)) {
 			return false;
 		}
 

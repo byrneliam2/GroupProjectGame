@@ -4,6 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import common.utils.DisplayValues;
+import player.InvalidPlayerExceptions;
 import player.Player;
 
 /**
@@ -37,6 +38,18 @@ public class NPC extends Player {
 		this.control = cs;
 		super.setMaxHealth(health);
 		super.setHealth(health);
+	}
+
+	@Override
+	public boolean move(double dx, double dy) throws InvalidPlayerExceptions {
+		playerBox.setFrame(playerBox.getX() + dx, playerBox.getY() + dy, playerBox.getWidth(), playerBox.getHeight());
+		if (map.canMove(playerBox)) {
+			return true;
+		} else {
+			playerBox.setFrame(playerBox.getX() - dx, playerBox.getY() - dy, playerBox.getWidth(),
+					playerBox.getHeight());
+			throw new InvalidPlayerExceptions("You cant make a move/Invalid move");
+		}
 	}
 
 	/**

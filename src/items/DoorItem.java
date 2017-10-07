@@ -1,7 +1,6 @@
 package items;
 
 import java.awt.Point;
-import java.awt.Rectangle;
 
 import map.Map;
 

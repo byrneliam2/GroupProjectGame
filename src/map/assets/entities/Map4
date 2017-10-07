@@ -11,6 +11,11 @@ Map10 04 true
 Door
 Map10 04 true
 17 0
+
+MassiveGun
+7 15
+HealthPot
+4 16
  
 Npc
 HungryBear

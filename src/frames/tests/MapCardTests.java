@@ -6,13 +6,14 @@ package frames.tests;
  * 300338518
  */
 
+import common.utils.DisplayValues;
 import frames.cards.MapCard;
+import frames.cards.MenuCard;
 import game.Game;
+import game.IGame;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
-
-import javax.swing.*;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -20,13 +21,17 @@ import static org.junit.Assert.assertNotNull;
 public class MapCardTests {
 
     @Test
-    public void test01_MapData() {
-        Game g = new Game();
+    public void test01_MenuData() {
+        MenuCard m = new MenuCard("menu");
+        assertNotNull(m.getComponent(0).getComponentAt(DisplayValues.WIDTH/2, DisplayValues.HEIGHT/2 - 50));
+    }
+
+    @Test
+    public void test02_MapData() {
+        IGame g = new Game();
         g.newGame();
         MapCard m = new MapCard("map", g.getWorld().getStartingMap(), g);
-        assertNotNull(m.getComponentAt(
-                SwingUtilities.convertPoint(
-                        m.getComponent(0), g.getPlayer().getxLocation(), g.getPlayer().getyLocation(), m)));
+        assertNotNull(m.getComponent(0).getComponentAt(g.getPlayer().getxLocation(), g.getPlayer().getyLocation()));
     }
 
 }
