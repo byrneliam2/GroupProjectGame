@@ -12,6 +12,7 @@ import items.Equipable;
 import items.InvalidBackpackException;
 import common.items.Item;
 import items.Usable;
+import map.Environment;
 import map.Map;
 import map.World;
 import common.utils.MathUtils;
@@ -23,22 +24,24 @@ import common.utils.MathUtils;
 public class Player {
 	/* constants */
 	private static final int rangeCircleWidth = 2 * Map.tileSize;
-	private static final double defaultFireRate = 0.2;
+	private static final double defaultFireRate = 0.8;
+	private static final int baseSpeed = 6;
 
+	private javax.swing.Timer fireTimer = new javax.swing.Timer(1000, (e) -> takeDamage());
 	private final String name;
 	private Item closestItem;
 	private Backpack itemsList = new Backpack(this);
 	protected boolean isDead = false;
-	protected int health = 5;
-	private int maxHealth = 5;
-	private int speed = 6;
+	protected int health = 5, maxHealth = 5;
+	protected int speed = baseSpeed;// movement speed of the player
 	private double fireRate = defaultFireRate;// in seconds, smaller numbers mean less time between shots
 	private static Timer shotTimer = new Timer();
-	private Map map;// the map which the player is currently located on.
+	protected Map map;// the map which the player is currently located on.
 	private boolean isReadyToShoot = true;
+	private Environment currentEnvironment;
 
 	private Ellipse2D.Double rangeCircle;// the range at which the player can 'pick up' items
-	private Rectangle.Double playerBox;// the hit box representing the location of the player.
+	protected Rectangle.Double playerBox;// the hit box representing the location of the player.
 
 	/**
 	 * @param name
@@ -50,12 +53,14 @@ public class Player {
 		rangeCircle = new Ellipse2D.Double(xLocation - Map.tileSize / 2, yLocation - Map.tileSize / 2, rangeCircleWidth,
 				rangeCircleWidth);
 		playerBox = new Rectangle.Double(xLocation + 3, yLocation + 3, Map.tileSize - 6, Map.tileSize - 6);
+		fireTimer.setInitialDelay(0);
 	}
 
 	/**
 	 * Adds the closest item to the player ot the player's backpack. If item is a
 	 * key, adds it to the key section of the backpack. Also tells the map to remove
 	 * the item from the map.
+	 * Also as of ~October causes the item to be immediatly equiped or used on pickup.
 	 *
 	 * @param item
 	 *            item to pickup.
@@ -90,6 +95,7 @@ public class Player {
 	 * @throws InvalidPlayerExceptions
 	 *             if the backpack doesnt contain the item.
 	 */
+	@Deprecated
 	public void removeItem(Item item) throws InvalidPlayerExceptions {
 		try {
 			// Remove the Item from the Player list of Items.
@@ -114,6 +120,7 @@ public class Player {
 	 *             if the player already has the max number of items equipped or the
 	 *             item is not part of a player's backpack.
 	 */
+	@Deprecated
 	public void equipItem(Equipable item) throws InvalidPlayerExceptions {
 		throw new Error("Implementation removed");
 	}
@@ -127,6 +134,7 @@ public class Player {
 	 *             if the item was not equipped to any player or the pack's
 	 *             unequipped area is full.
 	 */
+	@Deprecated
 	public void unequipItem(Equipable item) throws InvalidPlayerExceptions {
 		throw new Error("Implementation removed");
 	}
@@ -139,6 +147,7 @@ public class Player {
 	 * @throws InvalidPlayerExceptions
 	 *             if the item was not part of a player's backpack.
 	 */
+	@Deprecated
 	public void useItem(Usable item) throws InvalidPlayerExceptions {
 		try {
 			// use the item
@@ -154,6 +163,7 @@ public class Player {
 	 * @param item
 	 * @throws InvalidPlayerExceptions
 	 */
+	@Deprecated
 	public void pickUpAndUse(Usable item) throws InvalidPlayerExceptions {
 		try {
 			// If the player wants to use the supply with the necessary items for a
@@ -198,16 +208,19 @@ public class Player {
 	 * @param dy
 	 * @return true if the player moved through a door, false otherwise.
 	 * @throws InvalidPlayerExceptions
-	 *             if the player tries to make an invalid move.
+	 *             if the player tries to make an invalid move. eg move into a wall.
 	 */
 	public boolean move(double dx, double dy) throws InvalidPlayerExceptions {
-		DoorItem door = null;
 		if (Game.GAME_PAUSED) {
 			throw new InvalidPlayerExceptions("Game is paused, you cannot move");
 		}
-
+		slowPlayer();
+		dx = dx * speed;
+		dy = dy * speed;
+		// move the player's frame
 		playerBox.setFrame(playerBox.getX() + dx, playerBox.getY() + dy, playerBox.getWidth(), playerBox.getHeight());
 		if (map.canMove(playerBox)) {
+			DoorItem door = null;
 			// if player is next to a door and the door is unlocked or you have the key, go through...
 			if ((door = map.getDoor(playerBox)) != null && (!door.isLocked() || canOpenDoor(door))) {
 				map = enterDoor(door);
@@ -217,16 +230,51 @@ public class Player {
 				// update rangeCircle
 				rangeCircle.setFrame(rangeCircle.getX() + dx, rangeCircle.getY() + dy, rangeCircleWidth,
 						rangeCircleWidth);
+
 				// update closest itemest item to player
-				
 				closestItem = map.getClosestItem(rangeCircle);
+
+				updateEnvironment();
+
 				return false;
 			}
-		} else {
+		} else {// player made an invalid move, so move player back to where he came from and throw exception.
 			playerBox.setFrame(playerBox.getX() - dx, playerBox.getY() - dy, playerBox.getWidth(),
 					playerBox.getHeight());
 			throw new InvalidPlayerExceptions("You cant make a move/Invalid move");
 		}
+	}
+
+	private void updateEnvironment() {
+		unSlowPlayer();
+		// update the current Environment
+		currentEnvironment = map.onEnviromentTile((int) playerBox.getCenterX(), (int) playerBox.getCenterY());
+		doFireEffect();
+		doDeathEffect();
+	}
+
+	private void doDeathEffect() {
+		if (currentEnvironment == Environment.DEATH) {
+			isDead = true;
+		}
+	}
+
+	private void doFireEffect() {
+		if (currentEnvironment == Environment.FIRE) {
+			fireTimer.start();
+		} else {
+			fireTimer.stop();
+		}
+	}
+
+	private void slowPlayer() {
+		if (currentEnvironment == Environment.MUD)
+			speed = baseSpeed / 3;
+	}
+
+	private void unSlowPlayer() {
+		if (currentEnvironment == Environment.MUD)
+			speed = baseSpeed;
 	}
 
 	/**
@@ -245,9 +293,9 @@ public class Player {
 
 		rangeCircle = new Ellipse2D.Double(playerBox.getX() - Map.tileSize / 2, playerBox.getY() - Map.tileSize / 2,
 				rangeCircleWidth, rangeCircleWidth);
-		
+
 		map.pauseMapNPCs();
-		// removes all the bullets from the game when you go through the door.
+		// stops and removes all the bullets from the game when you go through the door.
 		for (int i = Bullet.bulletList.size() - 1; i >= 0; i--) {
 			Bullet.bulletList.get(i).removeBullet();
 		}
@@ -256,6 +304,12 @@ public class Player {
 		return newMap;
 	}
 
+	/**
+	 * Sets the player's position in the new map next to the door he just came through.
+	 * 
+	 * @param door
+	 *            the door to set the player's position at
+	 */
 	private void setPlayerPosition(DoorItem door) {
 		if (door.getX() == 1860) {// entering on right...
 			playerBox.setFrame(1820, door.getY(), playerBox.width, playerBox.height);
@@ -269,6 +323,8 @@ public class Player {
 	}
 
 	/**
+	 * Shoots a bullet from the player's current coordinates to the coordinates given by the mouse
+	 * 
 	 * @param direction
 	 *            should be an angle between 0 and 2Pi. (there's a method in
 	 *            MathUtil package. which you can use to calculate the
@@ -281,7 +337,7 @@ public class Player {
 			throw new InvalidPlayerExceptions("Game is paused, you cannot shoot");
 		}
 
-		if (isReadyToShoot) {
+		if (isReadyToShoot) {// can only shoot if your gun is ready.
 			isReadyToShoot = false;
 			double x = playerBox.getX() + (playerBox.width / 2);
 			double y = playerBox.getY() + (playerBox.height / 2);
@@ -325,7 +381,7 @@ public class Player {
 
 	/**
 	 * @param health
-	 *            the health to set health to, can't be more than max health...
+	 *            the health to set health to, ensures that it isn't more than max health.
 	 */
 	public void setHealth(int health) {
 		if (health > maxHealth)
@@ -379,6 +435,11 @@ public class Player {
 		return this.itemsList;
 	}
 
+	/**
+	 * Sets the max health, ensures that the player's current health is <= max health.
+	 * 
+	 * @param max
+	 */
 	public void setMaxHealth(int max) {
 		this.maxHealth = max;
 		if (health > maxHealth)

@@ -358,7 +358,7 @@ public class Map {
 		double posX = r.getX();
 		double posY = r.getY();
 
-		if (posX < 0 || posY < 0 || posX > (this.width * Map.tileSize) || posY > (this.height * Map.tileSize)) {
+		if (posX < 0 || posY < 0 || posX >= (this.width * Map.tileSize) || posY >= (this.height * Map.tileSize)) {
 			return false;
 		}
 		if (this.collisionLayer.get((int) (posY / Map.tileSize)).get((int) (posX / Map.tileSize)) == 1) {
@@ -366,7 +366,7 @@ public class Map {
 		}
 		// Top right
 		posX = posX + r.getWidth();
-		if (posX > (this.width * Map.tileSize)) {
+		if (posX >= (this.width * Map.tileSize)) {
 			return false;
 		}
 		if (this.collisionLayer.get((int) (posY / Map.tileSize)).get((int) (posX / Map.tileSize)) == 1) {
@@ -375,7 +375,7 @@ public class Map {
 
 		// Bottom right
 		posY = posY + r.getHeight();
-		if (posY > (this.height * Map.tileSize)) {
+		if (posY >= (this.height * Map.tileSize)) {
 			return false;
 		}
 

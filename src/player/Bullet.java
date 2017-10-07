@@ -10,6 +10,7 @@ import common.utils.DisplayValues;
 import game.Game;
 import gfx.ImageLoader;
 import gfx.ImageUtilities;
+import map.Environment;
 
 /**
  * A bullet is a point object with an x,y location, when the bullet is created a
@@ -53,7 +54,7 @@ public class Bullet {
 	}
 
 	private double currentX, currentY;
-	private double updateX, updateY;
+	private double updateX, updateY, halfX, halfY;
 	private Player owner;
 	private TimerTask bulletTask;
 	private String bulletType;
@@ -83,6 +84,8 @@ public class Bullet {
 		this.bulletType = bulletType;
 		this.owner = owner;
 		calculateUpdateAmount(direction);
+		halfX = updateX / 2;
+		halfY = updateY / 2;
 		bulletList.add(this);
 
 		startTimer();// starts the bullet off
@@ -150,8 +153,13 @@ public class Bullet {
 		if (Game.GAME_PAUSED) {// do no updates when paused...
 			return;
 		}
-		currentX += updateX;
-		currentY += updateY;
+		if (owner.getMap().onEnviromentTile((int) currentX, (int) currentY) == Environment.MIST) {
+			currentX += halfX;
+			currentY += halfY;
+		} else {
+			currentX += updateX;
+			currentY += updateY;
+		}
 
 		// if the bullet hits an immovable area, remove it.
 		if (!owner.getMap().canMove((int) currentX, (int) currentY)) {

@@ -13,12 +13,12 @@ public class MassiveGun extends AbstractItem implements Equipable {
 
 	@Override
 	public void provideBonus(Player p) {
-		p.setFireRate(p.getFireRate() / 2);
+		p.setFireRate(p.getFireRate() * 0.5);
 	}
 
 	@Override
 	public void removeBonus(Player p) {
-		p.setFireRate(p.getFireRate() * 2);
+		p.setFireRate(p.getFireRate() / 0.5);
 	}
 
 }
