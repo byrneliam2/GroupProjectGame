@@ -7,7 +7,7 @@ import player.Player;
 public class SmallGun extends AbstractItem implements Equipable {
 
 	public SmallGun() {
-		super("Small Gun", "A small gun that increases your fireRate by 10%", null);
+		super("Small Gun", "A small gun that increases your fireRate by 10%", "smallGun");
 	}
 
 	@Override
