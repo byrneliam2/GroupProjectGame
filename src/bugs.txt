@@ -1,4 +1,2 @@
 - Exact middle of doors don't work
-- Grassland map collisions
-- No image for MaxhealthPotion and small gun
 - Get locked doors working for both images and backend
