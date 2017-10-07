@@ -249,7 +249,7 @@ public class Player {
 	private void updateEnvironment() {
 		unSlowPlayer();
 		// update the current Environment
-		currentEnvironment = map.onEnviromentTile((int) playerBox.getCenterX(), (int) playerBox.getCenterY());
+		currentEnvironment = map.onEnvironmentTile((int) playerBox.getCenterX(), (int) playerBox.getCenterY());
 		doFireEffect();
 		doDeathEffect();
 	}

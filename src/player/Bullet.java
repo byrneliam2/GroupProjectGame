@@ -153,7 +153,7 @@ public class Bullet {
 		if (Game.GAME_PAUSED) {// do no updates when paused...
 			return;
 		}
-		if (owner.getMap().onEnviromentTile((int) currentX, (int) currentY) == Environment.MIST) {
+		if (owner.getMap().onEnvironmentTile((int) currentX, (int) currentY) == Environment.MIST) {
 			currentX += halfX;
 			currentY += halfY;
 		} else {
