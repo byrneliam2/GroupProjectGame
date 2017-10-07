@@ -19,5 +19,25 @@ Door
 Map11 08 true
 16 0
 
-HealthPot
-29 4
+MassiveGun
+3 3
+
+Npc
+HungryBear
+PatrolScheme false 10
+2 6 2
+
+Npc
+HungryBear
+PatrolScheme false 10
+54 6 2
+
+Npc
+HungryBear
+PatrolScheme true 10
+4 6 2
+
+Npc
+HungryBear
+PatrolScheme true 10
+28 6 2

@@ -14,6 +14,13 @@ Door
 Map10 05 true
 0 9
 
+RustyArmor
+25 4
 
 HealthPot
-29 4
+4 4
+
+Npc
+Bear
+HardScheme true 0
+18 11 5
