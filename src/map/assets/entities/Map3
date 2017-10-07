@@ -16,17 +16,17 @@ Map7 03 true
 
 Npc
 HungryBat
-SprayScheme false 20
-28 26 2
-ShinyArmor
-4 4
-RustyArmor
-4 6
-MassiveGun
-4 8
+EasyScheme false 20
+36 29 2
+
+Npc
+HungryBat
+EasyScheme false 20
+6 29 2
+
 HealthPot
 29 4
-Key 04
-5 5
+HealthPot
+29 14
 
 

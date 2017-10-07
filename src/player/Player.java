@@ -27,6 +27,7 @@ public class Player {
 	private static final double defaultFireRate = 0.8;
 	private static final int baseSpeed = 6;
 
+	// timer for standing in fire...
 	private javax.swing.Timer fireTimer = new javax.swing.Timer(1000, (e) -> takeDamage());
 	private final String name;
 	private Item closestItem;
@@ -53,7 +54,7 @@ public class Player {
 		rangeCircle = new Ellipse2D.Double(xLocation - Map.tileSize / 2, yLocation - Map.tileSize / 2, rangeCircleWidth,
 				rangeCircleWidth);
 		playerBox = new Rectangle.Double(xLocation + 3, yLocation + 3, Map.tileSize - 6, Map.tileSize - 6);
-		fireTimer.setInitialDelay(0);
+		fireTimer.setInitialDelay(500);//0.5 seconds delay before first fire tick
 	}
 
 	/**
