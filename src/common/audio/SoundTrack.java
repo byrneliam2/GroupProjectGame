@@ -6,7 +6,8 @@ package common.audio;/*
 
 public enum SoundTrack implements Track{
     /* Sound Files */
-    CLICK("click.wav");
+    CLICK("click.wav"),
+    HURT("click.wav"); //TODO: Get another file for this
 
     private String filename;
 
