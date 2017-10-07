@@ -333,7 +333,7 @@ public class Map {
 	 * @param y
 	 */
 	public boolean canMove(int x, int y) {
-		if (x < 0 || y < 0 || x > this.width * Map.tileSize || y > this.height * Map.tileSize)
+		if (x < 0 || y < 0 || x >= this.width * Map.tileSize || y >= this.height * Map.tileSize)
 			return false;
 		x = (int) (x / Map.tileSize);
 		y = (int) (y / Map.tileSize);
