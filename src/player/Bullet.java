@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import common.player.IBullet;
 import common.utils.DisplayValues;
 import game.Game;
 import gfx.ImageLoader;
@@ -20,18 +21,18 @@ import map.Environment;
  * @author Thomas Edwards
  *
  */
-public class Bullet {
+public class Bullet implements IBullet {
 
 	/**
 	 * The list of all current bullets in the game.
 	 */
-	public static List<Bullet> bulletList = new ArrayList<>();
+	//public static List<Bullet> bulletList = new ArrayList<>();
 	/**
 	 * Timer which is responsible for updating all bullets in the bullet list.
 	 */
 	private static Timer bulletTimer = new Timer();
 
-	public static final int bulletSize = 20;
+	//public static final int bulletSize = 20;
 
 	/**
 	 * How quickley bullets move/are updated

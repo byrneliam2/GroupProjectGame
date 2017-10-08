@@ -6,9 +6,9 @@ package common.game;
  * 300338518
  */
 
+import common.player.IPlayer;
 import map.World;
 import player.InvalidPlayerExceptions;
-import player.Player;
 import common.utils.Direction;
 
 import java.util.Observer;
@@ -90,7 +90,7 @@ public interface IGame {
      * Get the current Player.
      * @return player
      */
-    Player getPlayer();
+    IPlayer getPlayer();
 
     /**
      * Determine if the game is over.

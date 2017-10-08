@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Scanner;
 
+import common.player.IPlayer;
 import player.Player;
 
 /**
@@ -30,7 +31,7 @@ public class WorldParser {
 	 * @throws IOException
 	 * @throws BadMapImageException
 	 */
-	public static World parse(String worldFileName, Player current) {
+	public static World parse(String worldFileName, IPlayer current) {
 		HashMap<String, Map> maps = new HashMap<String, Map>();
 		InputStream in = null;
 		String fileLocation = "assets/" + worldFileName;

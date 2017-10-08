@@ -7,14 +7,14 @@ package frames.cards;
  */
 
 import common.map.IMap;
+import common.player.IBullet;
+import common.player.IPlayer;
 import common.utils.DisplayValues;
 import frames.MainDisplay;
 import common.game.IGame;
 import gfx.ImageLoader;
 import gfx.ImageUtilities;
 import common.items.Item;
-import player.Bullet;
-import player.Player;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,7 +29,6 @@ import java.util.stream.Collectors;
  * {@link Card.Entity}s.
  * TODO Dialogue popups
  * TODO Player animations
- * TODO Abstract out Players and NPCs
  */
 public class MapCard extends Card {
 
@@ -129,7 +128,7 @@ public class MapCard extends Card {
 			switch (e.getType()) {
 				// only static entities (ones that can't be dynamically added) are Player instances
 				case PLAYER: case NPC:
-					Player p = (Player) o; // since an NPC is a Player
+					IPlayer p = (IPlayer) o; // since an NPC is a Player
 					if (p.isDead()) toRemove.add(e);
 					else e.setLocation(new Point(p.getxLocation(), p.getyLocation()));
 					break;
@@ -186,11 +185,11 @@ public class MapCard extends Card {
 	 * is not worth counting them as entities.
 	 */
 	private void updateBullets() {
-		for (int i = 0; i < Bullet.bulletList.size(); i++) {
-			Bullet b = Bullet.bulletList.get(i);
+		for (int i = 0; i < IBullet.bulletList.size(); i++) {
+			IBullet b = IBullet.bulletList.get(i);
 			Image img = b.getBulletPic();
-			draw(img, (int) b.getX() - Bullet.bulletSize/2,
-					(int) b.getY() - Bullet.bulletSize/2,
+			draw(img, (int) b.getX() - IBullet.bulletSize/2,
+					(int) b.getY() - IBullet.bulletSize/2,
 					img.getWidth(null), img.getHeight(null));
 		}
 	}

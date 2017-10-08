@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import common.player.IPlayer;
 import items.DoorItem;
 import map.parsers.DoorParser;
 import map.parsers.ItemParser;
@@ -37,7 +38,7 @@ public class MapParser {
 	 * @throws IOException
 	 * @throws BadMapImageException
 	 */
-	public static Map parse(String mapFileName, Player current) {
+	public static Map parse(String mapFileName, IPlayer current) {
 		String fileLocation = "assets/entities/" + mapFileName;
 		InputStream in = null;
 		Scanner scan = null;

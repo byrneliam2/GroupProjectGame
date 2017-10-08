@@ -5,6 +5,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import common.game.IGame;
+import common.player.IPlayer;
 import map.World;
 import map.WorldParser;
 import player.Bullet;
@@ -28,7 +29,7 @@ public class Game extends Observable implements IGame, Serializable {
 
 	public static boolean GAME_PAUSED = false;
 
-	private Player player;
+	private IPlayer player;
 	private World world;
 
 	@Override
@@ -52,7 +53,7 @@ public class Game extends Observable implements IGame, Serializable {
 	}
 
 	@Override
-	public Player getPlayer() {
+	public IPlayer getPlayer() {
 		return this.player;
 	}
 

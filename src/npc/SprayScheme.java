@@ -1,7 +1,7 @@
 package npc;
 
+import common.player.IPlayer;
 import player.Bullet;
-import player.Player;
 
 /**
  * Spray Scheme is a scheme that extends Medium scheme, however the NPC will shoot sprays of bullets in all directions
@@ -24,12 +24,11 @@ public class SprayScheme extends MediumScheme {
 
 	/**
 	 * Decides whether it is time to shoot, if it is, then make a new spray of bullet.
-	 * 
-	 * @param npc
+	 *  @param npc
 	 * @param player
-	 */
+     */
 	@Override
-	public void decideShooting(NPC npc, Player player) {
+	public void decideShooting(NPC npc, IPlayer player) {
 		// shoot at the player when sprayRate is divisable and change direction every 200
 		if (moveCounter > 200) {
 			moveCounter = 0;

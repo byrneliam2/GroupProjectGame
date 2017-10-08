@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
+import common.player.IPlayer;
 import gfx.ImageLoader;
 import gfx.ImageUtilities;
 import items.DoorItem;
@@ -55,7 +56,7 @@ public class Map implements IMap {
 	private ArrayList<ArrayList<Integer>> environmentalLayer;
 
 	/** The current player */
-	private Player currentPlayer;
+	private IPlayer currentPlayer;
 
 	/** The name of the map */
 	private String name;
@@ -63,7 +64,7 @@ public class Map implements IMap {
 	/** Doors on the current map */
 	List<DoorItem> doors;
 
-	public Map(String name, Player player, List<Item> items, ArrayList<NPC> NPCS, List<DoorItem> doors) {
+	public Map(String name, IPlayer player, List<Item> items, ArrayList<NPC> NPCS, List<DoorItem> doors) {
 		this.name = name;
 		this.items = items;
 		this.currentPlayer = player;

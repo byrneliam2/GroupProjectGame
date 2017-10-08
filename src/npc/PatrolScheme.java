@@ -1,9 +1,9 @@
 package npc;
 
+import common.player.IPlayer;
 import map.Map;
 import player.Bullet;
 import player.InvalidPlayerExceptions;
-import player.Player;
 import common.utils.MathUtils;
 
 /**
@@ -36,7 +36,7 @@ public class PatrolScheme implements ControlScheme {
 	}
 
 	@Override
-	public void doBestAction(NPC npc, Player player) {
+	public void doBestAction(NPC npc, IPlayer player) {
 		int move = player.getSpeed() / 2;// moves at same speed as player
 		try {
 			// move the npc according to the patrol direction.

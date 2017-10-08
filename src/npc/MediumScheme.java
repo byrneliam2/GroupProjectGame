@@ -1,5 +1,6 @@
 package npc;
 
+import common.player.IPlayer;
 import common.utils.Direction;
 import player.Bullet;
 import player.InvalidPlayerExceptions;
@@ -21,7 +22,7 @@ public class MediumScheme implements ControlScheme {
 	}
 
 	@Override
-	public void doBestAction(NPC npc, Player player) {
+	public void doBestAction(NPC npc, IPlayer player) {
 		try {
 			// move at half the player's speed.
 			npc.move(randDir.getX() * npc.getSpeed() / 2, randDir.getY() * npc.getSpeed() / 2);
@@ -36,11 +37,10 @@ public class MediumScheme implements ControlScheme {
 
 	/**
 	 * Descides whether it is time to shoot, if it is, then make a new bullet.
-	 * 
-	 * @param npc
+	 *  @param npc
 	 * @param player
 	 */
-	public void decideShooting(NPC npc, Player player) {
+	public void decideShooting(NPC npc, IPlayer player) {
 		// shoot at the player every 100 moves change direction every 200
 		if (moveCounter > 200) {
 			moveCounter = 0;

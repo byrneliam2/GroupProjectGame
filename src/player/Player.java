@@ -5,6 +5,7 @@ import java.awt.geom.Ellipse2D;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import common.player.IPlayer;
 import game.Game;
 import items.Backpack;
 import items.DoorItem;
@@ -21,7 +22,7 @@ import common.utils.MathUtils;
  * @author javahemohs Created by javahemohs on 19/09/17.
  *
  */
-public class Player {
+public class Player implements IPlayer {
 	/* constants */
 	private static final int rangeCircleWidth = 2 * Map.tileSize;
 	private static final double defaultFireRate = 0.8;
@@ -148,7 +149,6 @@ public class Player {
 	 * @throws InvalidPlayerExceptions
 	 *             if the item was not part of a player's backpack.
 	 */
-	@Deprecated
 	public void useItem(Usable item) throws InvalidPlayerExceptions {
 		try {
 			// use the item
@@ -164,7 +164,6 @@ public class Player {
 	 * @param item
 	 * @throws InvalidPlayerExceptions
 	 */
-	@Deprecated
 	public void pickUpAndUse(Usable item) throws InvalidPlayerExceptions {
 		try {
 			// If the player wants to use the supply with the necessary items for a

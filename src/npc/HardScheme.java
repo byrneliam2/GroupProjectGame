@@ -1,9 +1,9 @@
 package npc;
 
+import common.player.IPlayer;
 import common.utils.Direction;
 import player.Bullet;
 import player.InvalidPlayerExceptions;
-import player.Player;
 import common.utils.MathUtils;
 
 /**
@@ -21,7 +21,7 @@ public class HardScheme implements ControlScheme {
 	}
 
 	@Override
-	public void doBestAction(NPC npc, Player player) {
+	public void doBestAction(NPC npc, IPlayer player) {
 		try {
 			// move at half the player's speed.
 			npc.move(randDir.getX() * npc.getSpeed(), randDir.getY() * npc.getSpeed());

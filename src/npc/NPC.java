@@ -3,6 +3,7 @@ package npc;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import common.player.IPlayer;
 import common.utils.DisplayValues;
 import player.InvalidPlayerExceptions;
 import player.Player;
@@ -17,7 +18,7 @@ public class NPC extends Player {
 	public static final int updateRate = DisplayValues.FRAMERATE;// rate in milliseconds that NPC is updated
 	private static Timer npcTimer = new Timer();
 
-	private Player p;
+	private IPlayer p;
 	private ControlScheme control;
 	protected TimerTask npctask;
 
@@ -26,13 +27,12 @@ public class NPC extends Player {
 	 * @param x
 	 *            centre pixel x Location
 	 * @param y
-	 *            centre pixel y location
+ *            centre pixel y location
 	 * @param health
 	 * @param mainPlayer
 	 * @param cs
-	 *            the control scheme of the NPC to use.
 	 */
-	public NPC(String name, int x, int y, int health, Player mainPlayer, ControlScheme cs) {
+	public NPC(String name, int x, int y, int health, IPlayer mainPlayer, ControlScheme cs) {
 		super(name, x, y);
 		this.p = mainPlayer;
 		this.control = cs;

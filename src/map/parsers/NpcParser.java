@@ -3,6 +3,7 @@ package map.parsers;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import common.player.IPlayer;
 import map.MapParser;
 import map.ParseException;
 import npc.ControlScheme;
@@ -20,7 +21,7 @@ public class NpcParser {
 
 	}
 
-	public void parse(Scanner scan, ArrayList<NPC> npcs, Player mainPLayer) throws ParseException {
+	public void parse(Scanner scan, ArrayList<NPC> npcs, IPlayer mainPLayer) throws ParseException {
 		String name = MapParser.requireString(scan);
 		String scheme = MapParser.requireString(scan);
 		String leftRight = MapParser.requireString(scan);

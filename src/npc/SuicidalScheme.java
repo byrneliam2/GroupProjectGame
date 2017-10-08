@@ -1,5 +1,6 @@
 package npc;
 
+import common.player.IPlayer;
 import map.Map;
 import player.Bullet;
 import player.InvalidPlayerExceptions;
@@ -20,7 +21,7 @@ public class SuicidalScheme implements ControlScheme {
 	}
 
 	@Override
-	public void doBestAction(NPC npc, Player player) {
+	public void doBestAction(NPC npc, IPlayer player) {
 		if (moveCount >= 60) {
 			chooseBestDir(npc, player);
 			moveCount = 0;
@@ -47,7 +48,7 @@ public class SuicidalScheme implements ControlScheme {
 		angle = angle - number;
 	}
 
-	private void chooseBestDir(NPC npc, Player player) {
+	private void chooseBestDir(NPC npc, IPlayer player) {
 		angle = MathUtils.calculateAngle(npc.getCentreX(), npc.getCentreY(), player.getCentreX(), player.getCentreY());
 
 		moveX = Math.sin(angle) * 5;
