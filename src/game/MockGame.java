@@ -1,5 +1,6 @@
 package game;
 
+import common.game.IGame;
 import map.World;
 import player.InvalidPlayerExceptions;
 import player.Player;

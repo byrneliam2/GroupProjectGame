@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Observable;
 import java.util.Observer;
 
+import common.game.IGame;
 import map.World;
 import map.WorldParser;
 import player.Bullet;

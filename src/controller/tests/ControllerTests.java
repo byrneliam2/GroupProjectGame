@@ -2,7 +2,7 @@ package controller.tests;
 
 import controller.Controller;
 import common.controller.Command;
-import game.IGame;
+import common.game.IGame;
 import game.MockGame;
 import org.junit.FixMethodOrder;
 import org.junit.Test;

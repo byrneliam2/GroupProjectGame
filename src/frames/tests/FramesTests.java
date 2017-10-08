@@ -27,9 +27,10 @@ public class FramesTests {
     }
 
     private MainDisplay makeDisplay(boolean mock) {
-        MainDisplay m = new MainDisplay(mock ? new MockGame() : new Game());
+        MainDisplay m = new MainDisplay(mock ? new MockGame() : new Game(),
+                null, null);
         m.enableInputMethods(false);
-        m.getAudioHandler().stop();
+        //m.getAudioHandler().stop();
         m.newGame();
         return m;
     }

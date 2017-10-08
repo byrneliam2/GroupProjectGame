@@ -1,7 +1,7 @@
 package save_load;
 
 import game.Game;
-import game.IGame;
+import common.game.IGame;
 import map.World;
 import player.InvalidPlayerExceptions;
 import player.Player;
