@@ -6,6 +6,7 @@ import java.util.Scanner;
 import common.items.Item;
 import items.Key;
 import map.Map;
+import map.MapParser;
 import map.ParseException;
 
 public class KeyParser {

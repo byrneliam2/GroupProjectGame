@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import map.*;
-import map.parsers.MapParser;
-import map.parsers.WorldParser;
 
 import org.junit.Test;
 
