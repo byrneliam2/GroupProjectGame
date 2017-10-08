@@ -1,4 +1,4 @@
-package game;
+package common.game;
 
 /*
  * SWEN 222 Group Project

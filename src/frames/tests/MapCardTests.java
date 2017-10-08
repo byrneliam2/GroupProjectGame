@@ -10,7 +10,7 @@ import common.utils.DisplayValues;
 import frames.cards.MapCard;
 import frames.cards.MenuCard;
 import game.Game;
-import game.IGame;
+import common.game.IGame;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;

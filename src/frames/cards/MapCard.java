@@ -9,7 +9,7 @@ package frames.cards;
 import common.map.IMap;
 import common.utils.DisplayValues;
 import frames.MainDisplay;
-import game.IGame;
+import common.game.IGame;
 import gfx.ImageLoader;
 import gfx.ImageUtilities;
 import common.items.Item;
