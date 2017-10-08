@@ -5,7 +5,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import map.World;
-import map.WorldParser;
+import map.parsers.WorldParser;
 import player.Bullet;
 import player.InvalidPlayerExceptions;
 import player.Player;

@@ -1,4 +1,4 @@
-package map;
+package map.parsers;
 
 import java.util.List;
 import java.util.Scanner;
@@ -10,6 +10,8 @@ import items.itemList.MaxHealthPot;
 import items.itemList.RustyArmor;
 import items.itemList.ShinyArmor;
 import items.itemList.SmallGun;
+import map.Map;
+import map.ParseException;
 
 public class ItemParser {
 

@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import map.World;
-import map.WorldParser;
+import map.parsers.WorldParser;
 import player.Player;
 
 public class WorldTests {

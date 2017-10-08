@@ -1,8 +1,9 @@
-package map;
+package map.parsers;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import map.ParseException;
 import npc.ControlScheme;
 import npc.EasyScheme;
 import npc.HardScheme;

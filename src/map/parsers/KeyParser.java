@@ -1,10 +1,12 @@
-package map;
+package map.parsers;
 
 import java.util.List;
 import java.util.Scanner;
 
 import common.items.Item;
 import items.Key;
+import map.Map;
+import map.ParseException;
 
 public class KeyParser {
 	public KeyParser() {
