@@ -63,11 +63,9 @@ public class MainDisplay extends JComponent implements Observer {
         master.setUndecorated(true);
         //master.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-        if (controller != null) {
-            master.addKeyListener(this.controller.getKeyAdapter());
-            master.addMouseListener(this.controller.getMouseAdapter());
-            master.addMouseMotionListener(this.controller.getMouseAdapter());
-        }
+        master.addKeyListener(this.controller.getKeyAdapter());
+        master.addMouseListener(this.controller.getMouseAdapter());
+        master.addMouseMotionListener(this.controller.getMouseAdapter());
 
         // this component setup
         this.setLayout(new CardLayout());
@@ -162,7 +160,6 @@ public class MainDisplay extends JComponent implements Observer {
      */
     private void menu() {
         switchScreen("menu");
-        if (controller == null || audioHandler == null) return;
         controller.reloadController();
         audioHandler.stop();
         audioHandler.queueMusic(MusicTrack.MAIN_MENU);
@@ -184,10 +181,8 @@ public class MainDisplay extends JComponent implements Observer {
      */
     public void startGame() {
         switchScreen(game.getWorld().getStartingMap().getName());
-        if (audioHandler != null) {
-            audioHandler.stop();
-            audioHandler.queueMusic(MusicTrack.TEST_MUSIC);
-        }
+        audioHandler.stop();
+        audioHandler.queueMusic(MusicTrack.TEST_MUSIC);
         startTimer();
     }
 

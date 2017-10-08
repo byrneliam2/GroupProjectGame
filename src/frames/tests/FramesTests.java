@@ -6,9 +6,11 @@ package frames.tests;
  * 300338518
  */
 
+import common.mocks.MockAudioHandler;
+import common.mocks.MockController;
 import frames.MainDisplay;
 import game.Game;
-import game.MockGame;
+import common.mocks.MockGame;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
@@ -28,9 +30,9 @@ public class FramesTests {
 
     private MainDisplay makeDisplay(boolean mock) {
         MainDisplay m = new MainDisplay(mock ? new MockGame() : new Game(),
-                null, null);
+                new MockAudioHandler(), new MockController());
         m.enableInputMethods(false);
-        //m.getAudioHandler().stop();
+        m.getAudioHandler().stop();
         m.newGame();
         return m;
     }

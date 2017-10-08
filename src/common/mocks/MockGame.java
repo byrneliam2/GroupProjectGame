@@ -1,4 +1,4 @@
-package game;
+package common.mocks;
 
 import common.game.IGame;
 import map.World;
