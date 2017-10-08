@@ -4,6 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * Experimental button solution.
+ * @author Andrew McManaway
+ */
 public class LabelButton extends JButton {
 
     private String text;
