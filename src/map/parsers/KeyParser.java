@@ -15,10 +15,11 @@ public class KeyParser {
 
 	public void parse(Scanner scan, List<Item> items) throws ParseException {
 		int id = MapParser.requireInteger(scan);
+		String color = scan.next();
 		int x = MapParser.requireInteger(scan);
 		int y = MapParser.requireInteger(scan);
 
-		Item key = new Key(id);
+		Item key = new Key(id,color);
 		key.setX(x * Map.tileSize);
 		key.setY(y * Map.tileSize);
 		items.add(key);
