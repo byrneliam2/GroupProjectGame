@@ -15,3 +15,26 @@ Map6 13 true
 
 HealthPot
 29 4
+
+ShinyArmor
+3 16
+
+Npc 
+doggy
+SprayScheme true 60
+16 9 1
+
+Npc 
+doggy
+SprayScheme true 60
+4 16 1
+
+Npc 
+doggy
+SprayScheme true 60
+16 16 1
+
+Npc 
+doggy
+SprayScheme true 60
+20 4 1

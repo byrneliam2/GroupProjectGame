@@ -6,6 +6,9 @@ Map11 09 true
 0 9
 
 Npc
-BossGuy
+FastSprayer
 SprayScheme false 8
 42 16 2
+
+MaxHealthPot
+16 8

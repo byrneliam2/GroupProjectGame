@@ -19,8 +19,11 @@ Door
 Map11 08 true
 16 0
 
-MassiveGun
+ShinyArmor
 3 3
+
+MaxHealthPot
+16 7
 
 Npc
 HungryBear

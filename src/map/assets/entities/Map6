@@ -12,5 +12,10 @@ Door
 Map5 11 true
 16 17
 
-HealthPot
+SmallGun
 29 4
+
+Npc
+oneupBoy
+MediumScheme true 0
+29 4 10
