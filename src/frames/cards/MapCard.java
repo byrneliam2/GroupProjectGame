@@ -6,6 +6,7 @@ package frames.cards;
  * 300338518
  */
 
+import common.map.IMap;
 import common.utils.DisplayValues;
 import frames.MainDisplay;
 import game.IGame;
@@ -34,7 +35,7 @@ public class MapCard extends Card {
 	/* Primary attributes */
 	private List<Entity> statics;
 	private List<Entity> dynamics;
-	private map.Map map;
+	private IMap map;
 	private IGame game;
 
 	/* Constants */
