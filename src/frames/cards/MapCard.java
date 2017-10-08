@@ -29,6 +29,7 @@ import java.util.stream.Collectors;
  * {@link Card.Entity}s.
  * TODO Dialogue popups
  * TODO Player animations
+ * TODO Abstract out Players and NPCs
  */
 public class MapCard extends Card {
 

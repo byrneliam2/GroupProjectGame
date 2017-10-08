@@ -47,7 +47,8 @@ public class MainDisplay extends JComponent implements Observer {
         game = g;
         audioHandler = aud;
         controller = cntrl;
-        g.giveObserver(this);
+
+        game.giveObserver(this);
 
         master = new JFrame("The Illusion of the Prophecy");
         currentCard = null;
