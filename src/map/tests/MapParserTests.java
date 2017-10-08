@@ -6,10 +6,10 @@ import org.junit.Test;
 
 import map.BadMapImageException;
 import map.Map;
+import map.MapParser;
 import map.ParseException;
 import map.World;
-import map.parsers.MapParser;
-import map.parsers.WorldParser;
+import map.WorldParser;
 import player.Player;
 
 public class MapParserTests {

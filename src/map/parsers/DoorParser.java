@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import items.DoorItem;
 import map.Map;
+import map.MapParser;
 import map.ParseException;
 
 public class DoorParser {

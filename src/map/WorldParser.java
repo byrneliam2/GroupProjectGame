@@ -1,4 +1,4 @@
-package map.parsers;
+package map;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,10 +6,6 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Scanner;
 
-import map.BadMapImageException;
-import map.Map;
-import map.ParseException;
-import map.World;
 import player.Player;
 
 /**
@@ -44,6 +40,7 @@ public class WorldParser {
 			in = WorldParser.class.getResourceAsStream(fileLocation);
 			if (in == null) {
 				throw new ParseException("The world file " + fileLocation + " does not exist");
+
 			}
 			scan = new Scanner(in);
 			if (!scan.hasNext()) {
@@ -68,7 +65,6 @@ public class WorldParser {
 					in.close();
 				} catch (IOException e) {
 					e.printStackTrace();
-					System.out.println(e.getMessage());
 				}
 			}
 

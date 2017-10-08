@@ -1,4 +1,4 @@
-package map.parsers;
+package map;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,9 +7,10 @@ import java.util.List;
 import java.util.Scanner;
 
 import items.DoorItem;
-import map.BadMapImageException;
-import map.Map;
-import map.ParseException;
+import map.parsers.DoorParser;
+import map.parsers.ItemParser;
+import map.parsers.KeyParser;
+import map.parsers.NpcParser;
 import common.items.Item;
 import npc.NPC;
 import player.Player;

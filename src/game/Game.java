@@ -6,7 +6,7 @@ import java.util.Observer;
 
 import common.game.IGame;
 import map.World;
-import map.parsers.WorldParser;
+import map.WorldParser;
 import player.Bullet;
 import player.InvalidPlayerExceptions;
 import player.Player;

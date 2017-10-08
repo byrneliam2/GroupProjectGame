@@ -9,7 +9,7 @@ import org.junit.Test;
 import map.BadMapImageException;
 import map.ParseException;
 import map.World;
-import map.parsers.WorldParser;
+import map.WorldParser;
 import player.Player;
 
 public class WorldParserTests {

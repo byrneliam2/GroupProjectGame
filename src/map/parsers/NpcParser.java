@@ -3,6 +3,7 @@ package map.parsers;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import map.MapParser;
 import map.ParseException;
 import npc.ControlScheme;
 import npc.EasyScheme;
