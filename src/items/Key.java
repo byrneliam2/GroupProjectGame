@@ -9,10 +9,12 @@ package items;
 public class Key extends AbstractItem {
 
 	private int id;
+	private String color;
 
-	public Key(int id) {
+	public Key(int id, String color) {
 		super("Key", "A key which which can unlock a door", "key");
 		this.id = id;
+		this.color = color;
 	}
 
 	/**
@@ -21,5 +23,9 @@ public class Key extends AbstractItem {
 	 */
 	public boolean keyMatchesDoor(int doorID) {
 		return id == doorID;
+	}
+
+	public String getName() {
+		return color + "Key";
 	}
 }

@@ -48,10 +48,12 @@ mapName 05 true
 
 For Keys:
 <"Key"> <id>
+<key color>, white,green,gold,must be lower case
 <x> <y>
 
 Example:
 Key 5
+red
 6 6
 
 
