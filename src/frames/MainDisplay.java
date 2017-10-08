@@ -6,11 +6,9 @@ package frames;
  * 300338518
  */
 
-import audio.AudioHandler;
 import common.audio.IAudioHandler;
 import common.audio.MusicTrack;
 import common.utils.DisplayValues;
-import controller.*;
 import common.controller.IController;
 import frames.cards.Card;
 import frames.cards.*;
@@ -45,7 +43,7 @@ public class MainDisplay extends JComponent implements Observer {
     /* Game attributes */
     private IGame game;
 
-    public MainDisplay(IGame g, AudioHandler aud, Controller cntrl) {
+    public MainDisplay(IGame g, IAudioHandler aud, IController cntrl) {
         game = g;
         audioHandler = aud;
         controller = cntrl;
