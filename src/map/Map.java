@@ -12,7 +12,7 @@ import gfx.ImageLoader;
 import gfx.ImageUtilities;
 import items.DoorItem;
 import common.items.Item;
-import common.map.iMap;
+import common.map.IMap;
 import npc.NPC;
 import player.Bullet;
 import player.Player;
@@ -25,7 +25,7 @@ import player.Player;
  * @author James
  *
  */
-public class Map implements iMap {
+public class Map implements IMap {
 	/** pixel size of a individual tile */
 	public static final int tileSize = 60;
 

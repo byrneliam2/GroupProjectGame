@@ -11,13 +11,13 @@ import npc.NPC;
 import player.Bullet;
 
 /**
- * Abstract Map interface which describes all the functionality a map should
+ * This is an abstract Map interface which describes all the functionality a map should
  * have.
  * 
  * @author James
  *
  */
-public interface iMap {
+public interface IMap {
 	/**
 	 * This method pauses all the given NPCs on a map
 	 */

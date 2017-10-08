@@ -27,8 +27,8 @@ public class WorldParser {
 	 * This method reads a world text file and returns a new world.
 	 * 
 	 * @throws ParseException
-	 * @throws IOException 
-	 * @throws BadMapImageException 
+	 * @throws IOException
+	 * @throws BadMapImageException
 	 */
 	public static World parse(String worldFileName, Player current) {
 		HashMap<String, Map> maps = new HashMap<String, Map>();
@@ -52,7 +52,7 @@ public class WorldParser {
 
 			World n = new World(maps);
 			return n;
-		}catch(ParseException e) {
+		} catch (ParseException e) {
 			e.printStackTrace();
 		} finally {
 

@@ -2,6 +2,8 @@ package map;
 
 import java.util.HashMap;
 
+import common.map.IWorld;
+
 /**
  * This class represents a world. A world consists of a HashMap of map names to
  * maps and a HashMap of environment names to enviroment's
@@ -9,7 +11,7 @@ import java.util.HashMap;
  * @author James
  *
  */
-public class World {
+public class World implements IWorld {
 
 	// A HashMap of Map names to the map object that must be visible at all times,
 	// thus is public static
@@ -32,6 +34,5 @@ public class World {
 	public static HashMap<String, Map> getMaps() {
 		return maps;
 	}
-	
-	
+
 }
