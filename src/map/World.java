@@ -28,7 +28,7 @@ public class World implements IWorld {
 	 * @return
 	 */
 	public Map getStartingMap() {
-		return World.maps.get("Map10");
+		return World.maps.get("Map3");
 	}
 
 	public static HashMap<String, Map> getMaps() {

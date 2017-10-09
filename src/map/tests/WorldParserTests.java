@@ -34,7 +34,7 @@ public class WorldParserTests {
 		Player p1 = new Player("Tom", 50, 50);
 		World w = WorldParser.parse("world", p1);
 		p1.setMap(w.getStartingMap());
-		assert(12==w.getMaps().size());
+		assert(14==w.getMaps().size());
 	}
 
 }

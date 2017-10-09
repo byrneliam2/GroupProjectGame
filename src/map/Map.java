@@ -133,6 +133,9 @@ public class Map implements IMap {
 	}
 
 	private void placeAllItems(List<Item> itms) {
+		if (itms == null) {
+			return;
+		}
 		for (Item i : itms) {
 			if (i.getX() == 0 && i.getY() == 0) {
 				boolean placed = false;

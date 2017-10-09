@@ -191,6 +191,7 @@ public class MapTests {
 		assert (w.getStartingMap().getName().equals("Map3"));
 		w.getStartingMap().startMapNPCs();
 		DoorItem d = w.getStartingMap().getDoor(01);
+		p1.setSpeed(1);
 		// Player starts at 150,150
 		assertEquals(150, p1.getCentreX());
 		assertEquals(150, p1.getCentreY());
@@ -215,18 +216,18 @@ public class MapTests {
 	@Test
 	public void testRemovingNpc() {
 		this.doorSetup();
-		assertEquals(1, w.getStartingMap().getNPCs().size());
+		assertEquals(2, w.getStartingMap().getNPCs().size());
 		w.getStartingMap().removeNPC(w.getStartingMap().getNPCs().get(0));
-		assertEquals(0, w.getStartingMap().getNPCs().size());
+		assertEquals(1, w.getStartingMap().getNPCs().size());
 	}
 
 	@Test
 	public void testAddingNpc() {
 		this.doorSetup();
 		NPC c = new NPC("bug", 200, 200, 200, this.p1, new PatrolScheme(false, 5));
-		assertEquals(1, w.getStartingMap().getNPCs().size());
-		w.getStartingMap().getNPCs().add(c);
 		assertEquals(2, w.getStartingMap().getNPCs().size());
+		w.getStartingMap().getNPCs().add(c);
+		assertEquals(3, w.getStartingMap().getNPCs().size());
 	}
 
 	@Test
@@ -234,7 +235,7 @@ public class MapTests {
 		// Works on the basis that stopping a NPC returns true if it is not already
 		// stopped
 		this.doorSetup();
-		assertEquals(1, w.getStartingMap().getNPCs().size());
+		assertEquals(2, w.getStartingMap().getNPCs().size());
 		NPC c = w.getStartingMap().getNPCs().get(0);
 		w.getStartingMap().startMapNPCs();
 		w.getStartingMap().pauseMapNPCs();
@@ -414,6 +415,7 @@ public class MapTests {
 	public void testRangeCircle5() {
 		p1 = new Player("Tom", 120, 130);
 		m = MapParser.parse("MapTest", p1);
+		System.out.println(p1.getCentreX());
 		p1.setMap(m);
 		Item i = new HealthPot();
 		Item i2 = new MassiveGun();
@@ -424,7 +426,7 @@ public class MapTests {
 		assertEquals(i, m.getClosestItem(p1.getRangeCircle()));
 
 		try {
-			p1.move(0, 60);
+			p1.move(0, 10);
 		} catch (InvalidPlayerExceptions e) {
 			e.printStackTrace();
 			fail();
@@ -439,31 +441,31 @@ public class MapTests {
 	 * Tests if total the doors field == null, return null when trying to get a door
 	 */
 	@Test
-	public void testNullDoors(){
+	public void testNullDoors() {
 		p1 = new Player("Tom", 120, 130);
 		m = new Map("MapTest", p1, new ArrayList<>(), new ArrayList<>(), null);
 		p1.setMap(m);
 
-		assertNull(m.getDoor(new Rectangle2D.Double(1,1,1,1)));
+		assertNull(m.getDoor(new Rectangle2D.Double(1, 1, 1, 1)));
 	}
 
 	/**
 	 * Tests if total the doors field == null, return null when trying to get a door
 	 */
 	@Test
-	public void testNullItems(){
+	public void testNullItems() {
 		p1 = new Player("Tom", 120, 130);
 		m = new Map("MapTest", p1, null, new ArrayList<>(), new ArrayList<>());
 		p1.setMap(m);
 
-		assertNull(m.getClosestItem(new Ellipse2D.Double(1,1,1,1)));
+		assertNull(m.getClosestItem(new Ellipse2D.Double(1, 1, 1, 1)));
 	}
 
 	/**
 	 * Tests if the Background Layer is Returned
 	 */
 	@Test
-	public void testGetBackground(){
+	public void testGetBackground() {
 		p1 = new Player("Tom", 120, 130);
 		m = MapParser.parse("MapTest", p1);
 		p1.setMap(m);
@@ -475,8 +477,8 @@ public class MapTests {
 	 * Tests if the Background Layer is Returned
 	 */
 	@Test
-	public void testThrowException(){
-		try{
+	public void testThrowException() {
+		try {
 			throw new BadMapImageException("Test");
 		} catch (BadMapImageException e) {
 			assertEquals("Test", e.getMessage());
@@ -487,12 +489,11 @@ public class MapTests {
 	 * Tests Environment Enum
 	 */
 	@Test
-	public void getEnvironmentCode(){
+	public void getEnvironmentCode() {
 		assertTrue(1 == Environment.DEATH.getEnviromentCode());
 		assertTrue(2 == Environment.MIST.getEnviromentCode());
 		assertTrue(3 == Environment.FIRE.getEnviromentCode());
 		assertTrue(4 == Environment.MUD.getEnviromentCode());
 	}
-
 
 }

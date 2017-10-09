@@ -41,7 +41,7 @@ public class Game extends Observable implements IGame, Serializable {
 	 * Start the new game.
 	 */
 	public void newGame() {
-		this.player = new Player("Tom", 500, 500);
+		this.player = new Player("Tom", 500,500);
 		this.world = WorldParser.parse("world", this.player);
 	}
 
