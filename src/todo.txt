@@ -1,0 +1,9 @@
+TODO
+- Add game elements as to make an actual game (boss fight!)
+- Integrate saving and loading
+- Optimize drawing (associate items, etc. with images again?)
+- External testing for all libraries (including MapCardTests)
+- Get locked doors working for both images and backend
+
+FIXME
+- Tone down random item spawning, can currently get way too much armour

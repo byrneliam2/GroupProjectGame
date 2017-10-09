@@ -216,7 +216,7 @@ public class MainDisplay extends JComponent implements Observer {
      * @param selectedFile file selected
      */
     public void loadGame(File selectedFile) {
-        //
+        //game = game.loadGame(selectedFile);
     }
 
     /* =========================================================================================== */

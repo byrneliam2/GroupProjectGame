@@ -1,1 +1,0 @@
-- Get locked doors working for both images and backend
