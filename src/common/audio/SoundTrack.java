@@ -7,7 +7,7 @@ package common.audio;/*
 public enum SoundTrack implements Track{
     /* Sound Files */
     CLICK("click.wav"),
-    SHOOT("click.wav"), //TODO: Get another file for this
+    SHOOT("shoot.wav"),
     DEATH("click.wav"), //TODO: Get another file for this
     HURT("click.wav"); //TODO: Get another file for this
 

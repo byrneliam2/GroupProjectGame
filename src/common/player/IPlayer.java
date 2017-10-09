@@ -6,7 +6,6 @@ package common.player;
  * 300338518
  */
 
-import com.sun.javafx.geom.BoxBounds;
 import common.map.IMap;
 import items.Backpack;
 import map.Map;
