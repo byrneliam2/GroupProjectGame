@@ -8,8 +8,8 @@ NOTES:
 
 
 For Item:
-<ItemName> (Must be the same name as one of the concrete classes in items package)
-<x> <y> (Not sure how you are doing coordinates)
+<ItemName> <number of items> (Must be the same name as one of the concrete classes in items package)
+<x> <y> (only if number of items is one)(Not sure how you are doing coordinates)
 
 Example:
 HealthPot
