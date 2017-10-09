@@ -14,10 +14,10 @@ Door
 Map10 05 true
 0 9
 
-RustyArmor
+RustyArmor 1
 25 4
 
-HealthPot
+HealthPot 1
 4 4
 
 Npc

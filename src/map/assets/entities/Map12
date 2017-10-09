@@ -5,10 +5,12 @@ Door
 Map11 09 true
 0 9
 
+MaxHealthPot 4
+
 Npc
 FastSprayer
 SprayScheme false 8
 42 16 2
 
-MaxHealthPot
+MaxHealthPot 1
 16 8

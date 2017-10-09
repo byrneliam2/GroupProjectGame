@@ -19,11 +19,13 @@ Door
 Map11 08 true
 16 0
 
-ShinyArmor
+RustyArmor 1
 3 3
 
-MaxHealthPot
-16 7
+ShinyArmor 6
+
+MaxHealthPot 3
+
 
 Npc
 HungryBear

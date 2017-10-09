@@ -20,4 +20,9 @@ public class HealthPot extends AbstractItem implements Usable {
 	public void use(Player player) {
 		player.setHealth(player.getHealth() + 1);
 	}
+
+	@Override
+	public HealthPot clone() {
+		return new HealthPot();
+	}
 }

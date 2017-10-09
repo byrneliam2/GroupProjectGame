@@ -121,4 +121,5 @@ public class MapParser {
 			throw new ParseException("Was expecting another token but there was none");
 		}
 	}
+
 }

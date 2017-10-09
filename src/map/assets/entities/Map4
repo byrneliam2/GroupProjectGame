@@ -12,9 +12,9 @@ Door
 Map10 04 true
 17 0
 
-MassiveGun
+MassiveGun 1
 7 15
-HealthPot
+HealthPot 1
 4 16
  
 Npc

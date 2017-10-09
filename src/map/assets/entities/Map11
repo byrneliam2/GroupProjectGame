@@ -19,16 +19,16 @@ Door
 Map13 10 true
 16 0
 
-HealthPot
+HealthPot 1
 2 2
 
-HealthPot
+HealthPot 1
 2 16
 
-HealthPot
+HealthPot 1
 30 2
 
-HealthPot
+HealthPot 1
 30 16
 
 Npc

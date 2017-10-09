@@ -1,5 +1,7 @@
 package items;
 
+import common.items.Item;
+
 /**
  * Key Items unlock doors.
  *
@@ -27,5 +29,9 @@ public class Key extends AbstractItem {
 
 	public String getName() {
 		return color + "Key";
+	}
+
+	public Item clone() {
+		return new Key(this.id, this.color);
 	}
 }

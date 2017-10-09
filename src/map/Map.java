@@ -78,6 +78,7 @@ public class Map implements IMap {
 		for (NPC npc : NPCS) {
 			npc.setMap(this);
 		}
+		this.placeAllItems(this.items);
 
 	}
 
@@ -129,6 +130,26 @@ public class Map implements IMap {
 		EnvLayer = ImageUtilities.scale(EnvLayer, newWidth, newHeight);
 		this.environmentalLayer = this.loadEnvLayers(EnvLayer);
 
+	}
+
+	private void placeAllItems(List<Item> itms) {
+		for (Item i : itms) {
+			if (i.getX() == 0 && i.getY() == 0) {
+				boolean placed = false;
+
+				while (!placed) {
+					int width = (int) (Math.random() * 31) + 1;
+					int height = (int) (Math.random() * 17) + 1;
+					if (this.canMove(width * Map.tileSize, height * Map.tileSize)
+							&& this.onEnvironmentTile(width * Map.tileSize, height * Map.tileSize) == null) {
+						placed = true;
+						i.setX(width * Map.tileSize);
+						i.setY(height * Map.tileSize);
+					}
+				}
+				placed = false;
+			}
+		}
 	}
 
 	/**

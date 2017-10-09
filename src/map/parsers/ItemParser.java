@@ -16,20 +16,38 @@ import map.ParseException;
 
 public class ItemParser {
 
+	public static void parseItem2(String itemName, Scanner scan, List<Item> items) throws ParseException {
+		if (itemName.equals("HealthPot")) {
+			setItemPosition(scan, new HealthPot(), items);
+		} else if (itemName.equals("MassiveGun")) {
+			setItemPosition(scan, new MassiveGun(), items);
+		} else if (itemName.equals("RustyArmor")) {
+			setItemPosition(scan, new RustyArmor(), items);
+		} else if (itemName.equals("ShinyArmor")) {
+			setItemPosition(scan, new ShinyArmor(), items);
+		} else if (itemName.equals("MaxHealthPot")) {
+			setItemPosition(scan, new MaxHealthPot(), items);
+		} else if (itemName.equals("SmallGun")) {
+			setItemPosition(scan, new SmallGun(), items);
+		} else {
+			throw new ParseException("Unrecognised Item or entity name");
+		}
+	}
+
 	public static void parseItem(String itemName, Scanner scan, List<Item> items) throws ParseException {
 		if (itemName.equals("HealthPot")) {
-			setItemPosition(scan,new HealthPot(),items);
+			getItemAmount(scan, new HealthPot(), items);
 		} else if (itemName.equals("MassiveGun")) {
-			setItemPosition(scan,new MassiveGun(),items);
+			getItemAmount(scan, new MassiveGun(), items);
 		} else if (itemName.equals("RustyArmor")) {
-			setItemPosition(scan,new RustyArmor(),items);
+			getItemAmount(scan, new RustyArmor(), items);
 		} else if (itemName.equals("ShinyArmor")) {
-			setItemPosition(scan,new ShinyArmor(),items);
-		}else if (itemName.equals("MaxHealthPot")) {
-			setItemPosition(scan,new MaxHealthPot(),items);
+			getItemAmount(scan, new ShinyArmor(), items);
+		} else if (itemName.equals("MaxHealthPot")) {
+			getItemAmount(scan, new MaxHealthPot(), items);
 		} else if (itemName.equals("SmallGun")) {
-			setItemPosition(scan,new SmallGun(),items);
-		}   else {
+			getItemAmount(scan, new SmallGun(), items);
+		} else {
 			throw new ParseException("Unrecognised Item or entity name");
 		}
 	}
@@ -40,6 +58,30 @@ public class ItemParser {
 		i.setX(x * Map.tileSize);
 		i.setY(y * Map.tileSize);
 		items.add(i);
+	}
+
+	private static void getItemAmount(Scanner scan, Item i, List<Item> items) throws ParseException {
+		int amount = MapParser.requireInteger(scan);
+		if (amount == 1) {
+			setItemPosition(scan, i, items);
+		} else {
+			for (int a = 0; a < amount; a++) {
+				if (i instanceof HealthPot) {
+					items.add(new HealthPot());
+				} else if (i instanceof MassiveGun) {
+					items.add(new MassiveGun());
+				} else if (i instanceof RustyArmor) {
+					items.add(new RustyArmor());
+				} else if (i instanceof ShinyArmor) {
+					items.add(new ShinyArmor());
+				} else if (i instanceof MaxHealthPot) {
+					items.add(new MaxHealthPot());
+				} else if (i instanceof SmallGun) {
+					items.add(new SmallGun());
+				}
+
+			}
+		}
 	}
 
 }

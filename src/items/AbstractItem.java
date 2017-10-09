@@ -3,6 +3,7 @@ package items;
 import java.awt.Image;
 
 import common.items.Item;
+import items.itemList.HealthPot;
 
 public abstract class AbstractItem implements Item {
 	protected final String name, description;

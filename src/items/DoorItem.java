@@ -2,6 +2,7 @@ package items;
 
 import java.awt.Point;
 
+import common.items.Item;
 import map.Map;
 
 /**
@@ -20,7 +21,7 @@ public class DoorItem extends AbstractItem {
 	public DoorItem(String map, int ID, boolean locked, int x, int y) {
 		super(map, "A door linking to map: " + map + " with ID: " + ID, null);
 		this.doorID = ID;
-		//this.locked = locked; FIXME
+		// this.locked = locked; FIXME
 		super.setX(x);
 		super.setY(y);
 		p = new Point(x + Map.tileSize / 2, y + Map.tileSize / 2);
@@ -58,6 +59,10 @@ public class DoorItem extends AbstractItem {
 	@Override
 	public int hashCode() {
 		return doorID;
+	}
+
+	public Item clone() {
+		return new DoorItem(this.name, this.doorID, this.locked, this.x, this.y);
 	}
 
 }

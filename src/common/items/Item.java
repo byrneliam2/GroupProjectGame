@@ -68,4 +68,5 @@ public interface Item {
 	 * @return the image name
 	 */
 	public String getImageFileName();
+
 }
