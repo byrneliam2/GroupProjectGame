@@ -4,6 +4,7 @@ TODO
 - Optimize drawing (associate items, etc. with images again?)
 - External testing for all libraries (including MapCardTests)
 - Get locked doors working for both images and backend
+- Abstract out common interfaces: should all use common types!
 
 FIXME
 - Tone down random item spawning, can currently get way too much armour
