@@ -70,10 +70,21 @@ public class MapCard extends Card {
 				ImageLoader.image("playerImages", "playerRect", true),
 						new Point(game.getPlayer().getxLocation(), game.getPlayer().getyLocation()), 0)
 		);
+		
 		// add all NPCs
-		map.getNPCs().forEach(npc -> addStaticEntity(new Entity(npc, EntityType.NPC,
+		map.getNPCs().forEach(npc -> {
+			//add the boss npc
+			if(npc.getName().equals("Boss")){
+				addStaticEntity(new Entity(npc, EntityType.NPC,
+						ImageLoader.image("npcImages", "Rectangle", true),
+						new Point(npc.getxLocation(), npc.getyLocation()), 120));
+				return;
+			}
+			
+			addStaticEntity(new Entity(npc, EntityType.NPC,
 				ImageLoader.image("npcImages", "bug", true),
-				new Point(npc.getxLocation(), npc.getyLocation()), 0))
+				new Point(npc.getxLocation(), npc.getyLocation()), 0));
+			}
 		);
 	}
 

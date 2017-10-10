@@ -2,22 +2,15 @@ package npc;
 
 import common.player.IPlayer;
 import common.utils.Direction;
+import common.utils.MathUtils;
 import player.Bullet;
 import player.InvalidPlayerExceptions;
-import common.utils.MathUtils;
 
-/**
- * Moves very fast and shoots very fast
- * 
- * @author Thomas Edwards
- *
- */
-public class HardScheme implements ControlScheme {
-
+public class BossScheme implements ControlScheme {
 	private Direction randDir = getRandomDir();
 	private int moveCounter = 0;
 
-	public HardScheme() {
+	public BossScheme() {
 	}
 
 	@Override
@@ -41,6 +34,10 @@ public class HardScheme implements ControlScheme {
 				|| moveCounter == 52) {
 			new Bullet(npc.getCentreX(), npc.getCentreY(), MathUtils.calculateAngle(npc.getxLocation(),
 					npc.getyLocation(), player.getCentreX(), player.getCentreY()), npc, 10, "npcBullet2");
+			new Bullet(npc.getCentreX(), npc.getCentreY(), 0, npc, 4, "npcBullet2");// N
+			new Bullet(npc.getCentreX(), npc.getCentreY(), Math.PI , npc, 4, "npcBullet2");// S
+			new Bullet(npc.getCentreX(), npc.getCentreY(), Math.PI / 2 , npc, 4, "npcBullet2");// E
+			new Bullet(npc.getCentreX(), npc.getCentreY(), 3 * Math.PI / 2, npc, 4, "npcBullet2");// W
 		}
 	}
 
@@ -48,5 +45,4 @@ public class HardScheme implements ControlScheme {
 		int dir = (int) (Math.random() * 8);
 		return Direction.VALUES.get(dir);
 	}
-
 }

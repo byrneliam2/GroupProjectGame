@@ -6,6 +6,7 @@ import java.util.Scanner;
 import common.player.IPlayer;
 import map.MapParser;
 import map.ParseException;
+import npc.BossNPC;
 import npc.ControlScheme;
 import npc.EasyScheme;
 import npc.HardScheme;
@@ -33,6 +34,12 @@ public class NpcParser {
 		if (leftRight.equals("true")) {
 			LR = true;
 		}
+		if (name.equals("Boss")) {
+			NPC n = new BossNPC(mainPLayer);
+			npcs.add(n);
+			return;
+		}
+
 		ControlScheme a = null;
 		if (scheme.equals("PatrolScheme")) {
 			a = new PatrolScheme(LR, patrolDistance);

@@ -55,7 +55,7 @@ public class Player implements IPlayer {
 		rangeCircle = new Ellipse2D.Double(xLocation - Map.tileSize / 2, yLocation - Map.tileSize / 2, rangeCircleWidth,
 				rangeCircleWidth);
 		playerBox = new Rectangle.Double(xLocation + 3, yLocation + 3, Map.tileSize - 6, Map.tileSize - 6);
-		fireTimer.setInitialDelay(500);//0.5 seconds delay before first fire tick
+		fireTimer.setInitialDelay(500);// 0.5 seconds delay before first fire tick
 	}
 
 	/**
@@ -472,6 +472,10 @@ public class Player implements IPlayer {
 
 	public void setSpeed(int speed) {
 		this.speed = speed;
+	}
+
+	protected void setBoundingBoxWidth(int width, int height) {
+		this.playerBox.setFrame(playerBox.x, playerBox.y, width, height);
 	}
 
 }

@@ -23,9 +23,9 @@ import common.utils.Direction;
 public class Game extends Observable implements IGame, Serializable {
 
 	/**
-	 *
+	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -428815268724553339L;
 
 	public static boolean GAME_PAUSED = false;
 
@@ -41,7 +41,7 @@ public class Game extends Observable implements IGame, Serializable {
 	 * Start the new game.
 	 */
 	public void newGame() {
-		this.player = new Player("Tom", 500,500);
+		this.player = new Player("Tom", 500, 500);
 		this.world = WorldParser.parse("world", this.player);
 	}
 
@@ -59,7 +59,7 @@ public class Game extends Observable implements IGame, Serializable {
 
 	@Override
 	public int isOver() {
-		if (false)
+		if (World.getMaps().get("Map16").getNPCs().isEmpty())
 			return 2; // TODO win condition
 		if (player.isDead())
 			return 1;
@@ -78,7 +78,7 @@ public class Game extends Observable implements IGame, Serializable {
 	@Override
 	public void movePlayer(Direction dir) throws InvalidPlayerExceptions {
 		// if the movement caused a change in maps... notify observers
-		if (player.move( dir.getX(),  dir.getY())) {
+		if (player.move(dir.getX(), dir.getY())) {
 			set(getCurrentMap());
 		}
 	}
@@ -117,7 +117,7 @@ public class Game extends Observable implements IGame, Serializable {
 	 * Saves this game.Game object as a file...
 	 */
 	public void saveGame(String theFilePath) {
-		System.out.println("SaveGame MohsenJavehr"+this);
+		System.out.println("SaveGame MohsenJavehr" + this);
 		SaveLoad saveLoad = new SaveLoad(this, theFilePath);
 	}
 

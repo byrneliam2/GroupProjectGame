@@ -53,7 +53,7 @@ public class NPC extends Player {
 	}
 
 	/**
-	 * stops the timer which controls this NPC, which causes the NPC to simply stand
+	 * Stops the timer which controls this NPC, which causes the NPC to simply stand
 	 * still.
 	 */
 	public boolean stop() {
