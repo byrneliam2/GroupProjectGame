@@ -3,6 +3,7 @@ package map;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -13,11 +14,11 @@ import player.Player;
  * the game. This includes reading various map names. This class can be
  * considered a World factory and thus has no referenceable constructor and a
  * parser method that can be accessed from anywhere.
- * 
+ *
  * @author James
  *
  */
-public class WorldParser {
+public class WorldParser implements Serializable {
 
 	private WorldParser() {
 
@@ -25,10 +26,10 @@ public class WorldParser {
 
 	/**
 	 * This method reads a world text file and returns a new world.
-	 * 
+	 *
 	 * @throws ParseException
-	 * @throws IOException 
-	 * @throws BadMapImageException 
+	 * @throws IOException
+	 * @throws BadMapImageException
 	 */
 	public static World parse(String worldFileName, Player current) {
 		HashMap<String, Map> maps = new HashMap<String, Map>();

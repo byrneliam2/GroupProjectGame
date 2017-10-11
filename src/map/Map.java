@@ -5,6 +5,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +25,7 @@ import player.Player;
  * @author James
  *
  */
-public class Map {
+public class Map implements Serializable{
 	/** pixel size of a individual tile */
 	public static final int tileSize = 60;
 

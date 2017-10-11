@@ -1,11 +1,12 @@
 package map;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Scanner;
 
 import items.DoorItem;
 
-public class DoorParser {
+public class DoorParser implements Serializable  {
 	public DoorParser() {
 
 	}

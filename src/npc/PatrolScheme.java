@@ -4,6 +4,9 @@ import map.Map;
 import player.Bullet;
 import player.InvalidPlayerExceptions;
 import player.Player;
+
+import java.io.Serializable;
+
 import common.utils.MathUtils;
 
 /**
@@ -14,7 +17,7 @@ import common.utils.MathUtils;
  * @author Thomas Edwards
  *
  */
-public class PatrolScheme implements ControlScheme {
+public class PatrolScheme implements ControlScheme, Serializable{
 
 	private int progress = 0;// in pixels
 	private final int maxProgress;// in pixels

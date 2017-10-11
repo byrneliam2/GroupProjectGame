@@ -1,12 +1,14 @@
 package items;
 
+import java.io.Serializable;
+
 /**
  * Key Items unlock doors.
  *
  * @author Thomas Edwards
  *
  */
-public class Key extends AbstractItem {
+public class Key extends AbstractItem implements Serializable  {
 
 	private int id;
 

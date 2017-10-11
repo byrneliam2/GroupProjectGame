@@ -1,5 +1,6 @@
 package map;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -13,7 +14,7 @@ import npc.SprayScheme;
 import npc.SuicidalScheme;
 import player.Player;
 
-public class NpcParser {
+public class NpcParser implements Serializable {
 	public NpcParser() {
 
 	}

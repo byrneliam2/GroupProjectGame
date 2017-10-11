@@ -1,5 +1,7 @@
 package npc;
 
+import java.io.Serializable;
+
 import common.utils.Direction;
 import player.Bullet;
 import player.InvalidPlayerExceptions;
@@ -8,11 +10,11 @@ import common.utils.MathUtils;
 
 /**
  * Moves randomly and shoots the player fast.
- * 
+ *
  * @author Thomas Edwards
  *
  */
-public class MediumScheme implements ControlScheme {
+public class MediumScheme implements ControlScheme, Serializable{
 
 	protected Direction randDir = getRandomDir();
 	protected int moveCounter = 0;
@@ -36,7 +38,7 @@ public class MediumScheme implements ControlScheme {
 
 	/**
 	 * Descides whether it is time to shoot, if it is, then make a new bullet.
-	 * 
+	 *
 	 * @param npc
 	 * @param player
 	 */

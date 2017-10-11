@@ -1,6 +1,7 @@
 package player;
 
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -19,7 +20,7 @@ import gfx.ImageUtilities;
  * @author Thomas Edwards
  *
  */
-public class Bullet {
+public class Bullet implements Serializable  {
 
 	/**
 	 * The list of all current bullets in the game.

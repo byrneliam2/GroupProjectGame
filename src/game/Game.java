@@ -115,8 +115,19 @@ public class Game extends Observable implements IGame, Serializable {
 	 * Saves this game.Game object as a file...
 	 */
 	public void saveGame(String theFilePath) {
-		System.out.println("SaveGame MohsenJavehr"+this);
-		SaveLoad saveLoad = new SaveLoad(this, theFilePath);
+		System.out.println("SaveGame MohsenJavehr" + this);
+		SaveLoad saveLoad = new SaveLoad();
+		saveLoad.saveGame(this, theFilePath);
+	}
+
+	/**
+	 * Saves this game.Game object as a file...
+	 */
+	public Game loadGame(String theFilePath) {
+		System.out.println("THIS IS ACTUALLY THE loadGame FUNCTION" + theFilePath);
+		SaveLoad saveLoad = new SaveLoad();
+		Game game = saveLoad.loadGame(theFilePath);
+		return game;
 	}
 
 	@Override

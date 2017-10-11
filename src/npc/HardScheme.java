@@ -1,5 +1,7 @@
 package npc;
 
+import java.io.Serializable;
+
 import common.utils.Direction;
 import player.Bullet;
 import player.InvalidPlayerExceptions;
@@ -8,11 +10,11 @@ import common.utils.MathUtils;
 
 /**
  * Moves very fast and shoots very fast
- * 
+ *
  * @author Thomas Edwards
  *
  */
-public class HardScheme implements ControlScheme {
+public class HardScheme implements ControlScheme, Serializable {
 
 	private Direction randDir = getRandomDir();
 	private int moveCounter = 0;

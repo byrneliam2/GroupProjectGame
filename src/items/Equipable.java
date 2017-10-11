@@ -10,11 +10,11 @@ import player.Player;
  * @author edwardthom
  *
  */
-public interface Equipable extends Item {
+public interface Equipable extends Item  {
 
 	/**
 	 * Provides item's given bonuses to the player,
-	 * 
+	 *
 	 */
 	void provideBonus(Player p);
 

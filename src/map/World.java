@@ -1,5 +1,6 @@
 package map;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 /**
@@ -9,7 +10,7 @@ import java.util.HashMap;
  * @author James
  *
  */
-public class World {
+public class World implements Serializable {
 
 	// A HashMap of Map names to the map object that must be visible at all times,
 	// thus is public static
@@ -32,6 +33,6 @@ public class World {
 	public static HashMap<String, Map> getMaps() {
 		return maps;
 	}
-	
-	
+
+
 }

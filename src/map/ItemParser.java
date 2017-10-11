@@ -1,5 +1,6 @@
 package map;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Scanner;
 
@@ -11,7 +12,7 @@ import items.itemList.RustyArmor;
 import items.itemList.ShinyArmor;
 import items.itemList.SmallGun;
 
-public class ItemParser {
+public class ItemParser implements Serializable {
 
 	public static void parseItem(String itemName, Scanner scan, List<Item> items) throws ParseException {
 		if (itemName.equals("HealthPot")) {
