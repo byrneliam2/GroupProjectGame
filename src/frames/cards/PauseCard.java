@@ -55,7 +55,6 @@ public class PauseCard extends Card {
                     case "load":
                         if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
                             dsp.loadGame(fileChooser.getSelectedFile());
-                            dsp.update(null, "loadGame");
                         }
                         break;
                     case "settings":

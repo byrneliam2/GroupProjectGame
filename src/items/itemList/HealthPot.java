@@ -6,7 +6,7 @@ import player.Player;
 
 /**
  * Restores a portion of health to the player
- *
+ * 
  * @author Thomas Edwards
  *
  */

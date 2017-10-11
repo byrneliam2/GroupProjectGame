@@ -2,7 +2,6 @@ package player;
 
 import java.awt.Rectangle;
 import java.awt.geom.Ellipse2D;
-import java.io.Serializable;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -24,11 +23,7 @@ import common.utils.MathUtils;
  * @author javahemohs and Thomas Edwards Created by javahemohs on 19/09/17.
  *
  */
-<<<<<<< HEAD
-public class Player implements Serializable {
-=======
 public class Player implements IPlayer {
->>>>>>> 4276775ecaf2233d5d939e80508f781d1b738d9d
 	/* constants */
 	private static final int rangeCircleWidth = 2 * Map.tileSize;
 	private static final double defaultFireRate = 0.8;
@@ -149,10 +144,6 @@ public class Player implements IPlayer {
 						rangeCircleWidth);
 
 				// update closest itemest item to player
-<<<<<<< HEAD
-
-=======
->>>>>>> 4276775ecaf2233d5d939e80508f781d1b738d9d
 				closestItem = map.getClosestItem(rangeCircle);
 
 				updateEnvironment();

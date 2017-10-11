@@ -1,11 +1,6 @@
 package npc;
 
-<<<<<<< HEAD
-import java.io.Serializable;
-
-=======
 import common.player.IPlayer;
->>>>>>> 4276775ecaf2233d5d939e80508f781d1b738d9d
 import common.utils.Direction;
 import player.Bullet;
 import player.InvalidPlayerExceptions;
@@ -14,11 +9,11 @@ import common.utils.MathUtils;
 
 /**
  * Moves randomly and shoots the player fast.
- *
+ * 
  * @author Thomas Edwards
  *
  */
-public class MediumScheme implements ControlScheme, Serializable{
+public class MediumScheme implements ControlScheme {
 
 	protected Direction randDir = getRandomDir();
 	protected int moveCounter = 0;
@@ -42,12 +37,7 @@ public class MediumScheme implements ControlScheme, Serializable{
 
 	/**
 	 * Descides whether it is time to shoot, if it is, then make a new bullet.
-<<<<<<< HEAD
-	 *
-	 * @param npc
-=======
 	 *  @param npc
->>>>>>> 4276775ecaf2233d5d939e80508f781d1b738d9d
 	 * @param player
 	 */
 	public void decideShooting(NPC npc, IPlayer player) {
