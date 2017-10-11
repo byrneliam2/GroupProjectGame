@@ -84,4 +84,8 @@ public class MockGame implements IGame {
 
     @Override
     public void stopGame() {}
+
+	@Override
+	public void stop() {
+	}
 }

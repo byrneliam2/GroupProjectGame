@@ -45,4 +45,16 @@ public class ImageUtilities {
         g.dispose();
         return scaled;
     }
+    
+    /**
+     * Horizontal flip
+     * @param img image to be flipped (note that this method produces a copy)
+     * @return flipped copy of img
+     */
+    public static BufferedImage flipHorizontal(BufferedImage img) {
+        AffineTransform af = new AffineTransform(new double[] {-1.0,0.0,0.0,1.0});
+        af.translate(-img.getWidth(), 0.0);
+        AffineTransformOp op = new AffineTransformOp(af, AffineTransformOp.TYPE_BILINEAR);
+        return op.filter(img, null);
+    }
 }

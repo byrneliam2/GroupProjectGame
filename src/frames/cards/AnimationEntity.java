@@ -7,6 +7,7 @@ import common.player.IPlayer;
 import common.utils.Direction;
 import frames.cards.Card.EntityType;
 import gfx.ImageLoader;
+import gfx.ImageUtilities;
 
 public class AnimationEntity extends Entity {
 
@@ -35,7 +36,8 @@ public class AnimationEntity extends Entity {
 			leftImages[i] = ImageLoader.image("playerImages/playerAnimationImages", "L" + i, true);
 		}
 		for (int i = 0; i < rightImages.length; i++) {
-			rightImages[i] = ImageLoader.image("playerImages/playerAnimationImages", "R" + i, true);
+			//got to flip this image cause lazy james XD
+			rightImages[i] = ImageUtilities.flipHorizontal(ImageLoader.image("playerImages/playerAnimationImages", "R" + i, true));
 		}
 	}
 

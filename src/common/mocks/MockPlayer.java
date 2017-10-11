@@ -100,4 +100,14 @@ public class MockPlayer implements IPlayer {
 	@Override
 	public void setCurrentDir(Direction newDir) {
 	}
+
+	@Override
+	public boolean isMoving() {
+		
+		return false;
+	}
+
+	@Override
+	public void setMoving(boolean isMoving) {
+	}
 }
