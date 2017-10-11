@@ -37,7 +37,8 @@ public class AnimationEntity extends Entity {
 		}
 		for (int i = 0; i < rightImages.length; i++) {
 			//got to flip this image cause lazy james XD
-			rightImages[i] = ImageUtilities.flipHorizontal(ImageLoader.image("playerImages/playerAnimationImages", "R" + i, true));
+			rightImages[i] = ImageUtilities.cropImage(ImageUtilities
+					.flipHorizontal(ImageLoader.image("playerImages/playerAnimationImages", "R" + i, true)), new Rectangle());
 		}
 	}
 
