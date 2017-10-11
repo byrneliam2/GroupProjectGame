@@ -219,14 +219,14 @@ public class MapTests {
 		// Player starts on Map3 and should move over the door and into Map8
 		this.doorSetup();
 		assert (w.getStartingMap().getName().equals("Map3"));
-		w.getStartingMap().startMapNPCs();
+		//w.getStartingMap().startMapNPCs();
 
-		Map current = w.getStartingMap();
-		DoorItem nd = new DoorItem("Map8", 78, false, 360, 370);
-		current.placeItem(nd, 360, 360);
-		current.placeItem(new Key(78, "white"), 360, 280);
+		Map curMap = w.getStartingMap();
+		DoorItem door = new DoorItem("Map8", 78, false, 360, 370);
+		curMap.placeItem(door, 360, 360);
+		curMap.placeItem(new Key(78, "white"), 360, 280);
 		Item key = null;
-		for (Item i : current.getItems()) {
+		for (Item i : curMap.getItems()) {
 			if (i instanceof Key && i.getName().equals("whiteKey")) {
 				key = i;
 			}
@@ -238,8 +238,8 @@ public class MapTests {
 		assertEquals(150, p1.getCentreY());
 
 		// Assert door is at 390,390 and key is at 390,310
-		assert (390 == nd.getCentrePoint().getX());
-		assert (400 == nd.getCentrePoint().getY());
+		assert (390 == door.getCentrePoint().getX());
+		assert (400 == door.getCentrePoint().getY());
 		assert (360 == key.getX());
 		assert (280 == key.getY());
 
@@ -261,6 +261,11 @@ public class MapTests {
 		assertFalse(p1.move(0, 5));
 		assertFalse(p1.move(0, 5));
 
+		//Doesn't work cause door's have their own list of doors on the map.
+		//you can't placeItem() with a door.
+		//Don't start NPC's cause they might kill the player before he gets to the door.
+		//Might also be broken if map8 doesn't have a receiving door.
+		assertNotNull(curMap.getDoor(p1.getBoundingBox()));
 		// System.out.println(p1.getCentreY());
 
 		assertEquals("Map8", p1.getMap().getName());
