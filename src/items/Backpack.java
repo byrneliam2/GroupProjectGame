@@ -1,5 +1,6 @@
 package items;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,7 @@ import player.Player;
  * @author Thomas Edwards
  *
  */
-public class Backpack {
+public class Backpack implements Serializable {
 	/* Constants */
 	public static final int MAX_INVENTORY = 20;
 
@@ -60,7 +61,7 @@ public class Backpack {
 			Usable use = (Usable) item;
 			use.use(owner);
 		}
-		
+
 	}
 
 	/**

@@ -1,6 +1,10 @@
 package items;
 
+<<<<<<< HEAD
+import java.io.Serializable;
+=======
 import common.items.Item;
+>>>>>>> 4276775ecaf2233d5d939e80508f781d1b738d9d
 
 /**
  * Key Items unlock doors.
@@ -8,7 +12,7 @@ import common.items.Item;
  * @author Thomas Edwards
  *
  */
-public class Key extends AbstractItem {
+public class Key extends AbstractItem implements Serializable  {
 
 	private int id;
 	private String color;

@@ -42,6 +42,7 @@ public class MainDisplay extends JComponent implements Observer {
 
     /* Game attributes */
     private IGame game;
+    private File selectedFile;
 
     public MainDisplay(IGame g, IAudioHandler aud, IController cntrl) {
         game = g;
@@ -216,7 +217,14 @@ public class MainDisplay extends JComponent implements Observer {
      * @param selectedFile file selected
      */
     public void loadGame(File selectedFile) {
+<<<<<<< HEAD
+        //
+		System.out.println("loadGame CHRI IS HELPING ME: " + selectedFile.getAbsolutePath());
+        game.loadGame(selectedFile.getAbsolutePath());
+        this.selectedFile = selectedFile;
+=======
         //game = game.loadGame(selectedFile);
+>>>>>>> 4276775ecaf2233d5d939e80508f781d1b738d9d
     }
 
     /* =========================================================================================== */
@@ -287,6 +295,7 @@ public class MainDisplay extends JComponent implements Observer {
                 case "pause":   pauseGame();                       break;
                 case "stop":    stopGame();                        break;
                 case "unpause": startTimer();                      break;
+                case "loadGame": loadGame(selectedFile); 		   break;
                 default:        switchScreen(str);                 break;
             }
         }

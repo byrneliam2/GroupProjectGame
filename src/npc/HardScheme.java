@@ -1,6 +1,11 @@
 package npc;
 
+<<<<<<< HEAD
+import java.io.Serializable;
+
+=======
 import common.player.IPlayer;
+>>>>>>> 4276775ecaf2233d5d939e80508f781d1b738d9d
 import common.utils.Direction;
 import player.Bullet;
 import player.InvalidPlayerExceptions;
@@ -8,11 +13,11 @@ import common.utils.MathUtils;
 
 /**
  * Moves very fast and shoots very fast
- * 
+ *
  * @author Thomas Edwards
  *
  */
-public class HardScheme implements ControlScheme {
+public class HardScheme implements ControlScheme, Serializable {
 
 	private Direction randDir = getRandomDir();
 	private int moveCounter = 0;

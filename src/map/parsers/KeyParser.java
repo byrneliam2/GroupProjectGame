@@ -1,5 +1,6 @@
 package map.parsers;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Scanner;
 
@@ -9,7 +10,7 @@ import map.Map;
 import map.MapParser;
 import map.ParseException;
 
-public class KeyParser {
+public class KeyParser implements Serializable {
 	public KeyParser() {
 
 	}
