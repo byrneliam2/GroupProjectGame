@@ -166,4 +166,10 @@ public class SaveLoad implements IGame, Serializable {
 	public void stop() {
 	}
 
+	@Override
+	public void specialAbility(double x, double y) throws InvalidPlayerExceptions {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

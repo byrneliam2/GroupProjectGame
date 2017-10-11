@@ -26,13 +26,13 @@ public class Bullet implements IBullet {
 	/**
 	 * The list of all current bullets in the game.
 	 */
-	//public static List<Bullet> bulletList = new ArrayList<>();
+	// public static List<Bullet> bulletList = new ArrayList<>();
 	/**
 	 * Timer which is responsible for updating all bullets in the bullet list.
 	 */
 	private static Timer bulletTimer = new Timer();
 
-	//public static final int bulletSize = 20;
+	// public static final int bulletSize = 20;
 
 	/**
 	 * How quickley bullets move/are updated
@@ -193,7 +193,7 @@ public class Bullet implements IBullet {
 			updateY = -Math.sin(angle) * bulletSpeed;
 			updateX = -Math.cos(angle) * bulletSpeed;
 		} else {
-			throw new Error("Angle given was greater than 2Pi");
+			calculateUpdateAmount(angle - Math.PI / 2);
 		}
 
 	}

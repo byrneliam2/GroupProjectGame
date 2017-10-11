@@ -88,4 +88,10 @@ public class MockGame implements IGame {
 	@Override
 	public void stop() {
 	}
+
+	@Override
+	public void specialAbility(double x, double y) throws InvalidPlayerExceptions {
+		// TODO Auto-generated method stub
+		
+	}
 }
