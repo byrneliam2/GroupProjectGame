@@ -27,9 +27,9 @@ public class Controller implements IController {
 	}
 
 	/**
-	 * Both children Objects, Keyboard and Mouse, will notify their parent (this) if a command is pressed.
-	 * This will then be added to a set of all the current keys being pressed, so that when 'update()' is called
-	 * the Controller will know which commands to invoke.
+	 * Both children Objects, Keyboard and Mouse, will notify their parent (this) if a command is pressed. This will then be added to a set of all the current
+	 * keys being pressed, so that when 'update()' is called the Controller will
+	 * know which commands to invoke.
 	 * 
 	 * @param cmd
 	 *            The command to logged
@@ -44,7 +44,8 @@ public class Controller implements IController {
 	}
 
 	/**
-	 * This method is to be called during a game update, this will instruct IGame object on how to control the player.
+	 * This method is to be called during a game update, this will instruct IGame
+	 * object on how to control the player.
 	 * 
 	 * @param cmd
 	 *            The command to be invoked.
@@ -72,7 +73,7 @@ public class Controller implements IController {
 					game.shoot(mouse.getX(), mouse.getY());
 					break;
 				case SECONDARY_ATTACK:
-					// game.shoot(mouse.getX(), mouse.getY()); TODO: After Secondary File is Implemented
+					game.specialAbility(mouse.getX(), mouse.getY());
 					break;
 				case PAUSE:
 					game.pauseGame();
@@ -87,7 +88,7 @@ public class Controller implements IController {
 	public void update() {
 		if (!game.isPaused()) {
 			currentCommands.forEach(this::processCommand);
-			if (currentCommands.isEmpty())//for animations, change to make neater maybe
+			if (currentCommands.isEmpty())// for animations, change to make neater maybe
 				game.stop();
 		}
 	}

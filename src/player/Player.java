@@ -41,6 +41,7 @@ public class Player implements IPlayer {
 	private static Timer shotTimer = new Timer();
 	protected Map map;// the map which the player is currently located on.
 	private boolean isReadyToShoot = true;
+	private boolean isSpecialReady = true;
 	private Environment currentEnvironment;
 	private Direction currentDir = Direction.S;
 	private boolean isMoving = false;
@@ -64,8 +65,8 @@ public class Player implements IPlayer {
 	/**
 	 * Adds the closest item to the player ot the player's backpack. If item is a
 	 * key, adds it to the key section of the backpack. Also tells the map to remove
-	 * the item from the map.
-	 * Also as of ~October causes the item to be immediatly equiped or used on pickup.
+	 * the item from the map. Also as of ~October causes the item to be immediatly
+	 * equiped or used on pickup.
 	 *
 	 * @param item
 	 *            item to pickup.
@@ -88,9 +89,9 @@ public class Player implements IPlayer {
 		}
 	}
 
-
 	/**
-	 * Causes the player to take 1 damage and if the player is dead, changes the isDead flag to true.
+	 * Causes the player to take 1 damage and if the player is dead, changes the
+	 * isDead flag to true.
 	 */
 	public void takeDamage() {
 		// Decrease the health of the player by one
@@ -131,7 +132,8 @@ public class Player implements IPlayer {
 		playerBox.setFrame(playerBox.getX() + dx, playerBox.getY() + dy, playerBox.getWidth(), playerBox.getHeight());
 		if (map.canMove(playerBox)) {
 			DoorItem door = null;
-			// if player is next to a door and the door is unlocked or you have the key, go through...
+			// if player is next to a door and the door is unlocked or you have the key, go
+			// through...
 			if ((door = map.getDoor(playerBox)) != null && (!door.isLocked() || canOpenDoor(door))) {
 				map = enterDoor(door);
 				closestItem = map.getClosestItem(rangeCircle);
@@ -148,7 +150,8 @@ public class Player implements IPlayer {
 
 				return false;
 			}
-		} else {// player made an invalid move, so move player back to where he came from and throw exception.
+		} else {// player made an invalid move, so move player back to where he came from and
+				// throw exception.
 			playerBox.setFrame(playerBox.getX() - dx, playerBox.getY() - dy, playerBox.getWidth(),
 					playerBox.getHeight());
 			throw new InvalidPlayerExceptions("You cant make a move/Invalid move");
@@ -188,7 +191,8 @@ public class Player implements IPlayer {
 	}
 
 	/**
-	 * This method closes the current map and starts the new map, returns the new map that the door leads to.
+	 * This method closes the current map and starts the new map, returns the new
+	 * map that the door leads to.
 	 *
 	 * @param Door
 	 * @return
@@ -215,7 +219,8 @@ public class Player implements IPlayer {
 	}
 
 	/**
-	 * Sets the player's position in the new map next to the door he just came through.
+	 * Sets the player's position in the new map next to the door he just came
+	 * through.
 	 * 
 	 * @param door
 	 *            the door to set the player's position at
@@ -233,12 +238,13 @@ public class Player implements IPlayer {
 	}
 
 	/**
-	 * Shoots a bullet from the player's current coordinates to the coordinates given by the mouse
+	 * Shoots a bullet from the player's current coordinates to the coordinates
+	 * given by the mouse
 	 * 
 	 * @param direction
 	 *            should be an angle between 0 and 2Pi. (there's a method in
-	 *            MathUtil package. which you can use to calculate the
-	 *            angle from player to mouse if needed).
+	 *            MathUtil package. which you can use to calculate the angle from
+	 *            player to mouse if needed).
 	 * @throws InvalidPlayerExceptions
 	 *             if your gun is not ready to be fired yet.
 	 */
@@ -246,12 +252,10 @@ public class Player implements IPlayer {
 
 		if (isReadyToShoot) {// can only shoot if your gun is ready.
 			isReadyToShoot = false;
-			double x = playerBox.getX() + (playerBox.width / 2);
-			double y = playerBox.getY() + (playerBox.height / 2);
 
-			double direction = MathUtils.calculateAngle(x, y, mouseX, mouseY);
+			double direction = MathUtils.calculateAngle(getCentreX(), getCentreY(), mouseX, mouseY);
 			// make a new bullet
-			new Bullet(getCentreX(), getCentreY(), direction, this, 10, "playerBullet1");
+			new Bullet(getCentreX(), getCentreY(), direction, this, 9, "playerBullet1");
 
 			// start a timer to count till when the next shot is ready to shoot....
 			TimerTask taskEvent = new TimerTask() {
@@ -265,6 +269,29 @@ public class Player implements IPlayer {
 			throw new InvalidPlayerExceptions("You cant shoot because your weapon is not ready to shoot yet....");
 		}
 
+	}
+
+	public void specialAbility(double mouseX, double mouseY) throws InvalidPlayerExceptions {
+		if (isSpecialReady) {// can only shoot if your gun is ready.
+			isSpecialReady = false;
+
+			double direction = MathUtils.calculateAngle(getCentreX(), getCentreY(), mouseX, mouseY);
+			// make a new bullet
+			new Bullet(getCentreX(), getCentreY(), direction, this, 12, "playerBullet1");
+			new Bullet(getCentreX(), getCentreY(), direction-Math.PI/16, this, 12, "playerBullet1");
+			new Bullet(getCentreX(), getCentreY(), direction+Math.PI/16, this, 12, "playerBullet1");
+
+			// start a timer to count till when the next shot is ready to shoot....
+			TimerTask taskEvent = new TimerTask() {
+				public void run() {
+					isSpecialReady = true;
+				}
+			};
+			shotTimer.schedule(taskEvent, (int) (fireRate * 5000));
+
+		} else {// if you can't shoot (for any reason) throw an exception...
+			throw new InvalidPlayerExceptions("You cant shoot because your weapon is not ready to shoot yet....");
+		}
 	}
 
 	/*
@@ -288,7 +315,8 @@ public class Player implements IPlayer {
 
 	/**
 	 * @param health
-	 *            the health to set health to, ensures that it isn't more than max health.
+	 *            the health to set health to, ensures that it isn't more than max
+	 *            health.
 	 */
 	public void setHealth(int health) {
 		if (health > maxHealth)
@@ -343,7 +371,8 @@ public class Player implements IPlayer {
 	}
 
 	/**
-	 * Sets the max health, ensures that the player's current health is <= max health.
+	 * Sets the max health, ensures that the player's current health is <= max
+	 * health.
 	 * 
 	 * @param max
 	 */

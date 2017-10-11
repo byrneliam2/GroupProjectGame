@@ -110,4 +110,10 @@ public class MockPlayer implements IPlayer {
 	@Override
 	public void setMoving(boolean isMoving) {
 	}
+
+	@Override
+	public void specialAbility(double mouseX, double mouseY) throws InvalidPlayerExceptions {
+		// TODO Auto-generated method stub
+		
+	}
 }

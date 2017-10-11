@@ -24,6 +24,8 @@ public interface IPlayer {
 
 	void shoot(double mouseX, double mouseY) throws InvalidPlayerExceptions;
 
+	void specialAbility(double mouseX, double mouseY) throws InvalidPlayerExceptions;
+
 	boolean isDead();
 
 	int getxLocation();
@@ -49,8 +51,8 @@ public interface IPlayer {
 	public Direction getCurrentDir();
 
 	public void setCurrentDir(Direction newDir);
-	
+
 	public boolean isMoving();
 
-	public void setMoving(boolean isMoving) ;
+	public void setMoving(boolean isMoving);
 }

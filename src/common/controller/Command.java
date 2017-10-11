@@ -13,7 +13,7 @@ public enum Command {
     /* Interact Commands */
     INTERACT(InputType.KEYBOARD, KeyEvent.VK_F),
     PRIMARY_ATTACK(InputType.MOUSE, MouseEvent.BUTTON1),
-    SECONDARY_ATTACK(InputType.MOUSE, MouseEvent.BUTTON2),
+    SECONDARY_ATTACK(InputType.MOUSE, MouseEvent.BUTTON3),
 
     /* Game Commands */
     PAUSE(InputType.KEYBOARD, KeyEvent.VK_ESCAPE);

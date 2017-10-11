@@ -101,6 +101,11 @@ public class Game extends Observable implements IGame, Serializable {
 	}
 
 	@Override
+	public void specialAbility(double mouseX, double mouseY) throws InvalidPlayerExceptions {
+		player.specialAbility(mouseX, mouseY);
+	}
+
+	@Override
 	public void pauseGame() {
 		GAME_PAUSED = true;
 		if (this.player.getMap() != null)
