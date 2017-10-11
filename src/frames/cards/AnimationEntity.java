@@ -27,18 +27,26 @@ public class AnimationEntity extends Entity {
 
 	public void setupImages() {
 		for (int i = 0; i < backImages.length; i++) {
-			backImages[i] = ImageLoader.image("playerImages/playerAnimationImages", "B" + i, true);
+			BufferedImage img = ImageLoader.image("playerImages/playerAnimationImages", "B" + i, true);
+			img = ImageUtilities.scale(img, 60,60);
+			backImages[i] = img;
 		}
 		for (int i = 0; i < frontImages.length; i++) {
-			frontImages[i] = ImageLoader.image("playerImages/playerAnimationImages", "F" + i, true);
+			BufferedImage img = ImageLoader.image("playerImages/playerAnimationImages", "F" + i, true);
+			img = ImageUtilities.scale(img, 60,60);
+			frontImages[i] = img;
 		}
 		for (int i = 0; i < leftImages.length; i++) {
-			leftImages[i] = ImageLoader.image("playerImages/playerAnimationImages", "L" + i, true);
+			BufferedImage img = ImageLoader.image("playerImages/playerAnimationImages", "L" + i, true);
+			img = ImageUtilities.scale(img, 60,60);
+			leftImages[i] = img;
 		}
 		for (int i = 0; i < rightImages.length; i++) {
-			//got to flip this image cause lazy james XD
-			rightImages[i] = ImageUtilities.cropImage(ImageUtilities
-					.flipHorizontal(ImageLoader.image("playerImages/playerAnimationImages", "R" + i, true)), new Rectangle());
+			// got to flip this image cause lazy james XD
+			BufferedImage img = ImageLoader.image("playerImages/playerAnimationImages", "R" + i, true);
+			img = ImageUtilities.flipHorizontal(img);
+			img = ImageUtilities.scale(img, 60,60);
+			rightImages[i] = img;
 		}
 	}
 
@@ -58,7 +66,7 @@ public class AnimationEntity extends Entity {
 				return leftImages[currentImg / framesPerImage];
 			else
 				return rightImages[currentImg / framesPerImage];
-		}else{//player isn't moving
+		} else {// player isn't moving
 			if (player.getCurrentDir() == Direction.N)
 				return backImages[0];
 			else if (player.getCurrentDir() == Direction.S)
