@@ -7,6 +7,7 @@ package frames.cards;
  */
 
 import frames.MainDisplay;
+import frames.cards.Card.EntityType;
 import gfx.ImageUtilities;
 
 import javax.swing.*;
@@ -99,61 +100,63 @@ public abstract class Card extends JPanel {
 	 */
 	public abstract void redraw();
 
-	/**
-	 * A Card Entity represents an animated element inside a Card. This does not include
-	 * separate Swing entities such as buttons and background images. It does include
-	 * on-screen indicators that refer to the game directly, however. These are identifed
-	 * using the SPECIAL tag for the Entity's {@link EntityType}. Small items that persist
-	 * for short periods of time, such as bullets, do not count as entities.
-	 */
-	class Entity {
 
-		private Object object;
-		private EntityType type;
-		private BufferedImage image;
-		private Point location;
-
-		static final int SIZE = 60;
-
-		/**
-		 * @param object   object that this entity represents
-		 * @param type     type of the object
-		 * @param image    image of the object
-		 * @param location location of the object
-		 * @param size     size to scale to; if 0, a default size of {@link #SIZE} will be used
-		 */
-		Entity(Object object, EntityType type, BufferedImage image, Point location, int size) {
-			this.object = object;
-			this.type = type;
-			this.image = ImageUtilities.scale(image, size != 0 ? size : SIZE, size != 0 ? size : SIZE);
-			this.location = location;
-		}
-
-		public Object getObject() {
-			return object;
-		}
-
-		public EntityType getType() {
-			return type;
-		}
-
-		public BufferedImage getImage() {
-			return image;
-		}
-
-		public Point getLocation() {
-			return location;
-		}
-
-		public void setLocation(Point location) {
-			this.location = location;
-		}
-	}
 
 	/**
 	 * Declares the type of object the {@link Entity} represents.
 	 */
 	enum EntityType {
 		ITEM, PLAYER, NPC, HEART, INVENTORY, STRING
+	}
+}
+
+/**
+ * A Card Entity represents an animated element inside a Card. This does not include
+ * separate Swing entities such as buttons and background images. It does include
+ * on-screen indicators that refer to the game directly, however. These are identifed
+ * using the SPECIAL tag for the Entity's {@link EntityType}. Small items that persist
+ * for short periods of time, such as bullets, do not count as entities.
+ */
+class Entity {
+
+	private Object object;
+	private EntityType type;
+	private BufferedImage image;
+	private Point location;
+
+	static final int SIZE = 60;
+
+	/**
+	 * @param object   object that this entity represents
+	 * @param type     type of the object
+	 * @param image    image of the object
+	 * @param location location of the object
+	 * @param size     size to scale to; if 0, a default size of {@link #SIZE} will be used
+	 */
+	Entity(Object object, EntityType type, BufferedImage image, Point location, int size) {
+		this.object = object;
+		this.type = type;
+		this.image = ImageUtilities.scale(image, size != 0 ? size : SIZE, size != 0 ? size : SIZE);
+		this.location = location;
+	}
+
+	public Object getObject() {
+		return object;
+	}
+
+	public EntityType getType() {
+		return type;
+	}
+
+	public BufferedImage getImage() {
+		return image;
+	}
+
+	public Point getLocation() {
+		return location;
+	}
+
+	public void setLocation(Point location) {
+		this.location = location;
 	}
 }

@@ -16,6 +16,7 @@ import items.Usable;
 import map.Environment;
 import map.Map;
 import map.World;
+import common.utils.Direction;
 import common.utils.MathUtils;
 
 /**
@@ -41,6 +42,7 @@ public class Player implements IPlayer {
 	protected Map map;// the map which the player is currently located on.
 	private boolean isReadyToShoot = true;
 	private Environment currentEnvironment;
+	private Direction currentDir = Direction.S;
 
 	private Ellipse2D.Double rangeCircle;// the range at which the player can 'pick up' items
 	protected Rectangle.Double playerBox;// the hit box representing the location of the player.
@@ -464,6 +466,14 @@ public class Player implements IPlayer {
 
 	public Player getPlayer() {
 		return this;
+	}
+
+	public Direction getCurrentDir() {
+		return this.currentDir;
+	}
+
+	public void setCurrentDir(Direction newDir) {
+		this.currentDir = newDir;
 	}
 
 	public int getSpeed() {

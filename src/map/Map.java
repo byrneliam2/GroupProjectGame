@@ -77,6 +77,7 @@ public class Map implements IMap {
 		// sets the npc's up, note you'll still have to call startMapNPC's() to start
 		// them moving
 		if (Game.DEV_MODE && !name.equals("Map16")) {
+			//if dev mode, remove all npc's except the boss
 			NPCS.clear();
 		} else {
 			for (NPC npc : NPCS) {

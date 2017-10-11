@@ -66,7 +66,7 @@ public class MapCard extends Card {
 	 */
 	private void addStaticEntities() {
 		// add player
-		addStaticEntity(new Entity(game.getPlayer(), EntityType.PLAYER,
+		addStaticEntity(new AnimationEntity(game.getPlayer(), EntityType.PLAYER,
 				ImageLoader.image("playerImages", "playerRect", true),
 						new Point(game.getPlayer().getxLocation(), game.getPlayer().getyLocation()), 0)
 		);

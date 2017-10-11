@@ -7,6 +7,7 @@ package common.player;
  */
 
 import common.map.IMap;
+import common.utils.Direction;
 import items.Backpack;
 import map.Map;
 import player.InvalidPlayerExceptions;
@@ -15,33 +16,37 @@ import java.awt.*;
 
 public interface IPlayer {
 
-    IMap getMap();
+	IMap getMap();
 
-    boolean move(double x, double y) throws InvalidPlayerExceptions;
+	boolean move(double x, double y) throws InvalidPlayerExceptions;
 
-    void pickUpItem() throws InvalidPlayerExceptions;
+	void pickUpItem() throws InvalidPlayerExceptions;
 
-    void shoot(double mouseX, double mouseY) throws InvalidPlayerExceptions;
+	void shoot(double mouseX, double mouseY) throws InvalidPlayerExceptions;
 
-    boolean isDead();
+	boolean isDead();
 
-    int getxLocation();
+	int getxLocation();
 
-    int getyLocation();
+	int getyLocation();
 
-    int getHealth();
+	int getHealth();
 
-    Backpack getBackpack();
+	Backpack getBackpack();
 
-    void setMap(Map map);
+	void setMap(Map map);
 
-    Rectangle.Double getBoundingBox();
+	Rectangle.Double getBoundingBox();
 
-    void takeDamage();
+	void takeDamage();
 
-    int getCentreX();
+	int getCentreX();
 
-    int getCentreY();
+	int getCentreY();
 
-    int getSpeed();
+	int getSpeed();
+
+	public Direction getCurrentDir();
+
+	public void setCurrentDir(Direction newDir);
 }

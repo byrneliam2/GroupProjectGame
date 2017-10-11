@@ -82,6 +82,7 @@ public class Game extends Observable implements IGame, Serializable {
 		if (player.move(dir.getX(), dir.getY())) {
 			set(getCurrentMap());
 		}
+		player.setCurrentDir(dir);
 	}
 
 	@Override

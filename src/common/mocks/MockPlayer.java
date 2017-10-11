@@ -8,6 +8,7 @@ package common.mocks;
 
 import common.map.IMap;
 import common.player.IPlayer;
+import common.utils.Direction;
 import items.Backpack;
 import map.Map;
 import player.InvalidPlayerExceptions;
@@ -89,4 +90,14 @@ public class MockPlayer implements IPlayer {
     public int getSpeed() {
         return 0;
     }
+
+	@Override
+	public Direction getCurrentDir() {
+		
+		return null;
+	}
+
+	@Override
+	public void setCurrentDir(Direction newDir) {
+	}
 }
