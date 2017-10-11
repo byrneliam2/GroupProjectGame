@@ -49,4 +49,8 @@ public interface IPlayer {
 	public Direction getCurrentDir();
 
 	public void setCurrentDir(Direction newDir);
+	
+	public boolean isMoving();
+
+	public void setMoving(boolean isMoving) ;
 }

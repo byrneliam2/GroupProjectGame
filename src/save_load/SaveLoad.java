@@ -162,4 +162,8 @@ public class SaveLoad implements IGame, Serializable {
 
 	}
 
+	@Override
+	public void stop() {
+	}
+
 }

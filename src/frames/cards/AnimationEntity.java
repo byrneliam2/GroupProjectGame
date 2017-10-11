@@ -2,30 +2,68 @@ package frames.cards;
 
 import java.awt.Point;
 import java.awt.image.BufferedImage;
+
+import common.player.IPlayer;
+import common.utils.Direction;
 import frames.cards.Card.EntityType;
 import gfx.ImageLoader;
 
 public class AnimationEntity extends Entity {
-	
-	private BufferedImage [] images = new BufferedImage[3];
-	int currentImg = 0;
 
-	public AnimationEntity(Object object, EntityType type, BufferedImage image, Point location, int size) {
-		super(object, type, null, location, size);
+	private BufferedImage[] backImages = new BufferedImage[9];
+	private BufferedImage[] frontImages = new BufferedImage[9];
+	private BufferedImage[] leftImages = new BufferedImage[9];
+	private BufferedImage[] rightImages = new BufferedImage[9];
+	int currentImg = 0;
+	final int framesPerImage = 20;
+	IPlayer player;
+
+	public AnimationEntity(IPlayer player, EntityType type, BufferedImage image, Point location, int size) {
+		super(player, type, null, location, size);
+		this.player = player;
 		setupImages();
 	}
-	
-	public void setupImages(){
-		images[0] = ImageLoader.image("playerImages/playerAnimationImages", "B0", true);
-		images[1] = ImageLoader.image("playerImages/playerAnimationImages", "B3", true);
-		images[2] = ImageLoader.image("playerImages/playerAnimationImages", "B6", true);
+
+	public void setupImages() {
+		for (int i = 0; i < backImages.length; i++) {
+			backImages[i] = ImageLoader.image("playerImages/playerAnimationImages", "B" + i, true);
+		}
+		for (int i = 0; i < frontImages.length; i++) {
+			frontImages[i] = ImageLoader.image("playerImages/playerAnimationImages", "F" + i, true);
+		}
+		for (int i = 0; i < leftImages.length; i++) {
+			leftImages[i] = ImageLoader.image("playerImages/playerAnimationImages", "L" + i, true);
+		}
+		for (int i = 0; i < rightImages.length; i++) {
+			rightImages[i] = ImageLoader.image("playerImages/playerAnimationImages", "R" + i, true);
+		}
 	}
 
 	@Override
 	public BufferedImage getImage() {
 		currentImg++;
-		if(currentImg/10>=images.length)
-			currentImg = 0;
-		return images[currentImg/10];
+		if (currentImg / framesPerImage >= backImages.length)
+			currentImg = 1;
+
+		if (player.isMoving()) {
+
+			if (player.getCurrentDir() == Direction.N)
+				return backImages[currentImg / framesPerImage];
+			else if (player.getCurrentDir() == Direction.S)
+				return frontImages[currentImg / framesPerImage];
+			else if (player.getCurrentDir() == Direction.W)
+				return leftImages[currentImg / framesPerImage];
+			else
+				return rightImages[currentImg / framesPerImage];
+		}else{//player isn't moving
+			if (player.getCurrentDir() == Direction.N)
+				return backImages[0];
+			else if (player.getCurrentDir() == Direction.S)
+				return frontImages[0];
+			else if (player.getCurrentDir() == Direction.W)
+				return leftImages[0];
+			else
+				return rightImages[0];
+		}
 	}
 }

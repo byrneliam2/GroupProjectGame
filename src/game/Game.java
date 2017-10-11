@@ -86,6 +86,11 @@ public class Game extends Observable implements IGame, Serializable {
 	}
 
 	@Override
+	public void stop() {
+		player.setMoving(false);
+	}
+
+	@Override
 	public void interact() throws InvalidPlayerExceptions {
 		player.pickUpItem();
 	}
@@ -137,4 +142,5 @@ public class Game extends Observable implements IGame, Serializable {
 		setChanged();
 		notifyObservers(arg);
 	}
+
 }

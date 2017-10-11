@@ -43,6 +43,7 @@ public class Player implements IPlayer {
 	private boolean isReadyToShoot = true;
 	private Environment currentEnvironment;
 	private Direction currentDir = Direction.S;
+	private boolean isMoving = false;
 
 	private Ellipse2D.Double rangeCircle;// the range at which the player can 'pick up' items
 	protected Rectangle.Double playerBox;// the hit box representing the location of the player.
@@ -219,6 +220,7 @@ public class Player implements IPlayer {
 		slowPlayer();
 		dx = dx * speed;
 		dy = dy * speed;
+		isMoving = true;
 		// move the player's frame
 		playerBox.setFrame(playerBox.getX() + dx, playerBox.getY() + dy, playerBox.getWidth(), playerBox.getHeight());
 		if (map.canMove(playerBox)) {
@@ -486,6 +488,14 @@ public class Player implements IPlayer {
 
 	protected void setBoundingBoxWidth(int width, int height) {
 		this.playerBox.setFrame(playerBox.x, playerBox.y, width, height);
+	}
+
+	public boolean isMoving() {
+		return isMoving;
+	}
+
+	public void setMoving(boolean isMoving) {
+		this.isMoving = isMoving;
 	}
 
 }

@@ -97,6 +97,8 @@ public interface IGame {
      * @return 0 for false, 1 for lost, 2 for won
      */
     int isOver();
+    
+    void stop();
 
     /**
      * Save the current game.
