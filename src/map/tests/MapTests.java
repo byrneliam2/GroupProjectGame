@@ -14,6 +14,7 @@ import org.junit.Test;
 
 import common.items.Item;
 import items.DoorItem;
+import items.Key;
 import items.itemList.HealthPot;
 import items.itemList.MassiveGun;
 import npc.NPC;
@@ -208,6 +209,61 @@ public class MapTests {
 		// Move player over door
 		assertFalse(p1.move(-50, 0));
 		assertTrue(p1.move(-60, 0));
+
+		assertEquals("Map8", p1.getMap().getName());
+
+	}
+	
+	@Test
+	public void doorTestLocked() throws InvalidPlayerExceptions {
+		// Player starts on Map3 and should move over the door and into Map8
+		this.doorSetup();
+		assert (w.getStartingMap().getName().equals("Map3"));
+		w.getStartingMap().startMapNPCs();
+		
+		Map current = w.getStartingMap();
+		DoorItem nd = new DoorItem("Map8", 78, false, 360, 370);
+		current.placeItem(nd, 360,360);
+		current.placeItem(new Key(78,"white"), 360, 280);
+		Item key=null;
+		for(Item i: current.getItems()) {
+			if(i instanceof Key && i.getName().equals("whiteKey")) {
+				key=i;
+			}
+		}
+		
+		
+		
+		p1.setSpeed(1);
+		// Player starts at 150,150
+		assertEquals(150, p1.getCentreX());
+		assertEquals(150, p1.getCentreY());
+
+		// Assert door is at 390,390 and key is at 390,310
+		assert (390 == nd.getCentrePoint().getX());
+		assert (400 == nd.getCentrePoint().getY());
+		assert (360 == key.getX());
+		assert (280 == key.getY());
+
+		// move player to 390,280
+		assertFalse(p1.move(240,160));
+		p1.pickUpItem();
+		assertEquals(390, p1.getCentreX());
+		assertEquals(310, p1.getCentreY());
+
+		assertFalse(p1.move(0, 40));
+		assertFalse(p1.move(0, 5));
+		assertFalse(p1.move(0, 5));
+		assertFalse(p1.move(0, 5));
+		assertFalse(p1.move(0, 5));
+		assertFalse(p1.move(0, 5));
+		assertFalse(p1.move(0, 5));
+		assertFalse(p1.move(0, 5));
+		assertFalse(p1.move(0, 5));
+		assertFalse(p1.move(0, 5));
+		assertFalse(p1.move(0, 5));
+		
+		System.out.println(p1.getCentreY());
 
 		assertEquals("Map8", p1.getMap().getName());
 
