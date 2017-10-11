@@ -16,7 +16,7 @@ public class BackPackTests {
 	@Test
 	public void testPickup() {
 		Item i = new HealthPot();
-		Backpack b = new Backpack(null);
+		Backpack b = new Backpack(new Player(null, 0, 0));
 		try {
 			b.pickUpItem(i);
 		} catch (InvalidBackpackException e) {

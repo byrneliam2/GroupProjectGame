@@ -50,11 +50,13 @@ public class ExternalItemsTests {
 				b.pickUpItem(new HealthPot());
 			} catch (InvalidBackpackException e) {
 				e.printStackTrace();
+				fail();
 			}
 		try {
 			b.pickUpItem(new HealthPot());
-			fail("Shouldn't be able to pick up item when bag is full!");
-		} catch (InvalidBackpackException ignored) {
+		} catch (InvalidBackpackException e) {
+			e.printStackTrace();
+			fail();
 		}
 	}
 
@@ -83,8 +85,8 @@ public class ExternalItemsTests {
 			}
 		try {
 			b.pickUpAndUse(new HealthPot());
-			fail("Shouldn't be able to pick up item when bag is full!");
 		} catch (InvalidBackpackException ignored) {
+			fail();
 		}
 	}
 
@@ -108,9 +110,6 @@ public class ExternalItemsTests {
 		Item i = new HealthPot();
 		try {
 			b.pickUpItem(i);
-			b.removeItem(i);
-			assertTrue(i.getX() == 50);
-			assertTrue(i.getY() == 50);
 			assertTrue(i.getPack() == null);
 			assertTrue(b.getInventorySize() == 0);
 		} catch (InvalidBackpackException e) {
