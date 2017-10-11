@@ -10,6 +10,7 @@ import common.utils.DisplayValues;
 import frames.cards.MapCard;
 import frames.cards.MenuCard;
 import game.Game;
+import map.World;
 import common.game.IGame;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -34,4 +35,11 @@ public class MapCardTests {
         assertNotNull(m.getComponent(0).getComponentAt(g.getPlayer().getxLocation(), g.getPlayer().getyLocation()));
     }
 
+    @Test
+    public void test03_MapData() {
+        IGame g = new Game();
+        g.newGame();
+        MapCard m = new MapCard("map", World.getMaps().get("Map3"), g);
+        assertNotNull(m.getComponent(0).getComponentAt(g.getPlayer().getxLocation(), g.getPlayer().getyLocation()));
+    }
 }
