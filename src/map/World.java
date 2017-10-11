@@ -1,6 +1,5 @@
 package map;
 
-import java.io.Serializable;
 import java.util.HashMap;
 
 import common.map.IWorld;
@@ -12,11 +11,7 @@ import common.map.IWorld;
  * @author James
  *
  */
-<<<<<<< HEAD
-public class World implements Serializable {
-=======
 public class World implements IWorld {
->>>>>>> 4276775ecaf2233d5d939e80508f781d1b738d9d
 
 	// A HashMap of Map names to the map object that must be visible at all times,
 	// thus is public static
@@ -40,8 +35,4 @@ public class World implements IWorld {
 		return maps;
 	}
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 4276775ecaf2233d5d939e80508f781d1b738d9d
 }

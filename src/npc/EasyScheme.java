@@ -1,11 +1,6 @@
 package npc;
 
-<<<<<<< HEAD
-import java.io.Serializable;
-
-=======
 import common.player.IPlayer;
->>>>>>> 4276775ecaf2233d5d939e80508f781d1b738d9d
 import common.utils.Direction;
 import player.Bullet;
 import player.InvalidPlayerExceptions;
@@ -13,11 +8,11 @@ import common.utils.MathUtils;
 
 /**
  * This scheme slowly shoots at the player and moves randomly
- *
+ * 
  * @author Thomas Edwards
  *
  */
-public class EasyScheme implements ControlScheme, Serializable {
+public class EasyScheme implements ControlScheme {
 
 	private Direction randDir = getRandomDir();
 	private int shotCounter = 0;

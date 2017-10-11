@@ -1,6 +1,5 @@
 package npc;
 
-import java.io.Serializable;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -12,11 +11,11 @@ import player.Player;
 
 /**
  * NPC class.
- *
+ * 
  * @author Thomas Edwards
  *
  */
-public class NPC extends Player implements Serializable  {
+public class NPC extends Player {
 	public static final int updateRate = DisplayValues.FRAMERATE;// rate in milliseconds that NPC is updated
 	private static Timer npcTimer = new Timer();
 

@@ -1,12 +1,11 @@
 package items;
 
 import java.awt.Image;
-import java.io.Serializable;
 
 import common.items.Item;
 import items.itemList.HealthPot;
 
-public abstract class AbstractItem implements Item, Serializable{
+public abstract class AbstractItem implements Item {
 	protected final String name, description;
 	protected Image image;
 	protected Backpack pack;// is null if the item is not picked up

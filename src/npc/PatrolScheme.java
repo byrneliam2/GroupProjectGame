@@ -4,13 +4,6 @@ import common.player.IPlayer;
 import map.Map;
 import player.Bullet;
 import player.InvalidPlayerExceptions;
-<<<<<<< HEAD
-import player.Player;
-
-import java.io.Serializable;
-
-=======
->>>>>>> 4276775ecaf2233d5d939e80508f781d1b738d9d
 import common.utils.MathUtils;
 
 /**
@@ -21,7 +14,7 @@ import common.utils.MathUtils;
  * @author Thomas Edwards
  *
  */
-public class PatrolScheme implements ControlScheme, Serializable{
+public class PatrolScheme implements ControlScheme {
 
 	private int progress = 0;// in pixels
 	private final int maxProgress;// in pixels
