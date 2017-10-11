@@ -213,27 +213,25 @@ public class MapTests {
 		assertEquals("Map8", p1.getMap().getName());
 
 	}
-	
+
 	@Test
 	public void doorTestLocked() throws InvalidPlayerExceptions {
 		// Player starts on Map3 and should move over the door and into Map8
 		this.doorSetup();
 		assert (w.getStartingMap().getName().equals("Map3"));
 		w.getStartingMap().startMapNPCs();
-		
+
 		Map current = w.getStartingMap();
 		DoorItem nd = new DoorItem("Map8", 78, false, 360, 370);
-		current.placeItem(nd, 360,360);
-		current.placeItem(new Key(78,"white"), 360, 280);
-		Item key=null;
-		for(Item i: current.getItems()) {
-			if(i instanceof Key && i.getName().equals("whiteKey")) {
-				key=i;
+		current.placeItem(nd, 360, 360);
+		current.placeItem(new Key(78, "white"), 360, 280);
+		Item key = null;
+		for (Item i : current.getItems()) {
+			if (i instanceof Key && i.getName().equals("whiteKey")) {
+				key = i;
 			}
 		}
-		
-		
-		
+
 		p1.setSpeed(1);
 		// Player starts at 150,150
 		assertEquals(150, p1.getCentreX());
@@ -246,7 +244,7 @@ public class MapTests {
 		assert (280 == key.getY());
 
 		// move player to 390,280
-		assertFalse(p1.move(240,160));
+		assertFalse(p1.move(240, 160));
 		p1.pickUpItem();
 		assertEquals(390, p1.getCentreX());
 		assertEquals(310, p1.getCentreY());
@@ -262,8 +260,8 @@ public class MapTests {
 		assertFalse(p1.move(0, 5));
 		assertFalse(p1.move(0, 5));
 		assertFalse(p1.move(0, 5));
-		
-		System.out.println(p1.getCentreY());
+
+		// System.out.println(p1.getCentreY());
 
 		assertEquals("Map8", p1.getMap().getName());
 
