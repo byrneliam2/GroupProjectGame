@@ -21,10 +21,8 @@ public class SpecificItemTests {
 
 		try {
 			p.getBackpack().pickUpItem(i);
-			assertTrue(p.getBackpack().getInventory().contains(i));
-			p.useItem(i);
 			assertFalse(p.getBackpack().getInventory().contains(i));// item should dissapear once used
-		} catch (InvalidBackpackException | InvalidPlayerExceptions e) {
+		} catch (InvalidBackpackException e) {
 			e.printStackTrace();
 			fail();
 		}
@@ -39,13 +37,10 @@ public class SpecificItemTests {
 		Player p = new Player("tom", 5, 5);
 
 		try {
-			p.getBackpack().pickUpItem(i);
-			assertTrue(p.getBackpack().getInventory().contains(i));
 			assertEquals("Player should be on max health", p.getMaxHealth(), p.getHealth());
-
-			p.useItem(i);
+			p.getBackpack().pickUpItem(i);
 			assertEquals("Player should still be on max health", p.getMaxHealth(), p.getHealth());
-		} catch (InvalidBackpackException | InvalidPlayerExceptions e) {
+		} catch (InvalidBackpackException e) {
 			e.printStackTrace();
 			fail();
 		}
@@ -60,14 +55,12 @@ public class SpecificItemTests {
 		Player p = new Player("tom", 5, 5);
 
 		try {
-			p.getBackpack().pickUpItem(i);
-			assertTrue(p.getBackpack().getInventory().contains(i));
 			// manually sets the player's health
 			p.setHealth(2);
 			p.setMaxHealth(5);
-			p.useItem(i);
+			p.getBackpack().pickUpItem(i);
 			assertEquals("Player should have one more health", 3, p.getHealth());
-		} catch (InvalidBackpackException | InvalidPlayerExceptions e) {
+		} catch (InvalidBackpackException e) {
 			e.printStackTrace();
 			fail();
 		}
@@ -83,22 +76,18 @@ public class SpecificItemTests {
 		Player p = new Player("tom", 5, 5);
 
 		try {
-			p.getBackpack().pickUpItem(i);
-			p.getBackpack().pickUpItem(i2);
-			assertTrue(p.getBackpack().getInventory().contains(i));
-			assertTrue(p.getBackpack().getInventory().contains(i2));
 			// manually sets the player's health
 			p.setHealth(2);
 			p.setMaxHealth(5);
 
-			p.useItem(i);
+			p.getBackpack().pickUpItem(i);
 			assertEquals("Player should have one more health", 3, p.getHealth());
 			assertFalse(p.getBackpack().getInventory().contains(i));
 
-			p.useItem(i2);
+			p.getBackpack().pickUpItem(i2);
 			assertEquals("Player should have one more health", 4, p.getHealth());
 			assertFalse(p.getBackpack().getInventory().contains(i2));
-		} catch (InvalidBackpackException | InvalidPlayerExceptions e) {
+		} catch (InvalidBackpackException e) {
 			e.printStackTrace();
 			fail();
 		}

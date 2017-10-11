@@ -20,7 +20,7 @@ import common.utils.Direction;
 import common.utils.MathUtils;
 
 /**
- * @author javahemohs Created by javahemohs on 19/09/17.
+ * @author javahemohs and Thomas Edwards Created by javahemohs on 19/09/17.
  *
  */
 public class Player implements IPlayer {
@@ -74,9 +74,6 @@ public class Player implements IPlayer {
 	 *             player or, there is no item next to the player
 	 */
 	public void pickUpItem() throws InvalidPlayerExceptions {
-		if (Game.GAME_PAUSED) {
-			throw new InvalidPlayerExceptions("Game is paused, you cannot pickup Items");
-		}
 		try {
 			// add the item to the current player pack.
 			itemsList.pickUpItem(closestItem);
@@ -91,94 +88,6 @@ public class Player implements IPlayer {
 		}
 	}
 
-	/**
-	 * Remove an item from the BackPack placing it onto the map at the player's
-	 * current location.
-	 *
-	 * @param item
-	 *            item to remove from backpack
-	 * @throws InvalidPlayerExceptions
-	 *             if the backpack doesnt contain the item.
-	 */
-	@Deprecated
-	public void removeItem(Item item) throws InvalidPlayerExceptions {
-		try {
-			// Remove the Item from the Player list of Items.
-			itemsList.removeItem(item);
-			// update the map with the item that has been dropped
-			map.placeItem(item, (int) playerBox.getCenterX(), (int) playerBox.getCenterY());
-			// update the Closest item to the player rangeCircle
-			closestItem = item;
-
-		} catch (InvalidBackpackException e) {
-			throw new InvalidPlayerExceptions(e.getMessage());
-		}
-	}
-
-	/**
-	 * Equips this item, providing its given bonuses to the player, moving the item
-	 * into the 'equipped' section of the player's backpack.
-	 *
-	 * @param item
-	 *            item to equip
-	 * @throws InvalidPlayerExceptions
-	 *             if the player already has the max number of items equipped or the
-	 *             item is not part of a player's backpack.
-	 */
-	@Deprecated
-	public void equipItem(Equipable item) throws InvalidPlayerExceptions {
-		throw new Error("Implementation removed");
-	}
-
-	/**
-	 * Unequips this item, removing its given bonuses from the player it was
-	 * equipped to and moving it out of the 'equipped' section of the backpack.
-	 *
-	 * @param item
-	 * @throws InvalidPlayerExceptions
-	 *             if the item was not equipped to any player or the pack's
-	 *             unequipped area is full.
-	 */
-	@Deprecated
-	public void unequipItem(Equipable item) throws InvalidPlayerExceptions {
-		throw new Error("Implementation removed");
-	}
-
-	/**
-	 * Uses this item on the player and removes it from the inventory
-	 *
-	 * @param item
-	 *            item to use
-	 * @throws InvalidPlayerExceptions
-	 *             if the item was not part of a player's backpack.
-	 */
-	public void useItem(Usable item) throws InvalidPlayerExceptions {
-		try {
-			// use the item
-			itemsList.useItem(item);
-		} catch (InvalidBackpackException e) {
-			throw new InvalidPlayerExceptions(e.getMessage());
-		}
-	}
-
-	/**
-	 * pick Up And Use the item without putting it in the backpack.
-	 *
-	 * @param item
-	 * @throws InvalidPlayerExceptions
-	 */
-	public void pickUpAndUse(Usable item) throws InvalidPlayerExceptions {
-		try {
-			// If the player wants to use the supply with the necessary items for a
-			// particular purpose.
-			itemsList.pickUpAndUse(item);
-		} catch (InvalidBackpackException e) {
-			// If the player wants to use the supply with the necessary items for a
-			// particular purpose.
-			throw new InvalidPlayerExceptions(e.getMessage());
-
-		}
-	}
 
 	/**
 	 * Causes the player to take 1 damage and if the player is dead, changes the isDead flag to true.
@@ -214,9 +123,6 @@ public class Player implements IPlayer {
 	 *             if the player tries to make an invalid move. eg move into a wall.
 	 */
 	public boolean move(double dx, double dy) throws InvalidPlayerExceptions {
-		if (Game.GAME_PAUSED) {
-			throw new InvalidPlayerExceptions("Game is paused, you cannot move");
-		}
 		slowPlayer();
 		dx = dx * speed;
 		dy = dy * speed;
@@ -337,9 +243,6 @@ public class Player implements IPlayer {
 	 *             if your gun is not ready to be fired yet.
 	 */
 	public void shoot(double mouseX, double mouseY) throws InvalidPlayerExceptions {
-		if (Game.GAME_PAUSED) {
-			throw new InvalidPlayerExceptions("Game is paused, you cannot shoot");
-		}
 
 		if (isReadyToShoot) {// can only shoot if your gun is ready.
 			isReadyToShoot = false;
