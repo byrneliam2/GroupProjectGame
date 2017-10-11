@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import common.player.IPlayer;
+import game.Game;
 import gfx.ImageLoader;
 import gfx.ImageUtilities;
 import items.DoorItem;
@@ -75,8 +76,12 @@ public class Map implements IMap {
 		this.loadAllLayers(1920, 1080);
 		// sets the npc's up, note you'll still have to call startMapNPC's() to start
 		// them moving
-		for (NPC npc : NPCS) {
-			npc.setMap(this);
+		if (Game.DEV_MODE && !name.equals("Map16")) {
+			NPCS.clear();
+		} else {
+			for (NPC npc : NPCS) {
+				npc.setMap(this);
+			}
 		}
 		this.placeAllItems(this.items);
 

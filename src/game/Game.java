@@ -27,6 +27,7 @@ public class Game extends Observable implements IGame, Serializable {
 	 */
 	private static final long serialVersionUID = -428815268724553339L;
 
+	public static final boolean DEV_MODE = false;
 	public static boolean GAME_PAUSED = false;
 
 	private IPlayer player;

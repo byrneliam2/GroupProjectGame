@@ -8,7 +8,7 @@ TODO
 - Add 'empty' hearts representing health lost
 - Try get simple player animation working
 - Test that keys and locked doors work
-- Add a dev-mode boolean which removes npc's from game (so we can run around easily)
+- (DONE) Add a dev-mode boolean which removes npc's from game (so we can run around easily)
 - Fill out last 3 maps with npc/items
 - Put in the sound effects for shooting, dying etc.
 
