@@ -1,7 +1,7 @@
 package save_load;
 
 import game.Game;
-import game.IGame;
+import common.game.IGame;
 import map.World;
 import npc.NPC;
 import player.InvalidPlayerExceptions;
@@ -167,4 +167,18 @@ public class SaveLoad implements IGame, Serializable {
 		// TODO Auto-generated method stub
 
 	}
+<<<<<<< HEAD
+=======
+
+	@Override
+	public void stop() {
+	}
+
+	@Override
+	public void specialAbility(double x, double y) throws InvalidPlayerExceptions {
+		// TODO Auto-generated method stub
+		
+	}
+
+>>>>>>> 4276775ecaf2233d5d939e80508f781d1b738d9d
 }

@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import common.player.IPlayer;
 import game.Game;
 import items.Backpack;
 import items.DoorItem;
@@ -13,33 +14,45 @@ import items.Equipable;
 import items.InvalidBackpackException;
 import common.items.Item;
 import items.Usable;
+import map.Environment;
 import map.Map;
 import map.World;
+import common.utils.Direction;
 import common.utils.MathUtils;
 
 /**
- * @author javahemohs Created by javahemohs on 19/09/17.
+ * @author javahemohs and Thomas Edwards Created by javahemohs on 19/09/17.
  *
  */
+<<<<<<< HEAD
 public class Player implements Serializable {
+=======
+public class Player implements IPlayer {
+>>>>>>> 4276775ecaf2233d5d939e80508f781d1b738d9d
 	/* constants */
 	private static final int rangeCircleWidth = 2 * Map.tileSize;
-	private static final double defaultFireRate = 0.2;
+	private static final double defaultFireRate = 0.8;
+	private static final int baseSpeed = 6;
 
+	// timer for standing in fire...
+	private javax.swing.Timer fireTimer = new javax.swing.Timer(1000, (e) -> takeDamage());
 	private final String name;
 	private Item closestItem;
 	private Backpack itemsList = new Backpack(this);
 	protected boolean isDead = false;
-	protected int health = 5;
-	private int maxHealth = 5;
-	private int speed = 6;
+	protected int health = 5, maxHealth = 5;
+	protected int speed = baseSpeed;// movement speed of the player
 	private double fireRate = defaultFireRate;// in seconds, smaller numbers mean less time between shots
 	private static Timer shotTimer = new Timer();
-	private Map map;// the map which the player is currently located on.
+	protected Map map;// the map which the player is currently located on.
 	private boolean isReadyToShoot = true;
+	private boolean isSpecialReady = true;
+	private Environment currentEnvironment;
+	private Direction currentDir = Direction.S;
+	private boolean isMoving = false;
 
 	private Ellipse2D.Double rangeCircle;// the range at which the player can 'pick up' items
-	private Rectangle.Double playerBox;// the hit box representing the location of the player.
+	protected Rectangle.Double playerBox;// the hit box representing the location of the player.
 
 	/**
 	 * @param name
@@ -51,12 +64,14 @@ public class Player implements Serializable {
 		rangeCircle = new Ellipse2D.Double(xLocation - Map.tileSize / 2, yLocation - Map.tileSize / 2, rangeCircleWidth,
 				rangeCircleWidth);
 		playerBox = new Rectangle.Double(xLocation + 3, yLocation + 3, Map.tileSize - 6, Map.tileSize - 6);
+		fireTimer.setInitialDelay(500);// 0.5 seconds delay before first fire tick
 	}
 
 	/**
 	 * Adds the closest item to the player ot the player's backpack. If item is a
 	 * key, adds it to the key section of the backpack. Also tells the map to remove
-	 * the item from the map.
+	 * the item from the map. Also as of ~October causes the item to be immediatly
+	 * equiped or used on pickup.
 	 *
 	 * @param item
 	 *            item to pickup.
@@ -65,9 +80,6 @@ public class Player implements Serializable {
 	 *             player or, there is no item next to the player
 	 */
 	public void pickUpItem() throws InvalidPlayerExceptions {
-		if (Game.GAME_PAUSED) {
-			throw new InvalidPlayerExceptions("Game is paused, you cannot pickup Items");
-		}
 		try {
 			// add the item to the current player pack.
 			itemsList.pickUpItem(closestItem);
@@ -83,93 +95,8 @@ public class Player implements Serializable {
 	}
 
 	/**
-	 * Remove an item from the BackPack placing it onto the map at the player's
-	 * current location.
-	 *
-	 * @param item
-	 *            item to remove from backpack
-	 * @throws InvalidPlayerExceptions
-	 *             if the backpack doesnt contain the item.
-	 */
-	public void removeItem(Item item) throws InvalidPlayerExceptions {
-		try {
-			// Remove the Item from the Player list of Items.
-			itemsList.removeItem(item);
-			// update the map with the item that has been dropped
-			map.placeItem(item, (int) playerBox.getCenterX(), (int) playerBox.getCenterY());
-			// update the Closest item to the player rangeCircle
-			closestItem = item;
-
-		} catch (InvalidBackpackException e) {
-			throw new InvalidPlayerExceptions(e.getMessage());
-		}
-	}
-
-	/**
-	 * Equips this item, providing its given bonuses to the player, moving the item
-	 * into the 'equipped' section of the player's backpack.
-	 *
-	 * @param item
-	 *            item to equip
-	 * @throws InvalidPlayerExceptions
-	 *             if the player already has the max number of items equipped or the
-	 *             item is not part of a player's backpack.
-	 */
-	public void equipItem(Equipable item) throws InvalidPlayerExceptions {
-		throw new Error("Implementation removed");
-	}
-
-	/**
-	 * Unequips this item, removing its given bonuses from the player it was
-	 * equipped to and moving it out of the 'equipped' section of the backpack.
-	 *
-	 * @param item
-	 * @throws InvalidPlayerExceptions
-	 *             if the item was not equipped to any player or the pack's
-	 *             unequipped area is full.
-	 */
-	public void unequipItem(Equipable item) throws InvalidPlayerExceptions {
-		throw new Error("Implementation removed");
-	}
-
-	/**
-	 * Uses this item on the player and removes it from the inventory
-	 *
-	 * @param item
-	 *            item to use
-	 * @throws InvalidPlayerExceptions
-	 *             if the item was not part of a player's backpack.
-	 */
-	public void useItem(Usable item) throws InvalidPlayerExceptions {
-		try {
-			// use the item
-			itemsList.useItem(item);
-		} catch (InvalidBackpackException e) {
-			throw new InvalidPlayerExceptions(e.getMessage());
-		}
-	}
-
-	/**
-	 * pick Up And Use the item without putting it in the backpack.
-	 *
-	 * @param item
-	 * @throws InvalidPlayerExceptions
-	 */
-	public void pickUpAndUse(Usable item) throws InvalidPlayerExceptions {
-		try {
-			// If the player wants to use the supply with the necessary items for a
-			// particular purpose.
-			itemsList.pickUpAndUse(item);
-		} catch (InvalidBackpackException e) {
-			// If the player wants to use the supply with the necessary items for a
-			// particular purpose.
-			throw new InvalidPlayerExceptions(e.getMessage());
-
-		}
-	}
-
-	/**
-	 * Causes the player to take 1 damage and if the player is dead, changes the isDead flag to true.
+	 * Causes the player to take 1 damage and if the player is dead, changes the
+	 * isDead flag to true.
 	 */
 	public void takeDamage() {
 		// Decrease the health of the player by one
@@ -199,17 +126,19 @@ public class Player implements Serializable {
 	 * @param dy
 	 * @return true if the player moved through a door, false otherwise.
 	 * @throws InvalidPlayerExceptions
-	 *             if the player tries to make an invalid move.
+	 *             if the player tries to make an invalid move. eg move into a wall.
 	 */
 	public boolean move(double dx, double dy) throws InvalidPlayerExceptions {
-		DoorItem door = null;
-		if (Game.GAME_PAUSED) {
-			throw new InvalidPlayerExceptions("Game is paused, you cannot move");
-		}
-
+		slowPlayer();
+		dx = dx * speed;
+		dy = dy * speed;
+		isMoving = true;
+		// move the player's frame
 		playerBox.setFrame(playerBox.getX() + dx, playerBox.getY() + dy, playerBox.getWidth(), playerBox.getHeight());
 		if (map.canMove(playerBox)) {
-			// if player is next to a door and the door is unlocked or you have the key, go through...
+			DoorItem door = null;
+			// if player is next to a door and the door is unlocked or you have the key, go
+			// through...
 			if ((door = map.getDoor(playerBox)) != null && (!door.isLocked() || canOpenDoor(door))) {
 				map = enterDoor(door);
 				closestItem = map.getClosestItem(rangeCircle);
@@ -218,20 +147,61 @@ public class Player implements Serializable {
 				// update rangeCircle
 				rangeCircle.setFrame(rangeCircle.getX() + dx, rangeCircle.getY() + dy, rangeCircleWidth,
 						rangeCircleWidth);
-				// update closest itemest item to player
 
+				// update closest itemest item to player
+<<<<<<< HEAD
+
+=======
+>>>>>>> 4276775ecaf2233d5d939e80508f781d1b738d9d
 				closestItem = map.getClosestItem(rangeCircle);
+
+				updateEnvironment();
+
 				return false;
 			}
-		} else {
+		} else {// player made an invalid move, so move player back to where he came from and
+				// throw exception.
 			playerBox.setFrame(playerBox.getX() - dx, playerBox.getY() - dy, playerBox.getWidth(),
 					playerBox.getHeight());
 			throw new InvalidPlayerExceptions("You cant make a move/Invalid move");
 		}
 	}
 
+	private void updateEnvironment() {
+		unSlowPlayer();
+		// update the current Environment
+		currentEnvironment = map.onEnvironmentTile((int) playerBox.getCenterX(), (int) playerBox.getCenterY());
+		doFireEffect();
+		doDeathEffect();
+	}
+
+	private void doDeathEffect() {
+		if (currentEnvironment == Environment.DEATH) {
+			isDead = true;
+		}
+	}
+
+	private void doFireEffect() {
+		if (currentEnvironment == Environment.FIRE) {
+			fireTimer.start();
+		} else {
+			fireTimer.stop();
+		}
+	}
+
+	private void slowPlayer() {
+		if (currentEnvironment == Environment.MUD)
+			speed = baseSpeed / 3;
+	}
+
+	private void unSlowPlayer() {
+		if (currentEnvironment == Environment.MUD)
+			speed = baseSpeed;
+	}
+
 	/**
-	 * This method closes the current map and starts the new map, returns the new map that the door leads to.
+	 * This method closes the current map and starts the new map, returns the new
+	 * map that the door leads to.
 	 *
 	 * @param Door
 	 * @return
@@ -246,8 +216,9 @@ public class Player implements Serializable {
 
 		rangeCircle = new Ellipse2D.Double(playerBox.getX() - Map.tileSize / 2, playerBox.getY() - Map.tileSize / 2,
 				rangeCircleWidth, rangeCircleWidth);
+
 		map.pauseMapNPCs();
-		// removes all the bullets from the game when you go through the door.
+		// stops and removes all the bullets from the game when you go through the door.
 		for (int i = Bullet.bulletList.size() - 1; i >= 0; i--) {
 			Bullet.bulletList.get(i).removeBullet();
 		}
@@ -256,6 +227,13 @@ public class Player implements Serializable {
 		return newMap;
 	}
 
+	/**
+	 * Sets the player's position in the new map next to the door he just came
+	 * through.
+	 * 
+	 * @param door
+	 *            the door to set the player's position at
+	 */
 	private void setPlayerPosition(DoorItem door) {
 		if (door.getX() == 1860) {// entering on right...
 			playerBox.setFrame(1820, door.getY(), playerBox.width, playerBox.height);
@@ -269,26 +247,24 @@ public class Player implements Serializable {
 	}
 
 	/**
+	 * Shoots a bullet from the player's current coordinates to the coordinates
+	 * given by the mouse
+	 * 
 	 * @param direction
 	 *            should be an angle between 0 and 2Pi. (there's a method in
-	 *            MathUtil package. which you can use to calculate the
-	 *            angle from player to mouse if needed).
+	 *            MathUtil package. which you can use to calculate the angle from
+	 *            player to mouse if needed).
 	 * @throws InvalidPlayerExceptions
 	 *             if your gun is not ready to be fired yet.
 	 */
 	public void shoot(double mouseX, double mouseY) throws InvalidPlayerExceptions {
-		if (Game.GAME_PAUSED) {
-			throw new InvalidPlayerExceptions("Game is paused, you cannot shoot");
-		}
 
-		if (isReadyToShoot) {
+		if (isReadyToShoot) {// can only shoot if your gun is ready.
 			isReadyToShoot = false;
-			double x = playerBox.getX() + (playerBox.width / 2);
-			double y = playerBox.getY() + (playerBox.height / 2);
 
-			double direction = MathUtils.calculateAngle(x, y, mouseX, mouseY);
+			double direction = MathUtils.calculateAngle(getCentreX(), getCentreY(), mouseX, mouseY);
 			// make a new bullet
-			new Bullet(getCentreX(), getCentreY(), direction, this, 8, "playerBullet1");
+			new Bullet(getCentreX(), getCentreY(), direction, this, 9, "playerBullet1");
 
 			// start a timer to count till when the next shot is ready to shoot....
 			TimerTask taskEvent = new TimerTask() {
@@ -302,6 +278,29 @@ public class Player implements Serializable {
 			throw new InvalidPlayerExceptions("You cant shoot because your weapon is not ready to shoot yet....");
 		}
 
+	}
+
+	public void specialAbility(double mouseX, double mouseY) throws InvalidPlayerExceptions {
+		if (isSpecialReady) {// can only shoot if your gun is ready.
+			isSpecialReady = false;
+
+			double direction = MathUtils.calculateAngle(getCentreX(), getCentreY(), mouseX, mouseY);
+			// make a new bullet
+			new Bullet(getCentreX(), getCentreY(), direction, this, 9, "playerBullet1");
+			new Bullet(getCentreX(), getCentreY(), direction-Math.PI/16, this, 9, "playerBullet1");
+			new Bullet(getCentreX(), getCentreY(), direction+Math.PI/16, this, 9, "playerBullet1");
+
+			// start a timer to count till when the next shot is ready to shoot....
+			TimerTask taskEvent = new TimerTask() {
+				public void run() {
+					isSpecialReady = true;
+				}
+			};
+			shotTimer.schedule(taskEvent, (int) (fireRate * 5000));
+
+		} else {// if you can't shoot (for any reason) throw an exception...
+			throw new InvalidPlayerExceptions("You cant shoot because your weapon is not ready to shoot yet....");
+		}
 	}
 
 	/*
@@ -325,7 +324,8 @@ public class Player implements Serializable {
 
 	/**
 	 * @param health
-	 *            the health to set health to, can't be more than max health...
+	 *            the health to set health to, ensures that it isn't more than max
+	 *            health.
 	 */
 	public void setHealth(int health) {
 		if (health > maxHealth)
@@ -379,6 +379,12 @@ public class Player implements Serializable {
 		return this.itemsList;
 	}
 
+	/**
+	 * Sets the max health, ensures that the player's current health is <= max
+	 * health.
+	 * 
+	 * @param max
+	 */
 	public void setMaxHealth(int max) {
 		this.maxHealth = max;
 		if (health > maxHealth)
@@ -405,12 +411,32 @@ public class Player implements Serializable {
 		return this;
 	}
 
+	public Direction getCurrentDir() {
+		return this.currentDir;
+	}
+
+	public void setCurrentDir(Direction newDir) {
+		this.currentDir = newDir;
+	}
+
 	public int getSpeed() {
 		return speed;
 	}
 
 	public void setSpeed(int speed) {
 		this.speed = speed;
+	}
+
+	protected void setBoundingBoxWidth(int width, int height) {
+		this.playerBox.setFrame(playerBox.x, playerBox.y, width, height);
+	}
+
+	public boolean isMoving() {
+		return isMoving;
+	}
+
+	public void setMoving(boolean isMoving) {
+		this.isMoving = isMoving;
 	}
 
 }

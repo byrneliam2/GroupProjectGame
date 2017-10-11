@@ -38,7 +38,7 @@ public class GraphicsUtilitiesTests {
         BufferedImage main = null;
         BufferedImage roll = null;
         try {
-            //noinspection ConstantConditions
+            //no inspection ConstantConditions
             assertNotNull(GraphicsUtilities.produceButton(main, roll, 0));
             fail("Expecting IllegalArgumentException.");
         } catch (IllegalArgumentException ignored) {}
@@ -54,7 +54,7 @@ public class GraphicsUtilitiesTests {
     public void test05_MakeSticker() {
         BufferedImage main = null;
         try {
-            //noinspection ConstantConditions
+            //no inspection ConstantConditions
             assertNotNull(GraphicsUtilities.produceSticker(main, 0));
             fail("Expecting IllegalArgumentException.");
         } catch (IllegalArgumentException ignored) {}
@@ -64,4 +64,10 @@ public class GraphicsUtilitiesTests {
     public void test06_MakeSlider() {
         assertNotNull(GraphicsUtilities.produceSlider());
     }
+    
+    //External Tester notes
+    //I have ran the game and noted any visual bugs that i could see.
+    //At this point the game runs well and without error, however there will
+    //have to be some refactoring, as the front end should only be interacting with the back end
+    //through interfaces.
 }

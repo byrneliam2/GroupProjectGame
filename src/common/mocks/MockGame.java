@@ -1,5 +1,6 @@
-package game;
+package common.mocks;
 
+import common.game.IGame;
 import map.World;
 import player.InvalidPlayerExceptions;
 import player.Player;
@@ -99,4 +100,19 @@ public class MockGame implements IGame {
 
 	}
 
+<<<<<<< HEAD:src/game/MockGame.java
+=======
+    @Override
+    public void stopGame() {}
+
+	@Override
+	public void stop() {
+	}
+
+	@Override
+	public void specialAbility(double x, double y) throws InvalidPlayerExceptions {
+		// TODO Auto-generated method stub
+		
+	}
+>>>>>>> 4276775ecaf2233d5d939e80508f781d1b738d9d:src/common/mocks/MockGame.java
 }

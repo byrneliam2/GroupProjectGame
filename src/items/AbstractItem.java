@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.io.Serializable;
 
 import common.items.Item;
+import items.itemList.HealthPot;
 
 public abstract class AbstractItem implements Item, Serializable{
 	protected final String name, description;

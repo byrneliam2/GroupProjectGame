@@ -7,7 +7,7 @@ import player.Player;
 public class MaxHealthPot extends AbstractItem implements Usable {
 
 	public MaxHealthPot() {
-		super("Max Health Pot", "Restores the player to full health.", null);//TODO get Max healthPot image
+		super("Max Health Pot", "Restores the player to full health.", "maxHealthPotion");
 	}
 
 	@Override

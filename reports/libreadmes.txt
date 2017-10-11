@@ -24,6 +24,7 @@ All tests can be run as a suite by using the AllGFXTests class.
 
 items
 Run the AllItemsTests class to run all tests as a suite.
+Please note that not all the tests may pass, since items is undergoing a major redo currently.
 
 map
 

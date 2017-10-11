@@ -1,9 +1,13 @@
-package map;
+package map.parsers;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import common.player.IPlayer;
+import map.MapParser;
+import map.ParseException;
+import npc.BossNPC;
 import npc.ControlScheme;
 import npc.EasyScheme;
 import npc.HardScheme;
@@ -19,7 +23,7 @@ public class NpcParser implements Serializable {
 
 	}
 
-	public void parse(Scanner scan, ArrayList<NPC> npcs, Player mainPLayer) throws ParseException {
+	public void parse(Scanner scan, ArrayList<NPC> npcs, IPlayer mainPLayer) throws ParseException {
 		String name = MapParser.requireString(scan);
 		String scheme = MapParser.requireString(scan);
 		String leftRight = MapParser.requireString(scan);
@@ -31,6 +35,12 @@ public class NpcParser implements Serializable {
 		if (leftRight.equals("true")) {
 			LR = true;
 		}
+		if (name.equals("Boss")) {
+			NPC n = new BossNPC(mainPLayer);
+			npcs.add(n);
+			return;
+		}
+
 		ControlScheme a = null;
 		if (scheme.equals("PatrolScheme")) {
 			a = new PatrolScheme(LR, patrolDistance);

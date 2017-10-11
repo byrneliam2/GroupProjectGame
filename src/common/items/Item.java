@@ -3,6 +3,8 @@ package common.items;
 import items.Backpack;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.util.HashMap;
 
 /**
  * Abstract Item interface, all items of any type should implement these
@@ -12,6 +14,7 @@ import java.awt.Image;
  *
  */
 public interface Item {
+
 
 	/**
 	 * @return returns an image of this item. No guarantees on the size of image
@@ -68,4 +71,5 @@ public interface Item {
 	 * @return the image name
 	 */
 	public String getImageFileName();
+
 }

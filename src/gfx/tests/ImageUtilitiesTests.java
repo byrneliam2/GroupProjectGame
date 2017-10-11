@@ -47,4 +47,16 @@ public class ImageUtilitiesTests {
         assertTrue(scaled.getWidth() == 200);
         assertTrue(scaled.getHeight() == 200);
     }
+    //External Tests
+    @Test
+    public void test03_Scale() {
+        BufferedImage img = ImageLoader.image("ui", "logo", true);
+        int width = img.getWidth();
+        int height =  img.getHeight();
+        BufferedImage scaled = ImageUtilities.scale(img, 200, 200);
+        assertTrue(scaled.getWidth() == 200);
+        assertTrue(scaled.getHeight() == 200);
+        assertTrue(scaled.getWidth()!=width);
+        assertTrue(scaled.getHeight()!=height);
+    }
 }

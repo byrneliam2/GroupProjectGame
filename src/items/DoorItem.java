@@ -1,9 +1,13 @@
 package items;
 
 import java.awt.Point;
+<<<<<<< HEAD
 import java.awt.Rectangle;
 import java.io.Serializable;
+=======
+>>>>>>> 4276775ecaf2233d5d939e80508f781d1b738d9d
 
+import common.items.Item;
 import map.Map;
 
 /**
@@ -22,7 +26,7 @@ public class DoorItem extends AbstractItem implements Serializable  {
 	public DoorItem(String map, int ID, boolean locked, int x, int y) {
 		super(map, "A door linking to map: " + map + " with ID: " + ID, null);
 		this.doorID = ID;
-		//this.locked = locked; FIXME
+		this.locked = !locked;
 		super.setX(x);
 		super.setY(y);
 		p = new Point(x + Map.tileSize / 2, y + Map.tileSize / 2);
@@ -60,6 +64,10 @@ public class DoorItem extends AbstractItem implements Serializable  {
 	@Override
 	public int hashCode() {
 		return doorID;
+	}
+
+	public Item clone() {
+		return new DoorItem(this.name, this.doorID, this.locked, this.x, this.y);
 	}
 
 }

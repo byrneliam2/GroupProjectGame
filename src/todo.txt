@@ -1,0 +1,14 @@
+TODO
+- Integrate saving and loading
+- Optimize drawing (associate items, etc. with images again?)
+- External testing for all libraries (including MapCardTests)
+- Abstract out common interfaces: should all use common types!
+
+- Add 'empty' hearts representing health lost
+- Test that keys and locked doors work
+- (DONE) Add a dev-mode boolean which removes npc's from game (so we can run around easily)
+- Moving diagonally it moves faster than sideways and animations can't be made for it.
+- Fill out last 3 maps with npc/items
+- Put in the sound effects for shooting, dying etc.
+
+FIXME

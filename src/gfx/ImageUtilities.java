@@ -17,32 +17,61 @@ import java.awt.image.BufferedImage;
  */
 public class ImageUtilities {
 
-    /**
-     * Rotate the given image by a set number of degrees.
-     * @param img image to be rotated (note that this method produces a copy)
-     * @param deg number of degrees to rotate
-     * @return rotated copy of img
-     */
-    public static BufferedImage rotate(BufferedImage img, int deg) {
-        AffineTransform af = AffineTransform.getRotateInstance(
-                Math.toRadians(deg), img.getWidth()/2, img.getHeight()/2);
-        AffineTransformOp op = new AffineTransformOp(af, AffineTransformOp.TYPE_BILINEAR);
-        return op.filter(img, null);
-    }
+	/**
+	 * Rotate the given image by a set number of degrees.
+	 * 
+	 * @param img
+	 *            image to be rotated (note that this method produces a copy)
+	 * @param deg
+	 *            number of degrees to rotate
+	 * @return rotated copy of img
+	 */
+	public static BufferedImage rotate(BufferedImage img, int deg) {
+		AffineTransform af = AffineTransform.getRotateInstance(Math.toRadians(deg), img.getWidth() / 2,
+				img.getHeight() / 2);
+		AffineTransformOp op = new AffineTransformOp(af, AffineTransformOp.TYPE_BILINEAR);
+		return op.filter(img, null);
+	}
 
-    /**
-     * Scale the given image to a new pixel dimension.
-     * @param img image to be scaled (note that this method produces a copy)
-     * @param sw pixel width
-     * @param sh pixel height
-     * @return scaled copy of img
-     */
-    public static BufferedImage scale(BufferedImage img, int sw, int sh) {
-        BufferedImage scaled = new BufferedImage(sw, sh, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g = scaled.createGraphics();
-        g.setComposite(AlphaComposite.Src);
-        g.drawImage(img, 0, 0, sw, sh, null);
-        g.dispose();
-        return scaled;
-    }
+	/**
+	 * Scale the given image to a new pixel dimension.
+	 * 
+	 * @param img
+	 *            image to be scaled (note that this method produces a copy)
+	 * @param sw
+	 *            pixel width
+	 * @param sh
+	 *            pixel height
+	 * @return scaled copy of img
+	 */
+	public static BufferedImage scale(BufferedImage img, int sw, int sh) {
+		BufferedImage scaled = new BufferedImage(sw, sh, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g = scaled.createGraphics();
+		g.setComposite(AlphaComposite.Src);
+		g.drawImage(img, 0, 0, sw, sh, null);
+		g.dispose();
+		return scaled;
+	}
+
+	/**
+	 * Horizontal flip
+	 * 
+	 * @param img
+	 *            image to be flipped (note that this method produces a copy)
+	 * @return flipped copy of img
+	 */
+	public static BufferedImage flipHorizontal(BufferedImage img) {
+		AffineTransform af = new AffineTransform(new double[] { -1.0, 0.0, 0.0, 1.0 });
+		af.translate(-img.getWidth(), 0.0);
+		AffineTransformOp op = new AffineTransformOp(af, AffineTransformOp.TYPE_BILINEAR);
+		return op.filter(img, null);
+	}
+
+	/**
+	 * Crops the image to the given rect
+	 */
+	public static BufferedImage cropImage(BufferedImage img, Rectangle rect) {
+		BufferedImage dest = img.getSubimage((int) rect.getX(), (int) rect.getY(), rect.width, rect.height);
+		return dest;
+	}
 }

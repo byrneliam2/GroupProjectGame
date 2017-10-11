@@ -1,0 +1,10 @@
+Door
+Map15 15 false
+31 8
+
+Npc
+Boss
+SprayScheme false 50
+13 16 2
+
+MaxHealthPot 2

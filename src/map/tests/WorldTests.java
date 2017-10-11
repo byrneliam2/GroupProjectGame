@@ -22,7 +22,7 @@ public class WorldTests {
 	public void CorrectAmountOfMaps() {
 		Player p1 = new Player("Tom", 50, 50);
 		World w = WorldParser.parse("world", p1);
-		assert(World.getMaps().size()==3);
+		assert(World.getMaps().size()==14);
 	}
 
 }

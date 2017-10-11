@@ -6,15 +6,13 @@ package frames;
  * 300338518
  */
 
-import audio.AudioHandler;
 import common.audio.IAudioHandler;
 import common.audio.MusicTrack;
 import common.utils.DisplayValues;
-import controller.*;
 import common.controller.IController;
 import frames.cards.Card;
 import frames.cards.*;
-import game.IGame;
+import common.game.IGame;
 import gfx.ImageLoader;
 
 import javax.swing.*;
@@ -46,14 +44,16 @@ public class MainDisplay extends JComponent implements Observer {
     private IGame game;
     private File selectedFile;
 
-    public MainDisplay(IGame g) {
+    public MainDisplay(IGame g, IAudioHandler aud, IController cntrl) {
         game = g;
-        g.giveObserver(this);
+        audioHandler = aud;
+        controller = cntrl;
+
+        game.giveObserver(this);
 
         master = new JFrame("The Illusion of the Prophecy");
         currentCard = null;
         cards = new LinkedHashMap<>();
-        audioHandler = new AudioHandler();
 
         // master frame setup
         master.setIconImage(ImageLoader.image("ui", "logo", true));
@@ -64,12 +64,9 @@ public class MainDisplay extends JComponent implements Observer {
         master.setUndecorated(true);
         //master.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-        controller = new Controller(game);
-
-        master.addKeyListener(controller.getKeyAdapter());
-        master.addMouseListener(controller.getMouseAdapter());
-        master.addMouseMotionListener(controller.getMouseAdapter());
-
+        master.addKeyListener(this.controller.getKeyAdapter());
+        master.addMouseListener(this.controller.getMouseAdapter());
+        master.addMouseMotionListener(this.controller.getMouseAdapter());
 
         // this component setup
         this.setLayout(new CardLayout());
@@ -220,10 +217,14 @@ public class MainDisplay extends JComponent implements Observer {
      * @param selectedFile file selected
      */
     public void loadGame(File selectedFile) {
+<<<<<<< HEAD
         //
 		System.out.println("loadGame CHRI IS HELPING ME: " + selectedFile.getAbsolutePath());
         game.loadGame(selectedFile.getAbsolutePath());
         this.selectedFile = selectedFile;
+=======
+        //game = game.loadGame(selectedFile);
+>>>>>>> 4276775ecaf2233d5d939e80508f781d1b738d9d
     }
 
     /* =========================================================================================== */

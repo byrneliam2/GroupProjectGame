@@ -14,5 +14,18 @@ Door
 Map4 02 true  
 0 9
 
-HealthPot
-29 4
+SmallGun 1
+2 2
+
+SmallGun 1
+2 15
+
+Npc
+HungryBat
+SprayScheme false 20
+28 26 2
+
+Npc
+HungryBat
+SprayScheme false 20
+5 14 2

@@ -1,10 +1,13 @@
-package map;
+package map.parsers;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Scanner;
 
 import items.DoorItem;
+import map.Map;
+import map.MapParser;
+import map.ParseException;
 
 public class DoorParser implements Serializable  {
 	public DoorParser() {
@@ -15,13 +18,13 @@ public class DoorParser implements Serializable  {
 		String name = MapParser.requireString(scan);
 		int id = MapParser.requireInteger(scan);
 		String locked = MapParser.requireString(scan);
-		boolean lockUnlock = false;
+		boolean lockDoor = false;
 		if (locked.equals("true")) {
-			lockUnlock = true;
+			lockDoor = true;
 		}
 		int x = MapParser.requireInteger(scan);
 		int y = MapParser.requireInteger(scan);
-		DoorItem d = new DoorItem(name, id, lockUnlock, x * Map.tileSize, y * Map.tileSize);
+		DoorItem d = new DoorItem(name, id, lockDoor, x * Map.tileSize, y * Map.tileSize);
 		doors.add(d);
 
 	}

@@ -7,10 +7,12 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import common.player.IBullet;
 import common.utils.DisplayValues;
 import game.Game;
 import gfx.ImageLoader;
 import gfx.ImageUtilities;
+import map.Environment;
 
 /**
  * A bullet is a point object with an x,y location, when the bullet is created a
@@ -20,18 +22,22 @@ import gfx.ImageUtilities;
  * @author Thomas Edwards
  *
  */
+<<<<<<< HEAD
 public class Bullet implements Serializable  {
+=======
+public class Bullet implements IBullet {
+>>>>>>> 4276775ecaf2233d5d939e80508f781d1b738d9d
 
 	/**
 	 * The list of all current bullets in the game.
 	 */
-	public static List<Bullet> bulletList = new ArrayList<>();
+	// public static List<Bullet> bulletList = new ArrayList<>();
 	/**
 	 * Timer which is responsible for updating all bullets in the bullet list.
 	 */
 	private static Timer bulletTimer = new Timer();
 
-	public static final int bulletSize = 20;
+	// public static final int bulletSize = 20;
 
 	/**
 	 * How quickley bullets move/are updated
@@ -54,7 +60,7 @@ public class Bullet implements Serializable  {
 	}
 
 	private double currentX, currentY;
-	private double updateX, updateY;
+	private double updateX, updateY, halfX, halfY;
 	private Player owner;
 	private TimerTask bulletTask;
 	private String bulletType;
@@ -84,6 +90,8 @@ public class Bullet implements Serializable  {
 		this.bulletType = bulletType;
 		this.owner = owner;
 		calculateUpdateAmount(direction);
+		halfX = updateX / 2;
+		halfY = updateY / 2;
 		bulletList.add(this);
 
 		startTimer();// starts the bullet off
@@ -151,8 +159,13 @@ public class Bullet implements Serializable  {
 		if (Game.GAME_PAUSED) {// do no updates when paused...
 			return;
 		}
-		currentX += updateX;
-		currentY += updateY;
+		if (owner.getMap().onEnvironmentTile((int) currentX, (int) currentY) == Environment.MIST) {
+			currentX += halfX;
+			currentY += halfY;
+		} else {
+			currentX += updateX;
+			currentY += updateY;
+		}
 
 		// if the bullet hits an immovable area, remove it.
 		if (!owner.getMap().canMove((int) currentX, (int) currentY)) {
@@ -185,7 +198,7 @@ public class Bullet implements Serializable  {
 			updateY = -Math.sin(angle) * bulletSpeed;
 			updateX = -Math.cos(angle) * bulletSpeed;
 		} else {
-			throw new Error("Angle given was greater than 2Pi");
+			calculateUpdateAmount(angle - Math.PI / 2);
 		}
 
 	}

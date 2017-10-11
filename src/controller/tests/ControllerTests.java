@@ -2,8 +2,8 @@ package controller.tests;
 
 import controller.Controller;
 import common.controller.Command;
-import game.IGame;
-import game.MockGame;
+import common.game.IGame;
+import common.mocks.MockGame;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;

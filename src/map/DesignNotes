@@ -3,18 +3,9 @@ Design Notes for the map package:
 -The player may not always be on one tile. So there should be a method that decides what tile the player is on "more" and that is the tile the player is one.
 -Write a parser class that reads a map text file and creates a new map from it
 -Enviroment's need to be in a text file and parsed as well, or at least put into a enum or something
--Make sure to setup exceptions
--Map parser includes items and NPC stuff
--Methods for map class
 -Doors and if they are locked or unlocked, a locked door should reference a global boolean value in World, so when a player picks up a key the boolean is flipped and thus the player
 can unlock the door. Think about door interactions.
 -Movable objects, something to think about
 -Player represented by a single point or will the player just be the player and i have to find out which block it is more in.
-
-- Simple class on top of map (for view to communicate without entering implementation space)
-- No need to break up background image
-- Player bounding box
-- Background images in gfx/img directory
-- Method to return list of items
 
 - Coloured/shaped keys and doors

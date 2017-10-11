@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Observable;
 import java.util.Observer;
 
+import common.game.IGame;
+import common.player.IPlayer;
 import map.World;
 import map.WorldParser;
 import player.Bullet;
@@ -21,13 +23,14 @@ import common.utils.Direction;
 public class Game extends Observable implements IGame, Serializable {
 
 	/**
-	 *
+	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -428815268724553339L;
 
+	public static final boolean DEV_MODE = true;
 	public static boolean GAME_PAUSED = false;
 
-	private Player player;
+	private IPlayer player;
 	private World world;
 
 	@Override
@@ -51,13 +54,13 @@ public class Game extends Observable implements IGame, Serializable {
 	}
 
 	@Override
-	public Player getPlayer() {
+	public IPlayer getPlayer() {
 		return this.player;
 	}
 
 	@Override
 	public int isOver() {
-		if (false)
+		if (World.getMaps().get("Map16").getNPCs().isEmpty())
 			return 2; // TODO win condition
 		if (player.isDead())
 			return 1;
@@ -76,9 +79,15 @@ public class Game extends Observable implements IGame, Serializable {
 	@Override
 	public void movePlayer(Direction dir) throws InvalidPlayerExceptions {
 		// if the movement caused a change in maps... notify observers
-		if (player.move(player.getSpeed() * dir.getX(), player.getSpeed() * dir.getY())) {
+		if (player.move(dir.getX(), dir.getY())) {
 			set(getCurrentMap());
 		}
+		player.setCurrentDir(dir);
+	}
+
+	@Override
+	public void stop() {
+		player.setMoving(false);
 	}
 
 	@Override
@@ -89,6 +98,11 @@ public class Game extends Observable implements IGame, Serializable {
 	@Override
 	public void shoot(double mouseX, double mouseY) throws InvalidPlayerExceptions {
 		player.shoot(mouseX, mouseY);
+	}
+
+	@Override
+	public void specialAbility(double mouseX, double mouseY) throws InvalidPlayerExceptions {
+		player.specialAbility(mouseX, mouseY);
 	}
 
 	@Override
@@ -128,6 +142,8 @@ public class Game extends Observable implements IGame, Serializable {
 		SaveLoad saveLoad = new SaveLoad();
 		Game game = saveLoad.loadGame(theFilePath);
 		return game;
+		SaveLoad saveLoad = new SaveLoad(this, theFilePath);
+
 	}
 
 	@Override
@@ -144,4 +160,5 @@ public class Game extends Observable implements IGame, Serializable {
 		setChanged();
 		notifyObservers(arg);
 	}
+
 }

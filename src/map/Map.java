@@ -9,10 +9,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import common.player.IPlayer;
+import game.Game;
 import gfx.ImageLoader;
 import gfx.ImageUtilities;
 import items.DoorItem;
 import common.items.Item;
+import common.map.IMap;
 import npc.NPC;
 import player.Bullet;
 import player.Player;
@@ -25,7 +28,11 @@ import player.Player;
  * @author James
  *
  */
+<<<<<<< HEAD
 public class Map implements Serializable{
+=======
+public class Map implements IMap {
+>>>>>>> 4276775ecaf2233d5d939e80508f781d1b738d9d
 	/** pixel size of a individual tile */
 	public static final int tileSize = 60;
 
@@ -55,7 +62,7 @@ public class Map implements Serializable{
 	private ArrayList<ArrayList<Integer>> environmentalLayer;
 
 	/** The current player */
-	private Player currentPlayer;
+	private IPlayer currentPlayer;
 
 	/** The name of the map */
 	private String name;
@@ -63,7 +70,7 @@ public class Map implements Serializable{
 	/** Doors on the current map */
 	List<DoorItem> doors;
 
-	public Map(String name, Player player, List<Item> items, ArrayList<NPC> NPCS, List<DoorItem> doors) {
+	public Map(String name, IPlayer player, List<Item> items, ArrayList<NPC> NPCS, List<DoorItem> doors) {
 		this.name = name;
 		this.items = items;
 		this.currentPlayer = player;
@@ -72,17 +79,22 @@ public class Map implements Serializable{
 		this.NPCS = NPCS;
 		this.doors = doors;
 		this.loadAllLayers(1920, 1080);
-
 		// sets the npc's up, note you'll still have to call startMapNPC's() to start
 		// them moving
-		for (NPC npc : NPCS) {
-			npc.setMap(this);
+		if (Game.DEV_MODE && !name.equals("Map16")) {
+			//if dev mode, remove all npc's except the boss
+			NPCS.clear();
+		} else {
+			for (NPC npc : NPCS) {
+				npc.setMap(this);
+			}
 		}
+		this.placeAllItems(this.items);
 
 	}
 
 	/**
-	 * Pauses all of the map's npc's so that they don't move. Usefull to call when
+	 * Pauses all of the map's npc's so that they don't move. Useful to call when
 	 * the player changes maps.
 	 */
 	public void pauseMapNPCs() {
@@ -118,7 +130,7 @@ public class Map implements Serializable{
 	 * @param scaleY
 	 * @param tileSize
 	 */
-	public void loadAllLayers(int newWidth, int newHeight) {
+	private void loadAllLayers(int newWidth, int newHeight) {
 		BufferedImage colLayer = ImageLoader.image("MapImages", this.name + "Collision", true);
 		this.width = colLayer.getWidth() / 32;
 		this.height = colLayer.getHeight() / 32;
@@ -129,6 +141,29 @@ public class Map implements Serializable{
 		EnvLayer = ImageUtilities.scale(EnvLayer, newWidth, newHeight);
 		this.environmentalLayer = this.loadEnvLayers(EnvLayer);
 
+	}
+
+	private void placeAllItems(List<Item> itms) {
+		if (itms == null) {
+			return;
+		}
+		for (Item i : itms) {
+			if (i.getX() == 0 && i.getY() == 0) {
+				boolean placed = false;
+
+				while (!placed) {
+					int width = (int) (Math.random() * 31) + 1;
+					int height = (int) (Math.random() * 17) + 1;
+					if (this.canMove(width * Map.tileSize, height * Map.tileSize)
+							&& this.onEnvironmentTile(width * Map.tileSize, height * Map.tileSize) == null) {
+						placed = true;
+						i.setX(width * Map.tileSize);
+						i.setY(height * Map.tileSize);
+					}
+				}
+				placed = false;
+			}
+		}
 	}
 
 	/**
@@ -335,7 +370,7 @@ public class Map implements Serializable{
 	 * @param y
 	 */
 	public boolean canMove(int x, int y) {
-		if (x < 0 || y < 0 || x > this.width * Map.tileSize || y > this.height * Map.tileSize)
+		if (x < 0 || y < 0 || x >= this.width * Map.tileSize || y >= this.height * Map.tileSize)
 			return false;
 		x = (int) (x / Map.tileSize);
 		y = (int) (y / Map.tileSize);
@@ -359,7 +394,8 @@ public class Map implements Serializable{
 		// Top Left
 		double posX = r.getX();
 		double posY = r.getY();
-		if (posX < 0 || posY < 0) {
+
+		if (posX < 0 || posY < 0 || posX >= (this.width * Map.tileSize) || posY >= (this.height * Map.tileSize)) {
 			return false;
 		}
 		if (this.collisionLayer.get((int) (posY / Map.tileSize)).get((int) (posX / Map.tileSize)) == 1) {
@@ -367,7 +403,7 @@ public class Map implements Serializable{
 		}
 		// Top right
 		posX = posX + r.getWidth();
-		if (posX > (this.width * Map.tileSize)) {
+		if (posX >= (this.width * Map.tileSize)) {
 			return false;
 		}
 		if (this.collisionLayer.get((int) (posY / Map.tileSize)).get((int) (posX / Map.tileSize)) == 1) {
@@ -376,7 +412,7 @@ public class Map implements Serializable{
 
 		// Bottom right
 		posY = posY + r.getHeight();
-		if (posY > (this.height * Map.tileSize)) {
+		if (posY >= (this.height * Map.tileSize)) {
 			return false;
 		}
 
@@ -425,7 +461,7 @@ public class Map implements Serializable{
 	 * @param y
 	 * @return The environment on the tile closest to x,y
 	 */
-	public Environment onEnviromentTile(int x, int y) {
+	public Environment onEnvironmentTile(int x, int y) {
 		if (x < 0 || y < 0 || x > this.width * Map.tileSize || y > this.height * Map.tileSize) {
 			return null;
 		}
@@ -446,46 +482,11 @@ public class Map implements Serializable{
 	}
 
 	/**
-	 * This method returns whether there is a item on a given spot
-	 *
-	 * @param x
-	 * @param y
-	 * @return
-	 */
-	public boolean itemAtTile(int x, int y) {
-		Point pos = new Point((int) x / Map.tileSize, (int) y / Map.tileSize);
-		for (Item itm : this.items) {
-			if (itm.getX() == pos.getX() && itm.getY() == pos.getY()) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	/**
-	 * This method returns the item located at position x,y. Returns null if there
-	 * is no item. Returns an exception if the x or y position is invalid.
-	 *
-	 * @param x
-	 * @param y
-	 * @return
-	 */
-	public Item itemAt(int x, int y) {
-		Point pos = new Point((int) x / Map.tileSize, (int) y / Map.tileSize);
-		for (Item itm : this.items) {
-			if (itm.getX() == pos.getX() && itm.getY() == pos.getY()) {
-				return itm;
-			}
-		}
-		return null;
-	}
-
-	/**
 	 * This method returns all the NPC's on the map
 	 *
 	 * @return A ArrayList of NPC
 	 */
-	public List<NPC> getNPCS() {
+	public List<NPC> getNPCs() {
 		return this.NPCS;
 	}
 

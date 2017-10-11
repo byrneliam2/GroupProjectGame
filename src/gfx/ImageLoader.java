@@ -20,7 +20,6 @@ public class ImageLoader {
 
 	/**
 	 * Returns the image specified by the integer parameter.
-	 *
 	 * @param directory   name of directory within the img folder
 	 * @param name        file name
 	 * @param transparent is the image transparent? (this chooses a .jpg or .png format depending)

@@ -6,14 +6,15 @@ package frames.cards;
  * 300338518
  */
 
+import common.map.IMap;
+import common.player.IBullet;
+import common.player.IPlayer;
 import common.utils.DisplayValues;
 import frames.MainDisplay;
-import game.IGame;
+import common.game.IGame;
 import gfx.ImageLoader;
 import gfx.ImageUtilities;
 import common.items.Item;
-import player.Bullet;
-import player.Player;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,7 +35,7 @@ public class MapCard extends Card {
 	/* Primary attributes */
 	private List<Entity> statics;
 	private List<Entity> dynamics;
-	private map.Map map;
+	private IMap map;
 	private IGame game;
 
 	/* Constants */
@@ -65,14 +66,25 @@ public class MapCard extends Card {
 	 */
 	private void addStaticEntities() {
 		// add player
-		addStaticEntity(new Entity(game.getPlayer(), EntityType.PLAYER,
+		addStaticEntity(new AnimationEntity(game.getPlayer(), EntityType.PLAYER,
 				ImageLoader.image("playerImages", "playerRect", true),
 						new Point(game.getPlayer().getxLocation(), game.getPlayer().getyLocation()), 0)
 		);
+		
 		// add all NPCs
-		map.getNPCS().forEach(npc -> addStaticEntity(new Entity(npc, EntityType.NPC,
+		map.getNPCs().forEach(npc -> {
+			//add the boss npc
+			if(npc.getName().equals("Boss")){
+				addStaticEntity(new Entity(npc, EntityType.NPC,
+						ImageLoader.image("npcImages", "Rectangle", true),
+						new Point(npc.getxLocation(), npc.getyLocation()), 120));
+				return;
+			}
+			
+			addStaticEntity(new Entity(npc, EntityType.NPC,
 				ImageLoader.image("npcImages", "bug", true),
-				new Point(npc.getxLocation(), npc.getyLocation()), 0))
+				new Point(npc.getxLocation(), npc.getyLocation()), 0));
+			}
 		);
 	}
 
@@ -127,7 +139,7 @@ public class MapCard extends Card {
 			switch (e.getType()) {
 				// only static entities (ones that can't be dynamically added) are Player instances
 				case PLAYER: case NPC:
-					Player p = (Player) o; // since an NPC is a Player
+					IPlayer p = (IPlayer) o; // since an NPC is a Player
 					if (p.isDead()) toRemove.add(e);
 					else e.setLocation(new Point(p.getxLocation(), p.getyLocation()));
 					break;
@@ -184,11 +196,11 @@ public class MapCard extends Card {
 	 * is not worth counting them as entities.
 	 */
 	private void updateBullets() {
-		for (int i = 0; i < Bullet.bulletList.size(); i++) {
-			Bullet b = Bullet.bulletList.get(i);
+		for (int i = 0; i < IBullet.bulletList.size(); i++) {
+			IBullet b = IBullet.bulletList.get(i);
 			Image img = b.getBulletPic();
-			draw(img, (int) b.getX() - Bullet.bulletSize/2,
-					(int) b.getY() - Bullet.bulletSize/2,
+			draw(img, (int) b.getX() - IBullet.bulletSize/2,
+					(int) b.getY() - IBullet.bulletSize/2,
 					img.getWidth(null), img.getHeight(null));
 		}
 	}
