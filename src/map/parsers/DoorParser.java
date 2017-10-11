@@ -17,9 +17,9 @@ public class DoorParser implements Serializable  {
 	public void parse(Scanner scan, List<DoorItem> doors) throws ParseException {
 		String name = MapParser.requireString(scan);
 		int id = MapParser.requireInteger(scan);
-		String unlocked = MapParser.requireString(scan);
+		String locked = MapParser.requireString(scan);
 		boolean lockDoor = false;
-		if (unlocked.equals("false")) {
+		if (locked.equals("true")) {
 			lockDoor = true;
 		}
 		int x = MapParser.requireInteger(scan);

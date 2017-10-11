@@ -20,13 +20,13 @@ import map.Map;
 public class DoorItem extends AbstractItem implements Serializable  {
 
 	private int doorID;
-	private boolean unlocked;
+	private boolean locked;
 	private Point p;
 
 	public DoorItem(String map, int ID, boolean locked, int x, int y) {
 		super(map, "A door linking to map: " + map + " with ID: " + ID, null);
 		this.doorID = ID;
-		this.unlocked = !locked;
+		this.locked = !locked;
 		super.setX(x);
 		super.setY(y);
 		p = new Point(x + Map.tileSize / 2, y + Map.tileSize / 2);
@@ -51,14 +51,14 @@ public class DoorItem extends AbstractItem implements Serializable  {
 	 * Unlocks the door.
 	 */
 	public void unlockDoor() {
-		this.unlocked = true;
+		this.locked = false;
 	}
 
 	/**
 	 * @return true if the door is locked, false otherwise.
 	 */
 	public boolean isLocked() {
-		return !unlocked;
+		return locked;
 	}
 
 	@Override
@@ -67,7 +67,7 @@ public class DoorItem extends AbstractItem implements Serializable  {
 	}
 
 	public Item clone() {
-		return new DoorItem(this.name, this.doorID, this.unlocked, this.x, this.y);
+		return new DoorItem(this.name, this.doorID, this.locked, this.x, this.y);
 	}
 
 }

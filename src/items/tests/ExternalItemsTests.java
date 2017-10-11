@@ -110,7 +110,7 @@ public class ExternalItemsTests {
 		Item i = new HealthPot();
 		try {
 			b.pickUpItem(i);
-			assertTrue(i.getPack() == b);
+			assertTrue(i.getPack() == null);
 			assertTrue(b.getInventorySize() == 0);
 		} catch (InvalidBackpackException e) {
 			e.printStackTrace();
