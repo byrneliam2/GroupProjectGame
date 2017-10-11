@@ -30,6 +30,10 @@ public class Key extends AbstractItem {
 	public String getName() {
 		return color + "Key";
 	}
+	@Override
+	public String getImageFileName() {
+		return this.getName();
+	}
 
 	public Item clone() {
 		return new Key(this.id, this.color);
