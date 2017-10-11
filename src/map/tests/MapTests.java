@@ -28,7 +28,6 @@ public class MapTests {
 	private int x = 90, y = 90;
 	private Player p1;
 	private Map m;
-	private Map m2;
 	private World w;
 
 	public void setup() {
@@ -219,14 +218,14 @@ public class MapTests {
 		// Player starts on Map3 and should move over the door and into Map8
 		this.doorSetup();
 		assert (w.getStartingMap().getName().equals("Map3"));
-		w.getStartingMap().startMapNPCs();
+		// w.getStartingMap().startMapNPCs();
 
-		Map current = w.getStartingMap();
-		DoorItem nd = new DoorItem("Map8", 78, false, 360, 370);
-		current.placeItem(nd, 360, 360);
-		current.placeItem(new Key(78, "white"), 360, 280);
+		Map currentMap = w.getStartingMap();
+		DoorItem door = new DoorItem("Map8", 78, false, 360, 370);
+		currentMap.placeItem(door, 360, 360);
+		currentMap.placeItem(new Key(78, "white"), 360, 280);
 		Item key = null;
-		for (Item i : current.getItems()) {
+		for (Item i : currentMap.getItems()) {
 			if (i instanceof Key && i.getName().equals("whiteKey")) {
 				key = i;
 			}
@@ -238,8 +237,8 @@ public class MapTests {
 		assertEquals(150, p1.getCentreY());
 
 		// Assert door is at 390,390 and key is at 390,310
-		assert (390 == nd.getCentrePoint().getX());
-		assert (400 == nd.getCentrePoint().getY());
+		assert (390 == door.getCentrePoint().getX());
+		assert (400 == door.getCentrePoint().getY());
 		assert (360 == key.getX());
 		assert (280 == key.getY());
 
@@ -258,11 +257,19 @@ public class MapTests {
 		assertFalse(p1.move(0, 5));
 		assertFalse(p1.move(0, 5));
 		assertFalse(p1.move(0, 5));
-		assertFalse(p1.move(0, 5));
-		assertFalse(p1.move(0, 5));
-
+		
+		assertNotNull(currentMap.getDoor(p1.getBoundingBox()));
+		
 		// System.out.println(p1.getCentreY());
+		assertEquals(390, p1.getCentreY());
 
+		// TODO doesn't work I suspect because either 
+		//A)there is no opposite door on map 8.
+		//B) Doors are not treated as item's so "placing" them on the map doesn't work
+		// 		you have to add them to the door list in the map.
+		
+		// TODO also, don't start the map npcs if you arn't testing npcs otherwise they
+		// might kill the player before he gets to the door
 		assertEquals("Map8", p1.getMap().getName());
 
 	}
@@ -322,18 +329,17 @@ public class MapTests {
 	public void testPlayerBulletHitting() throws InvalidPlayerExceptions, InterruptedException {
 		// Bullet direction is 0-2Pie, 0 being north,pie being south,
 		this.doorSetup();
-		NPC c = w.getStartingMap().getNPCs().get(0);
-		c.start();
-		c.start();
-
-		Bullet b = new Bullet(926, 878, 0, p1, 2, "playerBullet1");
-
+		NPC c = new NPC("testNPC", 80, 80, 2, p1, null);
+		m.getNPCs().add(c);
+		// TODO map not setup properly....
+		c.getCentreX();
 		int health = c.getHealth();
+
+		Bullet b = new Bullet(c.getCentreX(), c.getCentreY() - 50, 0, p1, 2, "playerBullet1");
 
 		Thread.sleep(3000);
 
 		assertEquals(health - 1, c.getHealth());
-
 	}
 
 	@Test

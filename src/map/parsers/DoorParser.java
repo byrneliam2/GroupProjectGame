@@ -16,9 +16,9 @@ public class DoorParser {
 	public void parse(Scanner scan, List<DoorItem> doors) throws ParseException {
 		String name = MapParser.requireString(scan);
 		int id = MapParser.requireInteger(scan);
-		String locked = MapParser.requireString(scan);
+		String unlocked = MapParser.requireString(scan);
 		boolean lockDoor = false;
-		if (locked.equals("true")) {
+		if (unlocked.equals("false")) {
 			lockDoor = true;
 		}
 		int x = MapParser.requireInteger(scan);

@@ -15,13 +15,13 @@ import map.Map;
 public class DoorItem extends AbstractItem {
 
 	private int doorID;
-	private boolean locked;
+	private boolean unlocked;
 	private Point p;
 
 	public DoorItem(String map, int ID, boolean locked, int x, int y) {
 		super(map, "A door linking to map: " + map + " with ID: " + ID, null);
 		this.doorID = ID;
-		this.locked = !locked;
+		this.unlocked = !locked;
 		super.setX(x);
 		super.setY(y);
 		p = new Point(x + Map.tileSize / 2, y + Map.tileSize / 2);
@@ -46,14 +46,14 @@ public class DoorItem extends AbstractItem {
 	 * Unlocks the door.
 	 */
 	public void unlockDoor() {
-		this.locked = false;
+		this.unlocked = true;
 	}
 
 	/**
 	 * @return true if the door is locked, false otherwise.
 	 */
 	public boolean isLocked() {
-		return locked;
+		return !unlocked;
 	}
 
 	@Override
@@ -62,7 +62,7 @@ public class DoorItem extends AbstractItem {
 	}
 
 	public Item clone() {
-		return new DoorItem(this.name, this.doorID, this.locked, this.x, this.y);
+		return new DoorItem(this.name, this.doorID, this.unlocked, this.x, this.y);
 	}
 
 }
