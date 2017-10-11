@@ -5,6 +5,7 @@ import java.util.TimerTask;
 
 import common.player.IPlayer;
 import common.utils.DisplayValues;
+import game.Game;
 import player.InvalidPlayerExceptions;
 import player.Player;
 
@@ -38,6 +39,11 @@ public class NPC extends Player {
 		this.control = cs;
 		super.setMaxHealth(health);
 		super.setHealth(health);
+		
+		if(Game.DEV_MODE) {
+			super.setMaxHealth(1);
+			super.setHealth(1);
+		}
 	}
 
 	@Override

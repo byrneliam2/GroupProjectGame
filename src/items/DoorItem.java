@@ -21,7 +21,7 @@ public class DoorItem extends AbstractItem {
 	public DoorItem(String map, int ID, boolean locked, int x, int y) {
 		super(map, "A door linking to map: " + map + " with ID: " + ID, null);
 		this.doorID = ID;
-		// this.locked = locked; FIXME
+		this.locked = !locked;
 		super.setX(x);
 		super.setY(y);
 		p = new Point(x + Map.tileSize / 2, y + Map.tileSize / 2);

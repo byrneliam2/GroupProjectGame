@@ -17,13 +17,13 @@ public class DoorParser {
 		String name = MapParser.requireString(scan);
 		int id = MapParser.requireInteger(scan);
 		String locked = MapParser.requireString(scan);
-		boolean lockUnlock = false;
+		boolean lockDoor = false;
 		if (locked.equals("true")) {
-			lockUnlock = true;
+			lockDoor = true;
 		}
 		int x = MapParser.requireInteger(scan);
 		int y = MapParser.requireInteger(scan);
-		DoorItem d = new DoorItem(name, id, lockUnlock, x * Map.tileSize, y * Map.tileSize);
+		DoorItem d = new DoorItem(name, id, lockDoor, x * Map.tileSize, y * Map.tileSize);
 		doors.add(d);
 
 	}

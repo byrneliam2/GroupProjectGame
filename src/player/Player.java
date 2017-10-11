@@ -277,9 +277,9 @@ public class Player implements IPlayer {
 
 			double direction = MathUtils.calculateAngle(getCentreX(), getCentreY(), mouseX, mouseY);
 			// make a new bullet
-			new Bullet(getCentreX(), getCentreY(), direction, this, 12, "playerBullet1");
-			new Bullet(getCentreX(), getCentreY(), direction-Math.PI/16, this, 12, "playerBullet1");
-			new Bullet(getCentreX(), getCentreY(), direction+Math.PI/16, this, 12, "playerBullet1");
+			new Bullet(getCentreX(), getCentreY(), direction, this, 9, "playerBullet1");
+			new Bullet(getCentreX(), getCentreY(), direction-Math.PI/16, this, 9, "playerBullet1");
+			new Bullet(getCentreX(), getCentreY(), direction+Math.PI/16, this, 9, "playerBullet1");
 
 			// start a timer to count till when the next shot is ready to shoot....
 			TimerTask taskEvent = new TimerTask() {

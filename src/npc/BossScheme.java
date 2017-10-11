@@ -28,16 +28,16 @@ public class BossScheme implements ControlScheme {
 		if (moveCounter > 200) {
 			moveCounter = 0;
 			new Bullet(npc.getCentreX(), npc.getCentreY(), MathUtils.calculateAngle(npc.getxLocation(),
-					npc.getyLocation(), player.getCentreX(), player.getCentreY()), npc, 10, "npcBullet2");
+					npc.getyLocation(), player.getCentreX(), player.getCentreY()), npc, 6, "npcBullet2");
 			randDir = getRandomDir();
 		} else if (moveCounter == 100 || moveCounter == 90 || moveCounter == 190 || moveCounter == 50
 				|| moveCounter == 52) {
 			new Bullet(npc.getCentreX(), npc.getCentreY(), MathUtils.calculateAngle(npc.getxLocation(),
-					npc.getyLocation(), player.getCentreX(), player.getCentreY()), npc, 10, "npcBullet2");
+					npc.getyLocation(), player.getCentreX(), player.getCentreY()), npc, 6, "npcBullet2");
 			new Bullet(npc.getCentreX(), npc.getCentreY(), 0, npc, 4, "npcBullet2");// N
-			new Bullet(npc.getCentreX(), npc.getCentreY(), Math.PI , npc, 4, "npcBullet2");// S
-			new Bullet(npc.getCentreX(), npc.getCentreY(), Math.PI / 2 , npc, 4, "npcBullet2");// E
-			new Bullet(npc.getCentreX(), npc.getCentreY(), 3 * Math.PI / 2, npc, 4, "npcBullet2");// W
+			new Bullet(npc.getCentreX(), npc.getCentreY(), Math.PI , npc, 5, "npcBullet2");// S
+			new Bullet(npc.getCentreX(), npc.getCentreY(), Math.PI / 2 , npc, 6, "npcBullet2");// E
+			new Bullet(npc.getCentreX(), npc.getCentreY(), 3 * Math.PI / 2, npc, 7, "npcBullet2");// W
 		}
 	}
 
