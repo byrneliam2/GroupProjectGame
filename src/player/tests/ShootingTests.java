@@ -63,13 +63,14 @@ public class ShootingTests {
 			p.shoot(mouseX, mouseY);
 			sleep(1200);
 			p.shoot(mouseX, mouseY);
+			assertEquals(2,Bullet.bulletList.size());
 		} catch (InvalidPlayerExceptions e) {
 			fail();
 		}
 	}
 
 	/**
-	 * Tests that the bullet List contains the correct info after shotting two
+	 * Tests that the bullet List contains the correct info after shooting two
 	 * bullets
 	 */
 	@Test

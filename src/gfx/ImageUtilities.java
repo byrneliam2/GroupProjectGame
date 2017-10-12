@@ -66,12 +66,4 @@ public class ImageUtilities {
 		AffineTransformOp op = new AffineTransformOp(af, AffineTransformOp.TYPE_BILINEAR);
 		return op.filter(img, null);
 	}
-
-	/**
-	 * Crops the image to the given rect
-	 */
-	public static BufferedImage cropImage(BufferedImage img, Rectangle rect) {
-		BufferedImage dest = img.getSubimage((int) rect.getX(), (int) rect.getY(), rect.width, rect.height);
-		return dest;
-	}
 }

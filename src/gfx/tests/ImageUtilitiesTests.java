@@ -18,6 +18,11 @@ import java.awt.image.DataBuffer;
 import java.awt.image.DataBufferByte;
 import java.util.Arrays;
 
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 import static org.junit.Assert.assertTrue;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -58,5 +63,42 @@ public class ImageUtilitiesTests {
         assertTrue(scaled.getHeight() == 200);
         assertTrue(scaled.getWidth()!=width);
         assertTrue(scaled.getHeight()!=height);
+    }
+    
+    //External Tests
+    @Test
+    public void test01_Flip() throws InterruptedException {
+        BufferedImage img = ImageLoader.image("npcImages", "bug", true);
+        BufferedImage flippedImg = ImageUtilities.flipHorizontal(img);
+        displayImg(img,flippedImg);
+    }
+    
+    //External Tests
+    @Test
+    public void test02_Flip() throws InterruptedException {
+        BufferedImage img = ImageLoader.image("ItemPictures", "key", true);
+        BufferedImage flippedImg = ImageUtilities.flipHorizontal(img);
+        displayImg(img,flippedImg);
+    }
+ 
+    
+    public void displayImg(BufferedImage img1, BufferedImage img2) {
+    	JLabel label1 = new JLabel(new ImageIcon(img1));
+        JLabel label2 = new JLabel(new ImageIcon(img2));
+        JPanel panel = new JPanel();
+        
+        JFrame frame = new JFrame();
+        panel.add(label1);
+        panel.add(label2);
+        frame.add(panel);
+        frame.setUndecorated(true);
+        frame.pack();
+        frame.setVisible(true);
+        try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+        frame.dispose();
     }
 }
