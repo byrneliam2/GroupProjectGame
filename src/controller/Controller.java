@@ -4,11 +4,13 @@ import common.controller.Command;
 import common.controller.IController;
 import common.game.IGame;
 import common.utils.Direction;
+import player.InvalidPlayerExceptions;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.MouseAdapter;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+
+import static common.controller.Command.*;
 
 public class Controller implements IController {
     private IGame game;
@@ -30,14 +32,33 @@ public class Controller implements IController {
      * keys being pressed, so that when 'update()' is called the Controller will
      * know which commands to invoke.
      *
-     * @param cmd     The command to logged
+     * @param cmd The command to logged
      * @param pressed If the command is being pressed, or if released
      */
     public void notifyCommands(Command cmd, boolean pressed) {
-        if (pressed)
-            commands.add(cmd);
-        else
-            commands.remove(cmd);
+        if (pressed) commands.add(cmd);
+        else commands.remove(cmd);
+    }
+
+    private void handleMovement(){
+        for(Command c : commands) {
+            try {
+                switch (c) {
+                    case MOVE_UP:
+                        game.movePlayer(Direction.N);
+                        break;
+                    case MOVE_LEFT:
+                        game.movePlayer(Direction.W);
+                        break;
+                    case MOVE_DOWN:
+                        game.movePlayer(Direction.S);
+                        break;
+                    case MOVE_RIGHT:
+                        game.movePlayer(Direction.E);
+                        break;
+                }
+            } catch (Exception ignored) { }
+        }
     }
 
     /**
@@ -49,18 +70,6 @@ public class Controller implements IController {
             try {
                 if (!game.isPaused()) {
                     switch (c) {
-                        case MOVE_UP:
-                            game.movePlayer(Direction.N);
-                            break;
-                        case MOVE_LEFT:
-                            game.movePlayer(Direction.W);
-                            break;
-                        case MOVE_DOWN:
-                            game.movePlayer(Direction.S);
-                            break;
-                        case MOVE_RIGHT:
-                            game.movePlayer(Direction.E);
-                            break;
                         case INTERACT:
                             game.interact();
                             break;
@@ -75,18 +84,18 @@ public class Controller implements IController {
                             break;
                     }
                 }
-            } catch (Exception ignored) {
-            }
+            } catch (Exception ignored) { }
         }
     }
 
     @Override
     public void update() {
-        if (!game.isPaused()) {
-            handleCommands();
-            if (commands.isEmpty())// for animations, change to make neater maybe
-                game.stop();
-        }
+        if (game.isPaused()) return;
+
+        handleMovement();
+        handleCommands();
+
+        if (commands.isEmpty()) game.stop();// for animations, change to make neater maybe
     }
 
     @Override
