@@ -17,3 +17,16 @@ Map15 14 false
 0 4
 
 HealthPot 2
+
+SmallGun 1
+15 11
+
+Npc
+charger
+MediumScheme false 0
+35 6 1
+
+Npc
+charger
+MediumScheme false 0
+26 18 1

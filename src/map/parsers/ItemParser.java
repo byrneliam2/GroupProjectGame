@@ -48,7 +48,7 @@ public class ItemParser {
 		} else if (itemName.equals("SmallGun")) {
 			getItemAmount(scan, new SmallGun(), items);
 		} else {
-			throw new ParseException("Unrecognised Item or entity name");
+			throw new ParseException("Unrecognised Item or entity name: "+itemName);
 		}
 	}
 

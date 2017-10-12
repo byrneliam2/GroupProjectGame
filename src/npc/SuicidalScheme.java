@@ -22,7 +22,7 @@ public class SuicidalScheme implements ControlScheme {
 
 	@Override
 	public void doBestAction(NPC npc, IPlayer player) {
-		if (moveCount >= 60) {
+		if (moveCount >= 30) {
 			chooseBestDir(npc, player);
 			moveCount = 0;
 		}
@@ -43,15 +43,15 @@ public class SuicidalScheme implements ControlScheme {
 	private void chooseSideDir() {
 		double number = Math.random() > 0.5 ? Math.PI / 2 : -Math.PI / 2;
 		angle = angle + number;
-		moveX = Math.sin(angle) * 4;
-		moveY = -Math.cos(angle) * 4;
+		moveX = Math.sin(angle) * 6;
+		moveY = -Math.cos(angle) * 6;
 		angle = angle - number;
 	}
 
 	private void chooseBestDir(NPC npc, IPlayer player) {
 		angle = MathUtils.calculateAngle(npc.getCentreX(), npc.getCentreY(), player.getCentreX(), player.getCentreY());
 
-		moveX = Math.sin(angle) * 5;
-		moveY = -Math.cos(angle) * 5;
+		moveX = Math.sin(angle) * 7;
+		moveY = -Math.cos(angle) * 7;
 	}
 }

@@ -10,3 +10,29 @@ Map6 11 true
 16 0
 
 HealthPot 2
+
+Npc
+HungryBear
+PatrolScheme false 15
+3 2 2
+Npc
+HungryBear
+PatrolScheme false 13
+3 4 2
+Npc
+HungryBear
+PatrolScheme false 11
+3 6 2
+
+Npc
+HungryBear
+PatrolScheme false 15
+55 2 2
+Npc
+HungryBear
+PatrolScheme false 13
+55 4 2
+Npc
+HungryBear
+PatrolScheme false 11
+55 6 2
