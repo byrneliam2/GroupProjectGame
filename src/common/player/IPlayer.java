@@ -34,6 +34,8 @@ public interface IPlayer {
 
 	int getHealth();
 
+	int getMaxHealth();
+
 	Backpack getBackpack();
 
 	void setMap(Map map);

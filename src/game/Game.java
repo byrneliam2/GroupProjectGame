@@ -1,5 +1,6 @@
 package game;
 
+import java.awt.image.BufferedImage;
 import java.io.Serializable;
 import java.util.Observable;
 import java.util.Observer;
@@ -13,6 +14,8 @@ import player.InvalidPlayerExceptions;
 import player.Player;
 import save_load.SaveLoad;
 import common.utils.Direction;
+import gfx.ImageLoader;
+import gfx.ImageUtilities;
 
 /**
  * Class to be used by front end for getting all the different entities in the
@@ -27,6 +30,8 @@ public class Game extends Observable implements IGame, Serializable {
 	 */
 	private static final long serialVersionUID = -428815268724553339L;
 
+	public static BufferedImage heart = ImageUtilities.scale(ImageLoader.image("game", "heart", true), 50, 50);
+	public static BufferedImage emptyHeart = ImageUtilities.scale(ImageLoader.image("game", "lost-heart", true), 50, 50);
 	public static final boolean DEV_MODE = false;
 	public static boolean GAME_PAUSED = false;
 

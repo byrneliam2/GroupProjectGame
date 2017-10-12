@@ -127,6 +127,8 @@ class Entity {
 	static final int SIZE = 60;
 
 	/**
+	 * Scales the image associated with the entity
+	 * 
 	 * @param object   object that this entity represents
 	 * @param type     type of the object
 	 * @param image    image of the object
@@ -137,6 +139,21 @@ class Entity {
 		this.object = object;
 		this.type = type;
 		this.image = ImageUtilities.scale(image, size != 0 ? size : SIZE, size != 0 ? size : SIZE);
+		this.location = location;
+	}
+	
+	/**
+	 * Doesn't scale the image associated with entity
+	 * 
+	 * @param object
+	 * @param type
+	 * @param image
+	 * @param location
+	 */
+	Entity(Object object, EntityType type, BufferedImage image, Point location) {
+		this.object = object;
+		this.type = type;
+		this.image = image;
 		this.location = location;
 	}
 
@@ -158,5 +175,9 @@ class Entity {
 
 	public void setLocation(Point location) {
 		this.location = location;
+	}
+	
+	public void setImage(BufferedImage newImage) {
+		this.image = newImage;
 	}
 }

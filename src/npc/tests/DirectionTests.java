@@ -10,8 +10,9 @@ import player.Player;
 import common.utils.MathUtils;
 
 /**
- * Test that the correct direction is gotten by the getAngleToPlayer method.
- * Tests the 8 coordinates of a compass.
+ * Test that the correct direction is gotten by the Math.utils.CalculateAngle()
+ * method. Tests the 8 coordinates of a compass. Tested in this package as this
+ * is where the method is primarily used.
  * 
  * @author Thomas Edwards
  *

@@ -11,6 +11,7 @@ import common.player.IBullet;
 import common.player.IPlayer;
 import common.utils.DisplayValues;
 import frames.MainDisplay;
+import game.Game;
 import common.game.IGame;
 import gfx.ImageLoader;
 import gfx.ImageUtilities;
@@ -101,11 +102,10 @@ public class MapCard extends Card {
 			);
 		if (type == EntityType.HEART || all)
 			// add player health
-			for (int i = 0; i < game.getPlayer().getHealth(); i++) {
-				addDynamicEntity(new Entity(game.getPlayer(), EntityType.HEART,
-						ImageLoader.image("game", "heart", true),
-						new Point(ELEMENT_LOC_A + (i * ELEMENT_LOC_A), 0),
-						ELEMENT_LOC_A));
+			for (int i = 0; i < game.getPlayer().getMaxHealth(); i++) {
+					addDynamicEntity(new Entity(game.getPlayer(), EntityType.HEART,
+							Game.heart,
+							new Point(ELEMENT_LOC_A + (i * ELEMENT_LOC_A), 0)));
 			}
 		if (type == EntityType.INVENTORY || all)
 			// add inventory items
@@ -166,7 +166,11 @@ public class MapCard extends Card {
 					break;
 				case HEART:
 					if (++numHearts > game.getPlayer().getHealth())
+						e.setImage(Game.emptyHeart);
+					else if(numHearts>game.getPlayer().getMaxHealth())
 						toRemove.add(e);
+					else if(numHearts<=game.getPlayer().getHealth())
+						e.setImage(Game.heart);
 					break;
 				case INVENTORY:
 					numInventory++;
@@ -184,7 +188,7 @@ public class MapCard extends Card {
 			addDynamicEntities(t, false);
 		};
 		if (numItems < map.getItems().size()) 				type = EntityType.ITEM;
-		if (numHearts < game.getPlayer().getHealth()) 		type = EntityType.HEART;
+		if (numHearts < game.getPlayer().getMaxHealth()) 		type = EntityType.HEART;
 		if (numInventory < game.getPlayer().getBackpack()
 				.getInventorySize()) 						type = EntityType.INVENTORY;
 		if (type != null) dyn.accept(type);
@@ -258,8 +262,7 @@ public class MapCard extends Card {
 			draw(e.getImage(), e.getLocation().x, e.getLocation().y,
 					e.getImage().getWidth(), e.getImage().getHeight());
 		for (Entity e : dynamics)
-			draw(e.getImage(), e.getLocation().x, e.getLocation().y,
-					e.getImage().getWidth(), e.getImage().getHeight());
+			draw(e.getImage(), e.getLocation().x, e.getLocation().y,e.getImage().getWidth(), e.getImage().getHeight());
 	}
 
 	/**

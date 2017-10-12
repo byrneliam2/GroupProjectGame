@@ -116,4 +116,10 @@ public class MockPlayer implements IPlayer {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public int getMaxHealth() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
