@@ -3,7 +3,6 @@ package controller;
 import common.controller.Command;
 import common.controller.IController;
 import common.game.IGame;
-import player.InvalidPlayerExceptions;
 import common.utils.Direction;
 
 import java.awt.event.KeyAdapter;
@@ -80,7 +79,7 @@ public class Controller implements IController {
 					break;
 				}
 			}
-		} catch (InvalidPlayerExceptions ignored) {
+		} catch (Exception ignored) {
 		}
 	}
 
