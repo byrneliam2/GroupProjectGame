@@ -7,5 +7,7 @@ TODO
 - Moving diagonally it moves faster than sideways and animations can't be made for it.
 - Fill out last 3 maps with npc/items
 - Put in the sound effects for shooting, dying.
+- Change suicidal scheme to different color bullets
+- Change shotgun blast to different color bullets
 
 FIXME
