@@ -3,6 +3,9 @@ package npc;
 import common.player.IPlayer;
 import map.Map;
 
+/**
+ * @author Thomas Edwards
+ */
 public class BossNPC extends NPC {
 
 	public BossNPC(IPlayer mainPlayer) {

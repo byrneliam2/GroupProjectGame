@@ -9,7 +9,7 @@ import common.utils.MathUtils;
 /**
  * A scheme which causes the NPC to patrol left-right or up-down. The NPC will
  * walk the specified distance in the specified direction, then will walk back
- * continuously walking through the loop.
+ * continuously walking through the loop. Shoots
  *
  * @author Thomas Edwards
  *

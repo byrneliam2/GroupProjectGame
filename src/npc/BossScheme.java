@@ -6,6 +6,10 @@ import common.utils.MathUtils;
 import player.Bullet;
 import player.InvalidPlayerExceptions;
 
+/**
+ * Scheme used for the boss, shoots both randomly and structured. 
+ * @author Thomas Edwards
+ */
 public class BossScheme implements ControlScheme {
 	private Direction randDir = getRandomDir();
 	private int moveCounter = 0;

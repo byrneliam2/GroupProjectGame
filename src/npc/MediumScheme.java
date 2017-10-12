@@ -8,7 +8,7 @@ import player.Player;
 import common.utils.MathUtils;
 
 /**
- * Moves randomly and shoots the player fast.
+ * Moves randomly and shoots the player medium pace.
  * 
  * @author Thomas Edwards
  *

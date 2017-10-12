@@ -20,8 +20,8 @@ public class ShootingTests {
 	private ArrayList<NPC> npcs;
 	private Player p;
 	private Map m;
-	private int xLocation = 100;
-	private int yLocation = 100;
+	private int xLocation = 600;
+	private int yLocation = 600;
 	private double mouseX = 50.50;
 	private double mouseY = 50.50;
 
@@ -76,10 +76,10 @@ public class ShootingTests {
 	public void testShooting4() {
 		setup();
 		try {
-			p.shoot(800, 800);
+			p.shoot(1, 1);
 			assertEquals(1, Bullet.bulletList.size());
 
-			sleep(1200);
+			sleep((int) (p.getFireRate() * 1100));
 			assertEquals(1, Bullet.bulletList.size());
 			p.shoot(800, 800);
 			assertEquals(2, Bullet.bulletList.size());
@@ -100,9 +100,10 @@ public class ShootingTests {
 			double x = b.getX();
 			double y = b.getY();
 
-			// checks that the bullet is starting at the players location.
-			assertEquals(this.xLocation, x, 2);
-			assertEquals(this.yLocation, y, 2);
+			// checks that the bullet is starting at the players location.Note the bullet
+			// may have moved once during this time.
+			assertEquals(p.getCentreX(), x, 10);
+			assertEquals(p.getCentreY(), y, 10);
 		} catch (InvalidPlayerExceptions e) {
 			fail();
 		}
@@ -120,7 +121,7 @@ public class ShootingTests {
 			double x = b.getX();
 			double y = b.getY();
 
-			sleep(300);
+			sleep(100);
 
 			assertTrue(b.getX() < x);
 			assertTrue(b.getY() < y);
@@ -136,14 +137,15 @@ public class ShootingTests {
 	public void testDir2() {
 		setup();
 		try {
-			p.shoot(130, 140);
+			p.shoot(600 + mouseX, 600 + mouseX);
 			assertEquals(1, Bullet.bulletList.size());
 			Bullet b = Bullet.bulletList.get(0);
 			double x = b.getX();
 			double y = b.getY();
 
-			sleep(300);
+			sleep(100);
 
+			System.out.println(b.getX() + "  " + x);
 			assertTrue(b.getX() > x);
 			assertTrue(b.getY() > y);
 		} catch (InvalidPlayerExceptions e) {
@@ -158,13 +160,13 @@ public class ShootingTests {
 	public void testDir3() {
 		setup();
 		try {
-			p.shoot(50, 120);
+			p.shoot(50, 600 + mouseY);
 			assertEquals(1, Bullet.bulletList.size());
 			Bullet b = Bullet.bulletList.get(0);
 			double x = b.getX();
 			double y = b.getY();
 
-			sleep(300);
+			sleep(100);
 
 			assertTrue(b.getX() < x);
 			assertTrue(b.getY() > y);
@@ -180,13 +182,13 @@ public class ShootingTests {
 	public void testDir4() {
 		setup();
 		try {
-			p.shoot(120, 50);
+			p.shoot(660, 50);
 			assertEquals(1, Bullet.bulletList.size());
 			Bullet b = Bullet.bulletList.get(0);
 			double x = b.getX();
 			double y = b.getY();
 
-			sleep(300);
+			sleep(100);
 
 			assertTrue(b.getX() > x);
 			assertTrue(b.getY() < y);
@@ -199,7 +201,7 @@ public class ShootingTests {
 		Bullet.bulletList.clear();
 		p = new Player("Thomas", xLocation, yLocation);
 		npcs = new ArrayList<NPC>();
-		m = new Map("Map3", p, null, npcs, null);
+		m = new Map("Map7", p, null, npcs, null);
 		p.setMap(m);
 	}
 

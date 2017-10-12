@@ -42,13 +42,15 @@ public class Backpack {
 	 */
 	public void pickUpItem(Item item) throws InvalidBackpackException {
 		if (item == null)
-			throw new InvalidBackpackException("Can't pickup 'nothing' (closest item was null)");
+			throw new InvalidBackpackException("Can't pickup 'nothing' (item was null)");
 		if (inventory.size() >= MAX_INVENTORY)
 			throw new InvalidBackpackException("BackPack is full, can't add anymore items to it");
 		if (item.getPack() != null)
 			throw new InvalidBackpackException("Item has already been picked up");
 
 		item.pickUp(this);
+		
+		//updated so that picking up items applys the effect immediatly.
 		if (item instanceof Key) {// if you pick up a key, add it to the key section
 			Key key = (Key) item;
 			keys.add(key); // FIXME: Can pick up infinite keys?
@@ -71,6 +73,7 @@ public class Backpack {
 	 * @param itemToUse
 	 * @throws InvalidBackpackException
 	 */
+	@Deprecated
 	public void pickUpAndUse(Usable itemToUse) throws InvalidBackpackException {
 		if (inventory.size() >= MAX_INVENTORY)
 			throw new InvalidBackpackException("BackPack is full, can't add anymore items to it");
@@ -88,6 +91,7 @@ public class Backpack {
 	 * @throws InvalidBackpackException
 	 *             if the backpack doesn't contain this item.
 	 */
+	@Deprecated
 	public void removeItem(Item item) throws InvalidBackpackException {
 		if (item.getPack() == null)
 			throw new InvalidBackpackException("Item has not been picked up");
@@ -110,6 +114,7 @@ public class Backpack {
 	 * @throws InvalidBackpackException
 	 *             if the item was not part of a player's backpack.
 	 */
+	@Deprecated
 	public void useItem(Usable itemToUse) throws InvalidBackpackException {
 		if (!inventory.remove(itemToUse))// removes the item from inventory
 			throw new InvalidBackpackException("Item was not found in the pack");

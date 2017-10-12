@@ -12,12 +12,12 @@ public class ShinyArmor extends AbstractItem implements Equipable {
 
 	@Override
 	public void provideBonus(Player p) {
-		p.setMaxHealth(p.getMaxHealth() + 3);
+		p.setMaxHealth(p.getMaxHealth() + 2);
 	}
 
 	@Override
 	public void removeBonus(Player p) {
-		p.setMaxHealth(p.getMaxHealth() - 3);
+		p.setMaxHealth(p.getMaxHealth() - 2);
 	}
 
 }
