@@ -4,7 +4,6 @@ TODO
 - External testing for all libraries (including MapCardTests)
 - Abstract out common interfaces: should all use common types!
 
-- Moving diagonally it moves faster than sideways and animations can't be made for it.
 - Put in the sound effects for shooting, dying.
 - FIX DOOORS
 - Change suicidal scheme to different color bullets
