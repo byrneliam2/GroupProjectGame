@@ -4,13 +4,10 @@ import common.controller.Command;
 import common.controller.IController;
 import common.game.IGame;
 import common.utils.Direction;
-import player.InvalidPlayerExceptions;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.MouseAdapter;
 import java.util.*;
-
-import static common.controller.Command.*;
 
 public class Controller implements IController {
     private IGame game;
