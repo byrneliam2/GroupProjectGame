@@ -1,6 +1,7 @@
 package player;
 
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -21,7 +22,7 @@ import map.Environment;
  * @author Thomas Edwards
  *
  */
-public class Bullet implements IBullet {
+public class Bullet implements IBullet, Serializable {
 
 	/**
 	 * The list of all current bullets in the game.

@@ -1,6 +1,7 @@
 package items;
 
 import java.awt.Point;
+import java.io.Serializable;
 
 import common.items.Item;
 import map.Map;
@@ -12,7 +13,7 @@ import map.Map;
  * @author James
  *
  */
-public class DoorItem extends AbstractItem {
+public class DoorItem extends AbstractItem implements Serializable {
 
 	private int doorID;
 	private boolean locked;
