@@ -198,8 +198,8 @@ public class MapTests {
 		assertEquals(150, p1.getCentreY());
 
 		// Assert door is at 30,210
-		assert (30 == d.getCentrePoint().getX());
-		assert (210 == d.getCentrePoint().getY());
+		assert (30 == d.getEnterBox().getCenterX());
+		assert (210 == d.getEnterBox().getCenterY());
 
 		// move player to 150,210
 		assertFalse(p1.move(0, 60));
@@ -238,8 +238,8 @@ public class MapTests {
 		assertEquals(150, p1.getCentreY());
 
 		// Assert door is at 390,390 and key is at 390,310
-		assert (390 == door.getCentrePoint().getX());
-		assert (400 == door.getCentrePoint().getY());
+		assert (390 == door.getEnterBox().getCenterX());
+		assert (400 == door.getEnterBox().getCenterY());
 		assert (360 == key.getX());
 		assert (280 == key.getY());
 

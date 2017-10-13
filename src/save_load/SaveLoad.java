@@ -81,7 +81,6 @@ public class SaveLoad implements IGame, Serializable {
 		}
 		return game;
 	}
-
 	@Override
 	public void giveObserver(Observer o) {
 		// TODO Auto-generated method stub
