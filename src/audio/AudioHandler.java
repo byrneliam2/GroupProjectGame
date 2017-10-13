@@ -21,6 +21,7 @@ public class AudioHandler implements IAudioHandler {
     private String assetsFolder;
 
     private AudioClip currentSong;
+    private AudioClip loopingSong;
     private Deque<AudioClip> musicQueue;
 
     private float currentVolume;
@@ -38,13 +39,22 @@ public class AudioHandler implements IAudioHandler {
     }
 
     @Override
+    public void playLoop(Track track) {
+        this.stop();
+        loopingSong = createAudioClip(track, false, true);
+
+    }
+
+    @Override
     public void queueMusic(Track track) {
+        if(loopingSong != null) this.stop();
         musicQueue.offerLast(createAudioClip(track, true, false));
         if (currentSong == null) next();
     }
 
     @Override
     public void forceMusic(Track track) {
+        if(loopingSong != null) this.stop();
         musicQueue.offerFirst(createAudioClip(track, true, false));
         next();
     }
@@ -74,6 +84,11 @@ public class AudioHandler implements IAudioHandler {
 
     @Override
     public void stop() {
+        if(loopingSong != null) {
+            loopingSong.disableLoop();
+            loopingSong.getClip().stop();
+            loopingSong = null;
+        }
         musicQueue.clear();
         next();
     }
@@ -96,6 +111,8 @@ public class AudioHandler implements IAudioHandler {
                     if (wasQueued) {
                         this.currentSong = null;
                         next();
+                    } else if (loop) {
+                        this.loopingSong = createAudioClip(track, false, true);
                     }
                     //Close the Stream to save memory
                     e.getLine().close();
@@ -165,7 +182,11 @@ public class AudioHandler implements IAudioHandler {
             return path;
         }
 
-        public boolean shouldLoop() {
+        private void disableLoop() {
+            this.loop = false;
+        }
+
+        private boolean shouldLoop() {
             return loop;
         }
     }

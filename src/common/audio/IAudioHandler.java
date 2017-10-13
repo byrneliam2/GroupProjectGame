@@ -9,6 +9,12 @@ public interface IAudioHandler {
     void playSound(Track track);
 
     /**
+     * This method will disable all other music playing and queued, and start a music clip that will
+     * constantly loop until either another song is requested, or stop() is called.
+     */
+    void playLoop(Track track);
+
+    /**
      * This method will queue a new song to be played. This could either include a check to play the song instantly,
      * or allow the implementor to call the next() method.
      * @param track The SoundTrack to be queued.

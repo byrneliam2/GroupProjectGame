@@ -162,7 +162,7 @@ public class MainDisplay extends JComponent implements Observer {
         switchScreen("menu");
         controller.reloadController();
         audioHandler.stop();
-        audioHandler.queueMusic(MusicTrack.MAIN_MENU);
+        audioHandler.playLoop(MusicTrack.MENU_MUSIC);
     }
 
     /* =========================================================================================== */
@@ -182,7 +182,7 @@ public class MainDisplay extends JComponent implements Observer {
     public void startGame() {
         switchScreen(game.getWorld().getStartingMap().getName());
         audioHandler.stop();
-        audioHandler.queueMusic(MusicTrack.TEST_MUSIC);
+        audioHandler.playLoop(MusicTrack.GAME_MUSIC);
         startTimer();
     }
 
