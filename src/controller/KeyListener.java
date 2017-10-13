@@ -6,13 +6,13 @@ package controller;
  * External Tester: Mohsen Javaher
  */
 
-import common.controller.IListener;
+import common.controller.Command;
 import common.controller.InputType;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class KeyListener extends KeyAdapter implements IListener {
+public class KeyListener extends KeyAdapter  {
     private Controller parent;
 
     public KeyListener(Controller parent) {
@@ -21,11 +21,24 @@ public class KeyListener extends KeyAdapter implements IListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        notifyController(e.getKeyCode(), InputType.KEYBOARD, parent,true);
+        notifyController(e.getKeyCode(), parent,true);
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        notifyController(e.getKeyCode(), InputType.KEYBOARD, parent,false);
+        notifyController(e.getKeyCode(), parent,false);
+    }
+
+    /**
+     * Notifies the Controller of an Event Triggering.
+     * @param input The key with an event change
+     * @param pressed If the key was Clicked or Released.
+     */
+    private void notifyController(Integer input, Controller parent, boolean pressed){
+        for(Command cmd : Command.values()) {
+            if(!cmd.getType().equals(InputType.KEYBOARD)) continue;
+            else if(!cmd.getValue().equals(input)) continue;
+            parent.notifyCommands(cmd, pressed);
+        }
     }
 }
