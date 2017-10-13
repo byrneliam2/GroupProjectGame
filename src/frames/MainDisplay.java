@@ -222,7 +222,9 @@ public class MainDisplay extends JComponent implements Observer {
         IGame loadedGame = SaveLoad.loadGame(selectedFile);
         game.loadGame(loadedGame.getPlayer(), loadedGame.getWorld());
         this.doMapSetup();
-        switchScreen(game.getPlayer().getMap().getName());	
+        switchScreen(game.getPlayer().getMap().getName());
+        audioHandler.stop();
+        audioHandler.playLoop(MusicTrack.GAME_MUSIC);
         startTimer();
     }
 
