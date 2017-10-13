@@ -1,5 +1,7 @@
 package items;
 
+import java.io.Serializable;
+
 import common.items.Item;
 
 /**
@@ -8,7 +10,7 @@ import common.items.Item;
  * @author Thomas Edwards
  *
  */
-public class Key extends AbstractItem {
+public class Key extends AbstractItem implements Serializable{
 
 	private int id;
 	private String color;

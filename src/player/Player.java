@@ -2,6 +2,7 @@ package player;
 
 import java.awt.Rectangle;
 import java.awt.geom.Ellipse2D;
+import java.io.Serializable;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -23,7 +24,7 @@ import common.utils.MathUtils;
  * @author javahemohs and Thomas Edwards Created by javahemohs on 19/09/17.
  *
  */
-public class Player implements IPlayer {
+public class Player implements IPlayer, Serializable{
 	/* constants */
 	private static final int rangeCircleWidth = 2 * Map.tileSize;
 	private static final double defaultFireRate = 0.8;
@@ -221,7 +222,7 @@ public class Player implements IPlayer {
 	/**
 	 * Sets the player's position in the new map next to the door he just came
 	 * through.
-	 * 
+	 *
 	 * @param door
 	 *            the door to set the player's position at
 	 */
@@ -240,7 +241,7 @@ public class Player implements IPlayer {
 	/**
 	 * Shoots a bullet from the player's current coordinates to the coordinates
 	 * given by the mouse
-	 * 
+	 *
 	 * @param direction
 	 *            should be an angle between 0 and 2Pi. (there's a method in
 	 *            MathUtil package. which you can use to calculate the angle from
@@ -373,7 +374,7 @@ public class Player implements IPlayer {
 	/**
 	 * Sets the max health, ensures that the player's current health is <= max
 	 * health.
-	 * 
+	 *
 	 * @param max
 	 */
 	public void setMaxHealth(int max) {
