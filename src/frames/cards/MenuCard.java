@@ -10,6 +10,7 @@ import common.audio.SoundTrack;
 import frames.MainDisplay;
 import gfx.GraphicsUtilities;
 import gfx.ImageLoader;
+import gfx.PictureButton;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,15 +34,20 @@ public class MenuCard extends Card {
 		// put the logo in separately
 		components.put("logo", GraphicsUtilities.produceSticker(
 				ImageLoader.image("ui", "logo", true), 0.5f));
+
 		// use a loop to load all the buttons into the list
-		String[] files = { "new", "load", "settings", "info", "exit" };
-		// String[] files = {"load", "settings", "info", "exit"};
-		// components.put("new", new LabelButton("New Game", 225, 75));
-		for (String s : files) {
+		//String[] files = { "new", "load", "settings", "info", "exit" };
+		 String[] files = {"load", "settings", "info", "exit"};
+		 components.put("new", new PictureButton("New Game", 225, 75));
+		 components.put("load", new PictureButton("Load", 225, 75));
+		 components.put("settings", new PictureButton("Settings", 225, 75));
+		 components.put("info", new PictureButton("Info", 225, 75));
+		 components.put("exit", new PictureButton("Exit", 225, 75));
+		/*for (String s : files) {
 			components.put(s, GraphicsUtilities.produceButton(
 					ImageLoader.image("ui", "bu_" + s, true),
 					ImageLoader.image("ui", "bu_" + s + "_r", false), 0.5f));
-		}
+		}*/
 	}
 
     @Override
