@@ -43,6 +43,7 @@ public class AudioHandler implements IAudioHandler {
     public void playLoop(Track track) {
         this.stop();
         loopingSong = createAudioClip(track, false, true);
+        startClip(loopingSong);
 
     }
 
@@ -81,6 +82,7 @@ public class AudioHandler implements IAudioHandler {
         this.currentVolume = percentage;
         //Change the volume setting, and change song that is currently being played
         if(currentSong != null) setClipVolume(currentSong);
+        if(loopingSong != null) setClipVolume(loopingSong);
     }
 
     @Override
@@ -114,6 +116,7 @@ public class AudioHandler implements IAudioHandler {
                         next();
                     } else if (loop) {
                         this.loopingSong = createAudioClip(track, false, true);
+                        startClip(loopingSong);
                     }
                     //Close the Stream to save memory
                     e.getLine().close();
