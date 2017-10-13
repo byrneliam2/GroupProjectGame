@@ -114,7 +114,7 @@ public class AudioHandler implements IAudioHandler {
                     if (wasQueued) {
                         this.currentSong = null;
                         next();
-                    } else if (loop) {
+                    } else if (audioClip.shouldLoop()) {
                         this.loopingSong = createAudioClip(track, false, true);
                         startClip(loopingSong);
                     }
