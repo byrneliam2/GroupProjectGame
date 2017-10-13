@@ -1,5 +1,12 @@
 package audio.tests;
 
+/**
+ * Primary Author: Andrew McManaway
+ * Code Review: Liam Byrne
+ * External Tester: James Watt
+ */
+
+
 import audio.AudioException;
 import audio.AudioHandler;
 import common.audio.IAudioHandler;

@@ -1,5 +1,11 @@
 package common.audio;
 
+/**
+ * Primary Author: Andrew McManaway
+ * Code Review: Liam Byrne
+ * External Tester: James Watt
+ */
+
 public interface IAudioHandler {
 
     /**

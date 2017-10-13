@@ -1,8 +1,11 @@
 package audio;
 
 /**
- * This Class is Thrown when classes implementing IAudioHandler encounter an error attempting to play/queue a sound file.
+ * Primary Author: Andrew McManaway
+ * Code Review: Liam Byrne
+ * External Tester: James Watt
  */
+
 public class AudioException extends RuntimeException{
     AudioException(String message) {
         super(message);

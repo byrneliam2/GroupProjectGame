@@ -1,8 +1,9 @@
 package audio;
 
-/*  Andrew McManaway (mcmanaaandr)
- *  ID: 300371233
- *  SWEN 222 Group Project
+/**
+ * Primary Author: Andrew McManaway
+ * Code Review: Liam Byrne
+ * External Tester: James Watt
  */
 
 import common.audio.IAudioHandler;

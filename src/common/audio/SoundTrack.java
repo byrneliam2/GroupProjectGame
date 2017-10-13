@@ -1,7 +1,9 @@
-package common.audio;/*
- * andre: 300338518
- * 23/09/2017
- * Group Project
+package common.audio;
+
+/**
+ * Primary Author: Andrew McManaway
+ * Code Review: Liam Byrne
+ * External Tester: James Watt
  */
 
 public enum SoundTrack implements Track{
