@@ -1,5 +1,6 @@
 package npc;
 
+import java.io.Serializable;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -11,17 +12,21 @@ import player.Player;
 
 /**
  * NPC class.
- * 
+ *
  * @author Thomas Edwards
  *
  */
-public class NPC extends Player {
+public class NPC extends Player implements Serializable {
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 3953049502566928580L;
 	public static final int updateRate = DisplayValues.FRAMERATE;// rate in milliseconds that NPC is updated
 	private static Timer npcTimer = new Timer();
 
 	private IPlayer p;
 	private ControlScheme control;
-	protected TimerTask npctask;
+	protected transient TimerTask npctask;
 
 	/**
 	 * @param name
@@ -39,7 +44,7 @@ public class NPC extends Player {
 		this.control = cs;
 		super.setMaxHealth(health);
 		super.setHealth(health);
-		
+
 		if(Game.DEV_MODE) {
 			super.setMaxHealth(1);
 			super.setHealth(1);

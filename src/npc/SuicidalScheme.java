@@ -1,5 +1,7 @@
 package npc;
 
+import java.io.Serializable;
+
 import common.player.IPlayer;
 import map.Map;
 import player.Bullet;
@@ -9,11 +11,11 @@ import common.utils.MathUtils;
 
 /**
  * A scheme where the npc move towards the player and when its close, shoots the player very quickly.
- * 
+ *
  * @author Thomas Edwards
  *
  */
-public class SuicidalScheme implements ControlScheme {
+public class SuicidalScheme implements ControlScheme, Serializable{
 	private double moveX, moveY, angle;
 	private int moveCount = 60;
 

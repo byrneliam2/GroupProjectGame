@@ -1,5 +1,7 @@
 package npc;
 
+import java.io.Serializable;
+
 import common.player.IPlayer;
 import map.Map;
 import player.Bullet;
@@ -14,7 +16,7 @@ import common.utils.MathUtils;
  * @author Thomas Edwards
  *
  */
-public class PatrolScheme implements ControlScheme {
+public class PatrolScheme implements ControlScheme, Serializable{
 
 	private int progress = 0;// in pixels
 	private final int maxProgress;// in pixels
@@ -76,7 +78,7 @@ public class PatrolScheme implements ControlScheme {
 					npc.getyLocation(), player.getCentreX(), player.getCentreY());
 			if(angle>=Math.PI)
 				angle = 3*Math.PI/2;
-			else 
+			else
 				angle = Math.PI/2;
 			new Bullet(npc.getCentreX(), npc.getCentreY(), angle, npc, 6, "npcBullet3");
 			shotCounter = 0;

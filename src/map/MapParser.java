@@ -2,6 +2,7 @@ package map;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -25,7 +26,7 @@ import player.Player;
  * @author James
  *
  */
-public class MapParser {
+public class MapParser implements Serializable{
 
 	private MapParser() {
 

@@ -1,5 +1,7 @@
 package npc;
 
+import java.io.Serializable;
+
 import common.player.IPlayer;
 import common.utils.Direction;
 import common.utils.MathUtils;
@@ -7,10 +9,10 @@ import player.Bullet;
 import player.InvalidPlayerExceptions;
 
 /**
- * Scheme used for the boss, shoots both randomly and structured. 
+ * Scheme used for the boss, shoots both randomly and structured.
  * @author Thomas Edwards
  */
-public class BossScheme implements ControlScheme {
+public class BossScheme implements ControlScheme, Serializable {
 	private Direction randDir = getRandomDir();
 	private int moveCounter = 0;
 

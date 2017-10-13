@@ -1,5 +1,7 @@
 package npc;
 
+import java.io.Serializable;
+
 import common.player.IPlayer;
 import common.utils.Direction;
 import player.Bullet;
@@ -9,11 +11,11 @@ import common.utils.MathUtils;
 
 /**
  * Moves randomly and shoots the player medium pace.
- * 
+ *
  * @author Thomas Edwards
  *
  */
-public class MediumScheme implements ControlScheme {
+public class MediumScheme implements ControlScheme, Serializable {
 
 	protected Direction randDir = getRandomDir();
 	protected int moveCounter = 0;

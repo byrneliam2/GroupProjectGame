@@ -1,16 +1,18 @@
 package npc;
 
+import java.io.Serializable;
+
 import common.player.IPlayer;
 import player.Bullet;
 
 /**
  * Spray Scheme is a scheme that extends Medium scheme, however the NPC will shoot sprays of bullets in all directions
  * at the given spray rate.
- * 
+ *
  * @author Thomas Edwards
  *
  */
-public class SprayScheme extends MediumScheme {
+public class SprayScheme extends MediumScheme implements Serializable{
 
 	private int sprayRate;
 

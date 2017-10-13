@@ -1,12 +1,14 @@
 package npc;
 
+import java.io.Serializable;
+
 import common.player.IPlayer;
 import map.Map;
 
 /**
  * @author Thomas Edwards
  */
-public class BossNPC extends NPC {
+public class BossNPC extends NPC implements Serializable{
 
 	public BossNPC(IPlayer mainPlayer) {
 		super("Boss", 500, 400, 20, mainPlayer, new BossScheme());
