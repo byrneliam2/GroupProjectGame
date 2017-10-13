@@ -26,7 +26,7 @@ import gfx.ImageUtilities;
 public class Game extends Observable implements IGame, Serializable {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -428815268724553339L;
 
@@ -136,6 +136,7 @@ public class Game extends Observable implements IGame, Serializable {
 	public void saveGame(String theFilePath) {
 		System.out.println("SaveGame MohsenJavehr" + this);
 		SaveLoad saveLoad = new SaveLoad(this, theFilePath);
+		saveLoad.saveGame(this, theFilePath);
 	}
 
 	@Override
