@@ -22,7 +22,7 @@ public class AnimationEntity extends Entity {
 	private BufferedImage[] frontImages = new BufferedImage[9];
 	private BufferedImage[] leftImages = new BufferedImage[9];
 	private BufferedImage[] rightImages = new BufferedImage[9];
-	
+
 	private int currentImg = 0;
 	private final int framesPerImage = 20;// how many frames per image of the animation.
 	private final int scale = 60;// the scale of the image.
@@ -49,16 +49,10 @@ public class AnimationEntity extends Entity {
 			frontImages[i] = img;
 		}
 		for (int i = 0; i < leftImages.length; i++) {
-			BufferedImage img = ImageLoader.image("playerImages/playerAnimationImages", "L" + i, true);
+			BufferedImage img = ImageLoader.image("playerImages/playerAnimationImages", "S" + i, true);
 			img = ImageUtilities.scale(img, scale, scale);
 			leftImages[i] = img;
-		}
-		for (int i = 0; i < rightImages.length; i++) {
-			// got to flip this image cause lazy james XD
-			BufferedImage img = ImageLoader.image("playerImages/playerAnimationImages", "R" + i, true);
-			img = ImageUtilities.flipHorizontal(img);
-			img = ImageUtilities.scale(img, scale, scale);
-			rightImages[i] = img;
+			rightImages[i] = ImageUtilities.flipHorizontal(img);
 		}
 	}
 

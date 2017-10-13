@@ -2,6 +2,7 @@ package items;
 
 import java.awt.Point;
 import java.io.Serializable;
+import java.awt.Rectangle;
 
 import common.items.Item;
 import map.Map;
@@ -17,7 +18,8 @@ public class DoorItem extends AbstractItem implements Serializable {
 
 	private int doorID;
 	private boolean locked;
-	private Point p;
+	private Rectangle enterBox;// this is the collision rectangle, when the player collides with this rect, it
+								// causes the play to move through the door
 
 	public DoorItem(String map, int ID, boolean locked, int x, int y) {
 		super(map, "A door linking to map: " + map + " with ID: " + ID, null);
@@ -25,11 +27,12 @@ public class DoorItem extends AbstractItem implements Serializable {
 		this.locked = !locked;
 		super.setX(x);
 		super.setY(y);
-		p = new Point(x + Map.tileSize / 2, y + Map.tileSize / 2);
+		int size = 3;// size of the collision box to enter doors.
+		enterBox = new Rectangle(x + Map.tileSize / 2 - size, y + Map.tileSize / 2 - size, size * 2, size * 2);
 	}
 
-	public Point getCentrePoint() {
-		return p;
+	public Rectangle getEnterBox() {
+		return enterBox;
 	}
 
 	public String getMap() {

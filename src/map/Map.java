@@ -295,8 +295,8 @@ public class Map implements IMap, Serializable {
 		if (doors == null)
 			return null;
 		for (DoorItem d : this.doors) {
-			Point doorPoint = d.getCentrePoint();
-			if (boundingBox.contains(doorPoint)) {
+			Rectangle doorRect = d.getEnterBox();
+			if (boundingBox.intersects(doorRect)) {
 				return d;
 			}
 		}
