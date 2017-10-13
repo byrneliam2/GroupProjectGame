@@ -7,6 +7,7 @@ package common.game;
  */
 
 import common.player.IPlayer;
+import java.io.File;
 import map.World;
 import player.InvalidPlayerExceptions;
 import common.utils.Direction;
@@ -22,7 +23,7 @@ public interface IGame {
 
 	/**
 	 * Give an observer to the model to set as its own.
-	 * 
+	 *
 	 * @param o
 	 *            observer
 	 */
@@ -31,7 +32,7 @@ public interface IGame {
 	/**
 	 * Set this component to be changed (for {@link java.util.Observable}) and
 	 * notify all observers.
-	 * 
+	 *
 	 * @param arg
 	 *            argument for {@link Observer} update
 	 */
@@ -39,7 +40,7 @@ public interface IGame {
 
 	/**
 	 * Get the name of the current map the player is on.
-	 * 
+	 *
 	 * @return current map name
 	 */
 	String getCurrentMap();
@@ -61,21 +62,21 @@ public interface IGame {
 
 	/**
 	 * Determine if the game is currently paused.
-	 * 
+	 *
 	 * @return is game paused?
 	 */
 	boolean isPaused();
 
 	/**
 	 * Get the {@link World} that represents the collection of Maps.
-	 * 
+	 *
 	 * @return current World
 	 */
 	World getWorld();
 
 	/**
 	 * Move the player in a given direction.
-	 * 
+	 *
 	 * @param dir
 	 *            direction to move in, see {@link Direction}
 	 * @throws InvalidPlayerExceptions
@@ -84,14 +85,14 @@ public interface IGame {
 
 	/**
 	 * Pick up an item off the ground.
-	 * 
+	 *
 	 * @throws InvalidPlayerExceptions
 	 */
 	void interact() throws InvalidPlayerExceptions;
 
 	/**
 	 * Shoot a bullet.
-	 * 
+	 *
 	 * @param x
 	 *            mouse position x
 	 * @param y
@@ -102,7 +103,7 @@ public interface IGame {
 
 	/**
 	 * Does a player's special ability.
-	 * 
+	 *
 	 * @param x
 	 *            mouse position x
 	 * @param y
@@ -113,14 +114,14 @@ public interface IGame {
 
 	/**
 	 * Get the current Player.
-	 * 
+	 *
 	 * @return player
 	 */
 	IPlayer getPlayer();
 
 	/**
 	 * Determine if the game is over.
-	 * 
+	 *
 	 * @return 0 for false, 1 for lost, 2 for won
 	 */
 	int isOver();

@@ -1,6 +1,7 @@
 package game;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.Serializable;
 import java.util.Observable;
 import java.util.Observer;

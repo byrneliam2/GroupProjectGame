@@ -14,6 +14,7 @@ import frames.cards.Card;
 import frames.cards.*;
 import common.game.IGame;
 import gfx.ImageLoader;
+import save_load.SaveLoad;
 
 import javax.swing.*;
 import javax.swing.Timer;
@@ -215,8 +216,11 @@ public class MainDisplay extends JComponent implements Observer {
      * Load a game from a save file.
      * @param selectedFile file selected
      */
-    public void loadGame(File selectedFile) {
-        //game = game.loadGame(selectedFile);
+    public IGame loadGame(File selectedFile) {
+		System.out.println("LOADGAME CHRI IS HELPING ME: " + selectedFile.getAbsolutePath());
+        IGame loadedGame = SaveLoad.loadGame(selectedFile);
+        game = loadedGame;
+        return game;
     }
 
     /* =========================================================================================== */

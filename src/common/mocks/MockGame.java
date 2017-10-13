@@ -6,6 +6,7 @@ import player.InvalidPlayerExceptions;
 import player.Player;
 import common.utils.Direction;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Observer;
 
@@ -92,6 +93,7 @@ public class MockGame implements IGame {
 	@Override
 	public void specialAbility(double x, double y) throws InvalidPlayerExceptions {
 		// TODO Auto-generated method stub
-		
+
 	}
+
 }
