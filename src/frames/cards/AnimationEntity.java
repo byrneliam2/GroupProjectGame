@@ -49,7 +49,7 @@ public class AnimationEntity extends Entity {
 			frontImages[i] = img;
 		}
 		for (int i = 0; i < leftImages.length; i++) {
-			BufferedImage img = ImageLoader.image("playerImages/playerAnimationImages", "L" + i, true);
+			BufferedImage img = ImageLoader.image("playerImages/playerAnimationImages", "S" + i, true);
 			img = ImageUtilities.scale(img, scale, scale);
 			leftImages[i] = img;
 			rightImages[i] = ImageUtilities.flipHorizontal(img);
