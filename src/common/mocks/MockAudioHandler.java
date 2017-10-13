@@ -16,6 +16,11 @@ public class MockAudioHandler implements IAudioHandler{
     }
 
     @Override
+    public void playLoop(Track track) {
+
+    }
+
+    @Override
     public void queueMusic(Track track) {
 
     }
