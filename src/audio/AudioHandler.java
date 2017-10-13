@@ -33,19 +33,19 @@ public class AudioHandler implements IAudioHandler {
 
     @Override
     public void playSound(Track track) {
-        AudioClip clip = createAudioClip(track, false);
+        AudioClip clip = createAudioClip(track, false, false);
         startClip(clip);
     }
 
     @Override
     public void queueMusic(Track track) {
-        musicQueue.offerLast(createAudioClip(track, true));
+        musicQueue.offerLast(createAudioClip(track, true, false));
         if (currentSong == null) next();
     }
 
     @Override
     public void forceMusic(Track track) {
-        musicQueue.offerFirst(createAudioClip(track, true));
+        musicQueue.offerFirst(createAudioClip(track, true, false));
         next();
     }
 
@@ -86,10 +86,10 @@ public class AudioHandler implements IAudioHandler {
      * @param wasQueued Tells the AudioHandler to automatically skip to the next song.
      * @return The Created AudioClip Object.
      */
-    private AudioClip createAudioClip(Track track, boolean wasQueued) {
+    private AudioClip createAudioClip(Track track, boolean wasQueued, boolean loop) {
         try {
             //Create the AudioClip
-            AudioClip audioClip = new AudioClip(AudioSystem.getClip(), track);
+            AudioClip audioClip = new AudioClip(AudioSystem.getClip(), track, loop);
             audioClip.getClip().addLineListener(e -> {
                 if (e.getType().equals(LineEvent.Type.STOP)) {
                     //Enqueue next song on end
@@ -147,12 +147,14 @@ public class AudioHandler implements IAudioHandler {
      * a song, they will need to select an enum which extends the 'Track' interface.
      */
     private class AudioClip {
-        private String path;
         private Clip clip;
+        private String path;
+        private boolean loop;
 
-        private AudioClip(Clip clip, Track track) {
+        private AudioClip(Clip clip, Track track, boolean loop) {
             this.clip = clip;
             this.path = String.format("%s%s", assetsFolder, track.getSoundFile());
+            this.loop = loop;
         }
 
         private Clip getClip() {
@@ -161,6 +163,10 @@ public class AudioHandler implements IAudioHandler {
 
         private String getPath() {
             return path;
+        }
+
+        public boolean shouldLoop() {
+            return loop;
         }
     }
 }
