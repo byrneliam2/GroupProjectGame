@@ -9,7 +9,7 @@ package common.audio;
 public enum MusicTrack implements Track{
     /* Music Files */
     MENU_MUSIC("main_menu.wav"),
-    GAME_MUSIC("game_music.wav"),  //TODO: CHANGE ME
+    GAME_MUSIC("game_music.wav"),
     TEST_MUSIC("test_track.wav");
 
     private String filename;
