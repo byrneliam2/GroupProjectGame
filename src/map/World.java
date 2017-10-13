@@ -16,10 +16,10 @@ public class World implements IWorld, Serializable{
 
 	// A HashMap of Map names to the map object that must be visible at all times,
 	// thus is public static
-	public static HashMap<String, Map> maps;
+	public HashMap<String, Map> maps;
 
 	public World(HashMap<String, Map> maps) {
-		World.maps = maps;
+		this.maps = maps;
 	}
 
 	/**
@@ -29,11 +29,12 @@ public class World implements IWorld, Serializable{
 	 * @return
 	 */
 	public Map getStartingMap() {
-		return World.maps.get("Map3");
+		return maps.get("Map3");
 	}
 
-	public static HashMap<String, Map> getMaps() {
-		return maps;
+	public HashMap<String, Map> getMaps(){
+		return this.maps;
 	}
+
 
 }

@@ -66,7 +66,7 @@ public class Game extends Observable implements IGame, Serializable {
 
 	@Override
 	public int isOver() {
-		if (World.getMaps().get("Map16").getNPCs().isEmpty())
+		if (world.getMaps().get("Map16").getNPCs().isEmpty())
 			return 2; // TODO win condition
 		if (player.isDead())
 			return 1;
