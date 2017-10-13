@@ -1,5 +1,11 @@
 package controller;
 
+/**
+ * Primary Author: Andrew McManaway
+ * Code Review: Liam Byrne
+ * External Tester: Mohsen Javaher
+ */
+
 import common.controller.Command;
 import common.controller.IController;
 import common.game.IGame;

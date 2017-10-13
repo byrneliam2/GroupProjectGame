@@ -1,5 +1,11 @@
 package controller;
 
+/**
+ * Primary Author: Andrew McManaway
+ * Code Review: Liam Byrne
+ * External Tester: Mohsen Javaher
+ */
+
 import common.controller.IListener;
 import common.controller.InputType;
 

@@ -1,5 +1,11 @@
 package common.controller;
 
+/**
+ * Primary Author: Andrew McManaway
+ * Code Review: Liam Byrne
+ * External Tester: Mohsen Javaher
+ */
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.MouseAdapter;
 
