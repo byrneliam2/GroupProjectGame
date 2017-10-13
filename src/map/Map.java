@@ -62,6 +62,8 @@ public class Map implements IMap, Serializable {
 
 	/** The name of the map */
 	private String name;
+	
+	private World world;
 
 	/** Doors on the current map */
 	List<DoorItem> doors;
@@ -116,6 +118,7 @@ public class Map implements IMap, Serializable {
 	 */
 	public void removeNPC(NPC toBeRemoved) {
 		NPCS.remove(toBeRemoved);
+		toBeRemoved.stop();
 	}
 
 	/**
@@ -502,6 +505,14 @@ public class Map implements IMap, Serializable {
 	 */
 	public String getName() {
 		return this.name;
+	}
+
+	public World getWorld() {
+		return world;
+	}
+
+	public void setWorld(World world) {
+		this.world = world;
 	}
 
 }

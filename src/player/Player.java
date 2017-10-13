@@ -125,6 +125,7 @@ public class Player implements IPlayer, Serializable{
 	 *             if the player tries to make an invalid move. eg move into a wall.
 	 */
 	public boolean move(double dx, double dy) throws InvalidPlayerExceptions {
+		System.out.println("npc list size-> "+map.getNPCs().size());
 		slowPlayer();
 		dx = dx * speed;
 		dy = dy * speed;
@@ -199,7 +200,7 @@ public class Player implements IPlayer, Serializable{
 	 * @return
 	 */
 	private Map enterDoor(DoorItem Door) {
-		Map newMap = World.maps.get(Door.getMap());
+		Map newMap = map.getWorld().getMaps().get(Door.getMap());
 		// works because each doorWay has two door items of the same name.
 		DoorItem oppDoor = newMap.getDoor(Door.getDoorID());
 

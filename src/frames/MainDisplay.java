@@ -13,7 +13,9 @@ import common.controller.IController;
 import frames.cards.Card;
 import frames.cards.*;
 import common.game.IGame;
+import common.player.IBullet;
 import gfx.ImageLoader;
+import npc.NPC;
 import save_load.SaveLoad;
 
 import javax.swing.*;
@@ -132,7 +134,7 @@ public class MainDisplay extends JComponent implements Observer {
     private void doMapSetup() {
         // get model details and construct enough map cards to fit
         // noinspection AccessStaticViaInstance
-        for (Map.Entry m : game.getWorld().maps.entrySet()) {
+        for (Map.Entry m : game.getWorld().getMaps().entrySet()) {
             String name = (String) m.getKey();
             map.Map map = (map.Map) m.getValue();
             cards.put(name, new MapCard(name, map, game));
@@ -208,7 +210,6 @@ public class MainDisplay extends JComponent implements Observer {
      * @param selectedFile file selected
      */
     public void saveGame(File selectedFile) {
-		System.out.println("SaveGame CHRI IS HELPING ME: " + selectedFile.getAbsolutePath());
         game.saveGame(selectedFile.getAbsolutePath());
     }
 
@@ -216,11 +217,13 @@ public class MainDisplay extends JComponent implements Observer {
      * Load a game from a save file.
      * @param selectedFile file selected
      */
-    public IGame loadGame(File selectedFile) {
-		System.out.println("LOADGAME CHRI IS HELPING ME: " + selectedFile.getAbsolutePath());
+    public void loadGame(File selectedFile) {
+    	IBullet.bulletList.clear();
         IGame loadedGame = SaveLoad.loadGame(selectedFile);
-        game = loadedGame;
-        return game;
+        game.loadGame(loadedGame.getPlayer(), loadedGame.getWorld());
+        this.doMapSetup();
+        switchScreen(game.getPlayer().getMap().getName());	
+        startTimer();
     }
 
     /* =========================================================================================== */

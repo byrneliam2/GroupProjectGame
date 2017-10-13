@@ -27,12 +27,12 @@ import gfx.ImageUtilities;
 public class Game extends Observable implements IGame, Serializable {
 
 	/**
-	 *
+	 * 
 	 */
-	private static final long serialVersionUID = -428815268724553339L;
-
+	private static final long serialVersionUID = 1L;
 	public static BufferedImage heart = ImageUtilities.scale(ImageLoader.image("game", "heart", true), 50, 50);
-	public static BufferedImage emptyHeart = ImageUtilities.scale(ImageLoader.image("game", "lost-heart", true), 50, 50);
+	public static BufferedImage emptyHeart = ImageUtilities.scale(ImageLoader.image("game", "lost-heart", true), 50,
+			50);
 	public static final boolean DEV_MODE = false;
 	public static boolean GAME_PAUSED = false;
 
@@ -50,6 +50,11 @@ public class Game extends Observable implements IGame, Serializable {
 	public void newGame() {
 		this.player = new Player("Tom", 500, 500);
 		this.world = WorldParser.parse("world", this.player);
+	}
+
+	public void loadGame(IPlayer player, World world) {
+		this.player = player;
+		this.world = world;
 	}
 
 	/******************* View Methods **********************/
@@ -136,8 +141,7 @@ public class Game extends Observable implements IGame, Serializable {
 	 */
 	public void saveGame(String theFilePath) {
 		System.out.println("SaveGame MohsenJavehr" + this);
-		SaveLoad saveLoad = new SaveLoad(this, theFilePath);
-		saveLoad.saveGame(this, theFilePath);
+		SaveLoad.saveGame(this, theFilePath);
 	}
 
 	@Override

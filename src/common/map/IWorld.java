@@ -21,13 +21,6 @@ public interface IWorld {
 	 * @return The starting map
 	 */
 	public Map getStartingMap();
-
-	/**
-	 * This method returns all the maps in the given world
-	 * 
-	 * @return The HashMap of all Maps and their names
-	 */
-	public static HashMap<String, Map> getMaps() {
-		return World.maps;
-	}
+	
+	public HashMap<String, Map> getMaps();
 }

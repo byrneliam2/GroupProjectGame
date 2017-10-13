@@ -10,6 +10,7 @@ import common.player.IPlayer;
 import java.io.File;
 import map.World;
 import player.InvalidPlayerExceptions;
+import player.Player;
 import common.utils.Direction;
 
 import java.util.Observer;
@@ -74,6 +75,9 @@ public interface IGame {
 	 */
 	World getWorld();
 
+	
+	void loadGame(IPlayer player, World world);
+	
 	/**
 	 * Move the player in a given direction.
 	 *

@@ -17,12 +17,9 @@ import player.Player;
  *
  */
 public class NPC extends Player implements Serializable {
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = 3953049502566928580L;
+
 	public static final int updateRate = DisplayValues.FRAMERATE;// rate in milliseconds that NPC is updated
-	private static Timer npcTimer = new Timer();
+	public static Timer npcTimer = new Timer();
 
 	private IPlayer p;
 	private ControlScheme control;
@@ -33,7 +30,7 @@ public class NPC extends Player implements Serializable {
 	 * @param x
 	 *            centre pixel x Location
 	 * @param y
- *            centre pixel y location
+	 *            centre pixel y location
 	 * @param health
 	 * @param mainPlayer
 	 * @param cs
@@ -45,7 +42,7 @@ public class NPC extends Player implements Serializable {
 		super.setMaxHealth(health);
 		super.setHealth(health);
 
-		if(Game.DEV_MODE) {
+		if (Game.DEV_MODE) {
 			super.setMaxHealth(1);
 			super.setHealth(1);
 		}
@@ -68,6 +65,8 @@ public class NPC extends Player implements Serializable {
 	 * still.
 	 */
 	public boolean stop() {
+		if (npctask == null)
+			return false;
 		return npctask.cancel();
 	}
 
@@ -76,6 +75,7 @@ public class NPC extends Player implements Serializable {
 	 * around.
 	 */
 	public void start() {
+		System.out.println("NPC is started! attached player is " + p);
 		npctask = new TimerTask() {
 			@Override
 			public void run() {
@@ -96,6 +96,7 @@ public class NPC extends Player implements Serializable {
 	}
 
 	private void update() {
+		System.out.println("Updated this npc " + this);
 		control.doBestAction(this, p);
 	}
 

@@ -30,19 +30,7 @@ public class SaveLoad {
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
-	private static String thePath;
 
-	public SaveLoad() {
-
-	}
-
-	public SaveLoad(String thePath) {
-		this.thePath = thePath;
-	}
-
-	public SaveLoad(Game game, String thePath) {
-		this.thePath = thePath;
-	}
 
 	public static void saveGame(Game g, String theFilePath) {
 		System.out.println("THIS IS ACTUALLY THE SAVING FUNCTION" + g);

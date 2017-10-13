@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 import common.map.IWorld;
+import game.Game;
 
 /**
  * This class represents a world. A world consists of a HashMap of map names to
@@ -12,14 +13,15 @@ import common.map.IWorld;
  * @author James
  *
  */
-public class World implements IWorld, Serializable{
+public class World implements IWorld, Serializable {
 
-	// A HashMap of Map names to the map object that must be visible at all times,
-	// thus is public static
-	public HashMap<String, Map> maps;
+	private HashMap<String, Map> maps;
 
 	public World(HashMap<String, Map> maps) {
 		this.maps = maps;
+		for (Map m : maps.values()) {
+			m.setWorld(this);
+		}
 	}
 
 	/**
@@ -32,9 +34,8 @@ public class World implements IWorld, Serializable{
 		return maps.get("Map3");
 	}
 
-	public HashMap<String, Map> getMaps(){
-		return this.maps;
+	public HashMap<String, Map> getMaps() {
+		return maps;
 	}
-
 
 }
