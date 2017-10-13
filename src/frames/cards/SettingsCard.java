@@ -10,6 +10,7 @@ import common.audio.SoundTrack;
 import frames.MainDisplay;
 import gfx.GraphicsUtilities;
 import gfx.ImageLoader;
+import gfx.PictureButton;
 
 import javax.swing.*;
 import java.awt.*;
@@ -42,9 +43,12 @@ public class SettingsCard extends Card {
         // key binding
         //
         // back button
+        components.put("back", new PictureButton("Back", 225, 75));
+
+        /* LEGACY BUTTONS
         components.put("back", GraphicsUtilities.produceButton(
                 ImageLoader.image("ui", "bu_back", true),
-                ImageLoader.image("ui", "bu_back_r", false), 0.5f));
+                ImageLoader.image("ui", "bu_back_r", false), 0.5f));*/
     }
 
     @Override

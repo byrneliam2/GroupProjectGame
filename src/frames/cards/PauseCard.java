@@ -4,6 +4,7 @@ import common.audio.SoundTrack;
 import frames.MainDisplay;
 import gfx.GraphicsUtilities;
 import gfx.ImageLoader;
+import gfx.PictureButton;
 
 import javax.swing.*;
 import java.io.File;
@@ -23,13 +24,20 @@ public class PauseCard extends Card {
     @Override
     protected void doUISetup() {
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-        // use a loop to load all the buttons into the list
+
+        components.put("back", new PictureButton("Back", 225, 75));
+        components.put("save", new PictureButton("Save", 225, 75));
+        components.put("load", new PictureButton("Load", 225, 75));
+        components.put("settings", new PictureButton("Settings", 225, 75));
+        components.put("exit", new PictureButton("Main Menu", 225, 75));
+
+        /* LEGACY BUTTONS
         String[] files = {"back", "save", "load", "settings", "exit"};
         for (String s : files) {
             components.put(s, GraphicsUtilities.produceButton(
                     ImageLoader.image("ui", "bu_" + s, true),
                     ImageLoader.image("ui", "bu_" + s + "_r", false), 0.5f));
-        }
+        }*/
     }
 
     @Override
