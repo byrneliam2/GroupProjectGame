@@ -112,7 +112,6 @@ public class MapCard extends Card {
 						new Point(DisplayValues.WIDTH - (2 * ELEMENT_LOC_A) - (i * ELEMENT_LOC_A), 5),
 						ELEMENT_LOC_A));
 			}
-		// noinspection StatementWithEmptyBody
 		if (type == EntityType.STRING || all) {
 			// add dialogue, if any
 			String str = "Hello!";

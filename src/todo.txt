@@ -1,5 +1,5 @@
 TODO
-- Integrate saving and loading (done?) -> ISaveLoad?
+- Integrate saving and loading (done?) -> turn into static interface?
 - Optimize drawing (associate items, etc. with images again?) Done Hearts but not items.
 - External testing for all libraries (including MapCardTests)
 - Abstract out common interfaces: should all use common types! IMPORTANT!!!
@@ -9,5 +9,4 @@ TODO
 - Change suicidal scheme to different color bullets
 - Change shotgun blast to different color bullets
 - Replace all legacy buttons and labels (settings)
-
-FIXME
+- General code cleanup, removal of all print statements, etc.
