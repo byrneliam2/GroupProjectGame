@@ -3,6 +3,7 @@ TODO
 - Optimize drawing (associate items, etc. with images again?) Done Hearts but not items.
 - External testing for all libraries (including MapCardTests)
 - Abstract out common interfaces: should all use common types! IMPORTANT!!!
+- Hard to get through the 1-wide door (In the Map Upwards from the first level)
 
 - Put in the sound effects for shooting, dying.
 - Change suicidal scheme to different color bullets
