@@ -14,8 +14,7 @@ import java.util.List;
 
 public interface IBullet {
 
-    List<Bullet> bulletList = new ArrayList<>();
-    int bulletSize = 20;
+
 
     Image getBulletPic();
 

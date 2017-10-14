@@ -50,6 +50,8 @@ public class NPC extends Player implements Serializable {
 
 	@Override
 	public boolean move(double dx, double dy) throws InvalidPlayerExceptions {
+		//custom npc moving which ignores all environmental effects such as fire.
+		//also prevents npc's from moving through doors.
 		playerBox.setFrame(playerBox.getX() + dx, playerBox.getY() + dy, playerBox.getWidth(), playerBox.getHeight());
 		if (map.canMove(playerBox)) {
 			return true;

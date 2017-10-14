@@ -1,5 +1,20 @@
 package frames;
 
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.io.File;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
+
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.Timer;
+import javax.swing.UIManager;
+import javax.swing.WindowConstants;
+
 /*
  * SWEN 222 Group Project
  * Liam Byrne (byrneliam2)
@@ -8,20 +23,17 @@ package frames;
 
 import common.audio.IAudioHandler;
 import common.audio.MusicTrack;
-import common.utils.DisplayValues;
 import common.controller.IController;
-import frames.cards.Card;
-import frames.cards.*;
 import common.game.IGame;
-import common.player.IBullet;
+import common.utils.DisplayValues;
+import frames.cards.Card;
+import frames.cards.MapCard;
+import frames.cards.MenuCard;
+import frames.cards.PauseCard;
+import frames.cards.SettingsCard;
 import gfx.ImageLoader;
+import player.Bullet;
 import save_load.SaveLoad;
-
-import javax.swing.*;
-import javax.swing.Timer;
-import java.awt.*;
-import java.io.File;
-import java.util.*;
 
 /**
  * The MainDisplay represents the primary UI component for the front end
@@ -216,7 +228,7 @@ public class MainDisplay extends JComponent implements Observer {
      * @param selectedFile file selected
      */
     public void loadGame(File selectedFile) {
-    	IBullet.bulletList.clear();
+    	Bullet.bulletList.clear();
         IGame loadedGame = SaveLoad.loadGame(selectedFile);
         game.loadGame(loadedGame.getPlayer(), loadedGame.getWorld());
         this.doMapSetup();

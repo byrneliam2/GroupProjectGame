@@ -15,6 +15,7 @@ import game.Game;
 import common.game.IGame;
 import gfx.ImageLoader;
 import gfx.ImageUtilities;
+import player.Bullet;
 import common.items.Item;
 
 import javax.swing.*;
@@ -195,11 +196,11 @@ public class MapCard extends Card {
 	 * is not worth counting them as entities.
 	 */
 	private void updateBullets() {
-		for (int i = 0; i < IBullet.bulletList.size(); i++) {
-			IBullet b = IBullet.bulletList.get(i);
+		for (int i = 0; i < Bullet.bulletList.size(); i++) {
+			IBullet b = Bullet.bulletList.get(i);
 			Image img = b.getBulletPic();
-			draw(img, (int) b.getX() - IBullet.bulletSize/2,
-					(int) b.getY() - IBullet.bulletSize/2,
+			draw(img, (int) b.getX() - Bullet.bulletSize/2,
+					(int) b.getY() - Bullet.bulletSize/2,
 					img.getWidth(null), img.getHeight(null));
 		}
 	}
