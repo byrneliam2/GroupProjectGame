@@ -1,24 +1,8 @@
 package save_load;
 
 import game.Game;
-import common.game.IGame;
-import map.World;
-import npc.NPC;
-import player.InvalidPlayerExceptions;
-import player.Player;
-import common.utils.Direction;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
-import java.util.Map;
-import java.util.Observer;
-
-import javax.tools.JavaFileManager.Location;
+import java.io.*;
 
 /*
  *  Game Save and Load

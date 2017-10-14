@@ -1,12 +1,13 @@
 TODO
-- Integrate saving and loading
+- Integrate saving and loading (done?) -> ISaveLoad?
 - Optimize drawing (associate items, etc. with images again?) Done Hearts but not items.
 - External testing for all libraries (including MapCardTests)
-- Abstract out common interfaces: should all use common types!
+- Abstract out common interfaces: should all use common types! IMPORTANT!!!
 
 - Put in the sound effects for shooting, dying.
 - FIX DOOORS
 - Change suicidal scheme to different color bullets
 - Change shotgun blast to different color bullets
+- Replace all legacy buttons and labels (settings)
 
 FIXME

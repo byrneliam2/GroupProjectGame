@@ -66,7 +66,8 @@ public class MenuCard extends Card {
                     case "load":
                         JFileChooser fileChooser = new JFileChooser();
                         fileChooser.setCurrentDirectory(new File(".."));
-                        fileChooser.setDialogTitle("Select a <ext> file to load");
+                        fileChooser.setApproveButtonText("Load");
+                        fileChooser.setDialogTitle("Select a .dat file to load");
                         if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
                             dsp.loadGame(fileChooser.getSelectedFile());
                         }

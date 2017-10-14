@@ -1,7 +1,6 @@
 package game;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.Serializable;
 import java.util.Observable;
 import java.util.Observer;
@@ -13,10 +12,10 @@ import map.WorldParser;
 import player.Bullet;
 import player.InvalidPlayerExceptions;
 import player.Player;
-import save_load.SaveLoad;
 import common.utils.Direction;
 import gfx.ImageLoader;
 import gfx.ImageUtilities;
+import save_load.SaveLoad;
 
 /**
  * Class to be used by front end for getting all the different entities in the
@@ -26,9 +25,6 @@ import gfx.ImageUtilities;
  */
 public class Game extends Observable implements IGame, Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	public static BufferedImage heart = ImageUtilities.scale(ImageLoader.image("game", "heart", true), 50, 50);
 	public static BufferedImage emptyHeart = ImageUtilities.scale(ImageLoader.image("game", "lost-heart", true), 50,
@@ -136,9 +132,6 @@ public class Game extends Observable implements IGame, Serializable {
 		return GAME_PAUSED;
 	}
 
-	/**
-	 * Saves this game.Game object as a file...
-	 */
 	public void saveGame(String theFilePath) {
 		System.out.println("SaveGame MohsenJavehr" + this);
 		SaveLoad.saveGame(this, theFilePath);

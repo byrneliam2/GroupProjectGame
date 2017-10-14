@@ -1,5 +1,11 @@
 package frames.cards;
 
+/*
+ * SWEN 222 Group Project
+ * Liam Byrne (byrneliam2)
+ * 300338518
+ */
+
 import common.audio.SoundTrack;
 import frames.MainDisplay;
 import gfx.GraphicsUtilities;
@@ -50,17 +56,20 @@ public class PauseCard extends Card {
                 dsp.getAudioHandler().playSound(SoundTrack.CLICK);
                 JFileChooser fileChooser = new JFileChooser();
                 fileChooser.setCurrentDirectory(new File("."));
-                fileChooser.setDialogTitle("Select a <ext> file to load");
                 switch (str) {
                     case "back":
                         dsp.update(null, "unpause");
                         break;
                     case "save":
+                        fileChooser.setApproveButtonText("Save");
+                        fileChooser.setDialogTitle("Choose a place to save this game");
                         if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
                             dsp.saveGame(fileChooser.getSelectedFile());
                         }
                         break;
                     case "load":
+                        fileChooser.setApproveButtonText("Load");
+                        fileChooser.setDialogTitle("Select a .dat file to load");
                         if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
                             dsp.loadGame(fileChooser.getSelectedFile());
                         }

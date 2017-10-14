@@ -15,7 +15,6 @@ import frames.cards.*;
 import common.game.IGame;
 import common.player.IBullet;
 import gfx.ImageLoader;
-import npc.NPC;
 import save_load.SaveLoad;
 
 import javax.swing.*;
