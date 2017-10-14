@@ -75,7 +75,6 @@ public class NPC extends Player implements Serializable {
 	 * around.
 	 */
 	public void start() {
-		System.out.println("NPC is started! attached player is " + p);
 		npctask = new TimerTask() {
 			@Override
 			public void run() {
@@ -96,7 +95,6 @@ public class NPC extends Player implements Serializable {
 	}
 
 	private void update() {
-		System.out.println("Updated this npc " + this);
 		control.doBestAction(this, p);
 	}
 

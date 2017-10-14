@@ -20,12 +20,14 @@ import save_load.SaveLoad;
 /**
  * Class to be used by front end for getting all the different entities in the
  * game and controlling them.
+ * 
+ * A Game encapsulates the entire back-end and contains a player and a world.
  *
  * @author Thomas Edwards
  */
 public class Game extends Observable implements IGame, Serializable {
 
-	private static final long serialVersionUID = 1L;
+	
 	public static BufferedImage heart = ImageUtilities.scale(ImageLoader.image("game", "heart", true), 50, 50);
 	public static BufferedImage emptyHeart = ImageUtilities.scale(ImageLoader.image("game", "lost-heart", true), 50,
 			50);
@@ -35,10 +37,7 @@ public class Game extends Observable implements IGame, Serializable {
 	private IPlayer player;
 	private World world;
 
-	@Override
-	public void giveObserver(Observer o) {
-		this.addObserver(o);
-	}
+
 
 	/**
 	 * Start the new game.
@@ -46,11 +45,6 @@ public class Game extends Observable implements IGame, Serializable {
 	public void newGame() {
 		this.player = new Player("Tom", 500, 500);
 		this.world = WorldParser.parse("world", this.player);
-	}
-
-	public void loadGame(IPlayer player, World world) {
-		this.player = player;
-		this.world = world;
 	}
 
 	/******************* View Methods **********************/
@@ -68,9 +62,9 @@ public class Game extends Observable implements IGame, Serializable {
 	@Override
 	public int isOver() {
 		if (world.getMaps().get("Map16").getNPCs().isEmpty())
-			return 2; // TODO win condition
+			return 2;//win condition
 		if (player.isDead())
-			return 1;
+			return 1;//lose condition
 		else
 			return 0;
 
@@ -132,9 +126,15 @@ public class Game extends Observable implements IGame, Serializable {
 		return GAME_PAUSED;
 	}
 
+	@Override
 	public void saveGame(String theFilePath) {
-		System.out.println("SaveGame MohsenJavehr" + this);
 		SaveLoad.saveGame(this, theFilePath);
+	}
+	
+	@Override
+	public void loadGame(IPlayer player, World world) {
+		this.player = player;
+		this.world = world;
 	}
 
 	@Override
@@ -152,4 +152,8 @@ public class Game extends Observable implements IGame, Serializable {
 		notifyObservers(arg);
 	}
 
+	@Override
+	public void giveObserver(Observer o) {
+		this.addObserver(o);
+	}
 }

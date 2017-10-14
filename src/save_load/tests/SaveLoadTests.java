@@ -7,11 +7,11 @@ import org.junit.Test;
 import game.Game;
 import save_load.SaveLoad;
 
-public class allTests {
+public class SaveLoadTests {
 
 	@Test
 	public void testSaving() {
-
+		
 	}
 
 	@Test

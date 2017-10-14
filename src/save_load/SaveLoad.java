@@ -7,49 +7,50 @@ import java.io.*;
 /*
  *  Game Save and Load
  */
-
 public class SaveLoad {
 
 	/**
-	 *
+	 * Saves the game using serialization.
+	 * 
+	 * @param g
+	 *            the game to be saved.
+	 * @param theFilePath
+	 *            the file path of the file to save it as.
 	 */
-	private static final long serialVersionUID = 1L;
-
-
 	public static void saveGame(Game g, String theFilePath) {
-		System.out.println("THIS IS ACTUALLY THE SAVING FUNCTION" + g);
-		/*
-		 * This method will take any Object as a parameter, so as long as the class
-		 * implements the serializable interface.
-		 */
-		// File thePathFile = new File("./GroupProject/src/assets/saveGames");
+
 		FileOutputStream theSavedGame = null;
-		String savePath = theFilePath.concat(".dat");
+		if (theFilePath.endsWith(".dat"))//all saved games should end with .dat
+			theFilePath = theFilePath.concat(".dat");
+		
 		try {
 			if (theFilePath != null) {
-				theSavedGame = new FileOutputStream(savePath);
+				theSavedGame = new FileOutputStream(theFilePath);
 				ObjectOutputStream theByteCode = new ObjectOutputStream(theSavedGame);
 				theByteCode.writeObject(g);
 				theByteCode.close();
 			}
 		} catch (IOException e) {
+			System.out.println("Saving Failed");
 			e.printStackTrace();
 		}
 	}
 
+	/**
+	 * @param fileToLoad
+	 *            the file to load.
+	 * @return the game loaded from the file
+	 */
 	public static Game loadGame(File fileToLoad) {
-
-		System.out.println("THIS IS ACTUALLY THE loadGame FUNCTION");
 		Game game = null;
-
-
-			try {
-				ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileToLoad));
-				game = (Game) ois.readObject();
-				ois.close();
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
+		try {
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileToLoad));
+			game = (Game) ois.readObject();
+			ois.close();
+		} catch (Exception ex) {
+			System.out.println("Loading Failed");
+			ex.printStackTrace();
+		}
 		return game;
 	}
 }
