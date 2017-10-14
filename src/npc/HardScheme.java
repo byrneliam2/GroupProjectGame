@@ -16,7 +16,7 @@ import common.utils.MathUtils;
  */
 public class HardScheme implements ControlScheme, Serializable{
 
-	private Direction randDir = getRandomDir();
+	private Direction randDir = Direction.getRandomDirection();
 	private int moveCounter = 0;
 
 	public HardScheme() {
@@ -29,7 +29,7 @@ public class HardScheme implements ControlScheme, Serializable{
 			npc.move(randDir.getX() * npc.getSpeed(), randDir.getY() * npc.getSpeed());
 		} catch (InvalidPlayerExceptions e) {
 			// if we run into a wall, then choose a new direction...
-			randDir = getRandomDir();
+			randDir = Direction.getRandomDirection();
 		}
 
 		// shoot at the player alot change direction every 200
@@ -38,17 +38,12 @@ public class HardScheme implements ControlScheme, Serializable{
 			moveCounter = 0;
 			new Bullet(npc.getCentreX(), npc.getCentreY(), MathUtils.calculateAngle(npc.getxLocation(),
 					npc.getyLocation(), player.getCentreX(), player.getCentreY()), npc, 10, "npcBullet2");
-			randDir = getRandomDir();
+			randDir = Direction.getRandomDirection();
 		} else if (moveCounter == 100 || moveCounter == 90 || moveCounter == 190 || moveCounter == 50
 				|| moveCounter == 52) {
 			new Bullet(npc.getCentreX(), npc.getCentreY(), MathUtils.calculateAngle(npc.getxLocation(),
 					npc.getyLocation(), player.getCentreX(), player.getCentreY()), npc, 10, "npcBullet2");
 		}
-	}
-
-	public Direction getRandomDir() {
-		int dir = (int) (Math.random() * 8);
-		return Direction.VALUES.get(dir);
 	}
 
 }

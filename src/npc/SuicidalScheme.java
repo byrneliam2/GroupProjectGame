@@ -10,12 +10,13 @@ import player.Player;
 import common.utils.MathUtils;
 
 /**
- * A scheme where the npc move towards the player and when its close, shoots the player very quickly.
+ * A scheme where the npc charges towards the player and when its close, shoots
+ * the player very quickly.
  *
  * @author Thomas Edwards
  *
  */
-public class SuicidalScheme implements ControlScheme, Serializable{
+public class SuicidalScheme implements ControlScheme, Serializable {
 	private double moveX, moveY, angle;
 	private int moveCount = 60;
 
@@ -43,6 +44,7 @@ public class SuicidalScheme implements ControlScheme, Serializable{
 	}
 
 	private void chooseSideDir() {
+		// when the suicidal scheme hits a wall, change direction
 		double number = Math.random() > 0.5 ? Math.PI / 2 : -Math.PI / 2;
 		angle = angle + number;
 		moveX = Math.sin(angle) * 6;
@@ -50,7 +52,7 @@ public class SuicidalScheme implements ControlScheme, Serializable{
 		angle = angle - number;
 	}
 
-	private void chooseBestDir(NPC npc, IPlayer player) {
+	private void chooseBestDir(NPC npc, IPlayer player) {// moves straight at the player
 		angle = MathUtils.calculateAngle(npc.getCentreX(), npc.getCentreY(), player.getCentreX(), player.getCentreY());
 
 		moveX = Math.sin(angle) * 7;

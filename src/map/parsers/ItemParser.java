@@ -16,24 +16,6 @@ import map.ParseException;
 
 public class ItemParser {
 
-	public static void parseItem2(String itemName, Scanner scan, List<Item> items) throws ParseException {
-		if (itemName.equals("HealthPot")) {
-			setItemPosition(scan, new HealthPot(), items);
-		} else if (itemName.equals("MassiveGun")) {
-			setItemPosition(scan, new MassiveGun(), items);
-		} else if (itemName.equals("RustyArmor")) {
-			setItemPosition(scan, new RustyArmor(), items);
-		} else if (itemName.equals("ShinyArmor")) {
-			setItemPosition(scan, new ShinyArmor(), items);
-		} else if (itemName.equals("MaxHealthPot")) {
-			setItemPosition(scan, new MaxHealthPot(), items);
-		} else if (itemName.equals("SmallGun")) {
-			setItemPosition(scan, new SmallGun(), items);
-		} else {
-			throw new ParseException("Unrecognised Item or entity name");
-		}
-	}
-
 	public static void parseItem(String itemName, Scanner scan, List<Item> items) throws ParseException {
 		if (itemName.equals("HealthPot")) {
 			getItemAmount(scan, new HealthPot(), items);

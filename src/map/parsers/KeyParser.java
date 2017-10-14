@@ -10,10 +10,12 @@ import map.MapParser;
 import map.ParseException;
 
 public class KeyParser {
-	public KeyParser() {
 
-	}
-
+	/**
+	 * @param scan
+	 * @param items list of items to add the parsed key to.
+	 * @throws ParseException
+	 */
 	public void parse(Scanner scan, List<Item> items) throws ParseException {
 		int id = MapParser.requireInteger(scan);
 		String color = scan.next();

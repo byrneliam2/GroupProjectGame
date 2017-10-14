@@ -15,14 +15,21 @@ import npc.NPC;
 import npc.PatrolScheme;
 import npc.SprayScheme;
 import npc.SuicidalScheme;
-import player.Player;
 
 public class NpcParser {
-	public NpcParser() {
 
-	}
-
+	/**
+	 * Parses an npc with the scanner provided.
+	 * 
+	 * @param scan
+	 * @param npcs
+	 *            the list of npc's to add the parsed npc to.
+	 * @param mainPLayer
+	 *            the main player.
+	 * @throws ParseException
+	 */
 	public void parse(Scanner scan, ArrayList<NPC> npcs, IPlayer mainPLayer) throws ParseException {
+		//scan through all required things.
 		String name = MapParser.requireString(scan);
 		String scheme = MapParser.requireString(scan);
 		String leftRight = MapParser.requireString(scan);
@@ -34,12 +41,13 @@ public class NpcParser {
 		if (leftRight.equals("true")) {
 			LR = true;
 		}
+		// special boss parser...
 		if (name.equals("Boss")) {
 			NPC n = new BossNPC(mainPLayer);
 			npcs.add(n);
 			return;
 		}
-
+		//decide the control scheme for the npc.
 		ControlScheme a = null;
 		if (scheme.equals("PatrolScheme")) {
 			a = new PatrolScheme(LR, patrolDistance);
@@ -54,7 +62,7 @@ public class NpcParser {
 		} else if (scheme.equals("SprayScheme")) {
 			a = new SprayScheme(patrolDistance);
 		} else {
-			throw new ParseException("Your file has a incorrect Control Scheme: " + scheme);
+			throw new ParseException("Your file has an incorrect Control Scheme: " + scheme);
 		}
 		NPC n = new NPC(name, x * 32, y * 32, health, mainPLayer, a);
 		npcs.add(n);
