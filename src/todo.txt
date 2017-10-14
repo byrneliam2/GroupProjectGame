@@ -5,8 +5,10 @@ TODO
 - Abstract out common interfaces: should all use common types! IMPORTANT!!!
 
 - Put in the sound effects for shooting, dying.
-- FIX DOOORS
 - Change suicidal scheme to different color bullets
 - Change shotgun blast to different color bullets
+
 - Replace all legacy buttons and labels (settings)
 - General code cleanup, removal of all print statements, etc.
+- Fire environment broken
+
