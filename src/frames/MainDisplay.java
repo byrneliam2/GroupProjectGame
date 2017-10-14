@@ -132,7 +132,6 @@ public class MainDisplay extends JComponent implements Observer {
      */
     private void doMapSetup() {
         // get model details and construct enough map cards to fit
-        // noinspection AccessStaticViaInstance
         for (Map.Entry m : game.getWorld().getMaps().entrySet()) {
             String name = (String) m.getKey();
             map.Map map = (map.Map) m.getValue();

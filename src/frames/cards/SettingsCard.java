@@ -24,7 +24,7 @@ import java.util.Map;
  * memory aspect; this class notifies MainDisplay of a switch to the previous screen
  * through the observer update mechanism. That is, the "Back" button escapes to the
  * "last" screen on the display.
- * TODO key binding settings
+ * TODO key binding settings?
  */
 public class SettingsCard extends Card {
 

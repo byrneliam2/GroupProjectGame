@@ -30,15 +30,15 @@ public class MenuCard extends Card {
 
 	@Override
 	protected void doUISetup() {
-		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
+	  	panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 		// put the logo in separately
 		components.put("logo", GraphicsUtilities.produceSticker(ImageLoader.image("ui", "logo", true), 0.5f));
 
-		 components.put("new", new PictureButton("New Game", 225, 75));
-		 components.put("load", new PictureButton("Load", 225, 75));
-		 components.put("settings", new PictureButton("Settings", 225, 75));
-		 components.put("info", new PictureButton("Info", 225, 75));
-		 components.put("exit", new PictureButton("Exit", 225, 75));
+		components.put("new", new PictureButton("New Game", 225, 75));
+		components.put("load", new PictureButton("Load", 225, 75));
+		components.put("settings", new PictureButton("Settings", 225, 75));
+		components.put("info", new PictureButton("Info", 225, 75));
+		components.put("exit", new PictureButton("Exit", 225, 75));
 
 
 		/* LEGACY BUTTONS
