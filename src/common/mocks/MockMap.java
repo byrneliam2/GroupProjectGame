@@ -7,9 +7,10 @@ package common.mocks;
  */
 
 import common.items.Item;
+import common.map.Environment;
 import common.map.IMap;
+import common.map.IWorld;
 import items.DoorItem;
-import map.Environment;
 import npc.NPC;
 import player.Bullet;
 
@@ -97,4 +98,10 @@ public class MockMap implements IMap {
     public DoorItem getDoor(Rectangle.Double boundingBox) {
         return null;
     }
+
+	@Override
+	public IWorld getWorld() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

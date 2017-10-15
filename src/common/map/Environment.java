@@ -1,4 +1,4 @@
-package map;
+package common.map;
 
 import java.io.Serializable;
 

@@ -32,7 +32,12 @@ public class World implements IWorld, Serializable {
 	 * @return
 	 */
 	public Map getStartingMap() {
-		return maps.get("Map3");
+		for(String d : maps.keySet()) {
+			if(d.charAt(3)=='3') {
+				return this.maps.get(d);
+			}
+		}
+		return null;
 	}
 
 	public HashMap<String, Map> getMaps() {

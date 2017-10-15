@@ -6,7 +6,6 @@ import java.util.List;
 
 import common.items.Item;
 import items.DoorItem;
-import map.Environment;
 import npc.NPC;
 import player.Bullet;
 
@@ -140,5 +139,7 @@ public interface IMap {
      * @return
      */
     public String getName();
+    
+    public IWorld getWorld();
 
 }

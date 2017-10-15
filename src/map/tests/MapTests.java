@@ -1,24 +1,35 @@
 package map.tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.awt.Rectangle;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
-import java.util.Collections;
-
-import map.*;
 
 import org.junit.Test;
 
 import common.items.Item;
-import items.DoorItem;
+import common.map.Environment;
+import common.map.IMap;
+import common.map.IWorld;
+import common.player.IPlayer;
 import items.Key;
 import items.itemList.HealthPot;
 import items.itemList.MassiveGun;
+import map.BadMapImageException;
+import map.Map;
+import map.MapParser;
+import map.WorldParser;
 import npc.NPC;
 import npc.PatrolScheme;
+import common.items.*;
+import common.player.*;
+import common.*;
 import player.Bullet;
 import player.InvalidPlayerExceptions;
 import player.Player;
@@ -30,21 +41,21 @@ import player.Player;
 public class MapTests {
 
 	private int x = 90, y = 90;
-	private Player p1;
-	private Map m;
-	private Map m2;
-	private World w;
+	private IPlayer p1;
+	private IMap m;
+	private IMap m2;
+	private IWorld w;
 
 	public void setup() {
 		p1 = new Player("Tom", x, y);
 		m = MapParser.parse("MapTest", p1);
-		p1.setMap(m);
+		p1.setMap((Map) m);
 	}
 
 	public void environmentCollisionSetup() {
 		p1 = new Player("Tom", x, y);
 		m = MapParser.parse("MapTest", p1);
-		p1.setMap(m);
+		p1.setMap((Map) m);
 	}
 
 	public void doorSetup() {
@@ -52,6 +63,9 @@ public class MapTests {
 		w = WorldParser.parse("worldTest", p1);
 	}
 
+	/**
+	 * Test all types of environments
+	 */
 	@Test
 	public void enviromentTest() {
 		this.environmentCollisionSetup();
@@ -92,6 +106,9 @@ public class MapTests {
 
 	}
 
+	/**
+	 * Tests invalid positions for environments
+	 */
 	@Test
 	public void enviromentTestInvalidPoints() {
 		this.environmentCollisionSetup();
@@ -101,6 +118,9 @@ public class MapTests {
 
 	}
 
+	/**
+	 * Tests that you can and can't move for fringe map positions
+	 */
 	@Test
 	public void testCanMoveSpecificTiles() {
 		this.environmentCollisionSetup();
@@ -189,41 +209,43 @@ public class MapTests {
 		assertFalse(m.canMove(rBR1));
 	}
 
+	/**
+	 * Test that you can move through a open door
+	 * 
+	 * @throws InvalidPlayerExceptions
+	 */
 	@Test
-	public void doorTest() throws InvalidPlayerExceptions {
-		// Player starts on Map3 and should move over the door and into Map8
+	public void doorTestOpen() throws InvalidPlayerExceptions {
 		this.doorSetup();
-		assert (w.getStartingMap().getName().equals("Map3"));
-		w.getStartingMap().startMapNPCs();
-		DoorItem d = w.getStartingMap().getDoor(01);
-		p1.setSpeed(1);
-		// Player starts at 150,150
+		assert (w.getStartingMap().getName().equals("Map3Test"));
+
+		Map curMap = w.getStartingMap();
+
+		((Player) p1).setSpeed(1);
+
 		assertEquals(150, p1.getCentreX());
 		assertEquals(150, p1.getCentreY());
 
-		// Assert door is at 30,210
-		assert (30 == d.getEnterBox().getCenterX());
-		assert (210 == d.getEnterBox().getCenterY());
-
-		// move player to 150,210
-		assertFalse(p1.move(0, 60));
+		p1.move(0, 120);
 		assertEquals(150, p1.getCentreX());
-		assertEquals(210, p1.getCentreY());
+		assertEquals(270, p1.getCentreY());
 
-		// Move player over door
-		assertFalse(p1.move(-50, 0));
-		assertTrue(p1.move(-60, 0));
-
+		assertTrue(p1.move(-100, 0));
 		assertEquals("Map8", p1.getMap().getName());
-
 	}
 
+	/**
+	 * Test that you can move through a door that is locked but you have the correct
+	 * key
+	 * 
+	 * @throws InvalidPlayerExceptions
+	 */
 	@Test
 	public void doorTestLockedWithKey() throws InvalidPlayerExceptions {
 		// Player starts on Map3 and should pick up a key then move over the left door
 		// and into Map8
 		this.doorSetup();
-		assert (w.getStartingMap().getName().equals("Map3"));
+		assert (w.getStartingMap().getName().equals("Map3Test"));
 
 		Map curMap = w.getStartingMap();
 
@@ -235,7 +257,7 @@ public class MapTests {
 			}
 		}
 		assert (key != null);
-		p1.setSpeed(1);
+		((Player) p1).setSpeed(1);
 
 		assertEquals(150, p1.getCentreX());
 		assertEquals(150, p1.getCentreY());
@@ -253,16 +275,22 @@ public class MapTests {
 		assertEquals("Map8", p1.getMap().getName());
 	}
 
+	/**
+	 * Tests that you cannot move though a locked door if you do not have the
+	 * correct key
+	 * 
+	 * @throws InvalidPlayerExceptions
+	 */
 	@Test
 	public void doorTestLockedWithoutKey() throws InvalidPlayerExceptions {
 		// Player starts on Map3 and should not pick up a key then move over the left
 		// door and not be able to move onto Map 8
 		this.doorSetup();
-		assert (w.getStartingMap().getName().equals("Map3"));
+		assert (w.getStartingMap().getName().equals("Map3Test"));
 
 		Map curMap = w.getStartingMap();
 
-		p1.setSpeed(1);
+		((Player) p1).setSpeed(1);
 
 		assertEquals(150, p1.getCentreX());
 		assertEquals(150, p1.getCentreY());
@@ -272,8 +300,8 @@ public class MapTests {
 		assertEquals(180, p1.getCentreY());
 		p1.move(0, 35);
 		assertEquals(215, p1.getCentreY());
-		assertTrue(p1.move(-100, 0));
-		assertEquals("Map3", p1.getMap().getName());
+		assertFalse(p1.move(-100, 0));
+		assertEquals("Map3Test", p1.getMap().getName());
 	}
 
 	@Test
@@ -336,7 +364,7 @@ public class MapTests {
 		c.stop();
 		assertEquals(1182, c.getCentreX());
 		assertEquals(958, c.getCentreY());
-		Bullet b = new Bullet(1182, 940, 0, p1, 2, "playerBullet1");
+		Bullet b = new Bullet(1182, 940, 0, (Player) p1, 2, "playerBullet1");
 		double bulletY = b.getY();
 		int health = c.getHealth();
 
@@ -368,7 +396,7 @@ public class MapTests {
 	@Test
 	public void testBackgroundLayer() {
 		this.doorSetup();
-		assertEquals("Map3", w.getStartingMap().getName());
+		assertEquals("Map3Test", w.getStartingMap().getName());
 
 	}
 
@@ -411,10 +439,11 @@ public class MapTests {
 	public void testRangeCircle() {
 		setup();
 		Item i = new HealthPot();
-		m.placeItem(i, (int) p1.getRangeCircle().getCenterX(), (int) p1.getRangeCircle().getCenterY());
+		m.placeItem(i, (int) ((Player) p1).getRangeCircle().getCenterX(),
+				(int) ((Player) p1).getRangeCircle().getCenterY());
 
 		// tests item on top of the player
-		assertEquals(i, m.getClosestItem(p1.getRangeCircle()));
+		assertEquals(i, m.getClosestItem(((Player) p1).getRangeCircle()));
 	}
 
 	/**
@@ -428,7 +457,7 @@ public class MapTests {
 		m.placeItem(i, 2 * Map.tileSize, 2 * Map.tileSize);
 
 		// tests item at very edge of range circle
-		assertEquals(i, m.getClosestItem(p1.getRangeCircle()));
+		assertEquals(i, m.getClosestItem(((Player) p1).getRangeCircle()));
 	}
 
 	/**
@@ -438,7 +467,7 @@ public class MapTests {
 	public void testRangeCircle3() {
 		p1 = new Player("Tom", 3 * Map.tileSize, 2 * Map.tileSize);
 		m = MapParser.parse("MapTest", p1);
-		p1.setMap(m);
+		p1.setMap((Map) m);
 		Item i = new HealthPot();
 		Item i2 = new MassiveGun();
 		Item i3 = new HealthPot();
@@ -448,7 +477,7 @@ public class MapTests {
 		m.placeItem(i3, 4 * Map.tileSize, 2 * Map.tileSize);
 
 		// tests item at very edge of range circle
-		assertEquals(i2, m.getClosestItem(p1.getRangeCircle()));
+		assertEquals(i2, m.getClosestItem(((Player) p1).getRangeCircle()));
 	}
 
 	/**
@@ -458,7 +487,7 @@ public class MapTests {
 	public void testRangeCircle4() {
 		p1 = new Player("Tom", (2 * Map.tileSize) + (Map.tileSize / 2) + 20, (3 * Map.tileSize) + Map.tileSize / 2);
 		m = MapParser.parse("MapTest", p1);
-		p1.setMap(m);
+		p1.setMap((Map) m);
 		Item i = new HealthPot();
 		Item i2 = new MassiveGun();
 		Item i3 = new HealthPot();
@@ -469,7 +498,7 @@ public class MapTests {
 		m.placeItem(i3, 2 * Map.tileSize, 4 * Map.tileSize);
 
 		// tests item at very edge of range circle
-		assertEquals(i2, m.getClosestItem(p1.getRangeCircle()));
+		assertEquals(i2, m.getClosestItem(((Player) p1).getRangeCircle()));
 	}
 
 	/**
@@ -480,14 +509,14 @@ public class MapTests {
 		p1 = new Player("Tom", 120, 130);
 		m = MapParser.parse("MapTest", p1);
 		System.out.println(p1.getCentreX());
-		p1.setMap(m);
+		p1.setMap((Map) m);
 		Item i = new HealthPot();
 		Item i2 = new MassiveGun();
 		m.placeItem(i, 2 * Map.tileSize, 2 * Map.tileSize);
 		m.placeItem(i2, 2 * Map.tileSize, 3 * Map.tileSize);
 
 		// item i should be closest
-		assertEquals(i, m.getClosestItem(p1.getRangeCircle()));
+		assertEquals(i, m.getClosestItem(((Player) p1).getRangeCircle()));
 
 		try {
 			p1.move(0, 10);
@@ -496,7 +525,7 @@ public class MapTests {
 			fail();
 		}
 		// item i2 should be closest.
-		assertEquals(i2, m.getClosestItem(p1.getRangeCircle()));
+		assertEquals(i2, m.getClosestItem(((Player) p1).getRangeCircle()));
 	}
 
 	/* EXTERNAL TESTING STARTS HERE */
@@ -508,7 +537,7 @@ public class MapTests {
 	public void testNullDoors() {
 		p1 = new Player("Tom", 120, 130);
 		m = new Map("MapTest", p1, new ArrayList<>(), new ArrayList<>(), null);
-		p1.setMap(m);
+		p1.setMap((Map) m);
 
 		assertNull(m.getDoor(new Rectangle2D.Double(1, 1, 1, 1)));
 	}
@@ -520,7 +549,7 @@ public class MapTests {
 	public void testNullItems() {
 		p1 = new Player("Tom", 120, 130);
 		m = new Map("MapTest", p1, null, new ArrayList<>(), new ArrayList<>());
-		p1.setMap(m);
+		p1.setMap((Map) m);
 
 		assertNull(m.getClosestItem(new Ellipse2D.Double(1, 1, 1, 1)));
 	}
@@ -532,7 +561,7 @@ public class MapTests {
 	public void testGetBackground() {
 		p1 = new Player("Tom", 120, 130);
 		m = MapParser.parse("MapTest", p1);
-		p1.setMap(m);
+		p1.setMap((Map) m);
 
 		assertEquals("MapTest", m.getBackgroundLayer());
 	}
