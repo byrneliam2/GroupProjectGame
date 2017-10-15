@@ -1,12 +1,15 @@
 package common.utils;
 
 /**
- * Shared Utility class for various different calculations
+ * Shared Utility class for various different mathematical calculations
+ *
+ * @author Thomas Edwards
  */
 public class MathUtils {
 
 	/**
-	 * Calculate the angle from p1, to p2
+	 * Calculate the angle from p1, to p2. Returns an angle between 0 and 2Pi. 0 is
+	 * up, Pi is down, 2Pi is up etc.
 	 * 
 	 * @param x1
 	 *            Entity X coordinate
@@ -16,14 +19,14 @@ public class MathUtils {
 	 *            Player's X coordinate
 	 * @param y2
 	 *            Player's Y coordinate
-	 * @return the angle of each point
+	 * @return the angle from p1 to p2 between 0 and 2Pi. 0 would mean p2 is
+	 *         directly above p1.
 	 */
 	public static double calculateAngle(double x1, double y1, double x2, double y2) {
 		double x = x1 - x2;
 		double y = y1 - y2;
 
 		// math to calculate 360 degree angle.
-		// might have to catch divide-by-0 errors. TEST those!
 		double angle;
 		if (x > 0 && y >= 0) {// top left corner
 			angle = 3 * Math.PI / 2 + Math.atan(y / x);

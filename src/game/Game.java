@@ -27,7 +27,6 @@ import save_load.SaveLoad;
  */
 public class Game extends Observable implements IGame, Serializable {
 
-	
 	public static BufferedImage heart = ImageUtilities.scale(ImageLoader.image("game", "heart", true), 50, 50);
 	public static BufferedImage emptyHeart = ImageUtilities.scale(ImageLoader.image("game", "lost-heart", true), 50,
 			50);
@@ -36,8 +35,6 @@ public class Game extends Observable implements IGame, Serializable {
 
 	private IPlayer player;
 	private World world;
-
-
 
 	/**
 	 * Start the new game.
@@ -62,9 +59,9 @@ public class Game extends Observable implements IGame, Serializable {
 	@Override
 	public int isOver() {
 		if (world.getMaps().get("Map16").getNPCs().isEmpty())
-			return 2;//win condition
+			return 2;// win condition
 		if (player.isDead())
-			return 1;//lose condition
+			return 1;// lose condition
 		else
 			return 0;
 
@@ -73,6 +70,17 @@ public class Game extends Observable implements IGame, Serializable {
 	@Override
 	public World getWorld() {
 		return world;
+	}
+
+	@Override
+	public void set(Object arg) {
+		setChanged();
+		notifyObservers(arg);
+	}
+
+	@Override
+	public void giveObserver(Observer o) {
+		this.addObserver(o);
 	}
 
 	/******************* Controller Methods ************************/
@@ -130,7 +138,7 @@ public class Game extends Observable implements IGame, Serializable {
 	public void saveGame(String theFilePath) {
 		SaveLoad.saveGame(this, theFilePath);
 	}
-	
+
 	@Override
 	public void loadGame(IPlayer player, World world) {
 		this.player = player;
@@ -146,14 +154,4 @@ public class Game extends Observable implements IGame, Serializable {
 		set("stop");
 	}
 
-	@Override
-	public void set(Object arg) {
-		setChanged();
-		notifyObservers(arg);
-	}
-
-	@Override
-	public void giveObserver(Observer o) {
-		this.addObserver(o);
-	}
 }

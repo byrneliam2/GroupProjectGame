@@ -7,7 +7,7 @@ import player.Player;
  * Equipable items are items which can be 'equipped' by the player, they provide
  * static bonuses when eqquiped.
  *
- * @author edwardthom
+ * @author Thomas Edwards
  *
  */
 public interface Equipable extends Item {
