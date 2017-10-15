@@ -10,7 +10,9 @@ import common.items.Item;
 import common.map.IMap;
 import common.mocks.MockMap;
 import items.Backpack;
+import items.DoorItem;
 import items.InvalidBackpackException;
+import items.Key;
 import items.Usable;
 import items.itemList.*;
 import map.Map;
@@ -55,6 +57,8 @@ public class PlayerTest {
 		// it just increases up the health of the player
 		assertTrue(player.getBackpack().getInventory().contains(i));
 		// else assertFalse
+		
+		
 	}
 
 	/**
@@ -88,6 +92,7 @@ public class PlayerTest {
 		player = new Player(name, xLocation, yLocation);
 		// insert an item with specific coordinate next to the player
 		Item i = new MassiveGun();
+		// Create a gun Item with specific coordinates next to the player
 		IMap m = new MockMap();
 		m.placeItem(i, 95, 95);
 		// use the pick up item from the player class
@@ -100,18 +105,28 @@ public class PlayerTest {
 	/**
 	 * Check if the defaultFireRate of the player decreases when the Player picks up
 	 * a gun.
+	 * @throws InvalidBackpackException 
 	 */
 	@Test
-	public void testDefaultFireRate() {
-		// Create a Player with specific coordinates
+	public void testDefaultFireRate() throws InvalidBackpackException {
+		player = new Player(name, xLocation, yLocation);
+		// insert an item with specific coordinate next to the player
+		Item i = new MassiveGun();
+		// Create a gun Item with specific coordinates next to the player
+		IMap m = new MockMap();
 		// Create a gun Item with specific coordinates next to the player
 		// player needs to pick up the gun
+		m.placeItem(i, 98, 98);
+		// use the pick up item from the player class
+		double tempFireRate = player.getFireRate();
+		player.getBackpack().pickUpItem(i);
 		// check if the player backpack contatins the gun
-		// if it does contain the gun
-		// if the fire rate should have increased
-		// assertTrue
-		// else
-		// assertFalse
+		if(player.getBackpack().getInventory().contains(i)){
+			// if it does contain the gun
+			// if the fire rate should have increased
+			// assertTrue
+			assertTrue((tempFireRate < player.getFireRate()));
+		}
 	}
 
 	/**
@@ -122,17 +137,65 @@ public class PlayerTest {
 	 */
 	@Test
 	public void testTakeDamage() {
-		//
+		// Create a Player with specific coordinates
+		player = new Player(name, xLocation, yLocation);
+		// initially the player has 5 hearts
+		// so if the player gets damage three times
+		player.takeDamage();
+		player.takeDamage();
+		player.takeDamage();
+		// then the player should have two hearts
+		assertTrue((player.getHealth() == 2));
+		
 	}
 
 	/**
 	 * Check if the Player has the specific key to open the door and the player
 	 * should be around the door to open the door
+	 * @throws InvalidBackpackException 
 	 */
 	@Test
-	public void testCanOpenDoor() {
-
+	public void testCanOpenDoor() throws InvalidBackpackException {
+		// Create a Player with specific coordinates
+		player = new Player(name, xLocation, yLocation);
+		// Create a DoorItem with specific coordinates
+		DoorItem i = new DoorItem("map1", 10, true, xLocation/4, yLocation/4 );
+		// Create a gun Item with specific coordinates next to the player
+		IMap m = new MockMap();
+		// Create a gun Item with specific coordinates next to the player
+		// player needs to pick up the gun
+		m.placeItem(i, 98, 98);
+		// Create a KeyID with specific coordinates
+		Item second = new Key(10, "yellow");
+		// Create a gun Item with specific coordinates next to the player
+		m = new MockMap();
+		// Create a gun Item with specific coordinates next to the player
+		// player needs to pick up the gun
+		m.placeItem(second, 102, 102);
+		// Use the pickup item in the Player Item to pick up the item
+		player.getBackpack().pickUpItem(second);	
+		if(player.getBackpack().getInventory().contains(second)){
+			assertTrue(player.canOpenDoor(i));
+		}
 	}
+	
+	/**
+	 * Check if the player can die after getting five times attack
+	 */
+	@Test
+	public void testDeath() {
+		// Create a Player with specific coordinates
+		player = new Player(name, xLocation, yLocation);
+		// attack the player for five times because
+		// Initially the player has five hearts 
+		for(int i = 0; i<5; i++){
+			player.takeDamage();
+			if((player.getHealth() == 0)){
+				assertTrue((player.getHealth() == 0));
+			}
+		}
+	}
+
 
 	/**
 	 * Check if the player can not walk through the walls and the doors if the
