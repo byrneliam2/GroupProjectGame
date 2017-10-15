@@ -24,7 +24,7 @@ import common.utils.MathUtils;
  * @author javahemohs and Thomas Edwards Created by javahemohs on 19/09/17.
  *
  */
-public class Player implements IPlayer, Serializable{
+public class Player implements IPlayer, Serializable {
 	/* constants */
 	private static final int rangeCircleWidth = 2 * Map.tileSize;
 	private static final double defaultFireRate = 0.8;
@@ -175,9 +175,13 @@ public class Player implements IPlayer, Serializable{
 
 	private void doFireEffect() {
 		if (currentEnvironment == Environment.FIRE) {
-			fireTimer.start();
+			if (fireTimer == null) {
+				fireTimer = new javax.swing.Timer(1000, (e) -> takeDamage());
+				fireTimer.start();
+			}
 		} else {
 			fireTimer.stop();
+			fireTimer = null;
 		}
 	}
 
@@ -279,8 +283,8 @@ public class Player implements IPlayer, Serializable{
 			double direction = MathUtils.calculateAngle(getCentreX(), getCentreY(), mouseX, mouseY);
 			// make a new bullet
 			new Bullet(getCentreX(), getCentreY(), direction, this, 9, "playerBullet1");
-			new Bullet(getCentreX(), getCentreY(), direction-Math.PI/16, this, 9, "playerBullet1");
-			new Bullet(getCentreX(), getCentreY(), direction+Math.PI/16, this, 9, "playerBullet1");
+			new Bullet(getCentreX(), getCentreY(), direction - Math.PI / 16, this, 9, "playerBullet1");
+			new Bullet(getCentreX(), getCentreY(), direction + Math.PI / 16, this, 9, "playerBullet1");
 
 			// start a timer to count till when the next shot is ready to shoot....
 			TimerTask taskEvent = new TimerTask() {

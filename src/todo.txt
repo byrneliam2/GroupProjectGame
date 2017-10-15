@@ -11,5 +11,4 @@ TODO
 
 - Replace all legacy buttons and labels (settings)
 - General code cleanup, removal of all print statements, etc.
-- Fire environment broken for loaded games
 
