@@ -87,11 +87,12 @@ public class Game extends Observable implements IGame, Serializable {
 
 	@Override
 	public void movePlayer(Direction dir) throws InvalidPlayerExceptions {
+		player.setCurrentDir(dir);
 		// if the movement caused a change in maps... notify observers
 		if (player.move(dir.getX(), dir.getY())) {
 			set(getCurrentMap());
 		}
-		player.setCurrentDir(dir);
+		
 	}
 
 	@Override
