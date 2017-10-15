@@ -11,7 +11,7 @@ import map.Map;
  * This class represent a door, a door leads to another map. In this case each
  * door has the name of the map it leads to.
  *
- * @author James
+ * @author James and Thomas
  *
  */
 public class DoorItem extends AbstractItem implements Serializable {

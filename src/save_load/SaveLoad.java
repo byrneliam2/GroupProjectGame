@@ -4,8 +4,10 @@ import game.Game;
 
 import java.io.*;
 
-/*
+/**
  *  Game Save and Load
+ *  
+ *  @author Mohsen
  */
 public class SaveLoad {
 

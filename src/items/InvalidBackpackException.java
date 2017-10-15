@@ -5,7 +5,7 @@ package items;
  * something which is invalid. Such as pick up an item when their backpack is
  * full.
  *
- * @author edwardthom
+ * @author Thomas Edwards
  *
  */
 public class InvalidBackpackException extends Exception {

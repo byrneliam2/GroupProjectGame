@@ -4,6 +4,9 @@ import items.AbstractItem;
 import items.Equipable;
 import player.Player;
 
+/**
+ * @author Thomas Edwards
+ */
 public class MassiveGun extends AbstractItem implements Equipable {
 
 	public MassiveGun() {
