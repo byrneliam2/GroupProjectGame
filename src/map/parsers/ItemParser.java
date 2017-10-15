@@ -14,6 +14,10 @@ import map.Map;
 import map.MapParser;
 import map.ParseException;
 
+/**
+ * @author James
+ *
+ */
 public class ItemParser {
 
 	public static void parseItem(String itemName, Scanner scan, List<Item> items) throws ParseException {

@@ -9,6 +9,10 @@ import map.Map;
 import map.MapParser;
 import map.ParseException;
 
+/**
+ * @author James
+ *
+ */
 public class KeyParser {
 
 	/**

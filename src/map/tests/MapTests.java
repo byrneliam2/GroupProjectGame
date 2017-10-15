@@ -23,6 +23,10 @@ import player.Bullet;
 import player.InvalidPlayerExceptions;
 import player.Player;
 
+/**
+ * @author James
+ *
+ */
 public class MapTests {
 
 	private int x = 90, y = 90;

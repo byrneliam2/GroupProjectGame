@@ -16,6 +16,10 @@ import npc.PatrolScheme;
 import npc.SprayScheme;
 import npc.SuicidalScheme;
 
+/**
+ * @author James
+ *
+ */
 public class NpcParser {
 
 	/**

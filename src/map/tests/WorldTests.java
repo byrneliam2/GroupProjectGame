@@ -8,6 +8,10 @@ import map.World;
 import map.WorldParser;
 import player.Player;
 
+/**
+ * @author James
+ *
+ */
 public class WorldTests {
 
 	@Test
