@@ -3,6 +3,7 @@ package player;
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -28,7 +29,7 @@ public class Bullet implements IBullet, Serializable {
 	/**
 	 * The list of all current bullets in the game.
 	 */
-	public static final List<Bullet> bulletList = new ArrayList<>();
+	public static final List<Bullet> bulletList = Collections.synchronizedList(new ArrayList<>());
 	/**
 	 * The default size of a bullet.
 	 */
@@ -103,13 +104,6 @@ public class Bullet implements IBullet, Serializable {
 	}
 
 	/**
-	 * @return the current x location of this bullet
-	 */
-	public double getX() {
-		return currentX;
-	}
-
-	/**
 	 * Optimized method of getting the correct image for each bullet.
 	 * 
 	 * @return the image associated with this bullet type.
@@ -135,6 +129,13 @@ public class Bullet implements IBullet, Serializable {
 	 */
 	public double getY() {
 		return currentY;
+	}
+
+	/**
+	 * @return the current x location of this bullet
+	 */
+	public double getX() {
+		return currentX;
 	}
 
 	/**
