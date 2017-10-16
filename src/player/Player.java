@@ -180,8 +180,10 @@ public class Player implements IPlayer, Serializable {
 				fireTimer.start();
 			}
 		} else {
-			fireTimer.stop();
-			fireTimer = null;
+			if (fireTimer != null) {
+				fireTimer.stop();
+				fireTimer = null;
+			}
 		}
 	}
 
@@ -277,7 +279,8 @@ public class Player implements IPlayer, Serializable {
 	}
 
 	/*
-	 * Atm this is a shotgun blast that shoots 3 bullets instead of the normal 1 bullet. has an original 5 second cooldown.
+	 * Atm this is a shotgun blast that shoots 3 bullets instead of the normal 1
+	 * bullet. has an original 5 second cooldown.
 	 */
 	public void specialAbility(double mouseX, double mouseY) throws InvalidPlayerExceptions {
 		if (isSpecialReady) {// can only special if special is ready

@@ -49,7 +49,7 @@ public class MapTests {
 
 	public void doorSetup() {
 		p1 = new Player("Tom", 120, 120);
-		w = WorldParser.parse("world", p1);
+		w = WorldParser.parse("worldTest", p1);
 	}
 
 	@Test
@@ -219,61 +219,61 @@ public class MapTests {
 	}
 
 	@Test
-	public void doorTestLocked() throws InvalidPlayerExceptions {
-		// Player starts on Map3 and should move over the door and into Map8
+	public void doorTestLockedWithKey() throws InvalidPlayerExceptions {
+		// Player starts on Map3 and should pick up a key then move over the left door
+		// and into Map8
 		this.doorSetup();
 		assert (w.getStartingMap().getName().equals("Map3"));
-		//w.getStartingMap().startMapNPCs();
 
 		Map curMap = w.getStartingMap();
-		DoorItem door = new DoorItem("Map8", 78, false, 360, 370);
-		curMap.placeItem(door, 360, 360);
-		curMap.placeItem(new Key(78, "white"), 360, 280);
+
+		curMap.placeItem(new Key(01, "white"), 120, 180);
 		Item key = null;
 		for (Item i : curMap.getItems()) {
 			if (i instanceof Key && i.getName().equals("whiteKey")) {
 				key = i;
 			}
 		}
-
+		assert (key != null);
 		p1.setSpeed(1);
-		// Player starts at 150,150
+
 		assertEquals(150, p1.getCentreX());
 		assertEquals(150, p1.getCentreY());
 
-		// Assert door is at 390,390 and key is at 390,310
-		assert (390 == door.getEnterBox().getCenterX());
-		assert (400 == door.getEnterBox().getCenterY());
-		assert (360 == key.getX());
-		assert (280 == key.getY());
+		assertEquals(120, key.getX());
+		assertEquals(180, key.getY());
 
-		// move player to 390,280
-		assertFalse(p1.move(240, 160));
+		p1.move(0, 30);
+		assertEquals(150, p1.getCentreX());
+		assertEquals(180, p1.getCentreY());
 		p1.pickUpItem();
-		assertEquals(390, p1.getCentreX());
-		assertEquals(310, p1.getCentreY());
-
-		assertFalse(p1.move(0, 40));
-		assertFalse(p1.move(0, 5));
-		assertFalse(p1.move(0, 5));
-		assertFalse(p1.move(0, 5));
-		assertFalse(p1.move(0, 5));
-		assertFalse(p1.move(0, 5));
-		assertFalse(p1.move(0, 5));
-		assertFalse(p1.move(0, 5));
-		assertFalse(p1.move(0, 5));
-		assertFalse(p1.move(0, 5));
-		assertFalse(p1.move(0, 5));
-
-		//Doesn't work cause door's have their own list of doors on the map.
-		//you can't placeItem() with a door.
-		//Don't start NPC's cause they might kill the player before he gets to the door.
-		//Might also be broken if map8 doesn't have a receiving door.
-		assertNotNull(curMap.getDoor(p1.getBoundingBox()));
-		// System.out.println(p1.getCentreY());
-
+		p1.move(0, 35);
+		assertEquals(215, p1.getCentreY());
+		assertTrue(p1.move(-100, 0));
 		assertEquals("Map8", p1.getMap().getName());
+	}
 
+	@Test
+	public void doorTestLockedWithoutKey() throws InvalidPlayerExceptions {
+		// Player starts on Map3 and should not pick up a key then move over the left
+		// door and not be able to move onto Map 8
+		this.doorSetup();
+		assert (w.getStartingMap().getName().equals("Map3"));
+
+		Map curMap = w.getStartingMap();
+
+		p1.setSpeed(1);
+
+		assertEquals(150, p1.getCentreX());
+		assertEquals(150, p1.getCentreY());
+
+		p1.move(0, 30);
+		assertEquals(150, p1.getCentreX());
+		assertEquals(180, p1.getCentreY());
+		p1.move(0, 35);
+		assertEquals(215, p1.getCentreY());
+		assertTrue(p1.move(-100, 0));
+		assertEquals("Map3", p1.getMap().getName());
 	}
 
 	@Test
@@ -333,14 +333,15 @@ public class MapTests {
 		this.doorSetup();
 		NPC c = w.getStartingMap().getNPCs().get(0);
 		c.start();
-		c.start();
-
-		Bullet b = new Bullet(926, 878, 0, p1, 2, "playerBullet1");
-
+		c.stop();
+		assertEquals(1182, c.getCentreX());
+		assertEquals(958, c.getCentreY());
+		Bullet b = new Bullet(1182, 940, 0, p1, 2, "playerBullet1");
+		double bulletY = b.getY();
 		int health = c.getHealth();
 
 		Thread.sleep(3000);
-
+		assert (b.getY() < bulletY);
 		assertEquals(health - 1, c.getHealth());
 
 	}

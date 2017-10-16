@@ -1,0 +1,30 @@
+Door
+Map8 01 false
+0 3
+
+Door
+Map8 01 false
+0 4
+
+Door
+Map7 03 true
+14 0
+
+Door
+Map7 03 true
+15 0
+
+Npc
+HungryBat
+EasyScheme false 20
+36 29 2
+
+Npc
+HungryBat
+EasyScheme false 20
+6 29 2
+
+HealthPot 2
+
+
+
