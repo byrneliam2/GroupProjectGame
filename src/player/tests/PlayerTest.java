@@ -2,7 +2,16 @@ package player.tests;
 
 import static org.junit.Assert.*;
 import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
+
+import common.items.Item;
+import items.Backpack;
+import items.InvalidBackpackException;
+import items.Usable;
+import items.itemList.HealthPot;
+import items.itemList.ShinyArmor;
 import map.Map;
 import npc.NPC;
 import player.Bullet;
@@ -15,24 +24,32 @@ import player.Player;
  *
  */
 public class PlayerTest {
-	private ArrayList<NPC> npcs;
-	private Player p;
 	private Map m;
+	private String name = "Thomas";
 	private int xLocation = 100;
 	private int yLocation = 100;
 	private double mouseX = 50.50;
 	private double mouseY = 50.50;
+	private ArrayList<NPC> npcs;
+	private Player player = new Player(name, xLocation, yLocation);
 
 
 	/**
 	 * Check if when a player picks up an item should appear in the itemsList OR the BackPack.
+	 * @throws InvalidPlayerExceptions
+	 * @throws InvalidBackpackException
 	 */
 	@Test
-	public void testPickedUpItem() {
+	public void testPickedUpItem() throws InvalidPlayerExceptions, InvalidBackpackException {
 		// insert a player with specific coordinate
+		player = new Player(name, xLocation, yLocation);
 		// insert an item with specific coordinate next to the player
+		Item i = new HealthPot();
+		m.placeItem(i, 100, 100);
 		// use the pick up item from the player class
+		player.getBackpack().pickUpItem(i);
 		// if the player backpack contains the specific item assertTrue
+		assertFalse(player.getBackpack().getInventory().contains(i));
 		// else assertFalse
 	}
 
