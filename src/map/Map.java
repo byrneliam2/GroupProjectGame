@@ -62,7 +62,7 @@ public class Map implements IMap, Serializable {
 
 	/** The name of the map */
 	private String name;
-	
+
 	private World world;
 
 	/** Doors on the current map */
@@ -80,7 +80,7 @@ public class Map implements IMap, Serializable {
 		// sets the npc's up, note you'll still have to call startMapNPC's() to start
 		// them moving
 		if (Game.DEV_MODE && !name.equals("Map16")) {
-			//if dev mode, remove all npc's except the boss
+			// if dev mode, remove all npc's except the boss
 			NPCS.clear();
 		} else {
 			for (NPC npc : NPCS) {
@@ -131,14 +131,17 @@ public class Map implements IMap, Serializable {
 	 */
 	private void loadAllLayers(int newWidth, int newHeight) {
 		BufferedImage colLayer = ImageLoader.image("MapImages", this.name + "Collision", true);
-		this.width = colLayer.getWidth() / 32;
-		this.height = colLayer.getHeight() / 32;
 		colLayer = ImageUtilities.scale(colLayer, newWidth, newHeight);
-		this.collisionLayer = this.loadColLayers(colLayer);
 
 		BufferedImage EnvLayer = ImageLoader.image("MapImages", this.name + "Environment", true);
 		EnvLayer = ImageUtilities.scale(EnvLayer, newWidth, newHeight);
-		this.environmentalLayer = this.loadEnvLayers(EnvLayer);
+
+		this.width = colLayer.getWidth() / Map.tileSize;
+		this.height = colLayer.getHeight() / Map.tileSize;
+
+		LayerLoader loader = new LayerLoader();
+		this.collisionLayer = loader.translateImageToCollisionArray(colLayer);
+		this.environmentalLayer = loader.translateImageToEnvironmentArray(EnvLayer);
 
 	}
 
@@ -163,100 +166,6 @@ public class Map implements IMap, Serializable {
 				placed = false;
 			}
 		}
-	}
-
-	/**
-	 * This method takes a buffered image representing the collision layer and
-	 * converts it into a 2D array of integers. Each integer representing whether
-	 * the buffered image was black or not.
-	 *
-	 * @param colLayer
-	 * @return 2D ArrayList<Integer>
-	 */
-	private ArrayList<ArrayList<Integer>> loadColLayers(BufferedImage colLayerUnbroken) {
-		ArrayList<ArrayList<BufferedImage>> colLayer = this.breakUpImageIntoTiles(colLayerUnbroken);
-
-		ArrayList<ArrayList<Integer>> collLayer = new ArrayList<ArrayList<Integer>>();
-		for (int i = 0; i < this.height; i++) {
-			collLayer.add(new ArrayList<Integer>(width));
-		}
-
-		for (int col = 0; col < this.height; col++) {
-			for (int row = 0; row < this.width; row++) {
-				Color c = new Color(colLayer.get(col).get(row).getRGB(1, 1));
-				if (c.getGreen() == 0 && c.getRed() == 0 && c.getBlue() == 0) {
-					collLayer.get(col).add(1);
-
-				} else {
-					collLayer.get(col).add(0);
-
-				}
-			}
-
-		}
-		return collLayer;
-	}
-
-	/**
-	 * This method takes a buffered image representing the environment layer and
-	 * converts it into a 2D array of integers. Each integer representing a type of
-	 * environment
-	 *
-	 * @param EnviroLayerUnbroken
-	 * @return
-	 */
-	private ArrayList<ArrayList<Integer>> loadEnvLayers(BufferedImage EnviroLayerUnbroken) {
-		ArrayList<ArrayList<BufferedImage>> EnvLayer = this.breakUpImageIntoTiles(EnviroLayerUnbroken);
-
-		ArrayList<ArrayList<Integer>> EnvironmentalLayer = new ArrayList<ArrayList<Integer>>();
-		for (int i = 0; i < this.height; i++) {
-			EnvironmentalLayer.add(new ArrayList<Integer>(width));
-		}
-
-		for (int col = 0; col < this.height; col++) {
-			for (int row = 0; row < this.width; row++) {
-				Color c = new Color(EnvLayer.get(col).get(row).getRGB(1, 1));
-				if (c.getGreen() == 0 && c.getRed() == 0 && c.getBlue() == 0) {// Black(1) is for death environment
-					EnvironmentalLayer.get(col).add(1);
-				} else if (c.getGreen() == 255 && c.getRed() == 0 && c.getBlue() == 0) {// Green(2) is for mud
-					// environment
-					EnvironmentalLayer.get(col).add(2);
-				} else if (c.getGreen() == 0 && c.getRed() == 255 && c.getBlue() == 0) {// Red(3) is for fire
-																						// environment
-					EnvironmentalLayer.get(col).add(3);
-				} else if (c.getGreen() == 0 && c.getRed() == 0 && c.getBlue() == 255) {// Blue(4) is for mist
-																						// environment
-					EnvironmentalLayer.get(col).add(4);
-				} else {
-					EnvironmentalLayer.get(col).add(0);// (0) is for no environment
-				}
-
-			}
-		}
-		return EnvironmentalLayer;
-	}
-
-	/**
-	 * This method breaks up a bufferedImage into sub images based off the TileSize.
-	 *
-	 * @param colLayer
-	 * @return A 2D array of BufferedImages
-	 */
-	private ArrayList<ArrayList<BufferedImage>> breakUpImageIntoTiles(BufferedImage colLayer) {
-		int widthUnbroken = colLayer.getWidth();
-		int heightUnbroken = colLayer.getHeight();
-		ArrayList<ArrayList<BufferedImage>> layer = new ArrayList<ArrayList<BufferedImage>>();
-		for (int initY = 0; initY < heightUnbroken; initY += Map.tileSize) {
-			layer.add(new ArrayList<BufferedImage>());
-		}
-		for (int y = 0; y < heightUnbroken; y += Map.tileSize) {
-			for (int x = 0; x < widthUnbroken; x += Map.tileSize) {
-				BufferedImage newTile = colLayer.getSubimage(x, y, Map.tileSize, Map.tileSize);
-				int posY = y / Map.tileSize;
-				layer.get(posY).add(newTile);
-			}
-		}
-		return layer;
 	}
 
 	/**
