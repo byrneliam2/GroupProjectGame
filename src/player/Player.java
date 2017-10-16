@@ -13,8 +13,9 @@ import items.DoorItem;
 import items.Equipable;
 import items.InvalidBackpackException;
 import common.items.Item;
+import common.map.Environment;
+import common.map.IMap;
 import items.Usable;
-import map.Environment;
 import map.Map;
 import map.World;
 import common.utils.Direction;
@@ -40,7 +41,7 @@ public class Player implements IPlayer, Serializable {
 	protected int speed = baseSpeed;// movement speed of the player
 	private double fireRate = defaultFireRate;// in seconds, smaller numbers mean less time between shots
 	private static Timer shotTimer = new Timer();
-	protected Map map;// the map which the player is currently located on.
+	protected IMap map;// the map which the player is currently located on.
 	private boolean isReadyToShoot = true;
 	private boolean isSpecialReady = true;
 	private Environment currentEnvironment;
@@ -361,7 +362,7 @@ public class Player implements IPlayer, Serializable {
 		return this.playerBox;
 	}
 
-	public Map getMap() {
+	public IMap getMap() {
 		return this.map;
 	}
 

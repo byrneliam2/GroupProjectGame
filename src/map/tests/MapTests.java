@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 import common.items.Item;
+import common.map.Environment;
 import common.map.IMap;
 import common.map.IWorld;
 import common.player.IPlayer;
@@ -21,7 +22,6 @@ import items.Key;
 import items.itemList.HealthPot;
 import items.itemList.MassiveGun;
 import map.BadMapImageException;
-import map.Environment;
 import map.Map;
 import map.MapParser;
 import map.WorldParser;
@@ -63,6 +63,9 @@ public class MapTests {
 		w = WorldParser.parse("worldTest", p1);
 	}
 
+	/**
+	 * Test all types of environments
+	 */
 	@Test
 	public void enviromentTest() {
 		this.environmentCollisionSetup();
@@ -103,6 +106,9 @@ public class MapTests {
 
 	}
 
+	/**
+	 * Tests invalid positions for environments
+	 */
 	@Test
 	public void enviromentTestInvalidPoints() {
 		this.environmentCollisionSetup();
@@ -112,6 +118,9 @@ public class MapTests {
 
 	}
 
+	/**
+	 * Tests that you can and can't move for fringe map positions
+	 */
 	@Test
 	public void testCanMoveSpecificTiles() {
 		this.environmentCollisionSetup();
@@ -200,6 +209,11 @@ public class MapTests {
 		assertFalse(m.canMove(rBR1));
 	}
 
+	/**
+	 * Test that you can move through a open door
+	 * 
+	 * @throws InvalidPlayerExceptions
+	 */
 	@Test
 	public void doorTestOpen() throws InvalidPlayerExceptions {
 		this.doorSetup();
@@ -220,6 +234,12 @@ public class MapTests {
 		assertEquals("Map8", p1.getMap().getName());
 	}
 
+	/**
+	 * Test that you can move through a door that is locked but you have the correct
+	 * key
+	 * 
+	 * @throws InvalidPlayerExceptions
+	 */
 	@Test
 	public void doorTestLockedWithKey() throws InvalidPlayerExceptions {
 		// Player starts on Map3 and should pick up a key then move over the left door
@@ -255,6 +275,12 @@ public class MapTests {
 		assertEquals("Map8", p1.getMap().getName());
 	}
 
+	/**
+	 * Tests that you cannot move though a locked door if you do not have the
+	 * correct key
+	 * 
+	 * @throws InvalidPlayerExceptions
+	 */
 	@Test
 	public void doorTestLockedWithoutKey() throws InvalidPlayerExceptions {
 		// Player starts on Map3 and should not pick up a key then move over the left

@@ -8,12 +8,12 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import common.map.Environment;
 import common.player.IBullet;
 import common.utils.DisplayValues;
 import game.Game;
 import gfx.ImageLoader;
 import gfx.ImageUtilities;
-import map.Environment;
 
 /**
  * A bullet is a point object with an x,y location, when the bullet is created a

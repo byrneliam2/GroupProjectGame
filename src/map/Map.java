@@ -15,6 +15,7 @@ import gfx.ImageLoader;
 import gfx.ImageUtilities;
 import items.DoorItem;
 import common.items.Item;
+import common.map.Environment;
 import common.map.IMap;
 import common.map.IWorld;
 import npc.NPC;
