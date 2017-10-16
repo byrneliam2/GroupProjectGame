@@ -1,5 +1,4 @@
 TODO
-- Integrate saving and loading (done?) -> turn into static interface?
 - Optimize drawing (associate items, etc. with images again?) Done Hearts but not items.
 - External testing for all libraries (including MapCardTests)
 - Abstract out common interfaces: should all use common types! IMPORTANT!!!

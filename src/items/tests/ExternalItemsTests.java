@@ -10,6 +10,7 @@ import common.items.Item;
 import items.*;
 import items.itemList.HealthPot;
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import player.Player;
@@ -103,7 +104,7 @@ public class ExternalItemsTests {
 		}
 	}
 
-	@Test
+	@Ignore
 	public void test07_BackpackTests() {
 		Player p = new Player("Player", 50, 50);
 		Backpack b = new Backpack(p);
