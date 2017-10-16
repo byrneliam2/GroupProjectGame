@@ -6,7 +6,6 @@ package audio.tests;
  * External Tester: James Watt
  */
 
-
 import audio.AudioException;
 import audio.AudioHandler;
 import common.audio.IAudioHandler;
@@ -137,6 +136,25 @@ public class AudioTests {
 		IAudioHandler audio = new AudioHandler();
 		audio.playSound(MusicTrack.TEST_MUSIC);
 		Thread.sleep(2000);
+		audio.stop();
+
+	}
+
+	@Test
+	public void test11_msuicPlays() throws InterruptedException {
+		IAudioHandler audio = new AudioHandler();
+		audio.playSound(MusicTrack.GAME_MUSIC);
+		Thread.sleep(2000);
+		audio.stop();
+
+	}
+
+	@Test
+	public void test12_msuicPlays() throws InterruptedException {
+		IAudioHandler audio = new AudioHandler();
+		audio.playSound(MusicTrack.MENU_MUSIC);
+		Thread.sleep(2000);
+		audio.stop();
 
 	}
 
