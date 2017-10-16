@@ -10,8 +10,7 @@ import common.items.Item;
 import items.Backpack;
 import items.InvalidBackpackException;
 import items.Usable;
-import items.itemList.HealthPot;
-import items.itemList.ShinyArmor;
+import items.itemList.*;
 import map.Map;
 import npc.NPC;
 import player.Bullet;
@@ -48,36 +47,50 @@ public class PlayerTest {
 		m.placeItem(i, 100, 100);
 		// use the pick up item from the player class
 		player.getBackpack().pickUpItem(i);
-		// if the player backpack contains the specific item assertTrue
-		assertFalse(player.getBackpack().getInventory().contains(i));
+		// if the player backpack contains the specific item assertFalse
+		// because the HealthPot is a useable type of item so the backpack would keep usable items
+		// it just increases up the health of the player
+		assertTrue(player.getBackpack().getInventory().contains(i));
 		// else assertFalse
 	}
 
 	/**
 	 * Check if when a player removes an item from the BackPack should NOT appear in the itemsList OR the BackPack anymore.
+	 * @throws InvalidBackpackException
 	 */
 	@Test
-	public void testRemoveItem() {
+	@Deprecated
+	public void testRemoveItem() throws InvalidBackpackException {
 		// insert a player with specific coordinate
 		// insert an item with specific coordinate next to the player
 		// use the pick up item from the player class
 		// if the player backpack contains the specific item
-			// the use the remove method to delete the item.
-				// if the player backpack doesnt contains the item
+			// then use the remove method to delete the item.
+			// if the player backpack doesnt contains the item
 					// assertTrue
-				// else
+			// else
 					//assertFalse
 	}
 
 
 	/**
 	 * Check if the Player is in rangeCircle box then it can pick up the item Other than that the test fails
+	 * @throws InvalidBackpackException
 	 */
 	@Test
-	public void testRangeCircle() {
-		// insert a player with specific coordinate
-		// insert an item with specific coordinate in the rangeCircle of player
+	public void testRangeCircle() throws InvalidBackpackException {
+		player = new Player(name, xLocation, yLocation);
+		// insert an item with specific coordinate next to the player
+		Item i = new HealthPot();
+		m.placeItem(i, 95, 95);
 		// use the pick up item from the player class
+		player.getBackpack().pickUpItem(i);
+		if(player.getBackpack().getInventory().contains(i))
+			assertTrue(true);
+		else
+			assertFalse(false);
+
+
 		// if the player backpack contains the specific item assertTrue
 		// else assertFalse
 	}
