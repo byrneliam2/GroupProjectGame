@@ -23,6 +23,7 @@ import javax.swing.WindowConstants;
 
 import common.audio.IAudioHandler;
 import common.audio.MusicTrack;
+import common.audio.SoundTrack;
 import common.controller.IController;
 import common.game.IGame;
 import common.utils.DisplayValues;
@@ -302,11 +303,15 @@ public class MainDisplay extends JComponent implements Observer {
             String str = (String) arg;
             // list special cases
             switch (str) {
-                case "last":    switchScreen(lastCard.getName());  break;
-                case "pause":   pauseGame();                       break;
-                case "stop":    stopGame();                        break;
-                case "unpause": startTimer();                      break;
-                default:        switchScreen(str);                 break;
+                //Switch Screens
+                case "last":    switchScreen(lastCard.getName());         break;
+                case "pause":   pauseGame();                              break;
+                case "stop":    stopGame();                               break;
+                case "unpause": startTimer();                             break;
+                //Play Audio
+                case "shoot":   audioHandler.playSound(SoundTrack.SHOOT); break;
+                case "hurt":   audioHandler.playSound(SoundTrack.HURT);   break;
+                default:        switchScreen(str);                        break;
             }
         }
         else redraw();

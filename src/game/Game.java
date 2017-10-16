@@ -56,8 +56,17 @@ public class Game extends Observable implements IGame, Serializable {
 		return this.player;
 	}
 
+	private int lastHealth = 0;
+
 	@Override
 	public int isOver() {
+		//Check Player Health
+		if(lastHealth < player.getHealth()) lastHealth = player.getHealth();
+		else if(player.getHealth() < lastHealth) {
+			lastHealth = player.getHealth();
+			set("hurt");
+		}
+
 		if (world.getMaps().get("Map16").getNPCs().isEmpty())
 			return 2;// win condition
 		if (player.isDead())
@@ -108,11 +117,13 @@ public class Game extends Observable implements IGame, Serializable {
 	@Override
 	public void shoot(double mouseX, double mouseY) throws InvalidPlayerExceptions {
 		player.shoot(mouseX, mouseY);
+		set("shoot");
 	}
 
 	@Override
 	public void specialAbility(double mouseX, double mouseY) throws InvalidPlayerExceptions {
 		player.specialAbility(mouseX, mouseY);
+		set("shoot");
 	}
 
 	@Override
