@@ -87,7 +87,8 @@ public class PlayerTest {
 	public void testRangeCircle() throws InvalidBackpackException {
 		player = new Player(name, xLocation, yLocation);
 		// insert an item with specific coordinate next to the player
-		Item i = new HealthPot();
+		Item i = new MassiveGun();
+		IMap m = new MockMap();
 		m.placeItem(i, 95, 95);
 		// use the pick up item from the player class
 		player.getBackpack().pickUpItem(i);
