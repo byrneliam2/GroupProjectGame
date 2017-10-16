@@ -157,7 +157,9 @@ public class Map implements IMap, Serializable {
 					int width = (int) (Math.random() * 31) + 1;
 					int height = (int) (Math.random() * 17) + 1;
 					if (this.canMove(width * Map.tileSize, height * Map.tileSize)
-							&& this.onEnvironmentTile(width * Map.tileSize, height * Map.tileSize) == null) {
+							&& this.onEnvironmentTile(width * Map.tileSize, height * Map.tileSize) == null
+							|| this.onEnvironmentTile(width * Map.tileSize,
+									height * Map.tileSize) == Environment.MIST) {
 						placed = true;
 						i.setX(width * Map.tileSize);
 						i.setY(height * Map.tileSize);
