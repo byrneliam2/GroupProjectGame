@@ -7,6 +7,8 @@ import java.util.List;
 import org.junit.Test;
 
 import common.items.Item;
+import common.map.IMap;
+import common.mocks.MockMap;
 import items.Backpack;
 import items.InvalidBackpackException;
 import items.Usable;
@@ -42,8 +44,9 @@ public class PlayerTest {
 	public void testPickedUpItem() throws InvalidPlayerExceptions, InvalidBackpackException {
 		// insert a player with specific coordinate
 		player = new Player(name, xLocation, yLocation);
+		IMap m = new MockMap();
 		// insert an item with specific coordinate next to the player
-		Item i = new HealthPot();
+		Item i = new MassiveGun();
 		m.placeItem(i, 100, 100);
 		// use the pick up item from the player class
 		player.getBackpack().pickUpItem(i);
@@ -81,7 +84,8 @@ public class PlayerTest {
 	public void testRangeCircle() throws InvalidBackpackException {
 		player = new Player(name, xLocation, yLocation);
 		// insert an item with specific coordinate next to the player
-		Item i = new HealthPot();
+		Item i = new MassiveGun();
+		IMap m = new MockMap();
 		m.placeItem(i, 95, 95);
 		// use the pick up item from the player class
 		player.getBackpack().pickUpItem(i);
