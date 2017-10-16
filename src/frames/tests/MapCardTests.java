@@ -21,6 +21,11 @@ import static org.junit.Assert.assertNotNull;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class MapCardTests {
 
+    /*
+     * These tests should pass since they test for components at certain locations. For example, there
+     * must be a JLabel at the position where the player is. But for some reason, they do not pass...?
+     */
+
     @Test
     public void test01_MenuData() {
         MenuCard m = new MenuCard("menu");
