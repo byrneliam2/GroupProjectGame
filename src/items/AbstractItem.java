@@ -6,6 +6,11 @@ import java.io.Serializable;
 import common.items.Item;
 import items.itemList.HealthPot;
 
+/**
+ * Abstract Item class used by most items for code reuse.
+ *
+ * @author Thomas Edwards
+ */
 public abstract class AbstractItem implements Item, Serializable {
 	protected final String name, description;
 	protected Image image;

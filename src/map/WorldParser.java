@@ -1,6 +1,5 @@
 package map;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
@@ -8,7 +7,6 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 import common.player.IPlayer;
-import player.Player;
 
 /**
  * This class is responsible for reading a text file that contains the world of
@@ -19,7 +17,7 @@ import player.Player;
  * @author James
  *
  */
-public class WorldParser implements Serializable{
+public class WorldParser{
 
 	private WorldParser() {
 
@@ -74,17 +72,4 @@ public class WorldParser implements Serializable{
 		return null;
 	}
 
-	public String require(String token, Scanner scan) throws ParseException {
-		if (scan.hasNext(token)) {
-			return scan.next();
-		} else {
-			throw new ParseException("Was expecting the token " + token + "but instead received " + scan.next());
-		}
-	}
-
-	public void requireSomething(Scanner scan) throws ParseException {
-		if (!scan.hasNext()) {
-			throw new ParseException("Was expecting another token but there was none");
-		}
-	}
 }

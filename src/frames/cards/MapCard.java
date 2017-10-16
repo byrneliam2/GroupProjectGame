@@ -15,6 +15,7 @@ import game.Game;
 import common.game.IGame;
 import gfx.ImageLoader;
 import gfx.ImageUtilities;
+import player.Bullet;
 import common.items.Item;
 
 import javax.swing.*;
@@ -27,9 +28,7 @@ import java.util.stream.Collectors;
 /**
  * The MapCard displays the state of a Map, including all Entities on screen. The MapCard's state
  * at any time is representative of the current game, using a combination of specially-typed
- * {@link Card.Entity}s.
- * TODO Dialogue popups
- * TODO Player animations
+ * {@link Entity}s.
  */
 public class MapCard extends Card {
 
@@ -71,17 +70,15 @@ public class MapCard extends Card {
 				ImageLoader.image("playerImages", "playerRect", true),
 						new Point(game.getPlayer().getxLocation(), game.getPlayer().getyLocation()), 0)
 		);
-		
 		// add all NPCs
 		map.getNPCs().forEach(npc -> {
-			//add the boss npc
-			if(npc.getName().equals("Boss")){
+			// add the boss npc
+			if (npc.getName().equals("Boss")) {
 				addStaticEntity(new Entity(npc, EntityType.NPC,
 						ImageLoader.image("npcImages", "Rectangle", true),
 						new Point(npc.getxLocation(), npc.getyLocation()), 120));
 				return;
 			}
-			
 			addStaticEntity(new Entity(npc, EntityType.NPC,
 				ImageLoader.image("npcImages", "bug", true),
 				new Point(npc.getxLocation(), npc.getyLocation()), 0));
@@ -116,7 +113,6 @@ public class MapCard extends Card {
 						new Point(DisplayValues.WIDTH - (2 * ELEMENT_LOC_A) - (i * ELEMENT_LOC_A), 5),
 						ELEMENT_LOC_A));
 			}
-		// noinspection StatementWithEmptyBody
 		if (type == EntityType.STRING || all) {
 			// add dialogue, if any
 			String str = "Hello!";
@@ -167,9 +163,9 @@ public class MapCard extends Card {
 				case HEART:
 					if (++numHearts > game.getPlayer().getHealth())
 						e.setImage(Game.emptyHeart);
-					else if(numHearts>game.getPlayer().getMaxHealth())
+					else if (numHearts > game.getPlayer().getMaxHealth())
 						toRemove.add(e);
-					else if(numHearts<=game.getPlayer().getHealth())
+					else if(numHearts <= game.getPlayer().getHealth())
 						e.setImage(Game.heart);
 					break;
 				case INVENTORY:
@@ -188,7 +184,7 @@ public class MapCard extends Card {
 			addDynamicEntities(t, false);
 		};
 		if (numItems < map.getItems().size()) 				type = EntityType.ITEM;
-		if (numHearts < game.getPlayer().getMaxHealth()) 		type = EntityType.HEART;
+		if (numHearts < game.getPlayer().getMaxHealth()) 	type = EntityType.HEART;
 		if (numInventory < game.getPlayer().getBackpack()
 				.getInventorySize()) 						type = EntityType.INVENTORY;
 		if (type != null) dyn.accept(type);
@@ -200,11 +196,11 @@ public class MapCard extends Card {
 	 * is not worth counting them as entities.
 	 */
 	private void updateBullets() {
-		for (int i = 0; i < IBullet.bulletList.size(); i++) {
-			IBullet b = IBullet.bulletList.get(i);
+		for (int i = 0; i < Bullet.bulletList.size(); i++) {
+			IBullet b = Bullet.bulletList.get(i);
 			Image img = b.getBulletPic();
-			draw(img, (int) b.getX() - IBullet.bulletSize/2,
-					(int) b.getY() - IBullet.bulletSize/2,
+			draw(img, (int) b.getX() - Bullet.bulletSize/2,
+					(int) b.getY() - Bullet.bulletSize/2,
 					img.getWidth(null), img.getHeight(null));
 		}
 	}

@@ -8,6 +8,10 @@ import map.World;
 import map.WorldParser;
 import player.Player;
 
+/**
+ * @author James
+ *
+ */
 public class WorldTests {
 
 	@Test
@@ -22,7 +26,7 @@ public class WorldTests {
 	public void CorrectAmountOfMaps() {
 		Player p1 = new Player("Tom", 50, 50);
 		World w = WorldParser.parse("world", p1);
-		assert(World.getMaps().size()==14);
+		assert(w.getMaps().size()==14);
 	}
 
 }

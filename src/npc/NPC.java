@@ -50,6 +50,8 @@ public class NPC extends Player implements Serializable {
 
 	@Override
 	public boolean move(double dx, double dy) throws InvalidPlayerExceptions {
+		//custom npc moving which ignores all environmental effects such as fire.
+		//also prevents npc's from moving through doors.
 		playerBox.setFrame(playerBox.getX() + dx, playerBox.getY() + dy, playerBox.getWidth(), playerBox.getHeight());
 		if (map.canMove(playerBox)) {
 			return true;
@@ -75,7 +77,6 @@ public class NPC extends Player implements Serializable {
 	 * around.
 	 */
 	public void start() {
-		System.out.println("NPC is started! attached player is " + p);
 		npctask = new TimerTask() {
 			@Override
 			public void run() {
@@ -96,7 +97,6 @@ public class NPC extends Player implements Serializable {
 	}
 
 	private void update() {
-		System.out.println("Updated this npc " + this);
 		control.doBestAction(this, p);
 	}
 

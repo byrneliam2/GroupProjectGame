@@ -1,12 +1,14 @@
 TODO
-- Integrate saving and loading
+- Integrate saving and loading (done?) -> turn into static interface?
 - Optimize drawing (associate items, etc. with images again?) Done Hearts but not items.
 - External testing for all libraries (including MapCardTests)
-- Abstract out common interfaces: should all use common types!
+- Abstract out common interfaces: should all use common types! IMPORTANT!!!
+- Hard to get through the 1-wide door (In the Map Upwards from the first level)
 
 - Put in the sound effects for shooting, dying.
-- FIX DOOORS
 - Change suicidal scheme to different color bullets
 - Change shotgun blast to different color bullets
 
-FIXME
+- Replace all legacy buttons and labels (settings)
+- General code cleanup, removal of all print statements, etc.
+

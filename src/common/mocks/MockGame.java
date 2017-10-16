@@ -1,6 +1,7 @@
 package common.mocks;
 
 import common.game.IGame;
+import common.player.IPlayer;
 import map.World;
 import player.InvalidPlayerExceptions;
 import player.Player;
@@ -47,6 +48,11 @@ public class MockGame implements IGame {
     @Override
     public World getWorld() {
         return new World(new HashMap<>());
+    }
+
+    @Override
+    public void loadGame(IPlayer player, World world) {
+
     }
 
     @Override

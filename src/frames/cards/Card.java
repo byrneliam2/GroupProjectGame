@@ -100,8 +100,6 @@ public abstract class Card extends JPanel {
 	 */
 	public abstract void redraw();
 
-
-
 	/**
 	 * Declares the type of object the {@link Entity} represents.
 	 */
@@ -113,7 +111,7 @@ public abstract class Card extends JPanel {
 /**
  * A Card Entity represents an animated element inside a Card. This does not include
  * separate Swing entities such as buttons and background images. It does include
- * on-screen indicators that refer to the game directly, however. These are identifed
+ * on-screen indicators that refer to the game directly, however. These are identified
  * using the SPECIAL tag for the Entity's {@link EntityType}. Small items that persist
  * for short periods of time, such as bullets, do not count as entities.
  */
@@ -124,11 +122,10 @@ class Entity {
 	private BufferedImage image;
 	private Point location;
 
-	static final int SIZE = 60;
+	private static final int SIZE = 60;
 
 	/**
-	 * Scales the image associated with the entity
-	 * 
+	 * Using this constructor will scale the image associated with the entity.
 	 * @param object   object that this entity represents
 	 * @param type     type of the object
 	 * @param image    image of the object
@@ -143,12 +140,7 @@ class Entity {
 	}
 	
 	/**
-	 * Doesn't scale the image associated with entity
-	 * 
-	 * @param object
-	 * @param type
-	 * @param image
-	 * @param location
+	 * This constructor doesn't scale the associated image.
 	 */
 	Entity(Object object, EntityType type, BufferedImage image, Point location) {
 		this.object = object;

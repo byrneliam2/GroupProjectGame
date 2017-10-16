@@ -7,7 +7,9 @@ package common.game;
  */
 
 import common.player.IPlayer;
+
 import java.io.File;
+
 import map.World;
 import player.InvalidPlayerExceptions;
 import player.Player;
@@ -22,123 +24,116 @@ import java.util.Observer;
  */
 public interface IGame {
 
-	/**
-	 * Give an observer to the model to set as its own.
-	 *
-	 * @param o
-	 *            observer
-	 */
-	void giveObserver(Observer o);
+    /**
+     * Give an observer to the model to set as its own.
+     *
+     * @param o observer
+     */
+    void giveObserver(Observer o);
 
-	/**
-	 * Set this component to be changed (for {@link java.util.Observable}) and
-	 * notify all observers.
-	 *
-	 * @param arg
-	 *            argument for {@link Observer} update
-	 */
-	void set(Object arg);
+    /**
+     * Set this component to be changed (for {@link java.util.Observable}) and
+     * notify all observers.
+     *
+     * @param arg argument for {@link Observer} update
+     */
+    void set(Object arg);
 
-	/**
-	 * Get the name of the current map the player is on.
-	 *
-	 * @return current map name
-	 */
-	String getCurrentMap();
+    /**
+     * Get the name of the current map the player is on.
+     *
+     * @return current map name
+     */
+    String getCurrentMap();
 
-	/**
-	 * Start a new game.
-	 */
-	void newGame();
+    /**
+     * Start a new game.
+     */
+    void newGame();
 
-	/**
-	 * Pause the current game, including all NPCs.
-	 */
-	void pauseGame();
+    /**
+     * Pause the current game, including all NPCs.
+     */
+    void pauseGame();
 
-	/**
-	 * Take the game out of paused state, see {@link #pauseGame}.
-	 */
-	void unPauseGame();
+    /**
+     * Take the game out of paused state, see {@link #pauseGame}.
+     */
+    void unPauseGame();
 
-	/**
-	 * Determine if the game is currently paused.
-	 *
-	 * @return is game paused?
-	 */
-	boolean isPaused();
+    /**
+     * Determine if the game is currently paused.
+     *
+     * @return is game paused?
+     */
+    boolean isPaused();
 
-	/**
-	 * Get the {@link World} that represents the collection of Maps.
-	 *
-	 * @return current World
-	 */
-	World getWorld();
+    /**
+     * Get the {@link World} that represents the collection of Maps.
+     *
+     * @return current World
+     */
+    World getWorld();
 
-	
-	void loadGame(IPlayer player, World world);
-	
-	/**
-	 * Move the player in a given direction.
-	 *
-	 * @param dir
-	 *            direction to move in, see {@link Direction}
-	 * @throws InvalidPlayerExceptions
-	 */
-	void movePlayer(Direction dir) throws InvalidPlayerExceptions;
 
-	/**
-	 * Pick up an item off the ground.
-	 *
-	 * @throws InvalidPlayerExceptions
-	 */
-	void interact() throws InvalidPlayerExceptions;
+    void loadGame(IPlayer player, World world);
 
-	/**
-	 * Shoot a bullet.
-	 *
-	 * @param x
-	 *            mouse position x
-	 * @param y
-	 *            mouse position y
-	 * @throws InvalidPlayerExceptions
-	 */
-	void shoot(double x, double y) throws InvalidPlayerExceptions;
+    /**
+     * Move the player in a given direction.
+     *
+     * @param dir direction to move in, see {@link Direction}
+     * @throws InvalidPlayerExceptions
+     */
+    void movePlayer(Direction dir) throws InvalidPlayerExceptions;
 
-	/**
-	 * Does a player's special ability.
-	 *
-	 * @param x
-	 *            mouse position x
-	 * @param y
-	 *            mouse position y
-	 * @throws InvalidPlayerExceptions
-	 */
-	void specialAbility(double x, double y) throws InvalidPlayerExceptions;
+    /**
+     * Pick up an item off the ground.
+     *
+     * @throws InvalidPlayerExceptions
+     */
+    void interact() throws InvalidPlayerExceptions;
 
-	/**
-	 * Get the current Player.
-	 *
-	 * @return player
-	 */
-	IPlayer getPlayer();
+    /**
+     * Shoot a bullet.
+     *
+     * @param x mouse position x
+     * @param y mouse position y
+     * @throws InvalidPlayerExceptions
+     */
+    void shoot(double x, double y) throws InvalidPlayerExceptions;
 
-	/**
-	 * Determine if the game is over.
-	 *
-	 * @return 0 for false, 1 for lost, 2 for won
-	 */
-	int isOver();
+    /**
+     * Does a player's special ability.
+     *
+     * @param x mouse position x
+     * @param y mouse position y
+     * @throws InvalidPlayerExceptions
+     */
+    void specialAbility(double x, double y) throws InvalidPlayerExceptions;
 
-	void stop();
+    /**
+     * Get the current Player.
+     *
+     * @return player
+     */
+    IPlayer getPlayer();
 
-	/**
-	 * Save the current game.
-	 */
-	void saveGame(String filePath);
+    /**
+     * Determine if the game is over.
+     *
+     * @return 0 for false, 1 for lost, 2 for won
+     */
+    int isOver();
 
-	/**
-	 * Stop the game entirely.
-	 */
-	void stopGame();
+    void stop();
+
+    /**
+     * Save the current game.
+     */
+    void saveGame(String filePath);
+
+    /**
+     * Stop the game entirely.
+     */
+    void stopGame();
 }

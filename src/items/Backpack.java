@@ -9,12 +9,14 @@ import player.Player;
 
 /**
  * Backpack contains 2 sections, the player's inventory, and the items equipped
- * by the player. Main API for the Player class to use.
+ * by the player. Main API for the Player class to use. As of update, no
+ * equipped item section as all items that are equipable, are equiped immediatly
+ * on pickup.
  *
  * @author Thomas Edwards
  *
  */
-public class Backpack implements Serializable{
+public class Backpack implements Serializable {
 	/* Constants */
 	public static final int MAX_INVENTORY = 20;
 
@@ -51,7 +53,7 @@ public class Backpack implements Serializable{
 
 		item.pickUp(this);
 
-		//updated so that picking up items applys the effect immediatly.
+		// updated so that picking up items applys the effect immediatly.
 		if (item instanceof Key) {// if you pick up a key, add it to the key section
 			Key key = (Key) item;
 			keys.add(key); // FIXME: Can pick up infinite keys?
@@ -105,8 +107,6 @@ public class Backpack implements Serializable{
 		item.remove();// removes items link to backpack.
 	}
 
-
-
 	/**
 	 * Uses this item on the player and removes it from the inventory
 	 *
@@ -141,7 +141,6 @@ public class Backpack implements Serializable{
 	public List<Item> getInventory() {
 		return this.inventory;
 	}
-
 
 	public int getInventorySize() {
 		return inventory.size();

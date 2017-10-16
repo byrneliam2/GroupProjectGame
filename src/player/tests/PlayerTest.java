@@ -24,6 +24,34 @@ public class PlayerTest {
 	private double mouseY = 50.50;
 
 
+	/**
+	 * Check if when a player picks up an item should appear in the itemsList OR the BackPack.
+	 */
+	@Test
+	public void testPickedUpItem() {
+		// insert a player with specific coordinate
+		// insert an item with specific coordinate next to the player
+		// use the pick up item from the player class
+		// if the player backpack contains the specific item assertTrue
+		// else assertFalse
+	}
+
+	/**
+	 * Check if when a player removes an item from the BackPack should NOT appear in the itemsList OR the BackPack anymore.
+	 */
+	@Test
+	public void testRemoveItem() {
+		// insert a player with specific coordinate
+		// insert an item with specific coordinate next to the player
+		// use the pick up item from the player class
+		// if the player backpack contains the specific item
+			// the use the remove method to delete the item.
+				// if the player backpack doesnt contains the item
+					// assertTrue
+				// else
+					//assertFalse
+	}
+
 
 	/**
 	 * Check if the Player is in rangeCircle box then it can pick up the item Other than that the test fails
@@ -31,7 +59,7 @@ public class PlayerTest {
 	@Test
 	public void testRangeCircle() {
 		// insert a player with specific coordinate
-		// insert an item with specific coordinate next to the player
+		// insert an item with specific coordinate in the rangeCircle of player
 		// use the pick up item from the player class
 		// if the player backpack contains the specific item assertTrue
 		// else assertFalse
@@ -54,45 +82,13 @@ public class PlayerTest {
 	}
 
 	/**
-	 * Check if when a player picks up an item should appear in the itemsList OR the BackPack.
-	 */
-	@Test
-	public void testPickedUpItem() {
-
-	}
-
-	/**
-	 * Check if when a player removes an item from the BackPack should NOT appear in the itemsList OR the BackPack anymore.
-	 */
-	@Test
-	public void testRemoveItem() {
-
-	}
-
-	/**
-	 * Check if when a player uses or Equip an item should appear in the itemsList OR the BackPack.
-	 */
-	@Test
-	public void testEquipItem() {
-
-	}
-
-	/**
-	 * Check if when a player uses an item.
-	 */
-	@Test
-	public void testUseItem() {
-
-	}
-
-	/**
 	 * Check if when a player takes damage When an enemy has shooted around the playerBox.
 	 * The Player has a box which has been implemented by using the Rectangle class. Which is kind
 	 * of the hit box representing the location of the player.
 	 */
 	@Test
 	public void testTakeDamage() {
-
+		//
 	}
 
 	/**
@@ -111,13 +107,4 @@ public class PlayerTest {
 	public void testCanMove() {
 
 	}
-
-	/**
-	 * Check when the player is entering a door should be on a new map
-	 */
-	@Test
-	public void testEnterDoor() {
-
-	}
-
 }

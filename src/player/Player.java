@@ -24,7 +24,7 @@ import common.utils.MathUtils;
  * @author javahemohs and Thomas Edwards Created by javahemohs on 19/09/17.
  *
  */
-public class Player implements IPlayer, Serializable{
+public class Player implements IPlayer, Serializable {
 	/* constants */
 	private static final int rangeCircleWidth = 2 * Map.tileSize;
 	private static final double defaultFireRate = 0.8;
@@ -59,7 +59,7 @@ public class Player implements IPlayer, Serializable{
 		this.name = name;
 		rangeCircle = new Ellipse2D.Double(xLocation - Map.tileSize / 2, yLocation - Map.tileSize / 2, rangeCircleWidth,
 				rangeCircleWidth);
-		playerBox = new Rectangle.Double(xLocation + 3, yLocation + 3, Map.tileSize - 6, Map.tileSize - 6);
+		playerBox = new Rectangle.Double(xLocation + 4, yLocation + 4, Map.tileSize - 8, Map.tileSize - 8);
 		fireTimer.setInitialDelay(500);// 0.5 seconds delay before first fire tick
 	}
 
@@ -125,7 +125,6 @@ public class Player implements IPlayer, Serializable{
 	 *             if the player tries to make an invalid move. eg move into a wall.
 	 */
 	public boolean move(double dx, double dy) throws InvalidPlayerExceptions {
-		System.out.println("npc list size-> "+map.getNPCs().size());
 		slowPlayer();
 		dx = dx * speed;
 		dy = dy * speed;
@@ -176,9 +175,13 @@ public class Player implements IPlayer, Serializable{
 
 	private void doFireEffect() {
 		if (currentEnvironment == Environment.FIRE) {
-			fireTimer.start();
+			if (fireTimer == null) {
+				fireTimer = new javax.swing.Timer(1000, (e) -> takeDamage());
+				fireTimer.start();
+			}
 		} else {
 			fireTimer.stop();
+			fireTimer = null;
 		}
 	}
 
@@ -273,15 +276,18 @@ public class Player implements IPlayer, Serializable{
 
 	}
 
+	/*
+	 * Atm this is a shotgun blast that shoots 3 bullets instead of the normal 1 bullet. has an original 5 second cooldown.
+	 */
 	public void specialAbility(double mouseX, double mouseY) throws InvalidPlayerExceptions {
-		if (isSpecialReady) {// can only shoot if your gun is ready.
+		if (isSpecialReady) {// can only special if special is ready
 			isSpecialReady = false;
 
 			double direction = MathUtils.calculateAngle(getCentreX(), getCentreY(), mouseX, mouseY);
-			// make a new bullet
+			// make new bullets
 			new Bullet(getCentreX(), getCentreY(), direction, this, 9, "playerBullet1");
-			new Bullet(getCentreX(), getCentreY(), direction-Math.PI/16, this, 9, "playerBullet1");
-			new Bullet(getCentreX(), getCentreY(), direction+Math.PI/16, this, 9, "playerBullet1");
+			new Bullet(getCentreX(), getCentreY(), direction - Math.PI / 16, this, 9, "playerBullet1");
+			new Bullet(getCentreX(), getCentreY(), direction + Math.PI / 16, this, 9, "playerBullet1");
 
 			// start a timer to count till when the next shot is ready to shoot....
 			TimerTask taskEvent = new TimerTask() {

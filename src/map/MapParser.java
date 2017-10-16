@@ -7,15 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import common.items.Item;
 import common.player.IPlayer;
 import items.DoorItem;
 import map.parsers.DoorParser;
 import map.parsers.ItemParser;
 import map.parsers.KeyParser;
 import map.parsers.NpcParser;
-import common.items.Item;
 import npc.NPC;
-import player.Player;
 
 /**
  * This class is responsible for reading a text file that contains all the
@@ -26,7 +25,7 @@ import player.Player;
  * @author James
  *
  */
-public class MapParser implements Serializable{
+public class MapParser{
 
 	private MapParser() {
 

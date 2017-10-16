@@ -39,7 +39,7 @@ public class MapCardTests {
     public void test03_MapData() {
         IGame g = new Game();
         g.newGame();
-        MapCard m = new MapCard("map", World.getMaps().get("Map3"), g);
+        MapCard m = new MapCard("map", g.getWorld().getMaps().get("Map3"), g);
         assertNotNull(m.getComponent(0).getComponentAt(g.getPlayer().getxLocation(), g.getPlayer().getyLocation()));
     }
 }

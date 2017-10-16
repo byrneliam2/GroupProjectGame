@@ -58,7 +58,7 @@ public class AnimationEntity extends Entity {
 
 	@Override
 	public BufferedImage getImage() {
-		currentImg++;
+		currentImg++;//updates the counter for the animation.
 		if (currentImg / framesPerImage >= backImages.length)
 			currentImg = 1;
 

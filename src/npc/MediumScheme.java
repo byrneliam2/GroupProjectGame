@@ -17,7 +17,7 @@ import common.utils.MathUtils;
  */
 public class MediumScheme implements ControlScheme, Serializable {
 
-	protected Direction randDir = getRandomDir();
+	protected Direction randDir = Direction.getRandomDirection();
 	protected int moveCounter = 0;
 
 	public MediumScheme() {
@@ -30,7 +30,7 @@ public class MediumScheme implements ControlScheme, Serializable {
 			npc.move(randDir.getX() * npc.getSpeed() / 2, randDir.getY() * npc.getSpeed() / 2);
 		} catch (InvalidPlayerExceptions e) {
 			// if we run into a wall, then choose a new direction...
-			randDir = getRandomDir();
+			randDir = Direction.getRandomDirection();
 		}
 
 		moveCounter++;
@@ -42,22 +42,17 @@ public class MediumScheme implements ControlScheme, Serializable {
 	 *  @param npc
 	 * @param player
 	 */
-	public void decideShooting(NPC npc, IPlayer player) {
+	protected void decideShooting(NPC npc, IPlayer player) {
 		// shoot at the player every 100 moves change direction every 200
 		if (moveCounter > 200) {
 			moveCounter = 0;
 			new Bullet(npc.getCentreX(), npc.getCentreY(), MathUtils.calculateAngle(npc.getxLocation(),
 					npc.getyLocation(), player.getCentreX(), player.getCentreY()), npc, 4, "npcBullet4");
-			randDir = getRandomDir();
+			randDir = Direction.getRandomDirection();
 		} else if (moveCounter == 100) {
 			new Bullet(npc.getCentreX(), npc.getCentreY(), MathUtils.calculateAngle(npc.getxLocation(),
 					npc.getyLocation(), player.getCentreX(), player.getCentreY()), npc, 4, "npcBullet4");
 		}
-	}
-
-	public Direction getRandomDir() {
-		int dir = (int) (Math.random() * 8);
-		return Direction.VALUES.get(dir);
 	}
 
 }

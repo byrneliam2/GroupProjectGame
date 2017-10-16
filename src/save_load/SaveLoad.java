@@ -1,66 +1,64 @@
 package save_load;
 
 import game.Game;
-import common.game.IGame;
-import map.World;
-import npc.NPC;
-import player.InvalidPlayerExceptions;
-import player.Player;
-import common.utils.Direction;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
-import java.util.Map;
-import java.util.Observer;
+import java.io.*;
 
-import javax.tools.JavaFileManager.Location;
-
-/*
+/**
  *  Game Save and Load
+ *
+ *  @author Mohsen
  */
-
 public class SaveLoad {
 
 	/**
+	 * Saves the game using serialization.
 	 *
+	 * @param g
+	 *            the game to be saved.
+	 * @param theFilePath
+	 *            the file path of the file to save it as.
 	 */
-	private static final long serialVersionUID = 1L;
-
-
 	public static void saveGame(Game g, String theFilePath) {
+
 		/*
 		 * This method will take any Object as a parameter, so as long as the class
 		 * implements the serializable interface.
 		 */
 		// File thePathFile = new File("./GroupProject/src/assets/saveGames");
+
 		FileOutputStream theSavedGame = null;
-		String savePath = theFilePath.concat(".dat");
+		if (theFilePath.endsWith(".dat"))//all saved games should end with .dat
+			theFilePath = theFilePath.concat(".dat");
+
 		try {
 			if (theFilePath != null) {
-				theSavedGame = new FileOutputStream(savePath);
+				theSavedGame = new FileOutputStream(theFilePath);
 				ObjectOutputStream theByteCode = new ObjectOutputStream(theSavedGame);
 				theByteCode.writeObject(g);
 				theByteCode.close();
 			}
 		} catch (IOException e) {
+			System.out.println("Saving Failed");
 			e.printStackTrace();
 		}
 	}
 
+	/**
+	 * @param fileToLoad
+	 *            the file to load.
+	 * @return the game loaded from the file
+	 */
 	public static Game loadGame(File fileToLoad) {
 		Game game = null;
-			try {
-				ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileToLoad));
-				game = (Game) ois.readObject();
-				ois.close();
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
+		try {
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileToLoad));
+			game = (Game) ois.readObject();
+			ois.close();
+		} catch (Exception ex) {
+			System.out.println("Loading Failed");
+			ex.printStackTrace();
+		}
 		return game;
 	}
 }

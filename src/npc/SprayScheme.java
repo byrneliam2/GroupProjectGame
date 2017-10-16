@@ -3,6 +3,7 @@ package npc;
 import java.io.Serializable;
 
 import common.player.IPlayer;
+import common.utils.Direction;
 import player.Bullet;
 
 /**
@@ -34,7 +35,7 @@ public class SprayScheme extends MediumScheme implements Serializable{
 		// shoot at the player when sprayRate is divisable and change direction every 200
 		if (moveCounter > 200) {
 			moveCounter = 0;
-			randDir = getRandomDir();
+			randDir = Direction.getRandomDirection();//change direction.
 		}
 		if (moveCounter % sprayRate == 0) {
 			double offset = Math.random() * Math.PI / 8;

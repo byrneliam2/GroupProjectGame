@@ -9,6 +9,7 @@ package gfx.tests;
 import gfx.GraphicsUtilities;
 import gfx.ImageLoader;
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
@@ -20,14 +21,14 @@ import static org.junit.Assert.assertNotNull;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class GraphicsUtilitiesTests {
 
-    @Test
+    @Ignore
     public void test01_MakeButton() {
         BufferedImage main = ImageLoader.image("ui", "bu_new", true);
         BufferedImage roll = ImageLoader.image("ui", "bu_new_r", false);
         assertNotNull(GraphicsUtilities.produceButton(main, roll, 0));
     }
 
-    @Test
+    @Ignore
     public void test02_MakeButton() {
         BufferedImage main = ImageLoader.image("ui", "bu_new", true);
         assertNotNull(GraphicsUtilities.produceButton(main, null, 0));

@@ -16,7 +16,7 @@ import common.utils.MathUtils;
  */
 public class EasyScheme implements ControlScheme, Serializable {
 
-	private Direction randDir = getRandomDir();
+	private Direction randDir = Direction.getRandomDirection();
 	private int shotCounter = 0;
 
 	public EasyScheme() {
@@ -29,7 +29,7 @@ public class EasyScheme implements ControlScheme, Serializable {
 			npc.move(randDir.getX() * npc.getSpeed() / 2, randDir.getY() * npc.getSpeed() / 2);
 		} catch (InvalidPlayerExceptions e) {
 			// if we run into a wall, then choose a new direction...
-			randDir = getRandomDir();
+			randDir = Direction.getRandomDirection();
 		}
 
 		// shoot at the player every 200 moves. and then change direction
@@ -38,13 +38,7 @@ public class EasyScheme implements ControlScheme, Serializable {
 			shotCounter = 0;
 			new Bullet(npc.getCentreX(), npc.getCentreY(), MathUtils.calculateAngle(npc.getxLocation(),
 					npc.getyLocation(), player.getCentreX(), player.getCentreY()), npc, 4, "npcBullet1");
-			randDir = getRandomDir();
+			randDir = Direction.getRandomDirection();
 		}
 	}
-
-	public Direction getRandomDir() {
-		int dir = (int) (Math.random() * 8);
-		return Direction.VALUES.get(dir);
-	}
-
 }
