@@ -27,9 +27,8 @@ import gfx.ImageUtilities;
 public class Game extends Observable implements IGame, Serializable {
 
 	/**
-	 * 
+	 *
 	 */
-	private static final long serialVersionUID = 1L;
 	public static BufferedImage heart = ImageUtilities.scale(ImageLoader.image("game", "heart", true), 50, 50);
 	public static BufferedImage emptyHeart = ImageUtilities.scale(ImageLoader.image("game", "lost-heart", true), 50,
 			50);

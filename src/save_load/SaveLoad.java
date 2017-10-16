@@ -33,7 +33,6 @@ public class SaveLoad {
 
 
 	public static void saveGame(Game g, String theFilePath) {
-		System.out.println("THIS IS ACTUALLY THE SAVING FUNCTION" + g);
 		/*
 		 * This method will take any Object as a parameter, so as long as the class
 		 * implements the serializable interface.
@@ -54,11 +53,7 @@ public class SaveLoad {
 	}
 
 	public static Game loadGame(File fileToLoad) {
-
-		System.out.println("THIS IS ACTUALLY THE loadGame FUNCTION");
 		Game game = null;
-
-
 			try {
 				ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileToLoad));
 				game = (Game) ois.readObject();
