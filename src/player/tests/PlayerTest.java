@@ -105,12 +105,12 @@ public class PlayerTest {
 		Item i = new MassiveGun();
 		m.placeItem(i, 95, 95);
 		// use the pick up item from the player class
-		double fireRateTemp = player.getDefaultFireRate();
+		double fireRateTemp = player.getFireRate();
 		player.getBackpack().pickUpItem(i);
 		// check if the player backpack contatins the gun
 		if (player.getBackpack().getInventory().contains(i)) {
 			// if it does contain the gun
-			//if the fire rate should have increased assertTrue
+			// if the fire rate should have increased assertTrue
 			assertTrue((fireRateTemp<player.getFireRate()));
 		}
 	}
@@ -122,8 +122,14 @@ public class PlayerTest {
 	 */
 	@Test
 	public void testTakeDamage() {
-
-		//
+		// insert a player with specific coordinate
+		player = new Player(name, xLocation, yLocation);
+		// The player initially has 5 hearts
+		// if the player loses two of them then he has 3 hearts
+		player.takeDamage();
+		player.takeDamage();
+		// by using the getHealth funtion check if the take damage works properly
+		assertTrue(player.getHealth() == 3);
 	}
 
 	/**
@@ -131,7 +137,14 @@ public class PlayerTest {
 	 */
 	@Test
 	public void testCanOpenDoor() {
-
+		// insert a player with specific coordinate
+		// insert a door with those specific coordinates too
+		// insert keys which Player can pick them up
+		// if the player back pack contains the keys
+			// then if the player can move to the door
+				//assertTrue();
+			// else
+				//assertFalse();
 	}
 
 
