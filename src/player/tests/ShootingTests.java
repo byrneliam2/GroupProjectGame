@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 import map.Map;
+import map.World;
 import npc.NPC;
 import player.Bullet;
 import player.InvalidPlayerExceptions;
@@ -202,7 +203,7 @@ public class ShootingTests {
 		Bullet.bulletList.clear();
 		p = new Player("Thomas", xLocation, yLocation);
 		npcs = new ArrayList<NPC>();
-		m = new Map("Map7", p, null, npcs, null);
+		m = new Map("Map7",p, null, npcs, null);
 		p.setMap(m);
 	}
 

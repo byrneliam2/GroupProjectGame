@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 import common.map.IWorld;
+import common.player.IPlayer;
 import game.Game;
 
 /**
@@ -14,7 +15,7 @@ import game.Game;
  *
  */
 public class World implements IWorld, Serializable {
-
+	
 	private HashMap<String, Map> maps;
 
 	public World(HashMap<String, Map> maps) {

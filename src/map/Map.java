@@ -16,6 +16,7 @@ import gfx.ImageUtilities;
 import items.DoorItem;
 import common.items.Item;
 import common.map.IMap;
+import common.map.IWorld;
 import npc.NPC;
 import player.Bullet;
 import player.Player;
@@ -57,26 +58,25 @@ public class Map implements IMap, Serializable {
 	// Blue(4) is for mist
 	private ArrayList<ArrayList<Integer>> environmentalLayer;
 
-	/** The current player */
-	private IPlayer currentPlayer;
-
 	/** The name of the map */
 	private String name;
 
-	private World world;
+	private IWorld world;
+
+	private IPlayer currentPlayer;
 
 	/** Doors on the current map */
 	List<DoorItem> doors;
 
-	public Map(String name, IPlayer player, List<Item> items, ArrayList<NPC> NPCS, List<DoorItem> doors) {
+	public Map(String name, IPlayer currentPlayer, List<Item> items, ArrayList<NPC> NPCS, List<DoorItem> doors) {
 		this.name = name;
 		this.items = items;
-		this.currentPlayer = player;
-		player.setMap(this);// sets the player up
 		this.backgroundLayer = name;
 		this.NPCS = NPCS;
 		this.doors = doors;
 		this.loadAllLayers(1920, 1080);
+		this.currentPlayer = currentPlayer;
+
 		// sets the npc's up, note you'll still have to call startMapNPC's() to start
 		// them moving
 		if (Game.DEV_MODE && !name.equals("Map16")) {
@@ -247,7 +247,7 @@ public class Map implements IMap, Serializable {
 
 	/**
 	 * This method drops a given item onto a x,y spot on the Map by inserting the
-	 * new item into this maps ArrayList of items.
+	 * new item into this maps List of items.
 	 *
 	 * @param i
 	 * @param x
@@ -255,7 +255,21 @@ public class Map implements IMap, Serializable {
 	 */
 	public void placeItem(Item i, int x, int y) {
 		this.items.add(i);
-		i.setX(x);// might be unnecessary TODO.
+		i.setX(x);
+		i.setY(y);
+	}
+
+	/**
+	 * This method drops a given door onto a x,y spot on the Map by inserting the
+	 * new door into this maps List of doors.
+	 *
+	 * @param i
+	 * @param x
+	 * @param y
+	 */
+	public void placeDoorItem(DoorItem i, int x, int y) {
+		this.doors.add(i);
+		i.setX(x);
 		i.setY(y);
 	}
 
@@ -416,11 +430,11 @@ public class Map implements IMap, Serializable {
 		return this.name;
 	}
 
-	public World getWorld() {
+	public IWorld getWorld() {
 		return world;
 	}
 
-	public void setWorld(World world) {
+	public void setWorld(IWorld world) {
 		this.world = world;
 	}
 

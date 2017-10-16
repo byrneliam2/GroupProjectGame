@@ -2,6 +2,7 @@ package common.map;
 
 import java.util.HashMap;
 
+import common.player.IPlayer;
 import map.Map;
 import map.World;
 
@@ -21,6 +22,7 @@ public interface IWorld {
 	 * @return The starting map
 	 */
 	public Map getStartingMap();
-	
+
 	public HashMap<String, Map> getMaps();
+
 }

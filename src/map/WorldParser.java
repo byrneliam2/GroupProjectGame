@@ -17,7 +17,7 @@ import common.player.IPlayer;
  * @author James
  *
  */
-public class WorldParser{
+public class WorldParser {
 
 	private WorldParser() {
 
@@ -51,8 +51,9 @@ public class WorldParser{
 				maps.put(map, MapParser.parse(map, current));
 			}
 
-			World n = new World(maps);
-			return n;
+			World w = new World(maps);
+			current.setMap(w.getStartingMap());
+			return w;
 		} catch (ParseException e) {
 			e.printStackTrace();
 		} finally {

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import common.items.Item;
+import common.map.IWorld;
 import common.player.IPlayer;
 import items.DoorItem;
 import map.parsers.DoorParser;
@@ -25,7 +26,7 @@ import npc.NPC;
  * @author James
  *
  */
-public class MapParser{
+public class MapParser {
 
 	private MapParser() {
 
