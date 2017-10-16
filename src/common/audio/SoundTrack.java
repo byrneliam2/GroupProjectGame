@@ -10,8 +10,7 @@ public enum SoundTrack implements Track{
     /* Sound Files */
     CLICK("click.wav"),
     SHOOT("shoot.wav"),
-    DEATH("click.wav"), //TODO: Get another file for this
-    HURT("click.wav"); //TODO: Get another file for this
+    HURT("hurt.wav"); //TODO: Get another file for this
 
     private String filename;
 
