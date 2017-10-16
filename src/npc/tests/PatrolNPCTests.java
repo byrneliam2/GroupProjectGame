@@ -38,7 +38,7 @@ public class PatrolNPCTests {
 
 		// checks the npc's position
 		assertTrue(testNPC.getxLocation()>x);
-		assertEquals(y, testNPC.getyLocation());
+		assertEquals(y+1, testNPC.getyLocation());
 	}
 
 	/**
