@@ -190,32 +190,23 @@ public class MapTests {
 	}
 
 	@Test
-	public void doorTest() throws InvalidPlayerExceptions {
-		// Player starts on Map3 and should move over the door and into Map8
+	public void doorTestOpen() throws InvalidPlayerExceptions {
 		this.doorSetup();
-		assert (w.getStartingMap().getName().equals("Map3"));
-		w.getStartingMap().startMapNPCs();
-		DoorItem d = w.getStartingMap().getDoor(01);
+		assert (w.getStartingMap().getName().equals("Map3Test"));
+
+		Map curMap = w.getStartingMap();
+
 		p1.setSpeed(1);
-		// Player starts at 150,150
+
 		assertEquals(150, p1.getCentreX());
 		assertEquals(150, p1.getCentreY());
 
-		// Assert door is at 30,210
-		assert (30 == d.getEnterBox().getCenterX());
-		assert (210 == d.getEnterBox().getCenterY());
-
-		// move player to 150,210
-		assertFalse(p1.move(0, 60));
+		p1.move(0, 120);
 		assertEquals(150, p1.getCentreX());
-		assertEquals(210, p1.getCentreY());
+		assertEquals(270, p1.getCentreY());
 
-		// Move player over door
-		assertFalse(p1.move(-50, 0));
-		assertTrue(p1.move(-60, 0));
-
+		assertTrue(p1.move(-100, 0));
 		assertEquals("Map8", p1.getMap().getName());
-
 	}
 
 	@Test
@@ -223,7 +214,7 @@ public class MapTests {
 		// Player starts on Map3 and should pick up a key then move over the left door
 		// and into Map8
 		this.doorSetup();
-		assert (w.getStartingMap().getName().equals("Map3"));
+		assert (w.getStartingMap().getName().equals("Map3Test"));
 
 		Map curMap = w.getStartingMap();
 
@@ -258,7 +249,7 @@ public class MapTests {
 		// Player starts on Map3 and should not pick up a key then move over the left
 		// door and not be able to move onto Map 8
 		this.doorSetup();
-		assert (w.getStartingMap().getName().equals("Map3"));
+		assert (w.getStartingMap().getName().equals("Map3Test"));
 
 		Map curMap = w.getStartingMap();
 
@@ -272,8 +263,8 @@ public class MapTests {
 		assertEquals(180, p1.getCentreY());
 		p1.move(0, 35);
 		assertEquals(215, p1.getCentreY());
-		assertTrue(p1.move(-100, 0));
-		assertEquals("Map3", p1.getMap().getName());
+		assertFalse(p1.move(-100, 0));
+		assertEquals("Map3Test", p1.getMap().getName());
 	}
 
 	@Test
@@ -368,7 +359,7 @@ public class MapTests {
 	@Test
 	public void testBackgroundLayer() {
 		this.doorSetup();
-		assertEquals("Map3", w.getStartingMap().getName());
+		assertEquals("Map3Test", w.getStartingMap().getName());
 
 	}
 
