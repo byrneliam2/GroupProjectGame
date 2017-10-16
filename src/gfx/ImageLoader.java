@@ -28,7 +28,7 @@ public class ImageLoader {
 	public static BufferedImage image(String directory, String name, boolean transparent) {
 		BufferedImage img = null;
 		try {
-			img = ImageIO.read(ImageLoader.class.getResource("../assets/img/" + directory
+			img = ImageIO.read(ImageLoader.class.getResource("/assets/img/" + directory
 					+ (!directory.equals("") ? "/" : "") + name + (transparent ? ".png" : ".jpg")));
 		} catch (IOException e) {
 			e.printStackTrace();

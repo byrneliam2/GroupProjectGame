@@ -28,7 +28,7 @@ public class AudioHandler implements IAudioHandler {
     private float currentVolume;
 
     public AudioHandler() {
-        this.assetsFolder = "../assets/sounds/";
+        this.assetsFolder = "/assets/sounds/";
         this.musicQueue = new ArrayDeque<>();
         this.currentVolume = 0.6f;
     }
@@ -136,7 +136,7 @@ public class AudioHandler implements IAudioHandler {
      */
     private void startClip(AudioClip clip) {
         try {
-            AudioInputStream stream = AudioSystem.getAudioInputStream(getClass().getResourceAsStream(clip.getPath()));
+            AudioInputStream stream = AudioSystem.getAudioInputStream(AudioHandler.class.getResource(clip.getPath()));
             clip.getClip().open(stream);
             setClipVolume(clip);
             clip.getClip().start();
