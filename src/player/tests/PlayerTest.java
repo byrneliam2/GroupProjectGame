@@ -24,29 +24,16 @@ public class PlayerTest {
 	private double mouseY = 50.50;
 
 
-
-	/**
-	 * Check if the Player is in rangeCircle box then it can pick up the item Other than that the test fails
-	 */
-	@Test
-	public void testRangeCircle() {
-
-	}
-
-	/**
-	 * Check if the defaultFireRate of the player decreases when the Player picks up a gun.
-	 */
-	@Test
-	public void testDefaultFireRate() {
-
-	}
-
 	/**
 	 * Check if when a player picks up an item should appear in the itemsList OR the BackPack.
 	 */
 	@Test
 	public void testPickedUpItem() {
-
+		// insert a player with specific coordinate
+		// insert an item with specific coordinate next to the player
+		// use the pick up item from the player class
+		// if the player backpack contains the specific item assertTrue
+		// else assertFalse
 	}
 
 	/**
@@ -54,23 +41,44 @@ public class PlayerTest {
 	 */
 	@Test
 	public void testRemoveItem() {
+		// insert a player with specific coordinate
+		// insert an item with specific coordinate next to the player
+		// use the pick up item from the player class
+		// if the player backpack contains the specific item
+			// the use the remove method to delete the item.
+				// if the player backpack doesnt contains the item
+					// assertTrue
+				// else
+					//assertFalse
+	}
 
+
+	/**
+	 * Check if the Player is in rangeCircle box then it can pick up the item Other than that the test fails
+	 */
+	@Test
+	public void testRangeCircle() {
+		// insert a player with specific coordinate
+		// insert an item with specific coordinate in the rangeCircle of player
+		// use the pick up item from the player class
+		// if the player backpack contains the specific item assertTrue
+		// else assertFalse
 	}
 
 	/**
-	 * Check if when a player uses or Equip an item should appear in the itemsList OR the BackPack.
+	 * Check if the defaultFireRate of the player decreases when the Player picks up a gun.
 	 */
 	@Test
-	public void testEquipItem() {
-
-	}
-
-	/**
-	 * Check if when a player uses an item.
-	 */
-	@Test
-	public void testUseItem() {
-
+	public void testDefaultFireRate() {
+		// Create a Player with specific coordinates
+		// Create a gun Item with specific coordinates next to the player
+		// player needs to pick up the gun
+		// check if the player backpack contatins the gun
+			// if it does contain the gun
+				//if the fire rate should have increased
+					// assertTrue
+				// else
+					//assertFalse
 	}
 
 	/**
@@ -80,7 +88,7 @@ public class PlayerTest {
 	 */
 	@Test
 	public void testTakeDamage() {
-
+		//
 	}
 
 	/**
@@ -99,30 +107,4 @@ public class PlayerTest {
 	public void testCanMove() {
 
 	}
-
-	/**
-	 * Check when the player is entering a door should be on a new map
-	 */
-	@Test
-	public void testEnterDoor() {
-
-	}
-
-	/**
-	 * Check if when a player picks up an item should appear in the itemsList OR the BackPack.
-	 */
-	@Test
-	public void testSetPlayerPosition() {
-
-	}
-
-	/**
-	 * Check if the player is not allowed to shoot immedietly straight after each others
-	 * There is should be a timer schedual which take a miliseconds to reload the players Gun magazine.
-	 */
-	@Test
-	public void testShoot() {
-
-	}
-
 }

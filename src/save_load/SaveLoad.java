@@ -6,14 +6,14 @@ import java.io.*;
 
 /**
  *  Game Save and Load
- *  
+ *
  *  @author Mohsen
  */
 public class SaveLoad {
 
 	/**
 	 * Saves the game using serialization.
-	 * 
+	 *
 	 * @param g
 	 *            the game to be saved.
 	 * @param theFilePath
@@ -21,10 +21,16 @@ public class SaveLoad {
 	 */
 	public static void saveGame(Game g, String theFilePath) {
 
+		/*
+		 * This method will take any Object as a parameter, so as long as the class
+		 * implements the serializable interface.
+		 */
+		// File thePathFile = new File("./GroupProject/src/assets/saveGames");
+
 		FileOutputStream theSavedGame = null;
 		if (theFilePath.endsWith(".dat"))//all saved games should end with .dat
 			theFilePath = theFilePath.concat(".dat");
-		
+
 		try {
 			if (theFilePath != null) {
 				theSavedGame = new FileOutputStream(theFilePath);

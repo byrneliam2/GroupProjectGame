@@ -20,7 +20,7 @@ import save_load.SaveLoad;
 /**
  * Class to be used by front end for getting all the different entities in the
  * game and controlling them.
- * 
+ *
  * A Game encapsulates the entire back-end and contains a player and a world.
  *
  * @author Thomas Edwards
@@ -101,7 +101,7 @@ public class Game extends Observable implements IGame, Serializable {
 		if (player.move(dir.getX(), dir.getY())) {
 			set(getCurrentMap());
 		}
-		
+
 	}
 
 	@Override
