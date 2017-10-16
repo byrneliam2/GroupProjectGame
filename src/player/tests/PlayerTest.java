@@ -85,13 +85,8 @@ public class PlayerTest {
 		m.placeItem(i, 95, 95);
 		// use the pick up item from the player class
 		player.getBackpack().pickUpItem(i);
-		if(player.getBackpack().getInventory().contains(i))
-			assertTrue(true);
-		else
-			assertFalse(false);
-
-
 		// if the player backpack contains the specific item assertTrue
+		assertTrue(player.getBackpack().getInventory().contains(i));
 		// else assertFalse
 	}
 
