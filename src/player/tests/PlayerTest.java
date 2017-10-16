@@ -7,6 +7,8 @@ import java.util.List;
 import org.junit.Test;
 
 import common.items.Item;
+import common.map.IMap;
+import common.mocks.MockMap;
 import items.Backpack;
 import items.InvalidBackpackException;
 import items.Usable;
@@ -16,6 +18,7 @@ import npc.NPC;
 import player.Bullet;
 import player.InvalidPlayerExceptions;
 import player.Player;
+
 
 /**
  * @author Mohsen Javaher
@@ -31,10 +34,9 @@ public class PlayerTest {
 	private ArrayList<NPC> npcs;
 	private Player player = new Player(name, xLocation, yLocation);
 
+
 	/**
-	 * Check if when a player picks up an item should appear in the itemsList OR the
-	 * BackPack.
-	 * 
+	 * Check if when a player picks up an item should appear in the itemsList OR the BackPack.
 	 * @throws InvalidPlayerExceptions
 	 * @throws InvalidBackpackException
 	 */
@@ -42,14 +44,14 @@ public class PlayerTest {
 	public void testPickedUpItem() throws InvalidPlayerExceptions, InvalidBackpackException {
 		// insert a player with specific coordinate
 		player = new Player(name, xLocation, yLocation);
+		IMap m = new MockMap();
 		// insert an item with specific coordinate next to the player
-		Item i = new HealthPot();
+		Item i = new MassiveGun();
 		m.placeItem(i, 100, 100);
 		// use the pick up item from the player class
 		player.getBackpack().pickUpItem(i);
 		// if the player backpack contains the specific item assertFalse
-		// because the HealthPot is a useable type of item so the backpack would keep
-		// usable items
+		// because the HealthPot is a useable type of item so the backpack would keep usable items
 		// it just increases up the health of the player
 		assertTrue(player.getBackpack().getInventory().contains(i));
 		// else assertFalse
