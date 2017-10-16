@@ -147,7 +147,6 @@ public class ShootingTests {
 
 			sleep(100);
 
-			System.out.println(b.getX() + "  " + x);
 			assertTrue(b.getX() > x);
 			assertTrue(b.getY() > y);
 		} catch (InvalidPlayerExceptions e) {
