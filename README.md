@@ -1,4 +1,4 @@
-## SWEN222PROJECT
+# SWEN222PROJECT
 A repository for the group of Liam, Mohsen, James, Thomas and Andrew (Team SnicketySnacks).
 
 See src/schedule.txt for group meeting and coding day schedule.
@@ -16,4 +16,4 @@ It is a dungeon crawler, move using the wasd keys, press f to pick up items and 
 
 No external libraries needed only the standard java libraries used.
 
-# Launch by downloading the project into eclipse or intelliJ and runnning the launcher in src
+### Launch by downloading the jar "Swen222_Game.jar" file and running it. or by downloading the whole project into eclipse/intelliJ and launching through the launcher class in src.
